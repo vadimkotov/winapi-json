@@ -1,0 +1,1968 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "Defines a console alias for the specified executable.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "To compile an application that uses this function, define _WIN32_WINNT as 0x0501 or later. For more information, see  Using the Windows Headers. For an example, see  Console Aliases. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "AddConsoleAlias",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "Source",
+        "description": "The console alias to be mapped to the text specified by Target."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "Target",
+        "description": "The text to be substituted for Source. If this parameter is NULL, then the console alias is removed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "ExeName",
+        "description": "The name of the executable file for which the console alias is to be defined."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Allocates a new console for the calling process.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "A process can be associated with only one console, so  the AllocConsole function fails if the calling process already has a console. A process can use the  FreeConsole function to detach itself from its current console, then it can call  AllocConsole to create a new console or  AttachConsole to attach to another console. If the calling process creates a child process, the child inherits the new console. AllocConsole initializes standard input, standard output, and standard error handles for the new console. The standard input handle is a handle to the console's input buffer, and the standard output and standard error handles are handles to the console's screen buffer. To retrieve these handles, use the  GetStdHandle function. This function is primarily used by graphical user interface (GUI) application to create a console window. GUI applications are initialized without a console. Console applications are initialized with a console, unless they are created as detached processes (by calling the  CreateProcess function with the DETACHED_PROCESS flag). ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "AllocConsole",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Attaches the calling process to the console of the specified process.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "A process can be attached to at most one console. If the calling process is already attached to a console,  the error code returned is ERROR_ACCESS_DENIED (5). If the specified process does not have a console, the error code returned is ERROR_INVALID_HANDLE (6). If the specified process does not exist, the error code returned is ERROR_INVALID_PARAMETER (87). A process can use the  FreeConsole function to detach itself from its console. If other processes share the console, the console is not destroyed, but the process that called  FreeConsole cannot refer to it. A console is closed when the last process attached to it terminates or calls  FreeConsole. After a process calls FreeConsole, it can call the  AllocConsole function to create a new console or  AttachConsole to attach to another console. To compile an application that uses this function, define _WIN32_WINNT as 0x0501 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "AttachConsole",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwProcessId",
+        "description": "The identifier of the process whose console is to be used. This parameter can be one of the following values.  ValueMeaning   pid   Use the console of the specified process.   ATTACH_PARENT_PROCESS (DWORD)-1   Use the console of the parent of the current process."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Creates a console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the new console screen buffer. If the function fails, the return value is INVALID_HANDLE_VALUE. To get extended error information, call  GetLastError. ",
+    "remarks": "A console can have multiple screen buffers but only one active screen buffer. Inactive screen buffers can be accessed for reading and writing, but only the active screen buffer is displayed. To make the new screen buffer the active screen buffer, use the  SetConsoleActiveScreenBuffer function. The calling process can use the returned handle in any function that requires a handle to a console screen buffer, subject to the limitations of access specified by the dwDesiredAccess parameter. The calling process can use the DuplicateHandle function to create a duplicate screen buffer handle that has different access or inheritability from the original handle. However, DuplicateHandle cannot be used to create a duplicate that is valid for a different process (except through inheritance). To close the console screen buffer handle, use the CloseHandle function. For an example, see  Reading and Writing Blocks of Characters and Attributes. ",
+    "return_type": "HANDLE WINAPI",
+    "category": "Consoles",
+    "name": "CreateConsoleScreenBuffer",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwDesiredAccess",
+        "description": "The access to the console screen buffer. For a list of access rights, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwShareMode",
+        "description": "This parameter can be zero, indicating that the buffer cannot be shared, or it can be one or more of the following values.     ValueMeaning  FILE_SHARE_READ 0x00000001   Other open operations can be performed on the console screen buffer for read access.   FILE_SHARE_WRITE 0x00000002   Other open operations can be performed on the console screen buffer for write access."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "SECURITY_ATTRIBUTES",
+        "name": "*lpSecurityAttributes",
+        "description": "A pointer to a  SECURITY_ATTRIBUTES structure that determines whether the returned handle can be inherited by child processes. If lpSecurityAttributes is NULL, the handle cannot be inherited.    The lpSecurityDescriptor member of the structure specifies a security descriptor for the new console screen buffer. If lpSecurityAttributes is NULL, the console screen buffer gets a default security descriptor. The ACLs in the default security descriptor for a console screen buffer come from the primary or impersonation token of the creator."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "The type of console screen buffer to create. The only supported screen buffer type is CONSOLE_TEXTMODE_BUFFER."
+      },
+      {
+        "in_out": "_Reserved_",
+        "type": "LPVOID",
+        "name": "lpScreenBufferData",
+        "description": "Reserved; should be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Sets the character attributes for a specified number of character cells, beginning at the specified coordinates in a screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If the number of character cells whose attributes are to be set extends beyond the end of the specified row in the console screen buffer, the cells of the next row are set. If the number of cells to write to extends beyond the end of the console screen buffer, the cells are written up to the end of the console screen buffer. The character values at the positions written to are not changed. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "FillConsoleOutputAttribute",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_WRITE access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "wAttribute",
+        "description": "The attributes to use when writing to the console screen buffer. For more information, see  Character Attributes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nLength",
+        "description": "The number of character cells to be set to the specified color attributes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwWriteCoord",
+        "description": "A  COORD structure that specifies the character coordinates of the first cell whose attributes are to be set."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfAttrsWritten",
+        "description": "A pointer to a variable that receives the number of character cells whose attributes were actually set."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Writes a character to the console screen buffer a specified number of times, beginning at the specified coordinates.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If the number of characters to write to extends beyond the end of the specified row in the console screen buffer, characters are written to the next row. If the number of characters to write to extends beyond the end of the console screen buffer, the characters are written up to the end of the console screen buffer. The attribute values at the positions written are not changed. This function uses either Unicode characters or 8-bit characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "FillConsoleOutputCharacter",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_WRITE access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "TCHAR",
+        "name": "cCharacter",
+        "description": "The character to be written to the console screen buffer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nLength",
+        "description": "The number of character cells to which the character should be written."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwWriteCoord",
+        "description": "A  COORD structure that specifies the character coordinates of the first cell to which the character is to be written."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfCharsWritten",
+        "description": "A pointer to a variable that receives the number of characters actually written to the console screen buffer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Flushes the console input buffer. All input records currently in the input buffer are discarded.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "FlushConsoleInputBuffer",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleInput",
+        "description": "A handle to the console input buffer. The handle must have the GENERIC_WRITE access right. For more information, see  Console Buffer Security and Access Rights."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Detaches the calling process from its console.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "A process can be attached to at most one console. If the calling process is not already attached to a console,  the error code returned is ERROR_INVALID_PARAMETER (87). A process can use the  FreeConsole function to detach itself from its console. If other processes share the console, the console is not destroyed, but the process that called  FreeConsole cannot refer to it. A console is closed when the last process attached to it terminates or calls  FreeConsole. After a process calls FreeConsole, it can call the  AllocConsole function to create a new console or  AttachConsole to attach to another console. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "FreeConsole",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sends a specified signal to a console process group that shares the console associated with the calling process.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "GenerateConsoleCtrlEvent causes the control handler functions of processes in the target group to be called. All console processes have a default handler function that calls the  ExitProcess function. A console process can use the  SetConsoleCtrlHandler function to install or remove other handler functions. SetConsoleCtrlHandler can also enable an inheritable attribute that causes the calling process to ignore CTRL+C signals. If  GenerateConsoleCtrlEvent sends a CTRL+C signal to a process for which this attribute is enabled, the handler functions for that process are not called. CTRL+BREAK signals always cause the handler functions to be called. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "GenerateConsoleCtrlEvent",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwCtrlEvent",
+        "description": "The type of signal to be generated. This parameter can be one of the following values.  ValueMeaning  CTRL_C_EVENT 0   Generates a CTRL+C signal. This signal cannot be generated for process groups. If dwProcessGroupId is nonzero, this function will succeed, but the CTRL+C signal will not be received by processes within the specified process group.   CTRL_BREAK_EVENT 1   Generates a CTRL+BREAK signal."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwProcessGroupId",
+        "description": "The identifier of the process group to receive the signal. A process group is created when the CREATE_NEW_PROCESS_GROUP flag is specified in a call to the  CreateProcess function. The process identifier of the new process is also the process group identifier of a new process group. The process group includes all processes that are descendants of the root process. Only those processes in the group that share the same console as the calling process receive the signal. In other words, if a process in the group creates a new console, that process does not receive the signal, nor do its descendants.     If this parameter is zero, the signal is generated in all processes that share the console of the calling process."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the text for the specified console alias and executable.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "To compile an application that uses this function, define _WIN32_WINNT as 0x0501 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleAlias",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpSource",
+        "description": "The console alias whose text is to be retrieved."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpTargetBuffer",
+        "description": "A pointer to a buffer that receives the text associated with the console alias."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "TargetBufferLength",
+        "description": "The size of the buffer pointed to by lpTargetBuffer, in bytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpExeName",
+        "description": "The name of the executable file."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves all defined console aliases for the specified executable.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "To determine the required size  for the lpExeName buffer, use the GetConsoleAliasesLength function. To compile an application that uses this function, define _WIN32_WINNT as 0x0501 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleAliases",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpAliasBuffer",
+        "description": "A pointer to a buffer that receives the aliases.  The format of the data is as follows: Source1=Target1\\0Source2=Target2\\0... SourceN=TargetN\\0, where N is the number of console aliases defined."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "AliasBufferLength",
+        "description": "The size of the buffer pointed to by lpAliasBuffer, in bytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpExeName",
+        "description": "The executable file whose aliases are to be retrieved."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the required size for the buffer used by the GetConsoleAliases function.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "The size of the buffer required to store all console aliases defined for this executable file, in bytes. ",
+    "remarks": "To compile an application that uses this function, define _WIN32_WINNT as 0x0501 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleAliasesLength",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpExeName",
+        "description": "The name of the executable file whose console aliases are to be retrieved."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the names of all executable files with console aliases defined.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "To determine the required size for the lpExeNameBuffer buffer, use the GetConsoleAliasExesLength function. To compile an application that uses this function, define _WIN32_WINNT as 0x0501 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleAliasExes",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpExeNameBuffer",
+        "description": "A pointer to a buffer that receives the  names of the executable files."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "ExeNameBufferLength",
+        "description": "The size of the buffer pointed to by lpExeNameBuffer, in bytes."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the required size for the buffer used by the GetConsoleAliasExes function.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "The size of the buffer required to store the names of all executable files that have console aliases defined, in bytes. ",
+    "remarks": "To compile an application that uses this function, define _WIN32_WINNT as 0x0501 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleAliasExesLength",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the input code page used by the console associated with the calling process. A console uses its input code page to translate keyboard input into the corresponding character value.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "The return value is a code that identifies the code page. For a list of identifiers, see Code Page Identifiers. ",
+    "remarks": "A code page maps 256 character codes to individual characters. Different code pages include different special characters, typically customized for a language or a group of languages. To retrieve more information about a code page, including it's name, see the GetCPInfoEx function. To set a console's input code page, use the  SetConsoleCP function. To set and query a console's output code page, use the  SetConsoleOutputCP and  GetConsoleOutputCP functions. ",
+    "return_type": "UINT WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleCP",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves information about the size and visibility of the cursor for the specified console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleCursorInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PCONSOLE_CURSOR_INFO",
+        "name": "lpConsoleCursorInfo",
+        "description": "A pointer to a  CONSOLE_CURSOR_INFO structure that receives information about the console's cursor."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the display mode of the current console.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "To compile an application that uses this function, define _WIN32_WINNT as 0x0500 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleDisplayMode",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpModeFlags",
+        "description": "The display mode of the console. This parameter can be one or more of the following values.  ValueMeaning  CONSOLE_FULLSCREEN 1   Full-screen console. The console is in this mode as soon as the window is maximized. At this point, the transition to full-screen mode can still fail.   CONSOLE_FULLSCREEN_HARDWARE 2   Full-screen console communicating directly with the video hardware. This mode is set after the console is in CONSOLE_FULLSCREEN mode to indicate that the transition to full-screen mode has completed."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the size of the font used by the specified console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a  COORD structure that contains the width and height of each character in the font, in logical units. The X member contains the width, while the Y member contains the height. If the function fails, the width and the height are zero. To get extended error information, call  GetLastError. To compile an application that uses this function, define _WIN32_WINNT as 0x0500 or later. For more information, see  Using the Windows Headers. ",
+    "remarks": "",
+    "return_type": "COORD WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleFontSize",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nFont",
+        "description": "The index of the font whose size is to be retrieved. This index is obtained by calling the  GetCurrentConsoleFont function."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the history settings for the calling process's console.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Wincon.h",
+    "return_value": "If the function succeeds the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If the calling process is not a console process, the function fails and sets the last error to ERROR_ACCESS_DENIED. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleHistoryInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PCONSOLE_HISTORY_INFO",
+        "name": "lpConsoleHistoryInfo",
+        "description": "A pointer to a CONSOLE_HISTORY_INFO structure that receives the history settings for the calling process's console."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the current input mode of a console's input buffer or the current output mode of a console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "A console consists of an input buffer and one or more screen buffers. The mode of a console buffer determines how the console behaves during input or output (I/O) operations. One set of flag constants is used with input handles, and another set is used with screen buffer (output) handles. Setting the output modes of one screen buffer does not affect the output modes of other screen buffers. The ENABLE_LINE_INPUT and ENABLE_ECHO_INPUT modes only affect processes that use ReadFile or  ReadConsole to read from the console's input buffer. Similarly, the ENABLE_PROCESSED_INPUT mode primarily affects ReadFile and  ReadConsole users, except that it also determines whether CTRL+C input is reported in the input buffer (to be read by the  ReadConsoleInput function) or is passed to a function defined by the application. The ENABLE_WINDOW_INPUT and ENABLE_MOUSE_INPUT modes determine whether user interactions involving window resizing and mouse actions are reported in the input buffer or discarded. These events can be read by  ReadConsoleInput, but they are always filtered by ReadFile and  ReadConsole. The ENABLE_PROCESSED_OUTPUT and ENABLE_WRAP_AT_EOL_OUTPUT modes only affect processes using ReadFile or  ReadConsole and WriteFile or  WriteConsole. To change a console's I/O modes, call  SetConsoleMode function. For an example, see  Reading Input Buffer Events. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleMode",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleHandle",
+        "description": "A handle to the console input buffer or the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpMode",
+        "description": "A pointer to a variable that receives the current mode of the specified buffer.     If the hConsoleHandle parameter is an input handle, the mode can be one or more of the following values. When a console is created, all input modes except ENABLE_WINDOW_INPUT are enabled by default.  ValueMeaning  ENABLE_ECHO_INPUT 0x0004   Characters read by the ReadFile or  ReadConsole function are written to the active screen buffer as they are read. This mode can be used only if the ENABLE_LINE_INPUT mode is also enabled.   ENABLE_INSERT_MODE 0x0020   When enabled, text entered in a console window will be inserted at the current cursor location and all text following that location will not be overwritten. When disabled, all following text will be overwritten.   ENABLE_LINE_INPUT 0x0002   The  ReadFile or  ReadConsole function returns only when a carriage return character is read. If this mode is disabled, the functions return when one or more characters are available.   ENABLE_MOUSE_INPUT 0x0010   If the mouse pointer is within the borders of the console window and the window has the keyboard focus, mouse events generated by mouse movement and button presses are placed in the input buffer. These events are discarded by  ReadFile or  ReadConsole, even when this mode is enabled.   ENABLE_PROCESSED_INPUT 0x0001   CTRL+C is processed by the system and is not placed in the input buffer. If the input buffer is being read by  ReadFile or  ReadConsole, other control keys are processed by the system and are not returned in the ReadFile or  ReadConsole buffer. If the ENABLE_LINE_INPUT mode is also enabled, backspace, carriage return, and line feed characters are handled by the system.    ENABLE_QUICK_EDIT_MODE 0x0040   This flag enables the user to use the mouse to select and edit text.  To enable this mode, use ENABLE_QUICK_EDIT_MODE | ENABLE_EXTENDED_FLAGS. To disable this mode, use ENABLE_EXTENDED_FLAGS without this flag.   ENABLE_WINDOW_INPUT 0x0008   User interactions that change the size of the console screen buffer are reported in the console's input buffer. Information about these events can be read from the input buffer by applications using the  ReadConsoleInput function, but not by those using ReadFile or  ReadConsole.   ENABLE_VIRTUAL_TERMINAL_INPUT 0x0200   Setting this flag directs the Virtual Terminal processing engine to convert user input received by the console window into Console Virtual Terminal Sequences that can be retrieved by a supporting application through WriteFile or  WriteConsole functions. The typical usage of this flag is intended in conjunction with ENABLE_VIRTUAL_TERMINAL_PROCESSING on the output handle to connect to an application that communicates exclusively via virtual terminal sequences.     If the hConsoleHandle parameter is a screen buffer handle, the mode can be one or more of the following values. When a screen buffer is created, both output modes are enabled by default.  ValueMeaning  ENABLE_PROCESSED_OUTPUT 0x0001   Characters written by the  WriteFile or  WriteConsole function or echoed by the  ReadFile or  ReadConsole function are parsed for ASCII control sequences, and the correct action is performed. Backspace, tab, bell, carriage return, and line feed characters are processed.   ENABLE_WRAP_AT_EOL_OUTPUT 0x0002   When writing with WriteFile or  WriteConsole or echoing with ReadFile or  ReadConsole, the cursor moves to the beginning of the next row when it reaches the end of the current row. This causes the rows displayed in the console window to scroll up automatically when the cursor advances beyond the last row in the window. It also causes the contents of the console screen buffer to scroll up (discarding the top row of the console screen buffer) when the cursor advances beyond the last row in the console screen buffer. If this mode is disabled, the last character in the row is overwritten with any subsequent characters.   ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004   When writing with WriteFile or  WriteConsole, characters are parsed for VT100 and similar control character sequences that control cursor movement, color/font mode, and other operations that can also be performed via the existing Console APIs. For more information, see Console Virtual Terminal Sequences.   DISABLE_NEWLINE_AUTO_RETURN 0x0008   When writing with WriteFile or WriteConsole, this adds an additional state to end-of-line wrapping that can delay the cursor move and buffer scroll operations.    Normally when ENABLE_WRAP_AT_EOL_OUTPUT is set and text reaches the end of the line, the cursor will immediately move to the next line and the contents of the buffer will scroll up by one line. In contrast with this flag set, the scroll operation and cursor move is delayed until the next character arrives. The written character will be printed in the final position on the line and the cursor will remain above this character as if ENABLE_WRAP_AT_EOL_OUTPUT was off, but the next printable character will be printed as if ENABLE_WRAP_AT_EOL_OUTPUT is on. No overwrite will occur. Specifically, the cursor quickly advances down to the following line, a scroll is performed if necessary, the character is printed, and the cursor advances one more position.  The typical usage of this flag is intended in conjunction with setting   ENABLE_VIRTUAL_TERMINAL_PROCESSING to better emulate a terminal emulator where writing the final character on the screen (in the bottom right corner) without triggering an immediate scroll is the desired behavior.      ENABLE_LVB_GRID_WORLDWIDE 0x0010   The APIs for writing character attributes including WriteConsoleOutput and WriteConsoleOutputAttribute allow the usage of flags from character attributes to adjust the color of the foreground and background of text. Additionally, a range of DBCS flags was specified with the COMMON_LVB prefix. Historically, these flags only functioned in DBCS code pages for Chinese, Japanese, and Korean languages. With exception of the leading byte and trailing byte flags, the remaining flags describing line drawing and reverse video (swap foreground and background colors) can be useful for other languages to emphasize portions of output. With exception of the leading byte and trailing byte flags, the remaining flags describing line drawing and reverse video (swap foreground and background colors) can be useful for other languages to emphasize portions of output. Setting this console mode flag will allow these attributes to be used in every code page on every language. It is off by default to maintain compatibility with known applications that have historically taken advantage of the console ignoring these flags on non-CJK machines to store bits in these fields for their own purposes or by accident.   Note that using the ENABLE_VIRTUAL_TERMINAL_PROCESSING mode can result in LVB grid and reverse video flags being set while this flag is still off if the attached application requests underlining or inverse video via Console Virtual Terminal Sequences."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the original title for the current console window.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the length of the string copied to the buffer, in characters. If the buffer is not large enough to store the title, the return value is zero and GetLastError returns ERROR_SUCCESS. If the function fails, the return value is zero and   GetLastError returns the error code. ",
+    "remarks": "To set the title for a console window, use the  SetConsoleTitle function. To retrieve the current title string, use the GetConsoleTitle function. To compile an application that uses this function, define _WIN32_WINNT as 0x0600 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleOriginalTitle",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpConsoleTitle",
+        "description": "A pointer to a buffer that receives a null-terminated string containing the original title. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nSize",
+        "description": "The size of the lpConsoleTitle buffer, in characters."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the output code page used by the console associated with the calling process. A console uses its output code page to translate the character values written by the various output functions into the images displayed in the console window.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "The return value is a code that identifies the code page. For a list of identifiers, see Code Page Identifiers. ",
+    "remarks": "A code page maps 256 character codes to individual characters. Different code pages include different special characters, typically customized for a language or a group of languages. To retrieve more information about a code page, including it's name, see the GetCPInfoEx function. To set a console's output code page, use the  SetConsoleOutputCP function. To set and query a console's input code page, use the  SetConsoleCP and  GetConsoleCP functions. ",
+    "return_type": "UINT WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleOutputCP",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves a list of the processes attached to the current console.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is less than or equal to dwProcessCount and represents the number of process identifiers stored in the lpdwProcessList buffer. If the buffer is too small to hold all the valid process identifiers, the return value is the required number of array elements. The function will have stored no identifiers in the buffer. In this situation, use the return value to allocate a buffer that is large enough to store the entire list and call the function again. If the return value is zero, the function has failed, because every console has at least one process associated with it. To get extended error information, call  GetLastError. ",
+    "remarks": "To compile an application that uses this function, define _WIN32_WINNT as 0x0501 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleProcessList",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpdwProcessList",
+        "description": "A pointer to a buffer that receives an array of process identifiers upon success. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwProcessCount",
+        "description": "The maximum number of process identifiers that can be stored in the lpdwProcessList buffer."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves information about the specified console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The rectangle returned in the srWindow member of the  CONSOLE_SCREEN_BUFFER_INFO structure can be modified and then passed to the  SetConsoleWindowInfo function to scroll the console screen buffer in the window, to change the size of the window, or both. All coordinates returned in the  CONSOLE_SCREEN_BUFFER_INFO structure are in character-cell coordinates, where the origin (0, 0) is at the upper-left corner of the console screen buffer. For an example, see  Scrolling a Screen Buffer's Window. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleScreenBufferInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PCONSOLE_SCREEN_BUFFER_INFO",
+        "name": "lpConsoleScreenBufferInfo",
+        "description": "A pointer to a  CONSOLE_SCREEN_BUFFER_INFO structure that receives the console screen buffer information."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves extended information about the specified console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The rectangle returned in the srWindow member of the  CONSOLE_SCREEN_BUFFER_INFOEX structure can be modified and then passed to the  SetConsoleWindowInfo function to scroll the console screen buffer in the window, to change the size of the window, or both. All coordinates returned in the  CONSOLE_SCREEN_BUFFER_INFOEX structure are in character-cell coordinates, where the origin (0, 0) is at the upper-left corner of the console screen buffer. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleScreenBufferInfoEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PCONSOLE_SCREEN_BUFFER_INFOEX",
+        "name": "lpConsoleScreenBufferInfoEx",
+        "description": "A CONSOLE_SCREEN_BUFFER_INFOEX structure that receives the requested console screen buffer information."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves information about the current console selection.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "To compile an application that uses this function, define _WIN32_WINNT as 0x0500 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleSelectionInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PCONSOLE_SELECTION_INFO",
+        "name": "lpConsoleSelectionInfo",
+        "description": "A pointer to a  CONSOLE_SELECTION_INFO structure that receives the selection information."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the title for the current console window.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the length of the console window's title, in characters. If the function fails, the return value is zero and   GetLastError returns the error code. ",
+    "remarks": "To set the title for a console window, use the  SetConsoleTitle function. To retrieve the original title string, use the GetConsoleOriginalTitle function. This function uses either Unicode characters or 8-bit characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. For an example, see SetConsoleTitle. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleTitle",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpConsoleTitle",
+        "description": "A pointer to a buffer that receives a null-terminated string containing the title. If the buffer is too small to store the title, the function stores as many characters of the title as will fit in the buffer, ending with a null terminator. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nSize",
+        "description": "The size of the buffer pointed to by the lpConsoleTitle parameter, in characters."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the window handle used by the console associated with the calling process.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "The return value is a handle to the window used by the console associated with the calling process or NULL if there is no such associated console. ",
+    "remarks": "To compile an application that uses this function, define _WIN32_WINNT as 0x0500 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "HWND WINAPI",
+    "category": "Consoles",
+    "name": "GetConsoleWindow",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves information about the current console font.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "To compile an application that uses this function, define _WIN32_WINNT as 0x0500 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "GetCurrentConsoleFont",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bMaximumWindow",
+        "description": "If this parameter is TRUE, font information is retrieved for the maximum window size. If this parameter is FALSE, font information is retrieved for the current window size."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PCONSOLE_FONT_INFO",
+        "name": "lpConsoleCurrentFont",
+        "description": "A pointer to a  CONSOLE_FONT_INFO structure that receives the requested font information."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves extended information about the current console font.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "GetCurrentConsoleFontEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bMaximumWindow",
+        "description": "If this parameter is TRUE, font information is retrieved for the maximum window size. If this parameter is FALSE, font information is retrieved for the current window size."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PCONSOLE_FONT_INFOEX",
+        "name": "lpConsoleCurrentFontEx",
+        "description": "A pointer to a  CONSOLE_FONT_INFOEX structure that receives the requested font information."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the size of the largest possible console window, based on the current font and the size of the display.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a  COORD structure that specifies the number of character cell rows (X member) and columns (Y member) in the largest possible console window. Otherwise, the members of the structure are zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The function does not take into consideration the size of the console screen buffer, which means that the window size returned may be larger than the size of the console screen buffer. The  GetConsoleScreenBufferInfo function can be used to determine the maximum size of the console window, given the current screen buffer size, the current font, and the display size. ",
+    "return_type": "COORD WINAPI",
+    "category": "Consoles",
+    "name": "GetLargestConsoleWindowSize",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the number of unread input records in the console's input buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  GetNumberOfConsoleInputEvents function reports the total number of unread input records in the input buffer, including keyboard, mouse, and window-resizing input records. Processes using the  ReadFile or  ReadConsole function can only read keyboard input. Processes using the  ReadConsoleInput function can read all types of input records. A process can specify a console input buffer handle in one of the  wait functions to determine when there is unread console input. When the input buffer is not empty, the state of a console input buffer handle is signaled. To read input records from a console input buffer without affecting the number of unread records, use the  PeekConsoleInput function. To discard all unread records in a console's input buffer, use the  FlushConsoleInputBuffer function. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "GetNumberOfConsoleInputEvents",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleInput",
+        "description": "A handle to the console input buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpcNumberOfEvents",
+        "description": "A pointer to a variable that receives the number of unread input records in the console's input buffer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the number of buttons on the mouse used by the current console.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "When a console receives mouse input, an  INPUT_RECORD structure containing a  MOUSE_EVENT_RECORD structure is placed in the console's input buffer. The dwButtonState member of  MOUSE_EVENT_RECORD has a bit indicating the state of each mouse button. The bit is 1 if the button is down and 0 if the button is up. To determine the number of bits that are significant, use  GetNumberOfConsoleMouseButtons. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "GetNumberOfConsoleMouseButtons",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfMouseButtons",
+        "description": "A pointer to a variable that receives the number of mouse buttons."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves a handle to the specified standard device (standard input, standard output, or standard error).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the specified device, or a redirected handle set by a previous call to  SetStdHandle. The handle has GENERIC_READ and GENERIC_WRITE access rights, unless the application has used  SetStdHandle to set a standard handle with lesser access. If the function fails, the return value is INVALID_HANDLE_VALUE. To get extended error information, call  GetLastError. If an application does not have associated standard handles, such as a service running on an interactive desktop, and has not redirected them, the return value is NULL. ",
+    "remarks": "Handles returned by  GetStdHandle can be used by applications that need to read from or write to the console. When a console is created, the standard input handle is a handle to the console's input buffer, and the standard output and standard error handles are handles of the console's active screen buffer. These handles can be used by the ReadFile and WriteFile functions, or by any of the console functions that access the console input buffer or a screen buffer (for example, the  ReadConsoleInput,  WriteConsole, or  GetConsoleScreenBufferInfo functions). The standard handles of a process may be redirected by a call to  SetStdHandle, in which case  GetStdHandle returns the redirected handle. If the standard handles have been redirected, you can specify the CONIN$ value in a call to the CreateFile function to get a handle to a console's input buffer. Similarly, you can specify the CONOUT$ value to get a handle to a console's active screen buffer. When attaching to a new console, standard handles are always replaced with console handles unless STARTF_USESTDHANDLES was specified during process creation. If the existing value of the standard handle is NULL, or the existing value of the standard handle looks like a console pseudohandle, the handle is replaced with a console handle. When a parent uses both CREATE_NEW_CONSOLE and STARTF_USESTDHANDLES to create a console process, standard handles will not be replaced unless the existing value of the standard handle is NULL or a console pseudohandle. For an example, see  Reading Input Buffer Events. ",
+    "return_type": "HANDLE WINAPI",
+    "category": "Consoles",
+    "name": "GetStdHandle",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nStdHandle",
+        "description": "The standard device. This parameter can be one of the following values.  ValueMeaning  STD_INPUT_HANDLE (DWORD)-10   The standard input device. Initially, this is the console input buffer, CONIN$.   STD_OUTPUT_HANDLE (DWORD)-11   The standard output device. Initially, this is the active console screen buffer, CONOUT$.   STD_ERROR_HANDLE (DWORD)-12   The standard error device. Initially, this is the active console screen buffer, CONOUT$."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "An application-defined function used with the  SetConsoleCtrlHandler function. A console process uses this function to handle control signals received by the process. When the signal is received, the system creates a new thread in the process to execute the function.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function handles the control signal, it should return TRUE. If it returns FALSE, the next handler function in the list of handlers for this process is used. ",
+    "remarks": "Because the system creates a new thread in the process to execute the handler function, it is possible that the handler function will be terminated by another thread in the process. Be sure to synchronize threads in the process with the thread for the handler function. Each console process has its own list of  HandlerRoutine functions. Initially, this list contains only a default handler function that calls  ExitProcess. A console process adds or removes additional handler functions by calling the  SetConsoleCtrlHandler function, which does not affect the list of handler functions for other processes. When a console process receives any of the control signals, its handler functions are called on a last-registered, first-called basis until one of the handlers returns TRUE. If none of the handlers returns TRUE, the default handler is called. The CTRL_CLOSE_EVENT, CTRL_LOGOFF_EVENT, and CTRL_SHUTDOWN_EVENT signals give the process an opportunity to clean up before termination. A  HandlerRoutine can perform any necessary cleanup, then take one of the following actions: A process can use the  SetProcessShutdownParameters function to prevent the system from displaying a dialog box to the user during logoff or shutdown. In this case, the system terminates the process when  HandlerRoutine returns TRUE or when the time-out period elapses. When a console application is run as a service, it receives a modified default console control handler. This modified handler does not call  ExitProcess when processing the CTRL_LOGOFF_EVENT and CTRL_SHUTDOWN_EVENT signals. This allows the service to continue running after the user logs off. If the service installs its own console control handler, this handler is called before the default handler. If the installed handler calls  ExitProcess when processing the CTRL_LOGOFF_EVENT signal, the service exits when the user logs off. Note that a third-party library or DLL can install a console control handler for your application. If it does, this handler overrides the default handler, and can cause the application to exit when the user logs off. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "HandlerRoutine",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwCtrlType",
+        "description": "The type of control signal received by the handler. This parameter can be one of the following values.  ValueMeaning  CTRL_C_EVENT 0   A CTRL+C signal was received, either from keyboard input or from a signal generated by the  GenerateConsoleCtrlEvent function.   CTRL_BREAK_EVENT 1   A CTRL+BREAK signal was received, either from keyboard input or from a signal generated by  GenerateConsoleCtrlEvent.   CTRL_CLOSE_EVENT 2   A signal that the system sends to all processes attached to a console when the user closes the console (either by clicking Close on the console window's window menu, or by clicking the End Task button command from Task Manager).   CTRL_LOGOFF_EVENT 5   A signal that the system sends to all console processes when a user is logging off. This signal does not indicate which user is logging off, so no assumptions can be made. Note that this signal is received only by services. Interactive applications are terminated at logoff, so they are not present when the system sends this signal.   CTRL_SHUTDOWN_EVENT 6   A signal that the system sends when the system is shutting down. Interactive applications are not present by the time the system sends this signal, therefore it can be received only be services in this situation. Services also have their own notification mechanism for shutdown events. For more information, see  Handler. This signal can also be generated by  an application using GenerateConsoleCtrlEvent."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Adds or removes an application-defined  HandlerRoutine function from the list of handler functions for the calling process.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "This function provides a similar notification for console application and services that WM_QUERYENDSESSION provides for graphical applications with a message pump. You could also use this function from a graphical application, but there is no guarantee it would arrive before the notification from WM_QUERYENDSESSION. Each console process has its own list of application-defined  HandlerRoutine functions that handle CTRL+C and CTRL+BREAK signals. The handler functions also handle signals generated by the system when the user closes the console, logs off, or shuts down the system. Initially, the handler list for each process contains only a default handler function that calls the  ExitProcess function. A console process adds or removes additional handler functions by calling the  SetConsoleCtrlHandler function, which does not affect the list of handler functions for other processes. When a console process receives any of the control signals, its handler functions are called on a last-registered, first-called basis until one of the handlers returns TRUE. If none of the handlers returns TRUE, the default handler is called. For console processes, the CTRL+C and CTRL+BREAK key combinations are typically treated as signals (CTRL_C_EVENT and CTRL_BREAK_EVENT). When a console window with the keyboard focus receives CTRL+C or CTRL+BREAK, the signal is typically passed to all processes sharing that console. CTRL+BREAK is always treated as a signal, but typical CTRL+C behavior can be changed in three ways that prevent the handler functions from being called: A console process can use the  GenerateConsoleCtrlEvent function to send a CTRL+C or CTRL+BREAK signal to a console process group. The system generates CTRL_CLOSE_EVENT, CTRL_LOGOFF_EVENT, and CTRL_SHUTDOWN_EVENT signals when the user closes the console, logs off, or shuts down the system so that the process has an opportunity to clean up before termination. Console functions, or any C run-time functions that call console functions, may not work reliably during processing of any of the three signals mentioned previously. The reason is that some or all of the internal console cleanup routines may have been called before executing the process signal handler. Windows 7, Windows 8, Windows 8.1 and Windows 10: If a console application loads the gdi32.dll or user32.dll library, the HandlerRoutine function that you specify  when you call SetConsoleCtrlHandler does not get called for the CTRL_LOGOFF_EVENT and CTRL_SHUTDOWN_EVENT events.  The operating system recognizes processes that load  gdi32.dll or user32.dll as Windows applications rather than console applications. This behavior also occurs for console applications that do not call functions in gdi32.dll or user32.dll  directly, but do call functions such as Shell functions that do in turn call functions in gdi32.dll or user32.dll. To receive events when a user signs out or the device shuts down in these circumstances, create a hidden window in your console application, and then handle the  WM_QUERYENDSESSION and WM_ENDSESSION window messages that the hidden window receives. You can create a hidden   window by calling the CreateWindowEx method with the dwExStyle parameter set to 0. For an example, see  Registering a Control Handler Function. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleCtrlHandler",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "PHANDLER_ROUTINE",
+        "name": "HandlerRoutine",
+        "description": "A pointer to the application-defined  HandlerRoutine function to be added or removed.    This parameter can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "Add",
+        "description": "If this parameter is TRUE, the handler is added; if it is FALSE, the handler is removed.     If the HandlerRoutine parameter is NULL, a TRUE value causes the calling process to ignore CTRL+C input, and a FALSE value restores normal processing of CTRL+C input. This attribute of ignoring or processing CTRL+C is inherited by child processes."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Reads data from the specified console input buffer without removing it from the buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If the number of records requested exceeds the number of records available in the buffer, the number available is read. If no data is available, the function returns immediately. This function uses either Unicode characters or 8-bit characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "PeekConsoleInput",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleInput",
+        "description": "A handle to the console input buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PINPUT_RECORD",
+        "name": "lpBuffer",
+        "description": "A pointer to an array of  INPUT_RECORD structures that receives the input buffer data. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nLength",
+        "description": "The size of the array pointed to by the lpBuffer parameter, in array elements."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfEventsRead",
+        "description": "A pointer to a variable that receives the number of input records read."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Reads character input from the console input buffer and removes it from the buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "ReadConsole reads keyboard input from a console's input buffer. It behaves like the  ReadFile function, except that it can read in either Unicode (wide-character) or ANSI mode. To have applications that maintain a single set of sources compatible with both modes, use  ReadConsole rather than ReadFile. Although  ReadConsole can only be used with a console input buffer handle, ReadFile can be used with other handles (such as files or pipes).  ReadConsole fails if used with a standard handle that has been redirected to be something other than a console handle. All of the input modes that affect the behavior of ReadFile have the same effect on  ReadConsole. To retrieve and set the input modes of a console input buffer, use the  GetConsoleMode and  SetConsoleMode functions. If the input buffer contains input events other than keyboard events (such as mouse events or window-resizing events), they are discarded. Those events can only be read by using the  ReadConsoleInput function. This function uses either Unicode characters or 8-bit characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. The pInputControl parameter can be used to enable intermediate wakeups from the read in response to a file-completion control character specified in a CONSOLE_READCONSOLE_CONTROL structure. This feature requires command extensions to be enabled, the standard output handle to be a console output handle, and input to be Unicode. Windows Server 2003 and Windows XP/2000:  The intermediate read feature is not supported. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "ReadConsole",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleInput",
+        "description": "A handle to the console input buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID",
+        "name": "lpBuffer",
+        "description": "A pointer to a buffer that receives the data read from the console input buffer. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nNumberOfCharsToRead",
+        "description": "The number of characters to be read. The size of the buffer pointed to by the lpBuffer parameter should be at least nNumberOfCharsToRead * sizeof(TCHAR) bytes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfCharsRead",
+        "description": "A pointer to a variable that receives the number of characters actually read."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPVOID",
+        "name": "pInputControl",
+        "description": "A pointer to a CONSOLE_READCONSOLE_CONTROL structure that specifies a control character to signal the end of the read operation. This parameter can be NULL. This parameter requires Unicode input by default. For ANSI mode, set this parameter to NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Reads data from a console input buffer and removes it from the buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If the number of records requested in the nLength parameter exceeds the number of records available in the buffer, the number available is read. The function does not return until at least one input record has been read. A process can specify a console input buffer handle in one of the  wait functions to determine when there is unread console input. When the input buffer is not empty, the state of a console input buffer handle is signaled. To determine the number of unread input records in a console's input buffer, use the  GetNumberOfConsoleInputEvents function. To read input records from a console input buffer without affecting the number of unread records, use the  PeekConsoleInput function. To discard all unread records in a console's input buffer, use the  FlushConsoleInputBuffer function. This function uses either Unicode characters or 8-bit characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. For an example, see  Reading Input Buffer Events. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "ReadConsoleInput",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleInput",
+        "description": "A handle to the console input buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PINPUT_RECORD",
+        "name": "lpBuffer",
+        "description": "A pointer to an array of  INPUT_RECORD structures that receives the input buffer data. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nLength",
+        "description": "The size of the array pointed to by the lpBuffer parameter, in array elements."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfEventsRead",
+        "description": "A pointer to a variable that receives the number of input records read."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Reads character and color attribute data from a rectangular block of character cells in a console screen buffer, and the function writes the data to a rectangular block at a specified location in the destination buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "ReadConsoleOutput treats the console screen buffer and the destination buffer as two-dimensional arrays (columns and rows of character cells). The rectangle pointed to by the lpReadRegion parameter specifies the size and location of the block to be read from the console screen buffer. A destination rectangle of the same size is located with its upper-left cell at the coordinates of the dwBufferCoord parameter in the lpBuffer array. Data read from the cells in the console screen buffer source rectangle is copied to the corresponding cells in the destination buffer. If the corresponding cell is outside the boundaries of the destination buffer rectangle (whose dimensions are specified by the dwBufferSize parameter), the data is not copied. Cells in the destination buffer corresponding to coordinates that are not within the boundaries of the console screen buffer are left unchanged. In other words, these are the cells for which no screen buffer data is available to be read. Before  ReadConsoleOutput returns, it sets the members of the structure pointed to by the lpReadRegion parameter to the actual screen buffer rectangle whose cells were copied into the destination buffer. This rectangle reflects the cells in the source rectangle for which there existed a corresponding cell in the destination buffer, because  ReadConsoleOutput clips the dimensions of the source rectangle to fit the boundaries of the console screen buffer. If the rectangle specified by lpReadRegion lies completely outside the boundaries of the console screen buffer, or if the corresponding rectangle is positioned completely outside the boundaries of the destination buffer, no data is copied. In this case, the function returns with the members of the structure pointed to by the lpReadRegion parameter set such that the Right member is less than the Left, or the Bottom member is less than the Top. To determine the size of the console screen buffer, use the  GetConsoleScreenBufferInfo function. The  ReadConsoleOutput function has no effect on the console screen buffer's cursor position. The contents of the console screen buffer are not changed by the function. This function uses either Unicode characters or 8-bit characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. For an example, see  Reading and Writing Blocks of Characters and Attributes. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "ReadConsoleOutput",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PCHAR_INFO",
+        "name": "lpBuffer",
+        "description": "A pointer to a destination buffer that receives the data read from the console screen buffer. This pointer is treated as the origin of a two-dimensional array of  CHAR_INFO structures whose size is specified by the dwBufferSize parameter. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwBufferSize",
+        "description": "The size of the lpBuffer parameter, in character cells. The X member of the  COORD structure is the number of columns; the Y member is the number of rows."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwBufferCoord",
+        "description": "The coordinates of the upper-left cell in the lpBuffer parameter that receives the data read from the console screen buffer. The X member of the  COORD structure is the column, and the Y member is the row."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PSMALL_RECT",
+        "name": "lpReadRegion",
+        "description": "A pointer to a  SMALL_RECT structure. On input, the structure members specify the upper-left and lower-right coordinates of the console screen buffer rectangle from which the function is to read. On output, the structure members specify the actual rectangle that was used."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Copies a specified number of character attributes from consecutive cells of a console screen buffer, beginning at a specified location.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If the number of attributes to be read from extends beyond the end of the specified screen buffer row, attributes are read from the next row. If the number of attributes to be read from extends beyond the end of the console screen buffer, attributes up to the end of the console screen buffer are read. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "ReadConsoleOutputAttribute",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWORD",
+        "name": "lpAttribute",
+        "description": "A pointer to a buffer that receives the attributes being used by the console screen buffer. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage. For more information, see  Character Attributes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nLength",
+        "description": "The number of screen buffer character cells from which to read. The size of the buffer pointed to by the lpAttribute parameter should be nLength * sizeof(WORD)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwReadCoord",
+        "description": "The coordinates of the first cell in the console screen buffer from which to read, in characters. The X member of the  COORD structure is the column, and the Y member is the row."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfAttrsRead",
+        "description": "A pointer to a variable that receives the number of attributes actually read."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Copies a number of characters from consecutive cells of a console screen buffer, beginning at a specified location.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If the number of characters to be read from extends beyond the end of the specified screen buffer row, characters are read from the next row. If the number of characters to be read from extends beyond the end of the console screen buffer, characters up to the end of the console screen buffer are read. This function uses either Unicode characters or 8-bit characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "ReadConsoleOutputCharacter",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpCharacter",
+        "description": "A pointer to a buffer that receives the characters read from the console screen buffer. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nLength",
+        "description": "The number of screen buffer character cells from which to read. The size of the buffer pointed to by the lpCharacter parameter should be nLength * sizeof(TCHAR)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwReadCoord",
+        "description": "The coordinates of the first cell in the console screen buffer from which to read, in characters. The X member of the  COORD structure is the column, and the Y member is the row."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfCharsRead",
+        "description": "A pointer to a variable that receives the number of characters actually read."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Moves a block of data in a screen buffer. The effects of the move can be limited by specifying a clipping rectangle, so the contents of the console screen buffer outside the clipping rectangle are unchanged.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "ScrollConsoleScreenBuffer copies the contents of a rectangular region of a screen buffer, specified by the lpScrollRectangle parameter, to another area of the console screen buffer. The target rectangle has the same dimensions as the lpScrollRectangle rectangle with its upper-left corner at the coordinates specified by the dwDestinationOrigin parameter. Those parts of lpScrollRectangle that do not overlap with the target rectangle are filled in with the character and color attributes specified by the lpFill parameter. The clipping rectangle applies to changes made in both the lpScrollRectangle rectangle and the target rectangle. For example, if the clipping rectangle does not include a region that would have been filled by the contents of lpFill, the original contents of the region are left unchanged. If the scroll or target regions extend beyond the dimensions of the console screen buffer, they are clipped. For example, if lpScrollRectangle is the region contained by (0,0) and (19,19) and dwDestinationOrigin is (10,15), the target rectangle is the region contained by (10,15) and (29,34). However, if the console screen buffer is 50 characters wide and 30 characters high, the target rectangle is clipped to (10,15) and (29,29). Changes to the console screen buffer are also clipped according to lpClipRectangle, if the parameter specifies a  SMALL_RECT structure. If the clipping rectangle is specified as (0,0) and (49,19), only the changes that occur in that region of the console screen buffer are made. This function uses either Unicode characters or 8-bit characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. For an example, see  Scrolling a Screen Buffer's Contents. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "ScrollConsoleScreenBuffer",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SMALL_RECT",
+        "name": "*lpScrollRectangle",
+        "description": "A pointer to a  SMALL_RECT structure whose members specify the upper-left and lower-right coordinates of the console screen buffer rectangle to be moved."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "SMALL_RECT",
+        "name": "*lpClipRectangle",
+        "description": "A pointer to a  SMALL_RECT structure whose members specify the upper-left and lower-right coordinates of the console screen buffer rectangle that is affected by the scrolling. This pointer can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwDestinationOrigin",
+        "description": "A  COORD structure that specifies the upper-left corner of the new location of the lpScrollRectangle contents, in characters."
+      },
+      {
+        "in_out": "_In_",
+        "type": "CHAR_INFO",
+        "name": "*lpFill",
+        "description": "A pointer to a  CHAR_INFO structure that specifies the character and color attributes to be used in filling the cells within the intersection of lpScrollRectangle and lpClipRectangle that were left empty as a result of the move."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the specified screen buffer to be the currently displayed console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "A console can have multiple screen buffers.  SetConsoleActiveScreenBuffer determines which one is displayed. You can write to an inactive screen buffer and then use  SetConsoleActiveScreenBuffer to display the buffer's contents. For an example, see  Reading and Writing Blocks of Characters and Attributes. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleActiveScreenBuffer",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the input code page used by the console associated with the calling process. A console uses its input code page to translate keyboard input into the corresponding character value.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "A code page maps 256 character codes to individual characters. Different code pages include different special characters, typically customized for a language or a group of languages. To find the code pages that are installed  or supported by the operating system, use the EnumSystemCodePages function. The identifiers of the code pages available on the local computer are also stored in the registry under the following key: HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage However, it is better to use EnumSystemCodePages  to enumerate code pages because the registry can differ in different versions of Windows. To determine whether a particular code page is valid, use the IsValidCodePage function. To retrieve more information about a code page, including its name, use the GetCPInfoEx function. For a list of available code page identifiers, see Code Page Identifiers. To determine a console's current input code page, use the  GetConsoleCP function. To set and retrieve a console's output code page, use the  SetConsoleOutputCP and  GetConsoleOutputCP functions. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleCP",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "wCodePageID",
+        "description": "The identifier of the code page to be set. For more information, see Remarks."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets the size and visibility of the cursor for the specified console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "When a screen buffer's cursor is visible, its appearance can vary, ranging from completely filling a character cell to showing up as a horizontal line at the bottom of the cell. The dwSize member of the  CONSOLE_CURSOR_INFO structure specifies the percentage of a character cell that is filled by the cursor. If this member is less than 1 or greater than 100,  SetConsoleCursorInfo fails. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleCursorInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "CONSOLE_CURSOR_INFO",
+        "name": "*lpConsoleCursorInfo",
+        "description": "A pointer to a  CONSOLE_CURSOR_INFO structure that provides the new specifications for the console screen buffer's cursor."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets the cursor position in the specified console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The cursor position determines where characters written by the WriteFile or  WriteConsole function, or echoed by the ReadFile or  ReadConsole function, are displayed. To determine the current position of the cursor, use the  GetConsoleScreenBufferInfo function. If the new cursor position is not within the boundaries of the console screen buffer's window, the window origin changes to make the cursor visible. For an example, see  Using the High-Level Input and Output Functions. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleCursorPosition",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwCursorPosition",
+        "description": "A  COORD structure that specifies the new cursor position, in characters. The coordinates are the column and row of a screen buffer character cell. The coordinates must be within the boundaries of the console screen buffer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the display mode of the specified console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleDisplayMode",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "The display mode of the console. This parameter can be one or more of the following values.     ValueMeaning  CONSOLE_FULLSCREEN_MODE 1   Text is displayed in full-screen mode.   CONSOLE_WINDOWED_MODE 2   Text is displayed in a console window."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PCOORD",
+        "name": "lpNewScreenBufferDimensions",
+        "description": "A pointer to a COORD structure that receives the new dimensions of the screen buffer, in characters."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the history settings for the calling process's console.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Wincon.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If the calling process is not a console process, the function fails and sets the last error code to ERROR_ACCESS_DENIED. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleHistoryInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCONSOLE_HISTORY_INFO",
+        "name": "lpConsoleHistoryInfo",
+        "description": "A pointer to a CONSOLE_HISTORY_INFO structure that contains the history settings for the process's console."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets the input mode of a console's input buffer or the output mode of a console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "A console consists of an input buffer and one or more screen buffers. The mode of a console buffer determines how the console behaves during input and output (I/O) operations. One set of flag constants is used with input handles, and another set is used with screen buffer (output) handles. Setting the output modes of one screen buffer does not affect the output modes of other screen buffers. The ENABLE_LINE_INPUT and ENABLE_ECHO_INPUT modes only affect processes that use  ReadFile or  ReadConsole to read from the console's input buffer. Similarly, the ENABLE_PROCESSED_INPUT mode primarily affects ReadFile and  ReadConsole users, except that it also determines whether Ctrl+C input is reported in the input buffer (to be read by the  ReadConsoleInput function) or is passed to a  HandlerRoutine function defined by the application. The ENABLE_WINDOW_INPUT and ENABLE_MOUSE_INPUT modes determine whether user interactions involving window resizing and mouse actions are reported in the input buffer or discarded. These events can be read by  ReadConsoleInput, but they are always filtered by ReadFile and  ReadConsole. The ENABLE_PROCESSED_OUTPUT and ENABLE_WRAP_AT_EOL_OUTPUT modes only affect processes using ReadFile or  ReadConsole and WriteFile or  WriteConsole. To determine the current mode of a console input buffer or a screen buffer, use the  GetConsoleMode function. For an example, see  Reading Input Buffer Events. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleMode",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleHandle",
+        "description": "A handle to the console input buffer or a console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwMode",
+        "description": "The input or output mode to be set. If the hConsoleHandle parameter is an input handle, the mode can be one or more of the following values. When a console is created, all input modes except ENABLE_WINDOW_INPUT are enabled by default.     ValueMeaning  ENABLE_ECHO_INPUT 0x0004   Characters read by the ReadFile or  ReadConsole function are written to the active screen buffer as they are read. This mode can be used only if the ENABLE_LINE_INPUT mode is also enabled.   ENABLE_EXTENDED_FLAGS 0x0080   Required to enable or disable extended flags. See ENABLE_INSERT_MODE and ENABLE_QUICK_EDIT_MODE.   ENABLE_INSERT_MODE 0x0020   When enabled, text entered in a console window will be inserted at the current cursor location and all text following that location will not be overwritten. When disabled, all following text will be overwritten.  To enable this mode, use ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS. To disable this mode, use ENABLE_EXTENDED_FLAGS without this flag.   ENABLE_LINE_INPUT 0x0002   The  ReadFile or  ReadConsole function returns only when a carriage return character is read. If this mode is disabled, the functions return when one or more characters are available.   ENABLE_MOUSE_INPUT 0x0010   If the mouse pointer is within the borders of the console window and the window has the keyboard focus, mouse events generated by mouse movement and button presses are placed in the input buffer. These events are discarded by  ReadFile or  ReadConsole, even when this mode is enabled.   ENABLE_PROCESSED_INPUT 0x0001   CTRL+C is processed by the system and is not placed in the input buffer. If the input buffer is being read by  ReadFile or  ReadConsole, other control keys are processed by the system and are not returned in the ReadFile or  ReadConsole buffer. If the ENABLE_LINE_INPUT mode is also enabled, backspace, carriage return, and line feed characters are handled by the system.   ENABLE_QUICK_EDIT_MODE 0x0040   This flag enables the user to use the mouse to select and edit text.  To enable this mode, use ENABLE_QUICK_EDIT_MODE | ENABLE_EXTENDED_FLAGS. To disable this mode, use ENABLE_EXTENDED_FLAGS without this flag.   ENABLE_WINDOW_INPUT 0x0008   User interactions that change the size of the console screen buffer are reported in the console's input buffer. Information about these events can be read from the input buffer by applications using the  ReadConsoleInput function, but not by those using ReadFile or  ReadConsole.   ENABLE_VIRTUAL_TERMINAL_INPUT 0x0200   Setting this flag directs the Virtual Terminal processing engine to convert user input received by the console window into Console Virtual Terminal Sequences that can be retrieved by a supporting application through ReadFile or ReadConsole functions. The typical usage of this flag is intended in conjunction with ENABLE_VIRTUAL_TERMINAL_PROCESSING on the output handle to connect to an application that communicates exclusively via virtual terminal sequences.     If the hConsoleHandle parameter is a screen buffer handle, the mode can be one or more of the following values. When a screen buffer is created, both output modes are enabled by default.  ValueMeaning  ENABLE_PROCESSED_OUTPUT 0x0001   Characters written by the  WriteFile or  WriteConsole function or echoed by the ReadFile or  ReadConsole function are examined for ASCII control sequences and the correct action is performed. Backspace, tab, bell, carriage return, and line feed characters are processed.   ENABLE_WRAP_AT_EOL_OUTPUT 0x0002    When writing with WriteFile or  WriteConsole or echoing with  ReadFile or  ReadConsole, the cursor moves to the beginning of the next row when it reaches the end of the current row. This causes the rows displayed in the console window to scroll up automatically when the cursor advances beyond the last row in the window. It also causes the contents of the console screen buffer to scroll up (discarding the top row of the console screen buffer) when the cursor advances beyond the last row in the console screen buffer. If this mode is disabled, the last character in the row is overwritten with any subsequent characters.   ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004   When writing with WriteFile or  WriteConsole, characters are parsed for VT100 and similar control character sequences that control cursor movement, color/font mode, and other operations that can also be performed via the existing Console APIs. For more information, see Console Virtual Terminal Sequences.   DISABLE_NEWLINE_AUTO_RETURN 0x0008   When writing with WriteFile or WriteConsole, this adds an additional state to end-of-line wrapping that can delay the cursor move and buffer scroll operations.    Normally when ENABLE_WRAP_AT_EOL_OUTPUT is set and text reaches the end of the line, the cursor will immediately move to the next line and the contents of the buffer will scroll up by one line. In contrast with this flag set, the scroll operation and cursor move is delayed until the next character arrives. The written character will be printed in the final position on the line and the cursor will remain above this character as if ENABLE_WRAP_AT_EOL_OUTPUT was off, but the next printable character will be printed as if ENABLE_WRAP_AT_EOL_OUTPUT is on. No overwrite will occur. Specifically, the cursor quickly advances down to the following line, a scroll is performed if necessary, the character is printed, and the cursor advances one more position.  The typical usage of this flag is intended in conjunction with setting   ENABLE_VIRTUAL_TERMINAL_PROCESSING to better emulate a terminal emulator where writing the final character on the screen (in the bottom right corner) without triggering an immediate scroll is the desired behavior.      ENABLE_LVB_GRID_WORLDWIDE 0x0010   The APIs for writing character attributes including WriteConsoleOutput and WriteConsoleOutputAttribute allow the usage of flags from character attributes to adjust the color of the foreground and background of text. Additionally, a range of DBCS flags was specified with the COMMON_LVB prefix. Historically, these flags only functioned in DBCS code pages for Chinese, Japanese, and Korean languages. With exception of the leading byte and trailing byte flags, the remaining flags describing line drawing and reverse video (swap foreground and background colors) can be useful for other languages to emphasize portions of output. With exception of the leading byte and trailing byte flags, the remaining flags describing line drawing and reverse video (swap foreground and background colors) can be useful for other languages to emphasize portions of output. Setting this console mode flag will allow these attributes to be used in every code page on every language. It is off by default to maintain compatibility with known applications that have historically taken advantage of the console ignoring these flags on non-CJK machines to store bits in these fields for their own purposes or by accident.   Note that using the ENABLE_VIRTUAL_TERMINAL_PROCESSING mode can result in LVB grid and reverse video flags being set while this flag is still off if the attached application requests underlining or inverse video via Console Virtual Terminal Sequences."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the output code page used by the console associated with the calling process. A console uses its output code page to translate the character values written by the various output functions into the images displayed in the console window.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "A code page maps 256 character codes to individual characters. Different code pages include different special characters, typically customized for a language or a group of languages. If the current font is a fixed-pitch Unicode font,  SetConsoleOutputCP changes the mapping of the character values into the glyph set of the font, rather than loading a separate font each time it is called. This affects how extended characters (ASCII value greater than 127) are displayed in a console window. However, if the current font is a raster font,  SetConsoleOutputCP does not affect how extended characters are displayed. To find the code pages that are installed  or supported by the operating system, use the EnumSystemCodePages function. The identifiers of the code pages available on the local computer are also stored in the registry under the following key: HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Nls\\CodePage To determine whether a particular code page is valid, use the IsValidCodePage function. To retrieve more information about a code page, including its name, use the GetCPInfoEx function. For a list of available code page identifiers, see Code Page Identifiers. To determine a console's current output code page, use the  GetConsoleOutputCP function. To set and retrieve a console's input code page, use the  SetConsoleCP and  GetConsoleCP functions. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleOutputCP",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "wCodePageID",
+        "description": "The identifier of the code page to set. For more information, see Remarks."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets extended information about the specified console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleScreenBufferInfoEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_WRITE access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCONSOLE_SCREEN_BUFFER_INFOEX",
+        "name": "lpConsoleScreenBufferInfoEx",
+        "description": "A CONSOLE_SCREEN_BUFFER_INFOEX structure that contains the console screen buffer information."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Changes the size of the specified console screen buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleScreenBufferSize",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwSize",
+        "description": "A  COORD structure that specifies the new size of the console screen buffer, in character rows and columns. The specified width and height cannot be less than the width and height of the console screen buffer's window. The specified dimensions also cannot be less than the minimum size allowed by the system. This minimum depends on the current font size for the console (selected by the user) and the SM_CXMIN and SM_CYMIN values returned by the  GetSystemMetrics function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets the attributes of characters written to the console screen buffer by the  WriteFile or  WriteConsole function, or echoed by the  ReadFile or  ReadConsole function. This function affects text written after the function call.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "To determine the current color attributes of a screen buffer, call the  GetConsoleScreenBufferInfo function. For an example, see  Using the High-Level Input and Output Functions. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleTextAttribute",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "wAttributes",
+        "description": "The \t\t\t\t\t\tcharacter attributes."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the title for the current console window.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "When the process terminates, the system restores the original console title. This function uses either Unicode characters or 8-bit characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. The following example shows how to retrieve and modify the console title. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleTitle",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpConsoleTitle",
+        "description": "The string to be displayed in the title bar of the console window. The total size must be less than 64K."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the current size and position of a console screen buffer's window.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The function fails if the specified window rectangle extends beyond the boundaries of the console screen buffer. This means that the Top and Left members of the lpConsoleWindow rectangle (or the calculated top and left coordinates, if bAbsolute is FALSE) cannot be less than zero. Similarly, the Bottom and Right members (or the calculated bottom and right coordinates) cannot be greater than (screen buffer height \u00e2\u0080\u0093 1) and (screen buffer width \u00e2\u0080\u0093 1), respectively. The function also fails if the Right member (or calculated right coordinate) is less than or equal to the Left member (or calculated left coordinate) or if the Bottom member (or calculated bottom coordinate) is less than or equal to the Top member (or calculated top coordinate). For consoles with more than one screen buffer, changing the window location for one screen buffer does not affect the window locations of the other screen buffers. To determine the current size and position of a screen buffer's window, use the  GetConsoleScreenBufferInfo function. This function also returns the maximum size of the window, given the current screen buffer size, the current font size, and the screen size. The  GetLargestConsoleWindowSize function returns the maximum window size given the current font and screen sizes, but it does not consider the size of the console screen buffer. SetConsoleWindowInfo can be used to scroll the contents of the console screen buffer by shifting the position of the window rectangle without changing its size. For an example, see  Scrolling a Screen Buffer's Window. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetConsoleWindowInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_READ access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bAbsolute",
+        "description": "If this parameter is TRUE, the coordinates specify the new upper-left and lower-right corners of the window. If it is FALSE, the coordinates are relative to the current window-corner coordinates."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SMALL_RECT",
+        "name": "*lpConsoleWindow",
+        "description": "A pointer to a  SMALL_RECT structure that specifies the new upper-left and lower-right corners of the window."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets extended information about the current console font.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "To compile an application that uses this function, define _WIN32_WINNT as 0x0500 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetCurrentConsoleFontEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_WRITE access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bMaximumWindow",
+        "description": "If this parameter is TRUE, font information is set for the maximum window size. If this parameter is FALSE, font information is set for the current window size."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCONSOLE_FONT_INFOEX",
+        "name": "lpConsoleCurrentFontEx",
+        "description": "A pointer to a  CONSOLE_FONT_INFOEX structure that contains the  font information."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets the handle for the specified standard device (standard input, standard output, or standard error).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The standard handles of a process may have been redirected by a call to  SetStdHandle, in which case  GetStdHandle will return the redirected handle. If the standard handles have been redirected, you can specify the CONIN$ value in a call to the  CreateFile function to get a handle to a console's input buffer. Similarly, you can specify the CONOUT$ value to get a handle to the console's active screen buffer. For an example, see  Creating a Child Process with Redirected Input and Output. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "SetStdHandle",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nStdHandle",
+        "description": "The standard device for which the handle is to be set. This parameter can be one of the following values.  ValueMeaning  STD_INPUT_HANDLE (DWORD)-10   The standard input device.   STD_OUTPUT_HANDLE (DWORD)-11   The standard output device.   STD_ERROR_HANDLE (DWORD)-12   The standard error device."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hHandle",
+        "description": "The handle for  the standard device."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Writes a character string to a console screen buffer beginning at the current cursor location.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The WriteConsole function writes characters to the console screen buffer at the current cursor position. The cursor position advances as characters are written. The  SetConsoleCursorPosition function sets the current cursor position. Characters are written using the foreground and background color attributes associated with the console screen buffer. The  SetConsoleTextAttribute function changes these colors. To determine the current color attributes and the current cursor position, use  GetConsoleScreenBufferInfo. All of the input modes that affect the behavior of the WriteFile function have the same effect on  WriteConsole. To retrieve and set the output modes of a console screen buffer, use the  GetConsoleMode and  SetConsoleMode functions. The WriteConsole function uses either Unicode characters or ANSI characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. WriteConsole fails if it is used with a standard handle that is redirected to a file. If an application processes multilingual output that can be redirected, determine whether the output handle is a console handle (one method is to call the GetConsoleMode function and check whether it succeeds). If the handle is a console handle, call WriteConsole. If the handle is not a console handle, the output is redirected and you should call WriteFile to perform the I/O. Be sure to prefix a Unicode plain text file with a byte order mark. For more information, see Using Byte Order Marks. Although an application can use  WriteConsole in ANSI mode to write ANSI characters, consoles do not support ANSI escape sequences. However, some functions provide equivalent functionality. For more information,  see SetCursorPos,  SetConsoleTextAttribute, and  GetConsoleCursorInfo. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "WriteConsole",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_WRITE access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "VOID",
+        "name": "*lpBuffer",
+        "description": "A pointer to a buffer that contains characters to be written to the console screen buffer. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nNumberOfCharsToWrite",
+        "description": "The number of characters to be written. If the total size of the specified number of characters exceeds the available heap, the function fails with ERROR_NOT_ENOUGH_MEMORY."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfCharsWritten",
+        "description": "A pointer to a variable that receives the number of characters actually written."
+      },
+      {
+        "in_out": "_Reserved_",
+        "type": "LPVOID",
+        "name": "lpReserved",
+        "description": "Reserved; must be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Writes data directly to the console input buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "WriteConsoleInput places input records into the input buffer behind any pending events in the buffer. The input buffer grows dynamically, if necessary, to hold as many events as are written. This function uses either Unicode characters or 8-bit characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "WriteConsoleInput",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleInput",
+        "description": "A handle to the console input buffer. The handle must have the GENERIC_WRITE access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "INPUT_RECORD",
+        "name": "*lpBuffer",
+        "description": "A pointer to an array of  INPUT_RECORD structures that contain data to be written to the input buffer. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nLength",
+        "description": "The number of input records to be written."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfEventsWritten",
+        "description": "A pointer to a variable that receives the number of input records actually written."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Writes character and color attribute data to a specified rectangular block of character cells in a console screen buffer. The data to be written is taken from a correspondingly sized rectangular block at a specified location in the source buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "WriteConsoleOutput treats the source buffer and the destination screen buffer as two-dimensional arrays (columns and rows of character cells). The rectangle pointed to by the lpWriteRegion parameter specifies the size and location of the block to be written to in the console screen buffer. A rectangle of the same size is located with its upper-left cell at the coordinates of the dwBufferCoord parameter in the lpBuffer array. Data from the cells that are in the intersection of this rectangle and the source buffer rectangle (whose dimensions are specified by the dwBufferSize parameter) is written to the destination rectangle. Cells in the destination rectangle whose corresponding source location are outside the boundaries of the source buffer rectangle are left unaffected by the write operation. In other words, these are the cells for which no data is available to be written. Before  WriteConsoleOutput returns, it sets the members of lpWriteRegion to the actual screen buffer rectangle affected by the write operation. This rectangle reflects the cells in the destination rectangle for which there existed a corresponding cell in the source buffer, because  WriteConsoleOutput clips the dimensions of the destination rectangle to the boundaries of the console screen buffer. If the rectangle specified by lpWriteRegion lies completely outside the boundaries of the console screen buffer, or if the corresponding rectangle is positioned completely outside the boundaries of the source buffer, no data is written. In this case, the function returns with the members of the structure pointed to by the lpWriteRegion parameter set such that the Right member is less than the Left, or the Bottom member is less than the Top. To determine the size of the console screen buffer, use the  GetConsoleScreenBufferInfo function. WriteConsoleOutput has no effect on the cursor position. This function uses either Unicode characters or 8-bit characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. For an example, see  Reading and Writing Blocks of Characters and Attributes. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "WriteConsoleOutput",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_WRITE access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "CHAR_INFO",
+        "name": "*lpBuffer",
+        "description": "The data to be written to the console screen buffer. This pointer is treated as the origin of a two-dimensional array of  CHAR_INFO structures whose size is specified by the dwBufferSize parameter. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwBufferSize",
+        "description": "The size of the buffer pointed to by the lpBuffer parameter, in character cells. The X member of the  COORD structure is the number of columns; the Y member is the number of rows."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwBufferCoord",
+        "description": "The coordinates of the upper-left cell in the buffer pointed to by the lpBuffer parameter. The X member of the  COORD structure is the column, and the Y member is the row."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PSMALL_RECT",
+        "name": "lpWriteRegion",
+        "description": "A pointer to a  SMALL_RECT structure. On input, the structure members specify the upper-left and lower-right coordinates of the console screen buffer rectangle to write to. On output, the structure members specify the actual rectangle that was used."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Copies a number of character attributes to consecutive cells of a console screen buffer, beginning at a specified location.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If the number of attributes to be written to extends beyond the end of the specified row in the console screen buffer, attributes are written to the next row. If the number of attributes to be written to extends beyond the end of the console screen buffer, the attributes are written up to the end of the console screen buffer. The character values at the positions written to are not changed. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "WriteConsoleOutputAttribute",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_WRITE access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "*lpAttribute",
+        "description": "The attributes to be used when writing to the console screen buffer. For more information, see  Character Attributes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nLength",
+        "description": "The number of screen buffer character cells to which the attributes will be copied. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwWriteCoord",
+        "description": "A  COORD structure that specifies the character coordinates of the first cell in the console screen buffer to which the attributes will be written."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfAttrsWritten",
+        "description": "A pointer to a variable that receives the number of attributes actually written to the console screen buffer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Copies a number of characters to consecutive cells of a console screen buffer, beginning at a specified location.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wincon.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If the number of characters to be written to extends beyond the end of the specified row in the console screen buffer, characters are written to the next row. If the number of characters to be written to extends beyond the end of the console screen buffer, characters are written up to the end of the console screen buffer. The attribute values at the positions written to are not changed. This function uses either Unicode characters or 8-bit characters from the console's current code page. The console's code page defaults initially to the system's OEM code page. To change the console's code page, use the  SetConsoleCP or  SetConsoleOutputCP functions, or use the chcp or mode con cp select= commands. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Consoles",
+    "name": "WriteConsoleOutputCharacter",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hConsoleOutput",
+        "description": "A handle to the console screen buffer. The handle must have the GENERIC_WRITE access right. For more information, see  Console Buffer Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpCharacter",
+        "description": "The characters to be written to the console screen buffer. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nLength",
+        "description": "The number of characters to be written."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COORD",
+        "name": "dwWriteCoord",
+        "description": "A  COORD structure that specifies the character coordinates of the first cell in the console screen buffer to which characters will be written."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfCharsWritten",
+        "description": "A pointer to a variable that receives the number of characters actually written."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

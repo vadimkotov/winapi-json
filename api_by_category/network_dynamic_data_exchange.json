@@ -1,0 +1,560 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the function succeeds, the return value is zero. If the function fails, the return value is a nonzero error code. If the lpszErrorString buffer is not large enough to accept the complete error string, and the string is truncated, the function returns the value NDDE_INTERNAL_ERROR. ",
+    "remarks": "",
+    "return_type": "UINT",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeGetErrorString",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uErrorCode",
+        "description": "The error code to be converted into an error string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszErrorString",
+        "description": "A pointer to a buffer that receives the translated error string. This parameter cannot be NULL. If the buffer is not large enough to store the complete error string, the string is truncated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cBufSize",
+        "description": "The size of the buffer to receive the error string, in TCHARs."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the function succeeds, the return value is NDDE_NO_ERROR. If the function fails, the return value is an error code, which can be translated into a text error message by calling  NDdeGetErrorString. If the pSD parameter was NULL, it returns NDDE_BUF_TOO_SMALL. ",
+    "remarks": "",
+    "return_type": "UINT",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeGetShareSecurity",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszServer",
+        "description": "The name of the server on which the DSDM resides."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszShareName",
+        "description": "The name of the share whose security descriptor is to be retrieved from the DSDM. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SECURITY_INFORMATION",
+        "name": "si",
+        "description": "A  SECURITY_INFORMATION value that specifies the security information to be retrieved from the security descriptor associated with the share."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PSECURITY_DESCRIPTOR",
+        "name": "pSD",
+        "description": "A pointer to a  SECURITY_DESCRIPTOR structure that receives the self-relative security descriptor. This parameter can be NULL. If this parameter is NULL, the DSDM determines the size of the requested security information and returns the number of bytes needed in the lpcbsdRequired parameter along with the NDDE_BUF_TOO_SMALL error code."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbSD",
+        "description": "The size of the pSD buffer. This parameter must be zero if pSD is NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpcbsdRequired",
+        "description": "A pointer to the variable that receives the actual size of the retrieved security descriptor. This parameter cannot be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the function succeeds, the return value is NDDE_NO_ERROR. If the function fails, the return value is an error code, which can be translated into a text error message by calling  NDdeGetErrorString. ",
+    "remarks": "The trusted share modify identifier reflects the version of the DDE share in the DSDM at the time the DDE share was initially granted trusted status. The trusted share modify identifier is primarily used to remove obsolete trusted shares. However, the user does not need to remove obsolete trusted shares. The network DDE agent removes obsolete shares on the user's behalf. ",
+    "return_type": "UINT",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeGetTrustedShare",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszServer",
+        "description": "The name of the server on which the DSDM resides."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszShareName",
+        "description": "The share name whose trusted status is being queried. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpdwTrustOptions",
+        "description": "A pointer to a variable that receives the trust options. This parameter cannot be NULL. The following trust options are available.     ValueMeaning  NDDE_CMD_SHOW_MASK 0x0000FFFFL   Mask used to obtain the value used to override the DDE share show state, if NDDE_TRUST_CMD_SHOW is set.   NDDE_TRUST_CMD_SHOW 0x10000000L   Override the show state specified in the DDE share DSDM.   NDDE_TRUST_SHARE_DEL 0x20000000L   Remove the share's trusted status.   NDDE_TRUST_SHARE_INIT 0x40000000L   Allow a client to initiate to the application if it is already running in the user's context.   NDDE_TRUST_SHARE_START 0x80000000L   Allow the application to be started in the user's context."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpdwShareModId0",
+        "description": "A pointer to a variable that receives the first part of the trusted share modify identifier. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpdwShareModId1",
+        "description": "A pointer to a variable that receives the second part of the trusted share modify identifier. This parameter cannot be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the targetTopic parameter has valid syntax, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "This function is also called by  NDdeShareAdd when it creates the DDE share. ",
+    "return_type": "BOOL",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeIsValidAppTopicList",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "targetTopic",
+        "description": "A pointer to the application and topic string to validate. This parameter cannot be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the share name has valid syntax, the return value is nonzero. If the share name does not have valid syntax, the return value is zero. ",
+    "remarks": "This function is also called by  NDdeShareAdd when it creates the DDE share. ",
+    "return_type": "BOOL",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeIsValidShareName",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "shareName",
+        "description": "The share name to be validated. This parameter cannot be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the function succeeds, the return value is NDDE_NO_ERROR. If the function fails, the return value is an error code, which can be translated into a text error message by calling  NDdeGetErrorString. ",
+    "remarks": "To modify the SECURITY_DESCRIPTOR associated with a DDE share in the DSDM, the user must have appropriate privilege; the share creator has this privilege. ",
+    "return_type": "UINT",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeSetShareSecurity",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszServer",
+        "description": "The name of the server whose DSDM is to be modified."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszShareName",
+        "description": "The name of the share whose security descriptor is to be modified. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SECURITY_INFORMATION",
+        "name": "si",
+        "description": "A  SECURITY_INFORMATION value that identifies the security information to retrieve."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSECURITY_DESCRIPTOR",
+        "name": "pSD",
+        "description": "A pointer to a  SECURITY_DESCRIPTOR structure that contains security information. This parameter cannot be NULL and should point to a valid security descriptor."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the function succeeds, the return value is NDDE_NO_ERROR. If the function fails, the return value is an error code, which can be translated into a text error message by calling  NDdeGetErrorString. ",
+    "remarks": "The DDE share must first be created with  NDdeShareAdd. If  NDdeSetTrustedShare is called with dwTrustOptions set to zero, the trusted share loses its trusted status. ",
+    "return_type": "UINT",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeSetTrustedShare",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszServer",
+        "description": "The name of the server whose DSDM is to be modified."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszShareName",
+        "description": "The name of the share to be granted trusted status. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwTrustOptions",
+        "description": "The options affecting the trusted status of the DDE share. This parameter can be one of the following values.  OptionMeaning  NDDE_CMD_SHOW_MASK 0x0000FFFFL   Mask used to obtain the value used to override the DDE share show state, if NDDE_TRUST_CMD_SHOW is set.   NDDE_TRUST_CMD_SHOW 0x10000000L   Override the show state specified in the DDE share DSDM.   NDDE_TRUST_SHARE_DEL 0x20000000L   Remove the share's trusted status.   NDDE_TRUST_SHARE_INIT 0x40000000L   Allow a client to initiate to the application if it is already running in the user's context.   NDDE_TRUST_SHARE_START 0x80000000L   Allow the application to be started in the user's context."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the function succeeds, the return value is NDDE_NO_ERROR. If the function fails, the return value is an error code, which can be translated into a text error message by calling  NDdeGetErrorString. ",
+    "remarks": "Before a client can connect to the DDE share, it must be trusted with  NDdeSetTrustedShare. ",
+    "return_type": "UINT",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeShareAdd",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszServer",
+        "description": "The name of the server whose DSDM is to be modified."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nLevel",
+        "description": "The information level. This parameter must be 2."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSECURITY_DESCRIPTOR",
+        "name": "pSD",
+        "description": "A pointer to a  SECURITY_DESCRIPTOR structure to be associated with this share and against which access checks will be performed on subsequent initiates to this share. This parameter can be NULL, in which case the DSDM creates a default security descriptor that grants \"Full Control\" to the owner and \"Read and Link\" to everyone."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "lpBuffer",
+        "description": "A pointer to the  NDDESHAREINFO structure that defines the ApplicationTopic list associated with the DDE share being created as well as other parameters. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cBufSize",
+        "description": "The size of the lpBuffer structure, in bytes. This parameter cannot be zero."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the function succeeds, the return value is NDDE_NO_ERROR. If the function fails, the return value is an error code which can be translated into a text error message by calling  NDdeGetErrorString. ",
+    "remarks": "To delete a DDE share from the DSDM, you must have the appropriate privilege. The share creator has delete privilege. ",
+    "return_type": "UINT",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeShareDel",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszServer",
+        "description": "The name of the server whose DSDM is to be modified."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszShareName",
+        "description": "The name of the share to be deleted from the DSDM. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "wReserved",
+        "description": "Reserved. This parameter must be zero."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the function succeeds, the return value is NDDE_NO_ERROR. If the function fails, the return value is an error code, which can be translated into a text error message by calling  NDdeGetErrorString. If the lpBuffer parameter is NULL, it returns NDDE_BUF_TOO_SMALL. ",
+    "remarks": "",
+    "return_type": "UINT",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeShareEnum",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszServer",
+        "description": "The name of the server on which the DSDM resides."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nLevel",
+        "description": "Reserved. This parameter must be zero."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "lpBuffer",
+        "description": "A pointer to a buffer that receives the list of DDE shares. The list of DDE shares is stored as a sequence of null-separated strings terminating with a double null character at the end. This parameter can be NULL. If lpBuffer is NULL, the DSDM returns the size of buffer required to hold the list of shares in the lpcbTotalAvailable parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cBufSize",
+        "description": "The size of the lpBuffer buffer, in bytes. This parameter must be zero if lpBuffer is NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpnEntriesRead",
+        "description": "A pointer to a variable that receives the total number of shares being enumerated. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpcbTotalAvailable",
+        "description": "A pointer to a variable that receives the total number of bytes needed in the buffer to store the list of DDE shares. This parameter cannot be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the function succeeds, the return value is NDDE_NO_ERROR. If the function fails, the return value is an error code, which can be translated into a text error message by calling  NDdeGetErrorString. If the lpBuffer parameter is NULL, it returns NDDE_BUF_TOO_SMALL. ",
+    "remarks": "",
+    "return_type": "UINT",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeShareGetInfo",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszServer",
+        "description": "The name of the server on which the DSDM resides."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszShareName",
+        "description": "The share name whose information is to be retrieved from the DSDM. This parameter must not be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nLevel",
+        "description": "The information level. This parameter must be 2."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "lpBuffer",
+        "description": "A pointer to a buffer that receives the  NDDESHAREINFO structure and associated data pointed to by its members. This parameter can be NULL. If lpBuffer is NULL, then the DSDM calculates the number of bytes required to store the requested share information and returns that value in the lpnTotalAvailable field along with the NDDE_BUF_TOO_SMALL error."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cBufSize",
+        "description": "The size of the lpBuffer buffer, in bytes. If lpBuffer is NULL, then cBufSize should be zero."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpnTotalAvailable",
+        "description": "A pointer to a variable that receives the total number of bytes needed to store the requested share information. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWORD",
+        "name": "lpnItems",
+        "description": "A pointer to an item selection mask for partial share information retrieval."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the function succeeds, the return value is NDDE_NO_ERROR. If the function fails, the return value is an error code, which can be translated into a text error message by calling  NDdeGetErrorString. ",
+    "remarks": "",
+    "return_type": "UINT",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeShareSetInfo",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszServer",
+        "description": "The name of the server whose DSDM is to be modified."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszShareName",
+        "description": "The name of the share name whose information is to be modified. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nLevel",
+        "description": "The information level. This parameter must be 2."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "lpBuffer",
+        "description": "A pointer to the  NDDESHAREINFO structure that specifies the DDE share information to be stored in the DSDM. Currently the DDE share information is modified as a whole, that is, no partial edits are made. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cBufSize",
+        "description": "The size of the lpBuffer buffer, in bytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "sParmNum",
+        "description": "The parameter index to be modified. The current implementation does not support partial modification; therefore, this parameter must be zero."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "[Network DDE is no longer supported. Nddeapi.dll is present on Windows Vista, but all function calls return NDDE_NOT_IMPLEMENTED.]",
+    "library": "Nddeapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Nddeapi.h",
+    "return_value": "If the function succeeds, the return value is NDDE_NO_ERROR. If the function fails, the return value is an error code, which can be translated into a text error message by calling  NDdeGetErrorString. If the lpBuffer parameter is NULL, it returns NDDE_BUF_TOO_SMALL. ",
+    "remarks": "",
+    "return_type": "UINT",
+    "category": "Network Dynamic Data Exchange (DDE)",
+    "name": "NDdeTrustedShareEnum",
+    "is_callback": 0,
+    "dll": "Nddeapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszServer",
+        "description": "The name of the server on which the DSDM resides."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nLevel",
+        "description": "Reserved. This parameter must be zero."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "lpBuffer",
+        "description": "A pointer to a buffer that receives the list of trusted DDE shares. The list of trusted DDE shares is returned as a sequence of null-separated strings terminating with a double null character at the end. This parameter can be NULL. If the lpBuffer is NULL, the DSDM returns the size of buffer required to hold the list of shares in the lpcbTotalAvailable field."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cBufSize",
+        "description": "The size of the lpBuffer buffer, in bytes. This parameter must be zero if lpBuffer is NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpnEntriesRead",
+        "description": "A pointer to a variable that receives the total number of trusted shares being enumerated. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpcbTotalAvailable",
+        "description": "A pointer to a variable that receives the total number of bytes needed to store the list of trusted DDE shares. This parameter cannot be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

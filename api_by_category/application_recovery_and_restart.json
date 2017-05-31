@@ -1,0 +1,239 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Indicates that  the calling application has completed its data recovery.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "This should be the last call that you make in your callback because your application terminates as soon as this function is called. ",
+    "return_type": "VOID WINAPI",
+    "category": "Application Recovery and Restart",
+    "name": "ApplicationRecoveryFinished",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bSuccess",
+        "description": "Specify TRUE to indicate that the data was successfully recovered; otherwise, FALSE."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Indicates that  the calling application is continuing to recover data.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function returns S_OK on success or one of the following error codes.  ",
+    "remarks": "The application must call this function within the interval specified when calling the RegisterApplicationRecoveryCallback function. If the application fails to call this function within the specified interval, WER terminates the application. The recovery process can continue as long as this function is being called. If the user cancels the recovery process, the application should terminate. To indicate that the recovery process has been completed, call the ApplicationRecoveryFinished function. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Application Recovery and Restart",
+    "name": "ApplicationRecoveryInProgress",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PBOOL",
+        "name": "pbCanceled",
+        "description": "Indicates whether the user has canceled the recovery process. Set by WER if the user clicks the Cancel button."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves  a pointer to the callback routine registered for the specified process. The address returned is in the virtual address space of the process.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function returns S_OK on success or one of the following error codes.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Application Recovery and Restart",
+    "name": "GetApplicationRecoveryCallback",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hProcess",
+        "description": "A handle to the process. This handle must have the PROCESS_VM_READ access right."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "APPLICATION_RECOVERY_CALLBACK",
+        "name": "*pRecoveryCallback",
+        "description": "A pointer to the recovery callback function. For more information, see ApplicationRecoveryCallback."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "*ppvParameter",
+        "description": "A pointer to the callback parameter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDWORD",
+        "name": "pdwPingInterval",
+        "description": "The recovery ping interval, in 100-nanosecond intervals."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDWORD",
+        "name": "pdwFlags",
+        "description": "Reserved for future use."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves  the restart information registered for the specified process.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function returns S_OK on success or one of the following error codes.  ",
+    "remarks": "This information is available only for the current process; you cannot call this function after your program is restarted to get the restart command line. To get the command line after a restart, access the argv parameter of your main function. The following example shows how to get the restart settings specified when you called the RegisterApplicationRestart function. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Application Recovery and Restart",
+    "name": "GetApplicationRestartSettings",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hProcess",
+        "description": "A handle to the process. This handle must have the PROCESS_VM_READ access right."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PWSTR",
+        "name": "pwzCommandline",
+        "description": "A pointer to a buffer that receives the restart command line specified by the application when it called the RegisterApplicationRestart function. The maximum size of the command line, in characters, is RESTART_MAX_CMD_LINE. Can be NULL if pcchSize is zero."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PDWORD",
+        "name": "pcchSize",
+        "description": "On input, specifies the size of the pwzCommandLine buffer, in characters.  If the buffer is not large enough to receive the command line, the function fails with HRESULT_FROM_WIN32(ERROR_INSUFFICIENT_BUFFER) and sets this parameter to the required buffer size, in characters. On output, specifies the size of the buffer that was used. To determine the required buffer size, set pwzCommandLine to NULL and this parameter to zero. The size includes one for the null-terminator character. Note that the function returns S_OK, not HRESULT_FROM_WIN32(ERROR_INSUFFICIENT_BUFFER) in this case."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PDWORD",
+        "name": "pdwFlags",
+        "description": "A pointer to a variable that receives the flags specified by the application when it called the RegisterApplicationRestart function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Registers the active instance of an application for recovery.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function returns S_OK on success or one of the following error codes.  ",
+    "remarks": "If the  application encounters an unhandled exception or becomes unresponsive, Windows Error Reporting (WER) calls the specified recovery callback. You should use the callback to save data and state information. You can use the information if you also call  the RegisterApplicationRestart function to request that WER restart the application. WER will not call your recovery callback if an installer wants to  update a component of your application. To save data and state information in the update case, you should handle the WM_QUERYENDSESSION and WM_ENDSESSION messages. For details, see each message. The timeout for responding to these messages is five seconds. Most of the available recovery time is in the WM_CLOSE message for which you have 30 seconds. A console application that can be updated uses the CTRL_C_EVENT notification to initiate recovery (for details, see the HandlerRoutine callback function). The timeout for the handler to complete is 30 seconds. Applications should consider saving data and state information on a periodic bases to shorten the amount of time required for recovery. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Application Recovery and Restart",
+    "name": "RegisterApplicationRecoveryCallback",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "APPLICATION_RECOVERY_CALLBACK",
+        "name": "pRecoveryCallback",
+        "description": "A pointer to the recovery callback function. For more information, see ApplicationRecoveryCallback."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "pvParameter",
+        "description": "A pointer to a variable to be passed to the callback function. Can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwPingInterval",
+        "description": "The recovery ping interval, in milliseconds. By default, the interval is 5 seconds (RECOVERY_DEFAULT_PING_INTERVAL). The maximum interval is 5 minutes. If you specify zero, the default interval is used.  You must call the ApplicationRecoveryInProgress function within the specified interval to indicate to ARR that you are still actively recovering; otherwise, WER terminates recovery. Typically, you perform recovery in a loop with each iteration lasting no longer than the ping interval. Each iteration performs a block of recovery work followed by a call to ApplicationRecoveryInProgress. Since you also use ApplicationRecoveryInProgress to determine if the user wants to cancel recovery, you should consider a smaller interval, so you do not perform a lot of work unnecessarily."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Reserved for future use. Set to zero."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Registers the active instance of an application for restart.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function returns S_OK on success or one of the following error codes.  ",
+    "remarks": "Your initial registration for restart must occur before the application encounters an unhandled exception or becomes unresponsive. You could then call this function from inside your recovery callback to update the command line. For a Windows application that is being updated, the last opportunity to call this function is while processing the WM_QUERYENDSESSION message. For a console application that is being updated, the registration must occur before the installer tries to shutdown the application (you need to keep the registration current; you cannot call this function when handling the CTRL_C_EVENT notification). If you register for restart and the application encounters an unhandled exception or is not responsive, the user is offered the opportunity to restart the application; the application is not automatically restarted without the user's consent. However, if the application is being updated and requires a restart, the application is restarted automatically. To prevent cyclical restarts, the system will only restart the application if it has been     \trunning for a minimum of 60 seconds. Note that for an application to be restarted when the update requires a computer restart, the installer must call the ExitWindowsEx function with the EWX_RESTARTAPPS flag set or the InitiateShutdown function with the SHUTDOWN_RESTARTAPPS flag set. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Application Recovery and Restart",
+    "name": "RegisterApplicationRestart",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "PCWSTR",
+        "name": "pwzCommandline",
+        "description": "A pointer to a Unicode string that specifies the command-line arguments for the application when it is restarted. The maximum size of the command line that you can specify is RESTART_MAX_CMD_LINE characters. Do not include the name of the executable in the command line; this function adds it for you.   If this parameter is NULL or an empty string, the previously registered command line is removed. If the argument contains spaces, use quotes around the argument."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be 0 or one or more of the following values.  ValueMeaning  RESTART_NO_CRASH 1   Do not restart the process if it terminates due to an unhandled exception.   RESTART_NO_HANG 2   Do not restart the process if it terminates due to the  application not responding.    RESTART_NO_PATCH 4   Do not restart the process if it terminates due to the installation of  an update.   RESTART_NO_REBOOT 8   Do not restart the process if the computer is restarted as the result of an update."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Removes the active instance of an application from the recovery list.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function returns S_OK on success or one of the following error codes.  ",
+    "remarks": "You do not need to call this function before exiting. You need to remove the registration only if you choose to not recover data. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Application Recovery and Restart",
+    "name": "UnregisterApplicationRecoveryCallback",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Removes the active instance of an application from the restart list.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function returns S_OK on success or one of the following error codes.  ",
+    "remarks": "You do not need to call this function before exiting. You need to remove the registration only if you choose to not restart the application. For example, you could remove the registration if your application entered a corrupted state where a future restart would also fail. You must call this function before the application fails abnormally. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Application Recovery and Restart",
+    "name": "UnregisterApplicationRestart",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

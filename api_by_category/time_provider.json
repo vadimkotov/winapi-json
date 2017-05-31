@@ -1,0 +1,222 @@
+[
+  {
+    "n_arguments": 0,
+    "description": "Notifies the system that there are new time samples available.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Timeprov.h",
+    "return_value": "If the function succeeds, the return value is S_OK. Otherwise, the return value is one of the error codes defined in WinError.h. ",
+    "remarks": "The time provider manager uses this notification to determine when to send a TPC_GetSamples command. A hardware provider does not need to call this function, as the time provider manager requests samples without this notification. Time providers that provide samples sporadically, such as a provider that works in the background when a user establishes a transient dial-up connection, must call this function. The  TimeProvOpen function returns a pointer to this function. ",
+    "return_type": "HRESULT __stdcall",
+    "category": "Time Provider",
+    "name": "AlertSamplesAvailFunc",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the system time state information.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Timeprov.h",
+    "return_value": "If the function succeeds, the return value is S_OK. Otherwise, the return value is one of the error codes defined in WinError.h. ",
+    "remarks": "To ensure accuracy, the time provider should retrieve all time-related information using  GetTimeSysInfoFunc. Note that the time values should not be used directly in an NTP packet. They are expressed relative to 12:00 A.M. January 1, 1601, whereas NTP specifies that time values be expressed relative to 12:00 A.M. January 1, 1900. The  TimeProvOpen function returns a pointer to this function. For an example, see Sample Time Provider. ",
+    "return_type": "HRESULT __stdcall",
+    "category": "Time Provider",
+    "name": "GetTimeSysInfoFunc",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TimeSysInfo",
+        "name": "eInfo",
+        "description": "Requested state information. This parameter can be one of the following values.     ValueMeaning  TSI_ClockPrecision   The pvInfo parameter is a signed __int32 value that specifies the clock precision, in log2 seconds.   TSI_ClockTickSize   The pvInfo parameter is an unsigned __int64 value that specifies the clock tick size, in (10^-7) seconds.   TSI_CurrentTime   The pvInfo parameter is an unsigned __int64 value that specifies the current time, in (10^-7) second intervals that have elapsed since 12:00 A.M. January 1, 1601 Coordinated Universal Time (UTC).   TSI_LastSyncTime   The pvInfo parameter is an unsigned __int64 value that specifies the last synch time, in (10^-7) second intervals that have elapsed since 12:00 A.M. January 1, 1601 Coordinated Universal Time (UTC).   TSI_LeapFlags   The pvInfo parameter is a BYTE value that indicates an impending leap second or loss of synchronization. The following values are defined:      0 - No change 1 - Add leap second 2 - Subtract leap second 3 - Not synchronized    TSI_PhaseOffset   The pvInfo parameter is a signed __int64 value that specifies the phase offset used to adjust the clock, in seconds.   TSI_PollInterval   The pvInfo parameter is a signed __int32 value that specifies the poll interval, in log2 seconds.   TSI_ReferenceIdentifier   The pvInfo parameter is a DWORD value that specifies the reference identifier for the time source, in NTP format (either an IP address or a four character ASCII string that describes the hardware source, such as Global Positioning System (GPS) or WWVB).   TSI_RootDelay   The pvInfo parameter is a signed __int64 value that specifies the root delay, in (10^-7) seconds.   TSI_RootDispersion   The pvInfo parameter is an unsigned __int64 value that specifies, the root dispersion, in (10^-7) seconds.   TSI_Stratum   The pvInfo parameter is a BYTE value that specifies the number of network hops that separate this computer from the root source. Hardware providers should return zero. NTP providers should return the stratum of the peer that provided the sample.   TSI_TickCount   The pvInfo parameter is an unsigned __int64 value that specifies the tick count (number of milliseconds since the system was started). This value will eventually wrap, so it should be used only to compare short intervals.   TSI_TSFlags   The pvInfo parameter is a DWORD value that specifies one of the following time source flags:      TSF_Authenticated TSF_Hardware TSF_IPv6"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "pvInfo",
+        "description": "A pointer to a buffer that receives that state information. The format of this data depends on the value of eInfo."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Logs a time provider event in the event log.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Timeprov.h",
+    "return_value": "If the function succeeds, the return value is S_OK. Otherwise, the return value is one of the error codes defined in WinError.h. ",
+    "remarks": "This function provides the time provider with a simplified interface for event logging. Time providers that require more extensive event logging can perform their own event logging. For more information on event logging, see  Event Logging. The  TimeProvOpen function returns a pointer to this function. ",
+    "return_type": "HRESULT __stdcall",
+    "category": "Time Provider",
+    "name": "LogTimeProvEventFunc",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "wType",
+        "description": "The event type. This parameter can be one of the following values.     ValueMeaning  Error   Indicates a significant problem.   Information   Provides information about a successful operation.   Warning   Indicates a problem that is not immediately significant, but may cause future problems."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WCHAR",
+        "name": "*wszProvName",
+        "description": "The provider name."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WCHAR",
+        "name": "*wszMessage",
+        "description": "The event description."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the time provider's status information.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Timeprov.h",
+    "return_value": "If the function succeeds, the return value is S_OK. Otherwise, the return value is one of the error codes defined in WinError.h. ",
+    "remarks": "The  TimeProvOpen function returns a pointer to this function. ",
+    "return_type": "HRESULT __stdcall",
+    "category": "Time Provider",
+    "name": "SetProviderStatusFunc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SetProviderStatusInfo",
+        "name": "*pspsi",
+        "description": "A pointer to a  SetProviderStatusInfo structure that provides the status information."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Frees a  SetProviderStatusInfo structure.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Timeprov.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void __stdcall",
+    "category": "Time Provider",
+    "name": "SetProviderStatusInfoFreeFunc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "struct SetProviderStatusInfo",
+        "name": "*pspsi",
+        "description": "A pointer to the  SetProviderStatusInfo structure to be freed."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "A  callback function that is called by the time provider manager to shut down the time provider.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Timeprov.h",
+    "return_value": "If the function succeeds, the return value is S_OK. Otherwise, the return value is one of the error codes defined in WinError.h. ",
+    "remarks": "The provider should clean up its resources and terminate its operation. When the function returns, the time provider manager can unload the DLL. Therefore, the handle to the time provider is no longer valid and should not be used again. For an example, see Sample Time Provider. ",
+    "return_type": "HRESULT __stdcall",
+    "category": "Time Provider",
+    "name": "TimeProvClose",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TimeProvHandle",
+        "name": "hTimeProv",
+        "description": "A handle to the time provider. The  TimeProvOpen function receives this handle."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "A callback function that is called by the time provider manager to send commands to the time provider.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Timeprov.h",
+    "return_value": "If the function succeeds, the return value is S_OK. Otherwise, the return value is one of the error codes defined in WinError.h. ",
+    "remarks": "The time provider should never take longer than half a second to return from this call. When processing the TPC_GetSamples command, the provider should return one sample for each source it is monitoring. Therefore, a hardware provider should return one sample, while a network provider like NTP can return multiple samples. The provider should not return multiple samples from a single source; it should return the best sample from its cache of samples for the source. The provider can return the same sample on subsequent calls, provided that the data has not changed. For an example, see Sample Time Provider. ",
+    "return_type": "HRESULT __stdcall",
+    "category": "Time Provider",
+    "name": "TimeProvCommand",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TimeProvHandle",
+        "name": "hTimeProv",
+        "description": "A handle to the time provider. The  TimeProvOpen function receives this handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "TimeProvCmd",
+        "name": "eCmd",
+        "description": "The command to be sent. This parameter can be one of the following values.     CommandMeaning  TPC_GetSamples   The time provider should return the time samples it has collected. If there is no data available, the provider should return no samples. For more details, see Remarks.     The pvArgs parameter is pointer to a  TpcGetSamplesArgs structure. The time provider manager provides the buffer for the samples. If the pvArgs buffer if too small, the provider should provide as many samples as is can and return ERROR_INSUFFICIENT_BUFFER. Any other error codes returned by the provider are ignored.   TPC_NetTopoChange   The network topology has changed. Network providers must redetect the network settings and verify that they can reach their sources.     The pvArgs parameter indicates whether the change was requested by the user (NTC_UserRequested) or the system (NTC_Default).   TPC_Query   Reserved for future use.   TPC_PollIntervalChanged   The polling interval has changed. The time provider should call the  GetTimeSysInfo function to retrieve the new value.     The pvArgs parameter is not used. Any error returned by the provider is ignored.   TPC_Shutdown   The system is shutting down. The time provider should exit within five seconds.     The pvArgs parameter is not used.   TPC_TimeJumped   The system clock was adjusted abruptly, so the time provider should discard any time stamps it has saved.     The pvArgs parameter indicates whether the time jump was requested by the user (TJF_UserRequested) or the system (TJF_Default).   TPC_UpdateConfig   The time provider should verify whether its application-specific configuration data stored in the registry has changed.     The pvArgs parameter is not used. Any error returned by the provider is ignored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pvArgs",
+        "description": "A pointer to a buffer that specifies command information. The format of this data depends on the value of eCmd."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "A callback function that is called by the time provider manager when the time provider DLL is loaded.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Timeprov.h",
+    "return_value": "If the function succeeds, the return value is S_OK. Otherwise, the return value is one of the error codes defined in WinError.h. ",
+    "remarks": "You should return from this callback function as quickly as possible. Perform any initialization in another thread. For an example, see Sample Time Provider. ",
+    "return_type": "HRESULT __stdcall",
+    "category": "Time Provider",
+    "name": "TimeProvOpen",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WCHAR",
+        "name": "*wszName",
+        "description": "The provider name."
+      },
+      {
+        "in_out": "_In_",
+        "type": "TimeProvSysCallbacks",
+        "name": "*pSysCallbacks",
+        "description": "A pointer to a  TimeProvSysCallbacks structure that specifies pointers to the functions provided by the time service to the time provider. The system allocates this structure, and it is destroyed when the function returns. Therefore, you must copy the information to another buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "TimeProvHandle",
+        "name": "*phTimeProv",
+        "description": "A pointer to a buffer that contains a handle to the provider. The time provider manager uses this handle to communicate with the time provider."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  }
+]
+

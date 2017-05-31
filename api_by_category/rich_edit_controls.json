@@ -1,0 +1,346 @@
+[
+  {
+    "n_arguments": 5,
+    "description": "The AutoCorrectProc function is an      application-defined  callback function that is used with the      EM_SETAUTOCORRECTPROC message.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Richedit.h",
+    "return_value": "Type: int Returns one or more of the following values.  ",
+    "remarks": "",
+    "return_type": "int WINAPI",
+    "category": "Rich Edit Controls",
+    "name": "AutoCorrectProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "LANGID",
+        "name": "langid",
+        "description": "Type: LANGID Language ID that identifies the autocorrect file to use for automatic correcting."
+      },
+      {
+        "in_out": "",
+        "type": "WCHAR",
+        "name": "*pszBefore",
+        "description": "Type: const WCHAR* Autocorrect candidate string."
+      },
+      {
+        "in_out": "",
+        "type": "WCHAR",
+        "name": "*pszAfter",
+        "description": "Type: WCHAR* Resulting autocorrect string, if the return value is not ATP_NOCHANGE."
+      },
+      {
+        "in_out": "",
+        "type": "LONG",
+        "name": "cchAfter",
+        "description": "Type: LONG Count of characters in pszAfter."
+      },
+      {
+        "in_out": "",
+        "type": "LONG",
+        "name": "*pcchReplaced",
+        "description": "Type: LONG* Count of trailing characters in pszBefore to replace with pszAfter."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The EditStreamCallback function is an application defined callback function used with the EM_STREAMIN and EM_STREAMOUT messages. It is used to transfer a stream of data into or out of a rich edit control. The  \t\t\tEDITSTREAMCALLBACK type defines a pointer to this callback function. EditStreamCallback is a placeholder for the application-defined function name.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Richedit.h",
+    "return_value": "Type: DWORD The callback function returns zero to indicate success. The callback function returns a nonzero value to indicate an error. If an error occurs, the read or write operation ends and the rich edit control discards any data in the  \t\t\t\t\t\tpbBuff buffer. If the callback function returns a nonzero value, the rich edit control uses the  \t\t\t\t\t\tdwError member of the EDITSTREAM structure to pass the value back to the application. ",
+    "remarks": "When you send the EM_STREAMIN or EM_STREAMOUT message to a rich edit control, the  \t\t\t\tpfnCallback member of the EDITSTREAM structure specifies a pointer to an EditStreamCallback function. The rich edit control repeatedly calls the function to transfer a stream of data into or out of the control. When you send the EM_STREAMIN or EM_STREAMOUT message, you specify a value for the  \t\t\t\tdwCookie member of the EDITSTREAM structure. The rich edit control uses the  \t\t\t\tdwCookie parameter to pass this value to your EditStreamCallback function. For example, you might use  \t\t\t\tdwCookie to pass a handle to an open file. The callback function can then use the  \t\t\t\tdwCookie handle to read from or write to the file. The control calls the callback function repeatedly, transferring a portion of the data with each call. The control continues to call the callback function until one of the following conditions occurs: ",
+    "return_type": "DWORD CALLBACK",
+    "category": "Rich Edit Controls",
+    "name": "EditStreamCallback",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD_PTR",
+        "name": "dwCookie",
+        "description": "Type: DWORD_PTR Value of the  \t\t\t\t\tdwCookie member of the EDITSTREAM structure. The application specifies this value when it sends the EM_STREAMIN or EM_STREAMOUT message."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pbBuff",
+        "description": "Type: LPBYTE Pointer to a buffer to read from or write to. For a stream-in (read) operation, the callback function fills this buffer with data to transfer into the rich edit control. For a stream-out (write) operation, the buffer contains data from the control that the callback function writes to some storage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "cb",
+        "description": "Type: LONG Number of bytes to read or write."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "*pcb",
+        "description": "Type: LONG* Pointer to a variable that the callback function sets to the number of bytes actually read or written."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The EditWordBreakProcEx function is an application defined  callback function used with the EM_SETWORDBREAKPROCEX message. It determines the character index of the word break or the character class and word-break flags of the characters in the specified text. The  \t\t\tEDITWORDBREAKPROCEX type defines a pointer to this callback function. EditWordBreakProcEx is a placeholder for the application-defined function name.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Richedit.h",
+    "return_value": "Type: LONG The function returns a value based on the  \t\t\t\t\t\tcode parameter.  ",
+    "remarks": "An application must install the callback function by specifying the address of the callback function in an EM_SETWORDBREAKPROCEX message. For Microsoft Rich Edit 2.0 and later, Rich Edit no longer supports EditWordBreakProcEx. Users can send  \t\t\t\tEM_SETWORDBREAKPROC to set EditWordBreakProc, which is now enhanced to support the passing of Unicode text. ",
+    "return_type": "LONG CALLBACK",
+    "category": "Rich Edit Controls",
+    "name": "EditWordBreakProcEx",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "char",
+        "name": "*pchText",
+        "description": "Type: char* Pointer to the text at the current position. ..."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "cchText",
+        "description": "Type: LONG Number of characters in the buffer in the direction specified by  \t\t\t\t\tcode."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "bCharSet",
+        "description": "Type: BYTE Character set of the text."
+      },
+      {
+        "in_out": "_In_",
+        "type": "INT",
+        "name": "code",
+        "description": "Type: INT Word break action. Can be one of the values described for the  \t\t\t\t\tcode parameter in the EM_FINDWORDBREAK message."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the Unicode Transformation Format (UTF)-32 math alphanumeric character that corresponds to the specified Basic Multilingual Plane (BMP) character and math style.",
+    "library": "",
+    "min_server": "",
+    "header": "Tom.h",
+    "return_value": "Type: Returns the corresponding UTF-32 math alphanumeric character, or 0 if no such character exists. ",
+    "remarks": "This function is exported by the RichEdit 6.0 or later msftedit.dll. ",
+    "return_type": "",
+    "category": "Rich Edit Controls",
+    "name": "GetMathAlphanumeric",
+    "is_callback": 0,
+    "dll": "Msftedit.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "ch",
+        "description": "Type: LONG A BMP character."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "MathStyle",
+        "description": "Type: DWORD Math style. This parameter can be one of the values from the MANCODE enumeration."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the math style and the upright Basic Multilingual Plane (BMP) character code that corresponds to the specified trailing byte of a math surrogate pair.",
+    "library": "",
+    "min_server": "",
+    "header": "Tom.h",
+    "return_value": "Type: Returns the math style, which consists of a pair of values from the MANCODE enumeration. It can be one of the following values: combined with one of following values: ",
+    "remarks": "This function is exported by the RichEdit 6.0 or later msftedit.dll. ",
+    "return_type": "",
+    "category": "Rich Edit Controls",
+    "name": "GetMathAlphanumericCode",
+    "is_callback": 0,
+    "dll": "Msftedit.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "chTrail",
+        "description": "Type: DWORD  The trailing byte of the math surrogate pair. ..."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "WCHAR",
+        "name": "*pch",
+        "description": "Type: WCHAR* A buffer that receives the upright BMP character code. If no such character exists, pch receives 0."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 4,
+    "description": "The HyphenateProc function is an application\u00e2\u0080\u0093defined \t\tcallback function used with the EM_SETHYPHENATEINFO message. It determines how hyphenation is done in a Microsoft Rich Edit control.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Richedit.h",
+    "return_value": "There is no return value. ",
+    "remarks": "HyphenateProc is a placeholder for the application-defined function name. An application must install the callback function by specifying the address of the callback function in an EM_SETHYPHENATEINFO message. ",
+    "return_type": "void CALLBACK",
+    "category": "Rich Edit Controls",
+    "name": "HyphenateProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WCHAR",
+        "name": "*pszWord",
+        "description": "Type: WCHAR* Pointer to the word to hyphenate."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LANGID",
+        "name": "langid",
+        "description": "Type: LANGID Current language ID for the control."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "ichExceed",
+        "description": "Type: LONG Index of the character in the passed string that exceeds the line width."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HYPHRESULT",
+        "name": "*phyphresult",
+        "description": "Type: HYPHRESULT* Pointer to a HYPHRESULT structure that HyphenateProc fills in with the result of the hyphenation."
+      }
+    ],
+    "min_client": "Windows XP with SP1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Translates the built-up math, ruby, and other inline objects in the specified range to linear form.",
+    "library": "",
+    "min_server": "",
+    "header": "Tom.h",
+    "return_value": "Type: HRESULT See Remarks. ",
+    "remarks": "If the linearization is successful, the originally selected range is replaced by the linearized version. If the tomMathRemoveOutermost or tomMathBuildDownOutermost build down mode is specified, the build down operation can be affected by the tomMathChangeMask values.   The main purpose of these build-down modes is to facilitate transformations of the build-up math object as exposed by math context menus. For example, to convert a stacked fraction to a linear fraction as in (a+b/c)/(u+x/y)\u00e2\u0086\u0092((a+b/c))\u00e2\u0081\u0084((u+x/y)), parentheses must be inserted; otherwise, you get a transformation that looks incorrect, as in (a+b/c)/(u+x/y)\u00e2\u0086\u0092(a+b/c)\u00e2\u0081\u0084(u+x/y), even though internally the linear fraction still has the original numerator and denominator. The build-down process automatically inserts the parentheses, because the linear format for this case has parentheses, and the special change is made to replace the stacked-fraction operator U+002F by the linear fraction operator U+2215. Build up doesn't discard the parentheses for U+2215, but it does for U+002F. This function is exported by the RichEdit 6.0 or later msftedit.dll. ",
+    "return_type": "HRESULT",
+    "category": "Rich Edit Controls",
+    "name": "MathBuildDown",
+    "is_callback": 0,
+    "dll": "Msftedit.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "ITextRange2",
+        "name": "*prg",
+        "description": "Type: ITextRange2* On input, a text range object that contains the built-up math objects to convert to linear form. On output, the object contains the linear form."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ITextStrings",
+        "name": "*pstrs",
+        "description": "Type: ITextStrings* Strings collection used for manipulations."
+      },
+      {
+        "in_out": "_In_",
+        "type": "long",
+        "name": "Flags",
+        "description": "Type: long A combination of the following flags. tomMathAlphabeticstomMathBuildDownOutermosttomMathBuildUpArgOrZonetomMathRemoveOutermosttomPlain\t tomTeX"
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 3,
+    "description": "Converts the linear-format math in a range to a built-up form, or modifies the current built-up form.",
+    "library": "",
+    "min_server": "",
+    "header": "Tom.h",
+    "return_value": "Type: HRESULT See Remarks. ",
+    "remarks": "If the MathBuildUp method is called on a nondegenerate range, the method checks the text for math italic conversions (if tomMathAlphabetics is specified) and math autocorrect conversions (if tomMathAutoCorrect or tomMathAutoCorrectExt is specified). Then, the method attempts to build up the selected text. If successful, the method replaces the previous text in the range with the built-up text. If the method makes any changes to the range, the function returns NOERROR and the range selects the result. If the method does change the range, it returns S_FALSE or a Component Object Model (COM) error code. If the MathBuildUp method is called on a degenerate range, the MathBuildUp method treats the range as an insertion point (IP) immediately following the last character input. The method converts that character, possibly along with some preceding characters, to math italic (if tomMathAlphabetics is specified), internal math autocorrect (if tomMathAutoCorrect is specified), negated operators, and some operator pairs  (if tomMathAutoCorrectOpPairs is specified). If the IP is inside an argument, the method scans a range of text from the IP back to the start of a math object argument; otherwise, the method scans to the start of the current math zone. The scan is terminated by a hard carriage return or a soft end-of-paragraph mark, because math zones are terminated by these marks. A scan forward from start of the math object argument or math zone bypasses text that has no chance of being built up. If the scan reaches the original entry IP, one of the following outcomes can occur: If the scan finds text that might get built up, the MathBuildUp method attempts to build up the text up to the insertion point. If successful, the method returns NOERROR, and the range is updated with the corresponding built-up text. If this full build-up attempt fails, the MathBuildUp method does a partial build-up check for the expression immediately preceding the IP. If this succeeds, the method returns NOERROR and the range contains the linear text to be replaced by the built-up text. If full and partial build-up attempts fail, the function returns as described previously for the cases where no build-up text was found. Other possible return values include E_INVALIDARG (if either interface pointer is NULL) and E_OUTOFMEMORY. You should set the tomNeedTermOp flag should for formula autobuildup unless autocorrection has occurred that deletes the terminating blank. Autocorrection can occur when correcting text like \\alpha when the user types a blank to force autocorrection. This function is exported by the RichEdit 6.0 or later msftedit.dll. ",
+    "return_type": "HRESULT",
+    "category": "Rich Edit Controls",
+    "name": "MathBuildUp",
+    "is_callback": 0,
+    "dll": "Msftedit.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "ITextRange2",
+        "name": "*prg",
+        "description": "Type: ITextRange2* On input, a text range object that contains the linearly formatted math expressions to be converted into built-up math. On output, the object contains the built-up math."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ITextStrings",
+        "name": "*pstrs",
+        "description": "Type: ITextStrings* Strings collection used for manipulations."
+      },
+      {
+        "in_out": "_In_",
+        "type": "long",
+        "name": "Flags",
+        "description": "Type: long A combination of the following flags. tomChemicalFormulatomHaveDelimitertomMathAlphabetics\ttomMathApplyTemplatetomMathArabicAlphabetics    tomMathAutoCorrecttomMathAutoCorrectExttomMathAutoCorrectOpPairstomMathBackspacetomMathBuildDowntomMathBuildDownOutermosttomMathBuildUpArgOrZone tomMathBuildUpRecursetomMathChangeMasktomMathCollapseSeltomMathDeleteArgtomMathDeleteArg1tomMathDeleteArg2tomMathDeleteColtomMathDeleteRowtomMathEntertomMathInsColAftertomMathInsColBeforetomMathInsRowAftertomMathInsRowBeforetomMathMakeFracLinear tomMathMakeFracSlashedtomMathMakeFracStackedtomMathMakeLeftSubSuptomMathMakeSubSuptomMathRemoveOutermosttomMathRichEdittomMathShiftTabtomMathSingleChar tomMathSubscripttomMathSuperscripttomMathTabtomNeedTermOptomPlaintomShowEmptyArgPlaceholderstomTeX"
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 2,
+    "description": "Translates the math characters in the specified range.",
+    "library": "",
+    "min_server": "",
+    "header": "Tom.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This function is exported by the RichEdit 6.0 or later msftedit.dll. ",
+    "return_type": "HRESULT",
+    "category": "Rich Edit Controls",
+    "name": "MathTranslate",
+    "is_callback": 0,
+    "dll": "Msftedit.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "ITextRange2",
+        "name": "*prg",
+        "description": "Type: ITextRange2* On entry, this parameter specifies the text range that contains the math characters to translate. On successful exit, the characters in the range have been translated as specified"
+      },
+      {
+        "in_out": "_In_",
+        "type": "long",
+        "name": "Flags",
+        "description": "Type: long The translation flags, which can be one or more of the following values:  ValueMeaning  tomConvertMathChar   Converts to/from math italic and/or math bold according to the status of italic and bold retrieved by the ITextFont2::GetEffects method.   tomFoldMathAlpha   Converts from math alphanumerics back to ASCII and Basic Multilingual Plane (BMP) Greek.   tomMathAlphabetics   Converts to math italic.     Other flags are ignored and must be zero."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 0,
+    "description": "[Intended for internal use; not recommended for use in applications. This function may not be supported in future versions.]",
+    "library": "",
+    "min_server": "",
+    "header": "None",
+    "return_value": "Returns TRUE if successful, or FALSE otherwise. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Rich Edit Controls",
+    "name": "REExtendedRegisterClass",
+    "is_callback": 0,
+    "dll": "Riched20.dll (Rich Edit version 3.0)",
+    "arguments": [],
+    "min_client": ""
+  }
+]
+

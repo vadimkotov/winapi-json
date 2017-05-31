@@ -1,0 +1,412 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Call to close an open COMPRESSOR_HANDLE.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Compressapi.h on Windows 8 and Windows Server 2012",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If the compression algorithm fails for some internal reason, the error from GetLastError can be ERROR_FUNCTION_FAILED.    If the  system cannot locate the compression algorithm handle, the error can be ERROR_INVALID_HANDLE. ",
+    "return_type": "BOOL",
+    "category": "Compression API",
+    "name": "CloseCompressor",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "COMPRESSOR_HANDLE",
+        "name": "CompressorHandle",
+        "description": "Handle to the compressor to be closed. This is the handle to the compressor that was returned by CreateCompressor."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 1,
+    "description": "Call to close an open DECOMPRESSOR_HANDLE.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Compressapi.h on Windows 8 and Windows Server 2012",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If the compression algorithm fails for some internal reason, the error from GetLastError can be ERROR_FUNCTION_FAILED.    If the  system cannot locate the compression algorithm handle, the error can be ERROR_INVALID_HANDLE. ",
+    "return_type": "BOOL",
+    "category": "Compression API",
+    "name": "CloseDecompressor",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DECOMPRESSOR_HANDLE",
+        "name": "DecompressorHandle",
+        "description": "Handle to the decompressor to be closed. This is the handle to the compressor that was returned by CreateDecompressor."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 6,
+    "description": "Takes a block of information and compresses it.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Compressapi.h on Windows 8 and Windows Server 2012",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If the compression algorithm fails for some internal reason, the error from GetLastError can be ERROR_FUNCTION_FAILED.    If the  system cannot locate the compression algorithm handle, the error can be ERROR_INVALID_HANDLE. If the output buffer is too small to hold the compressed data, the error can be ERROR_INSUFFICIENT_BUFFER. If CompressedBuffer output buffer is too small to hold the compressed data, the function fails and the error from GetLastError can be ERROR_INSUFFICIENT_BUFFER. In this case, the CompressedDataSize parameter receives with the size that the  CompressedBuffer needs to be to guarantee success for that input buffer. You can set CompressedBufferSize to zero to determine the size of the output buffer to allocate. ",
+    "return_type": "BOOL",
+    "category": "Compression API",
+    "name": "Compress",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "COMPRESSOR_HANDLE",
+        "name": "CompressorHandle",
+        "description": "Handle to a compressor returned by CreateCompressor."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "UncompressedData",
+        "description": "Contains the block of information that is to be compressed. The size in bytes of the uncompressed block is given by UncompressedDataSize."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SIZE_T",
+        "name": "UncompressedDataSize",
+        "description": "Size in bytes  of the uncompressed information."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "CompressedBuffer",
+        "description": "The buffer that receives the compressed information. The maximum size in bytes of the buffer is given by CompressedBufferSize."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SIZE_T",
+        "name": "CompressedBufferSize",
+        "description": "Maximum size  in bytes of the buffer that receives the compressed information."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PSIZE_T",
+        "name": "CompressedDataSize",
+        "description": "Actual size  in bytes of the compressed information received."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 3,
+    "description": "Generates a new COMPRESSOR_HANDLE.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Compressapi.h on Windows 8 and Windows Server 2012",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If the compression algorithm fails for some internal reason, the error from GetLastError can be ERROR_FUNCTION_FAILED.  If the system can find no compression algorithm matching the specified name and version, the error  can be ERROR_NOT_SUPPORTED. ",
+    "return_type": "BOOL",
+    "category": "Compression API",
+    "name": "CreateCompressor",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Algorithm",
+        "description": "The type of compression algorithm and mode to be used by this compressor.  This parameter can have one of the following values optionally combined with the COMPRESS_RAW flag.  Use a \"bitwise OR\" operator to include COMPRESS_RAW and to create a  block mode compressor.  If COMPRESS_RAW is not included, the Compression API creates a buffer mode compressor. For more information about selecting a compression algorithm and mode, see Using the Compression API.  ValueMeaning  COMPRESS_ALGORITHM_MSZIP 2   MSZIP compression algorithm   COMPRESS_ALGORITHM_XPRESS 3   XPRESS compression algorithm   COMPRESS_ALGORITHM_XPRESS_HUFF 4   XPRESS compression algorithm with Huffman encoding   COMPRESS_ALGORITHM_LZMS 5   LZMS compression algorithm"
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCOMPRESS_ALLOCATION_ROUTINES",
+        "name": "AllocationRoutines",
+        "description": "Optional memory allocation and deallocation routines in a COMPRESS_ALLOCATION_ROUTINES structure."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PCOMPRESSOR_HANDLE",
+        "name": "CompressorHandle",
+        "description": "If the function succeeds, the handle to the specified compressor."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 3,
+    "description": "Generates a new DECOMPRESSOR_HANDLE.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Compressapi.h on Windows 8 and Windows Server 2012",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If the compression algorithm fails for some internal reason, the error from GetLastError can be ERROR_FUNCTION_FAILED.  If the system can find no compression algorithm matching the specified name and version, the error  can be ERROR_NOT_SUPPORTED. ",
+    "return_type": "BOOL",
+    "category": "Compression API",
+    "name": "CreateDecompressor",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Algorithm",
+        "description": "The type of compression algorithm and mode to be used by this decompressor.  This parameter can have one of the following values optionally combined with the COMPRESS_RAW flag.  Use a \"bitwise OR\" operator to include COMPRESS_RAW and to create a  block mode decompressor.  If COMPRESS_RAW is not included, the Compression API creates a buffer mode decompressor. For more information about selecting a compression algorithm and mode, see Using the Compression API.  ValueMeaning  COMPRESS_ALGORITHM_MSZIP 2   MSZIP compression algorithm   COMPRESS_ALGORITHM_XPRESS 3   XPRESS compression algorithm   COMPRESS_ALGORITHM_XPRESS_HUFF 4   XPRESS compression algorithm with Huffman encoding   COMPRESS_ALGORITHM_LZMS 5   LZMS compression algorithm"
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCOMPRESS_ALLOCATION_ROUTINES",
+        "name": "AllocationRoutines",
+        "description": "Optional memory allocation and deallocation routines in a COMPRESS_ALLOCATION_ROUTINES structure."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDECOMPRESSOR_HANDLE",
+        "name": "DecompressorHandle",
+        "description": "If the function succeeds, the handle to the specified decompressor."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 6,
+    "description": "Takes a block of compressed information and decompresses it.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Compressapi.h on Windows 8 and Windows Server 2012",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If the block of compressed data pointed to by CompressedData is corrupted, the function can fail and the error from GetLastError can be ERROR_BAD_COMPRESSION_BUFFER. It is also possible that the function will produce  a block of uncompressed data that does not match the original data. It is recommended that compressors and decompressors not use the COMPRESS_RAW flag. If the compressor is created with the COMPRESS_RAW flag,  the decompressor must also be created with the COMPRESS_RAW flag. If the compressor and decompressor are created using the COMPRESS_RAW flag, the value of UncompressedBufferSize must be exactly equal to the original size of the uncompressed data and not just the size of the output buffer. This means you should save the exact original size of the uncompressed data, as well as the   compressed data and compressed size, when using the COMPRESS_RAW flag. If  UncompressedBufferSize does not equal the original size of the uncompressed data, the uncompressed data will not match the original data. In this case, the function can return success or it can return ERROR_BAD_COMPRESSION_BUFFER. If the COMPRESS_RAW flag is not used, UncompressedBufferSize is not required to be exactly equal to the original size of the uncompressed data.  In this case, UncompressedDataSize returns the original size of the uncompressed data. If UncompressedBufferSize is smaller than the original data size, the function will fail and set UncompressedDataSize to the size of the original data and the error from GetLastError is ERROR_INSUFFICIENT_BUFFER. To determine how large the UncompressedBuffer needs to be, call the function with UncompressedBufferSize set to zero.  In this case, the function will fail and set UncompressedDataSize to the size of the original data and the error from GetLastError is ERROR_INSUFFICIENT_BUFFER.  Note that the original size returned by the function is extracted from the buffer itself and should be treated as untrusted and tested against reasonable limits. If the function is called with the CompressedDataSize parameter set to zero, the function fails and the error from GetLastError is ERROR_INSUFFICIENT_BUFFER. When it fails the function returns with UncompressedDataSize set to a value that you can use to avoid allocating too large a buffer for the compressed data. You must know the maximum possible size of the original data to use this method. If you set CompressedDataSize to zero, and set UncompressedBufferSize to the maximum possible size of the original uncompressed data, the Decompress function will fail as described and the value of UncompressedDataSize will be set to the maximum size for the compressed data buffer. If the compression algorithm fails for some internal reason, the error from GetLastError can be ERROR_FUNCTION_FAILED.     If the  system cannot locate the compression algorithm handle, the error can be ERROR_INVALID_HANDLE. If the output buffer is too small to hold the uncompressed data, the error can be ERROR_INSUFFICIENT_BUFFER.  ",
+    "return_type": "BOOL",
+    "category": "Compression API",
+    "name": "Decompress",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DECOMPRESSOR_HANDLE",
+        "name": "DecompressorHandle",
+        "description": "Handle to a decompressor returned by CreateDecompressor."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "CompressedData",
+        "description": "Contains the block of information that is to be decompressed. The size in bytes of the compressed block is given by CompressedDataSize."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SIZE_T",
+        "name": "CompressedDataSize",
+        "description": "The size in bytes  of the compressed information."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "UncompressedBuffer",
+        "description": "The buffer that receives the uncompressed information. The size in bytes of the buffer is given by UncompressedBufferSize."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SIZE_T",
+        "name": "UncompressedBufferSize",
+        "description": "Size  in bytes of the buffer that receives the uncompressed information."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PSIZE_T",
+        "name": "UncompressedDataSize",
+        "description": "Actual size  in bytes of the uncompressed information received."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 4,
+    "description": "Queries a compressor for information for a particular compression algorithm.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Compressapi.h on Windows 8 and Windows Server 2012",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If the compression algorithm fails for some internal reason, the error from GetLastError can be ERROR_FUNCTION_FAILED.    If the  system cannot locate the compression algorithm handle, the error can be ERROR_INVALID_HANDLE. If the compression algorithm does not allow the information class, the error can be ERROR_UNSUPPORTED_TYPE. If the buffer is to small to hold the value, the error can be ERROR_INSUFFICIENT_BUFFER. ",
+    "return_type": "BOOL",
+    "category": "Compression API",
+    "name": "QueryCompressorInformation",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "COMPRESSOR_HANDLE",
+        "name": "CompressorHandle",
+        "description": "Handle to the compressor being queried for information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COMPRESS_INFORMATION_CLASS",
+        "name": "CompressInformationClass",
+        "description": "A value of the  COMPRESS_INFORMATION_CLASS enumeration that identifies the type of information."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "CompressInformation",
+        "description": "Information for the compression algorithm written as bytes. The maximum size in bytes of this information is given by CompressInformationSize."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SIZE_T",
+        "name": "CompressInformationSize",
+        "description": "Maximum size  in bytes of the information."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 4,
+    "description": "Use this function to query information about a particular compression algorithm.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Compressapi.h on Windows 8 and Windows Server 2012",
+    "return_value": "Returns TRUE to indicate success and FALSE otherwise. Call GetLastError to determine cause of failure. ",
+    "remarks": "If the compression algorithm fails for some internal reason, the error from GetLastError can be ERROR_FUNCTION_FAILED.    If the  system cannot locate the compression algorithm handle, the error can be ERROR_INVALID_HANDLE. If the compression algorithm does not allow the information class, the error can be ERROR_UNSUPPORTED_TYPE. If the buffer is to small to hold the value, the error can be ERROR_INSUFFICIENT_BUFFER. ",
+    "return_type": "BOOL",
+    "category": "Compression API",
+    "name": "QueryDecompressorInformation",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DECOMPRESSOR_HANDLE",
+        "name": "DecompressorHandle",
+        "description": "Handle to the decompressor being queried for information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COMPRESS_INFORMATION_CLASS",
+        "name": "CompressInformationClass",
+        "description": "A value of the  COMPRESS_INFORMATION_CLASS enumeration that identifies the type of information."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "CompressInformation",
+        "description": "Information for the compression algorithm written as bytes. The maximum size in bytes of this information is given by CompressInformationSize."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SIZE_T",
+        "name": "CompressInformationSize",
+        "description": "Maximum size  in bytes of the information."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 1,
+    "description": "Prepares the decompressor for the decompression of a new stream.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Compressapi.h on Windows 8 and Windows Server 2012",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If the compression algorithm fails for some internal reason, the error from GetLastError can be ERROR_FUNCTION_FAILED.    If the  system cannot locate the compression algorithm handle, the error can be ERROR_INVALID_HANDLE. ",
+    "return_type": "BOOL",
+    "category": "Compression API",
+    "name": "ResetDecompressor",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DECOMPRESSOR_HANDLE",
+        "name": "DecompressorHandle",
+        "description": "Handle to the decompressor returned by CreateDecompressor."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 4,
+    "description": "Sets information in a compressor for a particular compression algorithm.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Compressapi.h on Windows 8 and Windows Server 2012",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If the compression algorithm fails for some internal reason, the error from GetLastError can be ERROR_FUNCTION_FAILED. If the system cannot locate the compression algorithm handle, the error can be ERROR_INVALID_HANDLE. If the compression algorithm does not allow changing the value of this information class, the error can be ERROR_NOT_SUPPORTED. If the compression algorithm does not allow the information class, the error can be ERROR_UNSUPPORTED_TYPE. ",
+    "return_type": "BOOL",
+    "category": "Compression API",
+    "name": "SetCompressorInformation",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "COMPRESSOR_HANDLE",
+        "name": "CompressorHandle",
+        "description": "Handle to the compressor."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COMPRESS_INFORMATION_CLASS",
+        "name": "CompressInformationClass",
+        "description": "A value that identifies the type of information. of the  enumeration that identifies the type of information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "CompressInformation",
+        "description": "The information being set read as bytes. The maximum size in bytes is given by CompressInformationSize."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SIZE_T",
+        "name": "CompressInformationSize",
+        "description": "Maximum size  of the information in bytes."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 4,
+    "description": "Sets information in a decompressor for a particular compression algorithm.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Compressapi.h on Windows 8 and Windows Server 2012",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If the compression algorithm fails for some internal reason, the error from GetLastError can be ERROR_FUNCTION_FAILED. If the system cannot locate the compression algorithm handle, the error can be ERROR_INVALID_HANDLE. If the compression algorithm does not allow changing the value of this information class, the error can be ERROR_NOT_SUPPORTED. If the compression algorithm does not allow the information class, the error can be ERROR_UNSUPPORTED_TYPE. ",
+    "return_type": "BOOL",
+    "category": "Compression API",
+    "name": "SetDecompressorInformation",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DECOMPRESSOR_HANDLE",
+        "name": "DeompressorHandle",
+        "description": "Handle to the decompressor."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COMPRESS_INFORMATION_CLASS",
+        "name": "CompressInformationClass",
+        "description": "A value that identifies the type of information. of the  enumeration that identifies the type of information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "CompressInformation",
+        "description": "The information being set read as bytes. The maximum size in bytes is given by CompressInformationSize."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SIZE_T",
+        "name": "CompressInformationSize",
+        "description": "Maximum size  of the information in bytes."
+      }
+    ],
+    "min_client": ""
+  }
+]
+

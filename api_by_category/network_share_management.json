@@ -1,0 +1,473 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "Ends a network session between a server and a workstation.",
+    "library": "Netapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Lmshare.h (include Lm.h)",
+    "return_value": "If the function succeeds, the return value is NERR_Success. If the function fails, the return value can be one of the following error codes.  ",
+    "remarks": "Only members of the Administrators or Server Operators local group can successfully execute the  NetSessionDel function. If you are programming for Active Directory, you may be able to call certain Active Directory Service Interface (ADSI) methods to achieve the same functionality you can achieve by calling the network management session functions. For more information, see  IADsSession and  IADsFileServiceOperations. The following code sample demonstrates how to terminate a session between a server and a workstation using a call to the NetSessionDel function. ",
+    "return_type": "NET_API_STATUS",
+    "category": "Network Share Management",
+    "name": "NetSessionDel",
+    "is_callback": 0,
+    "dll": "Netapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "servername",
+        "description": "Pointer to a string that specifies the DNS or NetBIOS name of the remote server on which the function is to execute. If this parameter is NULL, the local computer is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "UncClientName",
+        "description": "Pointer to a string that specifies the computer name of the client to disconnect. If the UncClientName parameter is NULL, then all the sessions of the user identified by the username parameter will be deleted on the server specified by the servername parameter. For more information, see  NetSessionEnum."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "username",
+        "description": "Pointer to a string that specifies the name of the user whose session is to be terminated. If this parameter is NULL, all users' sessions from the client specified by the UncClientName parameter are to be terminated."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 9,
+    "description": "Provides information about sessions established on a server.",
+    "library": "Netapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Lmshare.h (include Lm.h)",
+    "return_value": "If the function succeeds, the return value is NERR_Success. If the function fails, the return value can be one of the following error codes.  ",
+    "remarks": "Only members of the Administrators or Server Operators local group can successfully execute the  NetSessionEnum function at level 1 or level 2. No special group membership is required for level 0 or level 10 calls. If you are programming for Active Directory, you may be able to call certain Active Directory Service Interface (ADSI) methods to achieve the same functionality you can achieve by calling the network management session functions. For more information, see  IADsSession and  IADsFileServiceOperations. The following code sample demonstrates how to retrieve information about current sessions using a call to the  NetSessionEnum function. The sample calls  NetSessionEnum, specifying information level 10 ( SESSION_INFO_10). The sample loops through the entries and prints the retrieved information. Finally, the code prints the total number of sessions enumerated and frees the memory allocated for the information buffer. ",
+    "return_type": "NET_API_STATUS",
+    "category": "Network Share Management",
+    "name": "NetSessionEnum",
+    "is_callback": 0,
+    "dll": "Netapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "servername",
+        "description": "Pointer to a string that specifies the DNS or NetBIOS name of the remote server on which the function is to execute. If this parameter is NULL, the local computer is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "UncClientName",
+        "description": "Pointer to a string that specifies the name of the computer session for which information is to be returned. If this parameter is NULL,  NetSessionEnum returns information for all computer sessions on the server."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "username",
+        "description": "Pointer to a string that specifies the name of the user for which information is to be returned. If this parameter is NULL,  NetSessionEnum returns information for all users."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "level",
+        "description": "Specifies the information level of the data. This parameter can be one of the following values.      ValueMeaning  0   Return the name of the computer that established the session. The bufptr parameter points to an array of  SESSION_INFO_0 structures.   1   Return the name of the computer, name of the user, and open files, pipes, and devices on the computer. The bufptr  parameter points to an array of  SESSION_INFO_1 structures.   2   In addition to the information indicated for level 1, return the type of client and how the user established the session. The bufptr parameter points to an array of  SESSION_INFO_2 structures.   10   Return the name of the computer, name of the user, and active and idle times for the session. The bufptr parameter points to an array of  SESSION_INFO_10 structures.   502   Return the name of the computer; name of the user; open files, pipes, and devices on the computer; and the name of the transport the client is using. The bufptr parameter points to an array of  SESSION_INFO_502 structures."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "*bufptr",
+        "description": "Pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "prefmaxlen",
+        "description": "Specifies the preferred maximum length of returned data, in bytes. If you specify MAX_PREFERRED_LENGTH, the function allocates the amount of memory required for the data. If you specify another value in this parameter, it can restrict the number of bytes that the function returns. If the buffer size is insufficient to hold all entries, the function returns ERROR_MORE_DATA. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "entriesread",
+        "description": "Pointer to a value that receives the count of elements actually enumerated."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "totalentries",
+        "description": "Pointer to a value that receives the total number of entries that could have been enumerated from the current resume position. Note that applications should consider this value only as a hint."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "resume_handle",
+        "description": "Pointer to a value that contains a resume handle which is used to continue an existing session search. The handle should be zero on the first call and left unchanged for subsequent calls. If resume_handle is NULL, no resume handle is stored."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves information about a session established between a particular server and workstation.",
+    "library": "Netapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Lmshare.h (include Lm.h)",
+    "return_value": "If the function succeeds, the return value is NERR_Success. If the function fails, the return value can be one of the following error codes.  ",
+    "remarks": "Only members of the Administrators or Server Operators local group can successfully execute the  NetSessionGetInfo function at level 1 or level 2. No special group membership is required for level 0 or level 10 calls. If you are programming for Active Directory, you may be able to call certain Active Directory Service Interface (ADSI) methods to achieve the same functionality you can achieve by calling the network management session functions. For more information, see  IADsSession and  IADsFileServiceOperations. If you call this function at information level 1 or 2 on a member server or workstation, all authenticated users can view the information. The following code sample demonstrates how to retrieve information about a session using a call to the  NetSessionGetInfo function. The sample calls  NetSessionGetInfo, specifying information level 10 ( SESSION_INFO_10). If the call succeeds, the code prints information about the session. Finally, the sample frees the memory allocated for the information buffer. ",
+    "return_type": "NET_API_STATUS",
+    "category": "Network Share Management",
+    "name": "NetSessionGetInfo",
+    "is_callback": 0,
+    "dll": "Netapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "servername",
+        "description": "Pointer to a string that specifies the DNS or NetBIOS name of the remote server on which the function is to execute. If this parameter is NULL, the local computer is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "UncClientName",
+        "description": "Pointer to a string that specifies the name of the computer session for which information is to be returned. This parameter is required and cannot be NULL. For more information, see  NetSessionEnum."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "username",
+        "description": "Pointer to a string that specifies the name of the user whose session information is to be returned. This parameter is required and cannot be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "level",
+        "description": "Specifies the information level of the data. This parameter can be one of the following values.     ValueMeaning  0   Return the name of the computer that established the session.    The bufptr parameter points to a  SESSION_INFO_0 structure. \t\t\t\t\t\t\t   1   Return the name of the computer, name of the user, and open files, pipes, and devices on the computer.    The bufptr parameter points to a  SESSION_INFO_1 structure. \t\t\t\t\t\t\t   2   In addition to the information indicated for level 1, return the type of client and how the user established the session.    The bufptr parameter points to a  SESSION_INFO_2 structure. \t\t\t\t\t\t\t   10   Return the name of the computer; name of the user; and active and idle times for the session.    The bufptr parameter points to a  SESSION_INFO_10 structure."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "*bufptr",
+        "description": "Pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths.     This buffer is allocated by the system and must be freed using the  NetApiBufferFree function."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "Lists all connections made to a shared resource on the server or all connections established from a particular computer. If there is more than one user using this connection, then it is possible to get more than one structure for the same connection, but with a different user name.",
+    "library": "Netapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Lmshare.h (include Lm.h)",
+    "return_value": "If the function succeeds, the return value is NERR_Success. If the function fails, the return value is a system error code. For a list of error codes, see  System Error Codes. ",
+    "remarks": "Administrator, Server or Print Operator, or Power User group membership is required to successfully execute the  NetConnectionEnum function. The following code sample demonstrates how to list the connections made to a shared resource with a call to the  NetConnectionEnum function. The sample calls  NetConnectionEnum, specifying information level 1 (CONNECTION_INFO_1). If there are entries to return, it prints the values of the coni1_username and coni1_netname members. If there are no entries to return, the sample prints an appropriate message. Finally, the code sample frees the memory allocated for the information buffer. ",
+    "return_type": "NET_API_STATUS",
+    "category": "Network Share Management",
+    "name": "NetConnectionEnum",
+    "is_callback": 0,
+    "dll": "Netapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LMSTR",
+        "name": "servername",
+        "description": "Pointer to a string that specifies the DNS or NetBIOS name of the remote server on which the function is to execute. If this parameter is NULL, the local computer is used.     This string is Unicode if  _WIN32_WINNT or FORCE_UNICODE is defined."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LMSTR",
+        "name": "qualifier",
+        "description": "Pointer to a string that specifies a share name or computer name for the connections of interest. If it is a share name, then all the connections made to that share name are listed. If it is a computer name (for example, it starts with two backslash characters), then  NetConnectionEnum lists all connections made from that computer to the server specified. This string is Unicode if  _WIN32_WINNT or FORCE_UNICODE is defined."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "level",
+        "description": "Specifies the information level of the data. This parameter can be one of the following values.     ValueMeaning  0    Return connection identifiers. The bufptr parameter is a pointer to an array of  CONNECTION_INFO_0 structures.   1    Return connection identifiers and connection information. The bufptr parameter is a pointer to an array of  CONNECTION_INFO_1 structures."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "*bufptr",
+        "description": "Pointer to the address of the buffer that receives the information. The format of this data depends on the value of the level parameter.     This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "prefmaxlen",
+        "description": "Specifies the preferred maximum length of returned data, in bytes. If you specify MAX_PREFERRED_LENGTH, the function allocates the amount of memory required for the data. If you specify another value in this parameter, it can restrict the number of bytes that the function returns. If the buffer size is insufficient to hold all entries, the function returns ERROR_MORE_DATA. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "entriesread",
+        "description": "Pointer to a value that receives the count of elements actually enumerated."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "totalentries",
+        "description": "Pointer to a value that receives the total number of entries that could have been enumerated from the current resume position. Note that applications should consider this value only as a hint."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "resume_handle",
+        "description": "Pointer to a value that contains a resume handle which is used to continue an existing connection search. The handle should be zero on the first call and left unchanged for subsequent calls. If this parameter is NULL, then no resume handle is stored."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Shares a server resource.",
+    "library": "Netapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Lmshare.h (include Lm.h)",
+    "return_value": "If the function succeeds, the return value is NERR_Success. If the function fails, the return value can be one of the following error codes.  ",
+    "remarks": "This function applies only to Server Message Block (SMB) shares. For other types of shares, such as Distributed File System (DFS) or WebDAV shares, use Windows Networking (WNet) functions, which support all types of shares. Only members of the Administrators, System Operators, or Power Users local group can add file shares with a call to the  NetShareAdd function. The Print Operator can add printer shares. If you are programming for Active Directory, you may be able to call certain Active Directory Service Interface (ADSI) methods to achieve the same functionality you can achieve by calling the network management share functions. For more information, see  IADsFileShare. If 503 is specified for the level parameter, the remote server specified in the shi503_servername member of the SHARE_INFO_503 structure must have been bound to a transport protocol using the NetServerTransportAddEx function. In the call to  NetServerTransportAddEx, either 2 or 3 must have been specified for the level parameter, and the SVTI2_SCOPED_NAME flag must have been specified in the SERVER_TRANSPORT_INFO_2 structure for the transport protocol. The following code sample demonstrates how to share a network resource using a call to the  NetShareAdd function. The code sample fills in the members of the  SHARE_INFO_2 structure and calls  NetShareAdd, specifying information level 2. A password is not required because these platforms do not support share-level security. ",
+    "return_type": "NET_API_STATUS",
+    "category": "Network Share Management",
+    "name": "NetShareAdd",
+    "is_callback": 0,
+    "dll": "Netapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "servername",
+        "description": "Pointer to a string that specifies the DNS or NetBIOS name of the remote server on which the function is to execute. If this parameter is NULL, the local computer is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "level",
+        "description": "Specifies the information level of the data. This parameter can be one of the following values. \t\t\t\t\t  ValueMeaning  2   Specifies information about the shared resource, including the name of the resource, type and permissions, and number of connections. The buf parameter points to a  SHARE_INFO_2 structure.   502   Specifies information about the shared resource, including the name of the resource, type and permissions, number of connections, and other pertinent information. The buf parameter points to a  SHARE_INFO_502 structure.   503   Specifies information about the shared resource, including the name of the resource, type and permissions, number of connections, and other pertinent information. The buf parameter points to a  SHARE_INFO_503 structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "buf",
+        "description": "Pointer to the buffer that specifies the data. The format of this data depends on the value of the level parameter. For more information, see  Network Management Function Buffers."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "parm_err",
+        "description": "Pointer to a value that receives the index of the first member of the share information structure that causes the ERROR_INVALID_PARAMETER error. If this parameter is NULL, the index is not returned on error. For more information, see the  NetShareSetInfo function."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Checks whether or not a server is sharing a device.",
+    "library": "Netapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Lmshare.h (include Lm.h)",
+    "return_value": "If the function succeeds, the return value is NERR_Success. If the function fails, the return value can be one of the following error codes.  ",
+    "remarks": "This function applies only to Server Message Block (SMB) shares. For other types of shares, such as Distributed File System (DFS) or WebDAV shares, use Windows Networking (WNet) functions, which support all types of shares. No special group membership is required to successfully execute the  NetShareCheck function. If you are programming for Active Directory, you may be able to call certain Active Directory Service Interface (ADSI) methods to achieve the same functionality you can achieve by calling the network management share functions. For more information, see  IADsFileShare. The following code sample demonstrates how to check whether a server is sharing a device, using a call to the  NetShareCheck function. The function returns the type of device being shared, as described in the preceding documentation for the type parameter. ",
+    "return_type": "NET_API_STATUS",
+    "category": "Network Share Management",
+    "name": "NetShareCheck",
+    "is_callback": 0,
+    "dll": "Netapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "servername",
+        "description": "Pointer to a string that specifies the DNS or NetBIOS name of the remote server on which the function is to execute. If this parameter is NULL, the local computer is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "device",
+        "description": "Pointer to a string that specifies the name of the device to check for shared access."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "type",
+        "description": "Pointer to a variable that receives a bitmask of flags that specify the type of the shared device. This parameter is set only if the function returns successfully.  One of the following flags may be specified.  ValueMeaning  STYPE_DISKTREE   Disk drive.   STYPE_PRINTQ   Print queue.   STYPE_DEVICE   Communication device.   STYPE_IPC   Interprocess communication (IPC).     In addition, one or both of the following flags may be specified.  ValueMeaning  STYPE_SPECIAL   Special share reserved for interprocess communication (IPC$) or remote administration of the server (ADMIN$). Can also refer to administrative shares such as C$, D$, E$, and so forth. For more information, see Network Share Functions.   STYPE_TEMPORARY   A temporary share."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Deletes a share name from a server's list of shared resources, disconnecting all connections to the shared resource.",
+    "library": "Netapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Lmshare.h (include Lm.h)",
+    "return_value": "If the function succeeds, the return value is NERR_Success. If the function fails, the return value can be one of the following error codes.  ",
+    "remarks": "This function applies only to Server Message Block (SMB) shares. For other types of shares, such as Distributed File System (DFS) or WebDAV shares, use Windows Networking (WNet) functions, which support all types of shares. Only members of the Administrators, Server Operators, or Power Users local group, or those with Server Operator group membership, can successfully delete file shares with a call to the  NetShareDel function. The Print Operator can delete printer shares. If you are programming for Active Directory, you may be able to call certain Active Directory Service Interface (ADSI) methods to achieve the same functionality you can achieve by calling the network management share functions. For more information, see  IADsFileShare. The following code sample demonstrates how to delete a share using a call to the NetShareDel function. ",
+    "return_type": "NET_API_STATUS",
+    "category": "Network Share Management",
+    "name": "NetShareDel",
+    "is_callback": 0,
+    "dll": "Netapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LMSTR",
+        "name": "servername",
+        "description": "Pointer to a string that specifies the DNS or NetBIOS name of the remote server on which the function is to execute. If this parameter is NULL, the local computer is used.     This string is Unicode if  _WIN32_WINNT or FORCE_UNICODE is defined."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LMSTR",
+        "name": "netname",
+        "description": "Pointer to a string that specifies the name of the share to delete. This string is Unicode if  _WIN32_WINNT or FORCE_UNICODE is defined."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "reserved",
+        "description": "Reserved, must be zero."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Deletes a share name from a server's list of shared resources, which disconnects all connections to that share. This function, which is an extended version of the NetShareDel function, allows the caller  to specify a SHARE_INFO_0, SHARE_INFO_1, SHARE_INFO_2, SHARE_INFO_502, or SHARE_INFO_503 structure.",
+    "library": "Netapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Lmshare.h (include Lm.h)",
+    "return_value": "If the function succeeds, the return value is NERR_Success. If the function fails, the return value can be one of the following error codes.  ",
+    "remarks": "If 503 is specified for the level parameter, the buf parameter points to a SHARE_INFO_503 structure, and the shi503_netname and shi503_servername members of that structure are used to look up the shared resource on the server; the other members are ignored. The remote server specified in the shi503_servername member must have been bound to a transport protocol using the NetServerTransportAddEx function. In the call to  NetServerTransportAddEx, either 2 or 3 must have been specified for the level parameter, and the SVTI2_SCOPED_NAME flag must have been specified in the SERVER_TRANSPORT_INFO_2 structure for the transport protocol. If 0, 1, 2, or 502 is specified for the level parameter, the buf parameter points to a SHARE_INFO_0, SHARE_INFO_1, SHARE_INFO_2, or SHARE_INFO_502 structure, and the shi0_netname, shi1_netname, shi2_netname, or shi502_netname member of that structure is used; the other members are ignored. ",
+    "return_type": "NET_API_STATUS WINAPI",
+    "category": "Network Share Management",
+    "name": "NetShareDelEx",
+    "is_callback": 0,
+    "dll": "Netapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LMSTR",
+        "name": "servername",
+        "description": "Pointer to a string that specifies the DNS or NetBIOS name of the remote server on which the function is to execute. If this parameter is NULL, the local computer is used.     This string is Unicode if  _WIN32_WINNT or FORCE_UNICODE is defined."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "level",
+        "description": "Specifies the information level of the data. This parameter can be one of the following values. \t\t\t\t\t  ValueMeaning  0, 1, 2, or 502   Specifies information about the shared resource, including the name of the resource, type and permissions, and number of connections. The buf parameter points to a  SHARE_INFO_0, SHARE_INFO_1, SHARE_INFO_2, or SHARE_INFO_502  structure.   503   Specifies information about the shared resource, including the name of the resource, type and permissions, number of connections, and other pertinent information. The buf parameter points to a  SHARE_INFO_503 structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "buf",
+        "description": "Pointer to the buffer that specifies the data. The format of this data depends on the value of the level parameter. For more information, see  Network Management Function Buffers."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Retrieves information about each shared resource on a server.",
+    "library": "Netapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Lmshare.h (include Lm.h)",
+    "return_value": "If the function succeeds, the return value is NERR_Success. If the function fails, the return value is a system error code. For a list of error codes, see  System Error Codes. ",
+    "remarks": "This function applies only to Server Message Block (SMB) shares. For other types of shares, such as Distributed File System (DFS) or WebDAV shares, use Windows Networking (WNet) functions, which support all types of shares. For interactive users (users who are logged on locally to the machine), no special group membership is required to execute the NetShareEnum function. For non-interactive users, Administrator, Power User, Print Operator, or Server Operator group membership is required to successfully execute the  NetShareEnum function at levels 2, 502, and 503. No special group membership is required for level 0 or level 1 calls. Windows Server 2003 and Windows XP:  For all users, Administrator, Power User, Print Operator, or Server Operator group membership is required to successfully execute the  NetShareEnum function at levels 2 and 502. To retrieve a value that indicates whether a share is the root volume in a DFS tree structure, you must call the  NetShareGetInfo function and specify information level 1005. If you are programming for Active Directory, you may be able to call certain Active Directory Service Interface (ADSI) methods to achieve the same functionality you can achieve by calling the network management share functions. For more information, see  IADsFileShare. The following code sample demonstrates how to retrieve information about each shared resource on a server using a call to the  NetShareEnum function. The sample calls  NetShareEnum, specifying information level 502 (SHARE_INFO_502). If the call succeeds, the code loops through the entries and prints information about each share. The sample also calls the  IsValidSecurityDescriptor function to validate the shi502_security_descriptor member. Finally, the code sample frees the memory allocated for the information buffer. ",
+    "return_type": "NET_API_STATUS",
+    "category": "Network Share Management",
+    "name": "NetShareEnum",
+    "is_callback": 0,
+    "dll": "Netapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "servername",
+        "description": "Pointer to a string that specifies the DNS or NetBIOS name of the remote server on which the function is to execute. If this parameter is NULL, the local computer is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "level",
+        "description": "Specifies the information level of the data. This parameter can be one of the following values.     ValueMeaning  0    Return share names. The bufptr parameter points to an array of  SHARE_INFO_0 structures.   1   Return information about shared resources, including the name and type of the resource, and a comment associated with the resource.    The bufptr parameter points to an array of  SHARE_INFO_1 structures. \t\t\t\t\t\t\t   2    Return information about shared resources, including name of the resource, type and permissions, password, and number of connections. The bufptr parameter points to an array of  SHARE_INFO_2 structures.   502    Return information about shared resources, including name of the resource, type and permissions, number of connections, and other pertinent information. The bufptr parameter points to an array of  SHARE_INFO_502 structures. Shares from different scopes are not returned. For more information about scoping, see the Remarks section of the documentation for the NetServerTransportAddEx function.   503   Return information about shared resources, including the name of the resource, type and permissions, number of connections, and other pertinent information. The bufptr parameter points to an array of SHARE_INFO_503 structures. Shares from all scopes are returned. If the shi503_servername member of this structure is \"*\", there is no configured server name and the NetShareEnum function enumerates shares for all the unscoped names. Windows Server 2003 and Windows XP:  This information level is not supported."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "*bufptr",
+        "description": "Pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter.     This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "prefmaxlen",
+        "description": "Specifies the preferred maximum length of returned data, in bytes. If you specify MAX_PREFERRED_LENGTH, the function allocates the amount of memory required for the data. If you specify another value in this parameter, it can restrict the number of bytes that the function returns. If the buffer size is insufficient to hold all entries, the function returns ERROR_MORE_DATA. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "entriesread",
+        "description": "Pointer to a value that receives the count of elements actually enumerated."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "totalentries",
+        "description": "Pointer to a value that receives the total number of entries that could have been enumerated. Note that applications should consider this value only as a hint."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "resume_handle",
+        "description": "Pointer to a value that contains a resume handle which is used to continue an existing share search. The handle should be zero on the first call and left unchanged for subsequent calls. If resume_handle is NULL, then no resume handle is stored."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves operating statistics for a service. Currently, only the workstation and server services are supported.",
+    "library": "Netapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Lmstats.h (include Lm.h)",
+    "return_value": "If the function succeeds, the return value is NERR_Success. If the function fails, the return value is a system error code. For a list of error codes, see  System Error Codes. ",
+    "remarks": "No special group membership is required to obtain workstation statistics. Only members of the Administrators or Server Operators local group can successfully execute the  NetStatisticsGet function on a remote server. ",
+    "return_type": "NET_API_STATUS",
+    "category": "Network Share Management",
+    "name": "NetStatisticsGet",
+    "is_callback": 0,
+    "dll": "Netapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "server",
+        "description": "Pointer to a string that specifies the DNS or NetBIOS name of the server on which the function is to execute. If this parameter is NULL, the local computer is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "service",
+        "description": "Pointer to a string that specifies the name of the service about which to get the statistics. Only the values SERVICE_SERVER and SERVICE_WORKSTATION are currently allowed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "level",
+        "description": "Specifies the information level of the data. This parameter can be the following value.     ValueMeaning  0   Return statistics about a workstation or a server. The bufptr parameter points to a  STAT_WORKSTATION_0 or a  STAT_SERVER_0 structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "options",
+        "description": "This parameter must be zero."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "*bufptr",
+        "description": "Pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  }
+]
+

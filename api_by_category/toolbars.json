@@ -1,0 +1,145 @@
+[
+  {
+    "n_arguments": 5,
+    "description": "Creates a bitmap for use in a toolbar.",
+    "library": "Comctl32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Commctrl.h",
+    "return_value": "Type: HBITMAP Returns the handle to the bitmap if successful, or NULL otherwise. To retrieve extended error information, call GetLastError. ",
+    "remarks": "The function creates a new bitmap using the bitmap data and colors specified by the bitmap resource and the color mapping information. This function is fully supported only for images with color maps; that is, images with 256 or fewer colors. The following example code creates a bitmap from a resource and makes the color black appear transparent by mapping it to the system color for a button face. ",
+    "return_type": "HBITMAP",
+    "category": "Toolbars",
+    "name": "CreateMappedBitmap",
+    "is_callback": 0,
+    "dll": "Comctl32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE Handle to the module instance with the executable file that contains the bitmap resource."
+      },
+      {
+        "in_out": "",
+        "type": "INT_PTR",
+        "name": "idBitmap",
+        "description": "Type: INT_PTR Resource identifier of the bitmap resource."
+      },
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "wFlags",
+        "description": "Type: UINT Bitmap flag. This parameter can be zero or the following value:   ValueMeaning  CMB_MASKED   Uses a bitmap as a mask."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCOLORMAP",
+        "name": "lpColorMap",
+        "description": "Type: LPCOLORMAP Pointer to a COLORMAP structure that contains the color information needed to map the bitmaps. If this parameter is NULL, the function uses the default color map."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "iNumMaps",
+        "description": "Type: int Number of color maps pointed to by  \t\t\t\t\tlpColorMap."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 13,
+    "description": "Creates a toolbar window and adds the specified buttons to the toolbar.",
+    "library": "Comctl32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Commctrl.h",
+    "return_value": "Type: HWND Returns the window handle to the toolbar if successful, or NULL otherwise. To retrieve extended error information, call GetLastError. ",
+    "remarks": "Windows 95: The system can support a maximum of 16,364 window handles. ",
+    "return_type": "HWND",
+    "category": "Toolbars",
+    "name": "CreateToolbarEx",
+    "is_callback": 0,
+    "dll": "Comctl32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Handle to the parent window for the toolbar."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "ws",
+        "description": "Type: DWORD Window styles for the toolbar. The WS_CHILD style is included by default. This parameter can also include a combination of styles as discussed in Toolbar Control and Button Styles."
+      },
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "wID",
+        "description": "Type: UINT Control identifier for the toolbar."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "nBitmaps",
+        "description": "Type: int Number of button images contained in the bitmap specified by  \t\t\t\t\thBMInst and  \t\t\t\t\twBMID."
+      },
+      {
+        "in_out": "",
+        "type": "HINSTANCE",
+        "name": "hBMInst",
+        "description": "Type: HINSTANCE Module instance with the executable file that contains the bitmap resource."
+      },
+      {
+        "in_out": "",
+        "type": "UINT_PTR",
+        "name": "wBMID",
+        "description": "Type: UINT_PTR Resource identifier for the bitmap resource. If  \t\t\t\t\thBMInst is NULL, this parameter must be a valid bitmap handle."
+      },
+      {
+        "in_out": "",
+        "type": "LPCTBBUTTON",
+        "name": "lpButtons",
+        "description": "Type: LPCTBBUTTON Pointer to an array of TBBUTTON structures that contain information about the buttons to add to the toolbar."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "iNumButtons",
+        "description": "Type: int Number of buttons to add to the toolbar."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "dxButton",
+        "description": "Type: int Width, in pixels, of the buttons to add to the toolbar."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "dyButton",
+        "description": "Type: int Height, in pixels, of the buttons to add to the toolbar."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "dxBitmap",
+        "description": "Type: int Width, in pixels, of the button images to add to the buttons in the toolbar."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "dyBitmap",
+        "description": "Type: int Height, in pixels, of the button images to add to the buttons in the toolbar."
+      },
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "uStructSize",
+        "description": "Type: UINT Size of a TBBUTTON structure."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

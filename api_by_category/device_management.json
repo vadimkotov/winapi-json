@@ -1,0 +1,318 @@
+[
+  {
+    "n_arguments": 8,
+    "description": "Sends a control code directly to a specified device driver, causing the corresponding device to      perform the corresponding operation.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the operation completes successfully, the return value is nonzero. If the operation fails or is pending, the return value is zero. To get extended error information, call         GetLastError. ",
+    "remarks": "To retrieve a handle to the device, you must call the       CreateFile function with either the name of a device or       the name of the driver associated with a device. To specify a device name, use the following format: \\\\.\\DeviceName DeviceIoControl can accept a handle to a specific       device. For example, to open a handle to the logical drive A: with       CreateFile, specify \\\\.\\a:. Alternatively, you can use the       names \\\\.\\PhysicalDrive0, \\\\.\\PhysicalDrive1, and so on, to open handles to the physical drives on a system. You should specify the FILE_SHARE_READ and      FILE_SHARE_WRITE access flags when calling      CreateFile to open a handle to a device driver. However,      when you open a communications resource, such as a serial port, you must specify exclusive access. Use the other      CreateFile parameters as follows when opening a device      handle: For lists of supported control codes, see the following topics: For an example that uses DeviceIoControl, see       Calling DeviceIoControl. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Device Management",
+    "name": "DeviceIoControl",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hDevice",
+        "description": "A handle to the device on which the operation is to be performed. The device is typically a volume,        directory, file, or stream. To retrieve a device handle, use the        CreateFile function. For more information, see        Remarks."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwIoControlCode",
+        "description": "The control code for the operation. This value identifies the specific operation to be performed and the         type of device on which to perform it. For a list of the control codes, see Remarks. The documentation for each control code provides usage details         for the lpInBuffer, nInBufferSize,         lpOutBuffer, and nOutBufferSize parameters."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPVOID",
+        "name": "lpInBuffer",
+        "description": "A pointer to the input buffer that contains the data required to perform the operation. The format of this         data depends on the value of the dwIoControlCode parameter. This parameter can be NULL if dwIoControlCode specifies         an operation that does not require input data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nInBufferSize",
+        "description": "The size of the input buffer, in bytes."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPVOID",
+        "name": "lpOutBuffer",
+        "description": "A pointer to the output buffer that is to receive the data returned by the operation. The format of this         data depends on the value of the dwIoControlCode parameter. This parameter can be NULL if dwIoControlCode specifies         an operation that does not return data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nOutBufferSize",
+        "description": "The size of the output buffer, in bytes."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPDWORD",
+        "name": "lpBytesReturned",
+        "description": "A pointer to a variable that receives the size of the data stored in the output buffer, in bytes. If the output buffer is too small to receive any data,  the call fails,         GetLastError returns         ERROR_INSUFFICIENT_BUFFER, and lpBytesReturned is zero. If the output buffer is too small to hold all of the data but can hold some entries, some drivers will return         as much data as fits. In this case, the call fails,         GetLastError returns         ERROR_MORE_DATA, and lpBytesReturned indicates the amount         of data received. Your application should call         DeviceIoControl again with the same operation,         specifying a new starting point. If lpOverlapped is NULL,         lpBytesReturned cannot be NULL. Even when an operation         returns no output data and lpOutBuffer is NULL,         DeviceIoControl makes use of         lpBytesReturned. After such an operation, the value of         lpBytesReturned is meaningless. If lpOverlapped is not NULL,         lpBytesReturned can be NULL. If this parameter is not         NULL and the operation returns data, lpBytesReturned is         meaningless until the overlapped operation has completed. To retrieve the number of bytes returned, call         GetOverlappedResult. If         hDevice is associated with an I/O completion port, you can retrieve the number of         bytes returned by calling         GetQueuedCompletionStatus."
+      },
+      {
+        "in_out": "_Inout_opt_",
+        "type": "LPOVERLAPPED",
+        "name": "lpOverlapped",
+        "description": "A pointer to an OVERLAPPED structure. If hDevice was opened without specifying         FILE_FLAG_OVERLAPPED, lpOverlapped is ignored. If hDevice was opened with the FILE_FLAG_OVERLAPPED flag,         the operation is performed as an overlapped (asynchronous) operation. In this case,         lpOverlapped must point to a valid         OVERLAPPED structure that contains a handle to an         event object. Otherwise, the function fails in unpredictable ways. For overlapped operations,         DeviceIoControl returns immediately, and the event         object is signaled when the operation has been completed. Otherwise, the function does not return until the         operation has been completed or an error occurs."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Installs a new device. The user is prompted to select the device.",
+    "library": "",
+    "min_server": "Windows Server 2003",
+    "header": "",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. ",
+    "remarks": "This function has no associated import library. You must use the      LoadLibrary and      GetProcAddress functions to dynamically link to      NewDev.dll. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Device Management",
+    "name": "InstallNewDevice",
+    "is_callback": 0,
+    "dll": "NewDev.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndParent",
+        "description": "A handle to the top-level window to be used for any required user interface."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPGUID",
+        "name": "ClassGuid",
+        "description": "A pointer to a class GUID. This parameter is optional. If this parameter is        NULL, the user starts at the detection choice page. If this parameter is        GUID_NULL or GUID_DEVCLASS_UNKNOWN, the user starts at the        class selection page."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDWORD",
+        "name": "pReboot",
+        "description": "A pointer to a variable that receives the reboot status. This parameter can be         DI_NEEDRESTART or DI_NEEDREBOOT."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Registers the device or type of device for which a window will receive notifications.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a device notification handle. If the function fails, the return value is NULL. To get extended error information,         call GetLastError. ",
+    "remarks": "Applications send event notifications using the      BroadcastSystemMessage function. Any      application with a top-level window can receive basic notifications by processing the      WM_DEVICECHANGE message. Applications can use the      RegisterDeviceNotification function to      register to receive device notifications. Services can use the      RegisterDeviceNotification function to      register to receive device notifications. If a service specifies a window handle in the      hRecipient parameter, the notifications are sent to the window procedure. If      hRecipient is a service status handle,      SERVICE_CONTROL_DEVICEEVENT notifications are sent to the service control handler. For      more information about the service control handler, see      HandlerEx. Be sure to handle Plug and Play device events as quickly as possible. Otherwise, the system may become      unresponsive. If your event handler is to perform an operation that may block execution (such as I/O), it is best      to start another thread to perform the operation asynchronously. Device notification handles returned by      RegisterDeviceNotification must be closed      by calling the      UnregisterDeviceNotification function      when they are no longer needed. The DBT_DEVICEARRIVAL and      DBT_DEVICEREMOVECOMPLETE events are      automatically broadcast to all top-level windows for port devices. Therefore, it is not necessary to call      RegisterDeviceNotification for ports, and      the function fails if the dbch_devicetype member is      DBT_DEVTYP_PORT. Volume notifications are also broadcast to top-level windows, so the      function fails if dbch_devicetype is DBT_DEVTYP_VOLUME.      OEM-defined devices are not used directly by the system, so the function fails if      dbch_devicetype is DBT_DEVTYP_OEM. For an example, see       Registering for Device Notification. ",
+    "return_type": "HDEVNOTIFY WINAPI",
+    "category": "Device Management",
+    "name": "RegisterDeviceNotification",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hRecipient",
+        "description": "A handle to the window or service that will receive device events for the devices specified in the         NotificationFilter parameter. The same window handle can be used in multiple calls to         RegisterDeviceNotification. Services can specify either a window handle or service status handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "NotificationFilter",
+        "description": "A pointer to a block of data that specifies the type of device for which notifications should be sent. This        block always begins with the DEV_BROADCAST_HDR        structure. The data following this header is dependent on the value of the        dbch_devicetype member, which can be        DBT_DEVTYP_DEVICEINTERFACE or DBT_DEVTYP_HANDLE. For more        information, see Remarks."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Flags",
+        "description": "This parameter can be one of the following values.  ValueMeaning  DEVICE_NOTIFY_WINDOW_HANDLE 0x00000000   The hRecipient parameter is a window handle.   DEVICE_NOTIFY_SERVICE_HANDLE 0x00000001   The hRecipient parameter is a service status handle.     In addition, you can specify the following value.  ValueMeaning  DEVICE_NOTIFY_ALL_INTERFACE_CLASSES 0x00000004   Notifies the recipient of device interface events for all device interface classes. (The           dbcc_classguid member is ignored.) This value can be used only if the dbch_devicetype member is           DBT_DEVTYP_DEVICEINTERFACE."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes the specified device notification handle.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. For an example, see  Registering for Device Notification. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Device Management",
+    "name": "UnregisterDeviceNotification",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDEVNOTIFY",
+        "name": "Handle",
+        "description": "Device notification handle returned by the  RegisterDeviceNotification function."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Disables digital playback for the specified CD-ROM or DVD drive.",
+    "library": "",
+    "min_server": "Windows Server 2003",
+    "header": "StorProp.h",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. ",
+    "remarks": "To enable digital playback for the specified CD-ROM or DVD drive, use the CdromEnableDigitalPlayback function. To determine whether digital playback is enabled or disabled, use the CdromIsDigitalPlaybackEnabled function. This function has no associated import library. You must use the LoadLibrary and GetProcAddress functions to dynamically link to StorProp.dll. ",
+    "return_type": "LONG WINAPI",
+    "category": "Device Management",
+    "name": "CdromDisableDigitalPlayback",
+    "is_callback": 0,
+    "dll": "StorProp.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDEVINFO",
+        "name": "DevInfo",
+        "description": "A handle to a device information set listing the devices for which information is to be returned. This handle is typically returned by the SetupDiGetClassDevs or SetupDiGetClassDevsEx function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSP_DEVINFO_DATA",
+        "name": "DevInfoData",
+        "description": "A pointer to an SP_DEVINFO_DATA structure that defines the device instance."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Enables digital playback for the specified CD-ROM or DVD drive.",
+    "library": "",
+    "min_server": "Windows Server 2003",
+    "header": "StorProp.h",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. ",
+    "remarks": "To disable digital playback for the specified CD-ROM or DVD drive, use the CdromDisableDigitalPlayback function. To determine whether digital playback is enabled or disabled, use the CdromIsDigitalPlaybackEnabled function. This function has no associated import library. You must use the LoadLibrary and GetProcAddress functions to dynamically link to StorProp.dll. ",
+    "return_type": "LONG WINAPI",
+    "category": "Device Management",
+    "name": "CdromEnableDigitalPlayback",
+    "is_callback": 0,
+    "dll": "StorProp.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDEVINFO",
+        "name": "DevInfo",
+        "description": "A handle to a device information set listing the devices for which information is to be returned. This handle is typically returned by the SetupDiGetClassDevs or SetupDiGetClassDevsEx function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSP_DEVINFO_DATA",
+        "name": "DevInfoData",
+        "description": "A pointer to an SP_DEVINFO_DATA structure that defines the device instance."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOLEAN",
+        "name": "ForceUnknown",
+        "description": "If this member is TRUE, playback is enabled even if the drive is not known to be good."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Determines whether digital playback is enabled for the specified CD-ROM or DVD drive.",
+    "library": "",
+    "min_server": "Windows Server 2003",
+    "header": "StorProp.h",
+    "return_value": "If the function succeeds the return value is ERROR_SUCCESS. Otherwise, it is an error code. ",
+    "remarks": "To enable digital playback for the specified CD-ROM or DVD drive, use the CdromEnableDigitalPlayback function. To disable digital playback for the specified CD-ROM or DVD drive, use the CdromDisableDigitalPlayback function. This function has no associated import library. You must use the LoadLibrary and GetProcAddress functions to dynamically link to StorProp.dll. ",
+    "return_type": "LONG WINAPI",
+    "category": "Device Management",
+    "name": "CdromIsDigitalPlaybackEnabled",
+    "is_callback": 0,
+    "dll": "StorProp.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDEVINFO",
+        "name": "DevInfo",
+        "description": "A handle to a device information set listing the devices for which information is to be returned. This handle is typically returned by the SetupDiGetClassDevs or SetupDiGetClassDevsEx function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSP_DEVINFO_DATA",
+        "name": "DevInfoData",
+        "description": "A pointer to an SP_DEVINFO_DATA structure that defines the device instance."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBOOLEAN",
+        "name": "Enabled",
+        "description": "A pointer to a variable that receives TRUE if digital playback is enabled, and FALSE otherwise."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Determines whether the specified CD-ROM or DVD drive has digital playback that is known to be good.",
+    "library": "",
+    "min_server": "Windows Server 2003",
+    "header": "Storprop.h",
+    "return_value": "If digital playback is good, the return value is TRUE. Otherwise, the return value is FALSE. ",
+    "remarks": "This function has no associated import library. You must use the LoadLibrary and GetProcAddress functions to dynamically link to Storprop.dll. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Device Management",
+    "name": "CdromKnownGoodDigitalPlayback",
+    "is_callback": 0,
+    "dll": "Storprop.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDEVINFO",
+        "name": "DevInfo",
+        "description": "A handle to a device information set listing the devices for which information is to be returned. This handle is typically returned by the SetupDiGetClassDevs or SetupDiGetClassDevsEx function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSP_DEVINFO_DATA",
+        "name": "DevInfoData",
+        "description": "A pointer to an SP_DEVINFO_DATA structure that defines the device instance."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Verifies that the media region in the DVD drive matches the DVD drive region.",
+    "library": "",
+    "min_server": "Windows Server 2003",
+    "header": "",
+    "return_value": "If the function succeeds and the regions match, the return value is nonzero. Otherwise, the return value is zero. ",
+    "remarks": "This function has no associated import library. You must use the      LoadLibrary and      GetProcAddress functions to dynamically link to      StorProp.dll. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Device Management",
+    "name": "DvdLauncher",
+    "is_callback": 0,
+    "dll": "StorProp.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "HWnd",
+        "description": "A handle to the top-level window to be used for any required user interface."
+      },
+      {
+        "in_out": "_In_",
+        "type": "CHAR",
+        "name": "DriveLetter",
+        "description": "The drive letter."
+      }
+    ],
+    "min_client": "Windows XP"
+  }
+]
+

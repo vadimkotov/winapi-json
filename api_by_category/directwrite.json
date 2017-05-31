@@ -1,0 +1,38 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "Creates a DirectWrite factory object that is used for subsequent creation of individual DirectWrite objects.",
+    "library": "Dwrite.lib",
+    "min_server": "Windows Server 2008 R2, Windows Server 2008 with SP2 and Platform Update for Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Dwrite.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This function creates a DirectWrite factory object that is used for subsequent creation of individual DirectWrite objects.  DirectWrite factory contains internal state data such as font loader registration and cached font data.  In most cases it is recommended you use the shared factory object, because it allows multiple components that use DirectWrite to share internal DirectWrite state data, and thereby reduce memory usage.  However, there are cases when it is desirable to reduce the impact of a component,  such as a plug-in from an untrusted source, on the rest of the process, by sandboxing and isolating it from the rest of the process components. In such cases, it is recommended you use an isolated factory for the sandboxed component. The following example shows how to create a shared DirectWrite factory. ",
+    "return_type": "HRESULT",
+    "category": "DirectWrite",
+    "name": "DWriteCreateFactory",
+    "is_callback": 0,
+    "dll": "Dwrite.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWRITE_FACTORY_TYPE",
+        "name": "factoryType",
+        "description": "Type: DWRITE_FACTORY_TYPE A value that specifies whether the factory object will be shared or isolated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "iid",
+        "description": "Type: REFIID A GUID value that identifies the DirectWrite factory interface, such as __uuidof(IDWriteFactory)."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "IUnknown",
+        "name": "**factory",
+        "description": "Type: IUnknown** An address of a pointer to the newly created DirectWrite factory object."
+      }
+    ],
+    "min_client": "Windows 7, Windows Vista with SP2 and Platform Update for Windows Vista [desktop apps | Windows Store apps]"
+  }
+]
+

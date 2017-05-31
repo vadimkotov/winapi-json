@@ -1,0 +1,384 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "The RAS connection manager calls the  RasEapBegin function to initiate an authentication session.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Raseapif.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value should be an appropriate error code from Winerror.h, Raserror.h, or Mprerror.h. ",
+    "remarks": "The  RasEapBegin function is not part of the RRAS API; it is implemented in the EAP DLL. When the RAS connection manager calls the  RasEapGetInfo function, it receives a  PPP_EAP_INFO structure for the authentication protocol. This structure contains a pointer to the  RasEapBegin function. The memory for the work buffer (pointed to by *ppWorkBuffer) is allocated by the authentication protocol. The authentication protocol should free this memory in its implementation of  RasEapEnd. For more information, see  Avoiding Buffer Overruns. ",
+    "return_type": "DWORD APIENTRY",
+    "category": "Extensible Authentication Protocol (EAP)",
+    "name": "RasEapBegin",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "VOID",
+        "name": "**ppWorkBuffer",
+        "description": "Pointer to a pointer that, on successful return, points to a work buffer. This buffer is opaque to RAS; the contents of the buffer are used only by the authentication protocol. The RAS connection manager passes a pointer to this buffer to the authentication protocol in subsequent calls to  RasEapMakeMessage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PPP_EAP_INPUT",
+        "name": "*pPppEapInput",
+        "description": "Pointer to a  PPP_EAP_INPUT structure that specifies initialization information for the authentication session."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The RAS connection manager calls the  RasEapEnd function to end an authentication session. RAS  calls  RasEapEnd regardless of whether the session completed successfully.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Raseapif.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value should be an appropriate error code from Winerror.h, Raserror.h, or Mprerror.h. If  RasEapEnd returns an error code, RAS terminates the authentication session. ",
+    "remarks": "The  RasEapEnd function is not part of the RRAS API; it is implemented in the EAP DLL. When the Connection Manager calls the  RasEapGetInfo function, it receives a  PPP_EAP_INFO structure for the authentication protocol. This structure contains a pointer to the  RasEapEnd function. Provided that  RasEapBegin returned successfully, the connection manager calls the  RasEapEnd function when authentication has completed. ",
+    "return_type": "DWORD APIENTRY",
+    "category": "Extensible Authentication Protocol (EAP)",
+    "name": "RasEapEnd",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "VOID",
+        "name": "*pWorkBuffer",
+        "description": "Pointer to the work buffer to free."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The RAS connection manager calls  RasEapFreeMemory to free memory buffers returned by  RasEapInvokeConfigUI,  RasEapGetIdentity, and  RasEapInvokeInteractiveUI.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Raseapif.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value should be an appropriate error code from Winerror.h, Raserror.h, or Mprerror.h. ",
+    "remarks": "An authentication protocol may implement its various user interfaces in different DLLs. In such a case, each DLL must implement the  RasEapFreeMemory function. It is also possible that a single DLL may implement multiple user interfaces. For example, a single DLL may implement both the configuration and identity user interface for an authentication protocol. Another example would be a DLL that implements two configuration user interfaces, each to support a different authentication protocol. In these cases, the DLL must implement a single version of  RasEapFreeMemory that can free memory returned from any of the user interfaces implemented in the DLL. ",
+    "return_type": "DWORD APIENTRY",
+    "category": "Extensible Authentication Protocol (EAP)",
+    "name": "RasEapFreeMemory",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "*pMemory",
+        "description": "Pointer to the memory to free."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 12,
+    "description": "The RAS connection manager calls the  RasEapGetIdentity function to obtain identity information for the user requesting authentication.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Raseapif.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function was not able to allocate memory for the user data, the return value should be ERROR_NOT_ENOUGH_MEMORY. If the function is called with the RAS_EAP_FLAG_NON_INTERACTIVE flag, but must invoke a user interface to determine the user's identity, the function should return ERROR_INTERACTIVE_MODE. If the function fails in some other way, the return value should be an appropriate error code from Winerror.h, Raserror.h, or Mprerror.h. ",
+    "remarks": "The DLL that implements  RasEapGetIdentity and  RasEapFreeMemory may support more than one authentication protocol. The dwEapTypeId parameter specifies for which protocol to invoke the identity user interface. The IEEE 802.1X and PPP protocols do not call  RasEapGetIdentity without an implementation of  RasEapFreeMemory. The authentication protocol receives the data returned from  RasEapGetIdentity in the pUserData member of  PPP_EAP_INPUT during  RasEapBegin. To store the data for this user in the registry, the authentication protocol should set the pUserData member of  PPP_EAP_OUTPUT to point to the data, and the fSaveUserData member of  PPP_EAP_OUTPUT to TRUE. This function is called by the RAS function,  RasGetEapUserIdentity. If  RasEapGetIdentity displays a user interface, the user interface must support  WM_COMMAND messages where  LOWORD(wParam) equals IDCANCEL. ",
+    "return_type": "DWORD APIENTRY",
+    "category": "Extensible Authentication Protocol (EAP)",
+    "name": "RasEapGetIdentity",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwEapTypeId",
+        "description": "Specifies the authentication protocol for which to invoke the identity user interface."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndParent",
+        "description": "Handle to the parent window for the user interface dialog. If the dwFlags parameter contains the RAS_EAP_FLAG_NON_INTERACTIVE flag, then hwndParent is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Specifies zero or more of the following flags that qualify the authentication process.  FlagMeaning  RAS_EAP_FLAG_ROUTER   Specifies that the computer that is dialing in is a router. The absence of this flag indicates that the computer dialing in is a RAS client.   RAS_EAP_FLAG_NON_INTERACTIVE   Specifies that the authentication protocol should not bring up a user-interface. If the authentication protocol is not able to determine the identity from the data supplied, it should return the error code, ERROR_INTERACTIVE_MODE. If this flag is specified, the hwndParent parameter will be NULL.   RAS_EAP_FLAG_LOGON   Specifies that the user data is obtained when logging onto the local system, that is from Winlogon.exe.   RAS_EAP_FLAG_PREVIEW   Specifies that the user should be prompted for identity information before dialing.   RAS_EAP_FLAG_FIRST_LINK   Indicates that this connection is the first link in a multilink connection. See  Multilink and Callback Connections for more information.   RAS_EAP_FLAG_MACHINE_AUTH   Specifies that the authentication process use machine credentials for authentication. The credentials can be a certificate, machine name/password as in the case of MSCHAPv2 or any other means of identifying the machine. If the authentication protocol does not support machine authentication, it should return the error ERROR_NOT_SUPPORTED.   RAS_EAP_FLAG_8021X_AUTH   Specifies that this session is executing in a wireless context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WCHAR",
+        "name": "*pwszPhonebook",
+        "description": "Pointer to a null-terminated Unicode string that specifies the full path of the phone-book (PBK) file. If this parameter is NULL, the function uses the system phone book."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WCHAR",
+        "name": "*pwszEntry",
+        "description": "Pointer to a null-terminated Unicode string that specifies an existing entry name."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "*pConnectionDataIn",
+        "description": "Pointer to the connection-specific data currently stored in the phone-book entry."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwSizeOfConnectionDataIn",
+        "description": "Specifies the size of the connection-specific data currently stored in the phone-book entry."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "*pUserDataIn",
+        "description": "Pointer to the user-specific data currently stored for this user in the registry."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwSizeOfUserDataIn",
+        "description": "Specifies the size of the user-specific data currently stored for this user in the registry."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BYTE",
+        "name": "**ppUserDataOut",
+        "description": "Pointer to a pointer that, on successful return, points to the identity data for the user. This data will be passed to the authentication protocol in the pUserData member of  PPP_EAP_INPUT during the call to  RasEapBegin.     The authentication protocol should allocate the memory buffer for the identity data. RAS will free this memory by calling  RasEapFreeMemory."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*pdwSizeOfUserDataOut",
+        "description": "Pointer to a DWORD variable that receives the size of the data pointed to by the ppUserDataOut parameter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "WCHAR",
+        "name": "**ppwszIdentity",
+        "description": "Pointer to a pointer that, on successful return, points to a null-terminated Unicode string that identifies the user requesting authentication. This string is passed to the authentication protocol in the pszIdentity member of  PPP_EAP_INPUT during the call to  RasEapBegin."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The RAS connection manager calls  RasEapGetInfo to obtain a set of function pointers for a specified authentication protocol.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Raseapif.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value should be an appropriate error code from Winerror.h, Raserror.h, or Mprerror.h. ",
+    "remarks": "The DLL that implements  RasEapGetInfo may support more than one authentication protocol. The dwEapTypeId parameter specifies for which authentication protocol to obtain information. Implementations of EAP must export the  RasEapGetInfo function, since RAS uses  RasEapGetInfo to obtain pointers to the other authentication protocol functions. Upon initialization, the Connection Manager calls  RasEapGetInfo for each EAP DLL installed in the registry subkey, as explained in the  EAP Overview. If the function returns any value other than NO_ERROR, RAS considers the authentication protocol to be non-functional. RAS posts an error to the  Windows NT/Windows 2000 Event Log to indicate that this protocol did not start correctly and therefore is not available. ",
+    "return_type": "DWORD APIENTRY",
+    "category": "Extensible Authentication Protocol (EAP)",
+    "name": "RasEapGetInfo",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwEapTypeId",
+        "description": "Specifies the authentication protocol for which to obtain information."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PPP_EAP_INFO",
+        "name": "*pEapInfo",
+        "description": "Pointer to a  PPP_EAP_INFO structure. The structure receives members that RAS sets to identify the structure version and the authentication protocol for which function pointers are requested. For more information, see  PPP_EAP_INFO."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The RAS connection manager calls the  RasEapInitialize function to initialize or de-initialize the authentication protocol.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Raseapif.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value should be an appropriate error code from Winerror.h, Raserror.h, or Mprerror.h. ",
+    "remarks": "The  RasEapInitialize function is not part of the RRAS API; it is implemented in the EAP DLL. When the Connection Manager calls the  RasEapGetInfo function, it receives a  PPP_EAP_INFO structure for the authentication protocol. This structure contains a pointer to the  RasEapInitialize function. The authentication protocol may set the  RasEapInitialize member in  PPP_EAP_INFO to NULL. A NULL value indicates that the authentication protocol does not require initialization or de-initialization. Therefore, RAS need not call this function. ",
+    "return_type": "DWORD APIENTRY",
+    "category": "Extensible Authentication Protocol (EAP)",
+    "name": "RasEapInitialize",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fInitialize",
+        "description": "Specifies whether the authentication protocol should initialize or de-initialize. This parameter is TRUE if the protocol initializes and FALSE if the protocol does not initialize."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "The RAS connection manager calls the RasEapInvokeConfigUI function to display a dialog to obtain configuration information from the user. RAS calls  RasEapInvokeConfigUI when a new phone-book entry is created or an existing phone-book entry is edited, provided that the authentication protocol for the entry provides a configuration user interface.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Raseapif.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function was not able to allocate memory for the configuration data, the return value should be ERROR_NOT_ENOUGH_MEMORY. If the function fails in some other way, the return value should be an appropriate error code from Winerror.h, Raserror.h, or Mprerror.h. ",
+    "remarks": "The DLL that implements  RasEapInvokeConfigUI and  RasEapFreeMemory may support more than one authentication protocol. The dwEapTypeId parameter specifies for which protocol to invoke the configuration UI. RAS stores the connection data returned by  RasEapInvokeConfigUI in the phone-book entry for the connection on the client computer. ",
+    "return_type": "DWORD APIENTRY",
+    "category": "Extensible Authentication Protocol (EAP)",
+    "name": "RasEapInvokeConfigUI",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwEapTypeId",
+        "description": "Specifies the authentication protocol for which to invoke the configuration UI."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndParent",
+        "description": "Handle to the parent window for the UI dialog."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Specifies zero or more of the following flags that qualify the authentication process.  FlagMeaning  RAS_EAP_FLAG_ROUTER   Specifies that the computer that is dialing in is a router. The absence of this flag indicates that the computer dialing in is a RAS client.   RAS_EAP_FLAG_8021X_AUTH   Specifies that this session is executing in a wireless context.   RAS_EAP_FLAG_GUEST_ACCESS   Specified if the client wants guest access. This flag is normally used in the case of a wireless connection such that if the authentication fails for N number of consecutive tries the wireless client, if configured to request guest access, then does so by passing this flag. The RADIUS server should be setup to permit guest access."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "*pConnectionDataIn",
+        "description": "Pointer to the connection data currently stored in the phone-book entry. If the phone-book entry does not contain any data, this parameter is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwSizeOfConnectionDataIn",
+        "description": "Specifies the size of the connection data currently stored in the phone-book entry. If the phone-book entry for this connection does not contain any data, this parameter is  zero."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BYTE",
+        "name": "**ppConnectionDataOut",
+        "description": "Pointer to a pointer that, on successful return, points to the new connection data to store in the phone-book entry. None of this data should be specific to the current machine; phone-book entries should be portable from machine to machine."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*pdwSizeOfConnectionDataOut",
+        "description": "Pointer to a DWORD that receives the size of the new connection data to store in the phone-book entry."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The RAS connection manager calls the  RasEapInvokeInteractiveUI function to display a dialog to obtain authentication data from the user.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Raseapif.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. Check the ppDataFromInteractiveUI and lpdwSizeOfDataFromInteractiveUI parameters to determine if the function returned data from the interactive UI. If the function was not able to allocate memory for the data, the return value should be ERROR_NOT_ENOUGH_MEMORY. If the function fails in some other way, the return value should be an appropriate error code from Winerror.h, Raserror.h, or Mprerror.h. ",
+    "remarks": "The DLL that implements the  RasEapInvokeInteractiveUI and  RasEapFreeMemory functions may support more than one authentication protocol. The dwEapTypeId parameter specifies the authentication protocol for which to invoke the interactive UI. A pointer to the data returned from the interactive UI is passed back to the authentication protocol in the pDataFromInteractiveUI member of  PPP_EAP_INPUT structure. The  PPP_EAP_INPUT structure is passed as a parameter to the  RasEapMakeMessage function. The interactive user interface must support  WM_COMMAND messages where  LOWORD(wParam) equals IDCANCEL. ",
+    "return_type": "DWORD APIENTRY",
+    "category": "Extensible Authentication Protocol (EAP)",
+    "name": "RasEapInvokeInteractiveUI",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwEapTypeId",
+        "description": "Specifies the authentication protocol for which to invoke the interactive UI."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndParent",
+        "description": "Handle to the parent window for the dialog."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "*pUIContextData",
+        "description": "Pointer to context data for the interactive UI. The authentication protocol provides a pointer to this data as a member of the  PPP_EAP_OUTPUT structure. The RAS Connection Manager receives the  PPP_EAP_OUTPUT structure as an output parameter from the  RasEapMakeMessage function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwSizeofUIContextData",
+        "description": "Specifies the size of the context data. The authentication protocol provides the size as a member of the  PPP_EAP_OUTPUT structure. The RAS Connection Manager receives the  PPP_EAP_OUTPUT structure as an output parameter from the  RasEapMakeMessage function."
+      },
+      {
+        "in_out": "",
+        "type": "BYTE",
+        "name": "**ppDataFromInteractiveUI",
+        "description": "[out[ Pointer to a pointer variable. On successful return, this pointer variable  points to a memory buffer that contains the data obtained by the interactive UI. The interactive UI allocates this memory. RAS passes this data back to the authentication protocol in the  PPP_EAP_INPUT structure, then RAS frees this memory by calling  RasEapFreeMemory.     If the interactive UI does not obtain any user-specific data, the pointer that ppUserData points to should be set to NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*pdwSizeOfDataFromInteractiveUI",
+        "description": "Pointer to a DWORD variable that receives the size of the data returned from the interactive UI. If the interactive UI does not obtain any user-specific data, the DWORD variable should be set to zero."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The  RasEapMakeMessage function is the framework within which incoming and outgoing EAP packets, time outs, and other events such as authentication completion are processed for an EAP. RAS calls the  RasEapMakeMessage function every time there is an incoming or outgoing packet.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Raseapif.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value should be an appropriate error code from Winerror.h, Raserror.h, or Mprerror.h. Any error except for ERROR_PPP_INVALID_PACKET, terminates the authentication session. For more information on the ERROR_PPP_INVALID_PACKET return code, see  EAP Implementation Details. ",
+    "remarks": "The  RasEapMakeMessage function is not part of the RRAS API; it is implemented in the EAP DLL. When the connection manager calls the  RasEapGetInfo function, it receives a  PPP_EAP_INFO structure for the authentication protocol. This structure contains a pointer to the  RasEapMakeMessage function. RAS allocates the buffers pointed to by pReceivePacket, pSendPacket, pEapOutput, and pEapInput. The authentication protocol does not allocate any of these buffers. ",
+    "return_type": "DWORD APIENTRY",
+    "category": "Extensible Authentication Protocol (EAP)",
+    "name": "RasEapMakeMessage",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "VOID",
+        "name": "*pWorkBuf",
+        "description": "Pointer to the work buffer. The authentication protocol provides RAS with a pointer to this buffer via the  RasEapBegin function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PPP_EAP_PACKET",
+        "name": "*pReceivePacket",
+        "description": "Pointer to a  PPP_EAP_PACKET structure that contains a received packet. A pReceivePacket value of NULL indicates either that RAS is initiating the dialog with the authentication protocol, or that a time out has occurred and the authentication protocol should resend the last packet. The authentication protocol must determine, based on context, which of these two cases is true."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PPP_EAP_PACKET",
+        "name": "*pSendPacket",
+        "description": "Pointer to a  PPP_EAP_PACKET structure. The authentication protocol can use this structure to specify a packet to send."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbSendPacket",
+        "description": "Specifies the size, in bytes, of the buffer pointed to by pSendPacket."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PPP_EAP_OUTPUT",
+        "name": "*pEapOutput",
+        "description": "Pointer to a  PPP_EAP_OUTPUT structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PPP_EAP_INPUT",
+        "name": "*pEapInput",
+        "description": "Pointer to a  PPP_EAP_INPUT structure. This parameter may be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

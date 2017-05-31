@@ -1,0 +1,26 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "The RM_WRITE_STATUS_CALLBACK function can be implemented by the user interface that controls the Restart Manager. The installer that started the Restart Manager session can pass a pointer to this function to the Restart Manager functions to receive a percentage of completeness. The percentage of completeness is strictly increasing and describes the current operation being performed and the name of the application being affected.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "RestartManager.h",
+    "return_value": "This function pointer does not return a value. ",
+    "remarks": "",
+    "return_type": "typedef void (",
+    "category": "Restart Manager",
+    "name": "RM_WRITE_STATUS_CALLBACK pointer",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nPercentComplete",
+        "description": "An integer value between 0 and 100 that indicates the percentage of the total number of applications that have either been shut down or restarted."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

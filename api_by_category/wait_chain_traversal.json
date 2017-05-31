@@ -1,0 +1,167 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "Creates a new WCT session.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Wct.h",
+    "return_value": "If the function succeeds, the return value is a handle to the newly created session. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "When you have finished using the session, call the CloseThreadWaitChainSession function. For an example, see  Using WCT. ",
+    "return_type": "HWCT WINAPI",
+    "category": "Wait Chain Traversal",
+    "name": "OpenThreadWaitChainSession",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Flags",
+        "description": "The session type. This parameter can be one of the following values.  ValueMeaning   0   A synchronous session.   WCT_ASYNC_OPEN_FLAG   An asynchronous session."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PWAITCHAINCALLBACK",
+        "name": "callback",
+        "description": "If the session is asynchronous, this parameter can be a pointer to a WaitChainCallback callback function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Retrieves the wait chain for the specified thread.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Wct.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To retrieve extended error information, call  GetLastError.  ",
+    "remarks": "If the session is asynchronous, the function returns FALSE and GetLastError returns ERROR_IO_PENDING. To obtain the results, see the WaitChainCallback callback function. If the specified thread is not blocked or is blocked on an unsupported synchronization element, the function returns a single item in NodeInfoArray. The caller must have the SE_DEBUG_NAME privilege. If the caller has insufficient privileges, the function fails if the first thread cannot be accessed. Otherwise, the last node in the array will have its ObjectStatus member set to WctStatusNoAcces. If any subset of nodes in the array forms a cycle, the function sets the IsCycle parameter to TRUE. Wait chain information is dynamic; it was correct when the function was called but may be out-of-date by the time it is reviewed by the caller. For an example, see  Using WCT. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Wait Chain Traversal",
+    "name": "GetThreadWaitChain",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWCT",
+        "name": "WctHandle",
+        "description": "A handle to the WCT session created by the OpenThreadWaitChainSession function."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "DWORD_PTR",
+        "name": "Context",
+        "description": "A pointer to an application-defined context structure to be passed to the callback function for an asynchronous session."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Flags",
+        "description": "The wait chain retrieval options. This parameter can be one of more of the following values.  ValueMeaning  WCT_OUT_OF_PROC_COM_FLAG   Enumerates all threads of an out-of-proc MTA COM server to find the correct thread identifier.   WCT_OUT_OF_PROC_CS_FLAG   Retrieves critical-section information from other processes.   WCT_OUT_OF_PROC_FLAG   Follows the wait chain into other processes. Otherwise, the function reports the first thread in a different process but does not retrieve additional information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "ThreadId",
+        "description": "The identifier of the thread."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "NodeCount",
+        "description": "On input, a number from 1 to WCT_MAX_NODE_COUNT that specifies the number of nodes in the wait chain. On return, the number of nodes retrieved. If the array cannot contain all the nodes of the wait chain, the function fails, GetLastError returns ERROR_MORE_DATA, and this parameter receives the number of array elements required to contain all the nodes. For asynchronous sessions, check the value that is passed to the callback function. Do not free the variable until the callback function has returned."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWAITCHAIN_NODE_INFO",
+        "name": "NodeInfoArray",
+        "description": "An array of WAITCHAIN_NODE_INFO structures that receives the wait chain. For asynchronous sessions, check the value that is passed to the callback function. Do not free the array until the callback function has returned."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBOOL",
+        "name": "IsCycle",
+        "description": "If the function detects a deadlock, this variable is set to TRUE; otherwise, it is set to FALSE. For asynchronous sessions, check the value that is passed to the callback function. Do not free the variable until the callback function has returned."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes the specified WCT session and cancels any outstanding asynchronous operations.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Wct.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "If the WCT session was opened in asynchronous mode (with WCT_ASYNC_OPEN_FLAG), the function cancels any outstanding operations after their callback functions have been called and returned, and then it returns. For an example, see  Using WCT. ",
+    "return_type": "VOID WINAPI",
+    "category": "Wait Chain Traversal",
+    "name": "CloseThreadWaitChainSession",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWCT",
+        "name": "WctHandle",
+        "description": "A handle to the WCT session created by the OpenThreadWaitChainSession function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "An application-defined callback function that receives a wait chain. Specify this address when calling the  OpenThreadWaitChainSession function.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Wct.h",
+    "return_value": "This callback function does not return a value. It is common to pass an event handle to the callback function for communication purposes, as shown in the following code snippet. ",
+    "remarks": "",
+    "return_type": "VOID CALLBACK",
+    "category": "Wait Chain Traversal",
+    "name": "WaitChainCallback",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWCT",
+        "name": "WctHandle",
+        "description": "A handle to the WCT session created by the OpenThreadWaitChainSession function."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD_PTR",
+        "name": "Context",
+        "description": "A optional pointer to an application-defined context structure specified by the GetThreadWaitChain function."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "CallbackStatus",
+        "description": "The callback status. This parameter can be one of the following values, or one of the other system error codes.  ValueMeaning  ERROR_ACCESS_DENIED   The caller did not have sufficient privilege to open a target thread.   ERROR_CANCELLED   The asynchronous session was canceled by a call to the CloseThreadWaitChainSession function.   ERROR_MORE_DATA   The NodeInfoArray buffer is not large enough to contain all the nodes in the wait chain. The NodeCount parameter contains the number of nodes in the chain. The wait chain returned is still valid.   ERROR_OBJECT_NOT_FOUND   The specified thread could not be located.   ERROR_SUCCESS   The operation completed successfully.   ERROR_TOO_MANY_THREADS   The number of nodes exceeds WCT_MAX_NODE_COUNT. The wait chain returned is still valid."
+      },
+      {
+        "in_out": "",
+        "type": "LPDWORD",
+        "name": "NodeCount",
+        "description": "The number of nodes retrieved, up to WCT_MAX_NODE_COUNT. If the array cannot contain all the nodes of the wait chain, the function fails, CallbackStatus is ERROR_MORE_DATA, and this parameter receives the number of array elements required to contain all the nodes."
+      },
+      {
+        "in_out": "",
+        "type": "PWAITCHAIN_NODE_INFO",
+        "name": "NodeInfoArray",
+        "description": "An array of WAITCHAIN_NODE_INFO structures that receives the wait chain."
+      },
+      {
+        "in_out": "",
+        "type": "LPBOOL",
+        "name": "IsCycle",
+        "description": "If the function detects a deadlock, this variable is set to TRUE; otherwise, it is set to FALSE."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

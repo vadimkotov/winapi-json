@@ -1,0 +1,101 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "The  MMCFreeNotifyHandle function is called by a snap-in to free the handle to an  MMCN_PROPERTY_CHANGE notification message sent to the snap-in by MMC in response to an  MMCPropertyChangeNotify call made by a property sheet.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "Mmc.h",
+    "return_value": "This callback function can return one of these values. ",
+    "remarks": "The handle to the notification is passed to the snap-in through a call to the  IExtendPropertySheet2::CreatePropertyPages method. If the snap-in returns a success code (S_OK, S_FALSE) from this method, then the snap-in must call  MMCFreeNotifyHandle. If the snap-in returns an error code, then MMC immediately frees the handle. The snap-in can free the handle at any time, because MMC does not use the handle after it is given to the snap-in. The snap-in must only call  MMCFreeNotifyHandle once and it must not use the handle in an  MMCPropertyChangeNotify call after it is freed. Be aware that the snap-in only must call  MMCFreeNotifyHandle if its  IExtendPropertySheet2::CreatePropertyPages method is called. MMC will not call IExtendPropertySheet2::CreatePropertyPages if the snap-in uses  IPropertySheetCallback to add property pages and then calls IPropertySheetProvider::AddPrimaryPages with a NULL first parameter. Calling  AddPrimaryPages in this way informs MMC that the pages have already been added, so it is not required to call the snap-in's IExtendPropertySheet2::CreatePropertyPages method. For more information, see  Adding Wizard Pages: Implementation Details. The following list contains scenarios that illustrate situations in which the snap-in can call  MMCFreeNotifyHandle: ",
+    "return_type": "HRESULT STDAPICALLTYPE",
+    "category": "Microsoft Management Console (MMC) 2.0",
+    "name": "MMCFreeNotifyHandle",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lNotifyHandle",
+        "description": "A value that specifies a handle provided by the console during an  IExtendPropertySheet2::CreatePropertyPages call."
+      }
+    ],
+    "min_client": "Windows Vista"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The  MMCPropertyChangeNotify function enables a snap-in property sheet to notify its  IComponent or  IComponentData interface that an item's properties have changed.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "Mmc.h",
+    "return_value": "This callback function can return one of these values. ",
+    "remarks": "This is the handle passed to IExtendPropertySheet2::CreatePropertyPages. A call to  MMCPropertyChangeNotify causes an MMCN_PROPERTY_CHANGE notification to be sent to the snap-in. The param value that is passed to  MMCPropertyChangeNotify is, in turn, forwarded to the snap-in as the param argument to MMCN_PROPERTY_CHANGE. ",
+    "return_type": "HRESULT STDAPICALLTYPE",
+    "category": "Microsoft Management Console (MMC) 2.0",
+    "name": "MMCPropertyChangeNotify",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lNotifyHandle",
+        "description": "A value that specifies the handle used to route the notification message to the appropriate  IComponent or  IComponentData."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "param",
+        "description": "User-defined. Can be used freely."
+      }
+    ],
+    "min_client": "Windows Vista"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The MMCPropertyHelp function is introduced in MMC 1.1.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "Mmc.h",
+    "return_value": "This callback function can return one of these values. ",
+    "remarks": "Call  MMCPropertyHelp in the notification handler for the  MMCN_CONTEXTHELP notification. A snap-in can provide context help on a property page. Because an MMC property sheet is typically running on a separate thread, the property page cannot use the  IDisplayHelp interface directly. Instead, the property page can call  MMCPropertyHelp from the MMC library to achieve the same result.  MMCPropertyHelp takes the same topic string parameter as  IDisplayHelp::ShowTopic and handles marshaling the request to the main MMC thread. If the snap-in handles the MMCN_CONTEXTHELP notification, MMC expects the snap-in to specify a Help topic for the selected item. Consequently, in the notification handler for the MMCN_CONTEXTHELP notification, the snap-in has two options: ",
+    "return_type": "HRESULT",
+    "category": "Microsoft Management Console (MMC) 2.0",
+    "name": "MMCPropertyHelp",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "pszHelpTopic",
+        "type": "",
+        "name": "pszHelpTopic",
+        "description": "A pointer to a NULL-terminated string specifying the topic to display in the merged MMC HTML Help file. The string must have the following format: helpfilename::topicfilename where helpfilename is the file name of the snap-in's HTML Help file (.chm) that MMC merged into the MMC HTML Help file (file name only, not the path to the original HTML Help file) and topicfilename is the internal path to the topic file within the snap-in's .chm file. The author of the snap-in's HTML Help file determines whether there is an internal directory structure for the topic HTML files or if all topic HTML files are at the root of the .chm file. For example, if the snap-in had the HTML Help file mysnapin.chm merged into the MMC HTML Help file and a topic HTML file that had the internal Help file path of htm/snphlp01.htm, the string would have the following form: mysnapin.chm::htm/snphlp01.htm Support for numeric IDs for topics is not available in this release."
+      }
+    ],
+    "min_client": "Windows Vista"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The  MMCPropPageCallback function is only required by Microsoft Foundation Classes (MFC)-based snap-ins. The function sets the correct module state during page creation.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "Mmc.h",
+    "return_value": "This callback function can return one of these values. ",
+    "remarks": "This function should not be called by snap-ins that statically link MFC libraries. A call to this function by such a snap-in will not link correctly. For each page derived from CPropertyPage, call  MMCPropPageCallback with a pointer to the page's callback, following these guidelines: MFC must have the correct module state set from exported functions or COM interfaces. This includes calls made from the operating system to the module. For exported functions or COM interfaces, this is done by adding the AFX_MANAGE_STATE macro at the beginning of all the exported functions in snap-in DLLs that dynamically link to MFC. This is done by adding the following line of code to the beginning of functions exported from the snap-in: For an operating system call, MFC does this automatically. Because MMC's property sheet is not an MFC CPropertySheet, the operating system call due to the callback is in the wrong module state. As a result, you need to make sure that the module state is correctly set during the page creation. This is the purpose of  MMCPropPageCallback. After the module state has been set, the only AFX_MANAGE_STATE calls that need to be made are those exposed by the COM interfaces implemented by the snap-in (for example  IExtendPropertySheet2::CreatePropertyPages). To determine whether the application has the correct module state, look at CWinApp and note the application name. ",
+    "return_type": "HRESULT STDAPICALLTYPE",
+    "category": "Microsoft Management Console (MMC) 2.0",
+    "name": "MMCPropPageCallback",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "void",
+        "name": "*vpsp",
+        "description": "A pointer to the Microsoft Windows  PROPSHEETPAGE structure. Be aware that by default, MFC installs its own callback in the pfnCallback member of the structure."
+      }
+    ],
+    "min_client": "Windows Vista"
+  }
+]
+

@@ -1,0 +1,815 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Computes the maximum factor by which a given transform can stretch any vector.",
+    "library": "D2d1.lib",
+    "min_server": "Windows Server 2012 R2 [desktop apps | Windows Store apps]",
+    "header": "D2d1_1.h",
+    "return_value": "The scale factor. ",
+    "remarks": "Formally, if M is the input matrix, this method will return the maximum value of |V * M| / |V| for all vectors V, where |.| denotes length. ",
+    "return_type": "FLOAT",
+    "category": "Direct2D",
+    "name": "D2D1ComputeMaximumScaleFactor",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "D2D1_MATRIX_3X2_F",
+        "name": "*matrix",
+        "description": "The input transform matrix."
+      }
+    ],
+    "min_client": "Windows 8.1 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Creates a new Direct2D device associated with the provided DXGI device.",
+    "library": "",
+    "min_server": "Windows Server 2012 and Platform Update for Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "D2d1_1.h",
+    "return_value": "The function returns an HRESULT. Possible values include, but are not limited to, those in the following table.  ",
+    "remarks": "This function will also create a new ID2D1Factory1 that can be retrieved through ID2D1Resource::GetFactory. If the creation properties are not specified, then d2dDevice will inherit its threading mode from dxgiDevice and debug tracing will not be enabled. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Direct2D",
+    "name": "D2D1CreateDevice",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IDXGIDevice",
+        "name": "*dxgiDevice",
+        "description": "The DXGI device the Direct2D device is associated with."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "D2D1_CREATION_PROPERTIES",
+        "name": "*creationProperties",
+        "description": "The properties to apply to the Direct2D device."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ID2D1Device",
+        "name": "**d2dDevice",
+        "description": "When this function returns, contains the address of a pointer to a Direct2D device."
+      }
+    ],
+    "min_client": "Windows 8 and Platform Update for Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Creates a new Direct2D device context associated with a DXGI surface.",
+    "library": "",
+    "min_server": "Windows Server 2012 and Platform Update for Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "D2d1_1.h",
+    "return_value": "The function returns an HRESULT. Possible values include, but are not limited to, those in the following table.  ",
+    "remarks": "This function will also create a new ID2D1Factory1 that can be retrieved through ID2D1Resource::GetFactory. This function will also create a new ID2D1Device that can be retrieved through ID2D1DeviceContext::GetDevice. The DXGI device will be specified implicitly through dxgiSurface. If creationProperties are not specified, the Direct2D device will inherit its threading mode from the DXGI device implied by dxgiSurface and debug tracing will not be enabled. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Direct2D",
+    "name": "D2D1CreateDeviceContext",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IDXGISurface",
+        "name": "*dxgiSurface",
+        "description": "The DXGI surface the Direct2D device context is associated with."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "D2D1_CREATION_PROPERTIES",
+        "name": "*creationProperties",
+        "description": "The properties to apply to the Direct2D device context."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ID2D1DeviceContext",
+        "name": "**d2dDeviceContext",
+        "description": "When this function returns, contains the address of a pointer to a Direct2D device context."
+      }
+    ],
+    "min_client": "Windows 8 and Platform Update for Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Creates a factory object    that can be used to create Direct2D resources.",
+    "library": "D2d1.lib",
+    "min_server": "Windows Server 2008 R2, Windows Server 2008 with SP2 and Platform Update for Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "D2d1.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Direct2D",
+    "name": "D2D1CreateFactory(D2D1_FACTORY_TYPE,REFIID,void**)",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "D2D1_FACTORY_TYPE",
+        "name": "factoryType",
+        "description": "Type: D2D1_FACTORY_TYPE The threading model of the factory and the resources it creates."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID A reference to the IID of ID2D1Factory that is obtained by using __uuidof(ID2D1Factory)."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppIFactory",
+        "description": "Type: void** When this method returns, contains the address to a pointer to the new factory."
+      }
+    ],
+    "min_client": "Windows 7, Windows Vista with SP2 and Platform Update for Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates a factory object    that can be used to create Direct2D resources.",
+    "library": "D2d1.lib",
+    "min_server": "Windows Server 2008 R2, Windows Server 2008 with SP2 and Platform Update for Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "D2d1.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The ID2D1Factory interface provides the starting point for  Direct2D. In general, objects created from a single instance of a factory object can be used with other resources created from that instance, but not with resources created by other factory instances. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Direct2D",
+    "name": "D2D1CreateFactory(D2D1_FACTORY_TYPE,REFIID,D2D1_FACTORY_OPTIONS*,void**)",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "D2D1_FACTORY_TYPE",
+        "name": "factoryType",
+        "description": "Type: D2D1_FACTORY_TYPE The threading model of the factory and the resources it creates."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID A reference to the IID of ID2D1Factory that is obtained by using __uuidof(ID2D1Factory)."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "D2D1_FACTORY_OPTIONS",
+        "name": "*pFactoryOptions",
+        "description": "Type: const D2D1_FACTORY_OPTIONS* The level of detail provided to the debugging layer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppIFactory",
+        "description": "Type: void** When this method returns, contains the address to a pointer to the new factory."
+      }
+    ],
+    "min_client": "Windows 7, Windows Vista with SP2 and Platform Update for Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 16,
+    "description": "Returns the interior points for a gradient mesh patch based on the points defining a Coons patch.",
+    "library": "D2d1.lib",
+    "min_server": "Windows Server 2016 [desktop apps | Windows Store apps]",
+    "header": "D2d1_3.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "This function is called by the GradientMeshPatchFromCoonsPatch function and is not intended to be used directly. ",
+    "return_type": "void",
+    "category": "Direct2D",
+    "name": "D2D1GetGradientMeshInteriorPointsFromCoonsPatch",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "*point0",
+        "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 0."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "*point1",
+        "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 1."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "*point2",
+        "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 2."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "*point3",
+        "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 3."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "*point4",
+        "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 4."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "*point5",
+        "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 5."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "*point6",
+        "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 6."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "*point7",
+        "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 7."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "*point8",
+        "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 8."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "*point9",
+        "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "*point10",
+        "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 10."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "*point11",
+        "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 11."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "D2D1_POINT_2F",
+        "name": "*pTensorPoint11",
+        "description": "Type: D2D1_POINT_2F* Returns the interior point for the gradient mesh corresponding to point11 in the D2D1_GRADIENT_MESH_PATCH structure."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "D2D1_POINT_2F",
+        "name": "*pTensorPoint12",
+        "description": "Type: D2D1_POINT_2F* Returns the interior point for the gradient mesh corresponding to point12 in the D2D1_GRADIENT_MESH_PATCH structure."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "D2D1_POINT_2F",
+        "name": "*pTensorPoint21",
+        "description": "Type: D2D1_POINT_2F* Returns the interior point for the gradient mesh corresponding to point21 in the D2D1_GRADIENT_MESH_PATCH structure."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "D2D1_POINT_2F",
+        "name": "*pTensorPoint22",
+        "description": "Type: D2D1_POINT_2F* Returns the interior point for the gradient mesh corresponding to point22 in the D2D1_GRADIENT_MESH_PATCH structure."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps | UWP apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Tries to invert the specified matrix.",
+    "library": "D2d1.lib",
+    "min_server": "Windows Server 2008 R2, Windows Server 2008 with SP2 and Platform Update for Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "D2d1.h",
+    "return_value": "Type: BOOL true if the matrix was inverted; otherwise, false. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Direct2D",
+    "name": "D2D1InvertMatrix",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "D2D1_MATRIX_3X2_F",
+        "name": "*matrix",
+        "description": "Type: D2D1_MATRIX_3X2_F* The matrix to invert."
+      }
+    ],
+    "min_client": "Windows 7, Windows Vista with SP2 and Platform Update for Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Indicates whether the specified matrix is invertible.",
+    "library": "D2d1.lib",
+    "min_server": "Windows Server 2008 R2, Windows Server 2008 with SP2 and Platform Update for Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "D2d1.h",
+    "return_value": "Type: BOOL true if the matrix was inverted; otherwise, false. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Direct2D",
+    "name": "D2D1IsMatrixInvertible",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "D2D1_MATRIX_3X2_F",
+        "name": "*matrix",
+        "description": "Type: const D2D1_MATRIX_3X2_F* The matrix to test."
+      }
+    ],
+    "min_client": "Windows 7, Windows Vista with SP2 and Platform Update for Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Creates a rotation transformation that rotates by the specified angle about the specified point.",
+    "library": "D2d1.lib",
+    "min_server": "Windows Server 2008 R2, Windows Server 2008 with SP2 and Platform Update for Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "D2d1.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "Rotation occurs in the plane of the 2-D surface. ",
+    "return_type": "void WINAPI",
+    "category": "Direct2D",
+    "name": "D2D1MakeRotateMatrix",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "FLOAT",
+        "name": "angle",
+        "description": "Type: FLOAT The clockwise rotation angle, in degrees."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "center",
+        "description": "Type: D2D1_POINT_2F The point about which to rotate."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "D2D1_MATRIX_3X2_F",
+        "name": "*matrix",
+        "description": "Type: D2D1_MATRIX_3X2_F* When this method returns, contains the new rotation transformation. You must allocate storage for this parameter."
+      }
+    ],
+    "min_client": "Windows 7, Windows Vista with SP2 and Platform Update for Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates a skew transformation that has the specified x-axis angle, y-axis angle, and center point.",
+    "library": "D2d1.lib",
+    "min_server": "Windows Server 2008 R2, Windows Server 2008 with SP2 and Platform Update for Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "D2d1.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void WINAPI",
+    "category": "Direct2D",
+    "name": "D2D1MakeSkewMatrix",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "FLOAT",
+        "name": "angleX",
+        "description": "Type: FLOAT The x-axis skew angle, which is measured in degrees counterclockwise from the y-axis."
+      },
+      {
+        "in_out": "_In_",
+        "type": "FLOAT",
+        "name": "angleY",
+        "description": "Type: FLOAT The y-axis skew angle, which is measured in degrees counterclockwise from the x-axis."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_POINT_2F",
+        "name": "center",
+        "description": "Type: D2D1_POINT_2F The center point of the skew operation."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "D2D1_MATRIX_3X2_F",
+        "name": "*matrix",
+        "description": "Type: D2D1_MATRIX_3X2_F* When this method returns, contains the rotation transformation. You must allocate storate for this parameter."
+      }
+    ],
+    "min_client": "Windows 7, Windows Vista with SP2 and Platform Update for Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Multiplies two matrices and returns the result.",
+    "library": "D2d1.lib",
+    "min_server": "Windows Server 2008 R2, Windows Server 2008 with SP2 and Platform Update for Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "D2d1helper.h",
+    "return_value": "Type: D2D1_MATRIX_3X2_F The result of multiplying matrix1 and matrix2. ",
+    "remarks": "",
+    "return_type": "D2D1_MATRIX_3X2_F",
+    "category": "Direct2D",
+    "name": "operator*(const D2D1_MATRIX_3X2_F&,const D2D1_MATRIX_3X2_F&)",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "D2D1_MATRIX_3X2_F",
+        "name": "&matrix1",
+        "description": "Type: const D2D1_MATRIX_3X2_F The first matrix to multiply."
+      },
+      {
+        "in_out": "",
+        "type": "D2D1_MATRIX_3X2_F",
+        "name": "&matrix2",
+        "description": "Type: const D2D1_MATRIX_3X2_F The second matrix to multiply."
+      }
+    ],
+    "min_client": "Windows 7, Windows Vista with SP2 and Platform Update for Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the type of the given property.",
+    "library": "D2d1.lib",
+    "min_server": "",
+    "header": "D2d1_1.h",
+    "return_value": "",
+    "remarks": "",
+    "return_type": "D2D1_PROPERTY_TYPE",
+    "category": "Direct2D",
+    "name": "GetType",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "index",
+        "description": "Type: UINT32 The index of the property for which the type will be retrieved."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 4,
+    "description": "Calls a member-function property getter callback for a string-type property.",
+    "library": "D2d1.lib",
+    "min_server": "",
+    "header": "D2d1effecthelpers.h",
+    "return_value": "Type: HRESULT CALLBACK If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT CALLBACK",
+    "category": "Direct2D",
+    "name": "StringGetter",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IUnknown",
+        "name": "*effect",
+        "description": "Type: const IUnknown* The effect with the property."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "BYTE",
+        "name": "*data",
+        "description": "Type: BYTE* When this method returns, contains a pointer to the data requested."
+      },
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "dataSize",
+        "description": "Type: UINT32 The number of bytes in the data to be retrieved."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "UINT32",
+        "name": "*actualSize",
+        "description": "Type: UINT32* The actual size of the data, if the data is not measured in bytes."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 3,
+    "description": "Calls a member-function property setter callback for a string-type property.",
+    "library": "D2d1.lib",
+    "min_server": "",
+    "header": "D2d1effecthelpers.h",
+    "return_value": "Type: HRESULT CALLBACK If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT CALLBACK",
+    "category": "Direct2D",
+    "name": "StringSetter",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IUnknown",
+        "name": "*effect",
+        "description": "Type: IUnknown* The effect with the property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "*data",
+        "description": "Type: const BYTE* When this method returns, contains a pointer to the data requested."
+      },
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "dataSize",
+        "description": "Type: UINT32 The number of bytes in the data to be retrieved."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 4,
+    "description": "Calls a member-function property setter callback for a value-type property.",
+    "library": "D2d1.lib",
+    "min_server": "",
+    "header": "D2d1effecthelpers.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT CALLBACK WINAPI",
+    "category": "Direct2D",
+    "name": "ValueGetter",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IUnknown",
+        "name": "*effect",
+        "description": "The effect with the property."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "BYTE",
+        "name": "*data",
+        "description": "When this method returns, contains a pointer to the data requested."
+      },
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "dataSize",
+        "description": "The number of bytes in the data to be retrieved."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "UINT32",
+        "name": "*actualSize",
+        "description": "The actual size of the data, if the data is not measured in bytes."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 3,
+    "description": "Calls a member-function property setter callback for a value-type property.",
+    "library": "D2d1.lib",
+    "min_server": "",
+    "header": "D2d1effecthelpers.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT CALLBACK",
+    "category": "Direct2D",
+    "name": "ValueSetter",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IUnknown",
+        "name": "*effect",
+        "description": "The effect with the property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "*data",
+        "description": "When this method returns, contains a pointer to the data requested."
+      },
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "dataSize",
+        "description": "The number of bytes in the data to be retrieved."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 3,
+    "description": "Converts the given color from one colorspace to another.",
+    "library": "D2D1.lib",
+    "min_server": "",
+    "header": "D2d1_1.h",
+    "return_value": "Type: D2D1_COLOR_F The converted color. ",
+    "remarks": "",
+    "return_type": "D2D1_COLOR_F WINAPI",
+    "category": "Direct2D",
+    "name": "D2D1ConvertColorSpace",
+    "is_callback": 0,
+    "dll": "D2D1.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "D2D1_COLOR_SPACE",
+        "name": "sourceColorSpace",
+        "description": "Type: D2D1_COLOR_SPACE The source color space."
+      },
+      {
+        "in_out": "",
+        "type": "D2D1_COLOR_SPACE",
+        "name": "destinationColorSpace",
+        "description": "Type: D2D1_COLOR_SPACE The destination color space."
+      },
+      {
+        "in_out": "_In_",
+        "type": "D2D1_COLOR_F",
+        "name": "*color",
+        "description": "Type: const D2D1_COLOR_F* The source color."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 3,
+    "description": "Returns the sine and cosine of an angle.",
+    "library": "D2D1.lib",
+    "min_server": "",
+    "header": "D2d1_1.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void WINAPI",
+    "category": "Direct2D",
+    "name": "D2D1SinCos",
+    "is_callback": 0,
+    "dll": "D2D1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "FLOAT",
+        "name": "angle",
+        "description": "Type: FLOAT The angle to calculate."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "FLOAT",
+        "name": "*s",
+        "description": "Type: FLOAT* The sine of the angle."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "FLOAT",
+        "name": "*c",
+        "description": "Type: FLOAT* The cosine of the angle."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 1,
+    "description": "Returns the tangent of an angle.",
+    "library": "D2d1.lib",
+    "min_server": "",
+    "header": "D2d1_1.h",
+    "return_value": "Type: FLOAT The tangent of the angle. ",
+    "remarks": "",
+    "return_type": "FLOAT WINAPI",
+    "category": "Direct2D",
+    "name": "D2D1Tan",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "FLOAT",
+        "name": "angle",
+        "description": "Type: FLOAT The angle to calculate the tangent for."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 3,
+    "description": "Returns the length of a 3 dimensional vector.",
+    "library": "D2d1.lib",
+    "min_server": "",
+    "header": "D2d1_1.h",
+    "return_value": "Type: FLOAT The length of the vector. ",
+    "remarks": "",
+    "return_type": "FLOAT WINAPI",
+    "category": "Direct2D",
+    "name": "D2D1Vec3Length",
+    "is_callback": 0,
+    "dll": "D2d1.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "FLOAT",
+        "name": "x",
+        "description": "Type: FLOAT The  x value of the vector."
+      },
+      {
+        "in_out": "_In_",
+        "type": "FLOAT",
+        "name": "y",
+        "description": "Type: FLOAT The  y value of the vector."
+      },
+      {
+        "in_out": "_In_",
+        "type": "FLOAT",
+        "name": "z",
+        "description": "Type: FLOAT The  z value of the vector."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 4,
+    "description": "Gets a property from an effect.",
+    "library": "",
+    "min_server": "Windows Server 2012 and Platform Update for Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "D2d1effectauthor.h",
+    "return_value": "Returns S_OK if successful; otherwise, returns an HRESULT error code. ",
+    "remarks": "Supply a PD2D1_PROPERTY_GET_FUNCTION to the getFunction member of a D2D1_PROPERTY_BINDING structure to specify the function that Direct2D uses to get data for a property. ",
+    "return_type": "typedef HRESULT ( CALLBACK",
+    "category": "Direct2D",
+    "name": "PD2D1_PROPERTY_GET_FUNCTION pointer",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IUnknown",
+        "name": "*effect",
+        "description": "A pointer to the IUnknown interface for the effect on which the property will be retrieved."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BYTE",
+        "name": "*data",
+        "description": "A pointer to a variable that stores the data that this function retrieves on the property."
+      },
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "dataSize",
+        "description": "The number of bytes in the property to retrieve."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "UINT32",
+        "name": "*actualSize",
+        "description": "A optional pointer to a variable that stores the actual number of bytes retrieved on the property. If not used, set to NULL."
+      }
+    ],
+    "min_client": "Windows 8 and Platform Update for Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets a property on an effect.",
+    "library": "",
+    "min_server": "Windows Server 2012 and Platform Update for Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "D2d1effectauthor.h",
+    "return_value": "Returns S_OK if successful; otherwise, returns an HRESULT error code. ",
+    "remarks": "Supply a PD2D1_PROPERTY_SET_FUNCTION function pointer to the setFunction member of a D2D1_PROPERTY_BINDING structure to specify the function that Direct2D uses to set data for a property. ",
+    "return_type": "typedef HRESULT ( CALLBACK",
+    "category": "Direct2D",
+    "name": "PD2D1_PROPERTY_SET_FUNCTION pointer",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IUnknown",
+        "name": "*effect",
+        "description": "A pointer to the IUnknown interface for the effect on which the property will be set."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "*data",
+        "description": "A pointer to the data to be set on the property."
+      },
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "dataSize",
+        "description": "The number of bytes in the property set by the function."
+      }
+    ],
+    "min_client": "Windows 8 and Platform Update for Windows 7 [desktop apps | Windows Store apps]"
+  }
+]
+

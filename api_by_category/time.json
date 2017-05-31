@@ -1,0 +1,1189 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the current system date and time. The system time is expressed in Coordinated Universal Time (UTC).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function does not return a value or provide extended error information. ",
+    "remarks": "To set the current system date and time, use the SetSystemTime function. For an example, see  SYSTEMTIME. ",
+    "return_type": "void WINAPI",
+    "category": "Time",
+    "name": "GetSystemTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPSYSTEMTIME",
+        "name": "lpSystemTime",
+        "description": "A pointer to a  SYSTEMTIME structure to receive the current system date and time. The lpSystemTime parameter must not be NULL. Using NULL will result in an access violation."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Determines whether the system is applying periodic time adjustments to its time-of-day clock, and obtains the value and period of any such adjustments.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The GetSystemTimeAdjustment and SetSystemTimeAdjustment functions can be used to support algorithms that want to synchronize the time-of-day clock, reported by GetSystemTime and GetLocalTime, with another time source by using a periodic time adjustment. The GetSystemTimeAdjustment function lets a caller determine whether periodic time adjustment is enabled, and if it is, obtain the amount of each adjustment and the time between adjustments. The SetSystemTimeAdjustment function lets a caller enable or disable periodic time adjustment, and set the value of the adjusting increment. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "GetSystemTimeAdjustment",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PDWORD",
+        "name": "lpTimeAdjustment",
+        "description": "A pointer to a variable that the function sets to the number of lpTimeIncrement100-nanosecond units added to the time-of-day clock for every  period of time which actually passes as counted by the system. This value only has meaning if lpTimeAdjustmentDisabled is FALSE."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDWORD",
+        "name": "lpTimeIncrement",
+        "description": "A pointer to a variable that the function sets to the interval in 100-nanosecond units at which the system will add lpTimeAdjustment to the time-of-day clock. This value only has meaning if lpTimeAdjustmentDisabled is FALSE."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBOOL",
+        "name": "lpTimeAdjustmentDisabled",
+        "description": "A pointer to a variable that the function sets to indicate whether periodic time adjustment is in effect.     A value of TRUE indicates that periodic time adjustment is disabled, and the system time-of-day clock advances at the normal rate. In this mode, the system may adjust the time of day using its own internal time synchronization mechanisms. These internal time synchronization mechanisms may cause the time-of-day clock to change during the normal course of the system operation, which can include noticeable jumps in time as deemed necessary by the system. A value of FALSE indicates that periodic time adjustment is being used to adjust the time-of-day clock. For each lpTimeIncrement period of time that actually passes, lpTimeAdjustment will be added to the time of day.  If the lpTimeAdjustment value is smaller than lpTimeIncrement, the system time-of-day clock will advance at a rate slower than normal. If the lpTimeAdjustment value is larger than lpTimeIncrement, the time-of-day clock will advance at a rate faster than normal. If lpTimeAdjustment equals lpTimeIncrement, the time-of-day clock will advance at its normal speed.  The lpTimeAdjustment  value can be set by calling SetSystemTimeAdjustment. The lpTimeIncrement value is fixed by the system upon start, and does not change during system operation. In this mode, the system will not interfere with the time adjustment scheme, and will not attempt to synchronize time of day on its own via other techniques."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[NtQuerySystemTime may be altered or unavailable in future versions of Windows. Applications should use the GetSystemTimeAsFileTime function.]",
+    "library": "",
+    "min_server": "",
+    "header": "Winternl.h",
+    "return_value": "If the function succeeds, it returns STATUS_SUCCESS.  If it fails, it will return the appropriate status code, which will typically be STATUS_ACCESS_VIOLATION. ",
+    "remarks": "This function has no associated import library. You must use the LoadLibrary and GetProcAddress functions to dynamically link to Ntdll.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Time",
+    "name": "NtQuerySystemTime",
+    "is_callback": 0,
+    "dll": "Ntdll.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PLARGE_INTEGER",
+        "name": "SystemTime",
+        "description": "A pointer to a LARGE_INTEGER structure that receives the system time. This is a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC)."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 2,
+    "description": "[RtlLocalTimeToSystemTime is available for use in Windows 2000 and Windows XP. It may be unavailable or modifed in subsequent releases. Applications should use the LocalFileTimeToFileTime function.]",
+    "library": "",
+    "min_server": "",
+    "header": "Winternl.h",
+    "return_value": "If the function succeeds, it returns STATUS_SUCCESS.  If it fails, it will return the appropriate status code. ",
+    "remarks": "This function has no associated import library. You must use the LoadLibrary and GetProcAddress functions to dynamically link to Ntdll.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Time",
+    "name": "RtlLocalTimeToSystemTime",
+    "is_callback": 0,
+    "dll": "Ntdll.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PLARGE_INTEGER",
+        "name": "LocalTime",
+        "description": "A pointer to a LARGE_INTEGER structure that specifies the local time."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PLARGE_INTEGER",
+        "name": "SystemTime",
+        "description": "A pointer to a LARGE_INTEGER structure that receives the returned system time."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 2,
+    "description": "[RtlTimeToSecondsSince1970 is available for use in Windows 2000 and Windows XP.  It may be unavailable or modified in subsequent releases.]",
+    "library": "",
+    "min_server": "",
+    "header": "Winternl.h",
+    "return_value": "If the function succeeds, it returns TRUE. If it fails, it returns FALSE. Typically, this function will fail if the specified value of the  Time parameter is not within the valid timeframe specified in the parameter description. ",
+    "remarks": "This function has no associated import library. You must use the LoadLibrary and GetProcAddress functions to dynamically link to Ntdll.dll. There is no single equivalent public  function. To perform this task using public  functions, use the following steps: ",
+    "return_type": "BOOLEAN WINAPI",
+    "category": "Time",
+    "name": "RtlTimeToSecondsSince1970",
+    "is_callback": 0,
+    "dll": "Ntdll.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PLARGE_INTEGER",
+        "name": "Time",
+        "description": "A pointer to a LARGE_INTEGER structure that specifies the system time. The valid years for this value are 1970 to  2105 inclusive."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONG",
+        "name": "ElapsedSeconds",
+        "description": "A pointer to a variable that receives the number of seconds."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the current system time and date. The system time is expressed in Coordinated Universal Time (UTC).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The calling process must have the SE_SYSTEMTIME_NAME privilege. This privilege is disabled by default. The  SetSystemTime function enables the SE_SYSTEMTIME_NAME privilege before changing the system time and disables the privilege before returning. For more information, see  Running with Special Privileges. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "SetSystemTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SYSTEMTIME",
+        "name": "*lpSystemTime",
+        "description": "A pointer to a  SYSTEMTIME structure that contains the new system date and time.     The wDayOfWeek member of the  SYSTEMTIME structure is ignored."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Enables or disables periodic time adjustments to the system's time-of-day clock. When enabled, such time adjustments can be used to synchronize the time of day with some other source of time information.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is non-zero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. One way the function can fail is if the caller does not possess the SE_SYSTEMTIME_NAME privilege. ",
+    "remarks": "The  GetSystemTimeAdjustment and  SetSystemTimeAdjustment functions support algorithms that synchronize the time-of-day clock, reported via  GetSystemTime and  GetLocalTime, with another time source using a periodic time adjustment. The  SetSystemTimeAdjustment function supports two modes of time synchronization:  An application must have system-time privilege (the SE_SYSTEMTIME_NAME privilege) for this function to succeed. The SE_SYSTEMTIME_NAME privilege is disabled by default. Use the  AdjustTokenPrivileges function to enable the privilege before calling  SetSystemTimeAdjustment, and then to disable the privilege after the  SetSystemTimeAdjustment call. For more information, see  Running with Special Privileges. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "SetSystemTimeAdjustment",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwTimeAdjustment",
+        "description": "This value represents the number of 100-nanosecond units added to the system time-of-day  for each lpTimeIncrement period of time that actually passes. Call GetSystemTimeAdjustment to obtain the lpTimeIncrement value. See remarks. Note  Currently, Windows Vista and Windows 7 machines will lose any time adjustments set less than 16."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bTimeAdjustmentDisabled",
+        "description": "The time adjustment mode that the system is to use. Periodic system time adjustments can be disabled or enabled.     A value of TRUE specifies that periodic time adjustment is to be disabled. When disabled, the value of dwTimeAdjustment is ignored, and the system may adjust the time of day using its own internal time synchronization mechanisms. These internal time synchronization mechanisms may cause the time-of-day clock to change during the normal course of the system operation, which can include noticeable jumps in time as deemed necessary by the system. A value of FALSE specifies that periodic time adjustment is to be enabled, and will be used to adjust the time-of-day clock. The system will not interfere with the time adjustment scheme, and will not attempt to synchronize time of day on its own."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Converts a system time to file time format. System time is based on Coordinated Universal Time (UTC).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. For an example, see  Changing a File Time to the Current Time. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "SystemTimeToFileTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SYSTEMTIME",
+        "name": "*lpSystemTime",
+        "description": "A pointer to a  SYSTEMTIME structure that contains the system time to be converted from UTC to file time format.     The wDayOfWeek member of the  SYSTEMTIME structure is ignored."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPFILETIME",
+        "name": "lpFileTime",
+        "description": "A pointer to a  FILETIME structure to receive the converted system time."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Converts a time in Coordinated Universal Time (UTC) to a specified time zone's corresponding local time.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero, and the function sets the members of the  SYSTEMTIME structure pointed to by lpLocalTime to the appropriate local time values. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The SystemTimeToTzSpecificLocalTime function takes into account whether daylight saving time (DST) is in effect for the local time to which the system time is to be converted. The SystemTimeToTzSpecificLocalTime function may calculate the local time incorrectly under the following conditions: For an example, see Retrieving the Last-Write Time. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "SystemTimeToTzSpecificLocalTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "LPTIME_ZONE_INFORMATION",
+        "name": "lpTimeZone",
+        "description": "A pointer to a  TIME_ZONE_INFORMATION structure that specifies the time zone of interest.     If lpTimeZone is NULL, the function uses the currently active time zone."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSYSTEMTIME",
+        "name": "lpUniversalTime",
+        "description": "A pointer to a  SYSTEMTIME structure that specifies the UTC time to be converted. The function converts this universal time to the specified time zone's corresponding local time."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSYSTEMTIME",
+        "name": "lpLocalTime",
+        "description": "A pointer to a  SYSTEMTIME structure that receives the local time."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Converts a local time to a time in Coordinated Universal Time (UTC).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero, and the function sets the members of the  SYSTEMTIME structure pointed to by lpUniversalTime to the appropriate values. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "TzSpecificLocalTimeToSystemTime takes into account whether daylight saving time (DST) is in effect for the local time to be converted. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "TzSpecificLocalTimeToSystemTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "LPTIME_ZONE_INFORMATION",
+        "name": "lpTimeZoneInformation",
+        "description": "A pointer to a  TIME_ZONE_INFORMATION structure that specifies the time zone for the time specified in lpLocalTime. If lpTimeZoneInformation is NULL, the function uses the currently active time zone."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSYSTEMTIME",
+        "name": "lpLocalTime",
+        "description": "A pointer to a  SYSTEMTIME structure that specifies the local time to be converted. The function converts this time to the corresponding UTC time."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSYSTEMTIME",
+        "name": "lpUniversalTime",
+        "description": "A pointer to a  SYSTEMTIME structure that receives the UTC time."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Enumerates DYNAMIC_TIME_ZONE_INFORMATION entries stored in the  registry. This information is used to support time zones that experience annual boundary changes due to daylight saving time adjustments. Use the information returned by this function when calling GetDynamicTimeZoneInformationEffectiveYears to retrieve the specific range of years to pass to GetTimeZoneInformationForYear.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2012 [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Time",
+    "name": "EnumDynamicTimeZoneInformation",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const DWORD",
+        "name": "dwIndex",
+        "description": "Index value that represents the location of a DYNAMIC_TIME_ZONE_INFORMATION entry."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDYNAMIC_TIME_ZONE_INFORMATION",
+        "name": "lpTimeZoneInformation",
+        "description": "Specifies settings for  a time zone and dynamic daylight saving time."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Converts a file time to a local file time.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "To account for daylight saving time when converting a file time to a local time, use the following sequence of functions in place of using FileTimeToLocalFileTime: ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "FileTimeToLocalFileTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const FILETIME",
+        "name": "*lpFileTime",
+        "description": "A pointer to a FILETIME structure containing the UTC-based file time to be converted into a local file time."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPFILETIME",
+        "name": "lpLocalFileTime",
+        "description": "A pointer to a FILETIME structure to receive the converted local file time. This parameter cannot be the same as the lpFileTime parameter."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the current time zone and dynamic daylight saving time settings. These settings control the translations between Coordinated Universal Time (UTC) and local time.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, it returns one of the following values.  If the function fails, it returns TIME_ZONE_ID_INVALID. To get extended error information, call  GetLastError. ",
+    "remarks": "The StandardName and DaylightName members  of the resultant DYNAMIC_TIME_ZONE_INFORMATION  structure are localized according to the current user default UI language. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Time",
+    "name": "GetDynamicTimeZoneInformation",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PDYNAMIC_TIME_ZONE_INFORMATION",
+        "name": "pTimeZoneInformation",
+        "description": "A pointer to a DYNAMIC_TIME_ZONE_INFORMATION structure."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Gets a range, expressed in years, for which a DYNAMIC_TIME_ZONE_INFORMATION has valid entries. Use the returned value to identify the specific years to request when calling GetTimeZoneInformationForYear to retrieve time zone information for a time zone that experiences annual boundary changes due to daylight saving time adjustments.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2012 [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "The range to pass to GetTimeZoneInformationForYear. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Time",
+    "name": "GetDynamicTimeZoneInformationEffectiveYears",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const PDYNAMIC_TIME_ZONE_INFORMATION",
+        "name": "lpTimeZoneInformation",
+        "description": "Specifies settings for  a time zone and dynamic daylight saving time."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "FirstYear",
+        "description": "The year that marks the beginning of the range."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "LastYear",
+        "description": "The year that marks the end of the range."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the current local date and time.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "To set the current local date and time, use the SetLocalTime function. For an example, see  SYSTEMTIME. ",
+    "return_type": "void WINAPI",
+    "category": "Time",
+    "name": "GetLocalTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPSYSTEMTIME",
+        "name": "lpSystemTime",
+        "description": "A pointer to a  SYSTEMTIME structure to receive the current local date and time."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the current time zone settings. These settings control the translations between Coordinated Universal Time (UTC) and local time.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, it returns one of the following values.  If the function fails for other reasons, such as an out of memory error, it returns TIME_ZONE_ID_INVALID. To get extended error information, call  GetLastError. ",
+    "remarks": "All translations between UTC time and local time are based on the following formula: UTC = local time + bias The bias is the difference, in minutes, between UTC time and local time. The StandardName and DaylightName members  of the resultant TIME_ZONE_INFORMATION  structure are localized according to the current user default UI language. For an example, see SetTimeZoneInformation. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Time",
+    "name": "GetTimeZoneInformation",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTIME_ZONE_INFORMATION",
+        "name": "lpTimeZoneInformation",
+        "description": "A pointer to a  TIME_ZONE_INFORMATION structure to receive the current settings."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the time zone settings for the specified year and time zone. These settings control the translations between Coordinated Universal Time (UTC) and local time.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The wYear parameter is assumed to be a local time value. If the local time is close to the transition between the old year and the new year (00:00:00 January 1), passing a UTC year to the GetTimeZoneInformationForYear function can cause the function to return time zone settings for the wrong year. The StandardName and DaylightName members  of the resultant TIME_ZONE_INFORMATION  structure are localized according to the current user default UI language. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "GetTimeZoneInformationForYear",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "USHORT",
+        "name": "wYear",
+        "description": "The year for which the time zone settings are to be retrieved. The wYear parameter must be a local time value."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PDYNAMIC_TIME_ZONE_INFORMATION",
+        "name": "pdtzi",
+        "description": "A pointer to a DYNAMIC_TIME_ZONE_INFORMATION structure that specifies the time zone. If this parameter is NULL, the current time zone is used."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTIME_ZONE_INFORMATION",
+        "name": "ptzi",
+        "description": "A pointer to a TIME_ZONE_INFORMATION structure that receives the time zone settings."
+      }
+    ],
+    "min_client": "Windows Vista with SP1 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the current time zone and dynamic daylight saving time settings. These settings control translations from Coordinated Universal Time (UTC) to local time.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "An application must have the SE_TIME_ZONE_NAME privilege for this function to succeed. This privilege is disabled by default. Use the  AdjustTokenPrivileges function to enable the privilege before calling  SetDynamicTimeZoneInformation, and then to disable the privilege after the  SetDynamicTimeZoneInformation call. For more information, see  Running with Special Privileges. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "SetDynamicTimeZoneInformation",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const DYNAMIC_TIME_ZONE_INFORMATION",
+        "name": "*lpTimeZoneInformation",
+        "description": "A pointer to a DYNAMIC_TIME_ZONE_INFORMATION structure."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the current local time and date.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The calling process must have the SE_SYSTEMTIME_NAME privilege. This privilege is disabled by default. The  SetLocalTime function enables the SE_SYSTEMTIME_NAME privilege before changing the local time and disables the privilege before returning. For more information, see  Running with Special Privileges. The system uses UTC internally. Therefore, when you call  SetLocalTime, the system uses the current time zone information to perform the conversion, including the daylight saving time setting. Note that the system uses the daylight saving time setting of the current time, not the new time you are setting. Therefore, to ensure the correct result, call  SetLocalTime a second time, now that the first call has updated the daylight saving time setting. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "SetLocalTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SYSTEMTIME",
+        "name": "*lpSystemTime",
+        "description": "A pointer to a  SYSTEMTIME structure that contains the new local date and time.     The wDayOfWeek member of the  SYSTEMTIME structure is ignored."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the current time zone settings. These settings control translations from Coordinated Universal Time (UTC) to local time.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "An application must have the SE_TIME_ZONE_NAME privilege for this function to succeed. This privilege is disabled by default. Use the  AdjustTokenPrivileges function to enable the privilege before calling  SetTimeZoneInformation, and then to disable the privilege after the  SetTimeZoneInformation call. For more information, see  Running with Special Privileges. Windows Server 2003 and Windows XP/2000:  The application must have the SE_SYSTEMTIME_NAME privilege. Specific to Windows 7 and Windows 8,  call  SetDynamicTimeZoneInformation to set system time zone information instead of SetTimeZoneInformation. support provided for dynamic daylight savings time in. In a scenario where an application calls SetTimeZoneInformation instead, dynamic daylight saving time support is disabled for the calling application. To inform Explorer that the time zone has changed, send the  WM_SETTINGCHANGE message. All translations between UTC and local time are based on the following formula: UTC = local time + bias The bias is the difference, in minutes, between UTC and local time. The following example displays the current time zone, then adjusts the time zone one zone west. The old and new  time zone names are displayed. You can also verify the changes using Date and Time in Control Panel. The new name is displayed on the Date&Time tab as the Current Time Zone. The new time zone is displayed in the drop-down list on the Time Zone tab. To undo these changes, simply choose your old time zone from the drop-down list. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "SetTimeZoneInformation",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const TIME_ZONE_INFORMATION",
+        "name": "*lpTimeZoneInformation",
+        "description": "A pointer to a  TIME_ZONE_INFORMATION structure that contains the new settings."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Converts a time in Coordinated Universal Time (UTC) with dynamic daylight saving time settings to a specified time zone's corresponding local time.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2012 [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "SystemTimeToTzSpecificLocalTimeEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "const DYNAMIC_TIME_ZONE_INFORMATION",
+        "name": "*lpTimeZoneInformation",
+        "description": "A pointer to a DYNAMIC_TIME_ZONE_INFORMATION structure that specifies  the time zone and dynamic daylight saving time."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SYSTEMTIME",
+        "name": "*lpUniversalTime",
+        "description": "A pointer to a  SYSTEMTIME structure that specifies the UTC time to be converted. The function converts this universal time to the specified time zone's corresponding local time."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSYSTEMTIME",
+        "name": "lpLocalTime",
+        "description": "A pointer to a  SYSTEMTIME structure that receives the local time."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Converts a local time to a time with dynamic daylight saving time settings  to Coordinated Universal Time (UTC).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2012 [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "TzSpecificLocalTimeToSystemTimeEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "const DYNAMIC_TIME_ZONE_INFORMATION",
+        "name": "*lpTimeZoneInformation",
+        "description": "A pointer to a DYNAMIC_TIME_ZONE_INFORMATION structure that specifies  the time zone and dynamic daylight saving time."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SYSTEMTIME",
+        "name": "*lpLocalTime",
+        "description": "A pointer to a  SYSTEMTIME structure that specifies the local time to be converted. The function converts this time to the corresponding UTC time."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSYSTEMTIME",
+        "name": "lpUniversalTime",
+        "description": "A pointer to a  SYSTEMTIME structure that receives the UTC time."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Compares two file times.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "The return value is one of the following values.  ",
+    "remarks": "",
+    "return_type": "LONG WINAPI",
+    "category": "Time",
+    "name": "CompareFileTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const FILETIME",
+        "name": "*lpFileTime1",
+        "description": "A pointer to a FILETIME structure that specifies the       first file time."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const FILETIME",
+        "name": "*lpFileTime2",
+        "description": "A pointer to a FILETIME structure that specifies the       second file time."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Converts a file time to system time format. System time is based on Coordinated Universal Time (UTC).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call        GetLastError. For an example, see       Retrieving the Last-Write Time. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "FileTimeToSystemTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const FILETIME",
+        "name": "*lpFileTime",
+        "description": "A pointer to a FILETIME structure containing the file         time to be converted to system (UTC) date and time format. This value must be less than 0x8000000000000000. Otherwise, the function fails."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSYSTEMTIME",
+        "name": "lpSystemTime",
+        "description": "A pointer to a SYSTEMTIME structure to receive the        converted file time."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the date and time that a file or directory was created, last accessed, and last      modified.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. ",
+    "remarks": "Not all file systems can record creation and last access times and not all file systems record them in the      same manner. For example, on  FAT, create time has a resolution of 10 milliseconds, write time has a resolution of      2 seconds, and access time has a resolution of 1 day (really, the access date). Therefore, the      GetFileTime function may not return the same file time      information set using the SetFileTime function. NTFS delays updates to the last access time for a file by up to one hour after the last access. NTFS also      permits last access time updates to be disabled. Last access time is not updated on NTFS volumes by default. Windows Server 2003 and Windows XP:  Last access time is updated on NTFS volumes by default. For more information, see File Times. If you rename or delete a file, then restore it shortly thereafter, Windows searches the cache for file      information to restore. Cached information includes its short/long name pair and creation time. For an example, see       Retrieving the Last-Write Time. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "GetFileTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the file or directory for which dates and times are to be retrieved. The handle must have been        created using the CreateFile function with the        GENERIC_READ access right. For more information, see        File Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPFILETIME",
+        "name": "lpCreationTime",
+        "description": "A pointer to a FILETIME structure to receive the        date and time the file or directory was created. This parameter can be NULL if the        application does not require this information."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPFILETIME",
+        "name": "lpLastAccessTime",
+        "description": "A pointer to a FILETIME structure to        receive the date and time the file or directory was last accessed. The last access time includes the last time        the file or directory was written to, read from, or, in the case of executable files, run. This parameter can be        NULL if the application does not require this information."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPFILETIME",
+        "name": "lpLastWriteTime",
+        "description": "A pointer to a FILETIME structure to        receive the date and time the file or directory was last written to, truncated, or overwritten (for example,        with WriteFile or        SetEndOfFile). This date and time is not updated when        file attributes or security descriptors are changed. This parameter can be NULL if the        application does not require this information."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the current system date and time. The information is in Coordinated Universal Time (UTC) format.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void WINAPI",
+    "category": "Time",
+    "name": "GetSystemTimeAsFileTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPFILETIME",
+        "name": "lpSystemTimeAsFileTime",
+        "description": "A pointer to a  FILETIME structure to receive the current system date and time in UTC format."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Converts a local file time to a file time based on the Coordinated Universal Time (UTC).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, use the         GetLastError function. ",
+    "remarks": "LocalFileTimeToFileTime uses the current      settings for the time zone and daylight saving time. Therefore, if it is daylight saving time, this function will      take daylight saving time into account, even if the time you are converting is in standard time. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "LocalFileTimeToFileTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const FILETIME",
+        "name": "*lpLocalFileTime",
+        "description": "A pointer to a FILETIME structure that specifies the        local file time to be converted into a UTC-based file time."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPFILETIME",
+        "name": "lpFileTime",
+        "description": "A pointer to a FILETIME structure to receive the        converted UTC-based file time. This parameter cannot be the same as the        lpLocalFileTime parameter."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Sets the date and time that the specified file or directory was created, last accessed, or last      modified.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. ",
+    "remarks": "Not all file systems can record creation and last access times and not all file systems record them in the      same manner. For example, on  FAT, create time has a resolution of 10 milliseconds, write time has a resolution of      2 seconds, and access time has a resolution of 1 day (really, the access date). Therefore, the      GetFileTime function may not return the same file time      information set using SetFileTime. NTFS delays updates to      the last access time for a file by up to one hour after the last access. For an example, see       Changing a File Time to the Current Time. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "SetFileTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the file or directory. The handle must have been created using the        CreateFile function  with the        FILE_WRITE_ATTRIBUTES access right. For more information, see        File Security and Access Rights."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const FILETIME",
+        "name": "*lpCreationTime",
+        "description": "A pointer to a FILETIME structure that contains the        new creation date and time for the file or directory. If        the application does not need to change this information, set this parameter either to NULL or to a pointer to a FILETIME structure that has both the dwLowDateTime and dwHighDateTime members set to 0."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const FILETIME",
+        "name": "*lpLastAccessTime",
+        "description": "A pointer to a FILETIME structure that         contains the new last access date and time for the file or directory. The last access time includes the last         time the file or directory was written to, read from, or (in the case of executable files) run. If        the application does not need to change this information, set this parameter         either to NULL or to a pointer to a FILETIME structure that has both the dwLowDateTime and dwHighDateTime members set to 0. To prevent file operations using the given handle from modifying the last access time, call         SetFileTime immediately  after opening the file handle         and pass a FILETIME structure that has both the         dwLowDateTime and dwHighDateTime members set to         0xFFFFFFFF."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const FILETIME",
+        "name": "*lpLastWriteTime",
+        "description": "A pointer to a FILETIME structure that         contains the new last modified date and time for the file or directory.  If the application does not need to change this information, set this parameter either  to NULL  or to a pointer to a FILETIME structure that has both the dwLowDateTime and dwHighDateTime members set to 0. To prevent file operations using the given handle from modifying the last access time, call         SetFileTime immediately after opening the file handle         and pass a FILETIME structure that has both the         dwLowDateTime and dwHighDateTime members set to         0xFFFFFFFF."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Converts MS-DOS date and time values to a file time.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "DosDateTimeToFileTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "wFatDate",
+        "description": "The MS-DOS date. ..."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "wFatTime",
+        "description": "The MS-DOS time. ..."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPFILETIME",
+        "name": "lpFileTime",
+        "description": "A pointer to a  FILETIME structure that receives the converted file time."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Converts a file time to MS-DOS date and time values.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The MS-DOS date format can represent only dates between 1/1/1980 and 12/31/2107; this conversion fails if the input file time is outside this range. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "FileTimeToDosDateTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const FILETIME",
+        "name": "*lpFileTime",
+        "description": "A pointer to a  FILETIME structure containing the file time to convert to MS-DOS date and time format."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWORD",
+        "name": "lpFatDate",
+        "description": "A pointer to a variable to receive the MS-DOS date. ..."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWORD",
+        "name": "lpFatTime",
+        "description": "A pointer to a variable to receive the MS-DOS time. ..."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves system timing information.  On a multiprocessor system, the values returned are the sum     of the designated times across all processors.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error  information, call GetLastError. ",
+    "remarks": "To compile an application that uses this function, define _WIN32_WINNT as 0x0501 or later. For more information, see Using the Windows Headers. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "GetSystemTimes",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPFILETIME",
+        "name": "lpIdleTime",
+        "description": "A pointer to a FILETIME structure that receives the amount of time that the system has been idle."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPFILETIME",
+        "name": "lpKernelTime",
+        "description": "A pointer to a FILETIME structure that receives the amount of time that the system has spent executing in Kernel mode (including all threads in all processes, on all processors). This time value also includes the amount of time the system has been idle."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPFILETIME",
+        "name": "lpUserTime",
+        "description": "A pointer to a FILETIME structure that receives the amount of time that the system has spent executing in User mode (including all threads in all processes, on all processors)."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the number of milliseconds that have elapsed since the system was started, up to 49.7 days.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "The return value is the number of milliseconds that have elapsed since the system was started. ",
+    "remarks": "The resolution of the GetTickCount function is limited to the resolution of the system timer, which is typically in the range of  10 milliseconds to 16 milliseconds. The resolution of the GetTickCount function is not affected by adjustments made by the  GetSystemTimeAdjustment function. The elapsed time is stored as a DWORD value. Therefore, the time will wrap around to zero if the system is run continuously for 49.7 days. To avoid this problem, use the GetTickCount64 function. Otherwise, check for an overflow condition when comparing times. If you need a higher resolution timer, use a  multimedia timer or a  high-resolution timer. To obtain the time elapsed since the computer was started, retrieve the System Up Time counter in the performance data in the registry key HKEY_PERFORMANCE_DATA. The value returned is an 8-byte value. For more information, see  Performance Counters. To obtain the time the system has spent in the working state since it was started, use the QueryUnbiasedInterruptTime function. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Time",
+    "name": "GetTickCount",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the number of milliseconds that have elapsed since the system was started.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "The number of milliseconds. ",
+    "remarks": "The resolution of the GetTickCount64 function is limited to the resolution of the system timer, which is typically in the range of  10 milliseconds to 16 milliseconds. The resolution of the GetTickCount64 function is not affected by adjustments made by the  GetSystemTimeAdjustment function. If you need a higher resolution timer, use a  multimedia timer or a  high-resolution timer. To obtain the time the system has spent in the working state since it was started, use the QueryUnbiasedInterruptTime function. To compile an application that uses this function, define _WIN32_WINNT as 0x0600 or later. For more information, see Using the Windows Headers. ",
+    "return_type": "ULONGLONG WINAPI",
+    "category": "Time",
+    "name": "GetTickCount64",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the current value of the performance counter, which is a high resolution (<1us) time stamp that can be used for time-interval measurements.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. On systems that run Windows XP or later, the function will always succeed and will thus never return zero. ",
+    "remarks": "For more info about this function and its usage, see Acquiring high-resolution time stamps. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "QueryPerformanceCounter",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LARGE_INTEGER",
+        "name": "*lpPerformanceCount",
+        "description": "A pointer to a variable that receives the current performance-counter value, in counts."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the frequency of the performance counter. The frequency of the performance counter is fixed at system boot and is consistent across all processors. Therefore, the frequency need only be queried upon application initialization, and the result can be cached.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the installed hardware supports a high-resolution performance counter, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. On systems that run Windows XP or later, the function will always succeed and will thus never return zero. ",
+    "remarks": "For more info about this function and its usage, see Acquiring high-resolution time stamps. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Time",
+    "name": "QueryPerformanceFrequency",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LARGE_INTEGER",
+        "name": "*lpFrequency",
+        "description": "A pointer to a variable that receives the current performance-counter frequency, in counts per second. If the installed hardware doesn't support a high-resolution performance counter, this parameter can be zero (this will not occur on systems that run Windows XP or later)."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Queries the auxiliary counter frequency.",
+    "library": "Mincore.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Realtimeapiset.h",
+    "return_value": "Returns S_OK if the auxiliary counter is supported and E_NOTIMPL if the auxiliary counter is not supported. ",
+    "remarks": "You can determine the availability of the auxiliary counter by comparing the returned value against E_NOTIMPL. The following sample describes how to call QueryAuxiliaryCounterFrequency to retrieve the counter frequency. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Time",
+    "name": "QueryAuxiliaryCounterFrequency",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PULONGLONG",
+        "name": "lpAuxiliaryCounterFrequency",
+        "description": "Long pointer to an output buffer that contains the specified auxiliary counter frequency. If the auxiliary counter is not supported, the value in the output buffer will be undefined."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Converts the specified auxiliary counter value to the corresponding performance counter value; optionally provides the estimated conversion error in nanoseconds due to latencies and maximum possible drift.",
+    "library": "Mincore.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Realtimeapiset.h",
+    "return_value": "Returns S_OK if the conversion succeeds; otherwise, returns another HRESULT specifying the error.  The following code sample shows how to call ConvertPerformanceCounterToAuxiliaryCounter and  ConvertAuxiliaryCounterToPerformanceCounter to convert the specified data. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Time",
+    "name": "ConvertAuxiliaryCounterToPerformanceCounter",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONGLONG",
+        "name": "ullAuxiliaryCounterValue",
+        "description": "The auxiliary counter value to convert."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONGLONG",
+        "name": "lpPerformanceCounterValue",
+        "description": "On success, contains the converted performance counter value. Will be undefined if the function fails."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PULONGLONG",
+        "name": "lpConversionError",
+        "description": "On success, contains the estimated conversion error, in nanoseconds. Will be undefined if the function fails."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Converts the specified performance counter value to the corresponding auxiliary counter value; optionally provides the estimated conversion error in nanoseconds due to latencies and maximum possible drift.",
+    "library": "Mincore.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Realtimeapiset.h",
+    "return_value": "Returns S_OK if the conversion succeeds; otherwise, returns another HRESULT specifying the error.  The following code sample shows how to call ConvertPerformanceCounterToAuxiliaryCounter and  ConvertAuxiliaryCounterToPerformanceCounter to convert the specified data. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Time",
+    "name": "ConvertPerformanceCounterToAuxiliaryCounter",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONGLONG",
+        "name": "ullPerformanceCounterValue",
+        "description": "The performance counter value to convert."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONGLONG",
+        "name": "lpAuxiliaryCounterValue",
+        "description": "On success, contains the converted auxiliary counter value. Will be undefined if the function fails."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PULONGLONG",
+        "name": "lpConversionError",
+        "description": "On success, contains the estimated conversion error, in nanoseconds. Will be undefined if the function fails."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Gets the current interrupt-time count. For a more precise count, use QueryInterruptTimePrecise.",
+    "library": "Mincore.lib",
+    "min_server": "Windows Server 2016 [desktop apps | Windows Store apps]",
+    "header": "Realtimeapiset.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The interrupt-time count begins at zero when the system starts and is incremented at each clock interrupt by the length of a clock tick. The exact length of a clock tick depends on underlying hardware and can vary between systems. Unlike system time, the interrupt-time count is not subject to adjustments by users or the Windows time service. Applications can use the interrupt-time count to measure finer durations than are possible with system time. Applications that require greater precision than the interrupt-time count should use a high-resolution timer. Use the QueryPerformanceFrequency function to retrieve the frequency of the high-resolution timer and the QueryPerformanceCounter function to retrieve the counter's value. The  timer resolution set by the timeBeginPeriod and timeEndPeriod functions affects the resolution of  the QueryInterruptTime function. However, increasing the timer resolution is not recommended because it can reduce overall system performance and   increase system power consumption by preventing the processor from entering power-saving states. Instead, applications should use a high-resolution timer. To compile an application that uses this function, define _WIN32_WINNT as 0x0601 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "VOID",
+    "category": "Time",
+    "name": "QueryInterruptTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PULONGLONG",
+        "name": "lpInterruptTime",
+        "description": "A pointer to a ULONGLONG in which to receive the interrupt-time count in system time units of 100 nanoseconds. Divide by ten million, or 1e7, to get seconds (there are 1e9 nanoseconds in a second, so there are 1e7 100-nanoseconds in a second)."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps | UWP apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Gets the current interrupt-time count, in a more precise form than QueryInterruptTime does.",
+    "library": "Mincore.lib",
+    "min_server": "Windows Server 2016 [desktop apps | Windows Store apps]",
+    "header": "Realtimeapiset.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "QueryInterruptTimePrecise is similar to the QueryInterruptTime routine, but is more precise. The interrupt time reported by QueryInterruptTime is based on the latest tick of the system clock timer. The system clock timer is the hardware timer that periodically generates interrupts for the system clock. The uniform period between system clock timer interrupts is referred to as a system clock tick, and is typically in the range of 0.5 milliseconds to 15.625 milliseconds, depending on the hardware platform. The interrupt time value retrieved by QueryInterruptTime is accurate within a system clock tick. To provide a system time value that is more precise than that of QueryInterruptTime, QueryInterruptTimePrecise reads the timer hardware directly,  therefore a QueryInterruptTimePrecise call can be slower than a QueryInterruptTime call. Call the KeQueryTimeIncrement routine to determine the duration of a system clock tick. Also see Remarks in QueryInterruptTime. To compile an application that uses this function, define _WIN32_WINNT as 0x0601 or later. For more information, see \t\t\t\tUsing the Windows Headers. ",
+    "return_type": "VOID",
+    "category": "Time",
+    "name": "QueryInterruptTimePrecise",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PULONGLONG",
+        "name": "lpInterruptTimePrecise",
+        "description": "A pointer to a ULONGLONG in which to receive the interrupt-time count in system time units of 100 nanoseconds. Divide by ten million, or 1e7, to get seconds (there are 1e9 nanoseconds in a second, so there are 1e7 100-nanoseconds in a second)."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps | UWP apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Gets the current unbiased interrupt-time count, in units of 100 nanoseconds. The unbiased interrupt-time count does not include time the system spends in sleep or hibernation.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The interrupt-time count begins at zero when the system starts and is incremented at each clock interrupt by the length of a clock tick. The exact length of a clock tick depends on underlying hardware and can vary between systems. The interrupt-time count retrieved by the QueryUnbiasedInterruptTime function reflects only the time that the system is in the working state. Therefore, the interrupt-time count is not \"biased\" by time the system spends in sleep or hibernation. The system uses biased interrupt time for some operations, such as ensuring that relative timers that would have expired during sleep expire immediately upon waking. Unlike system time, the interrupt-time count is not subject to adjustments by users or the Windows time service. Applications can use the interrupt-time count to measure finer durations than are possible with system time. Applications that require greater precision than the interrupt-time count should use a high-resolution timer. Use the QueryPerformanceFrequency function to retrieve the frequency of the high-resolution timer and the QueryPerformanceCounter function to retrieve the counter's value. The  timer resolution set by the timeBeginPeriod and timeEndPeriod functions affects the resolution of  the QueryUnbiasedInterruptTime function. However, increasing the timer resolution is not recommended because it can reduce overall system performance and   increase system power consumption by preventing the processor from entering power-saving states. Instead, applications should use a high-resolution timer. To compile an application that uses this function, define _WIN32_WINNT as 0x0601 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "VOID",
+    "category": "Time",
+    "name": "QueryUnbiasedInterruptTime",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PULONGLONG",
+        "name": "lpUnbiasedInterruptTime",
+        "description": "A pointer to a ULONGLONG in which to receive the unbiased interrupt-time count in system time units of 100 nanoseconds. Divide by ten million, or 1e7, to get seconds (there are 1e9 nanoseconds in a second, so there are 1e7 100-nanoseconds in a second)."
+      }
+    ],
+    "min_client": "Windows 7, Windows 8 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Gets the current unbiased interrupt-time count, in a more precise form than QueryUnbiasedInterruptTime does. The unbiased interrupt-time count does not include time the system spends in sleep or hibernation.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2016 [desktop apps | Windows Store apps]",
+    "header": "Realtimeapiset.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "QueryUnbiasedInterruptTimePrecise is similar to the QueryUnbiasedInterruptTime routine, but is more precise. The interrupt time reported by QueryUnbiasedInterruptTime is based on the latest tick of the system clock timer. The system clock timer is the hardware timer that periodically generates interrupts for the system clock. The uniform period between system clock timer interrupts is referred to as a system clock tick, and is typically in the range of 0.5 milliseconds to 15.625 milliseconds, depending on the hardware platform. The interrupt time value retrieved by QueryUnbiasedInterruptTime is accurate within a system clock tick. To provide a system time value that is more precise than that of QueryUnbiasedInterruptTime, QueryUnbiasedInterruptTimePrecise reads the timer hardware directly,  therefore a QueryUnbiasedInterruptTimePrecise call can be slower than a QueryUnbiasedInterruptTime call. Call the KeQueryTimeIncrement routine to determine the duration of a system clock tick. Also see Remarks in QueryUnbiasedInterruptTime. To compile an application that uses this function, define _WIN32_WINNT as 0x0601 or later. For more information, see \t\t\t\tUsing the Windows Headers. ",
+    "return_type": "VOID",
+    "category": "Time",
+    "name": "QueryUnbiasedInterruptTimePrecise",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PULONGLONG",
+        "name": "lpUnbiasedInterruptTimePrecise",
+        "description": "A pointer to a ULONGLONG in which to receive the unbiased interrupt-time count in system time units of 100 nanoseconds. Divide by ten million, or 1e7, to get seconds (there are 1e9 nanoseconds in a second, so there are 1e7 100-nanoseconds in a second)."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps | UWP apps]"
+  }
+]
+

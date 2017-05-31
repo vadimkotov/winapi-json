@@ -1,0 +1,49 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Notifies the system that the application is about to start an operation.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "TRUE for all valid parameters and FALSE otherwise.  To get extended error information, call GetLastError. ",
+    "remarks": "The version of the _OPERATION_START_PARAMETERS structure is defined as OPERATION_API_VERSION in the Windows SDK. Because the OperationStart function is synchronous, it can take several seconds to return. This should be avoided in UI threads for the best responsiveness. There is a single instance of the operation recorder in a process. Although the operation  recorder APIs can be called from multiple threads within the process, all calls act on the single instance. Application launch tracing lasts for the first 10 second of the process lifetime.  OperationStart should be called after the end of application launch tracing by the system. Every call to OperationStart must be followed by a call to OperationEnd. Otherwise, the operation trace will be discarded after about 10s. The maximum number of operations that can be recorded on a given system is configurable. If this maximum is exceeded, the least recently used prefetch files are replaced. On Windows 8, this functionality requires the Superfetch service to be enabled. Windows 8 will have the service enabled by default.  For Windows Server 2012, this prefetching functionality needs to be enabled and disabled as required. This can be done using CIM based PowerShell cmdlets.  The prefetcher functionality can be exposed using the CIM class  of the CIM_PrefetcherService. ",
+    "return_type": "BOOL",
+    "category": "Operation Recorder",
+    "name": "OperationStart",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "OPERATION_START_PARAMETERS",
+        "name": "*OperationParams",
+        "description": "An _OPERATION_START_PARAMETERS structure that specifies VERSION, OPERATION_ID and FLAGS."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Notifies the system that the application is about to end an operation",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "TRUE for all valid parameters and FALSE otherwise.  To get extended error information, call GetLastError. ",
+    "remarks": "The version of the _OPERATION_END_PARAMETERS structure is defined as OPERATION_API_VERSION in the Windows SDK. The  OperationEnd function is safe to call on any thread. ",
+    "return_type": "BOOL",
+    "category": "Operation Recorder",
+    "name": "OperationEnd",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "OPERATION_END_PARAMETERS",
+        "name": "*OperationParams",
+        "description": "An _OPERATION_END_PARAMETERS structure that specifies VERSION, OPERATION_ID and FLAGS."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  }
+]
+

@@ -1,0 +1,630 @@
+[
+  {
+    "n_arguments": 4,
+    "description": "Receives messages or notifications intended for the default dialog box procedure of the Color dialog box. This is an application-defined or library-defined callback function that is used with the ChooseColor function.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "If the hook procedure returns zero, the default dialog box procedure processes the message. If the hook procedure returns a nonzero value, the default dialog box procedure ignores the message. ",
+    "remarks": "When you use the ChooseColor function to create a Color dialog box, you can provide a CCHookProc hook procedure to process messages or notifications intended for the dialog box procedure. To enable the hook procedure, use the CHOOSECOLOR structure that you passed to the dialog creation function. Specify the address of the hook procedure in the  lpfnHook member and specify the CC_ENABLEHOOK flag in the  Flags member. The default dialog box procedure processes the WM_INITDIALOG message before passing it to the hook procedure. For all other messages, the hook procedure receives the message first. Then, the return value of the hook procedure determines whether the default dialog procedure processes the message or ignores it. If the hook procedure processes the WM_CTLCOLORDLG message, it must return a valid brush handle to painting the background of the dialog box. In general, if the hook procedure processes any WM_CTLCOLOR* message, it must return a valid brush handle to painting the background of the specified control. Do not call the EndDialog function from the hook procedure. Instead, the hook procedure can call the PostMessage function to post a  WM_COMMAND message with the IDABORT value to the dialog box procedure. Posting IDABORT closes the dialog box and causes the dialog box function to return FALSE. If you need to know why the hook procedure closed the dialog box, you must provide your own communication mechanism between the hook procedure and your application. You can subclass the standard controls of a common dialog box. However, the dialog box procedure may also subclass the controls. Because of this, you should subclass controls when your hook procedure processes the WM_INITDIALOG message. This ensures that your subclass procedure receives the control-specific messages before the subclass procedure set by the dialog box procedure. ",
+    "return_type": "UINT_PTR CALLBACK",
+    "category": "Common Dialog Boxes",
+    "name": "CCHookProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hdlg",
+        "description": "A handle to the Color dialog box for which the message is intended."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uiMsg",
+        "description": "The identifier of the message being received."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter. If the uiMsg parameter indicates the WM_INITDIALOG message, lParam is a pointer to a CHOOSECOLOR structure containing the values specified when the dialog was created."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Receives messages or notifications intended for the default dialog box procedure of the Font dialog box. This is an application-defined or library-defined callback procedure that is used with the ChooseFont function.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "If the hook procedure returns zero, the default dialog box procedure processes the message. If the hook procedure returns a nonzero value, the default dialog box procedure ignores the message. ",
+    "remarks": "When you use the ChooseFont function to create a Font dialog box, you can provide a CFHookProc hook procedure to process messages or notifications intended for the dialog box procedure. To enable the hook procedure, use the CHOOSEFONT structure that you passed to the dialog creation function. Specify the address of the hook procedure in the  lpfnHook member and specify the CF_ENABLEHOOK flag in the  Flags member. The default dialog box procedure processes the WM_INITDIALOG message before passing it to the hook procedure. For all other messages, the hook procedure receives the message first. The return value of the hook procedure determines whether the default dialog box procedure processes the message or ignores it. If the hook procedure processes the WM_CTLCOLORDLG message, it must return a valid brush handle to paint the background of the dialog box. In general, if the hook procedure processes any WM_CTLCOLOR* message, it must return a valid brush handle to paint the background of the specified control. Do not call the EndDialog function from the hook procedure. Instead, the hook procedure can call the PostMessage function to post a WM_COMMAND message with the IDABORT value to the dialog box procedure. Posting IDABORT closes the dialog box and causes the dialog box function to return FALSE. If you need to know why the hook procedure closed the dialog box, you must provide your own communication mechanism between the hook procedure and your application. You can subclass the standard controls of a common dialog box. However, the dialog box procedure may also subclass the controls. Because of this, you should subclass controls when your hook procedure processes the WM_INITDIALOG message. This ensures that your subclass procedure receives the control-specific messages before the subclass procedure set by the dialog box procedure. ",
+    "return_type": "UINT_PTR CALLBACK",
+    "category": "Common Dialog Boxes",
+    "name": "CFHookProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hdlg",
+        "description": "A handle to the Font dialog box for which the message is intended."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uiMsg",
+        "description": "The identifier of the message being received."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter. If the uiMsg parameter indicates the WM_INITDIALOG message, lParam is a pointer to a CHOOSEFONT structure containing the values specified when the dialog box was created."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Creates a Color dialog box that enables the user to select a color.",
+    "library": "Comdlg32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "Type: BOOL If the user clicks the  \t\t\t\t\t\tOK button of the dialog box, the return value is nonzero. The  \t\t\t\t\t\trgbResult member of the CHOOSECOLOR structure contains the RGB color value of the color selected by the user. If the user cancels or closes the  \t\t\t\t\t\tColor dialog box or an error occurs, the return value is zero. To get extended error information, call the CommDlgExtendedError function, which can return one of the following values: ",
+    "remarks": "The Color dialog box does not support palettes. The color choices offered by the dialog box are limited to the system colors and dithered versions of those colors. You can provide a CCHookProc hook procedure for a Color dialog box. The hook procedure can process messages sent to the dialog box. To enable a hook procedure, set the CC_ENABLEHOOK flag in the  Flags member of the CHOOSECOLOR structure and specify the address of the hook procedure in the  lpfnHook member. For an example, see Choosing a Color. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Common Dialog Boxes",
+    "name": "ChooseColor",
+    "is_callback": 0,
+    "dll": "Comdlg32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPCHOOSECOLOR",
+        "name": "lpcc",
+        "description": "Type: LPCHOOSECOLOR A pointer to a CHOOSECOLOR structure that contains information used to initialize the dialog box. When ChooseColor returns, this structure contains information about the user's color selection."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Creates a Font dialog box that enables the user to choose attributes for a logical font. These attributes include a font family and associated font style, a point size, effects (underline, strikeout, and text color), and a script (or character set).",
+    "library": "Comdlg32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "Type: BOOL If the user clicks the  \t\t\t\t\t\tOK button of the dialog box, the return value is TRUE. The members of the CHOOSEFONT structure indicate the user's selections. If the user cancels or closes the  \t\t\t\t\t\tFont dialog box or an error occurs, the return value is FALSE. To get extended error information, call the CommDlgExtendedError function, which can return one of the following values. ",
+    "remarks": "You can provide a CFHookProc hook procedure for a Font dialog box. The hook procedure can process messages sent to the dialog box. To enable a hook procedure, set the CF_ENABLEHOOK flag in the Flags member of the CHOOSEFONT structure and specify the address of the hook procedure in the lpfnHook member. The hook procedure can send the WM_CHOOSEFONT_GETLOGFONT, WM_CHOOSEFONT_SETFLAGS, and WM_CHOOSEFONT_SETLOGFONT messages to the dialog box to get and set the current values and flags of the dialog box. For an example, see Choosing a Font. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Common Dialog Boxes",
+    "name": "ChooseFont",
+    "is_callback": 0,
+    "dll": "Comdlg32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPCHOOSEFONT",
+        "name": "lpcf",
+        "description": "Type: LPCHOOSEFONT A pointer to a CHOOSEFONT structure that contains information used to initialize the dialog box. When ChooseFont returns, this structure contains information about the user's font selection."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Returns a common dialog box error code. This code indicates the most recent error to occur during the execution of one of the common dialog box functions.",
+    "library": "Comdlg32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "Type: DWORD If the most recent call to a common dialog box function succeeded, the return value is undefined. If the common dialog box function returned FALSE because the user closed or canceled the dialog box, the return value is zero. Otherwise, the return value is a nonzero error code. The CommDlgExtendedError function can return general error codes for any of the common dialog box functions. In addition, there are error codes that are returned only for a specific common dialog box. All of these error codes are defined in Cderr.h. The following general error codes can be returned for any of the common dialog box functions.  The following error codes can be returned for the PrintDlg function.  The following error codes can be returned for the ChooseFont function.  The following error codes can be returned for the GetOpenFileName and GetSaveFileName functions.  The following error code can be returned for the FindText and ReplaceText functions.  ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Common Dialog Boxes",
+    "name": "CommDlgExtendedError",
+    "is_callback": 0,
+    "dll": "Comdlg32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Creates a system-defined modeless Find dialog box that lets the user specify a string to search for and options to use when searching for text in a document.",
+    "library": "Comdlg32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "Type: HWND If the function succeeds, the return value is the window handle to the dialog box. You can use the window handle to communicate with or to close the dialog box. If the function fails, the return value is NULL. To get extended error information, call the CommDlgExtendedError function. CommDlgExtendedError may return one of the following error codes: ",
+    "remarks": "The FindText function does not perform a search operation. Instead, the dialog box sends FINDMSGSTRING registered messages to the window procedure of the owner window of the dialog box. When you create the dialog box, the  hwndOwner member of the FINDREPLACE structure is a handle to the owner window. Before calling FindText, you must call the RegisterWindowMessage function to get the identifier for the FINDMSGSTRING message. The dialog box procedure uses this identifier to send messages when the user clicks the Find Next button, or when the dialog box is closing. The  lParam parameter of the FINDMSGSTRING message contains a pointer to a FINDREPLACE structure. The  Flags member of this structure indicates the event that caused the message. Other members of the structure indicate the user's input. If you create a Find dialog box, you must also use the IsDialogMessage function in the main message loop of your application to ensure that the dialog box correctly processes keyboard input, such as the TAB and ESC keys. IsDialogMessage returns a value that indicates whether the Find dialog box processed the message. You can provide an FRHookProc hook procedure for a Find dialog box. The hook procedure can process messages sent to the dialog box. To enable a hook procedure, set the FR_ENABLEHOOK flag in the  Flags member of the FINDREPLACE structure and specify the address of the hook procedure in the  lpfnHook member. For an example, see Finding Text. ",
+    "return_type": "HWND WINAPI",
+    "category": "Common Dialog Boxes",
+    "name": "FindText",
+    "is_callback": 0,
+    "dll": "Comdlg32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPFINDREPLACE",
+        "name": "lpfr",
+        "description": "Type: LPFINDREPLACE A pointer to a FINDREPLACE structure that contains information used to initialize the dialog box. The dialog box uses this structure to send information about the user's input to your application. For more information, see the following Remarks section."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Receives messages or notifications intended for the default dialog box procedure of the Find or Replace dialog box. The FRHookProc hook procedure is an application-defined or library-defined callback function that is used with the FindText or ReplaceText function.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "If the hook procedure returns zero, the default dialog box procedure processes the message. If the hook procedure returns a nonzero value, the default dialog box procedure ignores the message. ",
+    "remarks": "When you use the FindText or ReplaceText functions to create a Find or Replace dialog box, you can provide an FRHookProc hook procedure to process messages or notifications intended for the dialog box procedure. To enable the hook procedure, use the FINDREPLACE structure that you passed to the dialog creation function. Specify the address of the hook procedure in the lpfnHook member and specify the FR_ENABLEHOOK flag in the Flags member. The default dialog box procedure processes the WM_INITDIALOG message before passing it to the hook procedure. For all other messages, the hook procedure receives the message first. Then, the return value of the hook procedure determines whether the default dialog procedure processes the message or ignores it. If the hook procedure processes the WM_CTLCOLORDLG message, it must return a valid brush handle for painting the background of the dialog box. In general, if the hook procedure processes any WM_CTLCOLOR* message, it must return a valid brush handle for painting the background of the specified control. Do not call the EndDialog function from the hook procedure. Instead, the hook procedure can call the PostMessage function to post a WM_COMMAND message with the IDABORT value to the dialog box procedure. Posting IDABORT closes the dialog box and causes the dialog box function to return FALSE. If you need to know why the hook procedure closed the dialog box, you must provide your own communication mechanism between the hook procedure and your application. You can subclass the standard controls of a common dialog box. However, the dialog box procedure may also subclass the controls. Because of this, you should subclass controls when your hook procedure processes the WM_INITDIALOG message. This ensures that your subclass procedure receives the control-specific messages before the subclass procedure set by the dialog box procedure. ",
+    "return_type": "UINT_PTR CALLBACK",
+    "category": "Common Dialog Boxes",
+    "name": "FRHookProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hdlg",
+        "description": "A handle to the Find or Replace dialog box for which the message is intended."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uiMsg",
+        "description": "The identifier of the message being received."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter.                                            If the uiMsg parameter indicates the WM_INITDIALOG message, lParam is a pointer to a FINDREPLACE structure containing the values specified when the dialog box was created."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the name of the specified file.",
+    "library": "Comdlg32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "Type: short If the function succeeds, the return value is zero. If the file name is invalid, the return value is unknown. If there is an error, the return value is a negative number. If the buffer pointed to by the lpszTitle parameter is too small, the return value is a positive integer that specifies the required buffer size, in characters. The required buffer size includes the terminating null character. ",
+    "remarks": "GetFileTitle should only be called with legal file names; using an illegal file name has an undefined result. To get the buffer size needed for the name of a file, call the function with  lpszTitle set to NULL and  cchSize set to zero. The function returns the required size. GetFileTitle returns the string that the system would use to display the file name to the user. The display name includes an extension only if that is the user's preference for displaying file names. This means that the returned string may not accurately identify the file if it is used in calls to file system functions. If the  lpszTitle buffer is too small, GetFileTitle returns the size required to hold the display name. However, there is no guaranteed relationship between the required size and the characters originally specified in the  lpszFile buffer. For example, do not call GetFileTitle with  lpszTitle set to NULL and  cchSize set to zero, and then try to use the return value as an index into the  lpszFile string. You can usually achieve similar results (and superior performance) with C run-time library functions such as strrchr, wcsrchr, and _mbsrchr. ",
+    "return_type": "short WINAPI",
+    "category": "Common Dialog Boxes",
+    "name": "GetFileTitle",
+    "is_callback": 0,
+    "dll": "Comdlg32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszFile",
+        "description": "Type: LPCTSTR The name and location of a file."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszTitle",
+        "description": "Type: LPTSTR The buffer that receives the name of the file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "cchSize",
+        "description": "Type: WORD The length, in  \t\t\t\t\tcharacters, of the buffer pointed to by the lpszTitle parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[Starting with Windows Vista, the Open and Save As common dialog boxes have been superseded by the Common Item Dialog. We recommended that you use the Common Item Dialog API instead of these dialog boxes from the Common Dialog Box Library.]",
+    "library": "Comdlg32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "Type: BOOL If the user specifies a file name and clicks the OK button, the return value is nonzero. The buffer pointed to by the lpstrFile member of the OPENFILENAME structure contains the full path and file name specified by the user. If the user cancels or closes the Open dialog box or an error occurs, the return value is zero. To get extended error information, call the CommDlgExtendedError function, which can return one of the following values. ",
+    "remarks": "The Explorer-style Open dialog box provides user-interface features that are similar to the Windows Explorer. You can provide an OFNHookProc hook procedure for an Explorer-style Open dialog box. To enable the hook procedure, set the OFN_EXPLORER and OFN_ENABLEHOOK flags in the Flags member of the OPENFILENAME structure and specify the address of the hook procedure in the lpfnHook member. Windows continues to support the old-style Open dialog box for applications that want to maintain a user-interface consistent with the old-style user-interface. To display the old-style Open dialog box, enable an OFNHookProcOldStyle hook procedure and ensure that the OFN_EXPLORER flag is not set. To display a dialog box that allows the user to select a directory instead of a file, call the SHBrowseForFolder function. Note, when selecting multiple files, the total character limit for the file names depends on the version of the function. For an example, see Opening a File. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Common Dialog Boxes",
+    "name": "GetOpenFileName",
+    "is_callback": 0,
+    "dll": "Comdlg32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPOPENFILENAME",
+        "name": "lpofn",
+        "description": "Type: LPOPENFILENAME A pointer to an OPENFILENAME structure that contains information used to initialize the dialog box. When GetOpenFileName returns, this structure contains information about the user's file selection."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[Starting with Windows Vista, the Open and Save As common dialog boxes have been superseded by the Common Item Dialog. We recommended that you use the Common Item Dialog API instead of these dialog boxes from the Common Dialog Box Library.]",
+    "library": "Comdlg32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "Type: BOOL If the user specifies a file name and clicks the  \t\t\t\t\t\tOK button and the function is successful, the return value is nonzero. The buffer pointed to by the  \t\t\t\t\t\tlpstrFile member of the OPENFILENAME structure contains the full path and file name specified by the user. If the user cancels or closes the  \t\t\t\t\t\tSave dialog box or an error such as the file name buffer being too small occurs, the return value is zero. To get extended error information, call the CommDlgExtendedError function, which can return one of the following values: ",
+    "remarks": "The Explorer-style Save dialog box that provides user-interface features that are similar to the Windows Explorer. You can provide an OFNHookProc hook procedure for an Explorer-style Save dialog box. To enable the hook procedure, set the OFN_EXPLORER and OFN_ENABLEHOOK flags in the  Flags member of the OPENFILENAME structure and specify the address of the hook procedure in the  lpfnHook member. Windows continues to support old-style Save dialog boxes for applications that want to maintain a user-interface consistent with the old-style user-interface. To display the old-style Save dialog box, enable an OFNHookProcOldStyle hook procedure and ensure that the OFN_EXPLORER flag is not set. For an example, see Creating an Enhanced Metafile. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Common Dialog Boxes",
+    "name": "GetSaveFileName",
+    "is_callback": 0,
+    "dll": "Comdlg32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPOPENFILENAME",
+        "name": "lpofn",
+        "description": "Type: LPOPENFILENAME A pointer to an OPENFILENAME structure that contains information used to initialize the dialog box. When GetSaveFileName returns, this structure contains information about the user's file selection."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "[Starting with Windows Vista, the Open and Save As common dialog boxes have been superseded by the Common Item Dialog. We recommended that you use the Common Item Dialog API instead of these dialog boxes from the Common Dialog Box Library.]",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "If the hook procedure returns zero, the default dialog box procedure processes the message. If the hook procedure returns a nonzero value, the default dialog box procedure ignores the message. For the CDN_SHAREVIOLATION and CDN_FILEOK notification messages, the hook procedure should return a nonzero value to indicate that it has used the SetWindowLong function to set a nonzero DWL_MSGRESULT value. ",
+    "remarks": "If you do not specify the OFN_EXPLORER flag when you create an Open or Save As dialog box, and you want a hook procedure, you must use an old-style OFNHookProcOldStyle hook procedure. In this case, the dialog box will have the old-style user interface. When you use the GetOpenFileName or GetSaveFileName functions to create an Explorer-style Open or Save As dialog box, you can provide an OFNHookProc hook procedure. To enable the hook procedure, use the OPENFILENAME structure that you passed to the dialog creation function. Specify the pointer to the hook procedure in the  lpfnHook member and specify the OFN_ENABLEHOOK flag in the  Flags member. If you provide a hook procedure for an Explorer-style common dialog box, the system creates a dialog box that is a child of the default dialog box. The hook procedure acts as the dialog procedure for the child dialog. This child dialog is based on the template you specified in the OPENFILENAME structure, or it is a default child dialog if no template is specified. The child dialog is created when the default dialog procedure is processing its WM_INITDIALOG message. After the child dialog processes its own WM_INITDIALOG message, the default dialog procedure moves the standard controls, if necessary, to make room for any additional controls of the child dialog. The system then sends the CDN_INITDONE notification message to the hook procedure. The hook procedure does not receive messages intended for the standard controls of the default dialog box. You can subclass the standard controls, but this is discouraged because it may make your application incompatible with later versions. However, the Explorer-style common dialog boxes provide a set of messages that the hook procedure can use to monitor and control the dialog. These include a set of notification messages sent from the dialog, as well as messages that you can send to retrieve information from the dialog. For a complete list of these messages, see Explorer-Style Hook Procedures. If the hook procedure processes the WM_CTLCOLORDLG message, it must return a valid brush handle to painting the background of the dialog box. In general, if it processes any WM_CTLCOLOR* message, it must return a valid brush handle to painting the background of the specified control. Do not call the EndDialog function from the hook procedure. Instead, the hook procedure can call the PostMessage function to post a  WM_COMMAND message with the IDCANCEL value to the dialog box procedure. Posting IDCANCEL closes the dialog box and causes the dialog box function to return FALSE. If you need to know why the hook procedure closed the dialog box, you must provide your own communication mechanism between the hook procedure and your application. ",
+    "return_type": "UINT_PTR CALLBACK",
+    "category": "Common Dialog Boxes",
+    "name": "OFNHookProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hdlg",
+        "description": "A handle to the child dialog box of the Open or Save As dialog box. Use the GetParent function to get the handle to the Open or Save As dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uiMsg",
+        "description": "The identifier of the message being received."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter. If the uiMsg parameter indicates the WM_INITDIALOG message, lParam is a pointer to an OPENFILENAME structure containing the values specified when the dialog box was created."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "[Starting with Windows Vista, the Open and Save As common dialog boxes have been superseded by the Common Item Dialog. We recommended that you use the Common Item Dialog API instead of these dialog boxes from the Common Dialog Box Library.]",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "If the hook procedure returns zero, the default dialog box procedure processes the message. If the hook procedure returns a nonzero value, the default dialog box procedure ignores the message. ",
+    "remarks": "If you specify the OFN_EXPLORER flag when you create an Open or Save As dialog box, and you want a hook procedure, you must use an Explorer-style OFNHookProc hook procedure. When you use the GetOpenFileName or GetSaveFileName functions to create an old-style Open or Save As dialog box, you can provide an OFNHookProcOldStyle hook procedure. To enable the hook procedure, use the OPENFILENAME structure that you passed to the dialog creation function. Specify the pointer to the hook procedure in the  lpfnHook member and specify the OFN_ENABLEHOOK flag in the  Flags member. The default dialog box procedure processes the WM_INITDIALOG message before passing it to the hook procedure. For all other messages, the hook procedure receives the message first. Then, the return value of the hook procedure determines whether the default dialog procedure processes the message or ignores it. If the hook procedure processes the  WM_CTLCOLORDLG message, it must return a valid brush handle to painting the background of the dialog box. In general, if the hook procedure processes any WM_CTLCOLOR* message, it must return a valid brush handle to painting the background of the specified control. Do not call the EndDialog function from the hook procedure. Instead, the hook procedure can call the PostMessage function to post a  WM_COMMAND message with the IDABORT value to the dialog box procedure. Posting IDABORT closes the dialog box and causes the dialog box function to return FALSE. If you need to know why the hook procedure closed the dialog box, you must provide your own communication mechanism between the hook procedure and your application. You can subclass the standard controls of a common dialog box. However, the dialog box procedure may also subclass the controls. Because of this, you should subclass controls when your hook procedure processes the WM_INITDIALOG message. This ensures that your subclass procedure receives the control-specific messages before the subclass procedure set by the dialog box procedure. ",
+    "return_type": "UINT_PTR CALLBACK",
+    "category": "Common Dialog Boxes",
+    "name": "OFNHookProcOldStyle",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hdlg",
+        "description": "A handle to the Open or Save As dialog box for which the message is intended."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uiMsg",
+        "description": "The identifier of the message being received."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter. If the uiMsg parameter indicates the WM_INITDIALOG message, lParam is a pointer to an OPENFILENAME structure containing the values specified when the dialog box was created."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Receives messages that allow you to customize drawing of the sample page in the Page Setup dialog box. The PagePaintHook hook procedure is an application-defined or library-defined callback function used with the PageSetupDlg function.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "If the hook procedure returns TRUE for any of the first three messages of a drawing sequence (WM_PSD_PAGESETUPDLG, WM_PSD_FULLPAGERECT, or WM_PSD_MINMARGINRECT), the dialog box sends no more messages and does not draw in the sample page until the next time the system needs to redraw the sample page. If the hook procedure returns FALSE for all three messages, the dialog box sends the remaining messages of the drawing sequence. If the hook procedure returns TRUE for any of the remaining messages in a drawing sequence, the dialog box does not draw the corresponding portion of the sample page. If the hook procedure returns FALSE for any of these messages, the dialog box draws that portion of the sample page. ",
+    "remarks": "The Page Setup dialog box includes an image of a sample page that shows how the user's selections affect the appearance of the printed output. The image consists of a rectangle that represents the selected paper or envelope type, with a dotted-line rectangle representing the current margins, and partial (Greek text) characters to show how text looks on the printed page. When you use the PageSetupDlg function to create a Page Setup dialog box, you can provide a PagePaintHook hook procedure to customize the appearance of the sample page. To enable the hook procedure, use the PAGESETUPDLG structure that you passed to the creation function. Specify the pointer to the hook procedure in the  lpfnPagePaintHook member and specify the PSD_ENABLEPAGEPAINTHOOK flag in the  Flags member. Whenever the dialog box is about to draw the contents of the sample page, the hook procedure receives the following messages in the order in which they are listed.  ",
+    "return_type": "UINT_PTR CALLBACK",
+    "category": "Common Dialog Boxes",
+    "name": "PagePaintHook",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hdlg",
+        "description": "A handle to the Page Setup dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uiMsg",
+        "description": "The identifier of the message being received."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Creates a Page Setup dialog box that enables the user to specify the attributes of a printed page. These attributes include the paper size and source, the page orientation (portrait or landscape), and the width of the page margins.",
+    "library": "Comdlg32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "Type: BOOL If the user clicks the  \t\t\t\t\t\tOK button, the return value is nonzero. The members of the PAGESETUPDLG structure pointed to by the  \t\t\t\t\t\tlppsd parameter indicate the user's selections. If the user cancels or closes the  \t\t\t\t\t\tPage Setup dialog box or an error occurs, the return value is zero. To get extended error information, use the CommDlgExtendedError function Note that the values of  \t\t\t\t\t\thDevMode and  \t\t\t\t\t\thDevNames in PAGESETUPDLG may change when they are passed into PageSetupDlg. This is because these members are filled on both input and output. ",
+    "remarks": "Starting with Windows Vista, the PageSetupDlg does not contain the Printer button. To switch printer selection, use PrintDlg or PrintDlgEx. For an example, see Setting Up the Printed Page. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Common Dialog Boxes",
+    "name": "PageSetupDlg",
+    "is_callback": 0,
+    "dll": "Comdlg32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPPAGESETUPDLG",
+        "name": "lppsd",
+        "description": "Type: LPPAGESETUPDLG A pointer to a PAGESETUPDLG structure that contains information used to initialize the dialog box. The structure receives information about the user's selections when the function returns."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Receives messages or notifications intended for the default dialog box procedure of the Page Setup dialog box. The PageSetupHook hook procedure is an application-defined or library-defined callback function used with the PageSetupDlg function.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "If the hook procedure returns zero, the default dialog box procedure processes the message. If the hook procedure returns a nonzero value, the default dialog box procedure ignores the message. ",
+    "remarks": "When you use the PageSetupDlg function to create a Page Setup dialog box, you can provide a PageSetupHook hook procedure to process messages or notifications intended for the dialog box procedure. To enable the hook procedure, use the PAGESETUPDLG structure that you passed to the dialog creation function. Specify the pointer to the hook procedure in the  lpfnPageSetupHook member and specify the PSD_ENABLEPAGESETUPHOOK flag in the  Flags member. The default dialog box procedure processes the WM_INITDIALOG message before passing it to the hook procedure. For all other messages, the hook procedure receives the message first. Then, the return value of the hook procedure determines whether the default dialog procedure processes the message or ignores it. If the hook procedure processes the WM_CTLCOLORDLG message, it must return a valid brush handle to painting the background of the dialog box. In general, if the hook procedure processes any WM_CTLCOLOR* message, it must return a valid brush handle to painting the background of the specified control. Do not call the EndDialog function from the hook procedure. Instead, the hook procedure can call the PostMessage function to post a  WM_COMMAND message with the IDABORT value to the dialog box procedure. Posting IDABORT closes the dialog box and causes the dialog box function to return FALSE. If you need to know why the hook procedure closed the dialog box, you must provide your own communication mechanism between the hook procedure and your application. You can subclass the standard controls of a common dialog box. However, the dialog box procedure may also subclass the controls. Because of this, you should subclass controls when your hook procedure processes the WM_INITDIALOG message. This ensures that your subclass procedure receives the control-specific messages before the subclass procedure set by the dialog box procedure. ",
+    "return_type": "UINT_PTR CALLBACK",
+    "category": "Common Dialog Boxes",
+    "name": "PageSetupHook",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hdlg",
+        "description": "A handle to the Page Setup dialog box for which the message is intended."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uiMsg",
+        "description": "The identifier of the message being received."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter.  If the uiMsg parameter indicates the WM_INITDIALOG message, lParam is a pointer to a PAGESETUPDLG structure containing the values specified when the dialog box was created."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[PrintDlg is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use PrintDlgEx or PageSetupDlg.]",
+    "library": "Comdlg32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "Type: BOOL If the user clicks the  \t\t\t\t\t\tOK button, the return value is nonzero. The members of the PRINTDLG structure pointed to by the  \t\t\t\t\t\tlppd parameter indicate the user's selections. If the user canceled or closed the  \t\t\t\t\t\tPrint or  \t\t\t\t\t\tPrinter Setup dialog box or an error occurred, the return value is zero. To get extended error information, use the CommDlgExtendedError function. If the user canceled or closed the dialog box, CommDlgExtendedError returns zero; otherwise, it returns one of the following values. ",
+    "remarks": "If the hook procedure (pointed to by the  lpfnPrintHook or  lpfnSetupHook member of the PRINTDLG structure) processes the WM_CTLCOLORDLG message, the hook procedure must return a handle to the brush that should be used to paint the control background. Note that the values of  hDevMode and  hDevNames in PRINTDLG may change when they are passed into PrintDlg. This is because these members are filled on both input and output. To switch printer selection, use PrintDlg or PrintDlgEx. Windows Server 2003, Windows XP, and Windows 2000:  To switch printer selection, use the Printer button Known issue: If PD_RETURNDC is set but PD_USEDEVMODECOPIESANDCOLLATE flag is not set, the PrintDlgEx and PrintDlg  functions return incorrect number of copies. To get the correct number of copies, ensure that the calling application always uses PD_USEDEVMODECOPIESANDCOLLATE with PD_RETURNDC. For an example, see Displaying the Print Dialog Box. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Common Dialog Boxes",
+    "name": "PrintDlg",
+    "is_callback": 0,
+    "dll": "Comdlg32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPPRINTDLG",
+        "name": "lppd",
+        "description": "Type: LPPRINTDLG A pointer to a PRINTDLG structure that contains information used to initialize the dialog box. When PrintDlg returns, this structure contains information about the user's selections."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Displays a Print property sheet that enables the user to specify the properties of a particular print job. A Print property sheet has a General page that contains controls similar to the Print dialog box. The property sheet can also have additional application-specific and driver-specific property pages as well as the General page.",
+    "library": "Comdlg32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "Type: HRESULT If the function succeeds, the return value is S_OK and the  \t\t\t\t\t\tdwResultAction member of the PRINTDLGEX structure contains one of the following values.  If the function fails, the return value may be one of the following COM error codes. For more information, see Error Handling.  ",
+    "remarks": "The values of  hDevMode and  hDevNames in PRINTDLGEX may change when they are passed into PrintDlgEx. This is because these members are filled on both input and output. Be sure to free the memory allocated for these members If PD_RETURNDC is set but PD_USEDEVMODECOPIESANDCOLLATE flag is not set, the PrintDlg and PrintDlgEx functions return incorrect number of copies. To get the correct number of copies, ensure that the calling application always uses PD_USEDEVMODECOPIESANDCOLLATE with PD_RETURNDC. For more information, see Print Property Sheet. For an example, see Using the Print Property Sheet. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Common Dialog Boxes",
+    "name": "PrintDlgEx",
+    "is_callback": 0,
+    "dll": "Comdlg32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPPRINTDLGEX",
+        "name": "lppd",
+        "description": "Type: LPPRINTDLGEX A pointer to a PRINTDLGEX structure that contains information used to initialize the property sheet. When PrintDlgEx returns, this structure contains information about the user's selections. This structure must be declared dynamically using a memory allocation function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Receives messages or notifications intended for the default dialog box procedure of the Print dialog box. This is an application-defined or library-defined callback function that is used with the PrintDlg function.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "If the hook procedure returns zero, the default dialog box procedure processes the message. If the hook procedure returns a nonzero value, the default dialog box procedure ignores the message. ",
+    "remarks": "When you use the PrintDlg function to create a Print dialog box, you can provide a PrintHookProc hook procedure to process messages or notifications intended for the dialog box procedure. To enable the hook procedure, use the PRINTDLG structure that you passed to the dialog creation function. Specify the address of the hook procedure in the  lpfnPrintHook member and specify the PD_ENABLEPRINTHOOK flag in the  Flags member. The default dialog box procedure processes the WM_INITDIALOG message before passing it to the hook procedure. For all other messages, the hook procedure receives the message first. Then, the return value of the hook procedure determines whether the default dialog procedure processes the message or ignores it. If the hook procedure processes the WM_CTLCOLORDLG message, it must return a valid brush handle to painting the background of the dialog box. In general, if the hook procedure processes any WM_CTLCOLOR* message, it must return a valid brush handle to painting the background of the specified control. Do not call the EndDialog function from the hook procedure. Instead, the hook procedure can call the PostMessage function to post a  WM_COMMAND message with the IDABORT value to the dialog box procedure. Posting IDABORT closes the dialog box and causes the dialog box function to return FALSE. If you need to know why the hook procedure closed the dialog box, you must provide your own communication mechanism between the hook procedure and your application. You can subclass the standard controls of a common dialog box. However, the dialog box procedure may also subclass the controls. Because of this, you should subclass controls when your hook procedure processes the WM_INITDIALOG message. This ensures that your subclass procedure receives the control-specific messages before the subclass procedure set by the dialog box procedure. ",
+    "return_type": "UINT_PTR CALLBACK",
+    "category": "Common Dialog Boxes",
+    "name": "PrintHookProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hdlg",
+        "description": "A handle to the Print dialog box for which the message is intended."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uiMsg",
+        "description": "The identifier of the message being received."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter.  If the uiMsg parameter indicates the WM_INITDIALOG message, lParam is a pointer to a PRINTDLG structure containing the values specified when the dialog box was created."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Creates a system-defined modeless dialog box that lets the user specify a string to search for and a replacement string, as well as options to control the find and replace operations.",
+    "library": "Comdlg32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "Type: HWND If the function succeeds, the return value is the window handle to the dialog box. You can use the window handle to communicate with the dialog box or close it. If the function fails, the return value is NULL. To get extended error information, call the CommDlgExtendedError function, which can return one of the following error codes: ",
+    "remarks": "The ReplaceText function does not perform a text replacement operation. Instead, the dialog box sends FINDMSGSTRING registered messages to the window procedure of the owner window of the dialog box. When you create the dialog box, the  hwndOwner member of the FINDREPLACE structure is a handle to the owner window. Before calling ReplaceText, you must call the RegisterWindowMessage function to get the identifier for the FINDMSGSTRING message. The dialog box procedure uses this identifier to send messages when the user clicks the Find Next, Replace, or Replace All buttons, or when the dialog box is closing. The  lParam parameter of a FINDMSGSTRING message contains a pointer to the FINDREPLACE structure. The  Flags member of this structure indicates the event that caused the message. Other members of the structure indicate the user's input. If you create a Replace dialog box, you must also use the IsDialogMessage function in the main message loop of your application to ensure that the dialog box correctly processes keyboard input, such as the TAB and ESC keys. The IsDialogMessage function returns a value that indicates whether the Replace dialog box processed the message. You can provide an FRHookProc hook procedure for a Replace dialog box. The hook procedure can process messages sent to the dialog box. To enable a hook procedure, set the FR_ENABLEHOOK flag in the  Flags member of the FINDREPLACE structure and specify the address of the hook procedure in the  lpfnHook member. ",
+    "return_type": "HWND WINAPI",
+    "category": "Common Dialog Boxes",
+    "name": "ReplaceText",
+    "is_callback": 0,
+    "dll": "Comdlg32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPFINDREPLACE",
+        "name": "lpfr",
+        "description": "Type: LPFINDREPLACE A pointer to a FINDREPLACE structure that contains information used to initialize the dialog box. The dialog box uses this structure to send information about the user's input to your application. For more information, see the following Remarks section."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "An application-defined or library-defined callback function used with the PrintDlg function. The hook procedure receives messages or notifications intended for the default dialog box procedure of the Print Setup dialog box.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Commdlg.h (include Windows.h)",
+    "return_value": "If the hook procedure returns zero, the default dialog box procedure processes the message. If the hook procedure returns a nonzero value, the default dialog box procedure ignores the message. ",
+    "remarks": "The Print Setup dialog box has been superseded by the Page Setup dialog box, which should be used by new applications. However, for compatibility, the PrintDlg function continues to support display of the Print Setup dialog box. You can provide a SetupHookProc hook procedure for the Print Setup dialog box to process messages or notifications intended for the dialog box procedure. To enable the hook procedure, use the PRINTDLG structure that you passed to the dialog creation function. Specify the address of the hook procedure in the  lpfnSetupHook member and specify the PD_ENABLESETUPHOOK flag in the  Flags member. The default dialog box procedure processes the WM_INITDIALOG message before passing it to the hook procedure. For all other messages, the hook procedure receives the message first. Then, the return value of the hook procedure determines whether the default dialog procedure processes the message or ignores it. If the hook procedure processes the WM_CTLCOLORDLG message, it must return a valid brush handle to painting the background of the dialog box. In general, if the hook procedure processes any WM_CTLCOLOR* message, it must return a valid brush handle to painting the background of the specified control. Do not call the EndDialog function from the hook procedure. Instead, the hook procedure can call the PostMessage function to post a  WM_COMMAND message with the IDABORT value to the dialog box procedure. Posting IDABORT closes the dialog box and causes the dialog box function to return FALSE. If you need to know why the hook procedure closed the dialog box, you must provide your own communication mechanism between the hook procedure and your application. You can subclass the standard controls of a common dialog box. However, the dialog box procedure may also subclass the controls. Because of this, you should subclass controls when your hook procedure processes the WM_INITDIALOG message. This ensures that your subclass procedure receives the control-specific messages before the subclass procedure set by the dialog box procedure. ",
+    "return_type": "UINT_PTR CALLBACK",
+    "category": "Common Dialog Boxes",
+    "name": "SetupHookProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hdlg",
+        "description": "A handle to the Print Setup dialog box for which the message is intended."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uiMsg",
+        "description": "The identifier of the message being received."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Additional information about the message. The exact meaning depends on the value of the uiMsg parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

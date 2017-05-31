@@ -1,0 +1,1291 @@
+[
+  {
+    "n_arguments": 0,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "This callback function does not return a value. ",
+    "remarks": "It is not necessary for the extension agent to call its own  SnmpExtensionClose entry point. This is because the SNMP service calls the extension agent's  SnmpExtensionClose function when the service unloads the extension agent from the service's address space. The extension agent can clean up allocated resources and terminate services at this time. ",
+    "return_type": "void",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpExtensionClose",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. ",
+    "remarks": "Extension agents should ignore the dwUptimeReference parameter. Instead, they should call the  SnmpSvcGetUptime function to retrieve the number of centiseconds that the Microsoft SNMP service has been running. Because the dwUptimeReference parameter stores the elapsed time as a DWORD value in milliseconds, the time can wrap to zero and reflect an inaccurate time interval. The extension agent notifies the SNMP service that it needs to send one or more traps by setting the event handle passed back in the phSubagentTrapEvent parameter to the signaled state. After this event has been signaled, the SNMP service repeatedly calls the extension agent's  SnmpExtensionTrap entry point until the function returns a value of FALSE. This indicates that the extension agent has no more traps to send. If the extension agent does not generate traps, the phSubagentTrapEvent parameter should return a value of NULL. The SNMP extension agent must allocate and deallocate resources for the trap event handle. When the SNMP service calls the  SnmpExtensionInit function, the extension agent must call the  CreateEvent function to allocate the event handle. The extension agent passes the handle to the SNMP service in the phSubagentTrapEvent parameter. When the SNMP service calls the  SnmpExtensionClose function, the extension agent must deallocate resources for the trap event handle. The SNMP service makes a copy of the  AsnObjectIdentifier structure the extension agent returns in the pFirstSupportedRegion parameter. The extension agent must allocate and deallocate the resources associated with the original structure. It can do this when the SNMP service calls the  SnmpExtensionClose function. ",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpExtensionInit",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwUptimeReference",
+        "description": "Specifies a time-zero reference for the extension agent.     Note  Extension agents should ignore this parameter. The SNMP extension agent DLL should use the  SnmpSvcGetUptime function to retrieve the number of centiseconds the SNMP service has been running. For more information, see the following Remarks section."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HANDLE",
+        "name": "*phSubagentTrapEvent",
+        "description": "Pointer to an event handle the extension agent passes back to the SNMP service. This handle is used to notify the service that the extension agent has one or more traps to send. For additional information about allocating and deallocating the event handle, see the following Remarks section."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnObjectIdentifier",
+        "name": "*pFirstSupportedRegion",
+        "description": "Pointer to an  AsnObjectIdentifier structure to receive the first MIB subtree that the extension agent supports. For additional information about allocating and deallocating resources for this structure, see the following Remarks section.     The extension agent can register additional MIB subtrees by implementing the  SnmpExtensionInitEx entry point function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the pNextSupportedRegion parameter has been initialized with an additional MIB subtree, the return value is TRUE. If there are no more MIB subtrees to register, the return value is FALSE. ",
+    "remarks": "The SNMP service repeatedly calls the  SnmpExtensionInitEx function entry point so the extension agent can register support for additional MIB subtrees. The SNMP service makes a copy of the  AsnObjectIdentifier structure the extension agent returns in the pNextSupportedRegion parameter. The extension agent must allocate and deallocate the resources associated with the original structure. It can do this when the SNMP service calls the  SnmpExtensionClose function. ",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpExtensionInitEx",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "AsnObjectIdentifier",
+        "name": "*pNextSupportedRegion",
+        "description": "Pointer to an  AsnObjectIdentifier structure to receive the next MIB subtree that the extension agent supports."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "Unless an unexpected error occurs while the SNMP extension agent is processing the value of the pAgentMgmtData parameter, the extension agent should return TRUE. If the extension agent returns FALSE, the SNMP service does not load the extension agent, and the service stops directing SNMP requests to the extension agent. ",
+    "remarks": "If the extension agent exports the  SnmpExtensionMonitor function, the SNMP service calls the function during initialization of the extension agent, immediately after the service calls the  SnmpExtensionInit and the  SnmpExtensionInitEx functions. The SNMP service dynamically updates the SNMP counters (for example, the snmpInPkts and the snmpOutNoSuchNames counters) in the array pointed to by the pAgentMgmtData parameter. In order to be able to read these values while the SNMP service is running, the extension agent must store the pointer to pAgentMgmtData. Note that an SNMP extension agent should not update the memory pointed to by the pAgentMgmtData parameter. This is because the values of the SNMP service's internal counters would no longer be valid, and the behavior of the SNMP service could become unpredictable. As long as the extension agent does not alter it, the memory pointed to by pAgentMgmtData is valid while the SNMP service is running. ",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpExtensionMonitor",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "pAgentMgmtData",
+        "description": "Pointer to an array of  AsnAny objects (structures). The number of objects, and the type and description of each object, are in accordance with RFC 1213. For more information, see the following Remarks section."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. ",
+    "remarks": "When the SNMP service receives an SNMP PDU request, it calls the  SnmpExtensionQuery function to process the request. The extension agent must follow the rules in RFC 1157 to either resolve the variable bindings or generate an error. If the extension agent cannot resolve the variable bindings on a Get Next request, it must change the name field of the  SnmpVarBind structure to the value of the object identifier immediately following that of the currently supported MIB subtree view. For example, if the extension agent supports view \".1.3.6.1.4.1.77.1\", a Get Next request on \".1.3.6.1.4.1.77.1.5.1\" would result in a modified name field of \".1.3.6.1.4.1.77.2\". This signals the SNMP service to continue the attempt to resolve the variable bindings with other extension agents. It is important to note that the SNMP service and the extension agent may need to exchange dynamically allocated memory during a call to the  SnmpExtensionQuery function. The service dynamically allocates the object identifier in each  SnmpVarBind structure it passes to the extension agent. However, the extension agent must release this memory in order to replace the object identifier when it processes a Get Next request. The extension agent allocates dynamic memory for variable-length object types. The SNMP service releases this memory after the object is placed in the response PDU. In order to avoid heap corruption and memory leaks, both the SNMP service and the extension agent must use memory allocation routines that resolve to the same heap. The extension agent must use the  SnmpUtilMemAlloc function to allocate memory that it passes to the SNMP service. It must use the  SnmpUtilMemFree function to release the memory the service passes back to the extension agent. These functions are located in the utility dynamic-link library SNMPAPI.DLL. ",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpExtensionQuery",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "bPduType",
+        "description": "Specifies the SNMP version 1 (SNMPv1) PDU request type. This parameter can be one of the following values.     ValueMeaning  SNMP_PDU_GET   Retrieve the value or values of the specified variables.   SNMP_PDU_GETNEXT   Retrieve the value or values of the lexicographic successor of the specified variable.   SNMP_PDU_SET   Write a value within a specific variable.     Note that PDU request types have been renamed. For additional information, see  SNMP Variable Types and Request PDU Types."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "SnmpVarBindList",
+        "name": "*pVarBindList",
+        "description": "Pointer to the variable bindings list."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnInteger32",
+        "name": "*pErrorStatus",
+        "description": "Pointer to a variable in which the error status result will be returned. This parameter can be one of the following values defined by SNMPv1.     ValueMeaning  SNMP_ERRORSTATUS_NOERROR   The agent reports that no errors occurred during transmission.   SNMP_ERRORSTATUS_TOOBIG   The agent could not place the results of the requested operation into a single SNMP message.   SNMP_ERRORSTATUS_NOSUCHNAME   The requested operation identified an unknown variable.   SNMP_ERRORSTATUS_BADVALUE   The requested operation tried to change a variable but it specified either a syntax or value error.   SNMP_ERRORSTATUS_READONLY   The requested operation tried to change a variable that was not allowed to change according to the community profile of the variable.   SNMP_ERRORSTATUS_GENERR   An error other than one of those listed here occurred during the requested operation."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnInteger32",
+        "name": "*pErrorIndex",
+        "description": "Pointer to a variable in which the error index result will be returned."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. ",
+    "remarks": "The SNMP service calls the  SnmpExtensionQueryEx function multiple times to process an incoming SNMP SET request. The service can call  SnmpExtensionQueryEx during the  TEST request phase, the  COMMIT request phase, the  UNDO request phase, and the  CLEANUP request phase. The SNMP service processes an SNMP SET request type by first calling the  SnmpExtensionQueryEx function with a dwRequestType of SNMP_EXTENSION_SET_TEST. The service calls each extension agent responsible for the variable bindings in the request. Each extension agent must validate the variables in the variable binding list. They can optionally store any context information required for the following requests in the variable pointed to by the pContextInfo parameter. If the TEST request fails, the service initiates a CLEANUP request. The service calls each extension agent that previously returned TRUE to the TEST request again with the  SnmpExtensionQueryEx function. The service calls each extension agent using the SNMP_EXTENSION_SET_CLEANUP dwRequestType. If all extension agents return TRUE to the TEST request, the SNMP service calls each extension agent with the  SnmpExtensionQueryEx function, using the SNMP_EXTENSION_SET_COMMIT dwRequestType. The service returns to the extension agent context information that the extension agent passed to the service. This is the context information the extension agent passed in the pContextInfo parameter during the TEST request. The extension agent can use the context information to update the values of the specified variables in an instrumentation-specific manner. If the extension agent supports rollback processing, it can update the context information in the pContextInfo parameter at this time. The SNMP service passes the information back to the extension agent during the UNDO request. If all extension agents return TRUE to the COMMIT request, the service calls each extension agent with the  SnmpExtensionQueryEx function, using the SNMP_EXTENSION_SET_CLEANUP dwRequestType. If any extension agent fails the COMMIT request, the service also initiates a CLEANUP request. The service calls each extension agent that previously returned TRUE to the COMMIT request again with the  SnmpExtensionQueryEx function. The service calls each extension agent using the SNMP_EXTENSION_SET_CLEANUP dwRequestType. The service returns to the extension agent the context information passed in the pContextInfo parameter during the TEST or COMMIT request. The extension agent must release the resources associated with the parameter at this time. If any extension agent returns FALSE to the COMMIT request, the SNMP service terminates the COMMIT request. The service calls each extension agent that returned TRUE to the COMMIT request with a dwRequestType of SNMP_EXTENSION_SET_UNDO. This signals the extension agents that the COMMIT request failed, and they must initiate rollback processing. The extension agents must attempt to reset the values of the variables of interest, back to the values they were before the COMMIT request failed. To do this, the extension agents use the context information returned in the pContextInfo parameter during the COMMIT request. If any extension agent returns FALSE to the UNDO request, the entire SET operation fails with the error code SNMP_ERRORSTATUS_UNDOFAILED. If all extension agents return TRUE to the UNDO request, the SNMP SET operation fails with the error code set by the extension agent that failed the COMMIT request. After the UNDO request the service always calls each extension agent with the  SnmpExtensionQueryEx function, using the SNMP_EXTENSION_SET_CLEANUP dwRequestType. ",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpExtensionQueryEx",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwRequestType",
+        "description": "Specifies the type of operation that the SNMP service is requesting the extension agent to perform. This parameter can be one of the following values.     ValueMeaning  SNMP_EXTENSION_GET   Retrieve the value or values of the specified variables.   SNMP_EXTENSION_GET_NEXT   Retrieve the value or values of the lexicographic successor of the specified variables.   SNMP_EXTENSION_SET_TEST   Validate the values of the specified variables. This operation maximizes the probability of a successful write during the  COMMIT request.   SNMP_EXTENSION_SET_COMMIT   Write the new values to the specified variables.   SNMP_EXTENSION_SET_UNDO   Reset the values of the specified variables to their values before the COMMIT request.   SNMP_EXTENSION_SET_CLEANUP   Release the resources allocated in previous requests and operations.     For additional information about the SET request types, that is, those that begin with SNMP_EXTENSION_SET_, see the following Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwTransactionId",
+        "description": "Specifies a DWORD variable that is the unique identifier of the incoming SNMP request PDU. The extension agent can use this value to correlate multiple calls by the SNMP service that involve the same PDU."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "SnmpVarBindList",
+        "name": "*pVarBindList",
+        "description": "Pointer to the variable binding list containing the variables of interest."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "AsnOctetString",
+        "name": "*pContextInfo",
+        "description": "Pointer to an octet string that contains user-defined context information.     The extension agent can use this parameter to store context information used during multiphase SNMP SET operations. The extension agent must release resources associated with this parameter during the  CLEANUP request. The SNMP service does not release any resources associated with this parameter. For additional information, see the following Remarks section."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnInteger32",
+        "name": "*pErrorStatus",
+        "description": "Pointer to a variable to receive the error status result. This parameter can be one of the following values defined by SNMPv2C.     Error codeMeaning  SNMP_ERRORSTATUS_NOERROR   The agent reports that no errors occurred during transmission.   SNMP_ERRORSTATUS_TOOBIG   The agent could not place the results of the requested SNMP operation into a single SNMP message.   SNMP_ERRORSTATUS_NOSUCHNAME   The requested SNMP operation identified an unknown variable.   SNMP_ERRORSTATUS_BADVALUE   The requested SNMP operation tried to change a variable but it specified either a syntax or value error.   SNMP_ERRORSTATUS_READONLY   The requested SNMP operation tried to change a variable that was not allowed to change, according to the community profile of the variable.   SNMP_ERRORSTATUS_GENERR   An error other than one of those listed here occurred during the requested SNMP operation.   SNMP_ERRORSTATUS_NOACCESS   The specified SNMP variable is not accessible.   SNMP_ERRORSTATUS_WRONGTYPE   The value specifies a type that is inconsistent with the type required for the variable.   SNMP_ERRORSTATUS_WRONGLENGTH   The value specifies a length that is inconsistent with the length required for the variable.   SNMP_ERRORSTATUS_WRONGENCODING   The value contains an Abstract Syntax Notation One (ASN.1) encoding that is inconsistent with the ASN.1 tag of the field.   SNMP_ERRORSTATUS_WRONGVALUE   The value cannot be assigned to the variable.   SNMP_ERRORSTATUS_NOCREATION   The variable does not exist, and the agent cannot create it.   SNMP_ERRORSTATUS_INCONSISTENTVALUE   The value is inconsistent with values of other managed objects.   SNMP_ERRORSTATUS_RESOURCEUNAVAILABLE   Assigning the value to the variable requires allocation of resources that are currently unavailable.   SNMP_ERRORSTATUS_COMMITFAILED   No validation errors occurred, but no variables were updated.   SNMP_ERRORSTATUS_UNDOFAILED   No validation errors occurred. Some variables were updated because it was not possible to undo their assignment.   SNMP_ERRORSTATUS_AUTHORIZATIONERROR   An authorization error occurred.   SNMP_ERRORSTATUS_NOTWRITABLE   The variable exists but the agent cannot modify it.   SNMP_ERRORSTATUS_INCONSISTENTNAME   The variable does not exist; the agent cannot create it because the named object instance is inconsistent with the values of other managed objects."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnInteger32",
+        "name": "*pErrorIndex",
+        "description": "Pointer to a variable to receive the error index result."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the  SnmpExtensionTrap function returns a trap, the return value is TRUE. The SNMP service repeatedly calls the function until it returns a value of FALSE. For additional information, see the following Remarks section. ",
+    "remarks": "The SNMP service repeatedly calls the  SnmpExtensionTrap function when the phSubagentTrapEvent event handle is set to the signaled state. This handle is passed back during the call to the  SnmpExtensionInit entry point function. The  SnmpExtensionTrap function must return TRUE to indicate that the parameters contain valid data for a single trap. The function must return FALSE to indicate that the parameters do not represent valid trap data, and to stop the service's repeated calls. Note that after the SNMP service sends a trap, it frees the memory associated with the variable binding list. It is important to note that earlier documentation stated that the extension agent should dynamically allocate memory for the enterprise object identifier because the SNMP service would attempt to release the memory after sending a trap. The service will not release the memory associated with the enterprise object identifier. It is recommended that you return a pointer to a static  AsnObjectIdentifier structure instead. ",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpExtensionTrap",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "AsnObjectIdentifier",
+        "name": "*pEnterpriseOid",
+        "description": "Pointer to an  AsnObjectIdentifier structure to receive the object identifier of the enterprise that generated the trap. The SNMP service does not free the memory for this variable."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnInteger32",
+        "name": "*pGenericTrapId",
+        "description": "Pointer to a variable to receive an indication of the generic trap. This parameter can be one of the following values.     ValueMeaning  SNMP_GENERICTRAP_COLDSTART   The agent is initializing protocol entities on the managed mode. It may alter objects in its view.   SNMP_GENERICTRAP_WARMSTART   The agent is reinitializing itself but will not alter objects within its view.   SNMP_GENERICTRAP_LINKDOWN   An attached interface has changed from the \"up\" state to the \"down\" state. The first variable identifies the interface.   SNMP_GENERICTRAP_LINKUP   An attached interface has changed from the \"down\" state to the \"up\" state. The first variable identifies the interface.   SNMP_GENERICTRAP_AUTHFAILURE   An SNMP entity has sent an SNMP message, but has falsely claimed to belong to a known community.   SNMP_GENERICTRAP_EGPNEIGHLOSS   An EGP peer has changed to the down state. The first variable identifies the IP address of the EGP peer.   SNMP_GENERICTRAP_ENTERSPECIFIC   Signals an extraordinary event that is identified in the pSpecificTrapId parameter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnInteger32",
+        "name": "*pSpecificTrapId",
+        "description": "Pointer to a variable to receive an indication of the specific trap generated."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnTimeticks",
+        "name": "*pTimeStamp",
+        "description": "Pointer to a variable to receive the time stamp. It is recommended that you initialize this parameter with the value returned by a call to the  SnmpSvcGetUptime function."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SnmpVarBindList",
+        "name": "*pVarBindList",
+        "description": "Pointer to the variable bindings list. The extension agent must allocate the memory for this parameter. The SNMP service frees the memory with a call to the  SnmpUtilVarBindListFree function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Mgmtapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Mgmtapi.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. This function may return Windows Sockets error codes. ",
+    "remarks": "Windows Server 2003:  SNMP manager applications can call  SnmpMgrClose with a NULLsession parameter to clean up the resources that are associated with a successful call to the  SnmpMgrTrapListen function. Note, however, that if your application is a DLL, it should not call  SnmpMgrClose from its  DllMain entry-point function. SnmpMgrClose must not be called when the application DLL is in the process of unloading. Windows Server 2003:  SnmpMgrClose takes longer to execute under  Windows Server 2003 when compared to an identical call under Windows 2000. Specifically, a call to this API takes up to a second to execute under Windows Server 2003, whereas the same call takes around .3 milliseconds under Windows 2000. this may cause performance problems for Windows Server 2003 SNMP applications that call  SnmpMgrOpen and SnmpMgrClose frequently. To address this problem,  create an extra SNMP manager session by calling SnmpMgrOpen on the local host during application startup, and keep it open for the duration of the application's lifetime. Closing the session manager will close all associated sessions, requiring only one call to SnmpMgrClose. Windows Server 2003 with SP1:  The above issue does not apply to Windows 2003 Service Pack 1. ",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpMgrClose",
+    "is_callback": 0,
+    "dll": "Mgmtapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPSNMP_MGR_SESSION",
+        "name": "session",
+        "description": "Pointer to an internal structure that specifies the session to close. For more information, see the following Remarks section."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Mgmtapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Mgmtapi.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. GetLastError can also return one of the following error codes.  ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpMgrCtl",
+    "is_callback": 0,
+    "dll": "Mgmtapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPSNMP_MGR_SESSION",
+        "name": "session",
+        "description": "Pointer to an internal structure that specifies the session to which the control code applies."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwCtlCode",
+        "description": "Specifies a value (a control code) that identifies the operation to perform.     Currently, MGMCTL_SETAGENTPORT is the only supported control code. Setting this code allows an SNMP management application to send requests to a remote agent that is \"listening\" for SNMP manager requests on an arbitrary port. For more information, see the lpvInBuffer and the cbInBuffer parameter descriptions."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "lpvInBuffer",
+        "description": "Pointer to the buffer that contains the input parameters required for the operation.     When you specify the MGMCTL_SETAGENTPORT control code, this parameter must point to an unsigned integer that specifies the port number on which the remote agent will \"listen\" for SNMP manager requests. The port number must be in host-byte order."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbInBuffer",
+        "description": "Specifies the size, in bytes, of the buffer pointed to by the lpvInBuffer parameter.     When you specify the MGMCTL_SETAGENTPORT control code, this parameter is equal to sizeof(UINT)."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID",
+        "name": "lpvOutBuffer",
+        "description": "Pointer to the buffer that receives the operation's output data."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "cbOutBuffer",
+        "description": "Specifies the size, in bytes, of the buffer pointed to by the lpvOutBuffer parameter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpcbBytesReturned",
+        "description": "Pointer to a variable that receives the actual size, in bytes, of the data stored in the buffer pointed to by the lpvOutBuffer parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Mgmtapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Mgmtapi.h",
+    "return_value": "If the function returns a trap, the return value is TRUE. The code for the error can be retrieved by calling SnmpGetLastError immediately after the call. You should call the  SnmpMgrGetTrap function repeatedly until it returns FALSE (zero). The function may also return the following error codes.  ",
+    "remarks": "The application must always call the  SnmpMgrTrapListen function before calling the  SnmpMgrGetTrap function. This is because the event handle pointed to by the phTrapAvailable parameter of the  SnmpMgrTrapListen function enables the event-driven acquisition of SNMP traps. The SNMP Management API signals an application's event when the SNMP Trap Service delivers a trap. The application can also poll the  SnmpMgrGetTrap function for traps at regular intervals. In this case, the application should repeatedly call  SnmpMgrGetTrap until the function returns zero. ",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpMgrGetTrap",
+    "is_callback": 0,
+    "dll": "Mgmtapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "AsnObjectIdentifier",
+        "name": "*enterprise",
+        "description": "Pointer to an  AsnObjectIdentifier structure to receive the enterprise that generated the SNMP trap."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnNetworkAddress",
+        "name": "*IPAddress",
+        "description": "Pointer to a variable to receive the address of the agent that generated the SNMP trap."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnInteger",
+        "name": "*genericTrap",
+        "description": "Pointer to a variable to receive an indicator of the generic trap. This parameter can be one of the following values.     ValueMeaning  SNMP_GENERICTRAP_COLDSTART   The agent is initializing protocol entities on the managed mode. It may alter objects in its view.   SNMP_GENERICTRAP_WARMSTART   The agent is reinitializing itself but it will not alter objects in its view.   SNMP_GENERICTRAP_LINKDOWN   An attached interface has changed from the \"up\" state to the \"down\" state. The first variable in the variable bindings list identifies the interface.   SNMP_GENERICTRAP_LINKUP   An attached interface has changed from the \"down\" state to the \"up\" state. The first variable in the variable bindings list identifies the interface.   SNMP_GENERICTRAP_AUTHFAILURE   An SNMP entity has sent an SNMP message, but it has falsely claimed to belong to a known community.   SNMP_GENERICTRAP_EGPNEIGHLOSS   An EGP peer has changed to the \"down\" state. The first variable in the variable bindings list identifies the IP address of the EGP peer.   SNMP_GENERICTRAP_ENTERSPECIFIC   An extraordinary event has occurred and it is identified in the specificTrap parameter with an enterprise-specific value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnInteger",
+        "name": "*specificTrap",
+        "description": "Pointer to a variable to receive an indication of the specific trap generated."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnTimeticks",
+        "name": "*timeStamp",
+        "description": "Pointer to a variable to receive the time stamp."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SnmpVarBindList",
+        "name": "*variableBindings",
+        "description": "Pointer to an  SnmpVarBindList structure to receive the variable bindings list."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Mgmtapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Mgmtapi.h",
+    "return_value": "If the function returns a trap, the return value is nonzero. You should call the  SnmpMgrGetTrapEx function repeatedly until it returns zero. The function may also return the following error codes.  ",
+    "remarks": "The application must always call the  SnmpMgrTrapListen function before calling the  SnmpMgrGetTrapEx function. This is because the event handle that is pointed to by the phTrapAvailable parameter of the  SnmpMgrTrapListen function enables the event-driven acquisition of SNMP traps. The SNMP Management API signals an application event when the SNMP Trap Service delivers a trap. The application can also poll the  SnmpMgrGetTrapEx function for traps at regular intervals. In this case, the application should repeatedly call  SnmpMgrGetTrapEx until the function returns zero. ",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpMgrGetTrapEx",
+    "is_callback": 0,
+    "dll": "Mgmtapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "AsnObjectIdentifier",
+        "name": "*enterprise",
+        "description": "Pointer to an  AsnObjectIdentifier structure to receive the enterprise that generated the SNMP trap."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnNetworkAddress",
+        "name": "*agentAddress",
+        "description": "Pointer to a variable to receive the address of the agent that generated the SNMP trap; this information is retrieved from the SNMP protocol data unit (PDU)."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnNetworkAddress",
+        "name": "*sourceAddress",
+        "description": "Pointer to a variable to receive the address of the agent that generated the SNMP trap; this information is retrieved from the network transport."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnInteger",
+        "name": "*genericTrap",
+        "description": "Pointer to a variable to receive an indicator of the generic trap. This parameter can be one of the following values.     ValueMeaning  SNMP_GENERICTRAP_COLDSTART   The agent is initializing protocol entities on the managed mode. It may alter objects in its view.   SNMP_GENERICTRAP_WARMSTART   The agent is reinitializing itself but it will not alter objects in its view.   SNMP_GENERICTRAP_LINKDOWN   An attached interface has changed from the up state to the down state. The first variable in the variable bindings list identifies the interface.   SNMP_GENERICTRAP_LINKUP   An attached interface has changed from the down state to the up state. The first variable in the variable bindings list identifies the interface.   SNMP_GENERICTRAP_AUTHFAILURE   An SNMP entity has sent an SNMP message, but it has falsely claimed to belong to a known community.   SNMP_GENERICTRAP_EGPNEIGHLOSS   An EGP peer has changed to the down state. The first variable in the variable bindings list identifies the IP address of the EGP peer.   SNMP_GENERICTRAP_ENTERSPECIFIC   An extraordinary event has occurred. It is identified in the specificTrap parameter with an enterprise-specific value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnInteger",
+        "name": "*specificTrap",
+        "description": "Pointer to a variable to receive an indicator of the specific trap generated."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnOctetString",
+        "name": "*community",
+        "description": "Pointer to an  AsnOctetString structure to receive the community string of the generated SNMP trap."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnTimeticks",
+        "name": "*timeStamp",
+        "description": "Pointer to a variable to receive the time stamp."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SnmpVarBindList",
+        "name": "*variableBindings",
+        "description": "Pointer to an  SnmpVarBindList structure to receive the variable bindings list."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Mgmtapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Mgmtapi.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "If the function succeeds, call the  SnmpUtilMemFree function to free the memory allocated for the converted string. ",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpMgrOidToStr",
+    "is_callback": 0,
+    "dll": "Mgmtapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "AsnObjectIdentifier",
+        "name": "*oid",
+        "description": "Pointer to an object identifier variable to convert."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSTR",
+        "name": "*string",
+        "description": "Pointer to a null-terminated string to receive the converted value."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Mgmtapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Mgmtapi.h",
+    "return_value": "If the function succeeds, the return value is a pointer to an LPSNMP_MGR_SESSION structure. This structure is used internally and the programmer should not alter it. For more information, see the following Remarks section. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. GetLastError may return the SNMP_MEM_ALLOC_ERROR error code, which indicates a memory allocation error. This function may also return Windows Sockets error codes. ",
+    "remarks": "If possible, use a host name to identify the SNMP agent in the lpAgentAddress parameter. Host names can be provided for agents only if TCP/IP is loaded and the names are TCP/IP host names. NetBIOS names cannot be supplied for IPX hosts. The name and address of the SNMP target, or the string pointed to by the lpAgentAddress parameter, should conform to one of the following forms.  Applications should not use the LPSNMP_MGR_SESSION pointer that is returned by this function to call the  SnmpMgrRequest function in the context of a different thread. ",
+    "return_type": "LPSNMP_MGR_SESSION",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpMgrOpen",
+    "is_callback": 0,
+    "dll": "Mgmtapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPSTR",
+        "name": "lpAgentAddress",
+        "description": "Pointer to a null-terminated string that specifies a host name or an IP address. The host name must resolve to an IP address, an IPX address (in 8.12 notation), or an ethernet address. See the Remarks section for the acceptable forms for host names and IP addresses."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTR",
+        "name": "lpAgentCommunity",
+        "description": "Pointer to a null-terminated string that specifies the SNMP community name to use when communicating with the agent that is identified by the lpAgentAddress parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "INT",
+        "name": "nTimeOut",
+        "description": "Specifies the communications time-out in milliseconds."
+      },
+      {
+        "in_out": "_In_",
+        "type": "INT",
+        "name": "nRetries",
+        "description": "Specifies the communications retry count. The time-out that is specified in the nTimeOut parameter is doubled each time that a retry attempt is transmitted."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Mgmtapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Mgmtapi.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is NULL. To get extended error information, call  GetLastError, which may return one of the following error codes.  ",
+    "remarks": "Retries and time-outs are supplied to the  SnmpMgrOpen function. Each variable in the variable bindings list must be initialized to type ASN_NULL for Get and Get Next requests. ",
+    "return_type": "SNMPAPI",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpMgrRequest",
+    "is_callback": 0,
+    "dll": "Mgmtapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPSNMP_MGR_SESSION",
+        "name": "session",
+        "description": "Pointer to an internal structure that specifies the session that will perform the request.     Applications should not specify the LPSNMP_MGR_SESSION pointer returned by this function in a different thread. You can specify a pointer returned by  SnmpMgrOpen, but only if the calls to  SnmpMgrOpen and  SnmpMgrRequest originate in the context of the same thread."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "requestType",
+        "description": "Specifies the SNMP request type. This parameter can be one of the following values defined by SNMPv1.     ValueMeaning  SNMP_PDU_GET   Retrieve the value or values of the specified variables.   SNMP_PDU_GETNEXT   Retrieve the value or values of the lexicographic successor of the specified variable.   SNMP_PDU_SET   Write a value within a specific variable.     Note that PDU request types have been renamed. For additional information, see  SNMP Variable Types and Request PDU Types."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "SnmpVarBindList",
+        "name": "*variableBindings",
+        "description": "Pointer to the variable bindings list.  Note  The SnmpVarBind array pointed to by the SnmpVarBindList structure must be allocated using the SnmpUtilMemAlloc function."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnInteger",
+        "name": "*errorStatus",
+        "description": "Pointer to a variable in which the error status result will be returned. This parameter can be one of the following values defined by SNMPv1.     ValueMeaning  SNMP_ERRORSTATUS_NOERROR   The agent reports that no errors occurred during transmission.   SNMP_ERRORSTATUS_TOOBIG   The agent could not place the results of the requested operation into a single SNMP message.   SNMP_ERRORSTATUS_NOSUCHNAME   The requested operation identified an unknown variable.   SNMP_ERRORSTATUS_BADVALUE   The requested operation tried to change a variable but it specified either a syntax or value error.   SNMP_ERRORSTATUS_READONLY   The requested operation tried to change a variable that was not allowed to change according to the community profile of the variable.   SNMP_ERRORSTATUS_GENERR   An error other than one of those listed here occurred during the requested operation."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnInteger",
+        "name": "*errorIndex",
+        "description": "Pointer to a variable in which the error index result will be returned."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Mgmtapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Mgmtapi.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "If the function succeeds, call the  SnmpUtilOidFree function to free the memory allocated for the converted object identifier. If an application passes a valid object identifier to  SnmpMgrStrToOid, yet is unable to obtain the requested variable, then the syntax of the system group and object identifier is incorrect. This occurs because  SnmpMgrStrToOid assumes that the object identifier is under the Internet MIB of the management subtree. You must always precede the object identifier with a period (.) to obtain the correct system group (for example, \".1.3.6.1.2.1.1\"). If an application passes the variable \"1.3.6.1.2.1.1\",  SnmpMgrStrToOid cannot interpret the object identifier correctly. ",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpMgrStrToOid",
+    "is_callback": 0,
+    "dll": "Mgmtapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPSTR",
+        "name": "string",
+        "description": "Pointer to a null-terminated string to convert."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "AsnObjectIdentifier",
+        "name": "*oid",
+        "description": "Pointer to an object identifier variable to receive the converted value."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Mgmtapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Mgmtapi.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError, which may return any of the following error codes.  This function may return other system errors as well. ",
+    "remarks": "It is important to note that for users who are not administrators, the  SnmpMgrTrapListen function succeeds only if the SNMP trap service has been started. The application must always call the  SnmpMgrTrapListen function before calling the  SnmpMgrGetTrap function. This is because the event handle pointed to by the phTrapAvailable parameter enables the event-driven acquisition of SNMP traps. The SNMP Management API signals an application's event when the SNMP Trap Service delivers a trap. The application can also poll the  SnmpMgrGetTrap function for traps at regular intervals. In this case, the application should repeatedly call  SnmpMgrGetTrap until the function returns zero. Windows Server 2003:  SNMP manager applications can call  SnmpMgrClose with a NULLsession parameter to clean up resources associated with a successful call to the  SnmpMgrTrapListen function. Note, however, that if your application is a DLL, it should not call  SnmpMgrClose from its  DllMain entry-point function. ",
+    "return_type": "BOOL",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpMgrTrapListen",
+    "is_callback": 0,
+    "dll": "Mgmtapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "HANDLE",
+        "name": "*phTrapAvailable",
+        "description": "Pointer to an event handle to receive an indication that there are traps available, and that the application should call the  SnmpMgrGetTrap function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "The function returns a DWORD value that is the number of centiseconds the SNMP service has been running. ",
+    "remarks": "An extension agent should call the  SnmpSvcGetUptime function only if the extension agent DLL is loaded within the address space of the SNMP service. The SNMP extension agent DLL is encouraged to use the  SnmpSvcGetUptime function to retrieve the number of centiseconds that the SNMP service has been running. Extension agents should use  SnmpSvcGetUptime rather than calculate the uptime using the dwUptimeReference parameter. The service passes this parameter to the extension agent as the result of a call to the  SnmpExtensionInit function. Because the dwUptimeReference parameter stores the elapsed time as a DWORD value in milliseconds, the time can wrap to zero and reflect an inaccurate time interval. An extension agent that sends traps must initialize the timeStamp parameter to the  SnmpExtensionTrap function with the value returned by a call to the  SnmpSvcGetUptime function. ",
+    "return_type": "DWORD",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpSvcGetUptime",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "Extension agents are encouraged to use the  SnmpSvcSetLogType and  SnmpSvcSetLogLevel functions during development to adjust the output of debugging information. Extension agents can integrate the information with the debug output from the SNMP service. ",
+    "return_type": "void",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpSvcSetLogLevel",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "INT",
+        "name": "nLogLevel",
+        "description": "Specifies a signed integer variable that indicates the level of detail of the debug output from the  SnmpUtilDbgPrint function. This parameter can be one of the following values.     ValueMeaning  SNMP_LOG_SILENT   Disable all debugging output.   SNMP_LOG_FATAL   Display fatal errors only.   SNMP_LOG_ERROR   Display recoverable errors.   SNMP_LOG_WARNING   Display warnings and recoverable errors.   SNMP_LOG_TRACE   Display trace information.   SNMP_LOG_VERBOSE   Display verbose trace information."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "Extension agents are encouraged to use the  SnmpSvcSetLogType and  SnmpSvcSetLogLevel functions during development to adjust the output of debugging information. Extension agents can integrate the information with the debug output from the SNMP service. ",
+    "return_type": "void",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpSvcSetLogType",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "INT",
+        "name": "nLogType",
+        "description": "Specifies a signed integer variable that represents the destination for the debug output from the  SnmpUtilDbgPrint function. This parameter can be one of the following values.     ValueMeaning  SNMP_OUTPUT_TO_CONSOLE   The destination for the debug output is a console window.   SNMP_OUTPUT_TO_LOGFILE   The destination for the debug output is the SNMPDBG.LOG file in the SYSTEM32 directory.   SNMP_OUTPUT_TO_DEBUGGER   The destination for the debug output is a debugger utility."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "Call the  SnmpUtilAsnAnyFree function to free the memory that the  SnmpUtilAsnAnyCpy function allocates for the destination structure. ",
+    "return_type": "SNMPAPI",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilAsnAnyCpy",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "AsnAny",
+        "name": "*pAnyDst",
+        "description": "Pointer to an  AsnAny structure to receive the copy."
+      },
+      {
+        "in_out": "_In_",
+        "type": "AsnAny",
+        "name": "*pAnySrc",
+        "description": "Pointer to an  AsnAny structure to copy."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "Call the  SnmpUtilAsnAnyFree function to free the memory that the  SnmpUtilAsnAnyCpy function allocates. ",
+    "return_type": "void",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilAsnAnyFree",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "AsnAny",
+        "name": "*pAny",
+        "description": "Pointer to an  AsnAny structure whose memory should be freed."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "Extension agents are encouraged to use this function during development to enable debug output from the SNMP service. Use the  SnmpSvcSetLogLevel function to set the level of detail of the debug output from the SNMP service or from an extension agent's call to the  SnmpUtilDbgPrint function. Call the  SnmpSvcSetLogType function to specify the destination for the debug output. ",
+    "return_type": "void",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilDbgPrint",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "INT",
+        "name": "nLogLevel",
+        "description": "Specifies a signed integer variable that indicates the level of detail of the log event. This parameter can be one of the following values.     ValueMeaning  SNMP_LOG_SILENT   Disable all debugging output.   SNMP_LOG_FATAL   Display fatal errors only.   SNMP_LOG_ERROR   Display recoverable errors.   SNMP_LOG_WARNING   Display warnings and recoverable errors.   SNMP_LOG_TRACE   Display trace information.   SNMP_LOG_VERBOSE   Display verbose trace information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTR",
+        "name": "szFormat",
+        "description": "Pointer to a null-terminated format string that is similar to the standard C library function printf style."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "The function returns a null-terminated string that contains the string representation of the array of numbers pointed to by the Ids parameter. The string contains a sequence of numbers separated by periods ('.'); for example, 1.3.6.1.4.1.311. If the Ids parameter is null, or if the IdLength parameter specifies zero, the function returns the string \"<null oid>\". The maximum length of the returned string is 256 characters. If the string's length exceeds 256 characters, the string is truncated and terminated with a sequence of three periods ('...'). ",
+    "remarks": "The  SnmpUtilIdsToA function can assist with the debugging of SNMP applications. Note that the following memory restrictions apply when you call  SnmpUtilIdsToA: ",
+    "return_type": "LPSTR",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilIdsToA",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "*Ids",
+        "description": "Pointer to an array of unsigned integers. The array contains the sequence of numbers that the OID contains. The IdLength parameter specifies the array's length.     For more information, see the following Return Values and Remarks sections."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "IdLength",
+        "description": "Specifies the number of elements in the array pointed to by the Ids parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the function succeeds, the return value is a pointer to the newly allocated memory object. If the function fails, the return value is NULL. ",
+    "remarks": "Use the  SnmpUtilMemFree function to release memory that the  SnmpUtilMemAlloc function allocates. ",
+    "return_type": "LPVOID",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilMemAlloc",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nBytes",
+        "description": "Specifies the number of bytes to allocate for the memory object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "Call the  SnmpUtilMemAlloc function to allocate the memory for the object. ",
+    "return_type": "void",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilMemFree",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPVOID",
+        "name": "pMem",
+        "description": "Pointer to the memory object to release."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the function succeeds, the return value is a pointer to the newly allocated memory object. If the function fails, the return value is NULL. ",
+    "remarks": "Call the  SnmpUtilMemFree function to release memory that the  SnmpUtilMemReAlloc function allocates. ",
+    "return_type": "LPVOID",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilMemReAlloc",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "pMem",
+        "description": "Pointer to the memory object to resize."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nBytes",
+        "description": "Specifies the number of bytes to allocate for the new memory object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "The function returns a value greater than zero if pOctets1 is greater than pOctets2, zero if pOctets1 equals pOctets2, and less than zero if pOctets1 is less than pOctets2. ",
+    "remarks": "The  SnmpUtilOctetsCmp function calls the  SnmpUtilOctetsNCmp function. ",
+    "return_type": "SNMPAPI",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilOctetsCmp",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "AsnOctetString",
+        "name": "*pOctets1",
+        "description": "Pointer to an  AsnOctetString structure to compare."
+      },
+      {
+        "in_out": "_In_",
+        "type": "AsnOctetString",
+        "name": "*pOctets2",
+        "description": "Pointer to a second  AsnOctetString structure to compare."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "Call the  SnmpUtilOctetsFree function to free the memory that the  SnmpUtilOctetsCpy function allocates for the destination structure. ",
+    "return_type": "SNMPAPI",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilOctetsCpy",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "AsnOctetString",
+        "name": "*pOctetsDst",
+        "description": "Pointer to an  AsnOctetString structure to receive the copy."
+      },
+      {
+        "in_out": "_In_",
+        "type": "AsnOctetString",
+        "name": "*pOctetsSrc",
+        "description": "Pointer to an  AsnOctetString structure to copy."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "Call the  SnmpUtilOctetsFree function to free the memory that the  SnmpUtilOctetsCpy function allocates. ",
+    "return_type": "void",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilOctetsFree",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "AsnOctetString",
+        "name": "*pOctets",
+        "description": "Pointer to an  AsnOctetString structure whose memory should be freed."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "The function returns a value greater than zero if pOctets1 is greater than pOctets2, zero if pOctets1 equals pOctets2, and less than zero if pOctets1 is less than pOctets2. ",
+    "remarks": "The  SnmpUtilOctetsCmp function calls the  SnmpUtilOctetsNCmp function. ",
+    "return_type": "SNMPAPI",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilOctetsNCmp",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "AsnOctetString",
+        "name": "*pOctets1",
+        "description": "Pointer to an  AsnOctetString structure to compare."
+      },
+      {
+        "in_out": "_In_",
+        "type": "AsnOctetString",
+        "name": "*pOctets2",
+        "description": "Pointer to a second  AsnOctetString structure to compare."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nChars",
+        "description": "Specifies the number of subidentifiers to compare."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. This function does not generate Windows Sockets errors. The application should call the  GetLastError function. GetLastError may return the following error codes.  ",
+    "remarks": "The  SnmpUtilOidAppend function calls the  SnmpUtilMemReAlloc function. The  SnmpUtilMemReAlloc function expands the buffer for the destination object identifier. Call the  SnmpUtilOidFree function to free memory that the  SnmpUtilOidAppend function allocates for the destination. ",
+    "return_type": "SNMPAPI",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilOidAppend",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "AsnObjectIdentifier",
+        "name": "*pOidDst",
+        "description": "Pointer to an  AsnObjectIdentifier structure to receive the source structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "AsnObjectIdentifier",
+        "name": "*pOidSrc",
+        "description": "Pointer to an  AsnObjectIdentifier structure to append."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "The function returns a value greater than zero if pOid1 is greater than pOid2, zero if pOid1 equals pOid2, and less than zero if pOid1 is less than pOid2. ",
+    "remarks": "The  SnmpUtilOidCmp function calls the  SnmpUtilOidNCmp function. ",
+    "return_type": "SNMPAPI",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilOidCmp",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "AsnObjectIdentifier",
+        "name": "*pOid1",
+        "description": "Pointer to an  AsnObjectIdentifier structure to compare."
+      },
+      {
+        "in_out": "_In_",
+        "type": "AsnObjectIdentifier",
+        "name": "*pOid2",
+        "description": "Pointer to a second  AsnObjectIdentifier structure to compare."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "Call the  SnmpUtilOidFree function to free memory that the  SnmpUtilOidCpy function allocates for the destination structure. ",
+    "return_type": "SNMPAPI",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilOidCpy",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "AsnObjectIdentifier",
+        "name": "*pOidDst",
+        "description": "Pointer to an  AsnObjectIdentifier structure to receive the copy."
+      },
+      {
+        "in_out": "_In_",
+        "type": "AsnObjectIdentifier",
+        "name": "*pOidSrc",
+        "description": "Pointer to an  AsnObjectIdentifier structure to copy."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilOidFree",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "AsnObjectIdentifier",
+        "name": "*pOid",
+        "description": "Pointer to an  AsnObjectIdentifier structure whose memory should be freed."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "The function returns a value greater than zero if pOid1 is greater than pOid2, zero if pOid1 equals pOid2, and less than zero if pOid1 is less than pOid2. ",
+    "remarks": "",
+    "return_type": "SNMPAPI",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilOidNCmp",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "AsnObjectIdentifier",
+        "name": "*pOid1",
+        "description": "Pointer to an  AsnObjectIdentifier structure to compare."
+      },
+      {
+        "in_out": "_In_",
+        "type": "AsnObjectIdentifier",
+        "name": "*pOid2",
+        "description": "Pointer to a second  AsnObjectIdentifier structure to compare."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nSubIds",
+        "description": "Specifies the number of subidentifiers to compare."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "The function returns a null-terminated string of characters that contains the string representation of the object identifier pointed to by the Oid parameter. ",
+    "remarks": "The  SnmpUtilOidToA function can assist with the debugging of SNMP applications. For more information, see the  SnmpUtilIdsToA function.  SnmpUtilOidToA calls  SnmpUtilIdsToA internally to format the string. ",
+    "return_type": "LPSTR",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilOidToA",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "AsnObjectIdentifier",
+        "name": "*Oid",
+        "description": "Pointer to an  AsnObjectIdentifier structure to convert."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "Use the  SnmpUtilPrintAsnAny function for debugging and development purposes. This function does not generally print the data in a form that a manager application would typically need. ",
+    "return_type": "void",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilPrintAsnAny",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "AsnAny",
+        "name": "*pAny",
+        "description": "Pointer to an  AsnAny structure for a value to print."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The  SnmpUtilPrintOid function can assist with the debugging of command-line SNMP applications. The function prints the object identifier as a sequence of numbers separated by periods ('.'); for example, 1.3.6.1.4.1.311. ",
+    "return_type": "void",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilPrintOid",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "AsnObjectIdentifier",
+        "name": "*Oid",
+        "description": "Pointer to an  AsnObjectIdentifier structure to print."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "Call the  SnmpUtilVarBindFree function to free memory that the  SnmpUtilVarBindCpy function allocates for the destination structure. ",
+    "return_type": "SNMPAPI",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilVarBindCpy",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "SnmpVarBind",
+        "name": "*pVbDst",
+        "description": "Pointer to an  SnmpVarBind structure to receive the copy."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SnmpVarBind",
+        "name": "*pVbSrc",
+        "description": "Pointer to an  SnmpVarBind structure to copy."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "Call the  SnmpUtilVarBindListFree function to free memory that the  SnmpUtilVarBindListCpy function allocates for the destination structure. ",
+    "return_type": "SNMPAPI",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilVarBindListCpy",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "SnmpVarBindList",
+        "name": "*pVblDst",
+        "description": "Pointer to an  SnmpVarBindList structure to receive the copy."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SnmpVarBindList",
+        "name": "*pVblSrc",
+        "description": "Pointer to an  SnmpVarBindList structure to copy."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilVarBindFree",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "SnmpVarBind",
+        "name": "*pVb",
+        "description": "Pointer to an  SnmpVarBind structure whose memory should be freed."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SNMP is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use Windows Remote Management, which is the Microsoft implementation of WS-Man.]",
+    "library": "Snmpapi.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Snmp.h",
+    "return_value": "This function has no return values. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Simple Network Management Protocol (SNMP)",
+    "name": "SnmpUtilVarBindListFree",
+    "is_callback": 0,
+    "dll": "Snmpapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "SnmpVarBindList",
+        "name": "*pVbl",
+        "description": "Pointer to an  SnmpVarBindList structure whose allocated memory should be freed."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

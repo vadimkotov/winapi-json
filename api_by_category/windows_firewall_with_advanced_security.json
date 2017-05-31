@@ -1,0 +1,323 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "The NetworkIsolationDiagnoseConnectFailureAndGetInfo function gets information about a network isolation connection failure due to a missing capability. This function can be used to identify the capabilities required to connect to a server.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Netfw.h",
+    "return_value": "Type: DWORD Returns ERROR_SUCCESS if successful, or an error value otherwise. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Windows Firewall with Advanced Security",
+    "name": "NetworkIsolationDiagnoseConnectFailureAndGetInfo",
+    "is_callback": 0,
+    "dll": "Firewallapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "wszServerName",
+        "description": "Type: LPCWSTR Name (or IP address literal string) of the server to which a connection was attempted."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "NETISO_ERROR_TYPE",
+        "name": "*netIsoError",
+        "description": "Type: NETISO_ERROR_TYPE* The error that has occurred, indicating which network capability was missing and thus caused the failure."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The NetworkIsolationEnumAppContainers function enumerates all of the app containers that have been created in the system.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Netfw.h",
+    "return_value": "Type: DWORD Returns ERROR_SUCCESS if successful, or an error value otherwise. ERROR_OUTOFMEMORY will be returned if memory is unavailable. ",
+    "remarks": "If no app containers are installed on the system, ERROR_SUCCESS will still be returned (and ppPublicAppCs will be empty). ",
+    "return_type": "DWORD",
+    "category": "Windows Firewall with Advanced Security",
+    "name": "NetworkIsolationEnumAppContainers",
+    "is_callback": 0,
+    "dll": "Firewallapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Flags",
+        "description": "Type: DWORD May be set to NETISO_FLAG_FORCE_COMPUTE_BINARIES to ensure that all binaries are computed before the app container is returned. This flag should be set if the caller requires up-to-date and complete information on app container binaries. If this flag is not set, returned data may be stale or incomplete.  See NETISO_FLAG for more information."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*pdwNumPublicAppCs",
+        "description": "Type: DWORD* The number of app containers in the ppPublicAppCs member."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PINET_FIREWALL_APP_CONTAINER",
+        "name": "*ppPublicAppCs",
+        "description": "Type: PINET_FIREWALL_APP_CONTAINER* The list of app container structure elements."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The NetworkIsolationEnumerateAppContainerRules function enumerates all of the rules related to app containers.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Netfw.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Windows Firewall with Advanced Security",
+    "name": "NetworkIsolationEnumerateAppContainerRules",
+    "is_callback": 0,
+    "dll": "Firewallapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "IEnumVARIANT",
+        "name": "**newEnum",
+        "description": "Type: IEnumVARIANT** Enumerator interface of an INetFwRule3 object that represents the rules enforcing app containers."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The NetworkIsolationFreeAppContainers function is used to release memory resources allocated to one or more app containers",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Netfw.h",
+    "return_value": "Type: DWORD Returns ERROR_SUCCESS if successful, or an error value otherwise. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Windows Firewall with Advanced Security",
+    "name": "NetworkIsolationFreeAppContainers",
+    "is_callback": 0,
+    "dll": "Firewallapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PINET_FIREWALL_APP_CONTAINER",
+        "name": "pPublicAppCs",
+        "description": "Type: PINET_FIREWALL_APP_CONTAINER The app container memory resources to be freed."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The NetworkIsolationGetAppContainerConfig function is used to retrieve configuration information about one or more app containers.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Netfw.h",
+    "return_value": "Type: DWORD Returns ERROR_SUCCESS if successful, or an error value otherwise. ",
+    "remarks": "Note that it is the calling program's responsibility to free the memory associated with the PSID_AND_ATTRIBUTES structure. The following code sample shows how to call this function. The FreeAppContainerConfig function shows how to free all of the associated memory. ",
+    "return_type": "DWORD",
+    "category": "Windows Firewall with Advanced Security",
+    "name": "NetworkIsolationGetAppContainerConfig",
+    "is_callback": 0,
+    "dll": "Firewallapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*pdwNumPublicAppCs",
+        "description": "Type: DWORD* The number of app containers in the appContainerSids member."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PSID_AND_ATTRIBUTES",
+        "name": "*appContainerSids",
+        "description": "Type: PSID_AND_ATTRIBUTES* The security identifiers (SIDs) of app containers that are allowed to send loopback traffic. Used for debugging purposes."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The NetworkIsolationRegisterForAppContainerChanges function is used to register for the delivery of notifications regarding changes to an app container.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Netfw.h",
+    "return_value": "Type: DWORD Returns ERROR_SUCCESS if successful, or an error value otherwise. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Windows Firewall with Advanced Security",
+    "name": "NetworkIsolationRegisterForAppContainerChanges",
+    "is_callback": 0,
+    "dll": "Firewallapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "flags",
+        "description": "Type: DWORD A bitmask value of control flags which specify when to receive notifications. May contain one or more of the following flags.   ValueMeaning  INET_FIREWALL_AC_NONE 0x00   No notifications will be delivered.   INET_FIREWALL_AC_PACKAGE_ID_ONLY  0x01   Notifications will be delivered when an app container is created with a package identifier.   INET_FIREWALL_AC_BINARY 0x02   Notifications will be delivered when  an app container is created with a binary path.   INET_FIREWALL_AC_MAX 0x04   Maximum value for testing purposes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PAC_CHANGES_CALLBACK_FN",
+        "name": "callback",
+        "description": "Type: PAC_CHANGES_CALLBACK_FN Function pointer that will be invoked when a notification is ready for delivery."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "context",
+        "description": "Type: PVOID Optional context pointer. This pointer is passed to the callback function along with details of the change."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HANDLE",
+        "name": "*registrationObject",
+        "description": "Type: HANDLE* Handle to the newly created registration."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The NetworkIsolationSetAppContainerConfig function is used to set the configuration of one or more app containers.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Netfw.h",
+    "return_value": "Type: DWORD Returns ERROR_SUCCESS if successful, or an error value otherwise. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Windows Firewall with Advanced Security",
+    "name": "NetworkIsolationSetAppContainerConfig",
+    "is_callback": 0,
+    "dll": "Firewallapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNumPublicAppCs",
+        "description": "Type: DWORD The number of app containers in the appContainerSids member."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSID_AND_ATTRIBUTES",
+        "name": "appContainerSids",
+        "description": "Type: PSID_AND_ATTRIBUTES The security identifiers (SIDs) of app containers that are allowed to send loopback traffic. Used for debugging purposes."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "The NetworkIsolationSetupAppContainerBinaries function is used by software installers to provide information about the image paths of applications that are running in an app container.   This information is provided to third-party firewall applications about the applications in order to enhance user experience and security decisions.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Netfw.h",
+    "return_value": "Type: HRESULT If the function succeeds, it returns S_OK. If the function fails, it returns an HRESULT value that indicates the error. For a list of common error codes, see Common HRESULT Values. ",
+    "remarks": "Applications creating an app container can use NetworkIsolationSetupAppContainerBinaries to provide third-party firewall applications with  the direct path to applications running inside that app container. ",
+    "return_type": "HRESULT",
+    "category": "Windows Firewall with Advanced Security",
+    "name": "NetworkIsolationSetupAppContainerBinaries",
+    "is_callback": 0,
+    "dll": "Firewallapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PSID",
+        "name": "applicationContainerSid",
+        "description": "Type: PSID The package identifier of the app container."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "packageFullName",
+        "description": "Type: LPCWSTR A string representing the package identity of the app that owns this app container. Contains the 5-part tuple as individual fields (name, version, architecture, resourceid, publisher)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "packageFolder",
+        "description": "Type: LPCWSTR The file location of the app that owns this app container."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "displayName",
+        "description": "Type: LPCWSTR The friendly name of the app container."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bBinariesFullyComputed",
+        "description": "Type: BOOL True if the binary files are being provided by the caller; otherwise, false."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "*binaries",
+        "description": "Type: LPCWSTR* An array of paths to the applications running in the app container."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "binariesCount",
+        "description": "Type: DWORD The number of paths contained in the binaries parameter."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The NetworkIsolationUnregisterForAppContainerChanges function  is used to cancel an app container change registration and stop receiving notifications.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Netfw.h",
+    "return_value": "Type: DWORD Returns ERROR_SUCCESS if successful, or an error value otherwise. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Windows Firewall with Advanced Security",
+    "name": "NetworkIsolationUnregisterForAppContainerChanges",
+    "is_callback": 0,
+    "dll": "Firewallapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "registrationObject",
+        "description": "Type: HANDLE Handle to the previously created registration."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The PAC_CHANGES_CALLBACK_FN  function is used to add custom behavior to the app container change notification process.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Netfw.h",
+    "return_value": "This function pointer does not return a value. ",
+    "remarks": "Call NetworkIsolationRegisterForAppContainerChanges to register this callback function. ",
+    "return_type": "typedef void (",
+    "category": "Windows Firewall with Advanced Security",
+    "name": "PAC_CHANGES_CALLBACK_FN pointer",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "void",
+        "name": "*context",
+        "description": "Type: void* Optional context pointer. It contains the value of the context parameter of the NetworkIsolationRegisterForAppContainerChanges function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const INET_FIREWALL_AC_CHANGE",
+        "name": "*pChange",
+        "description": "Type: const INET_FIREWALL_AC_CHANGE* The app container change information."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  }
+]
+

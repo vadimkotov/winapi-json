@@ -1,0 +1,38 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "The LVGroupCompare function is an application-defined callback function used with the LVM_INSERTGROUPSORTED and LVM_SORTGROUPS messages. It defines the ordering of the groups, based on the ID. The  \t\t\tLVGROUPCOMPARE type defines a pointer to this callback function. LVGroupCompare is a placeholder for the application-defined function name.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Commctrl.h",
+    "return_value": "Type: INT Returns a negative value if the data for Group1_ID is less than the data for Group2_ID, a positive value if it is greater, or zero if it is the same. ",
+    "remarks": "",
+    "return_type": "INT",
+    "category": "List-View Controls",
+    "name": "LVGroupCompare",
+    "is_callback": 0,
+    "dll": "Comctl32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "INT",
+        "name": "Group1_ID",
+        "description": "Type: INT The ID of the first group."
+      },
+      {
+        "in_out": "_In_",
+        "type": "INT",
+        "name": "Group2_ID",
+        "description": "Type: INT The ID of the second group."
+      },
+      {
+        "in_out": "_In_",
+        "type": "VOID",
+        "name": "*pvData",
+        "description": "Type: VOID* A pointer to the application-defined information. This comes from the message that was called; for LVM_INSERTGROUPSORTED it is LVINSERTGROUPSORTED.pvData, and for LVM_SORTGROUPS it is the plv parameter."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

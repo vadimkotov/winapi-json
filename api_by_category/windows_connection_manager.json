@@ -1,0 +1,202 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "The WcmFreeMemory function is used to release memory resources allocated by the WCM functions.",
+    "library": "Wcmapi.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Wcmapi.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID WINAPI",
+    "category": "Windows Connection Manager",
+    "name": "WcmFreeMemory",
+    "is_callback": 0,
+    "dll": "Wcmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "PVOID",
+        "name": "pMemory",
+        "description": "Pointer to the memory to be freed."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The WcmGetProfileList function retrieves a list of profiles in preferred order, descending from the most preferred to the least preferred. The list includes all WCM-managed auto-connect profiles across all WCM-managed media types.",
+    "library": "Wcmapi.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Wcmapi.h",
+    "return_value": "Type: DWORD Returns ERROR_SUCCESS if successful, or an error value otherwise. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Windows Connection Manager",
+    "name": "WcmGetProfileList",
+    "is_callback": 0,
+    "dll": "Wcmapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Reserved_",
+        "type": "PVOID",
+        "name": "pReserved",
+        "description": "Type: PVOID Reserved."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWCM_PROFILE_INFO_LIST",
+        "name": "*ppProfileList",
+        "description": "Type: PWCM_PROFILE_INFO_LIST* The list of profiles."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The WcmQueryProperty function retrieves the value of a specified WCM property.",
+    "library": "Wcmapi.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Wcmapi.h",
+    "return_value": "Type: DWORD Returns ERROR_SUCCESS if successful, or an error value otherwise. ",
+    "remarks": "The type of data stored in the ppData parameter will vary, depending on which property is being queried. This table shows the data type of each property.  ",
+    "return_type": "DWORD WINAPI",
+    "category": "Windows Connection Manager",
+    "name": "WcmQueryProperty",
+    "is_callback": 0,
+    "dll": "Wcmapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "const GUID",
+        "name": "*pInterface",
+        "description": "Type: const GUID* The interface to query. For global properties, this parameter is NULL."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "strProfileName",
+        "description": "Type: LPCWSTR The name of the profile. If querying a non-global property (connection_cost, dataplan_status, or hotspot_profile), the profile must be specified or the call will fail."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WCM_PROPERTY",
+        "name": "Property",
+        "description": "Type: WCM_PROPERTY The WCM property to query."
+      },
+      {
+        "in_out": "_Reserved_",
+        "type": "PVOID",
+        "name": "pReserved",
+        "description": "Type: PVOID Reserved."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDWORD",
+        "name": "pdwDataSize",
+        "description": "Type: PDWORD The size of the returned property value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*ppData",
+        "description": "Type: PBYTE* The returned property value."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The WcmSetProfileList function reorders a profile list or a subset of a profile list.",
+    "library": "Wcmapi.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Wcmapi.h",
+    "return_value": "Type: DWORD Returns ERROR_SUCCESS if successful, or an error value otherwise. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Windows Connection Manager",
+    "name": "WcmSetProfileList",
+    "is_callback": 0,
+    "dll": "Wcmapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WCM_PROFILE_INFO_LIST",
+        "name": "*pProfileList",
+        "description": "Type: WCM_PROFILE_INFO_LIST* The list of profiles to be reordered, provided in the preferred order (descending from the most preferred to the least preferred)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwPosition",
+        "description": "Type: DWORD Specifies the position in the list to start the reorder."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fIgnoreUnknownProfiles",
+        "description": "Type: BOOL True if any profiles in pProfileList which do not exist should be ignored; the call will proceed with the remainder of the list. False if the call should fail without modifying the profile order if any profiles in pProfileList do not exist."
+      },
+      {
+        "in_out": "_Reserved_",
+        "type": "PVOID",
+        "name": "pReserved",
+        "description": "Type: PVOID Reserved."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The WcmSetProperty function sets the value of a WCM property.",
+    "library": "Wcmapi.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Wcmapi.h",
+    "return_value": "Type: DWORD Returns ERROR_SUCCESS if successful, or an error value otherwise. ",
+    "remarks": "The type of data stored in the pbData parameter will vary, depending on which property is being set. This table shows the data type of each property.  ",
+    "return_type": "DWORD WINAPI",
+    "category": "Windows Connection Manager",
+    "name": "WcmSetProperty",
+    "is_callback": 0,
+    "dll": "Wcmapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "const GUID",
+        "name": "*pInterface",
+        "description": "Type: const GUID* The interface to set. For global properties, this parameter is NULL."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "strProfileName",
+        "description": "Type: LPCWSTR The profile name."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WCM_PROPERTY",
+        "name": "Property",
+        "description": "Type: WCM_PROPERTY The WCM property to set."
+      },
+      {
+        "in_out": "_Reserved_",
+        "type": "PVOID",
+        "name": "pReserved",
+        "description": "Type: PVOID Reserved."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwDataSize",
+        "description": "Type: DWORD The size of the new property value."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const BYTE",
+        "name": "*pbData",
+        "description": "Type: const BYTE* The new property value."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  }
+]
+

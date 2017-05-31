@@ -1,0 +1,998 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "Sets the input locale identifier (formerly called the keyboard layout handle) for the calling thread or the current process. The input locale identifier specifies a locale as well as the physical layout of the keyboard.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HKL The return value is of type  \t\t\t\t\t\tHKL. If the function succeeds, the return value is the previous input locale identifier. Otherwise, it is zero. To get extended error information, use the GetLastError function. ",
+    "remarks": "This function only affects the layout for the current process or thread. This function is not restricted to keyboard layouts. The  \t\t\t\thkl parameter is actually an input locale identifier. This is a broader concept than a keyboard layout, since it can also encompass a speech-to-text converter, an Input Method Editor (IME), or any other form of input. Several input locale identifiers can be loaded at any one time, but only one is active at a time. Loading multiple input locale identifiers makes it possible to rapidly switch between them. When multiple IMEs are allowed for each locale, passing an input locale identifier in which the high word (the device handle) is zero activates the first IME in the list belonging to the locale. The KLF_RESET and KLF_SHIFTLOCK flags alter the method by which the Caps Lock state is turned off. By default, the Caps Lock state is turned off by hitting the Caps Lock key again. If only KLF_RESET is set, the default state is reestablished. If KLF_RESET and KLF_SHIFTLOCK are set, the Caps Lock state is turned off by pressing either Caps Lock key. This feature is used to conform to local keyboard behavior standards as well as for personal preferences. ",
+    "return_type": "HKL WINAPI",
+    "category": "Keyboard Input",
+    "name": "ActivateKeyboardLayout",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HKL",
+        "name": "hkl",
+        "description": "Type: HKL Input locale identifier to be activated.  \t\t\t\t\t\t The input locale identifier must have been loaded by a previous call to the LoadKeyboardLayout function. This parameter must be either the handle to a keyboard layout or one of the following values.   ValueMeaning  HKL_NEXT 1   Selects the next locale identifier in the circular list of loaded locale identifiers maintained by the system.   HKL_PREV 0   Selects the previous locale identifier in the circular list of loaded locale identifiers maintained by the system."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "Flags",
+        "description": "Type: UINT Specifies how the input locale identifier is to be activated. This parameter can be one of the following values.  ValueMeaning  KLF_REORDER 0x00000008   If this bit is set, the system's circular list of loaded locale identifiers is reordered by moving the locale identifier to the head of the list. If this bit is not set, the list is rotated without a change of order. For example, if a user had an English locale identifier active, as well as having French, German, and Spanish locale identifiers loaded (in that order), then activating the German locale identifier with the KLF_REORDER bit set would produce the following order: German, English, French, Spanish. Activating the German locale identifier without the KLF_REORDER bit set would produce the following order: German, Spanish, English, French. If less than three locale identifiers are loaded, the value of this flag is irrelevant.    KLF_RESET 0x40000000    \t\t\t\t\t\t If set but KLF_SHIFTLOCK is not set, the Caps Lock state is turned off by pressing the Caps Lock key again. If set and KLF_SHIFTLOCK is also set, the Caps Lock state is turned off by pressing either SHIFT key. These two methods are mutually exclusive, and the setting persists as part of the User's profile in the registry.   KLF_SETFORPROCESS 0x00000100    \t\t\t\t\t\t Activates the specified locale identifier for the entire process and sends the  \t\t\t\t\t\tWM_INPUTLANGCHANGE message to the current thread's focus or active window.    KLF_SHIFTLOCK 0x00010000    \t\t\t\t\t\t This is used with KLF_RESET. See KLF_RESET for an explanation.   KLF_UNLOADPREVIOUS   This flag is unsupported. Use the UnloadKeyboardLayout function instead."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Blocks keyboard and mouse input events from reaching applications.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If input is already blocked, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "When input is blocked, real physical input from the mouse or keyboard will not affect the input queue's synchronous key state (reported by GetKeyState and GetKeyboardState), nor will it affect the asynchronous key state (reported by GetAsyncKeyState). However, the thread that is blocking input can affect both of these key states by calling SendInput. No other thread can do this. The system will unblock input in the following cases: ",
+    "return_type": "BOOL WINAPI",
+    "category": "Keyboard Input",
+    "name": "BlockInput",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fBlockIt",
+        "description": "Type: BOOL The function's purpose. If this parameter is TRUE, keyboard and mouse input events are blocked. If this parameter is FALSE, keyboard and mouse events are unblocked. Note that only the thread that blocked input can successfully unblock input."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Enables or disables mouse and keyboard input to the specified window or control. When input is disabled, the window does not receive input such as mouse clicks and key presses. When input is enabled, the window receives all input.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the window was previously disabled, the return value is nonzero. If the window was not previously disabled, the return value is zero. ",
+    "remarks": "If the window is being disabled, the system sends a WM_CANCELMODE message. If the enabled state of a window is changing, the system sends a WM_ENABLE message after the WM_CANCELMODE message. (These messages are sent before EnableWindow returns.) If a window is already disabled, its child windows are implicitly disabled, although they are not sent a WM_ENABLE message. A window must be enabled before it can be activated. For example, if an application is displaying a modeless dialog box and has disabled its main window, the application must enable the main window before destroying the dialog box. Otherwise, another window will receive the keyboard focus and be activated. If a child window is disabled, it is ignored when the system tries to determine which window should receive mouse messages. By default, a window is enabled when it is created. To create a window that is initially disabled, an application can specify the WS_DISABLED style in the CreateWindow or CreateWindowEx function. After a window has been created, an application can use EnableWindow to enable or disable the window. An application can use this function to enable or disable a control in a dialog box. A disabled control cannot receive the keyboard focus, nor can a user gain access to it. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Keyboard Input",
+    "name": "EnableWindow",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window to be enabled or disabled."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bEnable",
+        "description": "Type: BOOL Indicates whether to enable or disable the window. If this parameter is TRUE, the window is enabled. If the parameter is FALSE, the window is disabled."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the window handle to the active window attached to the calling thread's message queue.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HWND The return value is the handle to the active window attached to the calling thread's message queue. Otherwise, the return value is NULL. ",
+    "remarks": "To get the handle to the foreground window, you can use GetForegroundWindow. To get the window handle to the active window in the message queue for another thread, use GetGUIThreadInfo. ",
+    "return_type": "HWND WINAPI",
+    "category": "Keyboard Input",
+    "name": "GetActiveWindow",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines whether a key is up or down at the time the function is called, and whether the key was pressed after a previous call to GetAsyncKeyState.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: SHORT If the function succeeds, the return value specifies whether the key was pressed since the last call to GetAsyncKeyState, and whether the key is currently up or down. If the most significant bit is set, the key is down, and if the least significant bit is set, the key was pressed after the previous call to GetAsyncKeyState. However, you should not rely on this last behavior; for more information, see the Remarks. The return value is zero for the following cases: ",
+    "remarks": "The GetAsyncKeyState function works with mouse buttons. However, it checks on the state of the physical mouse buttons, not on the logical mouse buttons that the physical buttons are mapped to. For example, the call GetAsyncKeyState(VK_LBUTTON) always returns the state of the left physical mouse button, regardless of whether it is mapped to the left or right logical mouse button. You can determine the system's current mapping of physical mouse buttons to logical mouse buttons by calling GetSystemMetrics(SM_SWAPBUTTON). which returns TRUE if the mouse buttons have been swapped. Although the least significant bit of the return value indicates whether the key has been pressed since the last query, due to the pre-emptive multitasking nature of Windows, another application can call GetAsyncKeyState and receive the \"recently pressed\" bit instead of your application. The behavior of the least significant bit of the return value is retained strictly for compatibility with 16-bit Windows applications (which are non-preemptive) and should not be relied upon. You can use the virtual-key code constants VK_SHIFT, VK_CONTROL, and VK_MENU as values for the  \t\t\t\tvKey parameter. This gives the state of the SHIFT, CTRL, or ALT keys without distinguishing between left and right. You can use the following virtual-key code constants as values for  \t\t\t\tvKey to distinguish between the left and right instances of those keys.  These left- and right-distinguishing constants are only available when you call the GetKeyboardState, SetKeyboardState, GetAsyncKeyState, GetKeyState, and MapVirtualKey functions. ",
+    "return_type": "SHORT WINAPI",
+    "category": "Keyboard Input",
+    "name": "GetAsyncKeyState",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "vKey",
+        "description": "Type: int The virtual-key code. For more information, see Virtual Key Codes.  \t\t\t\t\t  You can use left- and right-distinguishing constants to specify certain keys. See the Remarks section for further information."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the handle to the window that has the keyboard focus, if the window is attached to the calling thread's message queue.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HWND The return value is the handle to the window with the keyboard focus. If the calling thread's message queue does not have an associated window with the keyboard focus, the return value is NULL. ",
+    "remarks": "GetFocus returns the window with the keyboard focus for the current thread's message queue. If GetFocus returns NULL, another thread's queue may be attached to a window that has the keyboard focus. Use the GetForegroundWindow function to retrieve the handle to the window with which the user is currently working. You can associate your thread's message queue with the windows owned by another thread by using the  \t\t\t\tAttachThreadInput function. To get the window with the keyboard focus on the foreground queue or the queue of another thread, use the GetGUIThreadInfo function. For an example, see \"Creating a Combo Box Toolbar\" in Using Combo Boxes. ",
+    "return_type": "HWND WINAPI",
+    "category": "Keyboard Input",
+    "name": "GetFocus",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the active input locale identifier (formerly called the keyboard layout).",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HKL The return value is the input locale identifier for the thread. The low word contains a Language Identifier for the input language and the high word contains a device handle to the physical layout of the keyboard. ",
+    "remarks": "The input locale identifier is a broader concept than a keyboard layout, since it can also encompass a speech-to-text converter, an Input Method Editor (IME), or any other form of input. Since the keyboard layout can be dynamically changed, applications that cache information about the current keyboard layout should process the WM_INPUTLANGCHANGE message to be informed of changes in the input language. To get the KLID (keyboard layout ID) of the currently active HKL, call the  GetKeyboardLayoutName. Beginning in Windows 8: The preferred method to retrieve the language associated with the current keyboard layout or input method is a call to Windows.Globalization.Language.CurrentInputMethodLanguageTag. If your app passes language tags from CurrentInputMethodLanguageTag to any National Language Support functions, it must first convert the tags by calling ResolveLocaleName. ",
+    "return_type": "HKL WINAPI",
+    "category": "Keyboard Input",
+    "name": "GetKeyboardLayout",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "idThread",
+        "description": "Type: DWORD The identifier of the thread to query, or 0 for the current thread."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the input locale identifiers (formerly called keyboard layout handles) corresponding to the current set of input locales in the system. The function copies the identifiers to the specified buffer.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the function succeeds, the return value is the number of input locale identifiers copied to the buffer or, if  \t\t\t\t\t\tnBuff is zero, the return value is the size, in array elements, of the buffer needed to receive all current input locale identifiers. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The input locale identifier is a broader concept than a keyboard layout, since it can also encompass a speech-to-text converter, an Input Method Editor (IME), or any other form of input. Beginning in Windows 8: The preferred method to retrieve the language associated with the current keyboard layout or input method is a call to Windows.Globalization.Language.CurrentInputMethodLanguageTag. If your app passes language tags from CurrentInputMethodLanguageTag to any National Language Support functions, it must first convert the tags by calling ResolveLocaleName. ",
+    "return_type": "int WINAPI",
+    "category": "Keyboard Input",
+    "name": "GetKeyboardLayoutList",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nBuff",
+        "description": "Type: int The maximum number of handles that the buffer can hold."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HKL",
+        "name": "*lpList",
+        "description": "Type: HKL* A pointer to the buffer that receives the array of input locale identifiers."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the name of the active input locale identifier (formerly called the keyboard layout) for the system.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The input locale identifier is a broader concept than a keyboard layout, since it can also encompass a speech-to-text converter, an Input Method Editor (IME), or any other form of input. Beginning in Windows 8: The preferred method to retrieve the language associated with the current keyboard layout or input method is a call to Windows.Globalization.Language.CurrentInputMethodLanguageTag. If your app passes language tags from CurrentInputMethodLanguageTag to any National Language Support functions, it must first convert the tags by calling ResolveLocaleName. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Keyboard Input",
+    "name": "GetKeyboardLayoutName",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "pwszKLID",
+        "description": "Type: LPTSTR The buffer (of at least KL_NAMELENGTH characters in length) that receives the name of the input locale identifier, including the terminating null character. This will be a copy of the string provided to the LoadKeyboardLayout function, unless layout substitution took place."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Copies the status of the 256 virtual keys to the specified buffer.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "An application can call this function to retrieve the current status of all the virtual keys. The status changes as a thread removes keyboard messages from its message queue. The status does not change as keyboard messages are posted to the thread's message queue, nor does it change as keyboard messages are posted to or retrieved from message queues of other threads. (Exception: Threads that are connected through AttachThreadInput share the same keyboard state.) When the function returns, each member of the array pointed to by the  \t\t\t\tlpKeyState parameter contains status data for a virtual key. If the high-order bit is 1, the key is down; otherwise, it is up. If the key is a toggle key, for example CAPS LOCK, then the low-order bit is 1 when the key is toggled and is 0 if the key is untoggled.  The low-order bit is meaningless for non-toggle keys. A toggle key is said to be toggled when it is turned on. A toggle key's indicator light (if any) on the keyboard will be on when the key is toggled, and off when the key is untoggled. To retrieve status information for an individual key, use the GetKeyState function. To retrieve the current state for an individual key regardless of whether the corresponding keyboard message has been retrieved from the message queue, use the GetAsyncKeyState function. An application can use the virtual-key code constants VK_SHIFT, VK_CONTROL and VK_MENU as indices into the array pointed to by  \t\t\t\tlpKeyState. This gives the status of the SHIFT, CTRL, or ALT keys without distinguishing between left and right. An application can also use the following virtual-key code constants as indices to distinguish between the left and right instances of those keys:  These left- and right-distinguishing constants are available to an application only through the GetKeyboardState, SetKeyboardState, GetAsyncKeyState, GetKeyState, and MapVirtualKey functions. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Keyboard Input",
+    "name": "GetKeyboardState",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "lpKeyState",
+        "description": "Type: PBYTE The 256-byte array that receives the status data for each virtual key."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves a string that represents the name of a key.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the function succeeds, a null-terminated string is copied into the specified buffer, and the return value is the length of the string, in  \t\t\t\t\t\tcharacters, not counting the terminating null character. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The format of the key-name string depends on the current keyboard layout. The keyboard driver maintains a list of names in the form of character strings for keys with names longer than a single character. The key name is translated according to the layout of the currently installed keyboard, thus the function may give different results for different input locales. The name of a character key is the character itself. The names of dead keys are spelled out in full. ",
+    "return_type": "int WINAPI",
+    "category": "Keyboard Input",
+    "name": "GetKeyNameText",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "lParam",
+        "description": "Type: LONG The second parameter of the keyboard message (such as  \t\t\t\t\tWM_KEYDOWN) to be processed. The function interprets the following bit positions in the lParam.   BitsMeaning 16-23Scan code. 24Extended-key flag. Distinguishes some keys on an enhanced keyboard. 25\"Do not care\" bit. The application calling this function sets this bit to indicate that the function should not distinguish between left and right CTRL and SHIFT keys, for example."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpString",
+        "description": "Type: LPTSTR The buffer that will receive the key name."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchSize",
+        "description": "Type: int The maximum length, in \t \t\t\t\t\tcharacters, of the key name, including the terminating null character. (This parameter should be equal to the size of the buffer pointed to by the  \t\t\t\t\tlpString parameter.)"
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the status of the specified virtual key. The status specifies whether the key is up, down, or toggled (on, off\u00e2\u0080\u0094alternating each time the key is pressed).",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: SHORT The return value specifies the status of the specified virtual key, as follows: ",
+    "remarks": "The key status returned from this function changes as a thread reads key messages from its message queue. The status does not reflect the interrupt-level state associated with the hardware. Use the GetAsyncKeyState function to retrieve that information. An application calls GetKeyState in response to a keyboard-input message. This function retrieves the state of the key when the input message was generated. To retrieve state information for all the virtual keys, use the GetKeyboardState function. An application can use the virtual key code constants VK_SHIFT, VK_CONTROL, and VK_MENU as values for the  \t\t\t\tnVirtKey parameter. This gives the status of the SHIFT, CTRL, or ALT keys without distinguishing between left and right. An application can also use the following virtual-key code constants as values for  \t\t\t\tnVirtKey to distinguish between the left and right instances of those keys: These left- and right-distinguishing constants are available to an application only through the GetKeyboardState, SetKeyboardState, GetAsyncKeyState, GetKeyState, and MapVirtualKey functions. For an example, see Displaying Keyboard Input. ",
+    "return_type": "SHORT WINAPI",
+    "category": "Keyboard Input",
+    "name": "GetKeyState",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nVirtKey",
+        "description": "Type: int A virtual key. If the desired virtual key is a letter or digit (A through Z, a through z, or 0 through 9),  \t\t\t\t\tnVirtKey must be set to the ASCII value of that character. For other keys, it must be a virtual-key code.  If a non-English keyboard layout is used, virtual keys with values in the range ASCII A through Z and 0 through 9 are used to specify most of the character keys. For example, for the German keyboard layout, the virtual key of value ASCII O (0x4F) refers to the \"o\" key, whereas VK_OEM_1 refers to the \"o with umlaut\" key."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the time of the last input event.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "This function is useful for input idle detection. However, GetLastInputInfo does not provide system-wide user input information across all running sessions. Rather, GetLastInputInfo provides session-specific user input information for only the session that invoked the function. The tick count when the last input event was received (see LASTINPUTINFO) is not guaranteed to be incremental. In some cases, the value might be less than the tick count of a prior event. For example, this can be caused by a timing gap between the raw input thread and the desktop thread or an event raised by SendInput, which supplies its own tick count. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Keyboard Input",
+    "name": "GetLastInputInfo",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PLASTINPUTINFO",
+        "name": "plii",
+        "description": "Type: PLASTINPUTINFO A pointer to a LASTINPUTINFO structure that receives the time of the last input event."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines whether the specified window is enabled for mouse and keyboard input.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the window is enabled, the return value is nonzero. If the window is not enabled, the return value is zero. ",
+    "remarks": "A child window receives input only if it is both enabled and visible. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Keyboard Input",
+    "name": "IsWindowEnabled",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window to be tested."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Loads a new input locale identifier (formerly called the keyboard layout) into the system.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HKL If the function succeeds, the return value is the input locale identifier corresponding to the name specified in pwszKLID. If no matching locale is available, the return value is the default language of the system. To get extended error information, call GetLastError. ",
+    "remarks": "The input locale identifier is a broader concept than a keyboard layout, since it can also encompass a speech-to-text converter, an Input Method Editor (IME), or any other form of input. An application can and will typically load the default input locale identifier or IME for a language and can do so by specifying only a string version of the language identifier. If an application wants to load a specific locale or IME, it should read the registry to determine the specific input locale identifier to pass to LoadKeyboardLayout. In this case, a request to activate the default input locale identifier for a locale will activate the first matching one. A specific IME should be activated using an explicit input locale identifier returned from  \t\t\t\tGetKeyboardLayout or LoadKeyboardLayout. Prior to Windows 8: This function only affects the layout for the current process or thread. Beginning in  Windows 8: This function affects the layout for the entire system. ",
+    "return_type": "HKL WINAPI",
+    "category": "Keyboard Input",
+    "name": "LoadKeyboardLayout",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pwszKLID",
+        "description": "Type: LPCTSTR The name of the input locale identifier to load. This name is a string composed of the hexadecimal value of the Language Identifier (low word) and a device identifier (high word). For example, U.S. English has a language identifier of 0x0409, so the primary U.S. English layout is named \"00000409\". Variants of U.S. English layout (such as the Dvorak layout) are named \"00010409\", \"00020409\", and so on."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "Flags",
+        "description": "Type: UINT Specifies how the input locale identifier is to be loaded. This parameter can be one of the following values.   ValueMeaning  KLF_ACTIVATE 0x00000001   Prior to Windows 8: If the specified input locale identifier is not already loaded, the function loads and activates the input locale identifier for the current thread. Beginning in  Windows 8: If the specified input locale identifier is not already loaded, the function loads and activates the input locale identifier for the system.   KLF_NOTELLSHELL 0x00000080   Prior to Windows 8: Prevents a  \t\t\t\t\t\tShellProc  hook procedure from receiving an HSHELL_LANGUAGE hook code when the new input locale identifier is loaded. This value is typically used when an application loads multiple input locale identifiers one after another. Applying this value to all but the last input locale identifier delays the shell's processing until all input locale identifiers have been added. Beginning in  Windows 8: In this scenario, the last input locale identifier is set for the entire system.   KLF_REORDER 0x00000008   Prior to Windows 8: Moves the specified input locale identifier to the head of the input locale identifier list, making that locale identifier the active locale identifier for the current thread. This value reorders the input locale identifier list even if KLF_ACTIVATE is not provided. Beginning in  Windows 8: Moves the specified input locale identifier to the head of the input locale identifier list, making that locale identifier the active locale identifier for the system. This value reorders the input locale identifier list even if KLF_ACTIVATE is not provided.   KLF_REPLACELANG 0x00000010    \t\t\t\t\t\tIf the new input locale identifier has the same language identifier as a current input locale identifier, the new input locale identifier replaces the current one as the input locale identifier for that language. If this value is not provided and the input locale identifiers have the same language identifiers, the current input locale identifier is not replaced and the function returns NULL.    KLF_SUBSTITUTE_OK 0x00000002   Substitutes the specified input locale identifier with another locale preferred by the user. The system starts with this flag set, and it is recommended that your application always use this flag. The substitution occurs only if the registry key  \t\t\t\t\t\tHKEY_CURRENT_USER\\Keyboard\\Layout\\Substitutes explicitly defines a substitution locale. For example, if the key includes the value name \"00000409\" with value \"00010409\", loading the U.S. English layout (\"00000409\") causes the Dvorak U.S. English layout (\"00010409\") to be loaded instead. The system uses KLF_SUBSTITUTE_OK when booting, and it is recommended that all applications use this value when loading input locale identifiers to ensure that the user's preference is selected.   KLF_SETFORPROCESS 0x00000100   Prior to Windows 8: This flag is valid only with KLF_ACTIVATE. Activates the specified input locale identifier for the entire process and sends the  \t\t\t\t\t\tWM_INPUTLANGCHANGE message to the current thread's Focus or Active window. Typically, LoadKeyboardLayout activates an input locale identifier only for the current thread. Beginning in  Windows 8: This flag is not used. LoadKeyboardLayout always activates an input locale identifier for the entire system if the current process owns the window with keyboard focus.   KLF_UNLOADPREVIOUS   This flag is unsupported. Use the UnloadKeyboardLayout function instead."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Translates (maps) a virtual-key code into a scan code or character value, or translates a scan code into a virtual-key code.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: UINT The return value is either a scan code, a virtual-key code, or a character value, depending on the value of uCode and uMapType. If there is no translation, the return value is zero. ",
+    "remarks": "An application can use MapVirtualKey to translate scan codes to the virtual-key code constants VK_SHIFT, VK_CONTROL, and VK_MENU, and vice versa. These translations do not distinguish between the left and right instances of the SHIFT, CTRL, or ALT keys. An application can get the scan code corresponding to the left or right instance of one of these keys by calling MapVirtualKey with uCode set to one of the following virtual-key code constants. These left- and right-distinguishing constants are available to an application only through the GetKeyboardState, SetKeyboardState, GetAsyncKeyState, GetKeyState, and MapVirtualKey functions. ",
+    "return_type": "UINT WINAPI",
+    "category": "Keyboard Input",
+    "name": "MapVirtualKey",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uCode",
+        "description": "Type: UINT The virtual key code or scan code for a key. How this value is interpreted depends on the value of the uMapType parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uMapType",
+        "description": "Type: UINT The translation to be performed. The value of this parameter depends on the value of the uCode parameter.   ValueMeaning  MAPVK_VK_TO_CHAR 2   uCode is a virtual-key code and is translated into an unshifted character value in the low-order word of the return value. Dead keys (diacritics) are indicated by setting the top bit of the return value. If there is no translation, the function returns 0.   MAPVK_VK_TO_VSC 0   uCode is a virtual-key code and is translated into a scan code. If it is a virtual-key code that does not distinguish between left- and right-hand keys, the left-hand scan code is returned. If there is no translation, the function returns 0.   MAPVK_VSC_TO_VK 1   uCode is a scan code and is translated into a virtual-key code that does not distinguish between left- and right-hand keys. If there is no translation, the function returns 0.   MAPVK_VSC_TO_VK_EX 3   uCode is a scan code and is translated into a virtual-key code that distinguishes between left- and right-hand keys. If there is no translation, the function returns 0."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Translates (maps) a virtual-key code into a scan code or character value, or translates a scan code into a virtual-key code. The function translates the codes using the input language and an input locale identifier.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: UINT The return value is either a scan code, a virtual-key code, or a character value, depending on the value of uCode and uMapType. If there is no translation, the return value is zero. ",
+    "remarks": "The input locale identifier is a broader concept than a keyboard layout, since it can also encompass a speech-to-text converter, an Input Method Editor (IME), or any other form of input. An application can use MapVirtualKeyEx to translate scan codes to the virtual-key code constants VK_SHIFT, VK_CONTROL, and VK_MENU, and vice versa. These translations do not distinguish between the left and right instances of the SHIFT, CTRL, or ALT keys. An application can get the scan code corresponding to the left or right instance of one of these keys by calling MapVirtualKeyEx with uCode set to one of the following virtual-key code constants. These left- and right-distinguishing constants are available to an application only through the GetKeyboardState, SetKeyboardState, GetAsyncKeyState, GetKeyState, MapVirtualKey, and MapVirtualKeyEx functions. For list complete table of virtual key codes, see Virtual Key Codes. ",
+    "return_type": "UINT WINAPI",
+    "category": "Keyboard Input",
+    "name": "MapVirtualKeyEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uCode",
+        "description": "Type: UINT The virtual-key code or scan code for a key. How this value is interpreted depends on the value of the uMapType parameter.  Starting with Windows Vista, the high byte of the uCode value can contain either 0xe0 or 0xe1 to specify the extended scan code."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uMapType",
+        "description": "Type: UINT The translation to perform. The value of this parameter depends on the value of the uCode parameter.   ValueMeaning  MAPVK_VK_TO_CHAR 2   The uCode parameter is a virtual-key code and is translated into an unshifted character value in the low order word of the return value. Dead keys (diacritics) are indicated by setting the top bit of the return value. If there is no translation, the function returns 0.   MAPVK_VK_TO_VSC 0   The uCode parameter is a virtual-key code and is translated into a scan code. If it is a virtual-key code that does not distinguish between left- and right-hand keys, the left-hand scan code is returned. If there is no translation, the function returns 0.   MAPVK_VK_TO_VSC_EX 4   The uCode parameter is a virtual-key code and is translated into a scan code. If it is a virtual-key code that does not distinguish between left- and right-hand keys, the left-hand scan code is returned. If the scan code is an extended scan code, the high byte of the uCode value can contain either 0xe0 or 0xe1 to specify the extended scan code. If there is no translation, the function returns 0.   MAPVK_VSC_TO_VK 1   The uCode parameter is a scan code and is translated into a virtual-key code that does not distinguish between left- and right-hand keys. If there is no translation, the function returns 0.                                                  MAPVK_VSC_TO_VK_EX 3   The uCode parameter is a scan code and is translated into a virtual-key code that distinguishes between left- and right-hand keys. If there is no translation, the function returns 0."
+      },
+      {
+        "in_out": "_Inout_opt_",
+        "type": "HKL",
+        "name": "dwhkl",
+        "description": "Type: HKL Input locale identifier to use for translating the specified code. This parameter can be any input locale identifier previously returned by the LoadKeyboardLayout function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Maps OEMASCII codes 0 through 0x0FF into the OEM scan codes and shift states. The function provides information that allows a program to send OEM text to another program by simulating keyboard input.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: DWORD The low-order word of the return value contains the scan code of the OEM character, and the high-order word contains the shift state, which can be a combination of the following bits.  If the character cannot be produced by a single keystroke using the current keyboard layout, the return value is  \t\t\t\t\t\t\u00e2\u0080\u00931. ",
+    "remarks": "This function does not provide translations for characters that require CTRL+ALT or dead keys. Characters not translated by this function must be copied by simulating input using the ALT+ keypad mechanism. The NUMLOCK key must be off. This function does not provide translations for characters that cannot be typed with one keystroke using the current keyboard layout, such as characters with diacritics requiring dead keys. Characters not translated by this function may be simulated using the ALT+ keypad mechanism. The NUMLOCK key must be on. This function is implemented using the VkKeyScan function. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Keyboard Input",
+    "name": "OemKeyScan",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "wOemChar",
+        "description": "Type: WORD The ASCII value of the OEM character."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Defines a system-wide hot key.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "When a key is pressed, the system looks for a match against all hot keys. Upon finding a match, the system posts the WM_HOTKEY message to the message queue of the window with which the hot key is associated. If the hot key is not associated with a window, then the WM_HOTKEY message is posted to the thread associated with the hot key. This function cannot associate a hot key with a window created by another thread. RegisterHotKey fails if the keystrokes specified for the hot key have already been registered by another hot key. If a hot key already exists with the same hWnd and id parameters, it is maintained along with the new hot key.  The application must explicitly call UnregisterHotKey to unregister the old hot key. Windows Server 2003:  If a hot key already exists with the same hWnd and id parameters, it is replaced by the new hot key. The F12 key is reserved for use by the debugger at all times, so it should not be registered as a hot key. Even when you are not debugging an application, F12 is reserved in case a kernel-mode debugger or a just-in-time debugger is resident. An application must specify an id value in the range 0x0000 through 0xBFFF. A shared DLL must specify a value in the range 0xC000 through 0xFFFF (the range returned by the GlobalAddAtom function). To avoid conflicts with hot-key identifiers defined by other shared DLLs, a DLL should use the GlobalAddAtom function to obtain the hot-key identifier. The following example shows how to use the RegisterHotKey function with the MOD_NOREPEAT flag. \t\t\t\t In this example, the hotkey 'ALT+b' is registered for the main thread. When the hotkey is pressed,  \t\t\t\t the thread will receive a WM_HOTKEY message, which will get picked up in the GetMessage call.  \t\t\t\t Because this example uses MOD_ALT with the MOD_NOREPEAT value for fsModifiers, the thread will only receive another WM_HOTKEY message when the 'b' key is released and then pressed again while the 'ALT' key is being pressed down. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Keyboard Input",
+    "name": "RegisterHotKey",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window that will receive WM_HOTKEY messages generated by the hot key. If this parameter is NULL, WM_HOTKEY messages are posted to the message queue of the calling thread and must be processed in the message loop."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "id",
+        "description": "Type: int The identifier of the hot key.  If the hWnd parameter is NULL, then the hot key is associated with the current thread rather than with a particular window. If a hot key already exists with the same hWnd and id parameters, see Remarks for the action taken."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "fsModifiers",
+        "description": "Type: UINT The keys that must be pressed in combination with the key specified by the  \t\t\t\t\tuVirtKey parameter in order to generate the WM_HOTKEY message. The fsModifiers parameter can be a combination of the following values.  ValueMeaning  MOD_ALT 0x0001   Either ALT key must be held down.   MOD_CONTROL 0x0002   Either CTRL key must be held down.   MOD_NOREPEAT 0x4000    Changes the hotkey behavior so that the keyboard auto-repeat does not yield multiple hotkey notifications.  Windows Vista:  This flag is not supported.   MOD_SHIFT 0x0004   Either SHIFT key must be held down.   MOD_WIN 0x0008   Either WINDOWS key was held down. These keys are labeled with the Windows logo. Keyboard shortcuts that involve the WINDOWS key are reserved for use by the operating system."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "vk",
+        "description": "Type: UINT The virtual-key code of the hot key. See Virtual Key Codes."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Synthesizes keystrokes, mouse motions, and button clicks.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: UINT The function returns the number of events that it successfully inserted into the keyboard or mouse input stream. If the function returns zero, the input was already blocked by another thread. To get extended error information, call GetLastError. This function fails when it is blocked by UIPI. Note that neither GetLastError nor the return value will indicate the failure was caused by UIPI blocking. ",
+    "remarks": "This function is subject to UIPI. Applications are permitted to inject input only into applications that are at an equal or lesser integrity level. The SendInput function inserts the events in the INPUT structures serially into the keyboard or mouse input stream. These events are not interspersed with other keyboard or mouse input events inserted either by the user (with the keyboard or mouse) or by calls to keybd_event, mouse_event, or other calls to SendInput. This function does not reset the keyboard's current state. Any keys that are already pressed when the function is called might interfere with the events that this function generates. To avoid this problem, check the keyboard's state with the GetAsyncKeyState function and correct as necessary. Because the touch keyboard uses the surrogate macros defined in winnls.h to send input to the system, a listener on the keyboard event hook must decode input originating from the touch keyboard. For more information, see Surrogates and Supplementary Characters. An accessibility application can use SendInput to inject keystrokes corresponding to application launch shortcut keys that are handled by the shell.  This  functionality is not guaranteed to work for other types of applications. ",
+    "return_type": "UINT WINAPI",
+    "category": "Keyboard Input",
+    "name": "SendInput",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nInputs",
+        "description": "Type: UINT The number of structures in the pInputs array."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPINPUT",
+        "name": "pInputs",
+        "description": "Type: LPINPUT An array of INPUT structures. Each structure represents an event to be inserted into the keyboard or mouse input stream."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cbSize",
+        "description": "Type: int The size, in bytes, of an INPUT structure. If cbSize is not the size of an INPUT structure, the function fails."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Activates a window. The window must be attached to the calling thread's message queue.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HWND If the function succeeds, the return value is the handle to the window that was previously active. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "The SetActiveWindow function activates a window, but not if the application is in the background. The window will be brought into the foreground (top of Z-Order) if its application is in the foreground when the system activates the window. If the window identified by the  \t\t\t\thWnd parameter was created by the calling thread, the active window status of the calling thread is set to  \t\t\t\thWnd. Otherwise, the active window status of the calling thread is set to NULL. ",
+    "return_type": "HWND WINAPI",
+    "category": "Keyboard Input",
+    "name": "SetActiveWindow",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the top-level window to be activated."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the keyboard focus to the specified window. The window must be attached to the calling thread's message queue.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HWND If the function succeeds, the return value is the handle to the window that previously had the keyboard focus. If the  \t\t\t\t\t\thWnd parameter is invalid or the window is not attached to the calling thread's message queue, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "The SetFocus function sends a WM_KILLFOCUS message to the window that loses the keyboard focus and a WM_SETFOCUS message to the window that receives the keyboard focus. It also activates either the window that receives the focus or the parent of the window that receives the focus. If a window is active but does not have the focus, any key pressed will produce the WM_SYSCHAR, WM_SYSKEYDOWN, or WM_SYSKEYUP message. If the VK_MENU key is also pressed, the  \t\t\t\tlParam parameter of the message will have bit 30 set. Otherwise, the messages produced do not have this bit set. By using the  \t\t\t\tAttachThreadInput function, a thread can attach its input processing to another thread. This allows a thread to call SetFocus to set the keyboard focus to a window attached to another thread's message queue. For an example, see Initializing a Dialog Box. ",
+    "return_type": "HWND WINAPI",
+    "category": "Keyboard Input",
+    "name": "SetFocus",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window that will receive the keyboard input. If this parameter is NULL, keystrokes are ignored."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Copies an array of keyboard key states into the calling thread's keyboard input-state table. This is the same table accessed by the GetKeyboardState and GetKeyState functions. Changes made to this table do not affect keyboard input to any other thread.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "Because the SetKeyboardState function alters the input state of the calling thread and not the global input state of the system, an application cannot use SetKeyboardState to set the NUM LOCK, CAPS LOCK, or SCROLL LOCK (or the Japanese KANA) indicator lights on the keyboard. These can be set or cleared using SendInput to simulate keystrokes. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Keyboard Input",
+    "name": "SetKeyboardState",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "lpKeyState",
+        "description": "Type: LPBYTE A pointer to a 256-byte array that contains keyboard key states."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Translates the specified virtual-key code and keyboard state to the corresponding character or characters. The function translates the code using the input language and physical keyboard layout identified by the keyboard layout handle.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the specified key is a dead key, the return value is negative. Otherwise, it is one of the following values.  ",
+    "remarks": "The parameters supplied to the ToAscii function might not be sufficient to translate the virtual-key code, because a previous dead key is stored in the keyboard layout. Typically, ToAscii performs the translation based on the virtual-key code. In some cases, however, bit 15 of the  \t\t\t\tuScanCode parameter may be used to distinguish between a key press and a key release. The scan code is used for translating ALT+ \t\t\t\tnumber key combinations. Although NUM LOCK is a toggle key that affects keyboard behavior, ToAscii ignores the toggle setting (the low bit) of  \t\t\t\tlpKeyState (VK_NUMLOCK) because the  \t\t\t\tuVirtKey parameter alone is sufficient to distinguish the cursor movement keys (VK_HOME, VK_INSERT, and so on) from the numeric keys (VK_DECIMAL, VK_NUMPAD0 - VK_NUMPAD9). ",
+    "return_type": "int WINAPI",
+    "category": "Keyboard Input",
+    "name": "ToAscii",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uVirtKey",
+        "description": "Type: UINT The virtual-key code to be translated. See Virtual-Key Codes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uScanCode",
+        "description": "Type: UINT The hardware scan code of the key to be translated. The high-order bit of this value is set if the key is up (not pressed)."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "BYTE",
+        "name": "*lpKeyState",
+        "description": "Type: const BYTE* A pointer to a 256-byte array that contains the current keyboard state. Each element (byte) in the array contains the state of one key. If the high-order bit of a byte is set, the key is down (pressed).  The low bit, if set, indicates that the key is toggled on. In this function, only the toggle bit of the CAPS LOCK key is relevant. The toggle state of the NUM LOCK and SCROLL LOCK keys is ignored."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWORD",
+        "name": "lpChar",
+        "description": "Type: LPWORD The buffer that receives the translated character or characters."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uFlags",
+        "description": "Type: UINT This parameter must be 1 if a menu is active, or 0 otherwise."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Translates the specified virtual-key code and keyboard state to the corresponding character or characters. The function translates the code using the input language and physical keyboard layout identified by the input locale identifier.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the specified key is a dead key, the return value is negative. Otherwise, it is one of the following values.  ",
+    "remarks": "The input locale identifier is a broader concept than a keyboard layout, since it can also encompass a speech-to-text converter, an Input Method Editor (IME), or any other form of input. The parameters supplied to the ToAsciiEx function might not be sufficient to translate the virtual-key code, because a previous dead key is stored in the keyboard layout. Typically, ToAsciiEx performs the translation based on the virtual-key code. In some cases, however, bit 15 of the  \t\t\t\tuScanCode parameter may be used to distinguish between a key press and a key release. The scan code is used for translating ALT+number key combinations. Although NUM LOCK is a toggle key that affects keyboard behavior, ToAsciiEx ignores the toggle setting (the low bit) of  \t\t\t\tlpKeyState (VK_NUMLOCK) because the  \t\t\t\tuVirtKey parameter alone is sufficient to distinguish the cursor movement keys (VK_HOME, VK_INSERT, and so on) from the numeric keys (VK_DECIMAL, VK_NUMPAD0 - VK_NUMPAD9). ",
+    "return_type": "int WINAPI",
+    "category": "Keyboard Input",
+    "name": "ToAsciiEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uVirtKey",
+        "description": "Type: UINT The virtual-key code to be translated. See Virtual-Key Codes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uScanCode",
+        "description": "Type: UINT The hardware scan code of the key to be translated. The high-order bit of this value is set if the key is up (not pressed)."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "BYTE",
+        "name": "*lpKeyState",
+        "description": "Type: const BYTE* A pointer to a 256-byte array that contains the current keyboard state. Each element (byte) in the array contains the state of one key. If the high-order bit of a byte is set, the key is down (pressed). The low bit, if set, indicates that the key is toggled on. In this function, only the toggle bit of the CAPS LOCK key is relevant. The toggle state of the NUM LOCK and SCOLL LOCK keys is ignored."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWORD",
+        "name": "lpChar",
+        "description": "Type: LPWORD A pointer to the buffer that receives the translated character or characters."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uFlags",
+        "description": "Type: UINT This parameter must be 1 if a menu is active, zero otherwise."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HKL",
+        "name": "dwhkl",
+        "description": "Type: HKL Input locale identifier to use to translate the code. This parameter can be any input locale identifier previously returned by the LoadKeyboardLayout function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Translates the specified virtual-key code and keyboard state to the corresponding Unicode character or characters.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int The function returns one of the following values.  ",
+    "remarks": "The parameters supplied to the ToUnicode function might not be sufficient to translate the virtual-key code because a previous dead key is stored in the keyboard layout. Typically, ToUnicode performs the translation based on the virtual-key code. In some cases, however, bit 15 of the wScanCode parameter can be used to distinguish between a key press and a key release. ",
+    "return_type": "int WINAPI",
+    "category": "Keyboard Input",
+    "name": "ToUnicode",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "wVirtKey",
+        "description": "Type: UINT The virtual-key code to be translated. See Virtual-Key Codes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "wScanCode",
+        "description": "Type: UINT The hardware scan code of the key to be translated. The high-order bit of this value is set if the key is up."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "BYTE",
+        "name": "*lpKeyState",
+        "description": "Type: const BYTE* A pointer to a 256-byte array that contains the current keyboard state. Each element (byte) in the array contains the state of one key. If the high-order bit of a byte is set, the key is down."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "pwszBuff",
+        "description": "Type: LPWSTR The buffer that receives the translated Unicode character or characters. However, this buffer may be returned without being null-terminated even though the variable name suggests that it is null-terminated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchBuff",
+        "description": "Type: int The size, in characters, of the buffer pointed to by the pwszBuff parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "wFlags",
+        "description": "Type: UINT The behavior of the function. If bit 0 is set, a menu is active. Bits 1 through 31 are reserved."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Translates the specified virtual-key code and keyboard state to the corresponding Unicode character or characters.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int The function returns one of the following values.  ",
+    "remarks": "The input locale identifier is a broader concept than a keyboard layout, since it can also encompass a speech-to-text converter, an Input Method Editor (IME), or any other form of input. The parameters supplied to the ToUnicodeEx function might not be sufficient to translate the virtual-key code because a previous dead key is stored in the keyboard layout. Typically, ToUnicodeEx performs the translation based on the virtual-key code. In some cases, however, bit 15 of the wScanCode parameter can be used to distinguish between a key press and a key release. As ToUnicodeEx translates the virtual-key code, it also changes the state of the kernel-mode keyboard buffer. This state-change affects dead keys, ligatures, alt+numpad key entry, and so on. It might also cause undesired side-effects if used in conjunction with TranslateMessage (which also changes the state of the kernel-mode keyboard buffer). ",
+    "return_type": "int WINAPI",
+    "category": "Keyboard Input",
+    "name": "ToUnicodeEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "wVirtKey",
+        "description": "Type: UINT The virtual-key code to be translated. See Virtual-Key Codes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "wScanCode",
+        "description": "Type: UINT The hardware scan code of the key to be translated. The high-order bit of this value is set if the key is up."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "*lpKeyState",
+        "description": "Type: const BYTE* A pointer to a 256-byte array that contains the current keyboard state. Each element (byte) in the array contains the state of one key. If the high-order bit of a byte is set, the key is down."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "pwszBuff",
+        "description": "Type: LPWSTR The buffer that receives the translated Unicode character or characters. However, this buffer may be returned without being null-terminated even though the variable name suggests that it is null-terminated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchBuff",
+        "description": "Type: int The size, in characters, of the buffer pointed to by the pwszBuff parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "wFlags",
+        "description": "Type: UINT The behavior of the function. If bit 0 is set, a menu is active. Bits 1 through 31 are reserved."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HKL",
+        "name": "dwhkl",
+        "description": "Type: HKL The input locale identifier used to translate the specified code. This parameter can be any input locale identifier previously returned by the LoadKeyboardLayout function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Unloads an input locale identifier (formerly called a keyboard layout).",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. The function can fail for the following reasons: To get extended error information, call GetLastError. ",
+    "remarks": "The input locale identifier is a broader concept than a keyboard layout, since it can also encompass a speech-to-text converter, an Input Method Editor (IME), or any other form of input. UnloadKeyboardLayout cannot unload the system default input locale identifier if it is the only keyboard layout loaded. You must first load another input locale identifier before unloading the default input locale identifier. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Keyboard Input",
+    "name": "UnloadKeyboardLayout",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HKL",
+        "name": "hkl",
+        "description": "Type: HKL The input locale identifier to be unloaded."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Frees a hot key previously registered by the calling thread.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. For an example, see Displaying Keyboard Input. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Keyboard Input",
+    "name": "UnregisterHotKey",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window associated with the hot key to be freed. This parameter should be NULL if the hot key is not associated with a window."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "id",
+        "description": "Type: int The identifier of the hot key to be freed."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Translates a character to the corresponding virtual-key code and shift state. The function translates the character using the input language and physical keyboard layout identified by the input locale identifier.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: SHORT If the function succeeds, the low-order byte of the return value contains the virtual-key code and the high-order byte contains the shift state, which can be a combination of the following flag bits.  If the function finds no key that translates to the passed character code, both the low-order and high-order bytes contain  \t\t\t\t\t\t\u00e2\u0080\u00931. ",
+    "remarks": "The input locale identifier is a broader concept than a keyboard layout, since it can also encompass a speech-to-text converter, an Input Method Editor (IME), or any other form of input. For keyboard layouts that use the right-hand ALT key as a shift key (for example, the French keyboard layout), the shift state is represented by the value 6, because the right-hand ALT key is converted internally into CTRL+ALT. Translations for the numeric keypad (VK_NUMPAD0 through VK_DIVIDE) are ignored. This function is intended to translate characters into keystrokes from the main keyboard section only. For example, the character \"7\" is translated into VK_7, not VK_NUMPAD7. VkKeyScanEx is used by applications that send characters by using the  \t\t\t\tWM_KEYUP and  \t\t\t\tWM_KEYDOWN messages. ",
+    "return_type": "SHORT WINAPI",
+    "category": "Keyboard Input",
+    "name": "VkKeyScanEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TCHAR",
+        "name": "ch",
+        "description": "Type: TCHAR The character to be translated into a virtual-key code."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HKL",
+        "name": "dwhkl",
+        "description": "Type: HKL Input locale identifier used to translate the character. This parameter can be any input locale identifier previously returned by the LoadKeyboardLayout function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the current code page.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: UINT The return value is an OEM code-page identifier, or it is the default identifier if the registry value is not readable. For a list of OEM code-page identifiers, see Code Page Identifiers. ",
+    "remarks": "",
+    "return_type": "UINT WINAPI",
+    "category": "Keyboard Input",
+    "name": "GetKBCodePage",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Synthesizes a keystroke. The system can use such a synthesized keystroke to generate a WM_KEYUP or WM_KEYDOWN message. The keyboard driver's interrupt handler calls the keybd_event function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "An application can simulate a press of the PRINTSCRN key in order to obtain a screen snapshot and save it to the clipboard. To do this, call keybd_event with the  \t\t\t\tbVk parameter set to VK_SNAPSHOT. The following sample program toggles the NUM LOCK light by using keybd_event with a virtual key of VK_NUMLOCK. It takes a Boolean value that indicates whether the light should be turned off (FALSE) or on (TRUE). The same technique can be used for the CAPS LOCK key (VK_CAPITAL) and the SCROLL LOCK key (VK_SCROLL). ",
+    "return_type": "VOID WINAPI",
+    "category": "Keyboard Input",
+    "name": "keybd_event",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "bVk",
+        "description": "Type: BYTE A virtual-key code. The code must be a value in the range 1 to 254. For a complete list, see Virtual Key Codes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "bScan",
+        "description": "Type: BYTE A hardware scan code for the key."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD Controls various aspects of function operation. This parameter can be one or more of the following values.   ValueMeaning  KEYEVENTF_EXTENDEDKEY 0x0001   If specified, the scan code was preceded by a prefix byte having the value 0xE0 (224).   KEYEVENTF_KEYUP 0x0002   If specified, the key is being released. If not specified, the key is being depressed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG_PTR",
+        "name": "dwExtraInfo",
+        "description": "Type: ULONG_PTR An additional value associated with the key stroke."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[This function has been superseded by the VkKeyScanEx function. You can still use VkKeyScan, however, if you do not need to specify a keyboard layout.]",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: SHORT If the function succeeds, the low-order byte of the return value contains the virtual-key code and the high-order byte contains the shift state, which can be a combination of the following flag bits.  If the function finds no key that translates to the passed character code, both the low-order and high-order bytes contain  \t\t\t\t\t\t\u00e2\u0080\u00931. ",
+    "remarks": "For keyboard layouts that use the right-hand ALT key as a shift key (for example, the French keyboard layout), the shift state is represented by the value 6, because the right-hand ALT key is converted internally into CTRL+ALT. Translations for the numeric keypad (VK_NUMPAD0 through VK_DIVIDE) are ignored. This function is intended to translate characters into keystrokes from the main keyboard section only. For example, the character \"7\" is translated into VK_7, not VK_NUMPAD7. VkKeyScan is used by applications that send characters by using the WM_KEYUP and WM_KEYDOWN messages. ",
+    "return_type": "SHORT WINAPI",
+    "category": "Keyboard Input",
+    "name": "VkKeyScan",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TCHAR",
+        "name": "ch",
+        "description": "Type: TCHAR The character to be translated into a virtual-key code."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Translates virtual-key messages into character messages. The character messages are posted to the calling thread's message queue, to be read the next time the thread calls the GetMessage or PeekMessage function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: BOOL If the message is translated (that is, a character message is posted to the thread's message queue), the return value is nonzero. If the message is WM_KEYDOWN, WM_KEYUP, WM_SYSKEYDOWN, or WM_SYSKEYUP, the return value is nonzero, regardless of the translation. If the message is not translated (that is, a character message is not posted to the thread's message queue), the return value is zero. ",
+    "remarks": "The TranslateMessage function does not modify the message pointed to by the lpMsg parameter. WM_KEYDOWN and WM_KEYUP combinations produce a WM_CHAR or WM_DEADCHAR message. WM_SYSKEYDOWN and WM_SYSKEYUP combinations produce a WM_SYSCHAR or WM_SYSDEADCHAR message. TranslateMessage produces WM_CHAR messages only for keys that are mapped to ASCII characters by the keyboard driver. If applications process virtual-key messages for some other purpose, they should not call TranslateMessage. For instance, an application should not call TranslateMessage if the TranslateAccelerator function returns a nonzero value. Note that the application is responsible for retrieving and dispatching input messages to the dialog box. Most applications use the main message loop for this. However, to permit the user to move to and to select controls by using the keyboard, the application must call IsDialogMessage. For more information, see  Dialog Box Keyboard Interface. For an example, see Creating a Message Loop. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Keyboard Input",
+    "name": "TranslateMessage",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "MSG",
+        "name": "*lpMsg",
+        "description": "Type: const MSG* A pointer to an MSG structure that contains message information retrieved from the calling thread's message queue by using the GetMessage or PeekMessage function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

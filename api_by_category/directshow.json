@@ -1,0 +1,38 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "",
+    "library": "Quartz.lib",
+    "min_server": "",
+    "header": "Errors.h (dshow.h)",
+    "return_value": "Returns the number of characters returned in the buffer, or zero if an error occurred. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "DirectShow",
+    "name": "AMGetErrorText",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HRESULT",
+        "name": "hr",
+        "description": "HRESULT value."
+      },
+      {
+        "in_out": "",
+        "type": "TCHAR",
+        "name": "*pBuffer",
+        "description": "Pointer to a character buffer that receives the error message."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "MaxLen",
+        "description": "Number of characters in pBuffer."
+      }
+    ],
+    "min_client": ""
+  }
+]
+

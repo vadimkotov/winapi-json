@@ -1,0 +1,2790 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "[PifMgr_CloseProperties is available for use in the   operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Shell32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Shlobj.h",
+    "return_value": "Type: int Returns NULL if successful. If unsuccessful, the functions returns the handle to the application properties that was passed as hProps. ",
+    "remarks": "",
+    "return_type": "int",
+    "category": "Windows Property System",
+    "name": "PifMgr_CloseProperties",
+    "is_callback": 0,
+    "dll": "Shell32.dll (version 5.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hProps",
+        "description": "Type: HANDLE A handle to the application's properties. This parameter should be set to the value that is returned by PifMgr_OpenProperties."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "flOpt",
+        "description": "Type: UINT A flag that specifies how the function operates.  CLOSEPROPS_DISCARD   Abandon cached data.  CLOSEPROPS_NONE   No options specified."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "[PifMgr_OpenProperties is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Shell32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Shlobj.h",
+    "return_value": "Type: HANDLE Returns a handle to the application's properties. Use this handle when you call the related .pif functions. ",
+    "remarks": "You should not think of PifMgr_OpenProperties as a function that opens a file somewhere. The .pif file does not remain open after this call. It is more useful to think of the function as a property structure allocator that you can initialize using disk data.  The primary reason why this function fails is because of low memory or inability to open the specified .pif file. If no .pif file exists, the function still allocates a data block in memory and initializes it with data from _Default.pif or its internal defaults.  If the function looks for a .pif file name but does not find it, it constructs a name and saves it in its internal .pif data structure. This guarantees that if PifMgr_SetProperties is called, the data is saved to disk. If the function does not find the .pif file, it searches for it in the following order. ",
+    "return_type": "HANDLE",
+    "category": "Windows Property System",
+    "name": "PifMgr_OpenProperties",
+    "is_callback": 0,
+    "dll": "Shell32.dll (version 5.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pszApp",
+        "description": "Type: PCWSTR A null-terminated Unicode string that contains the application's name."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCWSTR",
+        "name": "lpszPIF",
+        "description": "Type: PCWSTR A null-terminated Unicode string that contains the name of the .pif file."
+      },
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "hInf",
+        "description": "Type: UINT A handle to the application's .inf file. Set this value to zero if there is no .inf file. Set this value to -1 to prevent the .inf file from being processed."
+      },
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "flOpt",
+        "description": "Type: UINT A flag that controls how the function operates.  OPENPROPS_INHIBITPIF   Ignore any existing .pif files and get the properties from win.ini or _Default.pif. This flag is ignored on Windows NT, Windows 2000, and Windows XP. \t\t\t\t\t  OPENPROPS_NONE   No options specified."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "[PifMgr_GetProperties is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Shell32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Shlobj.h",
+    "return_value": "Type: int Returns NULL if successful. If unsuccessful, the function returns the handle to the application properties that were passed as hProps. ",
+    "remarks": "If the block is a \"named\" block, it must be the name of a linked extension inside the .pif file. This can be any predefined name (such as, \"WINDOWS 386 3.0\") or the name of your own block. You can create your own named data blocks using PifMgr_SetProperties. Named data can also be thought of as raw data, because it is returned to the calling application as it is, without translation. The size of a named block can be determined by calling PifMgr_GetProperties with cbProps set to 0. No data is copied, but the size of the requested block is returned. All named blocks can be enumerated by setting pszGroup to NULL. lpProps must be a pointer to a 16-byte buffer to contain the requested block name, and cbProps must be set to the zero-based block index.  The return value is the size of the block, or zero if the block is not found. If you request an unnamed property block by setting the selector of the name parameter to NULL, and the offset is a property group ordinal, then the associated structure is returned. For example, PifMgr_GetProperties(GROUP_TSK) returns a predefined structure that contains all the task-related information in a format that is independent of the .pif file. This is a valuable service because it relieves calling applications from dealing with .pif files that contain a wide variety of sections (known as .pif extensions), when only one is required. ",
+    "return_type": "int",
+    "category": "Windows Property System",
+    "name": "PifMgr_GetProperties",
+    "is_callback": 0,
+    "dll": "Shell32.dll (version 5.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HANDLE",
+        "name": "hProps",
+        "description": "Type: HANDLE A handle to an application's properties. This parameter should be set to the value that is returned by PifMgr_OpenProperties."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCSTR",
+        "name": "pszGroup",
+        "description": "Type: PCSTR A null-terminated string that contains the property group name. It can be one of the following, or any other name that corresponds to a valid .pif extension.     \"WINDOWS 286 3.0\"     \"WINDOWS 386 3.0\"     \"WINDOWS VMM 4.0\"     \"WINDOWS NT  3.1\"     \"WINDOWS NT  4.0\""
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "void",
+        "name": "*lpProps",
+        "description": "Type: void* When this function returns, contains a pointer to a PROPPRG structure."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "cbProps",
+        "description": "Type: int The size of the buffer, in bytes, pointed to by lpProps."
+      },
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "flOpt",
+        "description": "Type: UINT Set this parameter to GETPROPS_NONE."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "[PifMgr_SetProperties is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Shell32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Shlobj.h",
+    "return_value": "Type: int Returns the amount of information transferred, in bytes. Returns zero if the group cannot be found or an error occurs. ",
+    "remarks": "",
+    "return_type": "int",
+    "category": "Windows Property System",
+    "name": "PifMgr_SetProperties",
+    "is_callback": 0,
+    "dll": "Shell32.dll (version 5.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HANDLE",
+        "name": "hProps",
+        "description": "Type: HANDLE A handle to the application's properties. This parameter should be set to the value that is returned by PifMgr_OpenProperties."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCSTR",
+        "name": "pszGroup",
+        "description": "Type: PCSTR A null-terminated ANSI string containing the property group name. It can be one of the following, or any other name that corresponds to a valid .pif extension.     \"WINDOWS 286 3.0\"     \"WINDOWS 386 3.0\"     \"WINDOWS VMM 4.0\"     \"WINDOWS NT  3.1\"     \"WINDOWS NT  4.0\""
+      },
+      {
+        "in_out": "_In_",
+        "type": "void",
+        "name": "*lpProps",
+        "description": "Type: const void* A property group record buffer that holds the data."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "cbProps",
+        "description": "Type: int The size of the buffer, in bytes, pointed to by lpProps."
+      },
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "flOpt",
+        "description": "Type: UINT Always SETPROPS_NONE."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Converts the value of a property to the canonical value, according to the property description.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT Possible return values include the following:  ",
+    "remarks": "This function is a wrapper around the system's implementation of IPropertyDescription::CoerceToCanonicalValue. Most property descriptions specify the type that their values are expected to use. For example, the property description for System.Title specifies that System.Title values should be of type VT_LPWSTR. This function coerces values to this type, and then coerces the result into a canonical form. It is important to note that if this function fails, it will have already called PropVariantClear on the input PROPVARIANT structure. Only if this function succeeds is the calling application responsible for calling PropVariantClear on ppropvar when the structure is no longer needed. The coercion performed by this function is also performed by the property system during calls to IPropertyStore::GetValue and IPropertyStore::SetValue. Applications can either depend on the property system to perform the coercions or can use this function to perform the coercion at a time of the application's choosing. The coercion is performed in four steps, as follows: The following example, to be included as part of a larger program, demonstrates how to use PSCoerceToCanonicalValue to coerce a value to the type required for PKEY_Keywords. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSCoerceToCanonicalValue",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFPROPERTYKEY",
+        "name": "key",
+        "description": "Type: REFPROPERTYKEY Reference to a PROPERTYKEY structure that identifies the property whose value is to be coerced."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PROPVARIANT",
+        "name": "*ppropvar",
+        "description": "Type: PROPVARIANT* On entry, contains a pointer to a PROPVARIANT structure that contains the original value. When this function returns successfully, contains the canonical value."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Creates an adapter from an IPropertyStore.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The adapter object implements IPropertySetStorage, IPropertyStore, IPropertyStoreCapabilities, and IObjectProvider. Use this function if you need an object that implements IPropertyStore with an API that requires an IPropertySetStorage interface. The object created can also be useful to a namespace extension that wants to provide support for binding to namespace items using IPropertySetStorage. Applications must call this object from only one thread at a time. The adapter property store created by this function retains a reference to the source IPropertyStore interface. Therefore, the calling application is free to release its reference to the source IPropertyStore whenever convenient after calling this function. The adapter property store makes calls to methods on the IPropertyStore interface as appropriate. Therefore, if the calling application is writing values to the store, it should call the IPropertyStore::Commit method on only one of the interfaces. The following example, to be included as part of a larger program, demonstrates how to use PSCreateAdapterFromPropertyStore to use an adapter property store to convert an IPropertyStore interface into an IPropertySetStorage interface. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSCreateAdapterFromPropertyStore",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyStore",
+        "name": "*pps",
+        "description": "Type: IPropertyStore* Pointer to an IPropertyStore object that represents the property store."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to an IID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer requested in riid."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Creates a read-only, delayed-binding property store that contains multiple property stores.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This function creates a Component Object Model (COM) object that implements IPropertyStore,   INamedPropertyStore, IObjectProvider, and IPropertyStoreCapabilities. Applications must call this object from only one thread at a time. You must initialize COM with CoInitialize or OleInitialize before you call PSCreateDelayedMultiplexPropertyStore. COM must remain initialized for the lifetime of this object. PSCreateDelayedMultiplexPropertyStore is designed as an alternative to PSCreateMultiplexPropertyStore, which requires that the array of property stores be initialized before it creates the multiplex property store. The delayed binding mechanism is designed as a performance enhancement for calls to IPropertyStore::GetValue on a multiplex property store. When asked for the value of a property, the delayed multiplex property store checks each of the property stores for the value. After the value is found, there is no need to create and initialize subsequent stores. The delayed multiplex property store stops searching for a value when one of the property stores returns a success code and a non-VT_EMPTY value. When the delayed multiplex property store needs to access a particular property store, it first checks to see if it has already obtained an interface to that property store. If not, it calls IDelayedPropertyStoreFactory::GetDelayedPropertyStore with the appropriate property store ID to obtain the property store. It always uses the property store IDs in the order in which they are provided by the application. It is possible that not all IDs will be used. If the call to IDelayedPropertyStoreFactory fails with E_NOTIMPL or E_ACCESSDENIED for a particular property store ID, or if the application specified GPS_BESTEFFORT, then the failure is ignored and the delayed multiplex property store moves on to the next property store. In some cases, it might be beneficial to use PSCreateDelayedMultiplexPropertyStore in place of PSCreateMultiplexPropertyStore. For example, if an application needs to multiplex two property stores and the first property store is not memory-intensive to initialize and provides PKEY_Size information. Often, calling applications ask for a multiplex property store and then ask for only PKEY_Size before they release the object. In such a case, the application could avoid the cost of initializing the second property store by calling PSCreateDelayedMultiplexPropertyStore and implementing IDelayedPropertyStoreFactory. The following example, to be included as part of a larger program, demonstrates how to use PSCreateDelayedMultiplexPropertyStore in an implementation of IPropertyStoreFactory::GetPropertyStore. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSCreateDelayedMultiplexPropertyStore",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "GETPROPERTYSTOREFLAGS",
+        "name": "flags",
+        "description": "Type: GETPROPERTYSTOREFLAGS One or more GETPROPERTYSTOREFLAGS values. These values specify details of the created property store object."
+      },
+      {
+        "in_out": "",
+        "type": "IDelayedPropertyStoreFactory",
+        "name": "*pdpsf",
+        "description": "Type: IDelayedPropertyStoreFactory* Interface pointer to an instance of IDelayedPropertyStoreFactory."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "*rgStoreIds",
+        "description": "Type: const DWORD* Pointer to an array of property store IDs. This array does not need to be initialized."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cStores",
+        "description": "Type: DWORD The number of elements in the array pointed to by rgStoreIds."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to the requested IID of the interface that will represent the created property store."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyStore."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Creates an in-memory property store.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This function creates an in-memory property store object that implements IPropertyStore, INamedPropertyStore, IPropertyStoreCache, IPersistStream, IPropertyBag, and IPersistSerializedPropStorage. The memory property store does not correspond to a file and is designed for use as a cache. IPropertyStore::Commit is a no-op, and the data stored in the object persists only as long as the object does. The memory property store is thread safe. It aggregates the free-threaded marshaller and uses critical sections to protect its data members. The following example, to be included as part of a larger program, demonstrates how to use PSCreateMemoryPropertyStore. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSCreateMemoryPropertyStore",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to the requested interface ID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains a pointer to the desired interface, typically IPropertyStore or IPersistSerializedPropStorage."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates a read-only property store that contains multiple property stores, each of which must support either IPropertyStore or IPropertySetStorage.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This function creates a Component Object Model (COM) object that implements IPropertyStore, INamedPropertyStore, IObjectProvider, and IPropertyStoreCapabilities. The multiplex property store object aggregates the properties exposed from multiple property stores. This object can be useful for aggregating the properties from multiple existing property store implementations in a Shell namespace extension, or for reusing an existing property store and providing additional read-only properties. Applications must call this object from only one thread at a time. You must initialize COM with CoInitialize or OleInitialize before you call PSCreateDelayedMultiplexPropertyStore. COM must remain initialized for the lifetime of this object. Each of the objects in the array prgpunkStores must implement either IPropertyStore or IPropertySetStorage. If an object implements IPropertySetStorage, it is wrapped using PSCreatePropertyStoreFromPropertySetStorage for use in the multiplex property store. The multiplex property store implementation of IPropertyStore::GetValue asks each of the provided property stores for the value. The multiplex property store stops searching when one of the property stores returns a success code and a non-VT_EMPTY value. Failure codes cause the search to end and are passed back to the calling application. The multiplex property store implementation of IPropertyStoreCapabilities::IsPropertyWritable delegates the call to the first store that implements IPropertyStoreCapabilities. If multiple stores implement IPropertyStoreCapabilities, the subsequent ones are ignored. If no store implements IPropertyStoreCapabilities, this method returns S_OK. The following example, to be included as part of a larger program, demonstrates how to use PSCreateMultiplexPropertyStore in an implementation of IPropertyStoreFactory::GetPropertyStore. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSCreateMultiplexPropertyStore",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IUnknown",
+        "name": "**prgpunkStores",
+        "description": "Type: IUnknown** Address of a pointer to an array of property stores that implement either IPropertyStore or IPropertySetStorage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cStores",
+        "description": "Type: DWORD The number of elements in the array referenced in prgpunkStores."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to the requested IID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyStore."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Creates a container for a set of IPropertyChange objects. This container can be used with IFileOperation to apply a set of property changes to a set of files.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This function creates a Component Object Model (COM) object that implements IPropertyChangeArray. This object is a container for a set of IPropertyChange interfaces and can be used with IFileOperation to apply a set of property changes to a set of files. You must initialize COM with CoInitialize or OleInitialize before you call PSCreatePropertyChangeArray. COM must remain initialized for the lifetime of this object. The property change array executes in a single-threaded apartment (STA). A property change array can be initialized either by specifying simple changes by using the parameters, or by using various IPropertyChangeArray methods to insert or append additional changes. The parameters are tied together by their index value. For instance, for property rgpropkey[0], the new value rgpropvar[0] is applied as specified by rgflags[0]. The cChanges parameter states how many of these sets there are. Therefore, the number of elements in each array should be the same: ARRAYSIZE(rgpropkey) = ARRAYSIZE(rgflags) = ARRAYSIZE(rgpropvar) = cChanges. IFileOperation applies all changes in the property change array to a file simultaneously to avoid opening the file multiple times. The following example, to be included as part of a larger program, demonstrates how to use PSCreatePropertyChangeArray to set the Comment property to \"Fun\" and Rating to 4 on one or more files. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSCreatePropertyChangeArray",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "PROPERTYKEY",
+        "name": "*rgpropkey",
+        "description": "Type: const PROPERTYKEY* Pointer to an array of PROPERTYKEY structures that name the specific properties whose changes are being stored. If this value is NULL, cChanges must be 0."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PKA_FLAGS",
+        "name": "*rgflags",
+        "description": "Type: const PKA_FLAGS* Pointer to an array of PKA_FLAGS values. If this value is NULL, cChanges must be 0."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PROPVARIANT",
+        "name": "*rgpropvar",
+        "description": "Type: const PROPVARIANT* Pointer to an array of PROPVARIANT structures. If this value is NULL, cChanges must be 0."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cChanges",
+        "description": "Type: UINT Count of changes to be applied. This is the number of elements in each of the arrays rgpropkey, rgflags, and rgpropvar."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to the ID of the requested interface."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyChangeArray."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Accepts the IUnknown interface of an object that supports IPropertyStore or IPropertySetStorage. If the object supports IPropertySetStorage, it is wrapped so that it supports IPropertyStore.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "If the object pointed to by punk already supports IPropertyStore, no wrapper is created and the punk is returned unaltered. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSCreatePropertyStoreFromObject",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IUnknown",
+        "name": "*punk",
+        "description": "Type: IUnknown* A pointer to an interface that supports either IPropertyStore or IPropertySetStorage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "grfMode",
+        "description": "Type: DWORD Specifies the access mode to use. One of these values:  STGM_READ   Open for reading.  STGM_READWRITE   Open for reading and writing."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to the requested IID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns successfully, contains the address of a pointer to an interface guaranteed to support IPropertyStore."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Wraps an IPropertySetStorage interface in an IPropertyStore interface.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This function wraps an IPropertySetStorage interface in an IPropertyStore interface. Any value other than STGM_READ for grfMode, causes calls to IPropertyStore::SetValue and IPropertyStore::Commit to fail with STG_E_ACCESSDENIED. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSCreatePropertyStoreFromPropertySetStorage",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertySetStorage",
+        "name": "*ppss",
+        "description": "Type: IPropertySetStorage* A pointer to an IPropertySetStorage interface."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "grfMode",
+        "description": "Type: DWORD Specifies the access mode to enforce. grfMode should match the access mode used to open the IPropertySetStorage. Valid values are as follows:  STGM_READ   Calls to IPropertyStore::SetValueupdate an internal cache of properties, and calls to IPropertyStore::Commitcall the appropriate IPropertySetStorage methods to write out the changed properties.  STGM_WRITE   Not supported.  STGM_READWRITE   Not supported."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to an IID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer specified in riid."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Creates a simple property change.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Property changes can be placed into an IPropertyChangeArray which can then be used with IFileOperation to modify the properties on an item. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSCreateSimplePropertyChange",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PKA_FLAGS",
+        "name": "flags",
+        "description": "Type: PKA_FLAGS  PKA_FLAGS flags."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFPROPERTYKEY",
+        "name": "key",
+        "description": "Type: REFPROPERTYKEY Reference to a PROPERTYKEY structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFPROPVARIANT",
+        "name": "propvar",
+        "description": "Type: REFPROPVARIANT Reference to a PROPVARIANT structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to a specified IID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** The address of an IPropertyChange interface pointer."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "A wrapper API that calls the schema subsystem's IPropertySystem::EnumeratePropertyDescriptions. This function retrieves an instance of the subsystem object that implements IPropertyDescriptionList, to obtain either the entire list or a partial list of property descriptions in the system.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: PSSTDAPI Returns one of the following values.  ",
+    "remarks": "We recommend that you use the IID_PPV_ARGS macro, defined in objbase.h, to package the riid and ppv parameters. This macro provides the correct IID based on the interface pointed to by the value in ppv, eliminating the possibility of a coding error. ",
+    "return_type": "PSSTDAPI",
+    "category": "Windows Property System",
+    "name": "PSEnumeratePropertyDescriptions",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PROPDESC_ENUMFILTER",
+        "name": "filterOn",
+        "description": "Type: PROPDESC_ENUMFILTER The list to return. PROPDESC_ENUMFILTER shows the valid values for this method."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to the  interface ID of the requested interface."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** The address of an IPropertyDescriptionList interface pointer."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Gets a formatted, Unicode string representation of a property value stored in a PROPVARIANT structure. The caller is responsible for allocating the output buffer.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT Returns one of the following values.  ",
+    "remarks": "This function calls the schema subsystem's implementation of IPropertySystem::FormatForDisplay. That call provides a Unicode string representation of a property value, with additional formatting based on one or more PROPDESC_FORMAT_FLAGS. If the PROPERTYKEY is not recognized by the schema subsystem, IPropertySystem::FormatForDisplay attempts to format the value according to the value's VARTYPE. You must initialize Component Object Model (COM) with CoInitialize or OleInitialize before you call PSFormatPropertyValue. The purpose of this function is to convert data into a string suitable for display to the user. The value is formatted according to the current locale, the language of the user, the PROPDESC_FORMAT_FLAGS, and the property description specified by the property key. For information on how the property description schema influences the formatting of the value, see the following topics: Typically, the PROPDESC_FORMAT_FLAGS are used to modify the format prescribed by the property description. The output string can contain Unicode directional characters. These nonspacing characters influence the Unicode bidirectional algorithm so that the values appear correctly when a left-to-right (LTR) language is drawn on a right-to-left (RTL) window, or an RTL is drawn on a LTR window. These characters include the following: \"\\x200e\", \"\\x200f\", \"\\x202a\", \"\\x202b\", \"\\x202c\", \"\\x202d\", \"\\x202e\". The following properties use special formats and are unaffected by the PROPDESC_FORMAT_FLAGS. Note that examples cited are for strings with a current locale set to English; typically, output is localized except where noted.  If the property key does not correspond to a property description in any of the registered property schemas, then this function chooses a format based on the type of the value.  The following example, to be included as part of a larger program, demonstrates how to use PSFormatForDisplay to format a rating value. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSFormatForDisplay",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFPROPERTYKEY",
+        "name": "propkey",
+        "description": "Type: REFPROPERTYKEY Reference to a PROPERTYKEY that names the property whose value is being retrieved."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFPROPVARIANT",
+        "name": "propvar",
+        "description": "Type: REFPROPVARIANT Reference to a PROPVARIANT structure that contains the type and value of the property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PROPDESC_FORMAT_FLAGS",
+        "name": "pdfFlags",
+        "description": "Type: PROPDESC_FORMAT_FLAGS A flag that specifies the format to apply to the property string. See PROPDESC_FORMAT_FLAGS for possible values."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "pwszText",
+        "description": "Type: LPWSTR When the function returns, contains a pointer to the formatted value as a null-terminated, Unicode string. The calling application is responsible for allocating memory for the buffer before it calls PSFormatForDisplay."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cchText",
+        "description": "Type: DWORD Specifies the length of the buffer at pwszText in WCHARs, including the terminating null character."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Gets a formatted, Unicode string representation of a property value stored in a PROPVARIANT structure. This function allocates memory for the output string.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT Returns one of the following values.  ",
+    "remarks": "This function calls the schema subsystem's implementation of IPropertySystem::FormatForDisplayAlloc. That call provides a Unicode string representation of a property value, with additional formatting based on one or more PROPDESC_FORMAT_FLAGS. If the PROPERTYKEY is not recognized by the schema subsystem, IPropertySystem::FormatForDisplayAlloc attempts to format the value according to the value's VARTYPE. You must initialize Component Object Model (COM) with CoInitialize or OleInitialize before you call PSFormatForDisplayAlloc. The function allocates memory through CoTaskMemAlloc and returns a pointer to that memory through the ppszDisplay parameter. The calling application must use CoTaskMemFree to release that resource when it is no longer needed. The purpose of this function is to convert data into a string suitable for display to the user. The value is formatted according to the current locale, the language of the user, the PROPDESC_FORMAT_FLAGS, and the property description specified by the property key. For information on how the property description schema influences the formatting of the value, see the following topics: Typically, the PROPDESC_FORMAT_FLAGS are used to modify the format prescribed by the property description. The output string can contain Unicode directional characters. These nonspacing characters influence the Unicode bidirectional algorithm so that the values appear correctly when a left-to-right (LTR) language is drawn on a right-to-left (RTL) window, or an RTL is drawn on a LTR window. These characters include the following: \"\\x200e\", \"\\x200f\", \"\\x202a\", \"\\x202b\", \"\\x202c\", \"\\x202d\", \"\\x202e\". The following properties use special formats and are unaffected by the PROPDESC_FORMAT_FLAGS. Note that examples cited are for strings with a current locale set to English; typically, output is localized except where noted.  If the property key does not correspond to a property description in any of the registered property schemas, then this function chooses a format based on the type of the value.  The following example, to be included as part of a larger program, demonstrates how to use PSFormatForDisplayAlloc to format a rating value. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSFormatForDisplayAlloc",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFPROPERTYKEY",
+        "name": "key",
+        "description": "Type: REFPROPERTYKEY Reference to a PROPERTYKEY that names the property whose value is being retrieved."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFPROPVARIANT",
+        "name": "propvar",
+        "description": "Type: REFPROPVARIANT Reference to a PROPVARIANT structure that contains the type and value of the property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PROPDESC_FORMAT_FLAGS",
+        "name": "pdfFlags",
+        "description": "Type: PROPDESC_FORMAT_FLAGS One or more flags that specify the format to apply to the property string. See PROPDESC_FORMAT_FLAGS for possible values."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWSTR",
+        "name": "*ppszDisplay",
+        "description": "Type: PWSTR* When the function returns, contains a pointer to a null-terminated, Unicode string representation of the requested property value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Gets a formatted, Unicode string representation of a property value stored in a property store. This function allocates memory for the output string.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This function uses the ppd parameter to call IPropertyDescription::FormatForDisplay. That call provides a Unicode string representation of a property value, with additional formatting based on one or more PROPDESC_FORMAT_FLAGS. You must initialize Component Object Model (COM) with CoInitialize or OleInitialize before you call PSFormatPropertyValue. The function allocates memory and returns a pointer to that memory in ppszDisplay. The calling application must use CoTaskMemFree to release the string specified by ppszDisplay when it is no longer needed. The purpose of this function is to convert data into a string suitable for display to the user. The value is formatted according to the current locale, the language of the user, the PROPDESC_FORMAT_FLAGS, and the property description specified by the property key. For information on how the property description schema influences the formatting of the value, see the following topics: Typically, the PROPDESC_FORMAT_FLAGS are used to modify the format prescribed by the property description. The output string can contain Unicode directional characters. These nonspacing characters influence the Unicode bidirectional algorithm so that the values appear correctly when a left-to-right (LTR) language is drawn on a right-to-left (RTL) window, or an RTL is drawn on a LTR window. These characters include the following: \"\\x200e\", \"\\x200f\", \"\\x202a\", \"\\x202b\", \"\\x202c\", \"\\x202d\", \"\\x202e\". The following properties use special formats and are unaffected by the PROPDESC_FORMAT_FLAGS. Note that examples cited are for strings with a current locale set to English; typically, output is localized except where noted.  If the property key does not correspond to a property description in any of the registered property schemas, then this function chooses a format based on the type of the value.  The following example, to be included as part of a larger program, demonstrates how to use PSFormatPropertyValue to format a rating value. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSFormatPropertyValue",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyStore",
+        "name": "*pps",
+        "description": "Type: IPropertyStore* Pointer to an IPropertyStore, which represents the property store from which the property value is taken."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IPropertyDescription",
+        "name": "*ppd",
+        "description": "Type: IPropertyDescription* Pointer to an IPropertyDescription, which represents the property whose value is being retrieved."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PROPDESC_FORMAT_FLAGS",
+        "name": "pdff",
+        "description": "Type: PROPDESC_FORMAT_FLAGS One or more PROPDESC_FORMAT_FLAGS that specify the format to apply to the property string. See PROPDESC_FORMAT_FLAGS for possible values."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "*ppszDisplay",
+        "description": "Type: LPWSTR* When the function returns, contains a pointer to the formatted value as a null-terminated, Unicode string."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Gets an instance of a property description interface for a specified property.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.idl",
+    "return_value": "Type: HRESULT Returns S_OK if successful, or an error value otherwise, including the following:  ",
+    "remarks": "We recommend that you use the IID_PPV_ARGS macro, defined in Objbase.h, to package the riid and ppv parameters. This macro provides the correct IID based on the interface pointed to by the value in ppv, which eliminates the possibility of a coding error in riid that could lead to unexpected results. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSGetImageReferenceForValue",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFPROPERTYKEY",
+        "name": "propkey",
+        "description": "Type: REFPROPERTYKEY A reference to a PROPERTYKEY structure that specifies the property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID A reference to the IID of the interface to retrieve through ppv."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns successfully, contains the interface pointer requested in riid."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves a property handler for a Shell item.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: PSSTDAPI Returns S_OK if successful, or an error value otherwise. ",
+    "remarks": "This function is supported in Windows XP and Windows Vista. For applications supported only on Windows Vista or later, it is recommended that you use IShellItem2::GetPropertyStore instead of PSGetItemPropertyHandler. That method provides a richer set of properties in the property store that is returned. This function is approximately equivalent to passing the GPS_HANDLERPROPERTIESONLY flag to IShellItem2::GetPropertyStore. You must initialize Component Object Model (COM) with CoInitialize or OleInitialize before you call PSGetItemPropertyHandler. COM must remain initialized for the lifetime of this object. The following example, to be included as part of a larger program, demonstrates how to use PSGetItemPropertyHandler to obtain a property handler for an item. ",
+    "return_type": "PSSTDAPI",
+    "category": "Windows Property System",
+    "name": "PSGetItemPropertyHandler",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IUnknown",
+        "name": "*punkItem",
+        "description": "Type: IUnknown* A pointer to the IUnknown interface of a Shell item that supports IShellItem.                       Windows XP: Use SHCreateShellItem to create the Shell item. Windows Vista: Use SHCreateItemFromIDList, SHCreateItemFromParsingName, SHCreateItemFromRelativeName, SHCreateItemInKnownFolder, or SHCreateItemWithParent to create the Shell item."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fReadWrite",
+        "description": "Type: BOOL TRUE to retrieve a read/write property handler. FALSE to retrieve a read-only property handler."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to the IID of the interface the handler object should return. This should be IPropertyStore or an interface derived from IPropertyStore."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer requested in riid."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves a property handler for a Shell item.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: PSSTDAPI Returns S_OK if successful, or an error value otherwise. ",
+    "remarks": "This function is supported in Windows XP as part of the Microsoft Windows Desktop Search (WDS) redistributable which includes IPropertyStore and supporting interfaces. For applications supported only on Windows Vista or later, we recommend that you use IShellItem2::GetPropertyStoreWithCreateObject instead of PSGetItemPropertyHandlerWithCreateObject because IShellItem2::GetPropertyStoreWithCreateObject provides a richer set of properties in the property store that is returned. This function is approximately equivalent to passing the GPS_HANDLERPROPERTIESONLY flag to IShellItem2::GetPropertyStoreWithCreateObject. The punkCreateObject parameter enables the creation of a property store in a different context than that of the caller. For instance, the ICreateObject implementation can cause the property store to be created in another process. This parameter is used only for property handlers that support it and that are registered under                                       HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\PropertySystem\\PropertyHandlers You must initialize Component Object Model (COM) with CoInitialize or OleInitialize before you call PSGetItemPropertyHandlerWithCreateObject. COM must remain initialized for the lifetime of this object. The following example, to be included as part of a larger program, demonstrates how to use PSGetItemPropertyHandlerWithCreateObject to obtain a property handler for an item. ",
+    "return_type": "PSSTDAPI",
+    "category": "Windows Property System",
+    "name": "PSGetItemPropertyHandlerWithCreateObject",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IUnknown",
+        "name": "*punkItem",
+        "description": "Type: IUnknown* A pointer to the IUnknown interface of a Shell item that supports IShellItem.                       Windows XP: Use SHCreateShellItem to create the Shell item. Windows Vista: Use SHCreateItemFromIDList, SHCreateItemFromParsingName, SHCreateItemFromRelativeName, SHCreateItemInKnownFolder, or SHCreateItemWithParent to create the Shell item."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fReadWrite",
+        "description": "Type: BOOL TRUE to retrieve a read/write property handler. FALSE to retrieve a read-only property handler."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IUnknown",
+        "name": "*punkCreateObject",
+        "description": "Type: IUnknown* Pointer to the IUnknown interface of a class factory object that supports ICreateObject."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID A reference to the IID of the interface to retrieve through ppv."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns successfully, contains the interface pointer requested in riid. This is typically IPropertyStore or IPropertyStoreCapabilities."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Gets a value from serialized property storage by property name.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: PSSTDAPI Returns S_OK if successful, or an error value otherwise. ",
+    "remarks": "This function is intended to be called if the calling application already has a serialized property storage and needs no more than a few properties from storage. If many properties need to be retrieved, performance can be enhanced by creating a memory property store by calling PSCreateMemoryPropertyStore, initializing the property store by calling IPersistSerializedPropStorage::SetPropertyStorage, and using INamedPropertyStore or IPropertyStore to retrieve the properties. Note that PSGetNamedPropertyFromPropertyStorage works only on serialized buffers created by the system implementation of IPersistSerializedPropStorage. You must first obtain a memory property store by calling PSCreateMemoryPropertyStore; that store can then create a serialized buffer using the IPersistSerializedPropStorage interface. Although SERIALIZEDPROPSTORAGE is an opaque serialized data structure whose format may change in the future, earlier formats will be supported on subsequent versions of Windows. Because the format is opaque, applications should use supported property storage APIs to access and manipulate the serialized buffer (see IPersistSerializedPropStorage and  PSGetPropertyFromPropertyStorage). The following example, to be included as part of a larger program, demonstrates how to use PSGetNamedPropertyFromPropertyStorage to read a value from serialized property storage. ",
+    "return_type": "PSSTDAPI",
+    "category": "Windows Property System",
+    "name": "PSGetNamedPropertyFromPropertyStorage",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCUSERIALIZEDPROPSTORAGE",
+        "name": "psps",
+        "description": "Type: PCUSERIALIZEDPROPSTORAGE A pointer to an allocated buffer that contains the serialized properties. Call IPersistSerializedPropStorage::GetPropertyStorage to obtain the buffer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cb",
+        "description": "Type: DWORD The size, in bytes, of the USERIALIZESPROPSTORAGE buffer pointed to by psps."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszName",
+        "description": "Type: LPCWSTR A pointer to a null-terminated, Unicode string that contains the name of the property."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PROPVARIANT",
+        "name": "*ppropvar",
+        "description": "Type: PROPVARIANT* When this function returns, contains the requested value."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the canonical name of the property, given its PROPERTYKEY.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT Returns one of the following values.  ",
+    "remarks": "Retrieves a canonical name for a specified property key. Like property keys, canonical names uniquely identify a property. For example, System.Keywords is the canonical name for PKEY_Keywords. This function succeeds only for properties registered as part of the property schema. It is the responsibility of the calling application to use CoTaskMemFree to release the string referred to by ppszCanonicalName when it is no longer needed. The following example, to be included as part of a larger program, demonstrates how to use PSGetNameFromPropertyKey to read a value from serialized property storage. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSGetNameFromPropertyKey",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFPROPERTYKEY",
+        "name": "propkey",
+        "description": "Type: REFPROPERTYKEY Reference to a PROPERTYKEY structure that identifies the requested property."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWSTR",
+        "name": "*ppszCanonicalName",
+        "description": "Type: PWSTR* When this function returns, contains a pointer to the property name as a null-terminated Unicode string."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Gets an instance of a property description interface for a property specified by a PROPERTYKEY structure.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: PSSTDAPI Returns one of the following values.  ",
+    "remarks": "We recommend that you use the IID_PPV_ARGS macro, defined in Objbase.h, to package the riid and ppv parameters. This macro provides the correct IID based on the interface pointed to by the value in ppv, which eliminates the possibility of a coding error. The following example, to be included as part of a larger program, demonstrates how to use PSGetPropertyDescription to get the property description for the ratings property. ",
+    "return_type": "PSSTDAPI",
+    "category": "Windows Property System",
+    "name": "PSGetPropertyDescription",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFPROPERTYKEY",
+        "name": "propkey",
+        "description": "Type: REFPROPERTYKEY Reference to a PROPERTYKEY."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to the interface ID of the requested interface."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyDescription, IPropertyDescriptionAliasInfo, or IPropertyDescriptionSearchInfo."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Gets an instance of a property description interface for a specified property name.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: PSSTDAPI Returns one of the following values.  ",
+    "remarks": "It is recommended that you use the IID_PPV_ARGS macro, defined in objbase.h, to package the riid and ppv parameters. This macro provides the correct IID based on the interface pointed to by the value in ppv, eliminating the possibility of a coding error. We recommend that pszCanonicalName point to the canonical name of a property, for example, L\"System.Keywords\". The canonical name is case sensitive. In addition to the new canonical names, callers can pass a legacy name for a property. The following table contains the complete list of supported legacy names and the canonical names they correspond to.  The following example, to be included as part of a larger program, demonstrates how to use PSGetPropertyDescriptionByName to retrieve the description for the ratings property. ",
+    "return_type": "PSSTDAPI",
+    "category": "Windows Property System",
+    "name": "PSGetPropertyDescriptionByName",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 5.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszCanonicalName",
+        "description": "Type: LPCWSTR A pointer to a null-terminated, Unicode string that identifies the property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to the interface ID of the requested property."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyDescription, IPropertyDescriptionAliasInfo, or  IPropertyDescriptionSearchInfo."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Gets an instance of a property description list interface for a specified property list.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: PSSTDAPI Returns one of the following values.  ",
+    "remarks": "This function calls the property subsystem implementation of IPropertySystem::GetPropertyDescriptionListFromString to obtain a collection of properties provided as a semicolon-delimited property list string. We recommend that you use the IID_PPV_ARGS macro, defined in Objbase.h, to package the riid and ppv parameters. This macro provides the correct IID based on the interface pointed to by the value in ppv, which eliminates the possibility of a coding error. For more information about property schemas, see Property Schemas. The following example, to be included as part of a larger program, demonstrates how to use PSGetPropertyDescriptionListFromString. ",
+    "return_type": "PSSTDAPI",
+    "category": "Windows Property System",
+    "name": "PSGetPropertyDescriptionListFromString",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 5.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszPropList",
+        "description": "Type: LPCWSTR Pointer to a null-terminated, Unicode string that identifies the property list. See IPropertySystem::GetPropertyDescriptionListFromString for more information about the format of this parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to the interface ID of the requested interface."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyDescriptionList."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Gets the value of a property as stored in serialized property storage.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: PSSTDAPI Returns S_OK if successful, or an error value otherwise. ",
+    "remarks": "This function is intended to be called if the calling application already has a serialized property storage and needs no more than a few properties from storage. If many properties need to be retrieved, performance can be enhanced by creating a memory property store through PSCreateMemoryPropertyStore, initializing the property store by calling IPersistSerializedPropStorage::SetPropertyStorage, and by using IPropertyStore to retrieve the properties. Note that PSGetPropertyFromPropertyStorage works only on serialized buffers created by the system implementation of IPersistSerializedPropStorage. You must first obtain a memory property store by calling PSCreateMemoryPropertyStore. That store can then create a serialized buffer using the IPersistSerializedPropStorage interface. Although SERIALIZEDPROPSTORAGE is an opaque serialized data structure whose format may change in the future, earlier formats will be supported on subsequent versions of Windows. Because the format is opaque, applications should use supported property storage APIs to access and manipulate the serialized buffer (see IPersistSerializedPropStorage). The following example, to be included as part of a larger program, demonstrates how to use PSGetPropertyFromPropertyStorage to read a value from serialized property storage. ",
+    "return_type": "PSSTDAPI",
+    "category": "Windows Property System",
+    "name": "PSGetPropertyFromPropertyStorage",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCUSERIALIZEDPROPSTORAGE",
+        "name": "psps",
+        "description": "Type: PCUSERIALIZEDPROPSTORAGE Pointer to an allocated buffer that contains the serialized properties. This buffer is obtained by a call to IPersistSerializedPropStorage::GetPropertyStorage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cb",
+        "description": "Type: DWORD The size, in bytes, of the USERIALIZESPROPSTORAGE buffer pointed to by psps."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFPROPERTYKEY",
+        "name": "rpkey",
+        "description": "Type: REFPROPERTYKEY Reference to the PROPERTYKEY that identifies the property for which to get the value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PROPVARIANT",
+        "name": "**ppropvar",
+        "description": "Type: PROPVARIANT** When this function returns, contains the requested value."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Gets the property key for a canonical property name.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT Returns one of the following values.  ",
+    "remarks": "Property keys uniquely identify a property. For example, PKEY_Keywords corresponds to System.Keywords. This function succeeds only for properties registered as part of the property schema. See PSGetPropertyDescriptionByName for a list of legacy property names that are also supported by the function. The following example, to be included as part of a larger program, demonstrates how to use PSGetPropertyKeyFromName to obtain the property key for System.Keywords. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSGetPropertyKeyFromName",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pszName",
+        "description": "Type: PCWSTR Pointer to a property name as a null-terminated, Unicode string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PROPERTYKEY",
+        "name": "*ppropkey",
+        "description": "Type: PROPERTYKEY* When this function returns, contains the requested property key."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Gets an instance of the subsystem object that implements IPropertySystem.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: PSSTDAPI Returns one of the following values.  ",
+    "remarks": "You must initialize Component Object Model (COM) with CoInitialize or OleInitialize prior to calling PSGetPropertySystem.  COM must remain initialized for the lifetime of this object. The property system object aggregates the free-threaded marshaller and is thread-safe. We recommend that you use the IID_PPV_ARGS macro defined in Objbase.h to package the riid and ppv parameters. This macro provides the correct IID based on the interface pointed to by the value in ppv, which eliminates the possibility of a coding error. The following example, to be included as part of a larger program, demonstrates how to use PSGetPropertySystem. ",
+    "return_type": "PSSTDAPI",
+    "category": "Windows Property System",
+    "name": "PSGetPropertySystem",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference to the IID of the requested interface."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertySystem."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Gets a property value from a property store.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This helper function is used to read a property value from a store. If the calling code already has a PROPERTYKEY structure, it might be simpler to call IPropertyStore::GetValue directly. The following example, to be included as part of a larger program, demonstrates how to use PSGetPropertyValue. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSGetPropertyValue",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyStore",
+        "name": "*pps",
+        "description": "Type: IPropertyStore* Pointer to an instance of the IPropertyStore interface, which represents the property store from which to get the value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IPropertyDescription",
+        "name": "*ppd",
+        "description": "Type: IPropertyDescription* Pointer to an instance of the IPropertyDescription interface, which represents the property in the property store."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PROPVARIANT",
+        "name": "*ppropvar",
+        "description": "Type: PROPVARIANT* Pointer to an uninitialized PROPVARIANT structure. When this function returns, points to the requested property value."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Gets the class identifier (CLSID) of a per-computer, registered file property handler.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: PSSTDAPI Returns S_OK if successful, or an error value otherwise. ",
+    "remarks": "For information on how to register your handler, see Initializing Property Handlers. This function returns only those handlers registered under HKEY_LOCAL_MACHINE. Most calling applications should not need to call this method or use CoCreateInstance to create a property handler directly. Instead, calling applications should use IShellItem2::GetPropertyStore to create a property store for a Shell item on Windows Vista. IShellItem2::GetPropertyStore provides the largest set of available properties for a Shell item, and the most options for customizing exactly which properties to return. If no property handler is registered for the specified file, this function returns an error code. When this happens, it might still be possible to read certain file system properties from the property store returned from IShellItem2::GetPropertyStore. Applications that need to create a property handler from code and that must run both on Windows Vista and on Windows XP can call PSGetItemPropertyHandler to create a property store for a Shell item through the Microsoft Windows Desktop Search (WDS) redistributable. The following example, to be included as part of a larger program, demonstrates how to use PSLookupPropertyHandlerCLSID. ",
+    "return_type": "PSSTDAPI",
+    "category": "Windows Property System",
+    "name": "PSLookupPropertyHandlerCLSID",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pszFilePath",
+        "description": "Type: PCWSTR Pointer to a null-terminated, Unicode buffer that contains the absolute path of the file whose property handler CLSID is requested."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "CLSID",
+        "name": "*pclsid",
+        "description": "Type: CLSID* When this function returns, contains the requested property handler CLSID."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Deletes a property from a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_Delete",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Reads the BOOL data value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between windows types and the VARIANT type that is used to express values in a property bag.  Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadBOOL",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BOOL",
+        "name": "*value",
+        "description": "Type: BOOL* When this function returns successfully, contains a pointer to the value read from the property."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Reads a BSTR data value from a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag.  Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadBSTR",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BSTR",
+        "name": "*value",
+        "description": "Type: BSTR* When this function returns, contains a pointer to a BSTR property value."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Reads a DWORD data value from property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.idl",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadDWORD",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A pointer to a null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*value",
+        "description": "Type: DWORD* When this function returns, contains a pointer to a DWORD property value."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Reads the GUID data value from a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.idl",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadGUID",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "GUID",
+        "name": "*value",
+        "description": "Type: GUID* When this function returns, contains a pointer to a GUID property value."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Reads an int data value from a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "If the property bag does not already contain the specified property, the call still succeeds. The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadInt",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "int",
+        "name": "*value",
+        "description": "Type: int* When this function returns, contains a pointer to an int property value."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Reads a LONG data value from a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.idl",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "If the property bag does not already contain the specified property, the call still succeeds. The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadLONG",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LONG",
+        "name": "*value",
+        "description": "Type: LONG* When this function returns, contains a pointer to a LONG property value."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the property coordinates stored in a POINTL structure of a specified property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadPOINTL",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "POINTL",
+        "name": "*value",
+        "description": "Type: POINTL* When this function returns, contains a pointer to a POINTL structure that contains the property coordinates."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the property coordinates stored in a POINTS structure of a specified property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadPOINTS",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "POINTS",
+        "name": "*value",
+        "description": "Type: POINTS* When this function returns successfully, contains a pointer to a POINTS structure that contains the property coordinates."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Reads the property key of a property in a specified property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadPropertyKey",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PROPERTYKEY",
+        "name": "*value",
+        "description": "Type: PROPERTYKEY* When this function returns, contains a pointer to a property key value."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the coordinates of a rectangle stored in a property contained in a specified property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadRECTL",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "RECTL",
+        "name": "*value",
+        "description": "Type: RECTL* When this function returns, contains a pointer to a RECTL structure that contains the property coordinates."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Reads the SHORT data value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadSHORT",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SHORT",
+        "name": "*value",
+        "description": "Type: SHORT* When this function returns, contains a pointer to a SHORT property value."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Reads the string data value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": " The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadStr",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPCWSTR",
+        "name": "value",
+        "description": "Type: LPCWSTR When this function returns, contains a pointer to a string property value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "int",
+        "name": "characterCount",
+        "description": "Type: int This function returns the  integer that represents the size (maximum number of characters) of the value parameter being returned."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Reads a string data value from a property in a property bag and allocates memory for the string that is read.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadStrAlloc",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A pointer to a null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWSTR",
+        "name": "*value",
+        "description": "Type: PWSTR* When this function returns, contains a pointer to a string data value from a property in a property bag and allocates memory for the string that is read. The caller of the PSPropertyBag_ReadStrAlloc function needs to call a CoTaskMemFree function on this parameter."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Reads the data stream stored in a given property contained in a specified property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The caller of the PSPropertyBag_ReadStream function needs to call a IUnknown::Release method on the IStream object returned by this function. IPropertyBag and IPersistPropertyBag optimize Save As Text functionality. IPropertyBag and IPropertyBag2 provide an object with a property bag in which the object can save its properties persistently. IPropertyBag2 allows the object to obtain type information for each property: IPropertyBag2::Read causes one or more properties to be read from the property bag, and IPropertyBag2::Write causes one or more properties to be saved into the property bag. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadStream",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object, that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A pointer to a null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "IStream",
+        "name": "**value",
+        "description": "Type: IStream** The address of a pointer that, when this function returns successfully, receives the IStream object."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Reads the type of data value of a property that is stored in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "IPropertyBag and IPersistPropertyBag optimize Save As Text functionality. IPropertyBag and IPropertyBag2 provide an object with a property bag in which the object can save its properties persistently. IPropertyBag2 allows the object to obtain type information for each property: IPropertyBag2::Read causes one or more properties to be read from the property bag, and IPropertyBag2::Write causes one or more properties to be saved into the property bag. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadType",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object, that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A pointer to a null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "VARIANT",
+        "name": "*var",
+        "description": "Type: VARIANT* Returns on successful function completion a pointer to a VARIANT data type that contains the property value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "VARTYPE",
+        "name": "*type",
+        "description": "Type: VARTYPE* If type is VT_EMPTY, this function reads the VARIANT of the property in the IPropertyBag   propBag parameter. If type is not VT_EMPTY and not the same as the VARIANT read, then this function attempts to convert the VARIANT read to the VARTYPE defined by type parameter before returning."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Reads a ULONGLONG data value from a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadULONGLONG",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ULONGLONG",
+        "name": "value",
+        "description": "Type: ULONGLONG When this function returns, contains a pointer to a ULONGLONG property value."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Reads a given property of an unknown data value in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "IPropertyBag and IPersistPropertyBag optimize Save As Text functionality. IPropertyBag and IPropertyBag2 provide an object with a property bag in which the object can save its properties persistently. IPropertyBag2 allows the object to obtain type information for each property: IPropertyBag2::Read causes one or more properties to be read from the property bag, and IPropertyBag2::Write causes one or more properties to be saved into the property bag. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_ReadUnknown",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object, that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A pointer to a null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID A reference to the IID of the interface to retrieve through ppv. This interface IID should be IPropertyBag or an interface derived from IPropertyBag."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this method returns successfully, contains the interface pointer requested in riid. This is typically riid."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the BOOL value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WriteBOOL",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "value",
+        "description": "Type: BOOL The BOOL value to which the named property should be set."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the BSTR value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WriteBSTR",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BSTR",
+        "name": "value",
+        "description": "Type: BSTR The BSTR value to which the named property should be set."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the DWORD value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WriteDWORD",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "value",
+        "description": "Type: DWORD A DWORD value to which the named property should be set."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the GUID value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag.  Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WriteGUID",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "GUID",
+        "name": "*value",
+        "description": "Type: const GUID* A pointer to a GUID value to which the named property should be set."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the int value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WriteInt",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "value",
+        "description": "Type: int The int value to which the property should be set."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the LONG value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WriteLONG",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "value",
+        "description": "Type: LONG The LONG value to which the property should be set."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Stores the property coordinates in aPOINTL structure of a specified property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WritePOINTL",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "POINTL",
+        "name": "*value",
+        "description": "Type: const POINTL* A pointer to a POINTL structure that specifies the coordinates to store in the  property."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Stores the property coordinates in aPOINTS structure of a specified property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WritePOINTS",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "POINTS",
+        "name": "*value",
+        "description": "Type: const POINTS* Pointer to a POINTS structure that specifies the coordinates to store in the property."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the property key value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Property keys uniquely identify a property. For example, PKEY_Keywords corresponds to System.Keywords. This function succeeds only for properties registered as part of the property schema. The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WritePropertyKey",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFPROPERTYKEY",
+        "name": "value",
+        "description": "Type: REFPROPERTYKEY A PROPERTYKEY structure that specifies the property key value to store in the property."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Stores the coordinates of a rectangle in a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WriteRECTL",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "RECTL",
+        "name": "*value",
+        "description": "Type: const RECTL* A pointer to a RECTL structure that specifies the coordinates to store in the property."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the SHORT value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WriteSHORT",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SHORT",
+        "name": "value",
+        "description": "Type: SHORT The SHORT value to which the property should be set."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the string value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WriteStr",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "value",
+        "description": "Type: LPCWSTR The string value to which the property should be set."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Writes a data stream to a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WriteStream",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IStream",
+        "name": "*value",
+        "description": "Type: IStream* A pointer to the IStream object to write to the property."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the ULONGLONG value of a property in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WriteULONGLONG",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONGLONG",
+        "name": "value",
+        "description": "Type: ULONGLONG An ULONGLONG value to which the property should be set."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Writes a property of an unknown data value in a property bag.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The property bag property function API converts between window types and the VARIANT type that is used to express values in a property bag. Doing so eases property bag usage, simplifies applications, and avoids common coding errors. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyBag_WriteUnknown",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyBag",
+        "name": "*propBag",
+        "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "propName",
+        "description": "Type: LPCWSTR A pointer to a null-terminated property name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IUnknown",
+        "name": "*punk",
+        "description": "Type: IUnknown* A pointer to an IUnknown derived interface that copies the specified property of an unknown data value in a property bag."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Converts a string to a PROPERTYKEY structure.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The string to be converted must be formatted as \"{fmtid} pid\". For instance, the string that corresponds to PKEY_Title is: \"{F29F85E0-4FF9-1068-AB91-08002B27B3D9} 2\". PSStringFromPropertyKey outputs strings in this format. This function succeeds for any valid property key string, even if the property does not exist in the property schema. The following example, to be included as part of a larger program, demonstrates how to use PSPropertyKeyFromString. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSPropertyKeyFromString",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszString",
+        "description": "Type: LPCWSTR Pointer to a null-terminated, Unicode string to be converted."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PROPERTYKEY",
+        "name": "*pkey",
+        "description": "Type: PROPERTYKEY* When this function returns, contains a pointer to a PROPERTYKEY structure."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Informs the schema subsystem of the addition of a property description schema file.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT Returns one of the following values.  ",
+    "remarks": "This function is a wrapper API for the schema subsystem's implementation of IPropertySystem::RegisterPropertySchema. Call this function only when the file is first installed on the computer. Typically, a setup application calls this function after it installs the .propdesc file, which should be stored in the install directory of the application under Program Files. Multiple calls can be made to IPropertySystem::RegisterPropertySchema in order to register multiple schema files. When registering property schema files, remember that they can be read by processes running as different users. Therefore, it is important to place a schema file in a location that grants read access to all users on the machine. Similarly, use the absolute path to the file in this function's pszPath parameter. If a full or partial failure is encountered that prevents a property description from being loaded, the cause is recorded in the application event log. This function fails with E_ACCESSDENIED if the calling context does not have proper privileges, which includes write access to HKEY_LOCAL_MACHINE. It is the responsibility of the calling application to obtain privileges through User Account Control (UAC) mechanisms. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSRegisterPropertySchema",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 5.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pszPath",
+        "description": "Type: PCWSTR Pointer to the full file path, as a Unicode string, to the property description schema (.propdesc) file on the local machine. This can be either a fully-specified full path, or a full path that includes environment variables such as %PROGRAMFILES%."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the value of a property in a property store.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This helper function is used to write a property value to a store. If the calling code already has a PROPERTYKEY structure, it might be simpler to call IPropertyStore::SetValue directly. The following example, to be included as part of a larger program, demonstrates how to use PSSetPropertyValue. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSSetPropertyValue",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyStore",
+        "name": "*pps",
+        "description": "Type: IPropertyStore* Pointer to an instance of the IPropertyStore interface, which represents the property store that contains the property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IPropertyDescription",
+        "name": "*ppd",
+        "description": "Type: IPropertyDescription* Pointer to an instance of the IPropertyDescription interface, which identifies the individual property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFPROPVARIANT",
+        "name": "propvar",
+        "description": "Type: REFPROPVARIANT Reference to a PROPVARIANT structure that contains the new value."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Creates a string that identifies a property from that property's key.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The string format retrieved is \"{propkey.fmtid} propkey.pid\". For example, the output string for PKEY_Title is \"{F29F85E0-4FF9-1068-AB91-08002B27B3D9} 2\". The following example, to be included as part of a larger program, demonstrates the use of PSPropertyKeyFromString. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSStringFromPropertyKey",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFPROPERTYKEY",
+        "name": "pkey",
+        "description": "Type: REFPROPERTYKEY Reference to a PROPERTYKEY structure that identifies a property."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "psz",
+        "description": "Type: LPWSTR Pointer to a buffer that receives the output string. The buffer should be large enough to contain PKEYSTR_MAX WCHARs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cch",
+        "description": "Type: UINT The length of the buffer pointed to by psz, in WCHARs."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Informs the schema subsystem of the removal of a property description schema file.",
+    "library": "Propsys.lib",
+    "min_server": "Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Propsys.h",
+    "return_value": "Type: HRESULT Returns one of the following values.  ",
+    "remarks": "This function is a wrapper for the schema subsystem's implementation of IPropertySystem::UnregisterPropertySchema. Call this method when the file is being uninstalled from the computer. Typically, a setup application calls this method before or after uninstalling the .propdesc file. This method can be called after the file no longer exists. This function fails with a code of E_ACCESSDENIED if the calling context does not have proper privileges, which include write access to HKLM (HKEY_LOCAL_MACHINE). It is the responsibility of the calling application to obtain privileges through User Account Control (UAC) mechanisms. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "PSUnregisterPropertySchema",
+    "is_callback": 0,
+    "dll": "Propsys.dll (version 5.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pszPath",
+        "description": "Type: PCWSTR Pointer to the full file path, as a Unicode string, to the property description schema (.propdesc) file on the local machine. This can be either a fully-specified full path, or a full path that includes environment variables such as %PROGRAMFILES%."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Adds default properties to the property store as registered for the specified file extension.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Shobjidl.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The list of properties used to set a default value comes from the SetDefaultsFor registry value of the ProgID for the file association of the specified file extension. The list is prefixed by \"prop:\" and contains the canonical names of the properties to set the default value, such as: \"prop:System.Author;System.Document.DateCreated\". The possible properties for this list are System.Author, System.Document.DateCreated, and System.Photo.DateTaken. If the SetDefaultsFor value does not exist on the ProgID, this function uses the default found on the SetDefaultsFor value of HKEY_CLASSES_ROOT\\*. System.Author has the value of the user that performed the action. System.Document.DateCreated and System.Photo.DateTaken use the current date. These three properties are the only ones for which the system provides special defaults. Note that there are several types of properties: When creating a new file, types one and two are provided just by creating the file. But properties of type three must be set explicitly by a program. The system provides SHAddDefaultPropertiesByExt to provide values for up to three specific properties of type three. Sometimes Windows Explorer uses this API when saving a file for the first time, or when creating a new file after the menu choice New is selected from a shortcut menu. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "SHAddDefaultPropertiesByExt",
+    "is_callback": 0,
+    "dll": "Shell32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pszExt",
+        "description": "Type: PCWSTR A pointer to a null-terminated, Unicode string that specifies the extension."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IPropertyStore",
+        "name": "*pPropStore",
+        "description": "Type: IPropertyStore* A pointer to the IPropertyStore interface that defines the default properties to add."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves an object that represents a specific window's collection of properties, which allows those properties to be queried or set.",
+    "library": "Shell32.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Shellapi.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "An application can use this function to obtain access to a window's property store so that it can set an explicit Application User Model ID (AppUserModelID) in the System.AppUserModel.ID property. A window's properties must be removed before the window is closed. If this is not done, the resources used by those properties are not returned to the system. A property is removed by setting it to the PROPVARIANT type VT_EMPTY. When a call is made to IPropertyStore::SetValue on the object retrieved through ppv, the properties and values are immediately stored on the window. Therefore, no call to IPropertyStore::Commit is needed. No error occurs if it is called, but it has no effect. An application sets AppUserModelIDs on individual windows to control the application's taskbar grouping and Jump List contents. For instance, a suite application might want to provide a different taskbar button for each of its subfeatures, with the windows relating to that subfeature grouped under that button. Without window-level AppUserModelIDs, those windows would all be grouped together under the main process. Applications should also use this property store to set these relaunch properties so that the system can return the application to that state. ",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "SHGetPropertyStoreForWindow",
+    "is_callback": 0,
+    "dll": "Shell32.dll (version 6.1 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND A handle to the window whose properties are being retrieved."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID A reference to the IID of the property store object to retrieve through ppv. This is typically IID_IPropertyStore."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyStore."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves an object that supports IPropertyStore or related interfaces from a pointer to an item identifier list (PIDL).",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Shobjidl.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "SHGetPropertyStoreFromIDList",
+    "is_callback": 0,
+    "dll": "Shell32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCIDLIST_ABSOLUTE",
+        "name": "pidl",
+        "description": "Type: PCIDLIST_ABSOLUTE A pointer to an item ID list."
+      },
+      {
+        "in_out": "_In_",
+        "type": "GETPROPERTYSTOREFLAGS",
+        "name": "flags",
+        "description": "Type: GETPROPERTYSTOREFLAGS One or more values from the GETPROPERTYSTOREFLAGS constants. This parameter can also be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID A reference to the desired interface ID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyStore or a related interface."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Returns a property store for an item, given a path or parsing name.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Shobjidl.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "SHGetPropertyStoreFromParsingName",
+    "is_callback": 0,
+    "dll": "Shell32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pszPath",
+        "description": "Type: PCWSTR A pointer to a null-terminated Unicode string that specifies the item path."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "IBindCtx",
+        "name": "*pbc",
+        "description": "Type: IBindCtx* A pointer to a IBindCtx object, which provides access to a bind context. This value can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "GETPROPERTYSTOREFLAGS",
+        "name": "flags",
+        "description": "Type: GETPROPERTYSTOREFLAGS One or more values from the GETPROPERTYSTOREFLAGS constants. This parameter can also be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID A reference to the desired interface ID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "**ppv",
+        "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyStore or a related interface."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "[This function is available through Windows XP Service Pack 2 (SP2) and Windows Server 2003. It might be altered or unavailable in subsequent versions of Windows.]",
+    "library": "Shell32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Shlobj.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "SHPropStgCreate",
+    "is_callback": 0,
+    "dll": "Shell32.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertySetStorage",
+        "name": "*psstg",
+        "description": "Type: IPropertySetStorage* A pointer to an IPropertySetStorage interface."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFFMTID",
+        "name": "fmtid",
+        "description": "Type: REFFMTID A property set ID to open. The values for this parameter can be either one of those defined in Predefined Property Set Format Identifiers or any other FMTID that you register."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "CLSID",
+        "name": "*pclsid",
+        "description": "Type: const CLSID* A pointer to the CLSID associated with the set. This parameter can be NULL."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "grfFlags",
+        "description": "Type: DWORD One or more members of the PROPSETFLAG enumeration that determine how the property set is created and opened. All sets containing ANSI bytes should be created with PROPSETFLAG_ANSI, otherwise PROPSETFLAG_DEFAULT."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "grfMode",
+        "description": "Type: DWORD The flags from the STGM enumeration that indicate conditions for creating and deleting the object and access modes for the object. Must contain STGM_DIRECT | STGM_SHARE_EXCLUSIVE."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwDisposition",
+        "description": "Type: DWORD One of the following values, defined in Fileapi.h.  CREATE_NEW (1)   Create a new set if one does not already exist.  CREATE_ALWAYS (2)   Always create a new set, overwriting any existing set.  OPEN_EXISTING (3)   Open the existing set.  OPEN_ALWAYS (4)"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "IPropertyStorage",
+        "name": "**ppstg",
+        "description": "Type: IPropertyStorage** When this method returns, contains an IPropertyStorage interface pointer."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "UINT",
+        "name": "*puCodePage",
+        "description": "Type: UINT* When this method returns, contains the address of the code page ID for the set."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "[This function is available through Windows XP Service Pack 2 (SP2) and Windows Server 2003. It might be altered or unavailable in subsequent versions of Windows.]",
+    "library": "Shell32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Shlobj.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "SHPropStgReadMultiple",
+    "is_callback": 0,
+    "dll": "Shell32.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyStorage",
+        "name": "*pps",
+        "description": "Type: IPropertyStorage* An IPropertyStorage interface pointer that identifies the property store."
+      },
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "uCodePage",
+        "description": "Type: UINT A code page value for ANSI string properties."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "cpspec",
+        "description": "Type: ULONG A count of properties being read."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PROPSPEC",
+        "name": "rgpspec[]",
+        "description": "Type: PROPSPEC const[] An array of properties to be read."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PROPVARIANT",
+        "name": "rgvar[]",
+        "description": "Type: PROPVARIANT[] An array of PROPVARIANT types that, when this function returns successfully, receives the property values."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "[This function is available through Windows XP Service Pack 2 (SP2) and Windows Server 2003. It might be altered or unavailable in subsequent versions of Windows.]",
+    "library": "Shell32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Shlobj.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Windows Property System",
+    "name": "SHPropStgWriteMultiple",
+    "is_callback": 0,
+    "dll": "Shell32.dll (version 6.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IPropertyStorage",
+        "name": "*pps",
+        "description": "Type: IPropertyStorage* An IPropertyStorage interface pointer that identifies the property store."
+      },
+      {
+        "in_out": "_Inout_opt_",
+        "type": "UINT",
+        "name": "*uCodePage",
+        "description": "Type: UINT* A pointer to the code page value for ANSI string properties."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "cpspec",
+        "description": "Type: ULONG A count of properties being set."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PROPSPEC",
+        "name": "rgpspec[]",
+        "description": "Type: PROPSPEC const[] An array of PROPSPEC structures that contain the property information to be set."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PROPVARIANT",
+        "name": "rgvar[]",
+        "description": "Type: PROPVARIANT[] An array of PROPVARIANT types to set the property values."
+      },
+      {
+        "in_out": "",
+        "type": "PROPID",
+        "name": "propidNameFirst",
+        "description": "Type: PROPID The minimum value for property identifiers when they must be allocated. The value should be greater than or equal to PID_FIRST_USABLE."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  }
+]
+

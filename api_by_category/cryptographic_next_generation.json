@@ -1,0 +1,922 @@
+[
+  {
+    "n_arguments": 5,
+    "description": "[BCryptAddContextFunction is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "If the function added is already in the list, it will be removed and inserted at the new position. BCryptAddContextFunction can be called only in user mode. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptAddContextFunction",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table that the context exists in. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   The context exists in the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context to add the function to."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwInterface",
+        "description": "Identifies the cryptographic interface to add the function to. This can be one of the following values.  ValueMeaning  BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE   Add the function to the list of asymmetric encryption functions.   BCRYPT_CIPHER_INTERFACE   Add the function to the list of cipher functions.   BCRYPT_HASH_INTERFACE   Add the function to the list of hash functions.   BCRYPT_RNG_INTERFACE   Add the function to the list of random number generator functions.   BCRYPT_SECRET_AGREEMENT_INTERFACE   Add the function to the list of secret agreement functions.   BCRYPT_SIGNATURE_INTERFACE   Add the function to the list of signature functions.   NCRYPT_KEY_STORAGE_INTERFACE   Add the function to the list of key storage functions.   NCRYPT_SCHANNEL_INTERFACE   Add the function to the list of Schannel functions.   NCRYPT_SCHANNEL_SIGNATURE_INTERFACE   Add the function to the list of signature suites that Schannel will accept for TLS 1.2. Windows Vista and Windows Server 2008:  This value is not supported."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszFunction",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the cryptographic function to add."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwPosition",
+        "description": "Specifies the position in the list at which to insert this function. The function is inserted at this position ahead of any existing functions. The CRYPT_PRIORITY_TOP value is used to insert the function at the top of the list. The CRYPT_PRIORITY_BOTTOM value is used to insert the function at the end of the list."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[BCryptConfigureContext is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptConfigureContext can be called only in user mode. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptConfigureContext",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table that the context exists in. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   The context exists in the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context to set the configuration information for."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCRYPT_CONTEXT_CONFIG",
+        "name": "pConfig",
+        "description": "The address of a CRYPT_CONTEXT_CONFIG structure that contains the new context configuration information."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "[BCryptConfigureContextFunction is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptConfigureContextFunction can be called only in user mode. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptConfigureContextFunction",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table that the context exists in. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   The context exists in the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context to set the cryptographic function configuration information for."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwInterface",
+        "description": "Identifies the cryptographic interface to set the function configuration information for. This can be one of the following values.  ValueMeaning  BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE   Set the function configuration information in the list of asymmetric encryption functions.   BCRYPT_CIPHER_INTERFACE   Set the function configuration information in the list of cipher functions.   BCRYPT_HASH_INTERFACE   Set the function configuration information in the list of hash functions.   BCRYPT_RNG_INTERFACE   Set the function configuration information in the list of random number generator functions.   BCRYPT_SECRET_AGREEMENT_INTERFACE   Set the function configuration information in the list of secret agreement functions.   BCRYPT_SIGNATURE_INTERFACE   Set the function configuration information in the list of signature functions.   NCRYPT_KEY_STORAGE_INTERFACE   Set the function configuration information in the list of key storage functions.   NCRYPT_SCHANNEL_INTERFACE   Set the function configuration information in the list of Schannel functions.   NCRYPT_SCHANNEL_SIGNATURE_INTERFACE   Set the function configuration information in the  list of signature suites that Schannel accepts for TLS 1.2. Windows Vista and Windows Server 2008:  This value is not supported."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszFunction",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the cryptographic function to set the configuration information for."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCRYPT_CONTEXT_FUNCTION_CONFIG",
+        "name": "pConfig",
+        "description": "The address of a CRYPT_CONTEXT_FUNCTION_CONFIG structure that contains the new function configuration information."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[BCryptCreateContext is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptCreateContext can be called only in user mode. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptCreateContext",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table to create the context in. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   Create the context in the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context to create."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCRYPT_CONTEXT_CONFIG",
+        "name": "pConfig",
+        "description": "A pointer to a CRYPT_CONTEXT_CONFIG structure that contains additional configuration data for the new context. This parameter can be NULL if it is not needed."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[BCryptDeleteContext is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptDeleteContext can be called only in user mode. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptDeleteContext",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table to delete the context from. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   Delete the context from the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context to delete."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The BCryptEnumAlgorithms function gets a list of the registered algorithm identifiers.",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptEnumAlgorithms can be called either from user mode or kernel mode. Kernel mode callers must be executing at PASSIVE_LEVEL IRQL. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptEnumAlgorithms",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwAlgOperations",
+        "description": "A value that specifies the algorithm operation types to include in the enumeration. This can be a combination of one or more of the following values.  ValueMeaning  BCRYPT_CIPHER_OPERATION 0x00000001   Include the cipher algorithms in the enumeration.   BCRYPT_HASH_OPERATION 0x00000002   Include the hash algorithms in the enumeration.   BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION 0x00000004   Include the asymmetric encryption algorithms in the enumeration.   BCRYPT_SECRET_AGREEMENT_OPERATION 0x00000008   Include the secret agreement algorithms in the enumeration.   BCRYPT_SIGNATURE_OPERATION 0x00000010   Include the signature algorithms in the enumeration.   BCRYPT_RNG_OPERATION 0x00000020   Include the random number generator (RNG) algorithms in the enumeration."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ULONG",
+        "name": "*pAlgCount",
+        "description": "A pointer to a ULONG variable to receive the number of elements in the ppAlgList array."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BCRYPT_ALGORITHM_IDENTIFIER",
+        "name": "**ppAlgList",
+        "description": "The address of a BCRYPT_ALGORITHM_IDENTIFIER structure pointer to receive the array of registered algorithm identifiers. This pointer must be passed to the BCryptFreeBuffer function when it is no longer needed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwFlags",
+        "description": "A set of flags that modify the behavior of this function. No flags are defined for this function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The BCryptEnumContextFunctionProviders function obtains the providers for the cryptographic functions for a context in the specified configuration table.",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptEnumContextFunctionProviders can be called only in user mode. The following  example shows how to use the BCryptEnumContextFunctionProviders function to enumerate the providers for all key storage functions for all contexts in the local-machine configuration table. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptEnumContextFunctionProviders",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table from which to retrieve the context function providers. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   Retrieve the context functions from the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context to enumerate the function providers for."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwInterface",
+        "description": "Identifies the cryptographic interface to retrieve the function providers for. This can be one of the following values.  ValueMeaning  BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE   Retrieve the asymmetric encryption function providers.   BCRYPT_CIPHER_INTERFACE   Retrieve the cipher function providers.   BCRYPT_HASH_INTERFACE   Retrieve the hash function providers.   BCRYPT_RNG_INTERFACE   Retrieve the random number generator function providers.   BCRYPT_SECRET_AGREEMENT_INTERFACE   Retrieve the secret agreement function providers.   BCRYPT_SIGNATURE_INTERFACE   Retrieve the signature function providers.   NCRYPT_KEY_STORAGE_INTERFACE   Retrieve the key storage function providers.   NCRYPT_SCHANNEL_INTERFACE   Retrieve the Schannel function providers."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszFunction",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the function to enumerate the providers for."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "ULONG",
+        "name": "*pcbBuffer",
+        "description": "The address of a ULONG variable that, on entry, contains the size, in bytes, of the buffer pointed to by ppBuffer. If this size is not large enough to hold the set of context identifiers, this function will fail with STATUS_BUFFER_TOO_SMALL. After this function returns, this value contains the number of bytes that were copied to the ppBuffer buffer."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PCRYPT_CONTEXT_FUNCTION_PROVIDERS",
+        "name": "*ppBuffer",
+        "description": "The address of a pointer to a CRYPT_CONTEXT_FUNCTION_PROVIDERS structure that receives the set of context function providers retrieved by this function. The value pointed to by the pcbBuffer parameter contains the size of this buffer. If the value pointed to by this parameter is NULL, this function will allocate the required memory. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function. If this parameter is NULL, this function will place the required size, in bytes, in the variable pointed to by the pcbBuffer parameter and return STATUS_BUFFER_TOO_SMALL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The BCryptEnumContextFunctions function obtains the cryptographic functions for a context in the specified configuration table.",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptEnumContextFunctions can be called only in user mode. The following example shows how to use the BCryptEnumContextFunctions function to enumerate the key storage functions for all contexts in the local-machine configuration table. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptEnumContextFunctions",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table from which to retrieve the context functions. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   Retrieve the context functions from the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context to enumerate the functions for."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwInterface",
+        "description": "Identifies the cryptographic interface to retrieve the functions for. This can be one of the following values.  ValueMeaning  BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE   Retrieve the asymmetric encryption functions.   BCRYPT_CIPHER_INTERFACE   Retrieve the cipher functions.   BCRYPT_HASH_INTERFACE   Retrieve the hash functions.   BCRYPT_RNG_INTERFACE   Retrieve the random number generator functions.   BCRYPT_SECRET_AGREEMENT_INTERFACE   Retrieve the secret agreement functions.   BCRYPT_SIGNATURE_INTERFACE   Retrieve the signature functions.   NCRYPT_KEY_STORAGE_INTERFACE   Retrieve the key storage functions.   NCRYPT_SCHANNEL_INTERFACE   Retrieve the Schannel functions."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "ULONG",
+        "name": "*pcbBuffer",
+        "description": "The address of a ULONG variable that, on entry, contains the size, in bytes, of the buffer pointed to by ppBuffer. If this size is not large enough to hold the set of context identifiers, this function will fail with STATUS_BUFFER_TOO_SMALL. After this function returns, this value contains the number of bytes that were copied to the ppBuffer buffer."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PCRYPT_CONTEXT_FUNCTIONS",
+        "name": "*ppBuffer",
+        "description": "The address of a pointer to a CRYPT_CONTEXT_FUNCTIONS structure that receives the set of context functions retrieved by this function. The value pointed to by the pcbBuffer parameter contains the size of this buffer. If the value pointed to by this parameter is NULL, this function will allocate the required memory. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function. If this parameter is NULL, this function will place the required size, in bytes, in the variable pointed to by the pcbBuffer parameter and return STATUS_BUFFER_TOO_SMALL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[BCryptEnumContexts is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptEnumContexts can be called only in user mode. The following example shows how to use the BCryptEnumContexts function to allocate the memory for the ppBuffer buffer. The following example shows how to use the BCryptEnumContexts function to allocate your own memory for the ppBuffer buffer. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptEnumContexts",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table from which to retrieve the contexts. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   Retrieve the contexts from the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "ULONG",
+        "name": "*pcbBuffer",
+        "description": "The address of a ULONG variable that, on entry, contains the size, in bytes, of the buffer pointed to by ppBuffer. If this size is not large enough to hold the set of context identifiers, this function will fail with STATUS_BUFFER_TOO_SMALL. After this function returns, this value contains the number of bytes that were copied to the ppBuffer buffer."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PCRYPT_CONTEXTS",
+        "name": "*ppBuffer",
+        "description": "The address of a pointer to a CRYPT_CONTEXTS structure that receives the set of contexts retrieved by this function. The value pointed to by the pcbBuffer parameter contains the size of this buffer. If the value pointed to by this parameter is NULL, this function will allocate the required memory. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function. If this parameter is NULL, this function will place the required size, in bytes, in the variable pointed to by the pcbBuffer parameter and return STATUS_BUFFER_TOO_SMALL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The BCryptEnumProviders function obtains all of the CNG providers that support a specified algorithm.",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptEnumProviders can be called either from user mode or kernel mode. Kernel mode callers must be executing at PASSIVE_LEVEL IRQL. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptEnumProviders",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszAlgId",
+        "description": "A pointer to a null-terminated Unicode string that identifies the algorithm to obtain the providers for. This can be one of the predefined CNG Algorithm Identifiers or another algorithm identifier."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ULONG",
+        "name": "*pImplCount",
+        "description": "A pointer to a ULONG variable to receive the number of elements in the ppImplList array."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BCRYPT_PROVIDER_NAME",
+        "name": "**ppImplList",
+        "description": "The address of an array of BCRYPT_PROVIDER_NAME structures to receive the collection of providers that support the specified algorithm. The pImplCount parameter receives the number of elements in this array. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwFlags",
+        "description": "A set of flags that modifies the behavior of this function. There are currently no flags defined, so this parameter must be zero."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The BCryptEnumRegisteredProviders function retrieves information about the registered providers.",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": " The BCryptEnumRegisteredProviders function can be called in one of two ways: BCryptEnumRegisteredProviders can be called only in user mode. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptEnumRegisteredProviders",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "ULONG",
+        "name": "*pcbBuffer",
+        "description": "A pointer to a ULONG value that, on entry, contains the size, in bytes, of the buffer pointed to by the ppBuffer parameter. On exit, this value receives either the number of bytes copied to the buffer or the required size, in bytes, of the buffer. Note  This is the total size, in bytes, of the entire buffer, not just the size of the CRYPT_PROVIDERS structure. The buffer must be able to hold other data for the providers in addition to the CRYPT_PROVIDERS structure."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PCRYPT_PROVIDERS",
+        "name": "*ppBuffer",
+        "description": "A pointer to a buffer pointer that receives a CRYPT_PROVIDERS structure and other data that describes the collection of registered providers. If this parameter is NULL, this function will return STATUS_BUFFER_TOO_SMALL and place in the value pointed to by the pcbBuffer parameter, the required size, in bytes, of all the data. If this parameter is the address of a NULL pointer, this function will allocate the required memory, fill the memory with the information about the providers, and place the pointer to this memory in this parameter. When you have finished using this memory,  free it by passing this pointer to the BCryptFreeBuffer function. If this parameter is the address of a non-NULL pointer, this function will copy the provider information into this buffer. The pcbBuffer parameter must contain the size, in bytes, of the entire buffer. If the buffer is not large enough to hold all of the provider information, this function will return STATUS_BUFFER_TOO_SMALL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The BCryptGetFipsAlgorithmMode function determines whether Federal Information Processing Standard (FIPS) compliance is enabled.",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptGetFipsAlgorithmMode can be called either from user mode or kernel mode. Kernel mode callers must be executing at PASSIVE_LEVEL IRQL. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptGetFipsAlgorithmMode",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "BOOLEAN",
+        "name": "*pfEnabled",
+        "description": "The address of a BOOLEAN variable that receives zero if FIPS compliance is not enabled, or a nonzero value if FIPS compliance is enabled."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "[BCryptQueryContextConfiguration is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "Each context has only one set of configuration information, so although the ppBuffer parameter appears to be a used as an array, this function treats this as an array with only one element. The following example helps clarify how this parameter is used. BCryptQueryContextConfiguration can be called only in user mode. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptQueryContextConfiguration",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table that the context exists in. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   The context exists in the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context to obtain the configuration information for."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "ULONG",
+        "name": "*pcbBuffer",
+        "description": "The address of a ULONG variable that, on entry, contains the size, in bytes, of the buffer pointed to by ppBuffer. If this size is not large enough to hold the context information, this function will fail with STATUS_BUFFER_TOO_SMALL. After this function returns, this variable contains the number of bytes that were copied to the ppBuffer buffer."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PCRYPT_CONTEXT_CONFIG",
+        "name": "*ppBuffer",
+        "description": "The address of a pointer to a CRYPT_CONTEXT_CONFIG structure that receives the context configuration information retrieved by this function. The value pointed to by the pcbBuffer parameter contains the size of this buffer. If the value pointed to by this parameter is NULL, this function will allocate the required memory. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function. If this parameter is NULL, this function will place the required size, in bytes, in the variable pointed to by the pcbBuffer parameter and return STATUS_BUFFER_TOO_SMALL. For more information on the usage of this parameter, see Remarks."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "[BCryptQueryContextFunctionConfiguration is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "Each cryptographic function has only one set of configuration information, so although the ppBuffer parameter appears to be a used as an array, this function treats this as an array with only one element. The following example helps clarify how this parameter is used. BCryptQueryContextFunctionConfiguration can be called only in user mode. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptQueryContextFunctionConfiguration",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table that the context exists in. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   The context exists in the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context to obtain the function configuration information for."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwInterface",
+        "description": "Identifies the cryptographic interface to obtain the function configuration information for. This can be one of the following values.  ValueMeaning  BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE   Obtain the function configuration information from the list of asymmetric encryption functions.   BCRYPT_CIPHER_INTERFACE   Obtain the function configuration information from the list of cipher functions.   BCRYPT_HASH_INTERFACE   Obtain the function configuration information from the list of hash functions.   BCRYPT_RNG_INTERFACE   Obtain the function configuration information from the list of random number generator functions.   BCRYPT_SECRET_AGREEMENT_INTERFACE   Obtain the function configuration information from the list of secret agreement functions.   BCRYPT_SIGNATURE_INTERFACE   Obtain the function configuration information from the list of signature functions.   NCRYPT_KEY_STORAGE_INTERFACE   Obtain the function configuration information from the list of key storage functions.   NCRYPT_SCHANNEL_INTERFACE   Obtain the function configuration information from the list of Schannel functions."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszFunction",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the cryptographic function to obtain the configuration information for."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "ULONG",
+        "name": "*pcbBuffer",
+        "description": "The address of a ULONG variable that, on entry, contains the size, in bytes, of the buffer pointed to by ppBuffer. If this size is not large enough to hold the context information, this function will fail with STATUS_BUFFER_TOO_SMALL. After this function returns, this variable contains the number of bytes that were copied to the ppBuffer buffer."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PCRYPT_CONTEXT_FUNCTION_CONFIG",
+        "name": "*ppBuffer",
+        "description": "The address of a pointer to a CRYPT_CONTEXT_FUNCTION_CONFIG structure that receives the function configuration information retrieved by this function. The value pointed to by the pcbBuffer parameter contains the size of this buffer. If the value pointed to by this parameter is NULL, this function will allocate the required memory. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function. If this parameter is NULL, this function will place the required size, in bytes, in the variable pointed to by the pcbBuffer parameter and return STATUS_BUFFER_TOO_SMALL. For more information about the usage of this parameter, see Remarks."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "The BCryptQueryContextFunctionProperty function obtains the value of a named property for a cryptographic function in an existing CNG context.",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptQueryContextFunctionProperty can be called only in user mode. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptQueryContextFunctionProperty",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table that the context exists in. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   The context exists in the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context to obtain the function property from."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwInterface",
+        "description": "Identifies the cryptographic interface that the function exists in. This can be one of the following values.  ValueMeaning  BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE   The function exists in the list of asymmetric encryption functions.   BCRYPT_CIPHER_INTERFACE   The function exists in the list of cipher functions.   BCRYPT_HASH_INTERFACE   The function exists in the list of hash functions.   BCRYPT_RNG_INTERFACE   The function exists in the list of random number generator functions.   BCRYPT_SECRET_AGREEMENT_INTERFACE   The function exists in the list of secret agreement functions.   BCRYPT_SIGNATURE_INTERFACE   The function exists in the list of signature functions.   NCRYPT_KEY_STORAGE_INTERFACE   The function exists in the list of key storage functions.   NCRYPT_SCHANNEL_INTERFACE   The function exists in the list of Schannel functions."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszFunction",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the cryptographic function to obtain the property for."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszProperty",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the property to obtain."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "ULONG",
+        "name": "*pcbValue",
+        "description": "The address of a ULONG variable that, on entry, contains the size, in bytes, of the buffer pointed to by ppbValue. If this size is not large enough to hold the property value, this function will fail with STATUS_BUFFER_TOO_SMALL. After this function returns, this variable contains the number of bytes that were copied to the ppbValue buffer."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PUCHAR",
+        "name": "*ppbValue",
+        "description": "The address of a pointer to a buffer that receives the property data. The size and format of this buffer depends on the format of the property being retrieved. The value pointed to by the pcbValue parameter contains the size of this buffer. If the value pointed to by this parameter is NULL, this function will allocate the required memory. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function. If this parameter is NULL, this function will place the required size, in bytes, in the variable pointed to by the pcbValue parameter and return STATUS_BUFFER_TOO_SMALL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The BCryptQueryProviderRegistration function retrieves information about a CNG provider.",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptQueryProviderRegistration can be called only in user mode. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptQueryProviderRegistration",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszProvider",
+        "description": "A pointer to a null-terminated Unicode string that contains the name of the provider to obtain information about."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwMode",
+        "description": "Specifies the type of information to retrieve. This can be one of the following values.  ValueMeaning  CRYPT_ANY   Retrieve any information for the provider.   CRYPT_UM   Retrieve the user mode information for the provider.   CRYPT_KM   Retrieve the kernel mode information for the provider.   CRYPT_MM   Retrieve both the user mode and kernel mode information for the provider."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwInterface",
+        "description": "Specifies the interface to retrieve information for. This can be one of the following values.  ValueMeaning  BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE   Retrieve the asymmetric encryption interface.   BCRYPT_CIPHER_INTERFACE   Retrieve the cipher interface.   BCRYPT_HASH_INTERFACE   Retrieve the hash interface.   NCRYPT_KEY_STORAGE_INTERFACE   Retrieve the key storage interface.   BCRYPT_RNG_INTERFACE   Retrieve the random number generator interface.   NCRYPT_SCHANNEL_INTERFACE   Retrieve the Schannel interface.   BCRYPT_SECRET_AGREEMENT_INTERFACE   Retrieve the secret agreement interface.   BCRYPT_SIGNATURE_INTERFACE   Retrieve the signature interface."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "ULONG",
+        "name": "*pcbBuffer",
+        "description": "A pointer to a ULONG value that, on entry, contains the size, in bytes, of the buffer pointed to by the ppBuffer parameter. On exit, this value receives either the number of bytes copied to the buffer or the required size, in bytes, of the buffer.  Note  This is the total size, in bytes, of the entire buffer, not just the size of the CRYPT_PROVIDER_REG structure. The buffer must be able to hold other data for the providers in addition to the CRYPT_PROVIDER_REG structure."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PCRYPT_PROVIDER_REG",
+        "name": "*ppBuffer",
+        "description": "A pointer to a buffer pointer that receives a CRYPT_PROVIDER_REG structure and other data that describes the provider. If this parameter is NULL, this function will return STATUS_BUFFER_TOO_SMALL and place in the value pointed to by the pcbBuffer parameter, the required size, in bytes, of all data. If this parameter is the address of a NULL pointer, this function will allocate the required memory, fill it in with the provider information, and place a pointer to this memory in this parameter. When you have finished using this memory, free it by passing this pointer to the BCryptFreeBuffer function. If this parameter is the address of a non-NULL pointer, this function will copy the provider information into this buffer. The pcbBuffer parameter must contain the size, in bytes, of the entire buffer. If the buffer is not large enough to hold all of the provider information, this function will return STATUS_BUFFER_TOO_SMALL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[BCryptRegisterConfigChangeNotify is deprecated beginning with Windows 10.]",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "The handle returned in the variable pointed to by the phEvent parameter will be signaled when a change to the CNG configuration occurs. BCryptRegisterConfigChangeNotify(HANDLE*) can be called only in user mode. Code executing in kernel mode must call BCryptRegisterConfigChangeNotify(PRKEVENT). ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptRegisterConfigChangeNotify(HANDLE*)",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "HANDLE",
+        "name": "*phEvent",
+        "description": "The address of a HANDLE variable that receives the event handle. Use one of the Wait Functions, such as WaitForSingleObject, to determine when the event has been signaled. The event is unnamed and must be a manual-reset event. The event is signaled when any CNG configuration data has changed. This handle must be passed to the BCryptUnregisterConfigChangeNotify(HANDLE) function to remove the event notification."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[BCryptRegisterConfigChangeNotify is deprecated beginning with Windows 10.]",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "The handle returned in the variable pointed to by the phEvent parameter will be signaled when a change to the CNG configuration occurs. BCryptRegisterConfigChangeNotify(PRKEVENT) can be called only in kernel mode and at PASSIVE_LEVEL IRQL. Code executing in user mode must call BCryptRegisterConfigChangeNotify(HANDLE*). ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptRegisterConfigChangeNotify(PRKEVENT)",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PRKEVENT",
+        "name": "phEvent",
+        "description": "The address of a PRKEVENT variable that receives the pointer to the event dispatcher object. You use the kernel wait functions, such as KeWaitForSingleObject, to determine when the event has been signaled. The event is signaled when the CNG configuration has changed. This handle must be passed to the BCryptUnregisterConfigChangeNotify(PRKEVENT) function to remove the event notification."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "[BCryptRemoveContextFunction is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.]",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptRemoveContextFunction can be called only in user mode. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptRemoveContextFunction",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table that the context exists in. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   The context exists in the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context to remove the function from."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwInterface",
+        "description": "Identifies the cryptographic interface to remove the function from. This can be one of the following values.  ValueMeaning  BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE   Remove the function from the list of asymmetric encryption functions.   BCRYPT_CIPHER_INTERFACE   Remove the function from the list of cipher functions.   BCRYPT_HASH_INTERFACE   Remove the function from the list of hash functions.   BCRYPT_RNG_INTERFACE   Remove the function from the list of random number generator functions.   BCRYPT_SECRET_AGREEMENT_INTERFACE   Remove the function from the list of secret agreement functions.   BCRYPT_SIGNATURE_INTERFACE   Remove the function from the list of signature functions.   NCRYPT_KEY_STORAGE_INTERFACE   Remove the function from the list of key storage functions.   NCRYPT_SCHANNEL_INTERFACE   Remove the function from the list of Schannel functions.   NCRYPT_SCHANNEL_SIGNATURE_INTERFACE   Remove the function from the list of signature suites that Schannel accepts for TLS 1.2. Windows Vista and Windows Server 2008:  This value is not supported."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszFunction",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the cryptographic function to remove."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "The BCryptResolveProviders function obtains a collection of all of the providers that meet the specified criteria.",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptResolveProviders can be called either from user mode or kernel mode. Kernel mode callers must be executing at PASSIVE_LEVEL IRQL. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptResolveProviders",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context for which to obtain the providers.  If this is set to NULL or to an empty string, the default context is assumed."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "DWORD",
+        "name": "dwInterface",
+        "description": "The identifier of an interface that the provider must support. This must be one of the CNG Interface Identifiers. If the pszFunction parameter is not NULL or an empty string, you can set dwInterface to zero to force the function to infer the interface."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "pszFunction",
+        "description": "A pointer to a null-terminated Unicode string that contains the algorithm or function identifier that the provider must support. This can be one of the standard CNG Algorithm Identifiers or the identifier for another registered algorithm.  If dwInterface is set to a nonzero value, then pszFunction can be NULL to include all algorithms and functions."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "pszProvider",
+        "description": "A pointer to a null-terminated Unicode string that contains the name of the provider to retrieve. If this parameter is NULL, then all providers will be included. This parameter allows you to specify a specific provider to retrieve in the event that more than one provider meets the other criteria."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwMode",
+        "description": "Specifies the type of provider to retrieve. This can be one of the following values.  ValueMeaning  CRYPT_UM   Retrieve user mode providers.   CRYPT_KM   Retrieve kernel mode providers.   CRYPT_MM   Retrieve both user mode and kernel mode providers."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "A set of flags that modify the behavior of this function.  This can be a zero or a combination of one or more of the following values.  ValueMeaning  CRYPT_ALL_FUNCTIONS 1   This function will retrieve all of the functions supported by each provider that meets the specified criteria. If this flag is not specified, this function will only retrieve the first function of the provider or providers that meet the specified criteria.   CRYPT_ALL_PROVIDERS 2   This function will retrieve all of the providers that meet the specified criteria. If this flag is not specified, this function will only retrieve the first provider that is found that meets the specified criteria."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PDWORD",
+        "name": "pcbBuffer",
+        "description": "A pointer to a DWORD value that, on entry, contains the size, in bytes, of the buffer pointed to by the ppBuffer parameter. On exit, this value receives either the number of bytes copied to the buffer or the required size, in bytes, of the buffer."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PCRYPT_PROVIDER_REFS",
+        "name": "*ppBuffer",
+        "description": "The address of a CRYPT_PROVIDER_REFS pointer that receives the collection of providers that meet the specified criteria. If this parameter is NULL, this function will return STATUS_SUCCESS and place in the value pointed to by the pcbBuffer parameter, the required size, in bytes, of all the data. If this parameter is the address of a NULL pointer, this function will allocate the required memory, fill the memory with the information about the providers, and place the pointer to this memory in this parameter. When you have finished using this memory,  free it by passing this pointer to the BCryptFreeBuffer function. If this parameter is the address of a non-NULL pointer, this function will copy the provider information into this buffer. The pcbBuffer parameter must contain the size, in bytes, of the entire buffer. If the buffer is not large enough to hold all of the provider information, this function will return STATUS_BUFFER_TOO_SMALL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "The BCryptSetContextFunctionProperty function sets the value of a named property for a cryptographic function in an existing CNG context.",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptSetContextFunctionProperty can be called only in user mode. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptSetContextFunctionProperty",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwTable",
+        "description": "Identifies the configuration table that the context exists in. This can be one of the following values.  ValueMeaning  CRYPT_LOCAL   The context exists in the local-machine configuration table.   CRYPT_DOMAIN   This value is not available for use."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszContext",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the context to set the function property in."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwInterface",
+        "description": "Identifies the cryptographic interface that the function exists in. This can be one of the following values.  ValueMeaning  BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE   The function exists in the list of asymmetric encryption functions.   BCRYPT_CIPHER_INTERFACE   The function exists in the list of cipher functions.   BCRYPT_HASH_INTERFACE   The function exists in the list of hash functions.   BCRYPT_RNG_INTERFACE   The function exists in the list of random number generator functions.   BCRYPT_SECRET_AGREEMENT_INTERFACE   The function exists in the list of secret agreement functions.   BCRYPT_SIGNATURE_INTERFACE   The function exists in the list of signature functions.   NCRYPT_KEY_STORAGE_INTERFACE   The function exists in the list of key storage functions.   NCRYPT_SCHANNEL_INTERFACE   The function exists in the list of Schannel functions."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszFunction",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the cryptographic function to set the property for."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszProperty",
+        "description": "A pointer to a null-terminated Unicode string that contains the identifier of the property to set."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cbValue",
+        "description": "Contains the size, in bytes, of the pbValue buffer. This is the exact number of bytes that will be stored. If the property value is a string, you should add the size of one character to also store the terminating null character, if needed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PUCHAR",
+        "name": "pbValue",
+        "description": "The address of a buffer that contains the new property value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The BCryptUnregisterConfigChangeNotify(HANDLE) function removes a user mode CNG configuration change event handler that was created by using the BCryptRegisterConfigChangeNotify(HANDLE*) function.",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptUnregisterConfigChangeNotify(HANDLE) can be called only in user mode. Code executing in kernel mode must call BCryptUnregisterConfigChangeNotify(PRKEVENT). ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptUnregisterConfigChangeNotify(HANDLE)",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hEvent",
+        "description": "The handle of the event to remove. This is the handle that was obtained by using the BCryptRegisterConfigChangeNotify(HANDLE*) function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The BCryptUnregisterConfigChangeNotify(PRKEVENT) function removes a kernel mode CNG configuration change event handler that was created by using the BCryptRegisterConfigChangeNotify(PRKEVENT) function.",
+    "library": "Bcrypt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Bcrypt.h",
+    "return_value": "Returns a status code that indicates the success or failure of the function.  Possible return codes include, but are not limited to, the following.  ",
+    "remarks": "BCryptUnregisterConfigChangeNotify(PRKEVENT) can be called only in kernel mode and at PASSIVE_LEVEL IRQL. Code executing in user mode must call BCryptUnregisterConfigChangeNotify(HANDLE). ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Cryptographic Next Generation (CNG)",
+    "name": "BCryptUnregisterConfigChangeNotify(PRKEVENT)",
+    "is_callback": 0,
+    "dll": "Bcrypt.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PRKEVENT",
+        "name": "hEvent",
+        "description": "The pointer to the event dispatcher object to remove. This is the pointer that was obtained by using the BCryptRegisterConfigChangeNotify(PRKEVENT) function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

@@ -1,0 +1,341 @@
+[
+  {
+    "n_arguments": 4,
+    "description": "Captures a snapshot of a target process.",
+    "library": "",
+    "min_server": "Windows Server 2012 R2 [desktop apps only]",
+    "header": "Processsnapshot.h",
+    "return_value": "This function returns ERROR_SUCCESS on success. All error codes are defined in winerror.h. Use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a message for an error code. ",
+    "remarks": "",
+    "return_type": " STDAPI_(DWORD)",
+    "category": "Process Snapshotting",
+    "name": "PssCaptureSnapshot",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "ProcessHandle",
+        "description": "A handle to the target process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSS_CAPTURE_FLAGS",
+        "name": "CaptureFlags",
+        "description": "Flags that specify what to capture. For more information, see PSS_CAPTURE_FLAGS."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "DWORD",
+        "name": "ThreadContextFlags",
+        "description": "The CONTEXT record flags to capture if CaptureFlags specifies thread contexts."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HPSS",
+        "name": "*SnapshotHandle",
+        "description": "A handle to the snapshot that this function captures."
+      }
+    ],
+    "min_client": "Windows 8.1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Duplicates a snapshot handle from one process to another.",
+    "library": "",
+    "min_server": "Windows Server 2012 R2 [desktop apps only]",
+    "header": "Processsnapshot.h",
+    "return_value": "This function returns ERROR_SUCCESS on success or the following error code.  All error codes are defined in winerror.h. Use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a message for an error code. ",
+    "remarks": "",
+    "return_type": " STDAPI_(DWORD)",
+    "category": "Process Snapshotting",
+    "name": "PssDuplicateSnapshot",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "SourceProcessHandle",
+        "description": "A handle to the source process from which the original snapshot was captured. The handle must have PROCESS_VM_READ and PROCESS_DUP_HANDLE rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HPSS",
+        "name": "SnapshotHandle",
+        "description": "A handle to the snapshot to duplicate. This handle must be in the context of the source process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "TargetProcessHandle",
+        "description": "A handle to the target process that receives the duplicate snapshot. The handle must have PROCESS_VM_OPERATION, PROCESS_VM_WRITE, and PROCESS_DUP_HANDLE rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HPSS",
+        "name": "*TargetSnapshotHandle",
+        "description": "A handle to the duplicate snapshot that this function creates, in the context of the target process."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PSS_DUPLICATE_FLAGS",
+        "name": "Flags",
+        "description": "The duplication flags. For more information, see PSS_DUPLICATE_FLAGS."
+      }
+    ],
+    "min_client": "Windows 8.1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Frees a snapshot.",
+    "library": "",
+    "min_server": "Windows Server 2012 R2 [desktop apps only]",
+    "header": "Processsnapshot.h",
+    "return_value": "This function returns ERROR_SUCCESS on success or one of the following error codes.  All error codes are defined in winerror.h. Use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a message for an error code. ",
+    "remarks": "This API can free snapshot handles in the context of either the local or remote processes. If the snapshot was captured in the local process with PssCaptureSnapshot, or duplicated into the local process with PssDuplicateSnapshot, then specify the result of GetCurrentProcess as the process handle. If the snapshot is in the context of a remote process (for example, duplicated into the remote process), then specify the handle to that process. The operation does not protect against concurrent access to the same descriptor. For remote process frees, only snapshot handles that were created with PSS_CREATE_USE_VM_ALLOCATIONS or duplicated remotely can be freed by this API. The behavior of this routine on a descriptor that has already been freed is undefined. ",
+    "return_type": " STDAPI_(DWORD)",
+    "category": "Process Snapshotting",
+    "name": "PssFreeSnapshot",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "ProcessHandle",
+        "description": "A handle to the process that contains the snapshot. The handle must have PROCESS_VM_READ, PROCESS_VM_OPERATION, and PROCESS_DUP_HANDLE rights. If the snapshot was captured from the current process, or duplicated into the current process, then pass in the result of GetCurrentProcess."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HPSS",
+        "name": "SnapshotHandle",
+        "description": "A handle to the snapshot to free."
+      }
+    ],
+    "min_client": "Windows 8.1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Queries the snapshot.",
+    "library": "",
+    "min_server": "Windows Server 2012 R2 [desktop apps only]",
+    "header": "Processsnapshot.h",
+    "return_value": "This function returns ERROR_SUCCESS on success or one of the following error codes.  All error codes are defined in winerror.h. Use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a message for an error code. ",
+    "remarks": "",
+    "return_type": " STDAPI_(DWORD)",
+    "category": "Process Snapshotting",
+    "name": "PssQuerySnapshot",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HPSS",
+        "name": "SnapshotHandle",
+        "description": "A handle to the snapshot to query."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSS_QUERY_INFORMATION_CLASS",
+        "name": "InformationClass",
+        "description": "An enumerator member that selects what information to query. For more information, see PSS_QUERY_INFORMATION_CLASS."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "*Buffer",
+        "description": "The information that this function provides."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "BufferLength",
+        "description": "The size of Buffer, in bytes."
+      }
+    ],
+    "min_client": "Windows 8.1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Creates a walk marker.",
+    "library": "",
+    "min_server": "Windows Server 2012 R2 [desktop apps only]",
+    "header": "Processsnapshot.h",
+    "return_value": "This function returns ERROR_SUCCESS on success or the following error code.  All error codes are defined in winerror.h. Use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a message for an error code. ",
+    "remarks": "The walk marker maintains the state of a walk, and can be used to reposition or rewind the walk. The Allocator structure that provides the custom functions should remain valid for the lifetime of the walk marker. The custom functions are called from PssWalkMarkerCreate, PssWalkMarkerFree and PssWalkSnapshot using the same thread that calls PssWalkMarkerCreate, PssWalkMarkerFree and PssWalkSnapshot. Therefore the custom functions need not be multi-threaded. ",
+    "return_type": " STDAPI_(DWORD)",
+    "category": "Process Snapshotting",
+    "name": "PssWalkMarkerCreate",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "PSS_ALLOCATOR",
+        "name": "*Allocator",
+        "description": "A structure that provides functions to allocate and free memory.  If you provide the structure, PssWalkMarkerCreate uses the functions to  allocate the internal walk marker structures. Otherwise it uses the default process heap. For more information, see PSS_ALLOCATOR."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HPSSWALK",
+        "name": "*WalkMarkerHandle",
+        "description": "A handle to the walk marker that this function creates."
+      }
+    ],
+    "min_client": "Windows 8.1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Frees a walk marker created by PssWalkMarkerCreate.",
+    "library": "",
+    "min_server": "Windows Server 2012 R2 [desktop apps only]",
+    "header": "Processsnapshot.h",
+    "return_value": "This function returns ERROR_SUCCESS on success. All error codes are defined in winerror.h. Use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a message for an error code. ",
+    "remarks": "If PssWalkMarkerCreate used AllocRoutine of a custom allocator to create the walk marker, PssWalkMarkerFree uses the FreeRoutine of the allocator. ",
+    "return_type": " STDAPI_(DWORD)",
+    "category": "Process Snapshotting",
+    "name": "PssWalkMarkerFree",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HPSSWALK",
+        "name": "WalkMarkerHandle",
+        "description": "A handle to the walk marker."
+      }
+    ],
+    "min_client": "Windows 8.1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Returns the current position of a walk marker.",
+    "library": "",
+    "min_server": "Windows Server 2012 R2 [desktop apps only]",
+    "header": "Processsnapshot.h",
+    "return_value": "This function returns ERROR_SUCCESS on success. All error codes are defined in winerror.h. Use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a message for an error code. ",
+    "remarks": "The position value compared to the values of other positions is not of any significance. The only valid use of the position is to set the current position using the PssWalkMarkerSetPosition function. ",
+    "return_type": " STDAPI_(DWORD)",
+    "category": "Process Snapshotting",
+    "name": "PssWalkMarkerGetPosition",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HPSSWALK",
+        "name": "WalkMarkerHandle",
+        "description": "A  handle to the walk marker."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ULONG_PTR",
+        "name": "*Position",
+        "description": "The walk marker position that this function returns."
+      }
+    ],
+    "min_client": "Windows 8.1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Rewinds a walk marker back to the beginning.",
+    "library": "",
+    "min_server": "Windows Server 2012 R2 [desktop apps only]",
+    "header": "Processsnapshot.h",
+    "return_value": "This function returns ERROR_SUCCESS on success. All error codes are defined in winerror.h. Use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a message for an error code. ",
+    "remarks": "",
+    "return_type": " STDAPI_(DWORD)",
+    "category": "Process Snapshotting",
+    "name": "PssWalkMarkerSeekToBeginning",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HPSS",
+        "name": "WalkMarkerHandle",
+        "description": "A handle to the walk marker."
+      }
+    ],
+    "min_client": "Windows 8.1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets the position of a walk marker.",
+    "library": "",
+    "min_server": "Windows Server 2012 R2 [desktop apps only]",
+    "header": "Processsnapshot.h",
+    "return_value": "This function returns ERROR_SUCCESS on success or one of the following error codes. All error codes are defined in winerror.h. Use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a message for an error code. ",
+    "remarks": "",
+    "return_type": " STDAPI_(DWORD)",
+    "category": "Process Snapshotting",
+    "name": "PssWalkMarkerSetPosition",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HPSSWALK",
+        "name": "WalkMarkerHandle",
+        "description": "A handle to the walk marker."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG_PTR",
+        "name": "Position",
+        "description": "The position to set. This is a position that the  PssWalkMarkerGetPosition function provided."
+      }
+    ],
+    "min_client": "Windows 8.1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Returns information from the current walk position and advanced the walk marker to the next position.",
+    "library": "",
+    "min_server": "Windows Server 2012 R2 [desktop apps only]",
+    "header": "Processsnapshot.h",
+    "return_value": "This function returns ERROR_SUCCESS on success or one of the following error codes.  All error codes are defined in winerror.h. Use FormatMessage with the FORMAT_MESSAGE_FROM_SYSTEM flag to get a message for an error code. ",
+    "remarks": "For snapshot data types that have a variable number of instances within a snapshot, you use the PssWalkSnapshot function to obtain the instances one after another. You set the InformationClass parameter to specify the type of data. ",
+    "return_type": " STDAPI_(DWORD)",
+    "category": "Process Snapshotting",
+    "name": "PssWalkSnapshot",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HPSS",
+        "name": "SnapshotHandle",
+        "description": "A handle to the snapshot."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSS_WALK_INFORMATION_CLASS",
+        "name": "InformationClass",
+        "description": "The type of information to return. For more information, see PSS_WALK_INFORMATION_CLASS."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HPSSWALK",
+        "name": "WalkMarkerHandle",
+        "description": "A handle to a walk marker. The walk marker indicates the walk position from which data is to be returned. PssWalkSnapshot advances the walk marker to the next walk position in time order before returning to the caller."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void",
+        "name": "*Buffer",
+        "description": "The snapshot information that this function returns."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "BufferLength",
+        "description": "The size of Buffer, in bytes."
+      }
+    ],
+    "min_client": "Windows 8.1 [desktop apps only]"
+  }
+]
+

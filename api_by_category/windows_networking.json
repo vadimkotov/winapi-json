@@ -1,0 +1,645 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "The \t\t\t\tMultinetGetConnectionPerformance function returns information about the expected performance of a connection used to access a network resource.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "The MultinetGetConnectionPerformance function returns the information in a  NETCONNECTINFOSTRUCT structure. The information returned by the  MultinetGetConnectionPerformance function is an estimate only. Network traffic and routing can affect the accuracy of the results returned. Note that the  MultinetGetConnectionPerformance function can be used only to request information for a local device that is redirected to a network resource, or for a network resource to which there is currently a connection. If a UNC path is specified in the lpRemoteName member of the NETRESOURCE structure pointed to by the lpNetResource parameter,  the lpRemoteName member must be a directory name, not  a filename. A typical way to use this function would be to open a file on a network server (which would ensure that there is a connection to the file), call this function, and use the results to make decisions about how to manage file I/O. For example, you can decide whether to read the entire file into a temporary file on the client or directly access the file on the server. ",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "MultinetGetConnectionPerformance",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPNETRESOURCE",
+        "name": "lpNetResource",
+        "description": "A pointer to a  NETRESOURCE structure that specifies the network resource. The following members have specific meanings in this context.  MemberMeaning  lpLocalName   A pointer to a buffer that specifies a local device, such as \"F:\" or \"LPT1\", that is redirected to a network resource to be queried.     If this member is NULL or an empty string, the network resource is specified in the lpRemoteName member. If this flag specifies a local device, lpRemoteName is ignored.   lpRemoteName   A pointer to a network resource to query. The resource must currently have an established connection. For example, if the resource is a file on a file server, then having the file open will ensure the connection.   lpProvider   Usually set to NULL, but can be a pointer to the owner (provider) of the resource if the network on which the resource resides is known.     If the lpProvider member is not NULL, the system attempts to return information only about the named network."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPNETCONNECTINFOSTRUCT",
+        "name": "lpNetConnectInfoStruct",
+        "description": "A pointer to the  NETCONNECTINFOSTRUCT structure that receives the data."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The \t\t\t\tWNetCloseEnum function ends a network resource enumeration started by a call to the  WNetOpenEnum function.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is a  system error code, such as one of the following values.  For a code sample that illustrates an application-defined function that enumerates all the resources on a network, see  Enumerating Network Resources. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetCloseEnum",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hEnum",
+        "description": "Handle that identifies an enumeration instance. This handle must be returned by the  WNetOpenEnum function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The \t\t\t\tWNetConnectionDialog function starts a general browsing dialog box for connecting to network resources. The function requires a handle to the owner window for the dialog box.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the user cancels the dialog box, the function returns \u00e2\u0080\u00931. If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "If the user clicks OK in the dialog box, the requested network connection will have been made when the  WNetConnectionDialog function returns. If the function attempts to make a connection and the network provider returns the message ERROR_INVALID_PASSWORD, the system prompts the user to enter a password. The system uses the new password in another attempt to make the connection. ",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetConnectionDialog",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Handle to the owner window for the dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwType",
+        "description": "Resource type to allow connections to. This parameter can be the following value.     ValueMeaning  RESOURCETYPE_DISK   Connections to disk resources."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The \t\t\t\tWNetConnectionDialog1 function brings up a general browsing dialog for connecting to network resources. The function requires a  CONNECTDLGSTRUCT to establish the dialog box parameters.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the user cancels the dialog box, the function returns \u00e2\u0080\u00931. If the function is successful, it returns NO_ERROR. Also, if the call is successful, the dwDevNum member of the  CONNECTDLGSTRUCT structure contains the number of the connected device. Typically this dialog returns an error only if the user cannot enter a dialog session. This is because errors that occur after a dialog session are reported to the user directly. If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetConnectionDialog1",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPCONNECTDLGSTRUCT",
+        "name": "lpConnDlgStruct",
+        "description": "Pointer to a  CONNECTDLGSTRUCT structure. The structure establishes the browsing dialog parameters."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The \t\t\t\tWNetDisconnectDialog function starts a general browsing dialog box for disconnecting from network resources. The function requires a handle to the owner window for the dialog box.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the user cancels the dialog box, the return value is \u00e2\u0080\u00931. If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "The  WNetDisconnectDialog function returns immediately and creates a dialog box for disconnecting networked drives. This dialog box runs asynchronously on a worker thread. If the worker thread is terminated, the owner window and its associated dialog box are also terminated. If this occurs, the user might not be able to interact with the dialog box, because it will not  appear on the user's screen or will appear briefly. ",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetDisconnectDialog",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Handle to the owner window for the dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwType",
+        "description": "Resource type to disconnect from. This parameter can have the following value.     ValueMeaning  RESOURCETYPE_DISK   Disconnects from disk resources."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The \t\t\t\tWNetDisconnectDialog1 function attempts to disconnect a network resource. If the underlying network returns ERROR_OPEN_FILES, the function prompts the user for confirmation. If there is any error, the function informs the user. The function requires a  DISCDLGSTRUCT to specify the parameters for the disconnect attempt.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the user cancels the dialog box, the return value is \u00e2\u0080\u00931. If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetDisconnectDialog1",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPDISCDLGSTRUCT",
+        "name": "lpConnDlgStruct",
+        "description": "Pointer to a  DISCDLGSTRUCT structure. The structure specifies the behavior for the disconnect attempt."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The \t\t\t\tWNetEnumResource function continues an enumeration of network resources that was started by a call to the  WNetOpenEnum function.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is one of the following values.  If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "The  WNetEnumResource function does not enumerate users connected to a share; you can call the  NetConnectionEnum function to accomplish this task. To enumerate hidden shares, call the  NetShareEnum function. An application cannot set the lpBuffer parameter to NULL and retrieve the required buffer size from the lpBufferSize parameter. Instead, the application should allocate a buffer of a reasonable size\u00e2\u0080\u009416 kilobytes is typical\u00e2\u0080\u0094and use the value of lpBufferSize for error detection. For a code sample that illustrates an application-defined function that enumerates all the resources on a network, see  Enumerating Network Resources. ",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetEnumResource",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hEnum",
+        "description": "Handle that identifies an enumeration instance. This handle must be returned by the  WNetOpenEnum function."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpcCount",
+        "description": "Pointer to a variable specifying the number of entries requested. ..."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID",
+        "name": "lpBuffer",
+        "description": "Pointer to the buffer that receives the enumeration results. The results are returned as an array of  NETRESOURCE structures. Note that the buffer you allocate must be large enough to hold the structures, plus the strings to which their members point. For more information, see the following Remarks section.     The buffer is valid until the next call using the handle specified by the hEnum parameter. The order of  NETRESOURCE structures in the array is not predictable."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpBufferSize",
+        "description": "Pointer to a variable that specifies the size of the lpBuffer parameter, in bytes. If the buffer is too small to receive even one entry, this parameter receives the required size of the buffer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The \t\t\t\tWNetGetConnection function retrieves the name of the network resource associated with a local device.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "If the network connection was made using the Microsoft LAN Manager network, and the calling application is running in a different logon session than the application that made the connection, a call to the  WNetGetConnection function for the associated local device will fail. The function fails with ERROR_NOT_CONNECTED or ERROR_CONNECTION_UNAVAIL. This is because a connection made using Microsoft LAN Manager is visible only to applications running in the same logon session as the application that made the connection. (To prevent the call to  WNetGetConnection from failing it is not sufficient for the application to be running in the user account that created the connection.) Windows Server 2003 and Windows XP:  This function queries the MS-DOS device namespaces associated with a logon session because MS-DOS devices are identified by AuthenticationID. (An AuthenticationID is the  locally unique identifier, or LUID, associated with a logon session.) This can affect applications that call one of the WNet functions to create a network drive letter under one user logon, but query for existing network drive letters under a different user logon. An example of this situation could be when a user's second logon is created within a logon session, for example, by calling the  CreateProcessAsUser function, and the second logon runs an application that calls the  GetLogicalDrives function. GetLogicalDrives does not return network drive letters created by a WNet function under the first logon. Note that in the preceding example the first logon session still exists, and the example could apply to any logon session, including a Terminal Services session. For more information, see  Defining an MS-DOS Device Name. For a code sample that illustrates how to use the  WNetGetConnection function to retrieve the name of the network resource associated with a local device, see  Retrieving the Connection Name. ",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetGetConnection",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpLocalName",
+        "description": "Pointer to a constant null-terminated string that specifies the name of the local device to get the network name for."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpRemoteName",
+        "description": "Pointer to a null-terminated  string  that receives the remote name used to make the connection."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpnLength",
+        "description": "Pointer to a variable that specifies the size of the buffer pointed to by the lpRemoteName parameter, in characters. If the function fails because the buffer is not large enough, this parameter returns the required buffer size."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The \t\t\t\tWNetGetLastError function retrieves the most recent extended error code set by a WNet function. The network provider reported this error code; it will not generally be one of the errors included in the SDK header file WinError.h.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, and it obtains the last error that the network provider reported, the return value is NO_ERROR. If the caller supplies an invalid buffer, the return value is ERROR_INVALID_ADDRESS. ",
+    "remarks": "The  WNetGetLastError function retrieves errors that are specific to a network provider. You can call  WNetGetLastError when a WNet function returns ERROR_EXTENDED_ERROR. Like the  GetLastError function,  WNetGetLastError returns extended error information, which is maintained on a per-thread basis. Unlike GetLastError, the  WNetGetLastError function can return a string for reporting errors that are not described by any existing error code in WinError.h. For more information about using an application-defined error handler that calls the  WNetGetLastError function, see  Retrieving Network Errors. ",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetGetLastError",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpError",
+        "description": "Pointer to a variable that receives the error code reported by the network provider. The error code is specific to the network provider."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpErrorBuf",
+        "description": "Pointer to the buffer that receives the null-terminated string describing the error."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nErrorBufSize",
+        "description": "Size of the buffer pointed to by the lpErrorBuf parameter, in characters. If the buffer is too small for the error string, the string is truncated but still null-terminated. A buffer of at least 256 characters is recommended."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpNameBuf",
+        "description": "Pointer to the buffer that receives the null-terminated string identifying the network provider that raised the error."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nNameBufSize",
+        "description": "Size of the buffer pointed to by the lpNameBuf parameter, in characters. If the buffer is too small for the error string, the string is truncated but still null-terminated."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The \t\t\t\tWNetGetNetworkInformation function returns extended information about a specific network provider whose name was returned by a previous network enumeration.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is a  system error code, such as one of the following values.  For a code sample that illustrates an application-defined function that enumerates all the resources on a network, see  Enumerating Network Resources. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetGetNetworkInformation",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpProvider",
+        "description": "Pointer to a constant null-terminated string that contains the name of the network provider for which information is required."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPNETINFOSTRUCT",
+        "name": "lpNetInfoStruct",
+        "description": "Pointer to a  NETINFOSTRUCT structure. The structure describes characteristics of the network."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The \t\t\t\tWNetGetProviderName function obtains the provider name for a specific type of network.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetGetProviderName",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNetType",
+        "description": "Network type that is unique to the network. If two networks claim the same type, the function returns the name of the provider loaded first. Only the high word of the network type is used. If a network reports a subtype in the low word, it is ignored.     You can find a complete list of network types in the header file Winnetwk.h."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpProviderName",
+        "description": "Pointer to a buffer that receives the network provider name."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpBufferSize",
+        "description": "Size of the buffer passed to the function, in characters. If the return value is ERROR_MORE_DATA, lpBufferSize returns the buffer size required (in characters) to hold the provider name.     Windows Me/98/95:  The size of the buffer is in bytes, not characters. Also, the buffer must be at least 1 byte long."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "When provided with a remote path to a network resource, the  WNetGetResourceInformation function identifies the network provider that owns the resource and obtains information about the type of the resource. The function is typically used in conjunction with the  WNetGetResourceParent function to parse and interpret a network path typed in by a user.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is a  system error code, such as one of the following values.  For a code sample that illustrates how to use the  WNetGetResourceInformation function, see  Retrieving Information About a Network Resource. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetGetResourceInformation",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPNETRESOURCE",
+        "name": "lpNetResource",
+        "description": "Pointer to a  NETRESOURCE structure that specifies the network resource for which information is required.     The lpRemoteName member of the structure should specify the remote path name of the resource, typically one typed in by a user. The lpProvider and dwType members should also be filled in if known, because this operation can be memory intensive, especially if you do not specify the dwType member. If you do not know the values for these members, you should set them to NULL. All other members of the  NETRESOURCE structure are ignored."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID",
+        "name": "lpBuffer",
+        "description": "Pointer to the buffer to receive the result. On successful return, the first portion of the buffer is a  NETRESOURCE structure representing that portion of the input resource path that is accessed through the WNet functions, rather than through system functions specific to the input resource type. (The remainder of the buffer contains the variable-length strings to which the members of the  NETRESOURCE structure point.)     For example, if the input remote resource path is \\\\server\\share\\dir1\\dir2, then the output  NETRESOURCE structure contains information about the resource \\\\server\\share. The \\dir1\\dir2 portion of the path is accessed through the  file management functions. The lpRemoteName, lpProvider, dwType, dwDisplayType, and dwUsage members of  NETRESOURCE are returned, with all other members set to NULL. The lpRemoteName member is returned in the same syntax as the one returned from an enumeration by the  WNetEnumResource function. This allows the caller to perform a string comparison to determine whether the resource passed to  WNetGetResourceInformation is the same as the resource returned by a separate call to  WNetEnumResource."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpcbBuffer",
+        "description": "Pointer to a location that, on entry, specifies the size of the lpBuffer buffer, in bytes. The buffer you allocate must be large enough to hold the  NETRESOURCE structure, plus the strings to which its members point. If the buffer is too small for the result, this location receives the required buffer size, and the function returns ERROR_MORE_DATA."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "*lplpSystem",
+        "description": "If the function returns successfully, this parameter points to a string in the output buffer that specifies the part of the resource that is accessed through system functions. (This applies only to functions specific to the resource type rather than the WNet functions.)     For example, if the input remote resource name is \\\\server\\share\\dir1\\dir2, the lpRemoteName member of the output  NETRESOURCE structure points to \\\\server\\share. Also, the lplpSystem parameter points to \\dir1\\dir2. Both strings are stored in the buffer pointed to by the lpBuffer parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The \t\t\t\tWNetGetResourceParent function returns the parent of a network resource in the network browse hierarchy. Browsing begins at the location of the specified network resource.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "The  WNetGetResourceParent function is typically used in conjunction with the  WNetGetResourceInformation function to parse and interpret a network path typed in by a user. Unlike the  WNetGetResourceInformation function, if the resource includes a parent in its syntax, the  WNetGetResourceParent function returns the parent, whether or not the resource actually exists.  WNetGetResourceParent should typically be used only by applications that display network resources to the user in a hierarchical fashion. The Windows Explorer and the File Open dialog box are two well-known examples of this type of application. Note that no assumptions should be made about the type of resource that will be returned. You can call the  WNetEnumResource,  WNetGetResourceInformation, or  WNetGetResourceParent function to return information from the  NETRESOURCE structure. You can also construct network resource information using the members of the  NETRESOURCE structure. An example of an inappropriate use of  WNetGetResourceParent is to determine the name of the domain to which a specified server belongs. The function may happen to return the correct domain name for some networks in which domains appear directly above servers in the browse hierarchy. The function will return incorrect results for other networks. ",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetGetResourceParent",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPNETRESOURCE",
+        "name": "lpNetResource",
+        "description": "Pointer to a  NETRESOURCE structure that specifies the network resource for which the parent name is required.     Specify the members of the input  NETRESOURCE structure as follows. The caller typically knows the values to provide for the lpProvider and dwType members after previous calls to  WNetGetResourceInformation or  WNetGetResourceParent.  MemberMeaning  dwType   This member should be filled in if known; otherwise, it should be set to NULL.   lpRemoteName   This member should specify the remote name of the network resource whose parent is required.   lpProvider   This member should specify the network provider that owns the resource. This member is required; otherwise, the function could produce incorrect results.     All other members of the  NETRESOURCE structure are ignored."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID",
+        "name": "lpBuffer",
+        "description": "Pointer to a buffer to receive a single  NETRESOURCE structure that represents the parent resource. The function returns the lpRemoteName, lpProvider, dwType, dwDisplayType, and dwUsage members of the structure; all other members are set to NULL.     The lpRemoteName member points to the remote name for the parent resource. This name uses the same syntax as the one returned from an enumeration by the  WNetEnumResource function. The caller can perform a string comparison to determine whether the  WNetGetResourceParent resource is the same as that returned by  WNetEnumResource. If the input resource has no parent on any of the networks, the lpRemoteName member is returned as NULL. The presence of the RESOURCEUSAGE_CONNECTABLE bit in the dwUsage member indicates that you can connect to the parent resource, but only when it is available on the network."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpcbBuffer",
+        "description": "Pointer to a location that, on entry, specifies the size of the lpBuffer buffer, in bytes. If the buffer is too small to hold the result, this location receives the required buffer size, and the function returns ERROR_MORE_DATA."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The \t\t\t\tWNetGetUniversalName function takes a drive-based path for a network resource and returns an information structure that contains a more universal form of the name.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "A universal form of a local drive-based path identifies a network resource in an unambiguous, computer-independent manner. The name can then be passed to processes on other computers, allowing those processes to obtain access to the resource. The  WNetGetUniversalName function currently supports one universal name form: universal naming convention (UNC) names, which look like the following: Using the example from the preceding description of the lpLocalPath parameter, if the shared network drive is on a server named COOLSERVER, and the share name is HOTSHARE, the UNC name for the network resource whose drive-based name is H:\\Win32\\Examples\\Sample.doc would be the following: The  UNIVERSAL_NAME_INFO structure contains a pointer to a UNC name string. The  REMOTE_NAME_INFO structure also contains a pointer to a UNC name string as well as pointers to two other useful strings. For example, a process can pass the  REMOTE_NAME_INFO structure's lpszConnectionInfo member to the  WNetAddConnection2 function to connect a local device to the network resource. Then the process can append the string pointed to by the lpszRemainingPath member to the local device string. The resulting string can be passed to functions that require a drive-based path. The lpLocalPath parameter does not have to specify a path or resource that is already present on a remote resource.  For example, the lpLocalPath parameter could specify and folder, a hieracrchy of folders, or a file that does not currently exist. The \t\t\t\tWNetGetUniversalName function returns a more universal form of the name in these cases. The size of the buffer pointed to by the lpBuffer parameter and specified in the lpBufferSize parameter must be much larger than the size of the REMOTE_NAME_INFO  \t\t or UNIVERSAL_NAME_INFO structures. The buffer pointed to by the lpBuffer parameter must be large enough to store the UNC strings pointed to by the members in the REMOTE_NAME_INFO  \t\t or UNIVERSAL_NAME_INFO structures. If the buffer size is too small, then the function fails with ERROR_MORE_DATA and the variable pointed to by the lpBufferSize parameter indicates the required buffer size. Windows Server 2003 and Windows XP:  This function queries the MS-DOS device namespaces associated with a logon session because MS-DOS devices are identified by AuthenticationID. (An AuthenticationID is the  locally unique identifier, or LUID, associated with a logon session.) This can affect applications that call one of the WNet functions to create a network drive letter under one user logon, but query for existing network drive letters under a different user logon. An example of this situation could be when a user's second logon is created within a logon session, for example, by calling the  CreateProcessAsUser function, and the second logon runs an application that calls the  GetLogicalDrives function. GetLogicalDrives does not return network drive letters created by a WNet function under the first logon. Note that in the preceding example the first logon session still exists, and the example could apply to any logon session, including a Terminal Services session. For more information, see  Defining an MS-DOS Device Name. The following code sample illustrates how to use the  WNetGetUniversalName function to retrieve the universal UNC name strings associated with drive-based path for a network resource. ",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetGetUniversalName",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpLocalPath",
+        "description": "A pointer to a constant null-terminated string that is a drive-based path for a network resource.     For example, if drive H has been mapped to a network drive share, and the network       resource of interest is a file named Sample.doc in the directory \\Win32\\Examples on that share, the drive-based path is H:\\Win32\\Examples\\Sample.doc."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwInfoLevel",
+        "description": "The type of structure that the function stores in the buffer pointed to by the lpBuffer parameter. This parameter can be one of the following values defined in the Winnetwk.h header file.  ValueMeaning  UNIVERSAL_NAME_INFO_LEVEL   The function stores a  UNIVERSAL_NAME_INFO structure in the buffer.   REMOTE_NAME_INFO_LEVEL   The function stores a  REMOTE_NAME_INFO structure in the buffer.     The  UNIVERSAL_NAME_INFO structure points to a Universal Naming Convention (UNC) name string. The  REMOTE_NAME_INFO structure points to a UNC name string and two additional connection information strings. For more information, see the following Remarks section."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID",
+        "name": "lpBuffer",
+        "description": "A pointer to a buffer that receives the structure specified by the dwInfoLevel parameter."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpBufferSize",
+        "description": "A pointer to a variable that specifies the size, in bytes, of the buffer pointed to by the lpBuffer parameter. If the function succeeds, it sets the variable pointed to by lpBufferSize to the number of bytes stored in the buffer. If the function fails because the buffer is too small, this location receives the required buffer size, and the function returns ERROR_MORE_DATA."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The \t\t\t\tWNetGetUser function retrieves the current default user name, or the user name used to establish a network connection.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "The WNetGetUser function is not aware of shares on the Distributed File System (DFS). If the name specified by the lpName parameter is a local device  redirected to a DFS share or a remote resource that represents a DFS share, the WNetGetUser function fails with ERROR_NOT_CONNECTED. The following code sample illustrates how to use the  WNetGetUser function to retrieve the name of the user associated with a redirected local device or a remote network resource. ",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetGetUser",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpName",
+        "description": "A pointer to a constant null-terminated string that specifies either the name of a local device that has been redirected to a network resource, or the remote name of a network resource to which a connection has been made without redirecting a local device. If this parameter is NULL or the empty string, the system returns the name of the current user for the process."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpUserName",
+        "description": "A pointer to a buffer that receives the null-terminated user name."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpnLength",
+        "description": "A pointer to a variable that specifies the size of the lpUserName buffer, in characters. If the call fails because the buffer is not large enough, this variable contains the required buffer size."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The \t\t\t\tWNetOpenEnum function starts an enumeration of network resources or existing connections. You can continue the enumeration by calling the  WNetEnumResource function.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "If the dwScope parameter is equal to RESOURCE_CONNECTED, a network connection made using the Microsoft LAN Manager network is omitted from the enumeration if the connection was made by an application running in a different logon session than the application calling the  WNetOpenEnum function. This is because connections made using Microsoft LAN Manager are visible only to applications running in the same logon session as the application that made the connection. (To include the connection in the enumeration, it is not sufficient for the application to be running in the user account that created the connection.) The exact interpretation of RESOURCE_CONTEXT in the dwScope parameter depends on the networks installed on the machine. The  WNetOpenEnum function is used to begin enumeration of the resources in a single container. The following examples show the hierarchical structure of a Microsoft LAN Manager network and a Novell NetWare network and identify the containers. For a code sample that illustrates an application-defined function that enumerates all the resources on a network, see  Enumerating Network Resources. ",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetOpenEnum",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwScope",
+        "description": "Scope of the enumeration. This parameter can be one of the following values.     ValueMeaning  RESOURCE_CONNECTED   Enumerate all currently connected resources. The function ignores the dwUsage parameter. For more information, see the following Remarks section.   RESOURCE_CONTEXT   Enumerate only resources in the network context of the caller. Specify this value for a Network Neighborhood view. The function ignores the dwUsage parameter.   RESOURCE_GLOBALNET   Enumerate all resources on the network.   RESOURCE_REMEMBERED   Enumerate all remembered (persistent) connections. The function ignores the dwUsage parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwType",
+        "description": "Resource types to be enumerated. This parameter can be a combination of the following values.     ValueMeaning  RESOURCETYPE_ANY   All resources. This value cannot be combined with RESOURCETYPE_DISK or RESOURCETYPE_PRINT.   RESOURCETYPE_DISK   All disk resources.   RESOURCETYPE_PRINT   All print resources.     If a network provider cannot distinguish between print and disk resources, it can enumerate all resources."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwUsage",
+        "description": "Resource usage type to be enumerated. This parameter can be a combination of the following values.     ValueMeaning  0   All resources.   RESOURCEUSAGE_CONNECTABLE   All connectable resources.   RESOURCEUSAGE_CONTAINER   All container resources.   RESOURCEUSAGE_ATTACHED   Setting this value forces  WNetOpenEnum to fail if the user is not authenticated. The function fails even if the network allows enumeration without authentication.   RESOURCEUSAGE_ALL   Setting this value is equivalent to setting RESOURCEUSAGE_CONNECTABLE, RESOURCEUSAGE_CONTAINER, and RESOURCEUSAGE_ATTACHED.     This parameter is ignored unless the dwScope parameter is equal to RESOURCE_GLOBALNET. For more information, see the following Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPNETRESOURCE",
+        "name": "lpNetResource",
+        "description": "Pointer to a  NETRESOURCE structure that specifies the container to enumerate. If the dwScope parameter is not RESOURCE_GLOBALNET, this parameter must be NULL.     If this parameter is NULL, the root of the network is assumed. (The system organizes a network as a hierarchy; the root is the topmost container in the network.) If this parameter is not NULL, it must point to a  NETRESOURCE structure. This structure can be filled in by the application or it can be returned by a call to the  WNetEnumResource function. The  NETRESOURCE structure must specify a container resource; that is, the RESOURCEUSAGE_CONTAINER value must be specified in the dwUsage parameter. To enumerate all network resources, an application can begin the enumeration by calling  WNetOpenEnum with the lpNetResource parameter set to NULL, and then use the returned handle to call  WNetEnumResource to enumerate resources. If one of the resources in the  NETRESOURCE array returned by the  WNetEnumResource function is a container resource, you can call  WNetOpenEnum to open the resource for further enumeration."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPHANDLE",
+        "name": "lphEnum",
+        "description": "Pointer to an enumeration handle that can be used in a subsequent call to  WNetEnumResource."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[WNetRestoreConnectionW is not available for use as of Windows Vista.]",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is a system error code, such as one of the following values.  ",
+    "remarks": "The WNetRestoreConnectionW function is not supported on Windows Vista and later.  To call this function, first call the LoadLibrary function to load Mpr.dll. Then call the GetProcAddress function to retrieve the address of the WNetRestoreConnectionW function. WNetRestoreConnectionW is used by Winlogon to restore all persistent drive mappings during the interactive logon process. The function is also called by the Microsoft Windows Shell to reconnect individual drives at the user's request. This can occur, for example, when a drive fails to reconnect at logon and the user double-clicks the drive under the My Computer virtual folder. ",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetRestoreConnectionW",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndParent",
+        "description": "Handle to the parent window that the function uses to display the user interface (UI) that prompts the user for a name and password when making the network connection. If this parameter is NULL, there is no owner window."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "lpDevice",
+        "description": "Pointer to a null-terminated Unicode string that specifies the local name of the drive to connect to, such as \"Z:\". If this parameter is NULL, the function reconnects all persistent drives stored in the registry for the current user."
+      },
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "fUseUI",
+        "description": "If true, display a username/password prompt to the caller; otherwise, do not display it. The default value is true."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "The \t\t\t\tWNetUseConnection function makes a connection to a network resource. The function can redirect a local device to a network resource.",
+    "library": "Mpr.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnetwk.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is a  system error code, such as one of the following values.  ",
+    "remarks": "Windows Server 2003 and Windows XP:  The WNet functions create and delete network drive letters in the MS-DOS device namespace associated with a logon session because MS-DOS devices are identified by AuthenticationID. (An AuthenticationID is the  locally unique identifier, or LUID, associated with a logon session.) This can affect applications that call one of the WNet functions to create a network drive letter under one user logon, but query for existing network drive letters under a different user logon. An example of this situation could be when a user's second logon is created within a logon session, for example, by calling the  CreateProcessAsUser function, and the second logon runs an application that calls the  GetLogicalDrives function. GetLogicalDrives does not return network drive letters created by a WNet function under the first logon. Note that in the preceding example the first logon session still exists, and the example could apply to any logon session, including a Terminal Services session. For more information, see  Defining an MS-DOS Device Name. ",
+    "return_type": "DWORD",
+    "category": "Windows Networking (WNet)",
+    "name": "WNetUseConnection",
+    "is_callback": 0,
+    "dll": "Mpr.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndOwner",
+        "description": "Handle to a window that the provider of network resources can use as an owner window for dialog boxes. Use this parameter if you set the CONNECT_INTERACTIVE value in the dwFlags parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPNETRESOURCE",
+        "name": "lpNetResource",
+        "description": "Pointer to a  NETRESOURCE structure that specifies details of the proposed connection. The structure contains information about the network resource, the local device, and the network resource provider.     You must specify the following members of the  NETRESOURCE structure.  MemberMeaning  dwType   Specifies the type of resource to connect to.     It is most efficient to specify a resource type in this member, such as RESOURCETYPE_DISK or RESOURCETYPE_PRINT. However, if the lpLocalName member is NULL, or if it points to an empty string and CONNECT_REDIRECT is not set, dwType can be RESOURCETYPE_ANY. This method works only if the function does not automatically choose a device to redirect to the network resource. Although this member is required, its information may be ignored by the network service provider.   lpLocalName   Pointer to a null-terminated string that specifies the name of a local device to be redirected, such as \"F:\" or \"LPT1\". The string is treated in a case-insensitive manner.     If the string is empty, or if lpLocalName is NULL, a connection to the network occurs without redirection. If the CONNECT_REDIRECT value is set in the dwFlags parameter, or if the network requires a redirected local device, the function chooses a local device to redirect and returns the name of the device in the lpAccessName parameter.   lpRemoteName   Pointer to a null-terminated string that specifies the network resource to connect to. The string can be up to MAX_PATH characters in length, and it must follow the network provider's naming conventions.   lpProvider   Pointer to a null-terminated string that specifies the network provider to connect to. If lpProvider is NULL, or if it points to an empty string, the operating system attempts to determine the correct provider by parsing the string pointed to by the lpRemoteName member.     If this member is not NULL, the operating system attempts to make a connection only to the named network provider. You should set this member only if you know the network provider you want to use. Otherwise, let the operating system determine which provider the network name maps to.     The  WNetUseConnection function ignores the other members of the  NETRESOURCE structure. For more information, see the descriptions following for the dwFlags parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpPassword",
+        "description": "Pointer to a constant null-terminated string that specifies a password to be used in making the network connection.     If lpPassword is NULL, the function uses the current default password associated with the user specified by lpUserID. \t\t\t\t\t\t If lpPassword points to an empty string, the function does not use a password. If the connection fails because of an invalid password and the CONNECT_INTERACTIVE value is set in the dwFlags parameter, the function displays a dialog box asking the user to type the password."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpUserID",
+        "description": "Pointer to a constant null-terminated string that specifies a user name for making the connection.     If lpUserID is NULL, the function uses the default user name. (The user context for the process provides the default user name.) The lpUserID parameter is specified when users want to connect to a network resource for which they have been assigned a user name or account other than the default user name or account. The user-name string represents a  security context. It may be specific to a network provider."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Set of bit flags describing the connection. This parameter can be any combination of the following values.     ValueMeaning  CONNECT_INTERACTIVE   If this flag is set, the operating system may interact with the user for authentication purposes.   CONNECT_PROMPT   This flag instructs the system not to use any default settings for user names or passwords without offering the user the opportunity to supply an alternative. This flag is ignored unless CONNECT_INTERACTIVE is also set.   CONNECT_REDIRECT   This flag forces the redirection of a local device when making the connection.     If the lpLocalName member of  NETRESOURCE specifies a local device to redirect, this flag has no effect, because the operating system still attempts to redirect the specified device. When the operating system automatically chooses a local device, the dwType member must not be equal to RESOURCETYPE_ANY. If this flag is not set, a local device is automatically chosen for redirection only if the network requires a local device to be redirected. Windows XP:  When the system automatically assigns network drive letters, letters are assigned beginning with Z:, then Y:, and ending with C:. This reduces collision between per-logon drive letters (such as network drive letters) and global drive letters (such as disk drives). Note that previous releases assigned drive letters beginning with C: and ending with Z:.   CONNECT_UPDATE_PROFILE   This flag instructs the operating system to store the network resource connection.     If this bit flag is set, the operating system automatically attempts to restore the connection when the user logs on. The system remembers only successful connections that redirect local devices. It does not remember connections that are unsuccessful or deviceless connections. (A deviceless connection occurs when lpLocalName is NULL or when it points to an empty string.) If this bit flag is clear, the operating system does not automatically restore the connection at logon.   CONNECT_COMMANDLINE   If this flag is set, the operating system prompts the user for authentication using the command line instead of a graphical user interface (GUI). This flag is ignored unless CONNECT_INTERACTIVE is also set. Windows 2000/NT and Windows Me/98/95:  This value is not supported.   CONNECT_CMD_SAVECRED   If this flag is set, and the operating system prompts for a credential, the credential should be saved by the credential manager. If the credential manager is disabled for the caller's logon session, or if the network provider does not support saving credentials, this flag is ignored. This flag is also ignored unless you set the CONNECT_COMMANDLINE flag. Windows 2000/NT and Windows Me/98/95:  This value is not supported."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpAccessName",
+        "description": "Pointer to a buffer that receives system requests on the connection. This parameter can be NULL.     If this parameter is specified, and the lpLocalName member of the  NETRESOURCE structure specifies a local device, this buffer receives the local device name. If lpLocalName does not specify a device and the network requires a local device redirection, or if the CONNECT_REDIRECT value is set, this buffer receives the name of the redirected local device. Otherwise, the name copied into the buffer is that of a remote resource. If specified, this buffer must be at least as large as the string pointed to by the lpRemoteName member."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpBufferSize",
+        "description": "Pointer to a variable that specifies the size of the lpAccessName buffer, in characters. If the call fails because the buffer is not large enough, the function returns the required buffer size in this location. For more information, see the descriptions of the lpAccessName parameter and the ERROR_MORE_DATA error code in the Return Values section."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpResult",
+        "description": "Pointer to a variable that receives additional information about the connection. This parameter can be the following value.     ValueMeaning  CONNECT_LOCALDRIVE   If this flag is set, the connection was made using a local device redirection. If the lpAccessName parameter points to a buffer, the local device name is copied to the buffer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

@@ -1,0 +1,197 @@
+[
+  {
+    "n_arguments": 4,
+    "description": "Creates a new shape for the system caret and assigns ownership of the caret to the specified window. The caret shape can be a line, a block, or a bitmap.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The nWidth and nHeight parameters specify the caret's width and height, in logical units; the exact width and height, in pixels, depend on the window's mapping mode. CreateCaret automatically destroys the previous caret shape, if any, regardless of the window that owns the caret. The caret is hidden until the application calls the ShowCaret function to make the caret visible. The system provides one caret per queue. A window should create a caret only when it has the keyboard focus or is active. The window should destroy the caret before losing the keyboard focus or becoming inactive. You can retrieve the width or height of the system's window border by using the GetSystemMetrics function, specifying the SM_CXBORDER and SM_CYBORDER values. Using the window border width or height guarantees that the caret will be visible on a high-resolution screen. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Carets",
+    "name": "CreateCaret",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window that owns the caret."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HBITMAP",
+        "name": "hBitmap",
+        "description": "Type: HBITMAP A handle to the bitmap that defines the caret shape. If this parameter is NULL, the caret is solid. If this parameter is (HBITMAP) 1, the caret is gray. If this parameter is a bitmap handle, the caret is the specified bitmap. The bitmap handle must have been created by the CreateBitmap, CreateDIBitmap, or LoadBitmap function. If hBitmap is a bitmap handle, CreateCaret ignores the nWidth and nHeight parameters; the bitmap defines its own width and height."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nWidth",
+        "description": "Type: int The width of the caret, in logical units. If this parameter is zero, the width is set to the system-defined window border width. If hBitmap is a bitmap handle, CreateCaret ignores this parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nHeight",
+        "description": "Type: int The height of the caret, in logical units. If this parameter is zero, the height is set to the system-defined window border height. If hBitmap is a bitmap handle, CreateCaret ignores this parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Destroys the caret's current shape, frees the caret from the window, and removes the caret from the screen.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "DestroyCaret destroys the caret only if a window in the current task owns the caret. If a window that is not in the current task owns the caret, DestroyCaret does nothing and returns FALSE. The system provides one caret per queue. A window should create a caret only when it has the keyboard focus or is active. The window should destroy the caret before losing the keyboard focus or becoming inactive. For an example, see Destroying a Caret ",
+    "return_type": "BOOL WINAPI",
+    "category": "Carets",
+    "name": "DestroyCaret",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the time required to invert the caret's pixels.           The user can set this value.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: UINT If the function succeeds, the return value is the blink time, in milliseconds. A return value of INFINITE indicates that the caret does not blink. A return value is zero indicates that the function has failed.              To get extended error information, call GetLastError. ",
+    "remarks": "",
+    "return_type": "UINT WINAPI",
+    "category": "Carets",
+    "name": "GetCaretBlinkTime",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Copies the caret's position to the specified POINT structure.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The caret position is always given in the client coordinates of the window that contains the caret. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Carets",
+    "name": "GetCaretPos",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPPOINT",
+        "name": "lpPoint",
+        "description": "Type: LPPOINT A pointer to the POINT structure that is to receive the client coordinates of the caret."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Removes the caret from the screen. Hiding a caret does not destroy its current shape or invalidate the insertion point.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "HideCaret hides the caret only if the specified window owns the caret. If the specified window does not own the caret, HideCaret does nothing and returns FALSE. Hiding is cumulative. If your application calls HideCaret five times in a row, it must also call ShowCaret five times before the caret is displayed. For an example, see Hiding a Caret. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Carets",
+    "name": "HideCaret",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window that owns the caret. If this parameter is NULL, HideCaret searches the current task for the window that owns the caret."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the caret blink time to the specified number of milliseconds. The blink time is the elapsed time, in milliseconds, required to invert the caret's pixels.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The user can set the blink time using the Control Panel. Applications should respect the setting that the user has chosen. The SetCaretBlinkTime function should only be used by application that allow the user to set the blink time, such as a Control Panel applet. If you change the blink time, subsequently activated applications will use the modified blink time, even if you restore the previous blink time when you lose the keyboard focus or become inactive. This is due to the multithreaded environment, where deactivation of your application is not synchronized with the activation of another application. This feature allows the system to activate another application even if the current application is not responding. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Carets",
+    "name": "SetCaretBlinkTime",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uMSeconds",
+        "description": "Type: UINT The new blink time, in milliseconds."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Moves the caret to the specified coordinates. If the window that owns the caret was created with the CS_OWNDC class style, then the specified coordinates are subject to the mapping mode of the device context associated with that window.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "SetCaretPos moves the caret whether the caret is hidden. The system provides one caret per queue. A window should create a caret only when it has the keyboard focus or is active. The window should destroy the caret before losing the keyboard focus or becoming inactive. A window can set the caret position only if it owns the caret. For an example, see Creating and Displaying a Caret. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Carets",
+    "name": "SetCaretPos",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "X",
+        "description": "Type: int The new x-coordinate of the caret."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Y",
+        "description": "Type: int The new y-coordinate of the caret."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Makes the caret visible on the screen at the caret's current position. When the caret becomes visible, it begins flashing automatically.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "ShowCaret shows the caret only if the specified window owns the caret, the caret has a shape, and the caret has not been hidden two or more times in a row. If one or more of these conditions is not met, ShowCaret does nothing and returns FALSE. Hiding is cumulative. If your application calls HideCaret five times in a row, it must also call ShowCaret five times before the caret reappears. The system provides one caret per queue. A window should create a caret only when it has the keyboard focus or is active. The window should destroy the caret before losing the keyboard focus or becoming inactive. For an example, see Creating and Displaying a Caret. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Carets",
+    "name": "ShowCaret",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window that owns the caret. If this parameter is NULL, ShowCaret searches the current task for the window that owns the caret."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

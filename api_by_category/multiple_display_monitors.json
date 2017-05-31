@@ -1,0 +1,201 @@
+[
+  {
+    "n_arguments": 4,
+    "description": "The EnumDisplayMonitors function enumerates display monitors (including invisible pseudo-monitors associated with the mirroring drivers) that intersect a region formed by the intersection of a specified clipping rectangle and the visible region of a device context. EnumDisplayMonitors calls an application-defined MonitorEnumProc callback function once for each monitor that is enumerated. Note that GetSystemMetrics (SM_CMONITORS) counts only the display monitors.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "There are two reasons to call the EnumDisplayMonitors function: To determine whether all the display monitors in a system share the same color format, call GetSystemMetrics (SM_SAMEDISPLAYFORMAT). You do not need to use the EnumDisplayMonitors function when a window spans display monitors that have different color formats. You can continue to paint under the assumption that the entire screen has the color properties of the primary monitor. Your windows will look fine. EnumDisplayMonitors just lets you make them look better. Setting the hdc parameter to NULL lets you use the EnumDisplayMonitors function to obtain a handle and position rectangle for one or more display monitors. The following table shows how the four combinations of NULL and non-NULLhdc and lprcClip values affect the behavior of the EnumDisplayMonitors function.  To paint in response to a WM_PAINT message, using the capabilities of each monitor, you can use code like this in a window procedure: To paint the top half of a window using the capabilities of each monitor, you can use code like this: To paint the entire virtual screen optimally for each display monitor, you can use code like this: To retrieve information about all of the display monitors, use code like this: ",
+    "return_type": "BOOL",
+    "category": "Multiple Display Monitors",
+    "name": "EnumDisplayMonitors",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to a display device context that defines the visible region of interest. If this parameter is NULL, the hdcMonitor parameter passed to the callback function will be NULL, and the visible region of interest is the virtual screen that encompasses all the displays on the desktop."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "lprcClip",
+        "description": "A pointer to a RECT structure that specifies a clipping rectangle. The region of interest is the intersection of the clipping rectangle with the visible region specified by hdc. If hdc is non-NULL, the coordinates of the clipping rectangle are relative to the origin of the hdc. If hdc is NULL, the coordinates are virtual-screen coordinates. This parameter can be NULL if you don't want to clip the region specified by hdc."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MONITORENUMPROC",
+        "name": "lpfnEnum",
+        "description": "A pointer to a MonitorEnumProc application-defined callback function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "dwData",
+        "description": "Application-defined data that EnumDisplayMonitors passes directly to the MonitorEnumProc function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The GetMonitorInfo function retrieves information about a display monitor.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. For an example, see Positioning Objects on a Multiple Display Setup. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Multiple Display Monitors",
+    "name": "GetMonitorInfo",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HMONITOR",
+        "name": "hMonitor",
+        "description": "A handle to the display monitor of interest."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPMONITORINFO",
+        "name": "lpmi",
+        "description": "A pointer to a MONITORINFO or MONITORINFOEX structure that receives information about the specified display monitor. You must set the cbSize member of the structure to sizeof(MONITORINFO) or sizeof(MONITORINFOEX) before calling the GetMonitorInfo function. Doing so lets the function determine the type of structure you are passing to it. The MONITORINFOEX structure is a superset of the MONITORINFO structure. It has one additional member: a string that contains a name for the display monitor. Most applications have no use for a display monitor name, and so can save some bytes by using a MONITORINFO structure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "A MonitorEnumProc function is an application-defined callback function that is called by the EnumDisplayMonitors function.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "To continue the enumeration, return TRUE. To stop the enumeration, return FALSE. ",
+    "remarks": "You can use the EnumDisplayMonitors function to enumerate the set of display monitors that intersect the visible region of a specified device context and, optionally, a clipping rectangle. To do this, set the hdc parameter to a non-NULL value, and set the lprcClip parameter as needed. You can also use the EnumDisplayMonitors function to enumerate one or more of the display monitors on the desktop, without supplying a device context. To do this, set the hdc parameter of EnumDisplayMonitors to NULL and set the lprcClip parameter as needed. In all cases, EnumDisplayMonitors calls a specified MonitorEnumProc function once for each display monitor in the calculated enumeration set. The MonitorEnumProc function always receives a handle to the display monitor. If the hdc parameter of EnumDisplayMonitors is non-NULL, the MonitorEnumProc function also receives a handle to a device context whose color format is appropriate for the display monitor. You can then paint into the device context in a manner that is optimal for the display monitor. ",
+    "return_type": "BOOL CALLBACK",
+    "category": "Multiple Display Monitors",
+    "name": "MonitorEnumProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HMONITOR",
+        "name": "hMonitor",
+        "description": "A handle to the display monitor. This value will always be non-NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdcMonitor",
+        "description": "A handle to a device context. The device context has color attributes that are appropriate for the display monitor identified by hMonitor. The clipping area of the device context is set to the intersection of the visible region of the device context identified by the hdc parameter of EnumDisplayMonitors, the rectangle pointed to by the lprcClip parameter of EnumDisplayMonitors, and the display monitor rectangle. This value is NULL if the hdc parameter of EnumDisplayMonitors was NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPRECT",
+        "name": "lprcMonitor",
+        "description": "A pointer to a RECT structure. If hdcMonitor is non-NULL, this rectangle is the intersection of the clipping area of the device context identified by hdcMonitor and the display monitor rectangle. The rectangle coordinates are device-context coordinates. If hdcMonitor is NULL, this rectangle is the display monitor rectangle. The rectangle coordinates are virtual-screen coordinates."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "dwData",
+        "description": "Application-defined data that EnumDisplayMonitors passes directly to the enumeration function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The MonitorFromPoint function retrieves a handle to the display monitor that contains a specified point.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the point is contained by a display monitor, the return value is an HMONITOR handle to that display monitor. If the point is not contained by a display monitor, the return value depends on the value of dwFlags. ",
+    "remarks": "",
+    "return_type": "HMONITOR",
+    "category": "Multiple Display Monitors",
+    "name": "MonitorFromPoint",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "POINT",
+        "name": "pt",
+        "description": "A POINT structure that specifies the point of interest in virtual-screen coordinates."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Determines the function's return value if the point is not contained within any display monitor. This parameter can be one of the following values.  ValueMeaning  MONITOR_DEFAULTTONEAREST   Returns a handle to the display monitor that is nearest to the point.   MONITOR_DEFAULTTONULL   Returns NULL.   MONITOR_DEFAULTTOPRIMARY   Returns a handle to the primary display monitor."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The MonitorFromRect function retrieves a handle to the display monitor that has the largest area of intersection with a specified rectangle.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the rectangle intersects one or more display monitor rectangles, the return value is an HMONITOR handle to the display monitor that has the largest area of intersection with the rectangle. If the rectangle does not intersect a display monitor, the return value depends on the value of dwFlags. For an example, see Positioning Objects on a Multiple Display Setup. ",
+    "remarks": "",
+    "return_type": "HMONITOR",
+    "category": "Multiple Display Monitors",
+    "name": "MonitorFromRect",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "lprc",
+        "description": "A pointer to a RECT structure that specifies the rectangle of interest in virtual-screen coordinates."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Determines the function's return value if the rectangle does not intersect any display monitor. This parameter can be one of the following values.  ValueMeaning  MONITOR_DEFAULTTONEAREST   Returns a handle to the display monitor that is nearest to the rectangle.   MONITOR_DEFAULTTONULL   Returns NULL.   MONITOR_DEFAULTTOPRIMARY   Returns a handle to the primary display monitor."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The MonitorFromWindow function retrieves a handle to the display monitor that has the largest area of intersection with the bounding rectangle of a specified window.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the window intersects one or more display monitor rectangles, the return value is an HMONITOR handle to the display monitor that has the largest area of intersection with the window. If the window does not intersect a display monitor, the return value depends on the value of dwFlags. ",
+    "remarks": "If the window is currently minimized, MonitorFromWindow uses the rectangle of the window before it was minimized. ",
+    "return_type": "HMONITOR",
+    "category": "Multiple Display Monitors",
+    "name": "MonitorFromWindow",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "A handle to the window of interest."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Determines the function's return value if the window does not intersect any display monitor. This parameter can be one of the following values.  ValueMeaning  MONITOR_DEFAULTTONEAREST   Returns a handle to the display monitor that is nearest to the window.   MONITOR_DEFAULTTONULL   Returns NULL.   MONITOR_DEFAULTTOPRIMARY   Returns a handle to the primary display monitor."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

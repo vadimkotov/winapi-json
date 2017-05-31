@@ -1,0 +1,19 @@
+[
+  {
+    "n_arguments": 0,
+    "description": "Creates the object that's used to access a device. The instantiated object implements  the IDeviceIoControl and ICreateDeviceAccessAsync interfaces.",
+    "library": "Deviceaccess.lib",
+    "min_server": "",
+    "header": "Deviceaccess.h",
+    "return_value": "S_OK if the underlying object and asynchronous operation are created successfully; an appropriate error otherwise.  Note that this function doesn't perform the actual binding.That happens as part of the asynchronous operation. ",
+    "remarks": "",
+    "return_type": " !defined(__deviceaccess_h__) [-AND-] ((NTDDI_VERSION >= NTDDI_WIN8)) [-AND-]",
+    "category": "Device Access",
+    "name": "CreateDeviceAccessInstance",
+    "is_callback": 0,
+    "dll": "Deviceaccess.dll",
+    "arguments": [],
+    "min_client": ""
+  }
+]
+

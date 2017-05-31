@@ -1,0 +1,2467 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "Handles the WsAbandonMessage call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsAbandonMessage for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_ABANDON_MESSAGE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "Pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_MESSAGE*",
+        "name": "message",
+        "description": "The message that is current being read or written.  This should be                     the same message as was passed to WsWriteMessageStart                     or WsReadMessageStart."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Handles the WsAbortChannel call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "See WsAbortChannel for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_ABORT_CHANNEL_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Handles the WsAbortListener call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsAbortListener for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_ABORT_LISTENER_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "listenerInstance",
+        "description": "The pointer to the state specific to this listener instance,                     as created by the WS_CREATE_LISTENER_CALLBACK."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Handles the WsAcceptChannel call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsAcceptChannel for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_ACCEPT_CHANNEL_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "listenerInstance",
+        "description": "The pointer to the state specific to this listener instance,                     as created by the WS_CREATE_LISTENER_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to the channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK                     when WsCreateChannelForListener was called."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The callback function parameter used with the asynchronous model.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "All error return codes of an operation are represented as HRESULTs. This API defines a set of HRESULTs in the FACILITY_WS range, but also returns errors defined elsewhere in the Windows API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_ASYNC_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HRESULT",
+        "name": "errorCode",
+        "description": "The result of the operation.   If the operation fails                     and a WS_ERROR object is supplied, the object is filled with rich error information                      before the callback is invoked."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_CALLBACK_MODEL",
+        "name": "callbackModel",
+        "description": "A WS_CALLBACK_MODEL value that determines whether the callback is being invoked as a long or short term callback."
+      },
+      {
+        "in_out": "_In_",
+        "type": "void",
+        "name": "*callbackState",
+        "description": "A void pointer that corresponds to the value of the callbackState field of                      the WS_ASYNC_CONTEXT structure. This parameter is used to pass user-defined data to the callback function if the operation completes asynchronously."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Used with the WsAsyncExecute to specify the next                  function to invoke in a series of async operations.",
+    "library": "",
+    "min_server": "",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_ASYNC_FUNCTION",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HRESULT",
+        "name": "hr",
+        "description": "The result of the previous async operation."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_CALLBACK_MODEL",
+        "name": "callbackModel",
+        "description": "Whether the callback is being invoked long or short.                     For more information, see WS_CALLBACK_MODEL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "callbackState",
+        "description": "This user supplied value that was passed to WsAsyncExecute/"
+      },
+      {
+        "in_out": "",
+        "type": "WS_ASYNC_OPERATION*",
+        "name": "next",
+        "description": "Set the function field to the next function to call.  It will be called regardless of whether or not the current function succeeds or fails.                                       Set the function field to NULL to indicate that there are no more functions to call.                     WsAsyncExecute will set the function field to NULL before each function is called."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 3,
+    "description": "Notifies the client of the list of certificate issuers that are acceptable to the server.  With some protocols such as SSL, the server may optionally send such an issuer list to help the client choose a certificate.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_CERT_ISSUER_LIST_NOTIFICATION_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "certIssuerListNotificationCallbackState",
+        "description": "State that was specified along with this callback in the WS_CUSTOM_CERT_CREDENTIAL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const struct _SecPkgContext_IssuerListInfoEx*",
+        "name": "issuerList",
+        "description": "The list of certificate issuers acceptable to the server."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The WS_CERTIFICATE_VALIDATION_CALLBACK callback is invoked to validate a certificate when a connection to an HTTP server has been established and headers sent.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function can return one of these values.  ",
+    "remarks": "If WS_CERTIFICATE_VALIDATION_CALLBACK returns any value other than S_OK, the channel will be aborted. The service proxy will also be aborted if this property was passed to WsCreateServiceProxy. The callback implementation must avoid long computation times or long blocking calls so that it returns to the caller quickly. ",
+    "return_type": "HRESULT",
+    "category": "Windows Web Services",
+    "name": "WS_CERTIFICATE_VALIDATION_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "CERT_CONTEXT",
+        "name": "*certContext",
+        "description": "A pointer to a CERT_CONTEXT structure that is associated with the connection. Applications must free this structure using CertFreeCertificateContext."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "void",
+        "name": "*state",
+        "description": "A pointer to application specific state information. This parameter corresponds to the state member of the WS_CERTIFICATE_VALIDATION_CALLBACK_CONTEXT structure."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Handles the WsCloseChannel call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsCloseChannel for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_CLOSE_CHANNEL_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Handles the WsCloseListener call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsCloseListener for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_CLOSE_LISTENER_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "listenerInstance",
+        "description": "The pointer to the state specific to this listener instance,                     as created by the WS_CREATE_LISTENER_CALLBACK."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Handles the WsCreateChannel call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_CREATE_CHANNEL_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WS_CHANNEL_TYPE",
+        "name": "channelType",
+        "description": "The message exchange pattern of the channel.                                       If the type of channel is not supported by the custom                     channel implementation,  E_INVALIDARG should be returned."
+      },
+      {
+        "in_out": "const",
+        "type": "void*",
+        "name": "channelParameters",
+        "description": "The pointer to the value that was specified by the                     WS_CHANNEL_PROPERTY_CUSTOM_CHANNEL_PARAMETERS                     property when the custom channel is created using WsCreateChannel.                                       If the WS_CHANNEL_PROPERTY_CUSTOM_CHANNEL_PARAMETERS                     property was not specified, the value will be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "channelParametersSize",
+        "description": "The size in bytes of the value pointed to by channelParameters.                                       If the WS_CHANNEL_PROPERTY_CUSTOM_CHANNEL_PARAMETERS                     property was not specified, the size will be 0."
+      },
+      {
+        "in_out": "",
+        "type": "void**",
+        "name": "channelInstance",
+        "description": "A pointer to an structure allocated by the callback                      that contains the data specific to this channel instance.  This pointer                     will be passed to all the other channel callbacks                     for this particular channel instance.                                       If this callback is successful, then the WS_FREE_CHANNEL_CALLBACK                     will be used to free the channel instance returned                     in this parameter."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Handles the WsCreateChannelForListener call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsCreateChannelForListener for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_CREATE_CHANNEL_FOR_LISTENER_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "listenerInstance",
+        "description": "The pointer to the state specific to this listener instance,                     as created by the WS_CREATE_LISTENER_CALLBACK."
+      },
+      {
+        "in_out": "const",
+        "type": "void*",
+        "name": "channelParameters",
+        "description": "The pointer to the value that was specified by the                     WS_CHANNEL_PROPERTY_CUSTOM_CHANNEL_PARAMETERS                     property when the custom channel is created using WsCreateChannelForListener.                                       If the WS_CHANNEL_PROPERTY_CUSTOM_CHANNEL_PARAMETERS                     property was not specified, the value will be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "channelParametersSize",
+        "description": "The size in bytes of the value pointed to by channelParameters.                                       If the WS_CHANNEL_PROPERTY_CUSTOM_CHANNEL_PARAMETERS                     property was not specified, the size will be 0."
+      },
+      {
+        "in_out": "",
+        "type": "void**",
+        "name": "channelInstance",
+        "description": "A pointer to an structure allocated by the callback                     that contains the data specific to this channel instance.  This pointer                     will be passed to all the other channel callbacks                     for this particular channel instance.                                       If this callback is successful, then the WS_FREE_CHANNEL_CALLBACK                     will be used to free the channel instance returned                     in this parameter."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Handles creating an decoder instance.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function can return one of these values.  ",
+    "remarks": "The channel will create decoder instances as necessary.  Each decoder                instance will be called in a single-threaded fashion.  A single decoder                 instance however should not assume that it will see all messages from a                channel, as the channel may use multiple decoder instances for processing                messages. ",
+    "return_type": "HRESULT",
+    "category": "Windows Web Services",
+    "name": "WS_CREATE_DECODER_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "createContext",
+        "description": "The createContext that was specified in the WS_CHANNEL_DECODER                     used during channel creation."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_READ_CALLBACK",
+        "name": "readCallback",
+        "description": "The function that should be used to read the message data.  This callback                     should only be used in response to the WS_DECODER_START_CALLBACK,                     WS_DECODER_DECODE_CALLBACK and WS_DECODER_END_CALLBACK                      callbacks."
+      },
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "readContext",
+        "description": "The read context that should be passed to the provided WS_READ_CALLBACK."
+      },
+      {
+        "in_out": "",
+        "type": "void**",
+        "name": "decoderContext",
+        "description": "Returns the decoder instance.  This value will be                     passed to all of the decoder callbacks."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Handles creating an encoder instance.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function can return one of these values.  ",
+    "remarks": "The channel will create encoder instances as necessary.  Each encoder               instance will be called in a single-threaded fashion.  A single encoder               instance however should not assume that it will see all messages from a               channel, as the channel may use multiple encoder instances for processing               messages. ",
+    "return_type": "HRESULT",
+    "category": "Windows Web Services",
+    "name": "WS_CREATE_ENCODER_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "createContext",
+        "description": "The createContext that was specified in the WS_CHANNEL_ENCODER                     used during channel creation."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_WRITE_CALLBACK",
+        "name": "writeCallback",
+        "description": "The function that should be used to write the message data.  This callback                   should only be used in response to the WS_ENCODER_START_CALLBACK,                   WS_ENCODER_ENCODE_CALLBACK and WS_ENCODER_END_CALLBACK                   callbacks."
+      },
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "writeContext",
+        "description": "The write context that should be passed to the provided WS_WRITE_CALLBACK."
+      },
+      {
+        "in_out": "",
+        "type": "void**",
+        "name": "encoderContext",
+        "description": "Returns the encoder instance.  This value will be                     passed to all of the encoder callbacks."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Handles the WsCreateListener call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_CREATE_LISTENER_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WS_CHANNEL_TYPE",
+        "name": "channelType",
+        "description": "The type of channel the listener listens for."
+      },
+      {
+        "in_out": "const",
+        "type": "void*",
+        "name": "listenerParameters",
+        "description": "The pointer to the value that was specified by the                     WS_LISTENER_PROPERTY_CUSTOM_LISTENER_PARAMETERS                     property when the custom listener is created using WsCreateListener.                                       If the WS_LISTENER_PROPERTY_CUSTOM_LISTENER_PARAMETERS                     property was not specified, the value will be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "listenerParametersSize",
+        "description": "The size in bytes of the value pointed to by listenerParameters.                                       If the WS_LISTENER_PROPERTY_CUSTOM_LISTENER_PARAMETERS                     property was not specified, the size will be 0."
+      },
+      {
+        "in_out": "",
+        "type": "void**",
+        "name": "listenerInstance",
+        "description": "A pointer to an allocated structure that represents                     the listener instance.  This pointer                     will be passed to all the other listener callbacks                     for this particular listener instance.                                       If this callback is successful, then the WS_FREE_LISTENER_CALLBACK                     will be used to free the listener instance."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Decodes a message.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": " ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_DECODER_DECODE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "encoderContext",
+        "description": "The decoder instance returned by the WS_CREATE_DECODER_CALLBACK."
+      },
+      {
+        "in_out": "",
+        "type": "void*",
+        "name": "buffer",
+        "description": "The buffer to read into."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "maxLength",
+        "description": "The maximum number of bytes to read."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ULONG*",
+        "name": "*length",
+        "description": "The number of bytes read should be returned here.                                  The number of bytes should be set to 0 when there are no more bytes left.  This indicates                  the end of the decoded message data, and will cause WS_DECODER_END_CALLBACK to                  be invoked."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Decodes the end of a message.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "The decoder can use the callback passed to WS_CREATE_DECODER_CALLBACK to             read the encoded data of the message. This callback is not invoked until WS_DECODER_DECODE_CALLBACK returns 0 bytes. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_DECODER_END_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "encoderContext",
+        "description": "The decoder instance returned by the WS_CREATE_DECODER_CALLBACK."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Gets the content type of the message.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "The callback should verify that the content type provided matches what is expected,               and then should return the content type of the decoded message. The content type returned must remain valid until the next time the callback is               invoked, or the decoder is freed. The callback has to set newContentType to one that is supported by underlying channel.                 For example, with TCP session channel using SOAP 1.2 and binary encoding,                  the new content type should always be application/soap+msbinsession1. For WS_HTTP_CHANNEL_BINDING the content encoding parameter will               be set to the value of the \"Content-Encoding\" HTTP header.  If this header does               not exist, then NULL will be passed. For all other channel bindings, NULL will be passed for the content encoding. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_DECODER_GET_CONTENT_TYPE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "decoderContext",
+        "description": "The encoder instance returned by the WS_CREATE_DECODER_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WS_STRING*",
+        "name": "contentType",
+        "description": "The content type of the encoded message."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_STRING*",
+        "name": "contentEncoding",
+        "description": "The content encoding for the encoded message."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "WS_STRING*",
+        "name": "*newContentType",
+        "description": "The callback should return the content type for the newly decoded message here."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Starts decoding a message.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "The decoder can use the callback passed to WS_CREATE_DECODER_CALLBACK to               read the encoded data of the message. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_DECODER_START_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "encoderContext",
+        "description": "The decoder instance returned by the WS_CREATE_DECODER_CALLBACK."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Compares two durations.             A duration represents a unit of time as an eight-dimensional space where the coordinates designate the year, month, day, hour, minute, second, millisecond, and CPU tick as represented by the WS_DURATION data structure.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "If the function cannot compare the specified durations, it should return WS_E_INVALID_FORMAT.              (See Windows Web Services Return Values.) ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_DURATION_COMPARISON_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const WS_DURATION",
+        "name": "*duration1",
+        "description": "A pointer to a WS_DURATION structure representing the first duration to compare."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WS_DURATION",
+        "name": "*duration2",
+        "description": "A  pointer to a WS_DURATION structure representing the second duration."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "int",
+        "name": "*result",
+        "description": "The relationship between the durations as one of the following values:                      -1 if duration1 is less than duration2  0 if duration1 is equal to duration2  1 if duration1 is greater than duration2"
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR",
+        "name": "*error",
+        "description": "A pointer to  a WS_ERROR handle where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Determines whether the specified string can be written in optimized form. This callback is used in WS_XML_WRITER_BINARY_ENCODING",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_DYNAMIC_STRING_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "callbackState",
+        "description": "User-defined state that was passed to the function that accepted the WS_DYNAMIC_STRING_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WS_XML_STRING*",
+        "name": "string",
+        "description": "The string to look up in the dynamic dictionary."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BOOL*",
+        "name": "*found",
+        "description": "Whether or not the string was found in the dynamic dictionary is returned here."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ULONG*",
+        "name": "*id",
+        "description": "The id of the string is returned here."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Encodes a message.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "The encoder can use the callback passed to WS_CREATE_ENCODER_CALLBACK to               write the encoded data of the message. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_ENCODER_ENCODE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "encoderContext",
+        "description": "The encoder instance returned by the WS_CREATE_ENCODER_CALLBACK."
+      },
+      {
+        "in_out": "const",
+        "type": "WS_BYTES*",
+        "name": "buffers",
+        "description": "The buffers of data to write."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "count",
+        "description": "The number of buffers to write."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Encodes the end of a message.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "The encoder can use the callback passed to WS_CREATE_ENCODER_CALLBACK to             write the encoded data of the message. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_ENCODER_END_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "encoderContext",
+        "description": "The encoder instance returned by the WS_CREATE_ENCODER_CALLBACK."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if the function is invoked  synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Gets the content type of the message.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "The callback may inspect the content type provided, and then should return the                content type to use for the encoded message. The content type and content encoding returned must remain valid until the                callback is invoked again, or the encoder is freed. For WS_HTTP_CHANNEL_BINDING, if a non-zero length content encoding               is returned, the HTTP header \"Content-Encoding\" will be added to the message               with this value. For other channel bindings, it is an error to return a non-zero length                content encoding. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_ENCODER_GET_CONTENT_TYPE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "encoderContext",
+        "description": "The encoder instance returned by the WS_CREATE_ENCODER_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WS_STRING*",
+        "name": "contentType",
+        "description": "The content type of the encoded message."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "WS_STRING*",
+        "name": "*newContentType",
+        "description": "The callback should return the content type for the newly encoded message here."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "WS_STRING*",
+        "name": "*contentEncoding",
+        "description": "The callback should return the content encoding for the encoded message here."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Starts encoding a message.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "The encoder can use the callback passed to WS_CREATE_ENCODER_CALLBACK to               write the encoded data of the message. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_ENCODER_START_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "encoderContext",
+        "description": "The encoder instance returned by the WS_CREATE_ENCODER_CALLBACK."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Handles the WsFreeChannel call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "See WsOpenChannel for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_FREE_CHANNEL_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK.                                       The callback should free this pointer."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Handles freeing a decoder instance.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": " ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_FREE_DECODER_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "decoderContext",
+        "description": "Frees an instance of an decoder."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Handles freeing an encoder instance.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": " ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_FREE_ENCODER_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "encoderContext",
+        "description": "Frees an instance of an encoder."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Handles the WsFreeListener call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "See WsOpenListener for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_FREE_LISTENER_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "listenerInstance",
+        "description": "The pointer to the state specific to this listener instance,                     as created by the WS_CREATE_LISTENER_CALLBACK.                                       The callback should free this pointer."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Provides a certificate to the security runtime.  This callback is specified as part of the WS_CUSTOM_CERT_CREDENTIAL,  which in turn may be specified as part of a security binding that requires a  certificate credential. The runtime will invoke this callback when the channel  (client-side) or the listener (server-side) is opened.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_GET_CERT_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "getCertCallbackState",
+        "description": "State that was specified along with this callback in the certificate credential."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ENDPOINT_ADDRESS*",
+        "name": "targetAddress",
+        "description": "The target address to whom this certificate is to be presented, in case this certificate credential is specified for a client."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_STRING*",
+        "name": "viaUri",
+        "description": "The via address to whom this certificate is to be presented."
+      },
+      {
+        "in_out": "const",
+        "type": "struct _CERT_CONTEXT**",
+        "name": "cert",
+        "description": "The location to return the certificate."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Handles the WsGetChannelProperty call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsGetChannelProperty for information about the contract                 of this API. Every custom channel implementation must support returning                 a value for at least the following properties: Service Model layer provides its own logic of call timeouts as such it requires                  disabling timeouts in the underlying channel. In order for a custom channel to be                  used from Service Model layer, it should support disabling all of its timeouts and                  implement this callback for WS_CHANNEL_PROPERTY_ENABLE_TIMEOUTS. A custom                  channel cannot be used through Service Model unless query for                  WS_CHANNEL_PROPERTY_ENABLE_TIMEOUTS returns FALSE. It is up to the custom channel implementation to determine any                 additional properties it wishes to support. If a property is not supported, the E_INVALIDARG should be returned.              (See Windows Web Services Return Values.) ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_GET_CHANNEL_PROPERTY_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_CHANNEL_PROPERTY_ID",
+        "name": "id",
+        "description": "The id of the property to retrieve."
+      },
+      {
+        "in_out": "",
+        "type": "void*",
+        "name": "value",
+        "description": "The location to store the retrieved property.                     The pointer must have an alignment compatible with the type                     of the property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "valueSize",
+        "description": "The number of bytes allocated by the caller to                     store the retrieved property."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Handles the WsGetListenerProperty call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsGetListenerProperty for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_GET_LISTENER_PROPERTY_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "listenerInstance",
+        "description": "The pointer to the state specific to this listener instance,                     as created by the WS_CREATE_LISTENER_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_LISTENER_PROPERTY_ID",
+        "name": "id",
+        "description": "The id of the property to retrieve.                                       A custom listener can decide which properties to support."
+      },
+      {
+        "in_out": "",
+        "type": "void*",
+        "name": "value",
+        "description": "The location to store the retrieved property.                     The pointer must have an alignment compatible with the type                     of the property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "valueSize",
+        "description": "The number of bytes allocated by the caller to                     store the retrieved property."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Invoked when a message is about to be automatically                  redirected to another service utilizing HTTP auto redirect functionality                  as described in RFC2616. If the redirection should not be allowed, this                  callback should return S_FALSE or an error value. Otherwise the auto                  HTTP redirection will proceed.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The parameters supplied during this callback are valid only for the                  duration of the callback. The callback implementation should avoid lengthy computation or                  lengthy blocking calls so that it can return to the caller quickly. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_HTTP_REDIRECT_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "state",
+        "description": "The 'state' as specified as part of WS_HTTP_REDIRECT_CALLBACK_CONTEXT 'state' field."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WS_STRING*",
+        "name": "originalUrl",
+        "description": "The original endpoint URL that the message was sent to."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WS_STRING*",
+        "name": "newUrl",
+        "description": "The endpoint URL that the message is about to be forwarded to."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Determines if a value is the default value. This callback is used  before a value that is handled                 by a WS_CUSTOM_TYPE is serialized.  Support                 for default values is enabled by specifying                  when WS_FIELD_OPTIONAL in the WS_FIELD_DESCRIPTION.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_IS_DEFAULT_VALUE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const void*",
+        "name": "descriptionData",
+        "description": "This is the value of the descriptionData field from WS_CUSTOM_TYPE_DESCRIPTION.                     The callback can use this to access any additional information about the type."
+      },
+      {
+        "in_out": "const",
+        "type": "void*",
+        "name": "value",
+        "description": "A pointer to the value being serialized."
+      },
+      {
+        "in_out": "const",
+        "type": "void*",
+        "name": "defaultValue",
+        "description": "A pointer to the default value.  If no default value was specified                     for the field, this parameter will be NULL.                                       If the parameter is non-NULL, the callback should compare the two                      values field-by-field according to the custom type.  If the                      fields match, then the isDefault parameter should be set to TRUE.                                       If the parameter is NULL, the callback should compare the fields                     of the value with zero.  If the fields match, then the isDefault                     parameter should be set to TRUE."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "valueSize",
+        "description": "The size, in bytes, of the value being serialized."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BOOL*",
+        "name": "*isDefault",
+        "description": "Whether or not the value is the default value."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Notifies the caller that the message has completed its use of either the WS_XML_READER structure that was supplied to WsReadEnvelopeStart                 function, or of the WS_XML_WRITER structure supplied to the  WsWriteEnvelopeStart function.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. The callback should not access the message object, since it may                 already have been freed. ",
+    "remarks": "This callback can be used as an indicator that the message object is no                 longer using the reader or writer. The callback is specified when WsReadEnvelopeStart or                 WsWriteEnvelopeStart is called. The callback should assume that it is invoked as a                  WS_SHORT_CALLBACK, since it will be invoked on the same                  thread that calls WsFreeMessage or WsResetMessage. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_MESSAGE_DONE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void",
+        "name": "*doneCallbackState",
+        "description": "A pointer to state information passed to the  WsReadEnvelopeStart or WsWriteEnvelopeStart function.                                       This parameter can be used to specify a pointer to user-defined                     data required by the callback."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Handles the WsOpenChannel call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsOpenChannel for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_OPEN_CHANNEL_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WS_ENDPOINT_ADDRESS*",
+        "name": "endpointAddress",
+        "description": "The address of the endpoint."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Handles the WsOpenListener call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsOpenListener for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_OPEN_LISTENER_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "listenerInstance",
+        "description": "The pointer to the state specific to this listener instance,                     as created by the WS_CREATE_LISTENER_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WS_STRING*",
+        "name": "url",
+        "description": "The URL to listen on.  The format and interpretation of the URL                     is defined by the custom listener."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Gives notification of the cancellation of an                  asynchronous service operation call as a result of an aborted shutdown of service host.               This callback is invoked by service model.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "See WsRegisterOperationForCancel for details. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_OPERATION_CANCEL_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const WS_SERVICE_CANCEL_REASON",
+        "name": "reason",
+        "description": "Specifies the reason for which the call back is called."
+      },
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "state",
+        "description": "A reference to the application defined state registered with the callback."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Allows an application to cleanup                  state information that was registered with cancellation callback.                                This callback is invoked by service model.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "See WsRegisterOperationForCancel for details. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_OPERATION_FREE_STATE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "state",
+        "description": "A reference to the application defined state registered with the callback."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Invoked when the headers of the input message are                  about to be sent, or when output message headers are just received.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "See also, WS_PROXY_MESSAGE_CALLBACK_CONTEXT. ",
+    "return_type": "HRESULT",
+    "category": "Windows Web Services",
+    "name": "WS_PROXY_MESSAGE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WS_MESSAGE*",
+        "name": "message",
+        "description": "The input or output message."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_HEAP*",
+        "name": "heap",
+        "description": "The heap associated with the call. This is the heap which is passed to call for which this                      callback is being called."
+      },
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "state",
+        "description": "The 'state' as specified as part of WS_PROXY_MESSAGE_CALLBACK_CONTEXT 'state' field."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Used by the WsPullBytes function to request          the data that should be written.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "Returning size of 0 indicates EOF. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_PULL_BYTES_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "callbackState",
+        "description": "The user-defined state that was passed to WsPullBytes."
+      },
+      {
+        "in_out": "",
+        "type": "void*",
+        "name": "bytes",
+        "description": "Where the data that is read should be placed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "maxSize",
+        "description": "The maximum number of bytes that may be read."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ULONG*",
+        "name": "*actualSize",
+        "description": "The actual number of bytes that were read.  This may be less than maxSize.  Returning 0           indicates that there is no more data."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Used by the WsPushBytes function to request that data be written.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_PUSH_BYTES_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void",
+        "name": "*callbackState",
+        "description": "A             void pointer to the user-defined state that was passed to WsPushBytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_WRITE_CALLBACK",
+        "name": "writeCallback",
+        "description": "The           callback function for writing bytes to the document."
+      },
+      {
+        "in_out": "_In_",
+        "type": "void",
+        "name": "*writeCallbackState",
+        "description": "A  void  pointer to the caller-defined state that should be passed when invoking the WS_WRITE_CALLBACK function."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT",
+        "name": "*asyncContext",
+        "description": "A pointer to a WS_ASYNC_CONTEXT structure containing information on how to invoke the function asynchronously.  Assign  NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR",
+        "name": "*error",
+        "description": "A  pointer to a WS_ERROR data structure where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Used by the WS_XML_READER         to read from some source into a buffer.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "Returning size of 0 in the actualSize output parameter indicates the end of the file. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_READ_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void",
+        "name": "**callbackState",
+        "description": "A   void pointer to the user-defined state value that was passed to the function that accepted this callback."
+      },
+      {
+        "in_out": "",
+        "type": "void",
+        "name": "**bytes",
+        "description": "A void pointer to the location where the data should be placed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "maxSize",
+        "description": "The maximum number of bytes that may be read."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ULONG",
+        "name": "**actualSize",
+        "description": "A pointer to a ULONG  value that indicates the number of bytes actually read.  This may be less than maxSize.  Returning 0           indicates that there is no more data."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT",
+        "name": "*asyncContext",
+        "description": "A pointer to a WS_ASYNC_CONTEXT structure containing information on how to invoke the function asynchronously.  Assigned NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR",
+        "name": "*error",
+        "description": "A pointer to WS_ERROR data structure where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Handles the WsReadMessageEnd call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsReadMessageEnd for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_READ_MESSAGE_END_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_MESSAGE*",
+        "name": "message",
+        "description": "The message to read the end of."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Handles the WsReadMessageStart call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsReadMessageStart for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_READ_MESSAGE_START_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_MESSAGE*",
+        "name": "message",
+        "description": "The message to receive into."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Reads a value when WS_TYPE                 has been specified.  This allows reading of XML constructs which do not easily                 map to the core serialization model.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The callback will be invoked with the same calling sequence as                 WsReadType in the documentation for WS_TYPE_MAPPING.                 This defines what parts of the XML that the callback should read. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_READ_TYPE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WS_XML_READER",
+        "name": "*reader",
+        "description": "A pointer to a WS_XML_READER handle that contains the type value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_TYPE_MAPPING",
+        "name": "typeMapping",
+        "description": "Indicates how the XML is being mapped to this type.                        If a mapping does not make sense for this particular type, then the callback                     should return WS_E_INVALID_OPERATION.  (See Windows Web Services Return Values.) A callback implementation                     should be prepared to be passed new mapping types in future versions and should return                     WS_E_INVALID_OPERATION for those cases."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const void",
+        "name": "*descriptionData",
+        "description": "A pointer to the value of the descriptionData field of a  WS_CUSTOM_TYPE_DESCRIPTION structure.                     The callback can use this to gain access to any additional information about the type."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_HEAP",
+        "name": "*heap",
+        "description": "A pointer to the heap for use in allocating any additional data associated with this type such as its nested fields.                                         Note that this parameter may be NULL,                     if the caller did not specify a WS_HEAP object when deserializing                     the type."
+      },
+      {
+        "in_out": "",
+        "type": "void",
+        "name": "*value",
+        "description": "A pointer to a buffer that holds the value that is being deserialized.                     The callback is responsible for filling in the value based on the current                      contents of the reader and the typeMapping.                     The callback can use the supplied heap if necessary to allocate                     values associated with the value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "valueSize",
+        "description": "The buffer size that is being deserialized.                     The buffer is allocated according to the size specified in the                     WS_CUSTOM_TYPE_DESCRIPTION."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR",
+        "name": "*error",
+        "description": "A pointer to WS_ERROR data structure where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Handles the WsResetChannel call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsResetChannel for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_RESET_CHANNEL_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Handles the WsResetListener call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsResetListener for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_RESET_LISTENER_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "listenerInstance",
+        "description": "The pointer to the state specific to this listener instance,                     as created by the WS_CREATE_LISTENER_CALLBACK."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Invoked when a channel is accepted on an endpoint                  listener by service host.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "See also WS_SERVICE_CLOSE_CHANNEL_CALLBACK which can be used by the application to disassociate state,                 and gets called on channel closure. This callback is cancellable. For an example implementation on how to use this callback for associating session state, see the session based calculator sample. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_SERVICE_ACCEPT_CHANNEL_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const WS_OPERATION_CONTEXT*",
+        "name": "context",
+        "description": "The operation context."
+      },
+      {
+        "in_out": "",
+        "type": "void**",
+        "name": "channelState",
+        "description": "The callback may provide channel state through this parameter. This channel state is                     made available to the service operation as part of WS_OPERATION_CONTEXT through                     the WS_OPERATION_CONTEXT_PROPERTY_CHANNEL_USER_STATE."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on whether the function is getting invoked asynchornously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Invoked when a channel is closed or aborted on an endpoint.                  This callback is called right before we are about to close the channel.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The returned HRESULT is only used to see if the function is completing asynchronously. Failure or                  reporting failure through HRESULT does not in any way affects the service host infrastructure. Irrespective of whether WS_SERVICE_ACCEPT_CHANNEL_CALLBACK competed successfully or not. This function                  will always be fired. See also WS_SERVICE_ACCEPT_CHANNEL_CALLBACK which can be used by the application to associate state,                 and gets called when a channel gets accepted. For an example implementation on how to use this callback for disassociating session state, see the session based calculator sample. This callback is cancellable. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_SERVICE_CLOSE_CHANNEL_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const WS_OPERATION_CONTEXT*",
+        "name": "context",
+        "description": "The operation context."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on whether the function is getting invoked asynchornously."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Invoked when a WS_MESSAGE is received on an endpoint configured                  with a WS_SERVICE_CONTRACT which has defaultMessageHandlerCallback set.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "When defined, callback would disallow all concurrency on a session based channel. If concurrency on a session based channel                      is desirable an application should not define WS_SERVICE_MESSAGE_RECEIVE_CALLBACK on the WS_SERVICE_CONTRACT. At the time of the invocation of the callback, service model has performed WsReadMessageStart on the receiving                      WS_MESSAGE. It is the responsibility of the application implementing WS_SERVICE_MESSAGE_RECEIVE_CALLBACK                     to process the body and perform WsReadMessageEnd operation. If the callback fails, the underlying channel is aborted. See also,                     UnTypedServiceExample Defining a WS_SERVICE_MESSAGE_RECEIVE_CALLBACK Accessing the incoming WS_MESSAGE property ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_SERVICE_MESSAGE_RECEIVE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const WS_OPERATION_CONTEXT*",
+        "name": "context",
+        "description": "The context within which this callback is being invoked."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Specifies whether the callback can run asynchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Invoked when headers of the incoming message                  are received and the body is not processed.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_SERVICE_SECURITY_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const WS_OPERATION_CONTEXT*",
+        "name": "context",
+        "description": "The incoming message with headers only."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BOOL*",
+        "name": "*authorized",
+        "description": "Set to TRUE, if authorization succeeded, FALSE if authorization failed."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Invoked by service model to delegate to the service                  operation call. This callback is generated by wsutil.exe                  for every service operation. It is defined on the WS_OPERATION_DESCRIPTION for each                  service operation.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "A generated callback, it is recommended that the application do not implement this callback on their own. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_SERVICE_STUB_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const WS_OPERATION_CONTEXT*",
+        "name": "context",
+        "description": "The context within which this callback is being invoked."
+      },
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "frame",
+        "description": "Pointer to the method frame."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const void*",
+        "name": "callback",
+        "description": "Pointer to the callback function to which the stub function corresponds to."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Specifies whether the callback can run asynchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Handles the WsSetChannelProperty call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsSetChannelProperty for information about the contract                 of this API. It is up to the custom channel implementation to determine the                 set of properties it wishes to support. If a property is not supported, the E_INVALIDARG should be returned.             (See Windows Web Services Return Values.) ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_SET_CHANNEL_PROPERTY_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_CHANNEL_PROPERTY_ID",
+        "name": "id",
+        "description": "The id of the property to set."
+      },
+      {
+        "in_out": "const",
+        "type": "void*",
+        "name": "value",
+        "description": "The pointer to the property value to set.                     The pointer must have an alignment compatible with the type                     of the property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "valueSize",
+        "description": "The size of of the property value."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Handles the WsSetListenerProperty call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsSetListenerProperty for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_SET_LISTENER_PROPERTY_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "listenerInstance",
+        "description": "The pointer to the state specific to this listener instance,                     as created by the WS_CREATE_LISTENER_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_LISTENER_PROPERTY_ID",
+        "name": "id",
+        "description": "The id of the property to set.                                       A custom listener can decide which properties to support."
+      },
+      {
+        "in_out": "const",
+        "type": "void*",
+        "name": "value",
+        "description": "The pointer to the property value to set.                     The pointer must have an alignment compatible with the type                     of the property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "valueSize",
+        "description": "The size of of the property value."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Handles the WsShutdownSessionChannel call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsShutdownSessionChannel for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_SHUTDOWN_SESSION_CHANNEL_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Validates a username/password pair on the receiver side.  When a WS_USERNAME_MESSAGE_SECURITY_BINDING  containing this callback is included in the security description, this callback is invoked for each received message at the server.  This callback is expected  to return S_OKif the username/password pair was successfully validated, S_FALSE  when the pair could not be validated and an error value if an unexpected error occurred. Returning any result other than S_OK from this callback will result in the associated receive message failing with a security error.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_VALIDATE_PASSWORD_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "void*",
+        "name": "passwordValidatorCallbackState",
+        "description": "The state to be passed back when invoking this callback."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WS_STRING*",
+        "name": "username",
+        "description": "Received username."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WS_STRING*",
+        "name": "password",
+        "description": "Received password."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Validates a SAML assertion.  If a received SAML assertion passes the signature verification checks that ensure the SAML was issued by a trusted issuer, then this callback is invoked to enable the application to do additional validation on the XML form of the SAML assertion.  This callback is expected to return S_OK if the SAML assertion was successfully validated, S_FALSE when the assertion could not be validated and an error value if an unexpected error occurred.  Returning any result other than S_OK from this callback will result in the associated receive message failing with a security error.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_VALIDATE_SAML_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "void*",
+        "name": "samlValidatorCallbackState",
+        "description": "The state to be passed back when invoking this callback."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_XML_BUFFER*",
+        "name": "samlAssertion",
+        "description": "The received SAML assertion that has undergone a successful signature check."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Used by the WS_XML_WRITER function         to write a specified buffer to a user-determined destination.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps | Windows Store apps]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_WRITE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void",
+        "name": "*callbackState",
+        "description": "A   void pointer to the user-defined state value that was passed to the function that accepted this callback."
+      },
+      {
+        "in_out": "const",
+        "type": "WS_BYTES",
+        "name": "*buffers",
+        "description": "A  pointer to the buffers containing the data to be written."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "count",
+        "description": "The number of buffers to write."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT",
+        "name": "*asyncContext",
+        "description": "A pointer to a WS_ASYNC_CONTEXT structure containing information on how to invoke the function asynchronously.  Assigned NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR",
+        "name": "*error",
+        "description": "A pointer to a WS_ERROR data structure where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Handles the WsWriteMessageEnd call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsWriteMessageEnd for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_WRITE_MESSAGE_END_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_MESSAGE*",
+        "name": "message",
+        "description": "The message to write."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Handles the WsWriteMessageStart call                 for a WS_CUSTOM_CHANNEL_BINDING.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": " ",
+    "remarks": "See WsWriteMessageStart for information about the contract                 of this API. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_WRITE_MESSAGE_START_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "void*",
+        "name": "channelInstance",
+        "description": "The pointer to the state specific to this channel instance,                     as created by the WS_CREATE_CHANNEL_CALLBACK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_MESSAGE*",
+        "name": "message",
+        "description": "The message to write."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
+        "description": "Information on how to invoke the function asynchronously, or NULL if invoking synchronously."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR*",
+        "name": "error",
+        "description": "Specifies where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Invoked to write an element when WS_CUSTOM_TYPE                 has been specified.  This allows writing of XML constructs which do not easily                 map to the core serialization model.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WebServices.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The callback will be invoked with the same calling sequence as                 WsWriteType in the documentation for WS_TYPE_MAPPING.                 This defines what parts of the XML that the callback should write. ",
+    "return_type": "void",
+    "category": "Windows Web Services",
+    "name": "WS_WRITE_TYPE_CALLBACK",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WS_XML_WRITER",
+        "name": "*writer",
+        "description": "A  WS_XML_WRITER pointer to the writer that the value should be written to."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WS_TYPE_MAPPING",
+        "name": "typeMapping",
+        "description": "Indicates how the XML is being mapped to this type.  See WS_TYPE_MAPPING                     for more information.                                       If a mapping does not make sense for this particular type, the callback                     should return WS_E_INVALID_OPERATION. (See Windows Web Services Return Values.)  A callback implementation                     should be prepared to be passed new mapping types in future versions and should return                     WS_E_INVALID_OPERATION for those cases."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const void",
+        "name": "*descriptionData",
+        "description": "This is the value of the descriptionData field of the WS_CUSTOM_TYPE_DESCRIPTION structure.                     The callback uses this field to access any additional information about the type."
+      },
+      {
+        "in_out": "const",
+        "type": "void",
+        "name": "*value",
+        "description": "A  void pointer to a value to serialize."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "valueSize",
+        "description": "The size, in bytes, of the value being serialized."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WS_ERROR",
+        "name": "*error",
+        "description": "A pointer to a WS_ERROR data structure where additional error information should be stored if the function fails."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  }
+]
+

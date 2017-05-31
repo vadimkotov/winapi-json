@@ -1,0 +1,1051 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "Applies a snapshot of the current virtual disk for VHD Set files.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "ApplySnapshotVhdSet",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to an open virtual disk. For information on how to open a virtual disk, see the        OpenVirtualDisk function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PAPPLY_SNAPSHOT_VHDSET_PARAMETERS",
+        "name": "Parameters",
+        "description": "A pointer to a valid APPLY_SNAPSHOT_VHDSET_PARAMETERS structure that contains snapshot data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "APPLY_SNAPSHOT_VHDSET_FLAG",
+        "name": "Flags",
+        "description": "A valid combination of values of the        APPLY_SNAPSHOT_VHDSET_FLAG enumeration."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Attaches a parent to a virtual disk opened with the      OPEN_VIRTUAL_DISK_FLAG_CUSTOM_DIFF_CHAIN flag.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2012",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "This adds the specified parent virtual hard disk to the head of the differencing chain of the specified      virtual hard disk. If the differencing chain extends beyond the parent, this function can be called repeatedly to      add additional parents to the differencing chain. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "AddVirtualDiskParent",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "Handle to a virtual disk."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "ParentPath",
+        "description": "Address of a string containing a valid path to the virtual hard disk image to add as a parent."
+      }
+    ],
+    "min_client": "Windows 8"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Attaches a virtual hard disk (VHD) or CD or DVD image file (ISO) by locating an appropriate VHD      provider to accomplish the attachment.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2008 R2",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "The AttachVirtualDisk function is not supported      for VHDs or ISOs hosted on Secure Digital (SD) media plugged into an SD controller in native mode (for which      sffdisk.sys, sffp_sd.sys, and sdbus.sys drivers would be loaded) and will      fail with the error ERROR_FILE_NOT_FOUND. VHDs and ISOs hosted on SD media connected to      a USB reader are supported. If the AttachVirtualDisk function fails with an      error code value of ERROR_INVALID_PARAMETER, the cause may be due to any of the      following conditions: The host volume that contains the virtual disk image file cannot be compressed or EFS encrypted. This function will fail if a provider cannot be found, if the VHD or ISO image file is not valid, if the VHD      image is already attached, or if the caller does not have SE_MANAGE_VOLUME_PRIVILEGE      access rights. For more information about file security, see      File Security and Access Rights. The intended access mode of the virtual disk must be considered when opening the virtual disk handle. For      example, if the virtual disk is being attached for read/write access, the      VirtualDiskHandle parameter must have been opened using the      VIRTUAL_DISK_ACCESS_ATTACH_RW access flag. For more information, see      VIRTUAL_DISK_ACCESS_MASK and      OpenVirtualDisk. CD and DVD image files (ISO) are not supported before Windows 8 and      Windows Server 2012. ",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "AttachVirtualDisk",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to an open virtual disk. For information on how to open a virtual disk, see the        OpenVirtualDisk function."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PSECURITY_DESCRIPTOR",
+        "name": "SecurityDescriptor",
+        "description": "An optional pointer to a        SECURITY_DESCRIPTOR to apply to the attached        virtual disk. If this parameter is NULL, the security descriptor of the virtual disk        image file is used. Ensure that the security descriptor that AttachVirtualDisk applies to the attached virtual disk grants the write attributes permission for the user, or that the security descriptor of the virtual disk        image file grants the write attributes permission for the user  if you specify NULL for this parameter. If the security descriptor does not grant write attributes permission for a user, Shell displays the following error when the user accesses the attached virtual disk: The Recycle Bin is corrupted. Do you want to empty the Recycle Bin for this drive?"
+      },
+      {
+        "in_out": "_In_",
+        "type": "ATTACH_VIRTUAL_DISK_FLAG",
+        "name": "Flags",
+        "description": "A valid combination of values of the        ATTACH_VIRTUAL_DISK_FLAG enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "ProviderSpecificFlags",
+        "description": "Flags specific to the type of virtual disk being attached. May be zero if none are required."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PATTACH_VIRTUAL_DISK_PARAMETERS",
+        "name": "Parameters",
+        "description": "A pointer to a valid        ATTACH_VIRTUAL_DISK_PARAMETERS        structure that contains attachment parameter data."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPOVERLAPPED",
+        "name": "Overlapped",
+        "description": "An optional pointer to a valid OVERLAPPED        structure if        asynchronous operation is        desired."
+      }
+    ],
+    "min_client": "Windows 7"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Breaks a previously initiated mirror operation and sets the mirror to be the active virtual      disk.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2012",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "BreakMirrorVirtualDisk",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open mirrored virtual disk. For information on how to open a virtual disk, see the        OpenVirtualDisk function. For information on how to        mirror a virtual disk, see the MirrorVirtualDisk        function."
+      }
+    ],
+    "min_client": "Windows 8"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Reduces the size of a virtual hard disk (VHD) backing store file.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2008 R2",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "Compaction can be run only on a virtual disk that is dynamically expandable or differencing. There are two different types of compaction. File-system-aware compaction is the most efficient compaction type but using first the file-system-aware      compaction followed by the file-system-agnostic compaction will produce the smallest VHD. A compaction operation on a virtual disk can be safely interrupted and re-run later. Re-opening a virtual disk      file that has been interrupted may result in the reduction of a virtual disk file's size at the time of      opening. Compaction can be CPU-intensive and/or I/O-intensive, depending on how large the virtual disk is and how many      blocks require movement. The CompactVirtualDisk function runs on the      virtual disk in the same security context as the caller. ",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "CompactVirtualDisk",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open virtual disk, which must have been opened using the        VIRTUAL_DISK_ACCESS_METAOPS flag in the        VirtualDiskAccessMask parameter passed to        OpenVirtualDisk. For information on how to open a        virtual disk, see the OpenVirtualDisk function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COMPACT_VIRTUAL_DISK_FLAG",
+        "name": "Flags",
+        "description": "Must be the COMPACT_VIRTUAL_DISK_FLAG_NONE value (0) of the        COMPACT_VIRTUAL_DISK_FLAG enumeration."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCOMPACT_VIRTUAL_DISK_PARAMETERS",
+        "name": "Parameters",
+        "description": "A optional pointer to a valid        COMPACT_VIRTUAL_DISK_PARAMETERS        structure that contains compaction parameter data."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPOVERLAPPED",
+        "name": "Overlapped",
+        "description": "An optional pointer to a valid OVERLAPPED        structure if asynchronous        operation is desired."
+      }
+    ],
+    "min_client": "Windows 7"
+  },
+  {
+    "n_arguments": 9,
+    "description": "Creates a virtual hard disk (VHD) image file, either using default parameters or using an existing      virtual disk or physical disk.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2008 R2",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS and the        Handle parameter contains a valid pointer to the new virtual disk object. If the function fails, the return value is an error code and the value of the Handle        parameter is undefined. For more information, see        System Error Codes. ",
+    "remarks": "If the CreateVirtualDisk function fails with an      error code value of ERROR_INVALID_PARAMETER, the cause may be due to any of the      following conditions: The host volume containing the new virtual disk image file cannot be compressed or EFS encrypted. When creating the various types of virtual disks, the following combinations of creation parameters are        recommended: The CreateVirtualDisk function can also be used      as a mechanism for converting one type of virtual disk to another, or a physical disk to a virtual disk. This is      accomplished through the use of the SourcePath member of the      CREATE_VIRTUAL_DISK_PARAMETERS structure      to pre-populate the new virtual disk with block data from the source disk. ",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "CreateVirtualDisk",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVIRTUAL_STORAGE_TYPE",
+        "name": "VirtualStorageType",
+        "description": "A pointer to a VIRTUAL_STORAGE_TYPE structure       that contains the desired disk type and vendor information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "Path",
+        "description": "A pointer to a valid string that represents the path to the new virtual disk image file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "VIRTUAL_DISK_ACCESS_MASK",
+        "name": "VirtualDiskAccessMask",
+        "description": "The VIRTUAL_DISK_ACCESS_MASK value to use       when opening the newly created virtual disk file. If the Version member of the       Parameters parameter is set to       CREATE_VIRTUAL_DISK_VERSION_2 then only the       VIRTUAL_DISK_ACCESS_NONE (0) value may be specified."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PSECURITY_DESCRIPTOR",
+        "name": "SecurityDescriptor",
+        "description": "An optional pointer to a       SECURITY_DESCRIPTOR to apply to the virtual       disk image file. If this parameter is NULL, the parent directory's security descriptor       will be used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "CREATE_VIRTUAL_DISK_FLAG",
+        "name": "Flags",
+        "description": "Creation flags, which must be a valid combination of the       CREATE_VIRTUAL_DISK_FLAG enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "ProviderSpecificFlags",
+        "description": "Flags specific to the type of virtual disk being created. May be zero if none are required."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCREATE_VIRTUAL_DISK_PARAMETERS",
+        "name": "Parameters",
+        "description": "A pointer to a valid       CREATE_VIRTUAL_DISK_PARAMETERS structure       that contains creation parameter data."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPOVERLAPPED",
+        "name": "Overlapped",
+        "description": "An optional pointer to a valid OVERLAPPED structure       if asynchronous operation       is desired."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PHANDLE",
+        "name": "Handle",
+        "description": "A pointer to the handle object that represents the newly created virtual disk."
+      }
+    ],
+    "min_client": "Windows 7"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[Some information relates to pre-released product which may be substantially modified before it's commercially released. Microsoft makes no warranties, express or implied, with respect to the information provided here.]",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "DeleteSnapshotVhdSet",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open virtual disk. This must be a VHD Set file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PDELETE_SNAPSHOT_VHDSET_PARAMETERS",
+        "name": "Parameters",
+        "description": "A pointer to a valid DELETE_SNAPSHOT_VHDSET_PARAMETERS structure that contains snapshot deletion data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DELETE_SNAPSHOT_VHDSET_FLAG",
+        "name": "Flags",
+        "description": "Snapshot deletion flags, which must be a valid combination of the DELETE_SNAPSHOT_VHDSET_FLAG enumeration."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Deletes metadata from a virtual disk.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2012",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "DeleteVirtualDiskMetadata",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open virtual disk."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPGUID",
+        "name": "Item",
+        "description": "The item to be deleted."
+      }
+    ],
+    "min_client": "Windows 8"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Detaches a virtual hard disk (VHD) or CD or DVD image file (ISO) by locating an appropriate virtual      disk provider to accomplish the operation.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2008 R2",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "If the DetachVirtualDisk function fails with an      error code value of ERROR_INVALID_PARAMETER, the cause may be due to any of the      following conditions: The host volume that contains the virtual disk image file cannot be compressed or EFS encrypted. All other open handles to the virtual disk must be closed before the      DetachVirtualDisk function can succeed. If the virtual disk is attached and another handle that was used to attach it has      been closed, this is because the ATTACH_VIRTUAL_DISK_FLAG_PERMANENT_LIFETIME flag was      specified. In this case, the DetachVirtualDisk      function can succeed but the VHD will remain attached. If the      ATTACH_VIRTUAL_DISK_FLAG_PERMANENT_LIFETIME was not specified, the virtual disk will be      automatically detached when the last open handle is closed. This function will fail if a provider cannot be found, if the image file is not valid, if the image is not      attached, or if the caller does not have SE_MANAGE_VOLUME_PRIVILEGE access rights on a      Windows Server operating system. For more information about file security, see      File Security and Access Rights. CD and DVD image files (ISO) are not supported before Windows 8 and      Windows Server 2012. ",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "DetachVirtualDisk",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to an open virtual disk, which must have been opened using the        VIRTUAL_DISK_ACCESS_DETACH flag set in the        VirtualDiskAccessMask parameter to the        OpenVirtualDisk function. For information on how to        open a virtual disk, see the OpenVirtualDisk        function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DETACH_VIRTUAL_DISK_FLAG",
+        "name": "Flags",
+        "description": "A valid combination of values of the        DETACH_VIRTUAL_DISK_FLAG enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "ProviderSpecificFlags",
+        "description": "Flags specific to the type of virtual disk being detached. May be zero if none are required."
+      }
+    ],
+    "min_client": "Windows 7"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Enumerates the metadata associated with a virtual disk.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2012",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the buffer pointed to by the Items parameter was too small, the return value is         ERROR_INSUFFICIENT_BUFFER. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "EnumerateVirtualDiskMetadata",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "Handle to an open virtual disk."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "NumberOfItems",
+        "description": "Address of a ULONG. On input, the value indicates the number of elements in        the buffer pointed to by the Items parameter. On output, the value contains the number        of items retrieved. If the buffer was too small, the API will fail and return        ERROR_INSUFFICIENT_BUFFER and the ULONG will contain the        required buffer size."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "GUID",
+        "name": "*Items",
+        "description": "Address of a buffer to be filled with the GUIDs representing the metadata. The        GetVirtualDiskMetadata function can be used        to retrieve the data represented by each GUID."
+      }
+    ],
+    "min_client": "Windows 8"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Increases the size of a fixed or dynamically expandable virtual hard disk (VHD).",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2008 R2",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see System Error Codes. ",
+    "remarks": "The ExpandVirtualDisk function performs the operation in-place, and therefore does not create a virtual disk. The expand operation is valid only for fixed and expandable virtual disks and will invalidate a differencing virtual disk chain. Expanding a virtual disk requires that the virtual disk be detached during the operation. The caller must have READ|WRITE access to the backing store for the virtual disk. For an expandable virtual disk, the ExpandVirtualDisk function may not result in a larger file because the size is virtual and would not actually grow physically until used. If the virtual disk is expandable and the host volume does not have enough space for the new size, the ExpandVirtualDisk function can succeed anyway. Future writes to the virtual disk may fail if the host volume runs out of space as the virtual disk expands. ",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "ExpandVirtualDisk",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open virtual disk, which must have been opened using the VIRTUAL_DISK_ACCESS_METAOPS flag. For information on how to open a virtual disk, see the OpenVirtualDisk function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "EXPAND_VIRTUAL_DISK_FLAG",
+        "name": "Flags",
+        "description": "Must be the EXPAND_VIRTUAL_DISK_FLAG_NONE value of the EXPAND_VIRTUAL_DISK_FLAG enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PEXPAND_VIRTUAL_DISK_PARAMETERS",
+        "name": "Parameters",
+        "description": "A pointer to a valid EXPAND_VIRTUAL_DISK_PARAMETERS structure that contains expansion parameter data."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPOVERLAPPED",
+        "name": "Overlapped",
+        "description": "An optional pointer to a valid OVERLAPPED structure if asynchronous operation is desired."
+      }
+    ],
+    "min_client": "Windows 7"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Returns the relationships between virtual hard disks (VHDs) or CD or DVD image file (ISO) or the      volumes contained within those disks and their parent disk or volume.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2008 R2",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS and the        StorageDependencyInfo parameter contains the requested dependency information. If the function fails, the return value is an error code and the        StorageDependencyInfo parameter is undefined. For more information, see        System Error Codes. ",
+    "remarks": "CD and DVD image files (ISO) are not supported before Windows 8 and      Windows Server 2012. ",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "GetStorageDependencyInformation",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "ObjectHandle",
+        "description": "A handle to a volume or root directory if  the Flags parameter does not specify        the GET_STORAGE_DEPENDENCY_FLAG_DISK_HANDLE flag. For information on how to open a        volume or root directory, see the CreateFile function. If the Flags parameter specifies the        GET_STORAGE_DEPENDENCY_FLAG_DISK_HANDLE flag, this handle should be a handle to a        disk."
+      },
+      {
+        "in_out": "_In_",
+        "type": "GET_STORAGE_DEPENDENCY_FLAG",
+        "name": "Flags",
+        "description": "A valid combination of       GET_STORAGE_DEPENDENCY_FLAG values."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "StorageDependencyInfoSize",
+        "description": "Size, in bytes, of the buffer that the StorageDependencyInfo parameter refers       to."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PSTORAGE_DEPENDENCY_INFO",
+        "name": "StorageDependencyInfo",
+        "description": "A pointer to a buffer to receive the populated       STORAGE_DEPENDENCY_INFO structure, which is a       variable-length structure."
+      },
+      {
+        "in_out": "_Inout_opt_",
+        "type": "PULONG",
+        "name": "SizeUsed",
+        "description": "An optional pointer to a ULONG that receives the size used."
+      }
+    ],
+    "min_client": "Windows 7"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves information about a virtual hard disk (VHD).",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2008 R2",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS and the         VirtualDiskInfo parameter contains the requested information. If the function fails, the return value is an error code and the VirtualDiskInfo         parameter is undefined. For more information, see         System Error Codes. ",
+    "remarks": "The GetVirtualDiskInformation function      can be called on any valid VirtualDiskHandle, provided the handle was opened using the      VIRTUAL_DISK_ACCESS_GET_INFO flag. The VHD is not required to be an attached disk. ",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "GetVirtualDiskInformation",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open VHD, which must have been opened using the        VIRTUAL_DISK_ACCESS_GET_INFO flag set in the        VirtualDiskAccessMask parameter to the        OpenVirtualDisk function. For information on how to        open a VHD, see the OpenVirtualDisk function."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "VirtualDiskInfoSize",
+        "description": "A pointer to a ULONG that contains the size of the        VirtualDiskInfo parameter."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PGET_VIRTUAL_DISK_INFO",
+        "name": "VirtualDiskInfo",
+        "description": "A pointer to a valid GET_VIRTUAL_DISK_INFO        structure. The format of the data returned is dependent on the value passed in the        Version member by the caller."
+      },
+      {
+        "in_out": "_Inout_opt_",
+        "type": "PULONG",
+        "name": "SizeUsed",
+        "description": "A pointer to a ULONG that contains the size used."
+      }
+    ],
+    "min_client": "Windows 7"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the specified metadata from the virtual disk.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2012",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the buffer pointed to by the Items parameter was too small, the return value is         ERROR_INSUFFICIENT_BUFFER. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "GetVirtualDiskMetadata",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "Handle to an open virtual disk."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPGUID",
+        "name": "Item",
+        "description": "Address of a GUID identifying the metadata to retrieve."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "MetaDataSize",
+        "description": "Address of a ULONG. On input, the value indicates the size, in bytes, of        the buffer pointed to by the MetaData parameter. On output, the value contains size,        in bytes, of the retrieved metadata. If the buffer was too small, the API will fail and return        ERROR_INSUFFICIENT_BUFFER, putting the required size in the        ULONG and the buffer will contain the start of the metadata."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "MetaData",
+        "description": "Address of the buffer where the metadata is to be stored."
+      }
+    ],
+    "min_client": "Windows 8"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Checks the progress of an asynchronous virtual hard disk (VHD) operation.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2008 R2",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS and the        Progress parameter will be populated with the current virtual disk operation        progress. If the function fails, the return value is an error code and the value of the        Progress parameter is undefined. For more information, see        System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "GetVirtualDiskOperationProgress",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A valid handle to a virtual disk with a pending asynchronous operation."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOVERLAPPED",
+        "name": "Overlapped",
+        "description": "A pointer to a valid OVERLAPPED structure. This       parameter must reference the same structure previously sent to the virtual disk operation being checked for       progress."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVIRTUAL_DISK_PROGRESS",
+        "name": "Progress",
+        "description": "A pointer to a VIRTUAL_DISK_PROGRESS       structure that receives the current virtual disk operation progress."
+      }
+    ],
+    "min_client": "Windows 7"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the path to the physical device object that contains a virtual hard disk      (VHD) or CD or DVD image file (ISO).",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2008 R2",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS and the        DiskPath parameter contains a pointer to a populated string. If the function fails, the return value is an error code and the value of the contents of the buffer referred        to by the  DiskPath parameter is undefined. For more information, see        System Error Codes. ",
+    "remarks": "For the GetVirtualDiskPhysicalPath      function to succeed, the virtual disk referred to by the VirtualDiskHandle parameter      must be attached, the physical disk object must be to be located by the system, and the      DiskPath parameter must refer to a buffer large enough to hold the resulting path. This      path is in the form \\\\.\\PhysicalDriveX where X      is an integer that represents the particular enumeration of the physical disk on the caller's system. CD and DVD image files (ISO) are not supported before Windows 8 and      Windows Server 2012. ",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "GetVirtualDiskPhysicalPath",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open virtual disk, which must have been opened using the       VIRTUAL_DISK_ACCESS_GET_INFO flag. For information on how to open a virtual disk, see       the OpenVirtualDisk function."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "DiskPathSizeInBytes",
+        "description": "The size, in bytes, of the buffer pointed to by the DiskPath parameter."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PWSTR",
+        "name": "DiskPath",
+        "description": "A target buffer to receive the path of the physical disk device that contains the virtual disk."
+      }
+    ],
+    "min_client": "Windows 7"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Merges a child virtual hard disk (VHD) in a differencing chain with one or more parent virtual disks in the chain.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2008 R2",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see System Error Codes. ",
+    "remarks": "The MergeVirtualDisk function updates all data blocks in one or more parent disks with the data blocks from the child disk referred to by the VirtualDiskHandle parameter. This is essentially a copy operation. Merging a disk requires that the affected disks be detached during the operation. The caller must have READ|WRITE access to the backing store for the affected disks. The RWDepth of the disk must be greater than the merge depth  specified by the MergeDepth member of the MERGE_VIRTUAL_DISK_PARAMETERS structure (passed in the Parameters parameter). For more information about RWDepth, see OPEN_VIRTUAL_DISK_PARAMETERS. Merge modifies the parent disk being merged into, therefore any other differencing disks dependent on that parent will no longer be valid. The parent disk being merged into is changed to represent the same data as was held in the child differencing disk on which the merge is performed. Any pre-existing data in the parent disk being merged into is overwritten. If a merge operation is interrupted, the child disk is still usable.  The MergeVirtualDisk function can be rerun to finish the merge. The depth of a merge request is  the number of  parent VHD image files in the differencing chain to be merged. For example, if the MergeDepth member  has a value of 1, the data blocks from the specified differencing disk are moved into its parent. If the MergeDepth member has a value of 2 and the specified differencing disk's parent is also a differencing disk (meaning there is a third disk in the chain),  then the data blocks from both the first and second disks are moved into the third disk (with blocks from the first disk taking precedence over blocks from the second during the final operation). Upon completion, the affected child disks are no longer considered valid, and any future operations on them will have unsupported results. In the previous example, upon successful completion of the merge, the third disk is valid and the first and second are not. The MergeVirtualDisk function will not delete any disks that are not valid, or perform any automatic differencing relationship reconnections. This must be explicitly done by the caller. If a merge operation is performed on a nonleaf node of a differencing disk, it is the responsibility of the caller to fix up the parent information for the child nodes of the disk that is being merged. ",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "MergeVirtualDisk",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open virtual disk, which must have been opened using the VIRTUAL_DISK_ACCESS_METAOPS flag. For information on how to open a virtual disk, see the OpenVirtualDisk function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MERGE_VIRTUAL_DISK_FLAG",
+        "name": "Flags",
+        "description": "Must be the MERGE_VIRTUAL_DISK_FLAG_NONE value of the MERGE_VIRTUAL_DISK_FLAG enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PMERGE_VIRTUAL_DISK_PARAMETERS",
+        "name": "Parameters",
+        "description": "A pointer to a valid MERGE_VIRTUAL_DISK_PARAMETERS structure that contains merge parameter data."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPOVERLAPPED",
+        "name": "Overlapped",
+        "description": "An optional pointer to a valid OVERLAPPED structure if asynchronous operation is desired."
+      }
+    ],
+    "min_client": "Windows 7"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Initiates a mirror operation for a virtual disk.  Once the mirroring operation is initiated      it will not complete until either CancelIo or      CancelIoEx is called to cancel all I/O on the      VirtualDiskHandle, leaving the original file as the current  or      BreakMirrorVirtualDisk is called to stop using      the original file and only use the mirror.      GetVirtualDiskOperationProgress can be      used to determine if the disks are fully mirrored and writes go to both virtual disks.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2012",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "MirrorVirtualDisk",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open virtual disk. For information on how to open a virtual disk, see the        OpenVirtualDisk function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MIRROR_VIRTUAL_DISK_FLAG",
+        "name": "Flags",
+        "description": "A valid combination of values from the        MIRROR_VIRTUAL_DISK_FLAG enumeration.  ValueMeaning  MIRROR_VIRTUAL_DISK_FLAG_NONE 0x00000000   The mirror virtual disk file does not exist, and needs to be created.   MIRROR_VIRTUAL_DISK_FLAG_EXISTING_FILE 0x00000001   Create the mirror using an existing file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PMIRROR_VIRTUAL_DISK_PARAMETERS",
+        "name": "Parameters",
+        "description": "Address of a        MIRROR_VIRTUAL_DISK_PARAMETERS structure        containing mirror parameter data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOVERLAPPED",
+        "name": "Overlapped",
+        "description": "Address of an       OVERLAPPEDstructure. This parameter is required."
+      }
+    ],
+    "min_client": "Windows 8"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[Some information relates to pre-released product which may be substantially modified before it's commercially released. Microsoft makes no warranties, express or implied, with respect to the information provided here.]",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "ModifyVhdSet",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open virtual disk. This must be a VHD Set file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PMODIFY_VHDSET_PARAMETERS",
+        "name": "Parameters",
+        "description": "A pointer to a valid MODIFY_VHDSET_PARAMETERS structure that contains modification data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MODIFY_VHDSET_FLAG",
+        "name": "VirtualDiskHandle",
+        "description": "Modification flags, which must be a valid combination of the MODIFY_VHDSET_FLAG enumeration."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Opens a virtual hard disk (VHD) or CD or DVD image file (ISO) for use.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2008 R2",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS (0) and the        Handle parameter contains a valid pointer to the new virtual disk object. If the function fails, the return value is an error code and the value of the Handle        parameter is undefined. For more information, see        System Error Codes. ",
+    "remarks": "To prevent an open request failure when attempting to open a handle to a permanently attached virtual disk,      the following requirements apply: If the OpenVirtualDisk function fails with an error      code value of ERROR_INVALID_PARAMETER (87), the cause may be due to any of the following      conditions: The host volume that contains the virtual disk image file cannot be compressed or EFS encrypted. This function      will fail with error ERROR_UNSUPPORTED_COMPRESSION (618) if the host volume has been      compressed or with error ERROR_FILE_ENCRYPTED (6002) if the host volume has been EFS      encrypted after the initial virtual disk creation. The path pointed to by the Path parameter cannot be on a local network share (that      is a network share via loopback). This function will fail with error      ERROR_FILE_SYSTEM_LIMITATION (665) if the path is on a local network share. This      function will fail with error ERROR_FILE_CORRUPT (1392) if an ISO virtual disk is being      opened and the file size is not an even multiple of 2 KB (2,048 bytes), is at least 34 KB (34,816 bytes), or the      volume structure descriptor does not contain a known CDFS or UDFS volume identifier. When an application is finished using the object handle returned in the Handle      parameter, use the CloseHandle function to close the      handle. CD and DVD image files (ISO) are not supported before Windows 8 and      Windows Server 2012. ",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "OpenVirtualDisk",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVIRTUAL_STORAGE_TYPE",
+        "name": "VirtualStorageType",
+        "description": "A pointer to a valid VIRTUAL_STORAGE_TYPE       structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "Path",
+        "description": "A pointer to a valid path to the virtual disk image to open."
+      },
+      {
+        "in_out": "_In_",
+        "type": "VIRTUAL_DISK_ACCESS_MASK",
+        "name": "VirtualDiskAccessMask",
+        "description": "A valid value of the       VIRTUAL_DISK_ACCESS_MASK enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "OPEN_VIRTUAL_DISK_FLAG",
+        "name": "Flags",
+        "description": "A valid combination of values of the       OPEN_VIRTUAL_DISK_FLAG enumeration."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "POPEN_VIRTUAL_DISK_PARAMETERS",
+        "name": "Parameters",
+        "description": "An optional pointer to a valid       OPEN_VIRTUAL_DISK_PARAMETERS structure. Can       be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PHANDLE",
+        "name": "Handle",
+        "description": "A pointer to the handle object that represents the open virtual disk."
+      }
+    ],
+    "min_client": "Windows 7"
+  },
+  {
+    "n_arguments": 8,
+    "description": "Retrieves information about changes  to the specified areas of a virtual hard disk (VHD) that are tracked by resilient change tracking (RCT).",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2016",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "The status of the request. If the function succeeds, the return value is ERROR_SUCCESS and the         Ranges parameter contains the requested information. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "QueryChangesVirtualDisk",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open VHD, which must have been opened using the        VIRTUAL_DISK_ACCESS_GET_INFO flag set in the        VirtualDiskAccessMask parameter to the        OpenVirtualDisk function. For information on how to        open a VHD, see the OpenVirtualDisk function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "ChangeTrackingId",
+        "description": "A pointer to a string that specifies the change tracking identifier for the change that identifies the state of the virtual disk that you want to use as the basis of comparison to determine whether the specified area of the VHD has changed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG64",
+        "name": "ByteOffset",
+        "description": "An unsigned long integer that specifies the distance from the start of the VHD to the beginning of  the area of the VHD that you want to check for changes, in bytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG64",
+        "name": "ByteLength",
+        "description": "An unsigned long integer that specifies the length of the area of the VHD that you want to check for changes, in bytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "QUERY_CHANGES_VIRTUAL_DISK_FLAG",
+        "name": "Flags",
+        "description": "Reserved. Set to QUERY_CHANGES_VIRTUAL_DISK_FLAG_NONE."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PQUERY_CHANGES_VIRTUAL_DISK_RANGE",
+        "name": "Ranges",
+        "description": "An array of QUERY_CHANGES_VIRTUAL_DISK_RANGE structures that indicates the areas of the virtual disk within the area that the ByteOffset and ByteLength parameters specify that have changed since the change tracking identifier that the ChangeTrackingId  parameter specifies was sealed."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "RangeCount",
+        "description": "An address of an unsigned long integer. On input, the value indicates the number of QUERY_CHANGES_VIRTUAL_DISK_RANGE structures that the array that the Ranges parameter points to can hold. On output, the value contains the number of QUERY_CHANGES_VIRTUAL_DISK_RANGE structures that the method placed in the array."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONG64",
+        "name": "ProcessedLength",
+        "description": "A pointer to an unsigned long integer that indicates the total number of bytes that the method processed, which indicates for how much of the area that the BytesLength parameter specifies that changes were captured in the available space of the array that the Ranges parameter specifies."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Issues an embedded SCSI request directly to a virtual hard disk.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. A return of ERROR_SUCCESS only means the request was received by the virtual disk. The SCSI command itself could have failed due to an invalid device state, an unsupported SCSI command, or another error. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "RawSCSIVirtualDisk",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to an open virtual disk. For information on how to open a virtual disk, see the        OpenVirtualDisk function. This handle may also be a handle to a Remote Shared Virtual Disk. For information on how to open a Remote Shared Virtual Disk, see the Remote Shared Virtual Disk Protocol documentation."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PRAW_SCSI_VIRTUAL_DISK_PARAMETERS",
+        "name": "Parameters",
+        "description": "A pointer to a valid RAW_SCSI_VIRTUAL_DISK_PARAMETERS structure that contains snapshot deletion data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "RAW_SCSI_VIRTUAL_DISK_FLAG",
+        "name": "Flags",
+        "description": "SCSI virtual disk flags, which must be a valid combination of the RAW_SCSI_VIRTUAL_DISK_FLAG enumeration."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PRAW_SCSI_VIRTUAL_DISK_RESPONSE",
+        "name": "Response",
+        "description": "A pointer to a RAW_SCSI_VIRTUAL_DISK_RESPONSE structure that contains the results of processing the SCSI command."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Resizes a virtual disk.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2012",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "ResizeVirtualDisk",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "Handle to an open virtual disk."
+      },
+      {
+        "in_out": "_In_",
+        "type": "RESIZE_VIRTUAL_DISK_FLAG",
+        "name": "Flags",
+        "description": "Zero or more flags enumerated from the        RESIZE_VIRTUAL_DISK_FLAG enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PRESIZE_VIRTUAL_DISK_PARAMETERS",
+        "name": "Parameters",
+        "description": "Address of a        RESIZE_VIRTUAL_DISK_PARAMETERS        structure containing the new size of the virtual disk."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPOVERLAPPED",
+        "name": "Overlapped",
+        "description": "If this is to be an asynchronous operation, the address of a valid        OVERLAPPED structure."
+      }
+    ],
+    "min_client": "Windows 8"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets information about a virtual hard disk (VHD).",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2008 R2",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see        System Error Codes. ",
+    "remarks": "The SetVirtualDiskInformation function      will fail if the ParentFilePath member is requested to be set but the system cannot      resolve the path provided. Setting the parent information will also cause the child's parent      GUID and Timestamp fields to be updated. The virtual disk cannot be attached while this operation is in progress. The caller must have READ|WRITE access to the backing store for the virtual disk. ",
+    "return_type": "DWORD",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "SetVirtualDiskInformation",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open virtual disk, which must have been opened using the       VIRTUAL_DISK_ACCESS_METAOPS flag. For information on how to open a virtual disk, see       the OpenVirtualDisk function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSET_VIRTUAL_DISK_INFO",
+        "name": "VirtualDiskInfo",
+        "description": "A pointer to a valid SET_VIRTUAL_DISK_INFO       structure."
+      }
+    ],
+    "min_client": "Windows 7"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Sets a metadata item for a virtual disk.",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2012",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "SetVirtualDiskMetadata",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "Handle to an open virtual disk."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPGUID",
+        "name": "Item",
+        "description": "Address of a GUID identifying the metadata to retrieve."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "MetaDataSize",
+        "description": "Address of a ULONG containing the size, in bytes, of        the buffer pointed to by the MetaData parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "MetaData",
+        "description": "Address of the buffer containing the metadata to be stored."
+      }
+    ],
+    "min_client": "Windows 8"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[Some information relates to pre-released product which may be substantially modified before it's commercially released. Microsoft makes no warranties, express or implied, with respect to the information provided here.]",
+    "library": "VirtDisk.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "VirtDisk.h (include Windows.h)",
+    "return_value": "Status of the request. If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error code. For more information, see         System Error Codes. ",
+    "remarks": "",
+    "return_type": " WINAPI",
+    "category": "Virtual Hard Disk (VHD)",
+    "name": "TakeSnapshotVhdSet",
+    "is_callback": 0,
+    "dll": "VirtDisk.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "VirtualDiskHandle",
+        "description": "A handle to the open virtual disk. This must be a VHD Set file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PTAKE_SNAPSHOT_VHDSET_PARAMETERS",
+        "name": "Parameters",
+        "description": "A pointer to a valid TAKE_SNAPSHOT_VHDSET_PARAMETERS structure that contains snapshot data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "TAKE_SNAPSHOT_VHDSET_FLAG",
+        "name": "Flags",
+        "description": "Snapshot flags, which must be a valid combination of the TAKE_SNAPSHOT_VHDSET_FLAG enumeration"
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps only]"
+  }
+]
+

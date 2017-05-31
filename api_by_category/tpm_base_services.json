@@ -1,0 +1,429 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "Creates a context handle that can be used to pass commands to TBS.",
+    "library": "Tbs.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Tbs.h",
+    "return_value": "If the function succeeds, the function returns TBS_SUCCESS. If the function fails, it returns a TBS return code that indicates the error.  ",
+    "remarks": "The pContextParams parameter allows the caller to specify which TPM version (TPM1.2 or TPM2.0) it is designed for. For applications interacting with version 1.2 TPM only, a pointer to a TBS_CONTEXT_PARAMS structure can be provided, with the version field set to TPM_VERSION_12. Applications interacting with version 2.0 TPM will pass a pointer to a TBS_CONTEXT_PARAMS2 structure, with the version field set to TPM_VERSION_20. Set the reserved field to 0, and the includeTPm20 field to 1. If the application is prepared to interact with a version 1.2 TPM as well (in case the system has no version 2.0 TPM), set the includeTpm12 field to 1. If no TPM is present on the system, or the TPM version does not match those requested by the caller, Tbsi_Context_Create will return the TBS_E_TPM_NOT_FOUND (0x8028400) error code.  Application programs must check for both versions and be able to interact with either TPM. ",
+    "return_type": "TBS_RESULT",
+    "category": "TPM Base Services (TBS)",
+    "name": "Tbsi_Context_Create",
+    "is_callback": 0,
+    "dll": "Tbs.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCTBS_CONTEXT_PARAMS",
+        "name": "pContextParams",
+        "description": "A parameter to a TBS_CONTEXT_PARAMS structure that contains the parameters associated with the context."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PTBS_HCONTEXT",
+        "name": "*phContext",
+        "description": "A pointer to a location to store the new context handle."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 9,
+    "description": "Creates an attestation by extracting a TrustPoint from a TCG log.",
+    "library": "Tbs.lib",
+    "min_server": "",
+    "header": "Tbs.h",
+    "return_value": "",
+    "remarks": "The first TrustPoint, or the TrustPoint specified by the szAikNameRequested parameter, is extracted from the TCG log passed at the value specified by the pbLog parameter and returned in the buffer passed in the pbOutput parameter.  If the pszAikName parameter is specified, it receives a pointer to the name of the AIK for which the TrustPoint is retrieved.  If the pbAikPubDigest parameter is specified, it receives the SHA1 hash of the public modulus of the AIK for which the TrustPoint is retrieved. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "TPM Base Services (TBS)",
+    "name": "Tbsi_Create_Attestation_From_Log",
+    "is_callback": 0,
+    "dll": "Tbs.dll",
+    "arguments": [
+      {
+        "in_out": "_In_reads_(cbLog)",
+        "type": "PBYTE",
+        "name": "pbLog",
+        "description": "A pointer to a buffer containing a TCG log."
+      },
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "cbLog",
+        "description": "The size in bytes of the log specified by the pbLog parameter."
+      },
+      {
+        "in_out": "_In_opt_z_",
+        "type": "PWSTR",
+        "name": "szAikNameRequested",
+        "description": "If there are multiple AIKs registered (for example, using the NCryptExportKey function), this is a pointer to a WCHAR string of the name of the AIK for which to fetch the TrustPoint.  If the specified AIK is not found, ERROR_INVALID_PARAMETER is returned.  If this optional parameter is NULL, the first TrustPoint (if any) is retrieved from the log."
+      },
+      {
+        "in_out": "_Outptr_opt_result_z_",
+        "type": "PWSTR*",
+        "name": "pszAikName",
+        "description": "An optional pointer to a PWSTR variable that receives a pointer to a WCHAR string of the name of the AIK for which the TrustPoint was fetched.  If this is NULL, the name is not returned."
+      },
+      {
+        "in_out": "_Out_writes_all_opt_(20)",
+        "type": "PBYTE",
+        "name": "pbAikPubDigest",
+        "description": "An optional pointer to a 20 byte array to receive the SHA1 hash of the public modulus of the AIK for which the TrustPoint was fetched.  If this is NULL, the hash is not returned."
+      },
+      {
+        "in_out": "_Out_writes_to_opt_(cbOutput",
+        "type": "*pcbResult) PBYTE",
+        "name": "pbOutput",
+        "description": "A pointer to the buffer to receive the TrustPoint from the TCG log (if any)."
+      },
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "cbOutput",
+        "description": "The size in bytes of the buffer at pbOutput."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PUINT32",
+        "name": "pcbResult",
+        "description": "A pointer to a UINT32 variable to receive the number of bytes written to the buffer, or the size of the buffer required."
+      },
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "dwFlags",
+        "description": "No flags defined (0)."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 2,
+    "description": "Obtains the version of the TPM on the computer.",
+    "library": "Tbs.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Tbs.h",
+    "return_value": "If the function succeeds, the function returns TBS_SUCCESS. If the function fails, it returns a TBS return code that indicates the error.  ",
+    "remarks": "",
+    "return_type": "TBS_RESULT WINAPI",
+    "category": "TPM Base Services (TBS)",
+    "name": "Tbsi_GetDeviceInfo",
+    "is_callback": 0,
+    "dll": "Tbs.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT32",
+        "name": "Size",
+        "description": "Size of the memory location."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "Info",
+        "description": "A pointer to a TPM_DEVICE_INFO structure is returned containing the version information about the TPM. The location must be large enough to hold four 32-bit values."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the owner authorization  of the TPM if the information is available in the local registry.",
+    "library": "Tbs.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Tbs.h",
+    "return_value": "If the function succeeds, the function returns TBS_SUCCESS. If the function fails, it returns a TBS return code that indicates the error.  ",
+    "remarks": "There are additional authorization values, also known as delegation blobs, derived from the full TPM ownerAuth that allow a subset of the TPM functionality to be executed. The administrator can configure the level of ownerAuth that should be locally stored in the registry through Group Policy and the same can be obtained from this API call. If Active Directory backup of ownerAuth is enabled through Group Policy, the default level of ownerAuth is set as Delegated which means that the full owner auth is removed from the local registry and stored in Active Directory. Only delegation blobs are locally stored in the registry in that case. Although, the level of ownerAuth storage can be explicitly configured to Full resulting in the TPM ownerAuth being locally available in the registry. ",
+    "return_type": "TBS_RESULT WINAPI",
+    "category": "TPM Base Services (TBS)",
+    "name": "Tbsi_Get_OwnerAuth",
+    "is_callback": 0,
+    "dll": "Tbs.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TBS_HCONTEXT",
+        "name": "hContext",
+        "description": "TBS handle obtained from a previous call to the Tbsi_Context_Create function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "TBS_OWNERAUTH_TYPE",
+        "name": "ownerauthType",
+        "description": "Unsigned 32-bit integer indicating the type of owner authentication.  ValueMeaning  TBS_OWNERAUTH_TYPE_FULL 1   \tThe owner authorization is full.   TBS_OWNERAUTH_TYPE_ADMIN 2   \tThe owner authorization is an administrator.   TBS_OWNERAUTH_TYPE_USER 3   \tThe owner authorization is a user.   TBS_OWNERAUTH_TYPE_ENDORSEMENT 4   \tThe owner authorization is an endorsement authorization."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PBYTE",
+        "name": "pOutputBuf",
+        "description": "A pointer to a buffer to receive the TPM owner authorization information."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PUINT32",
+        "name": "pOutputBufLen",
+        "description": "An integer that, on input, specifies the size, in bytes, of the output buffer. On successful return, this value is set to the actual size of the TPM ownerAuth, in bytes."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Gets the Windows Boot Counter Log (WBCL)TCG log.",
+    "library": "Tbs.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Tbs.h",
+    "return_value": " ",
+    "remarks": "The Tbsi_Get_TCG_Log function returns the TCG Event Log copied by Windows in the preboot environment, and the buffer size depends on the number of events. The value of PCR 11 is overwritten after this copy is performed, so it should be treated as random. The function returns the log from the last boot of the platform that was not a resume from hibernation. After a resume from hibernation, the log may not match the TPM's current PCR values. Windows 10: The function may return a log that uses a format that is compatible with different hashing algorithms, depending on hardware capabilities and firmware settings. This log formats each event except the first as a TCG_PCR_EVENT2 structure: The log formats the first event as a TCG_PCR_EVENT structure, which is described later in this Remarks section. The following table describes the values of the members of this structure for this first event.  The following shows the syntax of the TCG_EfiSpecIdEventStruct structure that the Event member of the TCG_PCR_EVENT structure uses for the first log event. The Signature member of the TCG_EfiSpecIdEventStruct structure is set to a null-terminated ASCII string of \"Spec ID Event03\" when the log uses the format that is compatible with different hashing algorithms. The DigestSizes array in this first event contains the digest sizes for the different hashing algorithms that the log uses. When a parser inspects an event of type TCG_PCR_EVENT2, the parser can parse the TPML_DIGEST_VALUES member without information about all of the hashing algorithms present. The digest sizes in the first event allow the parser to skip the correct number of bytes for the  digests that are present. If the Signature member is not set to a null-terminated ASCII string of \"Spec ID Event03\", then the events in the log are of type TCG_PCR_EVENT, and the TCG_EfiSpecIdEventStruct structure does not contain the NumberOfAlgorithms and DigestSizes members. The log format that is compatible with different hashing algorithms allows the platform and operating system to use SHA1, SHA256, or other hashing algorithms. If the platform supports the SHA256 hashing algorithm and the uses the log format that is compatible with different hashing algorithms, the platform uses the SHA256 algorithm instead of  SHA1. Windows Vista with SP1 and Windows Server 2008:  The function returns the log directly from the ACPI table and returns the entire ACPI allocated buffer, including the unused buffer after any events. The Windows-defined events in the TCG event log are a tuple of {Type, Length, Value}. You can parse the log using the following TCG_PCR_EVENT structure from the TCG PC Client spec. You can create a correlation between lists of log events using the information in the TPM PCP Toolkit and the TPM Main Specification. The memory size required for the pOutputBuf parameter should either be the constant in TBS_IN_OUT_BUF_SIZE_MAX, defined in the Tbs.h header file, or it should be obtained by calling the Tbsi_Get_TCG_Log function with a zero length buffer to get the required buffer size.  Windows Vista with SP1 and Windows Server 2008:  Calling the Tbsi_Get_TCG_Log function with a zero length buffer to get the required buffer size is not supported. We recommend that you use the constant TBS_IN_OUT_BUF_SIZE_MAX, defined in the Tbs.h header file, for the memory size for the pOutputBuf parameter. ",
+    "return_type": "TBS_RESULT WINAPI",
+    "category": "TPM Base Services (TBS)",
+    "name": "Tbsi_Get_TCG_Log",
+    "is_callback": 0,
+    "dll": "Tbs.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TBS_HCONTEXT",
+        "name": "hContext",
+        "description": "The TBS handle of the context that is getting the TCG log. You get this parameter from a previous call to the Tbsi_Context_Create function."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*pabOutput",
+        "description": "A pointer to a buffer to receive  and store the WBCL. This parameter may be NULL to estimate the required buffer when the location pointed to by pcbOutput is also 0 on input."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PUNIT32",
+        "name": "*pcbOutput",
+        "description": "A pointer to an unsigned long integer that, on input, specifies the size, in bytes, of the output buffer.  If the function succeeds, this parameter, on output, receives the size, in bytes, of the data pointed to by pOutputBuf. If the function fails, this parameter does not receive a value. Calling the Tbsi_Get_TCG_Log function with a zero length buffer will return the size of the buffer required. Windows Vista with SP1 and Windows Server 2008:  This functionality is not available."
+      }
+    ],
+    "min_client": "Windows Vista with SP1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Gets one or more Windows Boot Counter Logs (WBCL)TCG log.",
+    "library": "Tbs.lib",
+    "min_server": "",
+    "header": "Tbs.h",
+    "return_value": "If the function succeeds, the function returns TBS_SUCCESS. If the function fails, it returns a TBS return code that indicates the error.  ",
+    "remarks": "After doing a full boot of a computer with a TPM, then hibernating and resuming the computer several times, call the Tbsi_Get_TCG_Logs functions and pass 0 as the value for the firstLog parameter, NULL for the pbOutput parameter, 0 for the cbOutput parameter, and TBS_GET_ALL_LOGS_FLAG for the dwFlags parameter. The  pcbResult output parameter will return the size in bytes of the buffer to allocate to hold all TCG logs since the most recent full boot.  Allocate this size buffer, and call Tbsi_Get_TCG_Logs again passing it the buffer pointer for the pbOutput parameter and the buffer size for the cbOutput parameter.  Each TCG log will be returned in the buffer separated from the previous log by its length in bytes. ",
+    "return_type": "TBS_RESULT WINAPI",
+    "category": "TPM Base Services (TBS)",
+    "name": "Tbsi_Get_TCG_Logs",
+    "is_callback": 0,
+    "dll": "Tbs.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "firstLog",
+        "description": "Specifies the starting log to retrieve.  0 for the most recent full boot, 1 for the first resume from hibernation after the most recent full boot, and so on."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "UINT32",
+        "name": "*pNextLog",
+        "description": "A pointer to a UINT32 variable to receive the number of the next hibernation log to retrieve."
+      },
+      {
+        "in_out": "_Out_writes_opt_(cbOutput)",
+        "type": "PBYTE",
+        "name": "pbOutput",
+        "description": "A pointer to the buffer to retrieve the log data."
+      },
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "cbOutput",
+        "description": "The size of the pbOutput buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PUINT32",
+        "name": "pcbResult",
+        "description": "A pointer to a UINT32 variable to receive the number of bytes written to the buffer, or the size of the buffer required."
+      },
+      {
+        "in_out": "",
+        "type": "UINT32",
+        "name": "dwFlags",
+        "description": "Specifies whether or not to retrieve all available logs.  0 to retrieve only the first specified log (firstLog), TBS_GET_ALL_LOGS_FLAG to retrieve all available logs starting with the specified first log."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 5,
+    "description": "Passes a physical presence ACPI command through TBS to the driver.",
+    "library": "Tbs.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Tbs.h",
+    "return_value": "If the function succeeds, the function returns TBS_SUCCESS. If the function fails, it returns a TBS return code that indicates the error.  ",
+    "remarks": "For more information, see TCG Physical Presence Interface Specification. ",
+    "return_type": "TBS_RESULT",
+    "category": "TPM Base Services (TBS)",
+    "name": "Tbsi_Physical_Presence_Command",
+    "is_callback": 0,
+    "dll": "Tbs.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TBS_HCONTEXT",
+        "name": "hContext",
+        "description": "The context of the ACPI command."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const PCBYTE",
+        "name": "*pabInput",
+        "description": "A pointer to a buffer that contains the input to the ACPI command.  The input to the ACPI command is defined in the TCG Physical Presence Interface Specification at https://www.trustedcomputinggroup.org/specs/PCClient. The buffer should contain Arg2 and Arg3 values as defined in this document. The values for Arg0 and Arg1 are static and automatically added. For example, if this method is used for Get Physical Presence Interface Version, then Arg2 is the integer value 1 and Arg3 is empty, so the buffer should just contain an integer value of 1. If this method is used for \"Submit TPM Operation Request to Pre-OS Environment\", then Arg2 is the integer value 2 and Arg3 will be the integer for the specified operation, such as 1 for enable or 2 for disable."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT32",
+        "name": "cbInput",
+        "description": "The length, in bytes, of the input buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "pabOutput",
+        "description": "A pointer to a buffer to contain the output of the ACPI command.  The buffer will contain the return value from the  command as defined in the TCG Physical Presence Interface Specification."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PUNIT32",
+        "name": "*pcbOutput",
+        "description": "A pointer to an unsigned long integer that, on input, specifies the size, in bytes, of the output buffer. If the function succeeds, this parameter, on output, receives the size, in bytes, of the data pointed to by pabOutput. If the function fails, this parameter does not receive a value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Invalidates the PCRs if the ELAM driver detects a policy-violation (a rootkit, for example).",
+    "library": "Tbs.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Tbs.h",
+    "return_value": " ",
+    "remarks": "You must run this function with administrative rights. This function extends PCR[12] by an unspecified value and increment the event counter in the TPM. Both actions are necessary, so the trust is broken in all quotes that are created from here on forward. Since the PCRs are reset on hibernation and the extend to PCR[12] then will disappear, a gap in the event counter will indicate a broken chain of logs. As a result, the WBCL files will not reflect the current state of the TPM for the remainder of the time that the TPM is powered up and remote systems will not be able to form trust in the security state of the system.  Note that anti-malware systems will probably perform additional remediation or alerts, but the invalidation step is crucial if attestation is supported. When the computer goes to hibernation and subsequently resumes, the previous PCR extent will be lost, and the broken trust will not be reflected in the PCR measurements anymore. To address this, the Tbsi_Revoke_Attestation function also increments the monotonic Event Counter located in the TPM. Further TPM attestation validations will notice a gap in the archived WBCL logs' boot counter values. Upon discovery of such a gap, attestation validation code should fail the validation, just as it would if other required events were not present in the log. Note that the counter in the TPM cannot be rolled back you can't construct the missing WBCL after the fact. ",
+    "return_type": "TBS_RESULT WINAPI",
+    "category": "TPM Base Services (TBS)",
+    "name": "Tbsi_Revoke_Attestation",
+    "is_callback": 0,
+    "dll": "Tbs.dll",
+    "arguments": [],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Cancels all outstanding commands for the specified context.",
+    "library": "Tbs.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Tbs.h",
+    "return_value": "If the function succeeds, the function returns TBS_SUCCESS. If the function fails, it returns a TBS return code that indicates the error.  ",
+    "remarks": "When a command is canceled, TBS sends a message to the command that indicates that the command was canceled. ",
+    "return_type": "TBS_RESULT",
+    "category": "TPM Base Services (TBS)",
+    "name": "Tbsip_Cancel_Commands",
+    "is_callback": 0,
+    "dll": "Tbs.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TBS_HCONTEXT",
+        "name": "hContext",
+        "description": "A TBS handle to the context whose commands are to be canceled and that was obtained from previous call to the Tbsi_Context_Create function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes a context handle, which releases resources associated with the context in TBS and closes the binding handle used to communicate with TBS.",
+    "library": "Tbs.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Tbs.h",
+    "return_value": "If the function succeeds, the function returns TBS_SUCCESS. If the function fails, it returns a TBS return code that indicates the error.  ",
+    "remarks": "When the context handle is closed, the structure associated with the context handle is zeroed, which ensures that  subsequent attempts to use the handle will result in an error. All objects that have been created under this context will be flushed. ",
+    "return_type": "TBS_RESULT",
+    "category": "TPM Base Services (TBS)",
+    "name": "Tbsip_Context_Close",
+    "is_callback": 0,
+    "dll": "Tbs.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TBS_HCONTEXT",
+        "name": "hContext",
+        "description": "A handle of the context to be closed."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Submits a Trusted Platform Module (TPM) command to TPM Base Services (TBS) for processing.",
+    "library": "Tbs.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Tbs.h",
+    "return_value": "If the function succeeds, the function returns TBS_SUCCESS. A command can be submitted successfully and still fail at the TPM. In this case, the failure code is returned as a standard TPM error in the result buffer. If the function fails, it returns a TBS return code that indicates the error.  ",
+    "remarks": "",
+    "return_type": "TBS_RESULT",
+    "category": "TPM Base Services (TBS)",
+    "name": "Tbsip_Submit_Command",
+    "is_callback": 0,
+    "dll": "Tbs.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TBS_HCONTEXT",
+        "name": "hContext",
+        "description": "The handle of the context that is submitting the command."
+      },
+      {
+        "in_out": "_In_",
+        "type": "TBS_COMMAND_LOCALITY",
+        "name": "Locality",
+        "description": "Used to set the locality for the TPM command. This must be one of the following values.  ValueMeaning  TBS_COMMAND_LOCALITY_ZERO 0 (0x0)   Locality zero. This is the only locality currently supported.   TBS_COMMAND_LOCALITY_ONE 1 (0x1)   Locality one.   TBS_COMMAND_LOCALITY_TWO 2 (0x2)   Locality two.   TBS_COMMAND_LOCALITY_THREE 3 (0x3)   Locality three.   TBS_COMMAND_LOCALITY_FOUR 4 (0x4)   Locality four."
+      },
+      {
+        "in_out": "_In_",
+        "type": "TBS_COMMAND_PRIORITY",
+        "name": "Priority",
+        "description": "The priority level that the command should have. This parameter can be one of the following values.  ValueMeaning  TBS_COMMAND_PRIORITY_LOW 100 (0x64)   Used for low priority application use.   TBS_COMMAND_PRIORITY_NORMAL 200 (0xC8)   Used for normal priority application use.   TBS_COMMAND_PRIORITY_SYSTEM 400 (0x190)   Used for system tasks that access the TPM.   TBS_COMMAND_PRIORITY_HIGH 300 (0x12C)   Used for high priority application use.   TBS_COMMAND_PRIORITY_MAX 2147483648 (0x80000000)   Used for tasks that originate from the power management system."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const PCBYTE",
+        "name": "*pabCommand",
+        "description": "A pointer to a buffer that contains the TPM command to process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT32",
+        "name": "cbCommand",
+        "description": "The length, in bytes, of the command."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*pabResult",
+        "description": "A pointer to a buffer to receive the result of the TPM command.  This buffer can be the same as pabCommand."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "UINT32",
+        "name": "*pcbOutput",
+        "description": "An integer that, on input, specifies the size, in bytes, of the result buffer.  This value is set when the submit command returns.  If the supplied buffer is too small, this parameter, on output, is set to the required size, in bytes, for the result."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

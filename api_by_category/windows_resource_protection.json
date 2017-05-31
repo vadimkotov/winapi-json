@@ -1,0 +1,67 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "Determines whether the specified file is protected. Applications should avoid replacing protected system files.",
+    "library": "Sfc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Sfc.h",
+    "return_value": "If the file is protected, the return value is a nonzero value. If the file is not protected, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Windows Resource Protection",
+    "name": "SfcIsFileProtected",
+    "is_callback": 0,
+    "dll": "Sfc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "RpcHandle",
+        "description": "This parameter must be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "ProtFileName",
+        "description": "The name of the file."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Determines whether the specified registry key is protected. Applications should avoid replacing protected registry keys.",
+    "library": "Sfc.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Sfc.h",
+    "return_value": "If the key is protected, the return value is a nonzero value. If the key is not protected, the return value is zero. ",
+    "remarks": "A key is protected by WRP if the path exists and is protected by WRP. The SfcIsKeyProtected function indicates that a subkey is protected by WRP if the subkey has a  parent key that is protected by WRP. For example, if the following registry key exists on the system and is protected by WRP:  The SfcIsKeyProtected function returns a nonzero value for the following subkey. The new subkey does not need to exist for the function to determine that it is WRP-protected.  ",
+    "return_type": "BOOL WINAPI",
+    "category": "Windows Resource Protection",
+    "name": "SfcIsKeyProtected",
+    "is_callback": 0,
+    "dll": "Sfc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HKEY",
+        "name": "hKey",
+        "description": "A handle to the root registry key. This must be a handle to one of the following predefined keys. HKEY_CLASSES_ROOT HKEY_CURRENT_USER HKEY_LOCAL_MACHINE HKEY_USERS"
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "lpSubKey",
+        "description": "A null-terminated string value containing the name of the subkey. This key must a subkey of the key identified by the hKey parameter. For more information about key names, see Structure of the Registry.  If this parameter is NULL, the function only checks whether the root registry key is protected."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REGSAM",
+        "name": "samDesired",
+        "description": "A constant that specifies the alternate registry view that should be used by applications that run on 64-bit Windows.  This flag is ignored on the x86 platform. For more information, see Accessing an Alternate Registry View.  ValueMeaning   0x0000   Use the 32-bit registry key from 32-bit applications and use the 64-bit registry key from 64-bit applications.   KEY_WOW64_64KEY 0x0100   Use the 64-bit registry key from either a 32-bit or 64-bit application.   KEY_WOW64_32KEY 0x0200   Use the 32-bit registry key from either a 32-bit or 64-bit application."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

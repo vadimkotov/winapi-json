@@ -1,0 +1,178 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Closes an open object handle.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. If the application is running under a debugger,  the function will throw an exception if it receives either a  handle value that is not valid  or a pseudo-handle value. This can happen if you close a handle twice, or if you  call  CloseHandle on a handle returned by the  FindFirstFile function instead of calling the FindClose function. ",
+    "remarks": "The  CloseHandle function closes handles to the following objects: The documentation for the functions that create these objects indicates that CloseHandle should be used when you are finished with the object, and what happens to pending operations on the object after the handle is closed. In general, CloseHandle invalidates the specified object handle, decrements the object's handle count, and performs object retention checks. After the last handle to an object is closed, the object is removed from the system. For a summary of the creator functions for these objects, see Kernel Objects. Generally, an application should call CloseHandle once for each handle it opens. It is usually not necessary to call CloseHandle if a function that uses a handle fails with ERROR_INVALID_HANDLE, because this error usually indicates that the handle is already invalidated. However, some functions use ERROR_INVALID_HANDLE to indicate that the object itself is no longer valid. For example, a function that attempts to use a handle to a file on a network might fail with ERROR_INVALID_HANDLE if the network connection is severed, because the file object is no longer available. In this case, the application should close the handle. If a handle is transacted, all handles bound to a transaction should be closed before the transaction is committed. If a transacted handle was opened by calling CreateFileTransacted with the FILE_FLAG_DELETE_ON_CLOSE flag, the file is not deleted until the application closes the handle and calls CommitTransaction. For more information about transacted objects, see Working With Transactions. Closing a thread handle does not terminate the associated thread or remove the thread object. Closing a process handle does not terminate the associated process or remove the process object. To remove a thread object, you must terminate the thread, then close all handles to the thread. For more information, see Terminating a Thread. To remove a process object, you must terminate the process, then close all handles to the process. For more information, see Terminating a Process. Closing a handle to a file mapping can succeed even when there are file views that are still open. For more information, see Closing a File Mapping Object. Do not use the CloseHandle  function to close a socket. Instead, use  the closesocket function, which releases all resources associated with the socket including the handle to the socket object. For more information, see Socket Closure. Do not use the CloseHandle  function to close a handle to an open registry key. Instead, use  the RegCloseKey function. CloseHandle does not close the handle to the registry key, but does not return an error to indicate this failure. For an example, see  Taking a Snapshot and Viewing Processes. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Handle and Objects",
+    "name": "CloseHandle",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hObject",
+        "description": "A valid handle to an open object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Compares two object handles to determine if they refer to the same underlying kernel object.",
+    "library": "Kernelbase.lib",
+    "min_server": "Windows Server 2016 [desktop apps | Windows Store apps]",
+    "header": "Handleapi.h (include Windows.h)",
+    "return_value": "A Boolean value that indicates if the two handles refer to the same underlying kernel object. TRUE if the same, otherwise FALSE. ",
+    "remarks": "The CompareObjectHandles function is useful to determine if two kernel handles refer to the same kernel object without imposing a requirement that specific access rights be granted to either handle in order to perform the comparison.  For example, if a process desires to determine whether a process handle is a handle to the current process, a call to CompareObjectHandles (GetCurrentProcess (), hProcess) can be used to determine if hProcess refers to the current process.  Notably, this does not require the use of object-specific access rights, whereas in this example, calling GetProcessId to check the process IDs of two process handles imposes a requirement that the handles grant PROCESS_QUERY_LIMITED_INFORMATION access. However it is legal for a process handle to not have that access right granted depending on how the handle is intended to be used. The following code sample creates three handles, two of which refer to the same object, then compares them to show that identical underlying kernel objects will return TRUE, while non-identical objects will return FALSE. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Handle and Objects",
+    "name": "CompareObjectHandles",
+    "is_callback": 0,
+    "dll": "Kernelbase.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFirstObjectHandle",
+        "description": "The first object handle to compare."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hSecondObjectHandle",
+        "description": "The second object handle to compare."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps | UWP apps]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Duplicates an object handle.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The duplicate handle refers to the same object as the original handle. Therefore, any changes to the object are reflected through both handles. For example, if you duplicate a file handle, the current file position is always the same for both handles. For  file handles to have different file positions, use the CreateFile function to create file handles that share access to the same file. DuplicateHandle can be called by either the source process or the target process (or a process that is both the source and target process). For example, a process can use  DuplicateHandle to create a noninheritable duplicate of an inheritable handle, or a handle with different access than the original handle. The source process uses the  GetCurrentProcess function to get a handle to itself. This handle is a pseudo handle, but DuplicateHandle converts it to a real process handle. To get the target process handle, it may be necessary to use some form of interprocess communication (for example, a named pipe or shared memory) to communicate the process identifier to the source process. The source process can use this identifier in the  OpenProcess function to obtain a handle to the target process. If the process that calls  DuplicateHandle is not also the target process, the source process must use interprocess communication to pass the value of the duplicate handle to the target process. DuplicateHandle can be used to duplicate a handle between a 32-bit process and a 64-bit process. The resulting handle is appropriately sized to work in the target process. For more information, see Process Interoperability. DuplicateHandle can duplicate handles to the following types of objects.  You should not use  DuplicateHandle to duplicate handles to the following objects: The dwDesiredAccess parameter specifies the new handle's access rights. All objects support the standard access rights. Objects may also support additional access rights depending on the object type. For more information, see the following topics: In some cases, the new handle can have more access rights than the original handle. However, in other cases,  DuplicateHandle cannot create a handle with more access rights than the original. For example, a file handle created with the GENERIC_READ access right cannot be duplicated so that it has both the GENERIC_READ and GENERIC_WRITE access right. Normally the target process closes a duplicated handle when that process is finished using the handle. To close a duplicated handle from the source process,  call DuplicateHandle with the following parameters: The following example creates a mutex, duplicates a handle to the mutex, and passes it to another thread. Duplicating the handle ensures that the reference count is increased so that the mutex object will not be destroyed until both threads have closed the handle. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Handle and Objects",
+    "name": "DuplicateHandle",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hSourceProcessHandle",
+        "description": "A handle to the process with the handle to be duplicated.     The handle must have the PROCESS_DUP_HANDLE access right. For more information, see  Process Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hSourceHandle",
+        "description": "The handle to be duplicated. This is an open object handle that is valid in the context of the source process. For a list of objects whose handles can be duplicated, see the following Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hTargetProcessHandle",
+        "description": "A handle to the process that is to receive the duplicated handle. The handle must have the PROCESS_DUP_HANDLE access right."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPHANDLE",
+        "name": "lpTargetHandle",
+        "description": "A pointer to a variable that receives the duplicate handle. This handle value is valid in the context of the target process.     If hSourceHandle is a pseudo handle returned by GetCurrentProcess or GetCurrentThread, DuplicateHandle converts it to a real  handle to a process or thread, respectively. If lpTargetHandle is NULL, the function duplicates the handle, but does not return the duplicate handle value to the caller. This behavior exists only for backward compatibility with previous versions of this function. You should not use this feature, as you will lose system resources until the target process terminates."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwDesiredAccess",
+        "description": "The access requested for the new handle. For the flags that can be specified for each object type, see the following Remarks section.     This parameter is ignored if the dwOptions parameter specifies the DUPLICATE_SAME_ACCESS flag. Otherwise, the flags that can be specified depend on the type of object whose handle is to be duplicated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bInheritHandle",
+        "description": "A variable that indicates whether the handle is inheritable. If TRUE, the duplicate handle can be inherited by new processes created by the target process. If FALSE, the new handle cannot be inherited."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwOptions",
+        "description": "Optional actions. This parameter can be zero, or any combination of the following values.     ValueMeaning  DUPLICATE_CLOSE_SOURCE 0x00000001   Closes the source handle. This occurs regardless of any error status returned.   DUPLICATE_SAME_ACCESS 0x00000002   Ignores the dwDesiredAccess parameter. The duplicate handle has the same access as the source handle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves certain properties of an object handle.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Handle and Objects",
+    "name": "GetHandleInformation",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hObject",
+        "description": "A handle to an object whose information is to be retrieved.     You can specify a handle to one of the following types of objects: access token, console input buffer, console screen buffer, event, file, file mapping, job, mailslot, mutex, pipe, printer, process, registry key, semaphore, serial communication device, socket, thread, or waitable timer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpdwFlags",
+        "description": "A pointer to a variable that receives a set of bit flags that specify properties of the object handle or 0. The following values are defined.     ValueMeaning  HANDLE_FLAG_INHERIT 0x00000001   If this flag is set, a child process created with the bInheritHandles parameter of  CreateProcess set to TRUE will inherit the object handle.   HANDLE_FLAG_PROTECT_FROM_CLOSE 0x00000002   If this flag is set, calling the  CloseHandle function will not close the object handle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets certain properties of an object handle.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "To set or clear the associated bit flag in dwFlags, you must set a change mask bit flag in dwMask. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Handle and Objects",
+    "name": "SetHandleInformation",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hObject",
+        "description": "A handle to an object whose information is to be set.     You can specify a handle to one of the following types of objects: access token, console input buffer, console screen buffer, event, file, file mapping, job, mailslot, mutex, pipe, printer, process, registry key, semaphore, serial communication device, socket, thread, or waitable timer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwMask",
+        "description": "A mask that specifies the bit flags to be changed. Use the same constants shown in the description of dwFlags."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Set of bit flags that specifies properties of the object handle. This parameter can be 0 or one or more of the following values.     ValueMeaning  HANDLE_FLAG_INHERIT 0x00000001   If this flag is set, a child process created with the bInheritHandles parameter of  CreateProcess set to TRUE will inherit the object handle.   HANDLE_FLAG_PROTECT_FROM_CLOSE 0x00000002   If this flag is set, calling the  CloseHandle function will not close the object handle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

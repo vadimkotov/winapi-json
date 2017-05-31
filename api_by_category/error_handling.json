@@ -1,0 +1,681 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "Generates simple tones on the speaker. The function is synchronous; it performs an alertable wait and does not return control to its caller until the sound finishes.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "A long time ago, all PC computers shared a common 8254 programable interval timer chip for the generation of primitive sounds.  The Beep function was written specifically to emit a beep on that piece of hardware. On these older systems, muting and volume controls have no effect on Beep; you would still hear the tone. To silence the tone, you used the following commands: net stop beep sc config beep start= disabled Since then, sound cards have become standard equipment on almost all PC computers.  As sound cards became more common, manufacturers began to remove the old timer chip from computers.   The chips were also excluded from the design of server computers.  The result is that Beep did not work on all computers without the chip.  This was okay because most developers had moved on to calling the MessageBeep function that uses whatever is the default sound device instead of the 8254 chip. Eventually because of the lack of hardware to communicate with, support for Beep was dropped in Windows Vista and Windows XP 64-Bit Edition. In Windows 7,  Beep was rewritten to pass the beep to the default sound device for the session.  This is normally the sound card, except when run under Terminal Services, in which case the beep is rendered on the client. The following example demonstrates the use of this function. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Error Handling",
+    "name": "Beep",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFreq",
+        "description": "The frequency of the sound, in hertz. This parameter must be in the range 37 through 32,767 (0x25 through 0x7FFF)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwDuration",
+        "description": "The duration of the sound, in milliseconds."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Captures a stack back trace by walking up the stack and recording the information for each      frame.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "The number of captured frames. ",
+    "remarks": "The CaptureStackBackTrace function is      defined as the RtlCaptureStackBackTrace function (the definition is included in      the Windows SDK beginning with Windows Vista). For more information, see WinBase.h and      WinNT.h. ",
+    "return_type": "USHORT WINAPI",
+    "category": "Error Handling",
+    "name": "CaptureStackBackTrace",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "FramesToSkip",
+        "description": "The number of frames to skip from the start of the back trace."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "FramesToCapture",
+        "description": "The number of frames to be captured. You can capture up to MAXUSHORT frames. Windows Server 2003 and Windows XP:  The sum of the FramesToSkip and FramesToCapture          parameters must be less than 63."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "*BackTrace",
+        "description": "An array of pointers captured from the current stack trace."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PULONG",
+        "name": "BackTraceHash",
+        "description": "A value that can be used to organize hash tables. If this parameter is NULL, then         no hash value is computed. This value is calculated based on the values of the pointers returned in the         BackTrace array. Two identical stack traces will generate identical hash values."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Displays a message box and terminates the application when the message box is closed. If the system is running with a debug version of Kernel32.dll, the message box gives the user the opportunity to terminate the application or to cancel the message box and return to the application that called  FatalAppExit.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "An application calls  FatalAppExit only when it is not capable of terminating any other way. ",
+    "return_type": "void WINAPI",
+    "category": "Error Handling",
+    "name": "FatalAppExit",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uAction",
+        "description": "This parameter must be zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpMessageText",
+        "description": "The null-terminated string that is displayed in the message box."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Flashes the specified window one time. It does not change the active state of the window.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "The return value specifies the window's state before the call to the  FlashWindow function. If the window caption was drawn as active before the call, the return value is nonzero. Otherwise, the return value is zero. ",
+    "remarks": "Flashing a window means changing the appearance of its caption bar as if the window were changing from inactive to active status, or vice versa. (An inactive caption bar changes to an active caption bar; an active caption bar changes to an inactive caption bar.) Typically, a window is flashed to inform the user that the window requires attention but that it does not currently have the keyboard focus. The  FlashWindow function flashes the window only once; for repeated flashing, the application should create a system timer. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Error Handling",
+    "name": "FlashWindow",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the window to be flashed. The window can be either open or minimized."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bInvert",
+        "description": "If this parameter is TRUE, the window is flashed from one state to the other. If it is FALSE, the window is returned to its original state (either active or inactive).     When an application is minimized and this parameter is TRUE, the taskbar window button flashes active/inactive. If it is FALSE, the taskbar window button flashes inactive, meaning that it does not change colors. It flashes, as if it were being redrawn, but it does not provide the visual invert clue to the user."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Flashes the specified window. It does not change the active state of the window.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "The return value specifies the window's state before the call to the  FlashWindowEx function. If the window caption was drawn as active before the call, the return value is nonzero. Otherwise, the return value is zero. ",
+    "remarks": "Typically, you flash a window to inform the user that the window requires attention but does not currently have the keyboard focus. When a window flashes, it appears to change from inactive to active status. An inactive caption bar changes to an active caption bar; an active caption bar changes to an inactive caption bar. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Error Handling",
+    "name": "FlashWindowEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PFLASHWINFO",
+        "name": "pfwi",
+        "description": "A pointer to a  FLASHWINFO structure."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Formats a message string. The function requires a message definition as input. The message      definition can come from a buffer passed into the function. It can come from a message table resource in an      already-loaded module. Or the caller can ask the function to search the system's message table resource(s) for the      message definition. The function finds the message definition in a message table resource based on a message      identifier and a language identifier. The function copies the formatted message text to an output buffer,      processing any embedded insert sequences if requested.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the number of TCHARs stored in the         output buffer, excluding the terminating null character. If the function fails, the return value is zero. To get extended error information, call         GetLastError. ",
+    "remarks": "Within the message text, several escape sequences are supported for dynamically formatting the message. These      escape sequences and their meanings are shown in the following tables. All escape sequences start with the percent      character (%).  Any other nondigit character following a percent character is formatted in the output message without the      percent character. Following are some examples.  If this function is called without FORMAT_MESSAGE_IGNORE_INSERTS, the        Arguments parameter must contain enough parameters to satisfy all insertion sequences        in the message string, and they must be of the correct type. Therefore, do not use untrusted or unknown message        strings with inserts enabled because they can contain more insertion sequences than        Arguments provides, or those that may be of the wrong type. In particular, it is        unsafe to take an arbitrary system error code returned from an API and use        FORMAT_MESSAGE_FROM_SYSTEM without        FORMAT_MESSAGE_IGNORE_INSERTS. The FormatMessage function can be used to obtain       error message strings for the system error codes returned by       GetLastError. For an example, see       Retrieving the Last-Error Code. The following example shows how to use an argument array and the width and precision specifiers. The following example shows how to implement the previous example using       va_list. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Error Handling",
+    "name": "FormatMessage",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "The formatting options, and how to interpret the lpSource parameter. The         low-order byte of dwFlags specifies how the function handles line breaks in the output         buffer. The low-order byte can also specify the maximum width of a formatted output line. This parameter can be one or more of the following values.  ValueMeaning  FORMAT_MESSAGE_ALLOCATE_BUFFER 0x00000100   The function allocates a buffer large enough to hold the formatted message, and places a pointer to the           allocated buffer at the address specified by lpBuffer. The           lpBuffer parameter is a pointer to an LPTSTR; you must           cast the pointer to an LPTSTR (for example,           (LPTSTR)&lpBuffer). The nSize           parameter specifies the minimum number of TCHARs to allocate for an output           message buffer. The caller should use the LocalFree           function to free the buffer when it is no longer needed. If the length of the formatted message exceeds 128K bytes, then           FormatMessage will fail and a subsequent call to           GetLastError will return           ERROR_MORE_DATA. In previous versions of Windows, this value was not available for use when compiling Windows Store apps. As of Windows 10 this value can be used.  Windows Server 2003 and Windows XP:  If the length of the formatted message exceeds 128K bytes, then             FormatMessage will not automatically fail with an             error of ERROR_MORE_DATA. Windows 10:  LocalFree is not in the modern SDK, so it cannot be used to free the result buffer. Instead, use HeapFree (GetProcessHeap(), allocatedMessage). In this case, this is the same as calling LocalFree on memory. Important:  LocalAlloc() has different options: LMEM_FIXED, and  LMEM_MOVABLE. FormatMessage() uses LMEM_FIXED, so HeapFree can be used. If LMEM_MOVABLE is used, HeapFree cannot be used.   FORMAT_MESSAGE_ARGUMENT_ARRAY 0x00002000   The Arguments parameter is not a va_list           structure, but is a pointer to an array of values that represent the arguments. This flag cannot be used with 64-bit integer values.  If you are using a 64-bit integer, you must use the           va_list structure.   FORMAT_MESSAGE_FROM_HMODULE 0x00000800   The lpSource parameter is a module handle containing the message-table           resource(s) to search. If this lpSource handle is NULL,           the current process's application image file will be searched. This flag cannot be used with          FORMAT_MESSAGE_FROM_STRING. If the module has no message table resource, the function fails with           ERROR_RESOURCE_TYPE_NOT_FOUND.   FORMAT_MESSAGE_FROM_STRING 0x00000400   The lpSource parameter is a pointer to a null-terminated string that contains          a message definition. The message definition may contain insert sequences, just as the message text in a          message table resource may. This flag cannot be used with          FORMAT_MESSAGE_FROM_HMODULE or          FORMAT_MESSAGE_FROM_SYSTEM.   FORMAT_MESSAGE_FROM_SYSTEM 0x00001000   The function should search the system message-table resource(s) for the requested message. If this flag is           specified with FORMAT_MESSAGE_FROM_HMODULE, the function searches the system           message table if the message is not found in the module specified by lpSource. This           flag cannot be used with FORMAT_MESSAGE_FROM_STRING. If this flag is specified, an application can pass the result of the           GetLastError function to retrieve the message text           for a system-defined error.   FORMAT_MESSAGE_IGNORE_INSERTS 0x00000200   Insert sequences in the message definition are to be ignored and passed through to the output buffer          unchanged. This flag is useful for fetching a message for later formatting. If this flag is set, the          Arguments parameter is ignored.     The low-order byte of dwFlags can specify the maximum width of a formatted output         line. The following are possible values of the low-order byte.  ValueMeaning   0   There are no output line width restrictions. The function stores line breaks that are in the message          definition text into the output buffer.   FORMAT_MESSAGE_MAX_WIDTH_MASK 0x000000FF   The function ignores regular line breaks in the message definition text. The function stores hard-coded          line breaks in the message definition text into the output buffer. The function generates no new line          breaks.     If the low-order byte is a nonzero value other than        FORMAT_MESSAGE_MAX_WIDTH_MASK, it specifies the maximum number of characters in an        output line. The function ignores regular line breaks in the message definition text. The function never splits        a string delimited by white space across a line break. The function stores hard-coded line breaks in the message        definition text into the output buffer. Hard-coded line breaks are coded with the %n escape sequence."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCVOID",
+        "name": "lpSource",
+        "description": "The location of the message definition. The type of this parameter depends upon the settings in the        dwFlags parameter.  dwFlags SettingMeaning  FORMAT_MESSAGE_FROM_HMODULE 0x00000800   A handle to the module that contains the message table to search.   FORMAT_MESSAGE_FROM_STRING 0x00000400   Pointer to a string that consists of unformatted message text. It will be scanned for inserts and          formatted accordingly.     If neither of these flags is set in dwFlags, then         lpSource is ignored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwMessageId",
+        "description": "The message identifier for the requested message. This parameter is ignored if        dwFlags includes FORMAT_MESSAGE_FROM_STRING."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwLanguageId",
+        "description": "The language identifier for the requested         message. This parameter is ignored if dwFlags includes         FORMAT_MESSAGE_FROM_STRING. If you pass a specific LANGID in this parameter,         FormatMessage will return a message for that         LANGID only. If the function cannot find a message for that         LANGID, it sets Last-Error to         ERROR_RESOURCE_LANG_NOT_FOUND. If you pass in zero,         FormatMessage looks for a message for         LANGIDs in the following order:  Language neutral Thread LANGID, based on the thread's locale value User default LANGID, based on the user's default locale value System default LANGID, based on the system default locale value US English  If FormatMessage does not locate a message for any         of the preceding LANGIDs, it returns any language message string that is present.         If that fails, it returns ERROR_RESOURCE_LANG_NOT_FOUND."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpBuffer",
+        "description": "A pointer to a buffer that receives the null-terminated string that specifies the formatted message. If         dwFlags includes FORMAT_MESSAGE_ALLOCATE_BUFFER, the         function allocates a buffer using the LocalAlloc         function, and places the pointer to the buffer at the address specified in         lpBuffer. This buffer cannot be larger than 64K bytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nSize",
+        "description": "If the FORMAT_MESSAGE_ALLOCATE_BUFFER flag is not set, this parameter specifies         the size of the output buffer, in TCHARs. If         FORMAT_MESSAGE_ALLOCATE_BUFFER is set, this parameter specifies the minimum number of         TCHARs to allocate for an output buffer. The output buffer cannot be larger than 64K bytes."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "va_list",
+        "name": "*Arguments",
+        "description": "An array of values that are used as insert values in the formatted message. A %1 in the format string         indicates the first value in the Arguments array; a %2 indicates the second argument;         and so on. The interpretation of each value depends on the formatting information associated with the insert in the         message definition. The default is to treat each value as a pointer to a null-terminated string. By default, the Arguments parameter is of type         va_list*, which is a language- and implementation-specific data type for         describing a variable number of arguments. The state of the va_list argument is         undefined upon return from the function. To use the va_list again, destroy the         variable argument list pointer using va_end and reinitialize it with         va_start. If you do not have a pointer of type         va_list*, then specify the FORMAT_MESSAGE_ARGUMENT_ARRAY         flag and pass a pointer to an array of DWORD_PTR values; those values are input to         the message formatted as the insert values. Each insert must have a corresponding element in the array."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the error mode for the current process.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "The process error mode. This function returns one of the following values.  ",
+    "remarks": "Each process has an associated error mode that indicates to the system how the application is going to respond      to serious errors. A child process inherits the error mode of its parent process. To change the error mode for the process, use the      SetErrorMode function. Windows 7: Callers should favor SetThreadErrorMode over        SetErrorMode since it is less disruptive to the normal        behavior of the system. GetThreadErrorMode is the        call function that corresponds to GetErrorMode. ",
+    "return_type": "UINT WINAPI",
+    "category": "Error Handling",
+    "name": "GetErrorMode",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the calling thread's last-error code value. The last-error code is maintained on a per-thread basis. Multiple threads do not overwrite each other's last-error code.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "The return value is the calling thread's last-error code. The Return Value section of the documentation for each function that sets the last-error code notes the conditions under which the function sets the last-error code. Most functions that set the thread's last-error code set it when they fail. However, some functions also set the last-error code when they succeed. If the function is not documented to set the last-error code, the value returned by this function is simply the most recent last-error code to have been set; some functions set the last-error code to 0 on success and others do not. ",
+    "remarks": "Functions executed by the calling thread set this value by calling the  SetLastError function. You should call the  GetLastError function immediately when a function's return value indicates that such a call will return useful data. That is because some functions call  SetLastError with a zero when they succeed, wiping out the error code set by the most recently failed function. To obtain an error string for system error codes, use the  FormatMessage function. For a complete list of error codes provided by the operating system, see  System Error Codes. The error codes returned by a function are not part of the Windows API specification and can vary by operating system or device driver. For this reason, we cannot provide the complete list of error codes that can be returned by each function. There are also many functions whose documentation does not include even a partial list of error codes that can be returned. Error codes are 32-bit values (bit 31 is the most significant bit). Bit 29 is reserved for application-defined error codes; no system error code has this bit set. If you are defining an error code for your application, set this bit to one. That indicates that the error code has been defined by an application, and ensures that your error code does not conflict with any error codes defined by the system. To convert a system error into an HRESULT value, use the  HRESULT_FROM_WIN32 macro. For an example, see  Retrieving the Last-Error Code. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Error Handling",
+    "name": "GetLastError",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the error mode for the calling thread.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "The process error mode. This function returns one of the following values.  ",
+    "remarks": "A thread inherits the error mode of the process in which it is running. To change the error mode for the thread, use the SetThreadErrorMode function. ",
+    "return_type": "DWORD",
+    "category": "Error Handling",
+    "name": "GetThreadErrorMode",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Plays a waveform sound. The waveform sound for each sound type is identified by an entry in the      registry.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinUser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. ",
+    "remarks": "After queuing the sound, the MessageBeep function      returns control to the calling function and plays the sound asynchronously. If it cannot play the specified alert sound,      MessageBeep attempts to play the system default sound. If      it cannot play the system default sound, the function produces a standard beep sound through the computer      speaker. The user can disable the warning beep by using the Sound control panel application. Note  To send a beep to a remote client, use the Beep function.       The Beep function is redirected to the client, whereas       MessageBeep is not. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Error Handling",
+    "name": "MessageBeep",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uType",
+        "description": "The sound to be played. The sounds are set by the user through the Sound control panel application, and then         stored in the registry. This parameter can be one of the following values.  ValueMeaning  0xFFFFFFFF  A simple beep. If the sound card is not available, the sound is generated using the speaker.    MB_ICONASTERISK 0x00000040L   See MB_ICONINFORMATION.    MB_ICONEXCLAMATION 0x00000030L   See MB_ICONWARNING.    MB_ICONERROR 0x00000010L   The sound specified as the Windows Critical Stop sound.    MB_ICONHAND 0x00000010L   See MB_ICONERROR.    MB_ICONINFORMATION 0x00000040L   The sound specified as the Windows Asterisk sound.    MB_ICONQUESTION 0x00000020L   The sound specified as the Windows Question sound.    MB_ICONSTOP 0x00000010L   See MB_ICONERROR.    MB_ICONWARNING 0x00000030L   The sound specified as the Windows Exclamation sound.    MB_OK 0x00000000L   The sound specified as the Windows Default Beep sound."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Searches the active function tables for an entry that corresponds to the specified PC     value.",
+    "library": "Kernel32.lib",
+    "min_server": "",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "If there is no entry in the function table for the specified PC, the function returns        NULL. Otherwise, the function returns the address of the function table entry that        corresponds to the specified PC. This function is declared as follows: This function is declared as follows: ",
+    "remarks": "",
+    "return_type": "PVOID WINAPI",
+    "category": "Error Handling",
+    "name": "RtlLookupFunctionEntry",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONGLONG",
+        "name": "ControlPc",
+        "description": "The virtual address of an instruction bundle within the function."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONGLONG",
+        "name": "ImageBase",
+        "description": "The base address of module to which the function belongs."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONGLONG",
+        "name": "TargetGp",
+        "description": "The global pointer value of the module. This parameter has a different declaration on x64 and ARM systems. For more information, see x64 Definition          and ARM Definition."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 1,
+    "description": "Converts the specified NTSTATUS code to its equivalent system error code.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winternl.h",
+    "return_value": "The function returns the corresponding system error code. ",
+    "remarks": "There is no function that provides the inverse functionality of RtlNtStatusToDosError, which would convert a system error code to its corresponding NTSTATUS code. ERROR_MR_MID_NOT_FOUND is returned when the specified NTSTATUS code does not have a corresponding system error code. This function has no associated import library. You must use the LoadLibrary and GetProcAddress functions to dynamically link to Ntdll.dll. ",
+    "return_type": "ULONG WINAPI",
+    "category": "Error Handling",
+    "name": "RtlNtStatusToDosError",
+    "is_callback": 0,
+    "dll": "Ntdll.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "NTSTATUS",
+        "name": "Status",
+        "description": "The NTSTATUS code to be converted."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the base address of the image that contains the specified PC value.",
+    "library": "Kernel32.lib",
+    "min_server": "",
+    "header": "WinNT.h",
+    "return_value": "If the PC value is found, the function returns the base address of the image that contains the PC value. If no image contains the PC value, the function returns NULL. ",
+    "remarks": "",
+    "return_type": "PVOID WINAPI",
+    "category": "Error Handling",
+    "name": "RtlPcToFileHeader",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "PcValue",
+        "description": "The PC value. The function searches all modules mapped into the address space of the calling process for a module that contains this value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "*BaseOfImage",
+        "description": "The base address of the image containing the PC value. This value must be added to any relative addresses in the headers to locate the image."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 4,
+    "description": "Initiates an unwind of procedure call frames.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void WINAPI",
+    "category": "Error Handling",
+    "name": "RtlUnwind",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "TargetFrame",
+        "description": "A pointer to the call frame that is the target of the unwind. If this parameter is        NULL, the function performs an exit unwind."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "TargetIp",
+        "description": "The continuation address of the unwind. This parameter is ignored if TargetFrame        is NULL."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PEXCEPTION_RECORD",
+        "name": "ExceptionRecord",
+        "description": "A pointer to an EXCEPTION_RECORD        structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "ReturnValue",
+        "description": "A value to be placed in the integer function return register before continuing execution."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Initiates an unwind of     procedure call frames.",
+    "library": "Kernel32.lib",
+    "min_server": "",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The FRAME_POINTERS structure is defined as follows: ",
+    "return_type": "void WINAPI",
+    "category": "Error Handling",
+    "name": "RtlUnwind2",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "TargetFrame",
+        "description": "A pointer to the call frame that is the target of the unwind. If this parameter is        NULL, the function performs an exit unwind."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "TargetIp",
+        "description": "The continuation address of the unwind. This parameter is ignored if TargetFrame        is NULL."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PEXCEPTION_RECORD",
+        "name": "ExceptionRecord",
+        "description": "A pointer to an EXCEPTION_RECORD        structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "ReturnValue",
+        "description": "A value to be placed in the integer function return register before continuing execution."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCONTEXT",
+        "name": "OriginalContext",
+        "description": "A pointer to a CONTEXT structure that stores context       during the unwind operation."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 6,
+    "description": "Initiates an unwind of     procedure call frames.",
+    "library": "Kernel32.lib",
+    "min_server": "",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The FRAME_POINTERS structure is defined as follows: ",
+    "return_type": "void WINAPI",
+    "category": "Error Handling",
+    "name": "RtlUnwindEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "TargetFrame",
+        "description": "A pointer to the call frame that is the target of the unwind. If this parameter is NULL, the function        performs an exit unwind."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "TargetIp",
+        "description": "The continuation address of the unwind. This parameter is ignored if TargetFrame is        NULL."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PEXCEPTION_RECORD",
+        "name": "ExceptionRecord",
+        "description": "A pointer to an EXCEPTION_RECORD structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "ReturnValue",
+        "description": "A value to be placed in the integer function return register before continuing execution."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCONTEXT",
+        "name": "OriginalContext",
+        "description": "A pointer to a CONTEXT structure that stores context        during the unwind operation."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PUNWIND_HISTORY_TABLE",
+        "name": "HistoryTable",
+        "description": "A pointer to the unwind history table. This structure is processor specific. For definitions of this        structure, see Winternl.h."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 8,
+    "description": "Retrieves     the invocation context of the function that precedes the specified function context.",
+    "library": "Kernel32.lib",
+    "min_server": "",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "This function returns a pointer to an EXCEPTION_ROUTINE callback         function. The PEXCEPTION_ROUTINE callback function is defined as follows: This function is defined as follows: The KNONVOLATILE_CONTEXT_POINTERS structure is defined as follows: This function is defined as follows: The KNONVOLATILE_CONTEXT_POINTERS structure is defined as follows: This function is not implemented on X86 ",
+    "remarks": "The complete list of epilogue markers for x64 is as follows: ",
+    "return_type": "PEXCEPTION_ROUTINE WINAPI",
+    "category": "Error Handling",
+    "name": "RtlVirtualUnwind",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "_In_",
+        "name": "HandlerType",
+        "description": "The handler type. This parameter can be one of the following values. This parameter is only present on x64.  ValueMeaning  UNW_FLAG_NHANDLER 0x0   The function has no handler.   UNW_FLAG_EHANDLER 0x1   The function has an exception handler that should be called.   UNW_FLAG_UHANDLER 0x2   The function has a termination handler that should be called when unwinding an exception.   UNW_FLAG_CHAININFO 0x4   The FunctionEntry member is the contents of a previous function table entry."
+      },
+      {
+        "in_out": "",
+        "type": "_In_",
+        "name": "ImageBase",
+        "description": "The base address of the module to which the function belongs."
+      },
+      {
+        "in_out": "",
+        "type": "_In_",
+        "name": "ControlPC",
+        "description": "The virtual address where control left the specified function."
+      },
+      {
+        "in_out": "",
+        "type": "_In_",
+        "name": "FunctionEntry",
+        "description": "The address of the function table entry for the specified function. To obtain the function table entry, call        the RtlLookupFunctionEntry function."
+      },
+      {
+        "in_out": "",
+        "type": "_Inout_",
+        "name": "ContextRecord",
+        "description": "A pointer to a CONTEXT structure that represents the        context of the previous frame."
+      },
+      {
+        "in_out": "",
+        "type": "_Out_",
+        "name": "InFunction",
+        "description": "The location of the PC. If this parameter is 0, the PC is in the prologue, epilogue, or a null frame region         of the function. If this parameter is 1, the PC is in the body of the function. This parameter is not present on x64."
+      },
+      {
+        "in_out": "",
+        "type": "_Out_",
+        "name": "EstablisherFrame",
+        "description": "A pointer to a FRAME_POINTERS structure that receives the establisher frame         pointer value. The real frame pointer is defined only if InFunction is 1. This parameter is of type PULONG64 on x64."
+      },
+      {
+        "in_out": "",
+        "type": "_Inout_opt_",
+        "name": "ContextPointers",
+        "description": "An optional pointer to a context pointers structure."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 1,
+    "description": "Controls whether the system will handle the specified types of serious errors or whether the process will handle them.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "The return value is the previous state of the error-mode bit flags. ",
+    "remarks": "Each process has an associated error mode that indicates to the system how the application is going to respond to serious errors. A child process inherits the error mode of its parent process. To retrieve the process error mode, use the GetErrorMode function. Because the error mode is set for the entire process, you must ensure that multi-threaded applications do not set different error-mode flags. Doing so can lead to inconsistent error handling. The system does not make alignment faults visible to an application on all processor architectures. Therefore, specifying SEM_NOALIGNMENTFAULTEXCEPT is not an error on such architectures, but the system is free to silently ignore the request. This means that code sequences such as the following are not always valid on x86 computers: Itanium:  An application must explicitly call  SetErrorMode with SEM_NOALIGNMENTFAULTEXCEPT to have the system automatically fix alignment faults. The default setting is for the system to make alignment faults visible to an application. Visual Studio 2005:  When declaring a pointer to a structure that may not have aligned data, you can use the __unaligned keyword to indicate that the type must be read one byte at a time. For more information, see Windows Data Alignment. Windows 7: Callers should favor SetThreadErrorMode over SetErrorMode since it is less disruptive to the normal behavior of the system. ",
+    "return_type": "UINT WINAPI",
+    "category": "Error Handling",
+    "name": "SetErrorMode",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uMode",
+        "description": "The process error mode. This parameter can be one or more of the following values.  ValueMeaning   0   Use the system default, which is to display all error dialog boxes.   SEM_FAILCRITICALERRORS 0x0001   The system does not display the critical-error-handler message box. Instead, the system sends the error to the calling process. Best practice is  that all applications call the process-wide SetErrorMode function with a parameter of SEM_FAILCRITICALERRORS at startup.  This is to prevent error mode dialogs from hanging the application.   SEM_NOALIGNMENTFAULTEXCEPT 0x0004   The system automatically fixes memory alignment faults and makes them invisible to the application. It does this for the calling process and any descendant processes. This feature is only supported by certain processor architectures. For more information, see the Remarks section. \t\t\t\t\t\t\t\t After this value is set for a process, subsequent attempts to clear the value are ignored.   SEM_NOGPFAULTERRORBOX 0x0002   The system does not display the Windows Error Reporting dialog.   SEM_NOOPENFILEERRORBOX 0x8000   The OpenFile function does not display a message box when it fails to find a file. Instead, the error is returned to the caller. This error mode overrides the OF_PROMPT flag."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the last-error code for the calling thread.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The last-error code is kept in thread local storage so that multiple threads do not overwrite each other's values. Most functions call  SetLastError or SetLastErrorEx only when they fail. However, some system functions call  SetLastError or SetLastErrorEx under conditions of success; those cases are noted in each function's documentation. Applications can optionally retrieve the value set by this function by using the  GetLastError function immediately after a function fails. Error codes are 32-bit values (bit 31 is the most significant bit). Bit 29 is reserved for application-defined error codes; no system error code has this bit set. If you are defining an error code for your application, set this bit to indicate that the error code has been defined by your application and to ensure that your error code does not conflict with any system-defined error codes. ",
+    "return_type": "void WINAPI",
+    "category": "Error Handling",
+    "name": "SetLastError",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwErrCode",
+        "description": "The last-error code for the thread."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets the last-error code.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The last-error code is kept in thread local storage so that multiple threads do not overwrite each other's values. Most functions call  SetLastError or SetLastErrorEx only when they fail. However, some system functions call  SetLastError or SetLastErrorEx under conditions of success; those cases are noted in each function's documentation. Applications can optionally retrieve the value set by this function by using the  GetLastError function immediately after a function fails. Error codes are 32-bit values (bit 31 is the most significant bit). Bit 29 is reserved for application-defined error codes; no system error code has this bit set. If you are defining an error code for your application, set this bit to indicate that the error code has been defined by the application and to ensure that your error code does not conflict with any system-defined error codes. ",
+    "return_type": "void WINAPI",
+    "category": "Error Handling",
+    "name": "SetLastErrorEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwErrCode",
+        "description": "The last-error code for the thread."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwType",
+        "description": "This parameter is ignored."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Controls whether the system will handle the specified types of serious errors or whether the calling thread will handle them.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "Each process has an associated error mode that indicates to the system how the application is going to respond to serious errors. A thread inherits the error mode of the process in which it is running. To retrieve the process error mode, use the GetErrorMode function. To retrieve the error mode of the calling thread, use the GetThreadErrorMode function. ",
+    "return_type": "BOOL",
+    "category": "Error Handling",
+    "name": "SetThreadErrorMode",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNewMode",
+        "description": "The thread error mode. This parameter can be one or more of the following values.  ValueMeaning   0   Use the system default, which is to display all error dialog boxes.   SEM_FAILCRITICALERRORS 0x0001   The system does not display the critical-error-handler message box. Instead, the system sends the error to the calling thread. Best practice is  that all applications call the process-wide SetErrorMode function with a parameter of SEM_FAILCRITICALERRORS at startup.  This is to prevent error mode dialogs from hanging the application.   SEM_NOGPFAULTERRORBOX 0x0002   The system does not display the Windows Error Reporting dialog.   SEM_NOOPENFILEERRORBOX 0x8000   The OpenFile function does not display a message box when it fails to find a file. Instead, the error is returned to the caller. This error mode overrides the OF_PROMPT flag."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpOldMode",
+        "description": "If the function succeeds, this parameter is set to the thread's previous error mode. This parameter can be NULL."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  }
+]
+

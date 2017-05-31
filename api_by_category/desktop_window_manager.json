@@ -1,0 +1,914 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "This function is deprecated and only returns DWM_E_COMPOSITIONDISABLED in Windows 7 and later. It may be removed in future versions of Windows.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmAttachMilContent",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": ""
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Default window procedure for Desktop Window Manager (DWM) hit testing within the non-client area.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "TRUE if DwmDefWindowProc handled the message; otherwise, FALSE. ",
+    "remarks": "When creating custom frames that include the standard caption buttons, WM_NCHITTEST and other non-client hit test messages should first be passed to the DwmDefWindowProc function. This enables the DWM to provide hit testing for the captions buttons. If DwmDefWindowProc does not handle the non-client hit test messages, further processing of these messages might be neccessary. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmDefWindowProc",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "A handle to the window procedure that received the message."
+      },
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "msg",
+        "description": "The message."
+      },
+      {
+        "in_out": "",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Specifies additional message information. The content of this parameter depends on the value of the msg parameter."
+      },
+      {
+        "in_out": "",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Specifies additional message information. The content of this parameter depends on the value of the msg parameter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LRESULT",
+        "name": "*plResult",
+        "description": "A pointer to an LRESULT value that, when this method returns successfully,receives the result of the hit test."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "This function is deprecated and only returns DWM_E_COMPOSITIONDISABLED in Windows 7 and later. It may be removed in future versions of Windows.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmDetachMilContent",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": ""
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Enables the blur effect on a specified window.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Enabling blur by setting the fEnable member of the DWM_BLURBEHIND structure to TRUE. This results in subsequent compositions of the window blurring the content behind it. This function should be called immediately before a BeginPaint call to ensure prompt application of the effect. The alpha values in the window are honored and the rendering atop the blur will use these alpha values. It is the application's responsibility to ensure that the alpha values of all pixels in the window are correct. Some Windows Graphics Device Interface (GDI) operations do not preserve alpha values, so care must be taken when presenting child windows because the alpha values they contribute are unpredictable. The region specified within the DWM_BLURBEHIND structure is owned by the caller. It is the caller's responsibility to free the region, and they can do so as soon as the function call is completed. This function can only be called on top-level windows. An error occurs when this function is called on other window types. This function must be called whenver Desktop Window Manager (DWM) composition is toggled. Handle the WM_DWMCOMPOSITIONCHANGED message for composition change notification. The following example demonstrates how to apply the blur behind the entire window. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmEnableBlurBehindWindow",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "The handle to the window on which the blur behind data is applied."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWM_BLURBEHIND",
+        "name": "*pBlurBehind",
+        "description": "A pointer to a DWM_BLURBEHIND structure that provides blur behind data."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Enables or disables Desktop Window Manager (DWM) composition.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Disabling DWM composition disables it for the entire desktop. DWM composition will be automatically enabled when all processes that have disabled composition have called DwmEnableComposition to enable it or have been terminated. The WM_DWMCOMPOSITIONCHANGED notification is sent whenever DWM composition is enabled or disabled. The following code example disables DWM composition. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmEnableComposition",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "uCompositionAction",
+        "description": "DWM_EC_ENABLECOMPOSITION to enable DWM composition; DWM_EC_DISABLECOMPOSITION to disable composition.                          Note  As of Windows 8, calling this function with DWM_EC_DISABLECOMPOSITION has no effect. However, the function will still return a success code."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Notifies the Desktop Window Manager (DWM) to opt in to or out of Multimedia Class Schedule Service (MMCSS) scheduling while the calling process is alive.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "DWM will be scheduled by the MMCSS as long as any process that called DwmEnableMMCSS to enable MMCSS is active and has not previously called DwmEnableMMCSS to disable MMCSS. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmEnableMMCSS",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "fEnableMMCSS",
+        "description": "TRUE to instruct DWM to participate in MMCSS scheduling; FALSE to opt out or end participation in MMCSS scheduling."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Extends the window frame into the client area.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This function must be called whenever Desktop Window Manager (DWM) composition is toggled. Handle the WM_DWMCOMPOSITIONCHANGED message for composition change notification. Use negative margin values to create the \"sheet of glass\" effect where the client area is rendered as a solid surface with no window border. The following sample demonstrates how to extend the bottom margin, creating a large bottom frame. The following sample demonstrates the \"sheet of glass\" effect where the client area is rendered without a window border. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmExtendFrameIntoClientArea",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "The handle to the window in which the frame will be extended into the client area."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MARGINS",
+        "name": "*pMarInset",
+        "description": "A pointer to a MARGINS structure that describes the margins to use when extending the frame into the client area."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Issues a flush call that blocks the caller until the next present, when all of the Microsoft DirectX surface updates that are currently outstanding have been made. This compensates for very complex scenes or calling processes with very low priority.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "DwmFlush waits for any queued DirectX changes that were queued by the calling application to be drawn to the screen before returning. It does not flush the entire session rendering batch. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmFlush",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the current color used for Desktop Window Manager (DWM) glass composition. This value is based on the current color scheme and can be modified by the user. Applications can listen for color changes by handling the WM_DWMCOLORIZATIONCOLORCHANGED notification.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The value pointed to by pcrColorization is in an 0xAARRGGBB format. Many Microsoft Win32 APIs, such as COLORREF, use a 0x00BBGGRR format. Be careful to assure that the intended colors are used. The following example code shows a WM_DWMCOLORIZATIONCOLORCHANGED notification handle. If the colorization notification is received, this code retrieves the new color value. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmGetColorizationColor",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*pcrColorization",
+        "description": "A pointer to a value that, when this function returns successfully, receives the current color used for glass composition. The color format of the value is 0xAARRGGBB."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BOOL",
+        "name": "*pfOpaqueBlend",
+        "description": "A pointer to a value that, when this function returns successfully, indicates whether the color is an opaque blend. TRUE if the color is an opaque blend; otherwise, FALSE."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the current composition timing information for a specified window.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmGetCompositionTimingInfo",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "The handle to the window for which the composition timing information should be retrieved.                                   Starting with Windows 8.1, this parameter must be set to NULL. If this parameter is not set to NULL, DwmGetCompositionTimingInfo returns E_INVALIDARG."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWM_TIMING_INFO",
+        "name": "*pTimingInfo",
+        "description": "A pointer to a DWM_TIMING_INFO structure that, when this function returns successfully, receives the current composition timing information for the window. The cbSize member of this structure must be set before this function is called."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "This function is deprecated and only returns DWM_E_COMPOSITIONDISABLED in Windows 7 and later. It may be removed in future versions of Windows.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmGetGraphicsStreamClient",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "uIndex",
+        "description": ""
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UUID",
+        "name": "*pClientUuid",
+        "description": ""
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "This function is deprecated and only returns DWM_E_COMPOSITIONDISABLED in Windows 7 and later. It may be removed in future versions of Windows.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmGetGraphicsStreamTransformHint",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "uIndex",
+        "description": ""
+      },
+      {
+        "in_out": "_Out_",
+        "type": "MilMatrix3x2D",
+        "name": "*pTransform",
+        "description": ""
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves transport attributes.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmGetTransportAttributes",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "BOOL",
+        "name": "*pfIsRemoting",
+        "description": "A pointer to a BOOL value that indicates whether the transport supports remoting. TRUE if the transport supports remoting; otherwise, FALSE."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BOOL",
+        "name": "*pfIsConnected",
+        "description": "A pointer to a BOOL value that indicates whether the transport is connected. TRUE if the transport is connected; otherwise, FALSE."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*pDwGeneration",
+        "description": "A pointer to a DWORD that receives a generation value for the transport."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the current value of a specified attribute applied to a window.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. The following example demonstrates how to determine whether nonclient-area rendering is enabled. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmGetWindowAttribute",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "The handle to the window from which the attribute data is retrieved."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwAttribute",
+        "description": "The attribute to retrieve, specified as a DWMWINDOWATTRIBUTE value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "pvAttribute",
+        "description": "A pointer to a value that, when this function returns successfully, receives the current value of the attribute. The type of the retrieved value depends on the value of the dwAttribute parameter."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "cbAttribute",
+        "description": "The size of the DWMWINDOWATTRIBUTE value being retrieved. The size is dependent on the type of the pvAttribute parameter."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Called by an application to indicate that all previously provided iconic bitmaps from a window, both thumbnails and peek representations, should be refreshed.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Calling this function causes the Desktop Window Manager (DWM) to invalidate its current bitmaps for the window and request new bitmaps from the window when they are next needed. DwmInvalidateIconicBitmaps should not be called frequently. Doing so can lead to poor performance as new bitmaps are created and retrieved. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmInvalidateIconicBitmaps",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll;  Uxtheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "A handle to the window or tab whose bitmaps are being invalidated through this call. This window must belong to the calling process."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Obtains a value that indicates whether Desktop Window Manager (DWM) composition is enabled. Applications on machines running Windows 7 or earlier can listen for composition state changes by handling the WM_DWMCOMPOSITIONCHANGED notification.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmIsCompositionEnabled",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "BOOL",
+        "name": "*pfEnabled",
+        "description": "A pointer to a value that, when this function returns successfully, receives TRUE if DWM composition is enabled; otherwise, FALSE.                           Note  As of Windows 8, DWM composition is always enabled. If an app declares Windows 8 compatibility in their manifest, this function will receive a value of TRUE through pfEnabled. If no such manifest entry is found, Windows 8 compatibility is not assumed and this function receives a value of FALSE through pfEnabled. This is done so that older programs that interpret a value of TRUE to imply that high contrast mode is off can continue to make the correct decisions about rendering their images. (Note that this is a bad practice\u2014you should use the SystemParametersInfo function with the SPI_GETHIGHCONTRAST flag to determine the state of high contrast mode.)   For more information, see Supporting High Contrast Themes."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Changes the number of monitor refreshes through which the previous frame will be displayed.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "This function always returns S_OK, even when DWM is not running. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmModifyPreviousDxFrameDuration",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "The handle to the window for which the new duration is applied to the previous frame."
+      },
+      {
+        "in_out": "",
+        "type": "INT",
+        "name": "cRefreshes",
+        "description": "The number of refreshes to apply to the previous frame."
+      },
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "fRelative",
+        "description": "TRUE if the value given in cRefreshes is relative to the current value (added to or subtracted from it); FALSE if the value replaces the current value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the source size of the Desktop Window Manager (DWM) thumbnail.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmQueryThumbnailSourceSize",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HTHUMBNAIL",
+        "name": "hThumbnail",
+        "description": "A handle to the thumbnail to retrieve the source window size from."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PSIZE",
+        "name": "pSize",
+        "description": "A pointer to a SIZE structure that, when this function returns successfully, receives the size of the source thumbnail."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Creates a Desktop Window Manager (DWM) thumbnail relationship between the destination and source windows.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Registering a DWM thumbnail relationship will not modify desktop composition; for information about thumbnail positioning, see the documentation for the DwmUpdateThumbnailProperties function. The window designated by hwndDestination must either be the desktop window itself or be owned by the process that is calling DwmRegisterThumbnail. This is required to prevent applications from affecting the content of other applications. The thumbnail registration handle obtained by this function is not globally unique but is unique to the process. Call the DwmUnregisterThumbnail function to unregister the thumbnail. This must be done within the process that the relationship was registered in. The following example demonstrates how to register the desktop thumbnail. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmRegisterThumbnail",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwndDestination",
+        "description": "The handle to the window that will use the DWM thumbnail. Setting the destination window handle to anything other than a top-level window type will result in a return value of E_INVALIDARG."
+      },
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwndSource",
+        "description": "The handle to the window to use as the thumbnail source. Setting the source window handle to anything other than a top-level window type will result in a return value of E_INVALIDARG."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PHTHUMBNAIL",
+        "name": "phThumbnailId",
+        "description": "A pointer to a handle that, when this function returns successfully, represents the registration of the DWM thumbnail."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Notifies Desktop Window Manager (DWM) that a touch contact has been recognized as a gesture, and that DWM should draw feedback for that gesture.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "",
+    "remarks": "",
+    "return_type": " DWMAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmRenderGesture",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "GESTURE_TYPE",
+        "name": "gt",
+        "description": "The type of gesture, specified as one of the GESTURE_TYPE values."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cContacts",
+        "description": "The number of contact points."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "*pdwPointerID",
+        "description": "The pointer ID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "POINT",
+        "name": "*pPoints",
+        "description": "The points."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets the number of monitor refreshes through which to display the presented frame.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "This function always returns S_OK, even when the frame duration is not changed or DWM is not running. ",
+    "remarks": "The DWM will attempt to display the presented frame for at least the number of monitor refreshes specified. It might be impossible to display the frame for the precise number of refreshes due to the current composition rate. If the frame is presented late to the DWM or the DWM is late in composing, a frame could be displayed for fewer than the number of refreshes requested or even skipped completely. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmSetDxFrameDuration",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "The handle to the window that displays the presented frame."
+      },
+      {
+        "in_out": "",
+        "type": "INT",
+        "name": "cRefreshes",
+        "description": "The number of refreshes through which to display the presented frame."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Sets a static, iconic bitmap to display a live preview (also known as a Peek preview) of a window or tab. The taskbar can use this bitmap to show a full-sized preview of a window or tab.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "Returns S_OK if the function succeeds, or an error value otherwise. Note that because this bitmap is not cached, if the window is not being previewed when an application calls this function, the function returns a success code but the bitmap is discarded and not used. ",
+    "remarks": "A live preview (also known as a Peek preview) of a window appears when a user moves the mouse pointer over the window's thumbnail in the taskbar or gives the thumbnail focus in the ALT+TAB window. This view is a full-sized view of the window and can be a snapshot or an iconic representation. A window typically calls the DwmSetIconicLivePreviewBitmap function in response to a WM_DWMSENDICONICLIVEPREVIEWBITMAP message. The returned bitmap must not be larger than the client area of the window or frame and must have 32-bit color depth. The Desktop Window Manager (DWM) uses a copy of the bitmap, but the caller retains ownership of the original bitmap and is responsible for freeing the resources that it uses when it is no longer needed. The DWM does not keep its copy of the bitmap when the DWM stops displaying the live preview representation. To set a static, iconic bitmap to use as a live preview for the application's window, an application calls the DwmSetIconicLivePreviewBitmap function. To set this bitmap, the application must call DwmSetWindowAttribute to set window attributes for non-client rendering to  DWMWA_FORCE_ICONIC_REPRESENTATION and DWMWA_HAS_ICONIC_BITMAP,  as shown in the following code. Then, the application calls DwmSetIconicLivePreviewBitmap  to respond to the WM_DWMSENDICONICLIVEPREVIEWBITMAP message, as shown in the following code. For the complete example, see the  Customize an Iconic Thumbnail and a Live Preview Bitmap sample. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmSetIconicLivePreviewBitmap",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll;  Uxtheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "A handle to the window. This window must belong to the calling process."
+      },
+      {
+        "in_out": "",
+        "type": "HBITMAP",
+        "name": "hbmp",
+        "description": "A handle to the bitmap to represent the window that hwnd specifies."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "POINT",
+        "name": "*pptClient",
+        "description": "The offset of a tab window's client region (the content area inside the client window frame) from the host window's frame. This offset enables the tab window's contents to be drawn correctly in a live preview  when it is drawn without its frame."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwSITFlags",
+        "description": "The display options for the live preview. This parameter can be 0 or the following value.  DWM_SIT_DISPLAYFRAME (0x00000001)   0x00000001. Displays a frame around the provided bitmap."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets a static, iconic bitmap on a window or tab to use as a thumbnail representation. The taskbar can use this bitmap as a thumbnail switch target for the window or tab.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "An application typically calls the DwmSetIconicThumbnail function after it receives a WM_DWMSENDICONICTHUMBNAIL message for its window. The thumbnail should not exceed the maximum x-coordinate and y-coordinate that are specified in that message. The thumbnail must also have a 32-bit color depth. The application calls DwmInvalidateIconicBitmaps to indicate to the Desktop Window Manager (DWM) that the iconic thumbnail and live preview bitmaps are out-of-date and should be refreshed. The DWM then requests new versions from the window when they are needed. However, if the DWM bitmap cache is full, DWM will not request updated versions. The DWM uses a copy of the bitmap, but the application can release this copy at any time because of memory constraints. If the copy is released, the window is not notified, but it might receive a subsequent WM_DWMSENDICONICTHUMBNAIL request when its thumbnail is needed again. The caller retains ownership of the original bitmap and is responsible for freeing the resources that it uses when it is no longer needed. Before calling DwmSetIconicThumbnail, the application must first call the DwmSetWindowAttribute function to set the DWMWA_FORCE_ICONIC_REPRESENTATION and DWMWA_HAS_ICONIC_BITMAP attributes, as shown in the following example. Next, the application calls the DwmSetIconicThumbnail function in response to a WM_DWMSENDICONICTHUMBNAIL message, as shown in the following example. For the complete example code, see the Customize an Iconic Thumbnail and a Live Preview Bitmap sample. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmSetIconicThumbnail",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll;  Uxtheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "A handle to the window or tab. This window must belong to the calling process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HBITMAP",
+        "name": "hbmp",
+        "description": "A handle to the bitmap to represent the window that hwnd specifies."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwSITFlags",
+        "description": "The display options for the thumbnail. One of the following values:  0 (0x00000000)   No frame is displayed around the provided thumbnail.  DWM_SIT_DISPLAYFRAME (0x00000001)   Displays a frame around the provided thumbnail."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets the present parameters for frame composition.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "This function always returns S_OK. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmSetPresentParameters",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "The handle to the window where the present parameters are applied."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "DWM_PRESENT_PARAMETERS",
+        "name": "*pPresentParams",
+        "description": "A pointer to a DWM_PRESENT_PARAMETERS structure that contains DWM video frame parameters for frame composition."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Sets the value of non-client rendering attributes for a window.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Calling this function with the dwAttribute set to DWMWA_NCRENDERING_ENABLED does not set the attribute. DWMWA_NCRENDERING_ENABLED is a \"get\" attribute and the resulting call is equivalent to a DwmGetWindowAttribute call. To enable or disable non-client rendering, the DWMWA_NCRENDERING_POLICY attribute must set to the desired value. If Desktop Composition has been disabled, this function returns DWM_E_COMPOSITIONDISABLED. The following example disables nonclient-area rendering, causing any previous calls to DwmEnableBlurBehindWindow or DwmExtendFrameIntoClientArea to be disabled. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmSetWindowAttribute",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll;  Uxtheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "The handle to the window that will receive the attributes."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwAttribute",
+        "description": "A single DWMWINDOWATTRIBUTE flag to apply to the window. This parameter specifies the attribute and the pvAttribute parameter points to the value of that attribute."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCVOID",
+        "name": "pvAttribute",
+        "description": "A pointer to the value of the attribute specified in the dwAttribute parameter. Different DWMWINDOWATTRIBUTE flags require different value types."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "cbAttribute",
+        "description": "The size, in bytes, of the value type pointed to by the pvAttribute parameter."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Called by an app or framework to specify the visual feedback type to draw in response to a particular touch or pen contact.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If dwPointerID does not match that of a contact currently present on the screen, this function returns E_INVALIDARG; otherwise, it returns S_OK. ",
+    "remarks": "It is safe to call this function on the UI thread. ",
+    "return_type": " DWMAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmShowContact",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwPointerID",
+        "description": "The pointer ID of the contact. Each touch or pen contact is given a unique ID when it is detected."
+      },
+      {
+        "in_out": "",
+        "type": "DWM_SHOWCONTACT",
+        "name": "eShowContact",
+        "description": "One or more of the following DWM_SHOWCONTACT visualizations that DWM should show for this contact.  DWMSC_NONE (0x00000000)   No visual feedback should be shown in reponse to the contact.  DWMSC_DOWN (0x00000001)   Show the \"contact down\" animation, such as would be used in a button press.  DWMSC_UP (0x00000002)   Show the \"contact up\" animation, such as would be used in a button release.  DWMSC_DRAG (0x00000004)   Show the \"contact drag\" animation when the UI element that was selected by the touch or pen is dragged.  DWMSC_HOLD (0x00000008)   Show a visual while the contact is held down, such as holding down a button.  DWMSC_PENBARREL (0x00000010)   Show the pen barrel visual when the pen barrel button is pressed.  DWMSC_ALL (0xFFFFFFFF)   Show any of the animations if called for."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Enables the graphical feedback of touch and drag interactions to the user.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "",
+    "remarks": "",
+    "return_type": " DWMAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmTetherContact",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwPointerID",
+        "description": "The pointer ID."
+      },
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "fEnable",
+        "description": "Indicates whether the contact is enabled."
+      },
+      {
+        "in_out": "",
+        "type": "POINT",
+        "name": "ptTether",
+        "description": "The tether."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Coordinates the animations of tool windows with the Desktop Window Manager (DWM).",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "",
+    "remarks": "",
+    "return_type": " DWMAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmTransitionOwnedWindow",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Handle to the window."
+      },
+      {
+        "in_out": "",
+        "type": "DWMTRANSITION_OWNEDWINDOW_TARGET",
+        "name": "target",
+        "description": "The target."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Removes a Desktop Window Manager (DWM) thumbnail relationship created by the DwmRegisterThumbnail function.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Unregistering DWM thumbnail relationships must be done within the process that registered the relationships. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmUnregisterThumbnail",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HTHUMBNAIL",
+        "name": "hThumbnailId",
+        "description": "The handle to the thumbnail relationship to be removed. Null or non-existent handles will result in a return value of E_INVALIDARG."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Updates the properties for a Desktop Window Manager (DWM) thumbnail.",
+    "library": "Dwmapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Dwmapi.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Thumbnail relationships created by the DwmRegisterThumbnail function will not be rendered to the destination window until this function is called. Subsequent calls will update the thumbnail according to the provided properties. The following example demonstrates how to register and display the desktop thumbnail. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Desktop Window Manager (DWM)",
+    "name": "DwmUpdateThumbnailProperties",
+    "is_callback": 0,
+    "dll": "Dwmapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HTHUMBNAIL",
+        "name": "hThumbnailId",
+        "description": "The handle to the DWM thumbnail to be updated. Null or invalid thumbnails, as well as thumbnails owned by other processes will result in a return value of E_INVALIDARG."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWM_THUMBNAIL_PROPERTIES",
+        "name": "*ptnProperties",
+        "description": "A pointer to a DWM_THUMBNAIL_PROPERTIES structure that contains the new thumbnail properties."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

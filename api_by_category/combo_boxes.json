@@ -1,0 +1,120 @@
+[
+  {
+    "n_arguments": 5,
+    "description": "Replaces the contents of a combo box with the names of the subdirectories and files in a specified directory. You can filter the list of names by specifying a set of file attributes. The list of names can include mapped drive letters.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. For example, if the string specified by lpPathSpec is not a valid path, the function fails. To get extended error information, call GetLastError. ",
+    "remarks": "If lpPathSpec specifies a directory, DlgDirListComboBox changes the current directory to the specified directory before filling the combo box. The text of the static control identified by the\tnIDStaticPath parameter is set to the name of the new current directory. DlgDirListComboBox sends the CB_RESETCONTENT and CB_DIR messages to the combo box. Microsoft Windows NT 4.0 and later: If uFiletype includes the DDL_DIRECTORY flag and lpPathSpec specifies a first-level directory, such as C:\\TEMP, the combo box will always include a \"..\" entry for the root directory. This is true even if the root directory has hidden or system attributes and the DDL_HIDDEN and DDL_SYSTEM flags are not specified. The root directory of an NTFS volume has hidden and system attributes. Security Warning:  Using this function incorrectly might compromise the security of your program. Incorrect use of this function includes having lpPathSpec indicate a non-writeable buffer, or a buffer without a null-termination. You should review the Security Considerations: Microsoft Windows Controls before continuing. Microsoft Windows NT 4.0 and later: The list displays long file names, if any. Windows 95 or later: The list displays short file names (the 8.3 form). You can use the SHGetFileInfo or GetFullPathName functions to get the corresponding long file name. Windows 95 or later: DlgDirListComboBoxW is supported by the Microsoft Layer for Unicode. To use this, you must add certain files to your application, as outlined in Microsoft Layer for Unicode on Windows Me/98/95 Systems. ",
+    "return_type": "int",
+    "category": "Combo Boxes",
+    "name": "DlgDirListComboBox",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box that contains the combo box."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPTSTR",
+        "name": "lpPathSpec",
+        "description": "Type: LPTSTR A pointer to a buffer containing a null-terminated string that specifies an absolute path, relative path, or file name. An absolute path can begin with a drive letter (for example, d:\\) or a UNC name (for example, \\\\machinename\\sharename).                                The function splits the string into a directory and a file name. The function searches the directory for names that match the file name. If the string does not specify a directory, the function searches the current directory.  If the string includes a file name, the file name must contain at least one wildcard character (? or *). If the string does not include a file name, the function behaves as if you had specified the asterisk wildcard character (*) as the file name. All names in the specified directory that match the file name and have the attributes specified by the uFiletype parameter are added to the list displayed in the combo box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIDComboBox",
+        "description": "Type: int The identifier of a combo box in the hDlg dialog box. If this parameter is zero, DlgDirListComboBox does not try to fill a combo box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIDStaticPath",
+        "description": "Type: int The identifier of a static control in the hDlg dialog box. DlgDirListComboBox sets the text of this control to display the current drive and directory. This parameter can be zero if you do not want to display the current drive and directory."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uFiletype",
+        "description": "Type: UINT A set of bit flags that specifies the attributes of the files or directories to be added to the combo box. This parameter can be a combination of the following values.   ValueMeaning  DDL_ARCHIVE   Includes archived files.   DDL_DIRECTORY   Includes subdirectories, which are enclosed in square brackets ([ ]).   DDL_DRIVES   All mapped drives are added to the list. Drives are listed in the form [-x-], where x is the drive letter.   DDL_EXCLUSIVE   Includes only files with the specified attributes. By default, read/write files are listed even if DDL_READWRITE is not specified.   DDL_HIDDEN   Includes hidden files.   DDL_READONLY   Includes read-only files.   DDL_READWRITE   Includes read/write files with no additional attributes. This is the default setting.   DDL_SYSTEM   Includes system files.   DDL_POSTMSGS   If this flag is set, DlgDirListComboBox uses the PostMessage function to send messages to the combo box. If this flag is not set, DlgDirListComboBox uses the SendMessage function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the current selection from a combo box filled by using the DlgDirListComboBox function. The selection is interpreted as a drive letter, a file, or a directory name.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the current selection is a directory name, the return value is nonzero. If the current selection is not a directory name, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If the current selection specifies a directory name or drive letter, the DlgDirSelectComboBoxEx function removes the enclosing square brackets (and hyphens for drive letters) so the name or letter is ready to be inserted into a new path or file name. If there is no selection, the contents of the buffer pointed to by lpString do not change. The DlgDirSelectComboBoxEx function does not allow more than one file name to be returned from a combo box. If the string is as long or longer than the buffer, the buffer contains the truncated string with a terminating null character. DlgDirSelectComboBoxEx sends CB_GETCURSEL and CB_GETLBTEXT messages to the combo box. You can use this function with all three types of combo boxes (CBS_SIMPLE, CBS_DROPDOWN, and CBS_DROPDOWNLIST). Security Warning:  Improper use of this function can cause problems for your application. For instance, the nCount parameter should be set properly for both ANSI and Unicode versions. Failure to do so could lead to a buffer overflow. You should review Security Considerations: Microsoft Windows Controls before continuing. Windows 95 or later: DlgDirSelectComboBoxExW is supported by the Microsoft Layer for Unicode (MSLU). To use this, you must add certain files to your application, as outlined in Microsoft Layer for Unicode on Windows Me/98/95 Systems. ",
+    "return_type": "BOOL",
+    "category": "Combo Boxes",
+    "name": "DlgDirSelectComboBoxEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box that contains the combo box."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpString",
+        "description": "Type: LPTSTR A pointer to the buffer that receives the selected path."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCount",
+        "description": "Type: int The length, in characters, of the buffer pointed to by the lpString parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIDComboBox",
+        "description": "Type: int The integer identifier of the combo box control in the dialog box."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves information about the specified combo box.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The CB_GETCOMBOBOXINFO message is equivalent to this function. The following example code retrieves information about the combo box specified by the window handle. ",
+    "return_type": "BOOL",
+    "category": "Combo Boxes",
+    "name": "GetComboBoxInfo",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndCombo",
+        "description": "Type: HWND A handle to the combo box."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PCOMBOBOXINFO",
+        "name": "pcbi",
+        "description": "Type: PCOMBOBOXINFO A pointer to a COMBOBOXINFO structure that receives the information. You must set COMBOBOXINFO.cbSize before calling this function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

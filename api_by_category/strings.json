@@ -1,0 +1,740 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Converts a character string or a single character to lowercase. If the operand is a character string, the function converts the characters in place.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: LPTSTR If the operand is a character string, the function returns a pointer to the converted string. Because the string is converted in place, the return value is equal to  \t\t\t\t\t\tlpsz. If the operand is a single character, the return value is a 32-bit value whose high-order word is zero, and low-order word contains the converted character. There is no indication of success or failure. Failure is rare. There is no extended error information for this function; do not call  \t\t\t\t\t\tGetLastError. ",
+    "remarks": "Note that CharLower always maps uppercase I to lowercase I (\"i\"), even when the current language is Turkish or Azeri. If you need a function that is linguistically sensitive in this respect, call LCMapString. Conversion to Unicode in the ANSI version of the function is done with the system default locale in all cases. ",
+    "return_type": "LPTSTR WINAPI",
+    "category": "Strings",
+    "name": "CharLower",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPTSTR",
+        "name": "lpsz",
+        "description": "Type: LPTSTR A null-terminated string, or specifies a single character. If the high-order word of this parameter is zero, the low-order word must contain a single character to be converted."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Converts uppercase characters in a buffer to lowercase characters. The function converts the characters in place.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: DWORD The return value is the number of  \t\t\t\t\t\tcharacters processed. For example, if CharLowerBuff(\"Acme of Operating Systems\", 10) succeeds, the return value is 10. ",
+    "remarks": "Note that CharLowerBuff always maps uppercase I to lowercase I  (\"i\"), even when the current language is Turkish or Azeri. If you need a function that is linguistically sensitive in this respect, call LCMapSting. Conversion to Unicode in the ANSI version of the function is done with the system default locale in all cases. For an example, see \"Creating a Spell Dialog Box\" in Using Combo Boxes. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Strings",
+    "name": "CharLowerBuff",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPTSTR",
+        "name": "lpsz",
+        "description": "Type: LPTSTR A buffer containing one or more characters to be processed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cchLength",
+        "description": "Type: DWORD The size, in  \t\t\t\t\tcharacters, of the buffer pointed to by  \t\t\t\t\tlpsz. The function examines each character, and converts uppercase characters to lowercase characters. The function examines the number of  \t\t\t\t\tcharacters indicated by  \t\t\t\t\tcchLength, even if one or more characters are null characters."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves a pointer to the next character in a string. This function can handle strings consisting of either single- or multi-byte characters.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: LPTSTR The return value is a pointer to the next character in the string, or to the terminating null character if at the end of the string. If  \t\t\t\t\t\tlpsz points to the terminating null character, the return value is equal to  \t\t\t\t\t\tlpsz. ",
+    "remarks": "When called as an ANSI function, CharNext uses the system default code-page, whereas CharNextExA specifies a code-page to use. This function works with default \"user\" expectations of characters when dealing with diacritics. For example: A string that contains U+0061 U+030a \"LATIN SMALL LETTER A\" + COMBINING RING ABOVE\" \u00e2\u0080\u0094 which looks like \"\u00c3\u00a5\", will advance two code points, not one. A string that contains U+0061 U+0301 U+0302 U+0303 U+0304 \u00e2\u0080\u0094 which looks like \"a\u00b4^~\u00af\", will advance five code points, not one, and so on. ",
+    "return_type": "LPTSTR WINAPI",
+    "category": "Strings",
+    "name": "CharNext",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpsz",
+        "description": "Type: LPCTSTR A character in a null-terminated string."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the pointer to the next character in a string. This function can handle strings consisting of either single- or multi-byte characters.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: LPSTR The return value is a pointer to the next character in the string, or to the terminating null character if at the end of the string. If  \t\t\t\t\t\tlpCurrentChar points to the terminating null character, the return value is equal to  \t\t\t\t\t\tlpCurrentChar. ",
+    "remarks": "CharNextExA specifies a code-page to use, whereas CharNext (if called as an ANSI function) uses the system default code-page. ",
+    "return_type": "LPSTR WINAPI",
+    "category": "Strings",
+    "name": "CharNextExA",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "CodePage",
+        "description": "Type: WORD The identifier of the code page to use to check lead-byte ranges. Can be one of the code-page values provided in Code Page Identifiers, or one of the following predefined values.   ValueMeaning  CP_ACP 0   Use system default ANSI code page.   CP_MACCP 2    Use the system default Macintosh code page.   CP_OEMCP 1   Use system default OEM code page."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCSTR",
+        "name": "lpCurrentChar",
+        "description": "Type: LPCSTR A character in a null-terminated string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD This parameter is reserved and must be 0."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves a pointer to the preceding character in a string. This function can handle strings consisting of either single- or multi-byte characters.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: LPTSTR The return value is a pointer to the preceding character in the string, or to the first character in the string if the  \t\t\t\t\t\tlpszCurrent parameter equals the  \t\t\t\t\t\tlpszStart parameter. ",
+    "remarks": "When called as an ANSI function, CharPrev uses the system default code-page, whereas CharPrevExA specifies a code-page to use. This function works with default \"user\" expectations of characters when dealing with diacritics. For example: A string that contains U+0061 U+030a \"LATIN SMALL LETTER A\" + COMBINING RING ABOVE\" \u00e2\u0080\u0094 which looks like \"\u00c3\u00a5\", will advance two code points, not one. A string that contains U+0061 U+0301 U+0302 U+0303 U+0304 \u00e2\u0080\u0094 which looks like \"a\u00b4^~\u00af\", will advance five code points, not one, and so on. ",
+    "return_type": "LPTSTR WINAPI",
+    "category": "Strings",
+    "name": "CharPrev",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszStart",
+        "description": "Type: LPCTSTR The beginning of the string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszCurrent",
+        "description": "Type: LPCTSTR A character in a null-terminated string."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the pointer to the preceding character in a string. This function can handle strings consisting of either single- or multi-byte characters.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: LPSTR The return value is a pointer to the preceding character in the string, or to the first character in the string if the  \t\t\t\t\t\tlpCurrentChar parameter equals the  \t\t\t\t\t\tlpStart parameter. ",
+    "remarks": "CharPrevExA specifies a code-page to use, whereas CharPrev (if called as an ANSI function) uses the system default code-page. ",
+    "return_type": "LPSTR WINAPI",
+    "category": "Strings",
+    "name": "CharPrevExA",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "CodePage",
+        "description": "Type: WORD The identifier of the code page to use to check lead-byte ranges. Can be one of the code-page values provided in Code Page Identifiers,  or one of the following predefined values.  ValueMeaning  CP_ACP 0   Use system default ANSI code page.   CP_MACCP 2    Use the system default Macintosh code page.   CP_OEMCP 1   Use system default OEM code page."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCSTR",
+        "name": "lpStart",
+        "description": "Type: LPCSTR The beginning of the string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCSTR",
+        "name": "lpCurrentChar",
+        "description": "Type: LPCSTR A character in a null-terminated string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD This parameter is reserved and must be zero."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Translates a string into the OEM-defined character set.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL The return value is always nonzero except when you pass the same address to  \t\t\t\t\t\tlpszSrc and  \t\t\t\t\t\tlpszDst in the wide-character version of the function. In this case the function returns zero and  \t\t\t\t\t\tGetLastError returns ERROR_INVALID_ADDRESS. Using this function incorrectly can compromise the security of your application. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Strings",
+    "name": "CharToOem",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszSrc",
+        "description": "Type: LPCTSTR The null-terminated string to be translated."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSTR",
+        "name": "lpszDst",
+        "description": "Type: LPSTR The destination buffer, which receives the translated string. If the CharToOem function is being used as an ANSI function, the string can be translated in place by setting the  \t\t\t\t\tlpszDst parameter to the same address as the  \t\t\t\t\tlpszSrc parameter. This cannot be done if CharToOem is being used as a wide-character function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Translates a specified number of characters in a string into the OEM-defined character set.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL The return value is always nonzero except when you pass the same address to lpszSrc and lpszDst in the wide-character version of the function. In this case the function returns zero and GetLastError returns ERROR_INVALID_ADDRESS. ",
+    "remarks": "Unlike the CharToOem function, the CharToOemBuff function does not stop converting characters when it encounters a null character in the buffer pointed to by lpszSrc. The CharToOemBuff function converts all cchDstLength characters. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Strings",
+    "name": "CharToOemBuff",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszSrc",
+        "description": "Type: LPCTSTR The null-terminated string to be translated."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSTR",
+        "name": "lpszDst",
+        "description": "Type: LPSTR The buffer for the translated string. If the CharToOemBuff function is being used as an ANSI function, the string can be translated in place by setting the lpszDst parameter to the same address as the lpszSrc parameter. This cannot be done if CharToOemBuff is being used as a wide-character function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cchDstLength",
+        "description": "Type: DWORD The number of characters to translate in the string identified by the lpszSrc parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Converts a character string or a single character to uppercase. If the operand is a character string, the function converts the characters in place.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: LPTSTR If the operand is a character string, the function returns a pointer to the converted string. Because the string is converted in place, the return value is equal to  \t\t\t\t\t\tlpsz. If the operand is a single character, the return value is a 32-bit value whose high-order word is zero, and low-order word contains the converted character. There is no indication of success or failure. Failure is rare. There is no extended error information for this function; do not call  \t\t\t\t\t\tGetLastError. ",
+    "remarks": "Note that CharUpper always maps lowercase I (\"i\") to uppercase I, even when the current language is Turkish or Azeri. If you need a function that is linguistically sensitive in this respect, call LCMapString. Conversion to Unicode in the ANSI version of the function is done with the system default locale in all cases. ",
+    "return_type": "LPTSTR WINAPI",
+    "category": "Strings",
+    "name": "CharUpper",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPTSTR",
+        "name": "lpsz",
+        "description": "Type: LPTSTR A null-terminated string, or a single character. If the high-order word of this parameter is zero, the low-order word must contain a single character to be converted."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Converts lowercase characters in a buffer to uppercase characters. The function converts the characters in place.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: DWORD The return value is the number of  \t\t\t\t\t\tcharacters processed. For example, if CharUpperBuff(\"Zenith of API Sets\", 10) succeeds, the return value is 10. ",
+    "remarks": "Note that CharUpperBuff always maps lowercase I (\"i\") to uppercase I, even when the current language is Turkish or Azeri. If you need a function that is linguistically sensitive in this respect, call LCMapString. Conversion to Unicode in the ANSI version of the function is done with the system default locale in all cases. For an example, see Creating and Using a Temporary File. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Strings",
+    "name": "CharUpperBuff",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPTSTR",
+        "name": "lpsz",
+        "description": "Type: LPTSTR A buffer containing one or more characters to be processed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cchLength",
+        "description": "Type: DWORD The size, in characters, of the buffer pointed to by lpsz. The function examines each character, and converts lowercase characters to uppercase characters. The function examines the number of characters indicated by  \t\t\t\t\tcchLength, even if one or more characters are null characters."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines whether a character is an alphabetical character. This determination is based on the semantics of the language selected by the user during setup or through Control Panel.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the character is alphabetical, the return value is nonzero. If the character is not alphabetical, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Strings",
+    "name": "IsCharAlpha",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TCHAR",
+        "name": "ch",
+        "description": "Type: TCHAR The character to be tested."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines whether a character is either an alphabetical or a numeric character. This determination is based on the semantics of the language selected by the user during setup or through Control Panel.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the character is alphanumeric, the return value is nonzero. If the character is not alphanumeric, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Strings",
+    "name": "IsCharAlphaNumeric",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TCHAR",
+        "name": "ch",
+        "description": "Type: TCHAR The character to be tested."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines whether a character is lowercase. This determination is based on the semantics of the language selected by the user during setup or through Control Panel.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the character is lowercase, the return value is nonzero. If the character is not lowercase, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Strings",
+    "name": "IsCharLower",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TCHAR",
+        "name": "ch",
+        "description": "Type: TCHAR The character to be tested."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines whether a character is uppercase. This determination is based on the semantics of the language selected by the user during setup or through Control Panel.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the character is uppercase, the return value is nonzero. If the character is not uppercase, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Strings",
+    "name": "IsCharUpper",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "TCHAR",
+        "name": "ch",
+        "description": "Type: TCHAR The character to be tested."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Loads a string resource from the executable file associated with a specified module, copies the string into a buffer, and appends a terminating null character.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the function succeeds, the return value is the number of characters copied into the buffer, not including the terminating null character, or zero if the string resource does not exist. To get extended error information, call GetLastError. ",
+    "remarks": "Using this function incorrectly can compromise the security of your application. Incorrect use includes specifying the wrong size in the nBufferMax parameter. For example, if lpBuffer points to a buffer szBuffer which is declared as TCHAR szBuffer[100], then sizeof(szBuffer) gives the size of the buffer in bytes, which could lead to a buffer overflow for the Unicode version of the function. Buffer overflow situations are the cause of many security problems in applications. In this case, using sizeof(szBuffer)/sizeof(TCHAR) or sizeof(szBuffer)/sizeof(szBuffer[0]) would give the proper size of the buffer. For an example, see Creating a Child Window ",
+    "return_type": "int WINAPI",
+    "category": "Strings",
+    "name": "LoadString",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to an instance of the module whose executable file contains the string resource. To get the handle to the application itself, call the GetModuleHandle function with NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uID",
+        "description": "Type: UINT The identifier of the string to be loaded."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpBuffer",
+        "description": "Type: LPTSTR The buffer is to receive the string. Must be of sufficient length to hold a pointer (8 bytes)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nBufferMax",
+        "description": "Type: int The size of the buffer, in characters. The string is truncated and null-terminated if it is longer than the number of characters specified. If this parameter is 0, then lpBuffer receives a read-only pointer to the resource itself."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Appends one string to another.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: LPTSTR If the function succeeds, the return value is a pointer to the buffer. If the function fails, the return value is NULL                      and lpString1 may not be null-terminated. Using this function incorrectly can compromise the security  \t\t\tof your application. This function uses structured exception handling (SEH) to catch  \t\t\taccess violations and other errors. When this function catches SEH errors, it returns  \t\t\tNULL without null-terminating the string and without notifying the  \t\t\tcaller of the error. The caller is not safe to assume that insufficient space is  \t\t\tthe error condition. lpString1 must be large enough to add lpString2  \t\t\tand the closing '\\0', otherwise a buffer overrun may occur. Buffer overruns may lead  \t\t\tto a denial of service attack against the application if an access violation occurs.  \t\t\tIn the worst case, a buffer overrun may allow an attacker to inject executable code into  \t\t\tyour process, especially if lpString1 is a stack-based buffer. Consider using StringCchCat instead. ",
+    "remarks": "",
+    "return_type": "LPTSTR WINAPI",
+    "category": "Strings",
+    "name": "lstrcat",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPTSTR",
+        "name": "lpString1",
+        "description": "Type: LPTSTR The first null-terminated string. This buffer must be large enough  \t\t\t\tto contain both strings."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpString2",
+        "description": "Type: LPTSTR The null-terminated string to be appended to the string  \t\t\t\tspecified in the lpString1 parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Compares two character strings. The comparison is case-sensitive.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: int If the string pointed to by  \t\t\t\t\t\tlpString1 is less than the string pointed to by  \t\t\t\t\t\tlpString2, the return value is negative. If the string pointed to by  \t\t\t\t\t\tlpString1 is greater than the string pointed to by  \t\t\t\t\t\tlpString2, the return value is positive. If the strings are equal, the return value is zero. ",
+    "remarks": "The lstrcmp function compares two strings by checking the first characters against each other, the second characters against each other, and so on until it finds an inequality or reaches the ends of the strings. Note that the lpString1 and lpString2 parameters must be null-terminated, otherwise the string comparison can be incorrect. The function calls CompareString, using the current thread locale, and subtracts 2 from the result, to maintain the C run-time conventions for comparing strings. The language (user locale) selected by the user at setup time, or through Control Panel, determines which string is greater (or whether the strings are the same). If no language (user locale) is selected, the system performs the comparison by using default values. With a double-byte character set (DBCS) version of the system, this function can compare two DBCS strings. The lstrcmp function uses a word sort, rather than a string sort. A word sort treats hyphens and apostrophes differently than it treats other symbols that are not alphanumeric, in order to ensure that words such as \"coop\" and \"co-op\" stay together within a sorted list. For a detailed discussion of word sorts and string sorts, see the Remarks section for the CompareString function. See Security Considerations: International Features for security considerations regarding   choice of comparison functions. ",
+    "return_type": "int WINAPI",
+    "category": "Strings",
+    "name": "lstrcmp",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpString1",
+        "description": "Type: LPCTSTR The first null-terminated string to be compared."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpString2",
+        "description": "Type: LPCTSTR The second null-terminated string to be compared."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Compares two character strings. The comparison is not case-sensitive.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: int If the string pointed to by  \t\t\t\t\t\tlpString1 is less than the string pointed to by  \t\t\t\t\t\tlpString2, the return value is negative. If the string pointed to by  \t\t\t\t\t\tlpString1 is greater than the string pointed to by  \t\t\t\t\t\tlpString2, the return value is positive. If the strings are equal, the return value is zero. ",
+    "remarks": "The lstrcmpi function compares two strings by checking the first characters against each other, the second characters against each other, and so on until it finds an inequality or reaches the ends of the strings. Note that the lpString1 and lpString2 parameters must be null-terminated, otherwise the string comparison can be incorrect. The function calls CompareString, using the current thread locale, and subtracts 2 from the result, to maintain the C run-time conventions for comparing strings. For some locales, the lstrcmpi function may be insufficient. If this occurs, use CompareString to ensure proper comparison. For example, in Japan call  with the NORM_IGNORECASE, NORM_IGNOREKANATYPE, and  NORM_IGNOREWIDTH  values to achieve the most appropriate non-exact string comparison. The NORM_IGNOREKANATYPE and NORM_IGNOREWIDTH values are ignored in non-Asian locales, so you can set these values for all locales and be guaranteed to have a culturally correct \"insensitive\" sorting regardless of the locale. Note that specifying these values slows performance, so use them only when necessary. With a double-byte character set (DBCS) version of the system, this function can compare two DBCS strings. The lstrcmpi function uses a word sort, rather than a string sort. A word sort treats hyphens and apostrophes differently than it treats other symbols that are not alphanumeric, in order to ensure that words such as \"coop\" and \"co-op\" stay together within a sorted list. For a detailed discussion of word sorts and string sorts, see the Remarks section for the CompareString function. See Security Considerations: International Features for security considerations regarding   choice of comparison functions. ",
+    "return_type": "int WINAPI",
+    "category": "Strings",
+    "name": "lstrcmpi",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpString1",
+        "description": "Type: LPCTSTR The first null-terminated string to be compared."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpString2",
+        "description": "Type: LPCTSTR The second null-terminated string to be compared."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Copies a string to a buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: LPTSTR If the function succeeds, the return value is a pointer to the buffer. If the function fails, the return value is NULL                      and lpString1 may not be null-terminated. ",
+    "remarks": "With a double-byte character set (DBCS) version of the system, this function can be used  \t\t\tto copy a DBCS string. The lstrcpy function has an  \t\t\tundefined behavior if source and destination buffers overlap. Using this function incorrectly can compromise the security  \t\t\tof your application. This function uses structured exception handling (SEH) to catch  \t\t\taccess violations and other errors. When this function catches SEH errors, it returns  \t\t\tNULL without null-terminating the string and without notifying the  \t\t\tcaller of the error. The caller is not safe to assume that insufficient space is  \t\t\tthe error condition. lpString1 must be large enough to hold lpString2  \t\t\tand the closing '\\0', otherwise a buffer overrun may occur. Buffer overflow situations are the cause of many security problems in applications and  \t\t\tcan cause a denial of service attack against the application if an access violation occurs.  \t\t\tIn the worst case, a buffer overrun may allow an attacker to inject executable code into  \t\t\tyour process, especially if lpString1 is a stack-based buffer. Consider using StringCchCopy instead; use either  \t\t\t\tStringCchCopy(buffer, sizeof(buffer)/sizeof(buffer[0]), src);,  \t\t\t\tbeing aware that buffer must not be a pointer or  \t\t\t\tuse StringCchCopy(buffer, ARRAYSIZE(buffer), src);,  \t\t\t\tbeing aware that, when copying to a pointer, the caller is responsible for  \t\t\t\tpassing in the size of the pointed-to memory in characters. ",
+    "return_type": "LPTSTR WINAPI",
+    "category": "Strings",
+    "name": "lstrcpy",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpString1",
+        "description": "Type: LPTSTR A buffer to receive the contents of the string pointed to by the  \t\t\t\t\tlpString2 parameter.  \t\t\t\t\tThe buffer must be large enough to contain the string, including the  \t\t\t\t\tterminating null character."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpString2",
+        "description": "Type: LPTSTR The null-terminated string to be copied."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Copies a specified number of characters from a source string into a buffer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: LPTSTR If the function succeeds, the return value is a pointer to the buffer.  \t\t\t\tThe function can succeed even if the source string is greater than  \t\t\t\tiMaxLength characters. If the function fails, the return value is NULL                      and lpString1 may not be null-terminated. ",
+    "remarks": "The buffer pointed to by lpString1 must  \t\t\tbe large enough to include a terminating null character, and the string length  \t\t\tvalue specified by iMaxLength includes room  \t\t\tfor a terminating null character. The lstrcpyn function has an undefined behavior if source      and destination buffers overlap. Using this function incorrectly can compromise the security  \t\t\tof your application. This function uses structured exception handling (SEH) to catch  \t\t\taccess violations and other errors. When this function catches SEH errors, it returns  \t\t\tNULL without null-terminating the string and without notifying the  \t\t\tcaller of the error. The caller is not safe to assume that insufficient space is  \t\t\tthe error condition. If the buffer pointed to by lpString1 is not large  \t\t\tenough to contain the copied string, a buffer overrun can occur. When copying an entire  \t\t\tstring, note that sizeof returns the number of bytes.  \t\t\tFor example, if lpString1 points to a buffer  \t\t\tszString1 which is declared as  \t\t\tTCHAR szString[100], then sizeof(szString1) gives the size of  \t\t\tthe buffer in bytes rather than WCHAR, which could lead to a buffer  \t\t\toverflow for the Unicode version of the function. Buffer overflow situations are the cause  \t\t\tof many security problems in applications and can cause a denial of service attack against  \t\t\tthe application if an access violation occurs. In the worst case, a buffer overrun may  \t\t\tallow an attacker to inject executable code into your process, especially if  \t\t\tlpString1 is a stack-based buffer. Using sizeof(szString1)/sizeof(szString1[0])  \t\t\t\tgives the proper size of the buffer. Consider using StringCchCopy instead; use either  \t\t\t\tStringCchCopy(buffer, sizeof(buffer)/sizeof(buffer[0]), src);,  \t\t\t\tbeing aware that buffer must not be a pointer or  \t\t\t\tuse StringCchCopy(buffer, ARRAYSIZE(buffer), src);,  \t\t\t\tbeing aware that, when copying to a pointer, the caller is responsible for  \t\t\t\tpassing in the size of the pointed-to memory in characters. Review Security Considerations: Windows User Interface before continuing. ",
+    "return_type": "LPTSTR WINAPI",
+    "category": "Strings",
+    "name": "lstrcpyn",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpString1",
+        "description": "Type: LPTSTR The destination buffer, which receives the copied characters. The buffer  \t\t\t\tmust be large enough to contain the number of TCHAR values  \t\t\t\tspecified by iMaxLength, including room  \t\t\t\tfor a terminating null character."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpString2",
+        "description": "Type: LPCTSTR The source string from which the function is to copy characters."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iMaxLength",
+        "description": "Type: int The number of TCHAR values to be copied from the  \t\t\t\tstring pointed to by lpString2 into the  \t\t\t\tbuffer pointed to by lpString1, including  \t\t\t\ta terminating null character."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines the length of the specified string (not including the terminating null character).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: int The function returns the length of the string, in characters. If lpString is NULL, the function returns 0. Using this function incorrectly can compromise the security of your application. lstrlen assumes that lpString is a null-terminated string, or NULL.  If it is not, this could lead to a buffer overrun or a denial of service attack against your application. Consider using one of the following alternatives: StringCbLength or StringCchLength. ",
+    "remarks": "",
+    "return_type": "int WINAPI",
+    "category": "Strings",
+    "name": "lstrlen",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpString",
+        "description": "Type: LPCTSTR The null-terminated string to be checked."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Translates a string from the OEM-defined character set into either an ANSI or a wide-character string.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL The return value is always nonzero except when you pass the same address to  \t\t\t\t\t\tlpszSrc and  \t\t\t\t\t\tlpszDst in the wide-character version of the function. In this case the function returns zero and  \t\t\t\t\t\tGetLastError returns ERROR_INVALID_ADDRESS. Using this function incorrectly can compromise the security of your application. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Strings",
+    "name": "OemToChar",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCSTR",
+        "name": "lpszSrc",
+        "description": "Type: LPCSTR A null-terminated string of characters from the OEM-defined character set."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszDst",
+        "description": "Type: LPTSTR The destination buffer, which receives the translated string. If the OemToChar function is being used as an ANSI function, the string can be translated in place by setting the  \t\t\t\t\tlpszDst parameter to the same address as the  \t\t\t\t\tlpszSrc parameter. This cannot be done if OemToChar is being used as a wide-character function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Translates a specified number of characters in a string from the OEM-defined character set into either an ANSI or a wide-character string.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL The return value is always nonzero except when you pass the same address to  \t\t\t\t\t\tlpszSrc and  \t\t\t\t\t\tlpszDst in the wide-character version of the function. In this case the function returns zero and  \t\t\t\t\t\tGetLastError returns ERROR_INVALID_ADDRESS. ",
+    "remarks": "Unlike the OemToChar function, the OemToCharBuff function does not stop converting characters when it encounters a null character in the buffer pointed to by  \t\t\t\tlpszSrc. The OemToCharBuff function converts all  \t\t\t\tcchDstLength characters. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Strings",
+    "name": "OemToCharBuff",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCSTR",
+        "name": "lpszSrc",
+        "description": "Type: LPCSTR One or more characters from the OEM-defined character set."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszDst",
+        "description": "Type: LPTSTR The destination buffer, which receives the translated string. If the OemToCharBuff function is being used as an ANSI function, the string can be translated in place by setting the  \t\t\t\t\tlpszDst parameter to the same address as the  \t\t\t\t\tlpszSrc parameter. This cannot be done if the OemToCharBuff function is being used as a wide-character function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cchDstLength",
+        "description": "Type: DWORD The number of  \t\t\t\t\tcharacters to be translated in the buffer identified by the  \t\t\t\t\tlpszSrc parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Writes formatted data to the specified buffer. Any arguments are converted and copied to the output buffer according to the corresponding format specification in the format string. The function appends a terminating null character to the characters it writes, but the return value does not include the terminating null character in its character count.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the function succeeds, the return value is the number of characters stored in the output buffer, not counting the terminating null character. If the function fails, the return value is less than the length of the expected output. To get extended error information, call GetLastError. Using this function incorrectly can compromise the security of your application. The string returned in lpOut is not guaranteed to be null-terminated. Also, avoid the %s format -- it can lead to a buffer overrun. If an access violation occurs it causes a denial of service against your application. In the worse case, an attacker can inject executable code. Consider using one of the following alternatives: StringCbPrintf, StringCbPrintfEx, StringCbVPrintf, StringCbVPrintfEx, StringCchPrintf, StringCchPrintfEx, StringCchVPrintf, or StringCchVPrintfEx. ",
+    "remarks": "The format-control string contains format specifications that determine the output format for the arguments following the lpFmt parameter. Format specifications, discussed below, always begin with a percent sign (%). If a percent sign is followed by a character that has no meaning as a format field, the character is not formatted (for example, %% produces a single percent-sign character). The format-control string is read from left to right. When the first format specification (if any) is encountered, it causes the value of the first argument after the format-control string to be converted and copied to the output buffer according to the format specification. The second format specification causes the second argument to be converted and copied, and so on. If there are more arguments than format specifications, the extra arguments are ignored. If there are not enough arguments for all of the format specifications, the results are undefined. A format specification has the following form: %[-][#][0][width][.precision]type Each field is a single character or a number signifying a particular format option. The type characters that appear after the last optional format field determine whether the associated argument is interpreted as a character, a string, or a number. The simplest format specification contains only the percent sign and a type character (for example, %s). The optional fields control other aspects of the formatting. Following are the optional and required fields and their meanings.  To use buffers larger than 1024 bytes, use _snwprintf. For more information, see the documentation for the C run-time library. ",
+    "return_type": "int __cdecl",
+    "category": "Strings",
+    "name": "wsprintf",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpOut",
+        "description": "Type: LPTSTR The buffer that is to receive the formatted output. The maximum size of the buffer is 1,024 bytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpFmt",
+        "description": "Type: LPCTSTR The format-control specifications. In addition to ordinary ASCII characters, a format specification for each argument appears in this string. For more information about the format specification, see the Remarks section."
+      },
+      {
+        "in_out": "",
+        "type": "_In_",
+        "name": "...",
+        "description": "One or more optional arguments. The number and type of argument parameters depend on the corresponding format-control specifications in the lpFmt parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Writes formatted data to the specified buffer using a pointer to a list of arguments. The items pointed to by the argument list are converted and copied to an output buffer according to the corresponding format specification in the format-control string. The function appends a terminating null character to the characters it writes, but the return value does not include the terminating null character in its character count.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the function succeeds, the return value is the number of characters stored in the buffer, not counting the terminating null character. If the function fails, the return value is less than the length of the expected output. To get extended error information, call GetLastError. Using this function incorrectly can compromise the security of your application. The string returned in lpOutput is not guaranteed to be NULL-terminated. Also, avoid the use of the %s format, which can lead to a buffer overrun. This can lead to a denial of service if it results in an access violation, or an attacker may inject executable code. Consider using one of the following alternatives: StringCbPrintf, StringCbPrintfEx, StringCbVPrintf, StringCbVPrintfEx, StringCchPrintf, StringCchPrintfEx, StringCchVPrintf, or StringCchVPrintfEx. ",
+    "remarks": "The function copies the format-control string into the output buffer character by character, starting with the first character in the string. When it encounters a format specification in the string, the function retrieves the value of the next available argument (starting with the first argument in the list), converts that value into the specified format, and copies the result to the output buffer. The function continues to copy characters and expand format specifications in this way until it reaches the end of the format-control string. If there are more arguments than format specifications, the extra arguments are ignored. If there are not enough arguments for all of the format specifications, the results are undefined. ",
+    "return_type": "int WINAPI",
+    "category": "Strings",
+    "name": "wvsprintf",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpOutput",
+        "description": "Type: LPTSTR The buffer that is to receive the formatted output. The maximum size of the buffer is 1,024 bytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpFmt",
+        "description": "Type: LPCTSTR The format-control specifications. In addition to ordinary ASCII characters, a format specification for each argument appears in this string. For more information about the format specification, see the wsprintf function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "va_list",
+        "name": "arglist",
+        "description": "Type: va_list Each element of this list specifies an argument for the format-control string. The number, type, and interpretation of the arguments depend on the corresponding format-control specifications in the  \t\t\t\t\tlpFmt parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

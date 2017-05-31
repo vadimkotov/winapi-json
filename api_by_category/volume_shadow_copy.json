@@ -1,0 +1,194 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "The CreateVssBackupComponents function      creates an IVssBackupComponents      interface object and returns a pointer to it.",
+    "library": "VssApi.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "VsBackup.h (include VsBackup.h, Vss.h, or VsWriter.h)",
+    "return_value": "The return values listed here are in addition to the normal COM HRESULTs that may be returned at any time         from the function.  ",
+    "remarks": "The calling application is responsible for calling IUnknown::Release to release the      resources held by the returned      IVssBackupComponents when it is no      longer needed. ",
+    "return_type": "HRESULT",
+    "category": "Volume Shadow Copy",
+    "name": "CreateVssBackupComponents",
+    "is_callback": 0,
+    "dll": "VssApi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "IVssBackupComponents",
+        "name": "**ppBackup",
+        "description": "Doubly indirect pointer to the created        IVssBackupComponents interface object."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The CreateVssExamineWriterMetadata      function creates an      IVssExamineWriterMetadata object.",
+    "library": "VssApi.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "VsBackup.h (include VsBackup.h, Vss.h, or VsWriter.h)",
+    "return_value": "The return values listed here are in addition to the normal COM HRESULTs that may be returned at any time         from the function.  ",
+    "remarks": "To save a copy of a writer's Writer Metadata Document into an XML string to pass in the bstrXML parameter, use the IVssExamineWriterMetadata::SaveAsXML method. To retrieve the latest version of a writer's Writer Metadata Document, use the IVssBackupComponents::GetWriterMetadata method. To load a writer metadata document into an existing IVssExamineWriterMetadata object, use the IVssExamineWriterMetadata::LoadFromXML method. Users should not attempt to modify the contents of the Writer Metadata Document. The calling application is responsible for calling IUnknown::Release to release the      resources held by      the IVssExamineWriterMetadata object when the object      is no longer needed. ",
+    "return_type": "HRESULT",
+    "category": "Volume Shadow Copy",
+    "name": "CreateVssExamineWriterMetadata",
+    "is_callback": 0,
+    "dll": "VssApi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BSTR",
+        "name": "bstrXML",
+        "description": "An XML string containing a Writer Metadata Document with which to initialize the returned        IVssExamineWriterMetadata object."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "IVssExamineWriterMetadata",
+        "name": "**ppMetadata",
+        "description": "A variable that receives an        IVssExamineWriterMetadata        interface pointer to the object."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Creates an IVssExpressWriter interface object and returns a pointer to it.",
+    "library": "VssApi.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "VsWriter.h",
+    "return_value": "The return values listed here are in addition to the normal COM HRESULT values that may be returned at any time from the function.  ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Volume Shadow Copy",
+    "name": "CreateVssExpressWriter",
+    "is_callback": 0,
+    "dll": "VssApi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "IVssExpressWriter",
+        "name": "**ppWriter",
+        "description": "Doubly indirect pointer to the newly created IVssExpressWriter object."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "This function is reserved for system use. Do not use this function directly. To create a VSS writer, extend the CVssWriterEx class. The CVssWriterEx base class implicitly calls CreateWriterEx.",
+    "library": "",
+    "min_server": "",
+    "header": "",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code.   ",
+    "remarks": "",
+    "return_type": "HRESULT STDMETHODCALLTYPE",
+    "category": "Volume Shadow Copy",
+    "name": "CreateWriterEx",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "CVssWriterEx",
+        "name": "*pWriter",
+        "description": "Reserved."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "IVssWriterImpl",
+        "name": "**pWriterImpl",
+        "description": "Reserved."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 3,
+    "description": "The IsVolumeSnapshotted function determines      whether any shadow copies exist for the specified volume.",
+    "library": "VssApi.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "VsBackup.h (include VsBackup.h, Vss.h, or VsWriter.h)",
+    "return_value": "The return values listed here are in addition to the normal COM HRESULTs that may be returned at any time         from the function.  ",
+    "remarks": "Before calling this function, the caller must have initialized COM by calling the CoInitialize function. If no volume control or file I/O operations are disabled for the selected volume, then the shadow copy      capability of the selected volume returned by plSnapshotCapability will be zero. ",
+    "return_type": "HRESULT",
+    "category": "Volume Shadow Copy",
+    "name": "IsVolumeSnapshotted",
+    "is_callback": 0,
+    "dll": "VssApi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "VSS_PWSZ",
+        "name": "pwszVolumeName",
+        "description": "Name of the volume. The name of the volume to be checked must be in one of the following formats and must include a trailing backslash (\\):  The path of a mounted folder, for example, Y:\\MountX\\ A drive letter, for example,          D:\\ A volume GUID path of the form \\\\?\\Volume{GUID}\\ (where GUID identifies the volume)"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BOOL",
+        "name": "*pbSnapshotsPresent",
+        "description": "The value of this parameter is TRUE if the volume has a shadow copy, and        FALSE if the volume does not have a shadow copy."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LONG",
+        "name": "*plSnapshotCapability",
+        "description": "A bit mask (or bitwise OR) of        VSS_SNAPSHOT_COMPATIBILITY values that        indicates whether certain volume control or file I/O operations are disabled for the given volume if a shadow        copy of it exists."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Checks the registry for writers that should block revert operations on  the specified volume.",
+    "library": "VssApi.lib",
+    "min_server": "Windows Server 2008, Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "VsBackup.h (include VsBackup.h, Vss.h, or VsWriter.h)",
+    "return_value": "This function can return one of these values.  ",
+    "remarks": "The list of writers that should block revert operations is stored in the registry under the following key: HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VSS\\Settings\\WritersBlockingRevert ",
+    "return_type": "HRESULT",
+    "category": "Volume Shadow Copy",
+    "name": "ShouldBlockRevert",
+    "is_callback": 0,
+    "dll": "VssApi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "wszVolumeName",
+        "description": "The name of the volume. This name must be in one of the following formats and must include a trailing backslash (\\):         The path of a mounted folder, for example, Y:\\MountX\\ A drive letter, for example,          D:\\ A volume GUID path of the form \\\\?\\Volume{GUID}\\ (where GUID identifies the volume)"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "bool",
+        "name": "*pbBlock",
+        "description": "A pointer to a variable that receives true if the volume  contains components from any writers that are listed in the registry as writers that should block revert operations, or false otherwise."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The VssFreeSnapshotProperties function is      used to free the contents of a VSS_SNAPSHOT_PROP      structure as part of managing its life cycle. The      VSS_SNAPSHOT_PROP structure is typically obtained by      using the      IVssBackupComponents::GetSnapshotProperties method or the IVssSoftwareSnapshotProvider::GetSnapshotProperties method.",
+    "library": "VssApi.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "VsBackup.h (include VsBackup.h, Vss.h, or VsWriter.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Volume Shadow Copy",
+    "name": "VssFreeSnapshotProperties",
+    "is_callback": 0,
+    "dll": "VssApi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "VSS_SNAPSHOT_PROP",
+        "name": "*pProp",
+        "description": "Pointer to a valid VSS_SNAPSHOT_PROP        object."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  }
+]
+

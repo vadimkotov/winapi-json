@@ -1,0 +1,612 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "Enumerates the user interface languages that are available on the operating system and calls the callback function with every language in the list.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns TRUE if successful or FALSE otherwise. To get extended error information, the application can call GetLastError, which can return one of the following error codes: ",
+    "remarks": "This function enumerates the user interface languages that are available and, depending on the flag specified, licensed for use on the operating system. It passes language identifiers or language names, one at a time, to the EnumUILanguagesProc callback function. The EnumUILanguages function continues to pass language identifiers or names to the callback function until the last language is found or the callback function returns FALSE. For applications that run only on Windows Vista and later, MUI_LANGUAGE_NAME is recommended over MUI_LANGUAGE_ID. MUI_LANGUAGE_NAME allows differentiation between languages that are associated with a supplemental locale. If the MUI_LANGUAGE_ID flag is specified in the call to this function, the strings passed to the callback   function will be hexadecimal language identifiers that do not include the leading 0x, and will be 4   characters in length. For example, en-US will be passed as \"0409\" and en as \"0009\". The value \"1000\" is passed to the callback function for any language associated with a supplemental locale. This value corresponds to the hexadecimal value of LOCALE_CUSTOM_UNSPECIFIED. It does not distinguish among supplemental locales, even if the selected language is in the user preferred UI languages list or the system preferred UI languages list. ",
+    "return_type": "BOOL",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "EnumUILanguages",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UILANGUAGE_ENUMPROC",
+        "name": "lpUILanguageEnumProc",
+        "description": "Pointer to an application-defined EnumUILanguagesProc callback function. EnumUILanguages calls this function repeatedly to enumerate the languages in the list."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags identifying language format and filtering. The following flags specify the format of the language to pass to the callback function. The format flags are mutually exclusive, and MUI_LANGUAGE_ID is the default.   ValueMeaning  MUI_LANGUAGE_ID   Pass the language identifier in the language string to the callback function.   MUI_LANGUAGE_NAME   Pass the language name in the language string to the callback function.     The following flags specify the filtering for the function to use in enumerating the languages. The filtering flags are mutually exclusive, and the default is MUI_LICENSED_LANGUAGES.  ValueMeaning  MUI_ALL_INSTALLED_LANGUAGES   Enumerate all installed languages available to the operating system.   MUI_LICENSED_LANGUAGES   Enumerate all installed languages that are available and licensed for use.   MUI_GROUP_POLICY   Enumerate all installed languages that are available and licensed, and that are allowed by   the group policy.     Windows Vista and later: The application can set dwFlags to 0, or to one or more of the specified flags. A setting of 0 causes the parameter value to default to MUI_LANGUAGE_ID | MUI_LICENSED_LANGUAGES. Windows 2000, Windows XP, Windows Server 2003: The application must set dwFlags to 0."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lParam",
+        "description": "Application-defined value."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "An application-defined callback function that processes enumerated user interface language information provided by the EnumUILanguages function. The UILANGUAGE_ENUMPROC type defines a pointer to this callback function. EnumUILanguagesProc is a placeholder for the application-defined function name.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns TRUE to continue enumeration or FALSE otherwise. ",
+    "remarks": "An EnumUILanguagesProc function can carry out any task. The application registers this function by passing its address to the EnumUILanguages function. If MUI_LANGUAGE_ID was specified in the call to EnumUILanguages, the language strings passed to this function will be hexadecimal language   identifiers that do not include the leading 0x, and will be 4 characters in length. For example, en-US will   be passed as \"0409\" and en as \"0009\". ",
+    "return_type": "BOOL CALLBACK",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "EnumUILanguagesProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpUILanguageString",
+        "description": "Pointer to a buffer containing a null-terminated string representing a user interface language identifier or language name, depending on the value for the dwFlags parameter passed in the call to EnumUILanguages."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lParam",
+        "description": "Application-defined value."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Releases the handle to a resource module loaded by LoadMUILibrary.",
+    "library": "Muiload.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Muiload.h",
+    "return_value": "Returns TRUE if successful or FALSE otherwise. To get extended error information, the application can call GetLastError. The error code is the same as that returned by FreeLibrary. ",
+    "remarks": "Once the application has called FreeMUILibrary, it should treat the passed module handle as invalid. Applications using this function can be built on pre-Windows Vista operating systems, but they must link statically with the MUILoad library provided in the Microsoft Windows SDK for Windows Vista. FreeMUILibrary is related to LoadMUILibrary in the same way that FreeLibrary is related to LoadLibraryEx, and similar considerations need to be applied to its usage. In particular, to support correct reference counting, FreeMUILibrary should be called for any handle returned by LoadMUILibrary. For more information see the Remarks sections of LoadLibraryEx and FreeLibrary. ",
+    "return_type": "BOOL",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "FreeMUILibrary",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HMODULE",
+        "name": "hResModule",
+        "description": "Handle to a resource module loaded by LoadMUILibrary. The handle indicates either a language-specific resource file or an LN file."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Returns a handle to the language-specific resources associated with a particular language-neutral (LN) file.",
+    "library": "Muiload.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Muiload.h",
+    "return_value": "Returns a handle to the appropriate language-specific resource file if successful. This function returns NULL if it fails. To get extended error information, the application can call GetLastError. ",
+    "remarks": "This function allows applications developed using the Win32 MUI resource technology to determine correctly the language-specific resource file to load on pre-Windows Vista operating systems. Applications using this function do not specifically have to be built on Windows Vista, but they do have to link statically with the MUILoad library provided in the Microsoft Windows SDK for Windows Vista. This function requires the executable and language-specific resource files to be stored using standard conventions. See Application Deployment for further information about file placement. The following items influence the loading of satellite binaries by this function. When running on Windows Vista, this function loads the main module without redirection. Only the pszFullModuleName parameter is used, as the resource loader functions perform redirection appropriately when they are called. When running on pre-Windows Vista operating systems, this function takes into account all parameters that the application supplies. It redirects binary loading to the proper satellite binary pair associated with the file represented by pszFullModuleName. This process reconstitutes the path associated with the file to mimic the behavior of Windows Vista that underlies the resource loader functions. The application uses the dwLangConvention parameter to specify the way the satellite binaries should be probed. If the application sets this parameter to MUI_LANGUAGE_ID, the binaries are probed in folders with hexadecimal string values. (These values do not include the leading 0x, and are 4 characters in length. For example, en-US is represented   as \"0409\" and en as \"0009\".) If the application sets the parameter to MUI_LANGUAGE_NAME, the function uses Windows Vista resource loading, which uses language name-based folder probes to find a satellite file. The state of the language identifier in the LangID parameter affects resource probing. If the application sets this parameter to 0, the function uses the predefined fallback logic, dependent on the operating system, to locate the appropriate language-specific resource file. When the application sets LangID to a nonzero value, the probing mechanism only searches the appropriately named folder and its associated neutral equivalent. For more information, see User Interface Language Management. LoadMUILibrary is built on the function LoadLibraryEx, and similar considerations need to be applied to its usage. In particular, FreeMUILibrary should be called for any handle returned by LoadMUILibrary. Also, LoadMUILibrary should not be called from DllMain. For more information see the Remarks sections of LoadLibraryEx and FreeLibrary. ",
+    "return_type": "HINSTANCE",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "LoadMUILibrary",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pszFullModuleName",
+        "description": "Pointer to a null-terminated string specifying the name of an LN file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwLangConvention",
+        "description": "Flags specifying the naming convention on pre-Windows Vista operating systems to name the directories containing the language-specific resource files. The flags are mutually exclusive, and the default is MUI_LANGUAGE_NAME.  ValueMeaning  MUI_LANGUAGE_ID   Interpret the name of the folder containing the language-specific resource files using language identifier format.   MUI_LANGUAGE_NAME   Interpret the name of the folder containing the language-specific resource files using language name format.     The following flag is available as an option and can be used in combination with either of the other flags.  ValueMeaning  MUI_LANGUAGE_EXACT   If resources for the identified language are not found in the resource files, check the main module specified by pwszModuleName and return a handle to that module if successful."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LANGID",
+        "name": "LangID",
+        "description": "Language identifier for the user interface resources on a pre-Windows Vista operating system. The language identifier cannot correspond to the language associated with any of these locale information constants:     LOCALE_SYSTEM_DEFAULT   LOCALE_USER_DEFAULT   LOCALE_CUSTOM_DEFAULT   LOCALE_CUSTOM_UI_DEFAULT   LOCALE_CUSTOM_UNSPECIFIED"
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves resource-related information about a file.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns TRUE if successful or FALSE otherwise. To get extended error information, the application can call GetLastError. ",
+    "remarks": "For the MUI_QUERY_LANGUAGE_NAME flag, this function retrieves an offset, in bytes, from the beginning of FILEMUIINFO in the dwLanguageNameOffset member. The following is sample code that accesses the language name associated with the input file: For the MUI_QUERY_RESOURCE_TYPES flag, this function retrieves language-specific resource file information in the following FILEMUIINFO members: If the input file is an LN file, the function fills in all the above structure members. In addition, it fills in the following members: The following is sample code that accesses the array of resource identifiers in the LN file. The following is sample code to access the multistring array of resource names in the LN file. Each of the code samples uses two reinterpret casts. First the code casts to BYTE* so that the pointer arithmetic for the offset is done in bytes. Then the code casts the resulting pointer to the desired type. Another approach is to write the following instead of the code shown in the samples. The effect is the same and the choice is strictly one of style. ",
+    "return_type": "BOOL",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "GetFileMUIInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags specifying the information to retrieve. Any combination of the following flags is allowed. The default value of the flags is MUI_QUERY_TYPE | MUI_QUERY_CHECKSUM.  ValueMeaning  MUI_QUERY_TYPE   Retrieve one of the following values in the dwFileType member of FILEMUIINFO:  MUI_FILETYPE_NOT_LANGUAGE_NEUTRAL: The specified input file does not have resource configuration data. Thus it is neither an LN file nor a language-specific resource file. This type of file is typical for older executable files. If this file type is specified, the function will not retrieve useful information for the other types. MUI_FILETYPE_LANGUAGE_NEUTRAL_MAIN. The input file is an LN file. MUI_FILETYPE_LANGUAGE_NEUTRAL_MUI. The input file is a language-specific resource file associated with an LN file.    MUI_QUERY_CHECKSUM   Retrieve the resource checksum of the input file in the pChecksum member of FILEMUIINFO. If the input file does not have resource configuration data, this member of the structure contains 0.   MUI_QUERY_LANGUAGE_NAME   Retrieve the language associated with the input file. For a language-specific resource file, this flag requests the associated language. For an LN file, this flag requests the language of the ultimate fallback resources for the module, which can be either in the LN file or in a separate language-specific resource file referenced by the resource configuration data of the LN file. For more information, see the Remarks section.   MUI_QUERY_RESOURCE_TYPES   Retrieve lists of resource types in the language-specific resource files and LN files as they are specified in the resource configuration data. See the Remarks section for a way to access this information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pcwszFilePath",
+        "description": "Pointer to a null-terminated string indicating the path to the file. Typically the file is either an LN file or a language-specific resource file. If it is not one of these types, the only significant value that the function retrieves is MUI_FILETYPE_NOT_LANGUAGE_NEUTRAL. The function only retrieves this value if the MUI_QUERY_RESOURCE_TYPES flag is set."
+      },
+      {
+        "in_out": "_Inout_opt_",
+        "type": "PFILEMUIINFO",
+        "name": "pFileMUIInfo",
+        "description": "Pointer to a buffer containing file information in a FILEMUIINFO structure and possibly in data following that structure. The information buffer might have to be much larger than the size of the structure itself. Depending on flag settings, the function can store considerable information following the structure, at offsets retrieved in the structure. For more information, see the Remarks section. Alternatively, the application can set this parameter to NULL if pcbFileMUIInfo is set to 0. In this case, the function retrieves the required size for the information buffer in pcbFileMUIInfo. Note  If the value of pFileMUIInfo is not NULL, the dwSize member must be set to the size of the FILEMUIINFO structure (including the information buffer), and the dwVersion member must be set to the current version of 0x001."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "DWORD",
+        "name": "*pcbFileMUIInfo",
+        "description": "Pointer to the buffer size, in bytes, for the file information indicated by pFileMUIInfo. On successful return from the function, this parameter contains the size of the retrieved file information buffer and the FILEMUIINFO structure that contains it. Alternatively, the application can set this parameter to 0 if it sets NULL in pFileMUIInfo. In this case, the function retrieves the required file information buffer size in pcbFileMUIInfo. To allocate the correct amount of memory, this value should be added to the size of the FILEMUIINFO structure itself. Note  The value of this parameter must match the value of the dwSize member of FILEMUIINFO if the value of pFileMUIInfo is not NULL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Retrieves the path to all language-specific resource files associated with the supplied LN file. The application must call this function repeatedly to get the path for each resource file.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns TRUE if successful or FALSE otherwise. If the function fails, the output parameters do not change. To get extended error information, the application can call GetLastError, which can return the following error codes: ",
+    "remarks": "This function verifies that language-specific resource files exist, but it does not verify that they are correct. It requires the resource files to be stored according to the storage convention explained in Application Deployment. If the call to this function specifies the MUI_LANGUAGE_ID flag, the supplied language string must   use a hexadecimal language identifier that does not include the leading 0x, and is 4 characters in length.   For example, en-US should be passed as \"0409\" and en as \"0009\". The returned language string will be in the   same format. When MUI_LANGUAGE_ID is specified, each hexadecimal value in the supplied language string must represent an actual language identifier. In particular, the values corresponding to the following locales cannot be specified: To receive enumerated information, the application should call this function repeatedly until it returns FALSE, leaving the contents of pululEnumerator unchanged between calls. Since each call retrieves the path to a different language-specific resource file, the application must clear the language buffer to an empty string between calls. If the application does not do this, the input value of pwszLanguage takes precedence over the setting of dwFlags. Typically the resource loader is used to find resource files. However, your application can also use this function to find the files. If the input file path is for an LN file, the function attaches a suffix of \".mui\" when looking for the corresponding language-specific resource files. For example, the function retrieves the following files when the application passes the string \"C:\\mydir\\Example1.dll\" in pcwszFilePath as the root file path, with dwFlags set to MUI_LANGUAGE_NAME | MUI_USE_SEARCH_ALL_LANGUAGES: The first call to the function sets pwszFileMUIPath  to \"C:\\mydir\\en-US\\Example1.dll.mui\". The second call sets the file path to \"C:\\mydir\\ja-JP\\Example1.dll.mui\". The function returns FALSE when called a third time and GetLastError returns ERROR_NO_MORE_FILES. If the file indicated by pcwszFilePath does not have resource configuration data, or if the file does not exist, the function leaves the file name as it is when looking for the corresponding language-specific resource files. For example, the application passes the string \"C:\\mydir\\Example2.txt\" in pcwszFilePath as the root file path, with dwFlags set to MUI_LANGUAGE_NAME | MUI_USER_PREFERRED_UI_LANGUAGES. Let's consider the case in which the user preferred UI languages (in order) are Catalan, \"ca-ES\", and Spanish (Spain), \"es-ES\", and where the following files exist: The first call to the function determines that there are no resources for \"ca-ES\" or for the neutral language \"ca\". The function then tries the next option, \"es-ES\", for which it succeeds in finding a match. Before returning, the function sets pwszFileMUIPath  to \"C:\\mydir\\es-ES\\Example2.txt\". A second application call to the function continues the enumeration by setting pwszFileMUIPath to \"C:\\mydir\\es\\Example2.txt\". If the target file and its associated resource files are actually Side-by-side enabled assemblies, GetFileMUIPath cannot be used to retrieve the path to the resource file. Please refer to Using Assemblies with a Multilanguage User Interface for details on how to use Side-by-side assemblies with MUI support. ",
+    "return_type": "BOOL",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "GetFileMUIPath",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags identifying language format and filtering. The following flags specify the format of the language indicated by pwszLanguage. The flags are mutually exclusive, and the default is MUI_LANGUAGE_NAME.  ValueMeaning  MUI_LANGUAGE_ID   Retrieve the language string in language identifier format.   MUI_LANGUAGE_NAME   Retrieve the language string in language name format.     The following flags specify the filtering for the function to use in locating language-specific resource files if pwszLanguage is set to NULL. The filtering flags are mutually exclusive, and the default is MUI_USER_PREFERRED_UI_LANGUAGES.  ValueMeaning  MUI_USE_SEARCH_ALL_LANGUAGES   Retrieve all language-specific resource files for the path indicated by pcwszFilePath, without considering file licensing. This flag is relevant only if the application supplies a null string for pwszLanguage.   MUI_USER_PREFERRED_UI_LANGUAGES   Retrieve only the files that implement languages in the fallback list. Successive calls enumerate the successive fallbacks, in the appropriate order. The first file indicated by the output value of pcchFileMUIPath should be the best fit. This flag is relevant only if the application supplies a null string for pwszLanguage.   MUI_USE_INSTALLED_LANGUAGES   Retrieve only the files for the languages installed on the computer. This flag is relevant only if the application supplies a null string for pwszLanguage.     The following flags allow the user to indicate the type of file that is specified by pcwszFilePath so that the function can determine if it must add \".mui\" to the file name. The flags are mutually exclusive. If the application passes both flags, the function fails. If the application passes neither flag, the function checks the file in the root folder to verify the file type and decide on file naming.  ValueMeaning  MUI_LANG_NEUTRAL_PE_FILE   Do not verify the file passed in pcwszFilePath and append \".mui\" to the file name before processing. For example, change Abc.exe to Abc.exe.mui.   MUI_NON_LANG_NEUTRAL_FILE   Do not verify the file passed in pcwszFilePath and do not append \".mui\" to the file name before processing. For example, use Abc.txt or Abc.chm."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pcwszFilePath",
+        "description": "Pointer to a null-terminated string specifying a file path. The path is either for an existing LN file or for a file such as a .txt, .inf, or .msc file. If the file is an LN file, the function looks for files containing the associated language-specific resources. For all other types of files, the function seeks files that correspond exactly to the file name and path indicated. Your application can overwrite the behavior of the file type check by using the MUI_LANG_NEUTRAL_PE_FILE or MUI_NON_LANG_NEUTRAL_FILE flag. For more information, see the Remarks section. Note  The supplied file path can be a network path: for example, \"\\\\machinename\\c$\\windows\\system32\\notepad.exe\"."
+      },
+      {
+        "in_out": "_Inout_opt_",
+        "type": "PWSTR",
+        "name": "pwszLanguage",
+        "description": "Pointer to a buffer containing a language string. On input, this buffer contains the language identifier or language name for which the application should find language-specific resource files, depending on the settings of dwFlags. On successful return from the function, this parameter contains the language of the language-specific resource file that the function has found. Alternatively, the application can set this parameter to NULL, with the value referenced by  pcchLanguage set to 0. In this case, the function retrieves the required buffer size in pcchLanguage."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "pcchLanguage",
+        "description": "Pointer to the buffer size, in characters, for the language string indicated by pwszLanguage. If the application sets the value referenced by this parameter to 0 and  passes NULL for pwszLanguage, then the required buffer size will be returned in pcchLanguage and the returned buffer size is always LOCALE_NAME_MAX_LENGTH, because the function is typically called multiple times in succession. The function cannot determine the exact size of the language name for all successive calls, and cannot extend the buffer on subsequent calls. Thus LOCALE_NAME_MAX_LENGTH is the only safe maximum."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PWSTR",
+        "name": "pwszFileMUIPath",
+        "description": "Pointer to a buffer containing the path to the language-specific resource file. It is strongly recommended to allocate this buffer to be of size MAX_PATH. Alternatively, this parameter can retrieve NULL if the value referenced by pcchFileMUIPath is set to 0. In this case, the function retrieves the required size for the file path buffer in pcchFileMUIPath."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "pcchFileMUIPath",
+        "description": "Pointer to the buffer size, in characters, for the file path indicated by pwszFileMUIPath. On successful return from the function, this parameter indicates the size of the retrieved file path. If the application sets the value referenced by this parameter to 0, the function retrieves NULL for pwszFileMUIPath, the required buffer size will be returned in pcchFileMUIPath and the returned buffer size is always MAX_PATH, because the function is typically called multiple times in succession. The function cannot determine the exact size of the path for all successive calls, and cannot extend the buffer on subsequent calls. Thus MAX_PATH is the only safe maximum."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONGLONG",
+        "name": "pululEnumerator",
+        "description": "Pointer to an enumeration variable. The first time this function is called, the value of the variable should be 0. Between subsequent calls, the application should not change the value of this parameter. After the function retrieves all possible language-specific resource file paths, it returns FALSE."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the process preferred UI languages. For more information, see User Interface Language Management.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns TRUE if successful or FALSE otherwise. To get extended error information, the application can call GetLastError, which can return one of the following error codes: If the process preferred UI language list is empty or if the languages specified for the process are not valid, the function succeeds and returns an empty multistring in pwszLanguagesBuffer and 2 in the pcchLanguagesBuffer parameter. ",
+    "remarks": "Depending on the flags specified by the application, this function can retrieve a list consisting of the process preferred UI languages. If it encounters a duplicate language, the function only retrieves the first instance of the duplicated language. When MUI_LANGUAGE_ID is specified, the language strings retrieved will be hexadecimal language identifiers   that do not include the leading 0x, and will be 4 characters in length. For example, en-US will be returned   as \"0409\" and en as \"0009\". ",
+    "return_type": "BOOL",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "GetProcessPreferredUILanguages",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags identifying the language format to use for the process preferred UI languages. The flags are mutually exclusive, and the default is MUI_LANGUAGE_NAME.   ValueMeaning  MUI_LANGUAGE_ID   Retrieve the language strings in language identifier format.   MUI_LANGUAGE_NAME   Retrieve the language strings in language name format."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONG",
+        "name": "pulNumLanguages",
+        "description": "Pointer to the number of languages retrieved in pwszLanguagesBuffer."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PZZWSTR",
+        "name": "pwszLanguagesBuffer",
+        "description": "Optional. Pointer to a double null-terminated multi-string buffer in which the function retrieves an ordered, null-delimited list in preference order, starting with the most preferable.  Alternatively if this parameter is set to NULL and pcchLanguagesBuffer is set to 0, the function retrieves the required size of the language buffer in pcchLanguagesBuffer. The required size includes the two null characters."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "pcchLanguagesBuffer",
+        "description": "Pointer to the size, in characters, for the language buffer indicated by pwszLanguagesBuffer. On successful return from the function, the parameter contains the size of the retrieved language buffer. Alternatively if this parameter is set to 0 and pwszLanguagesBuffer is set to NULL, the function retrieves the required size of the language buffer in pcchLanguagesBuffer."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the language identifier for the system default UI language of the operating system, also known as the \"install language\" on Windows Vista and later. For more information, see User Interface Language Management.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns the language identifier for the system default UI language of the operating system. For more information, see the Remarks section. ",
+    "remarks": "This function never returns a language identifier for a Language Interface Pack (LIP). It also never returns a language identifier corresponding to the locale identifier LOCALE_CUSTOM_UNSPECIFIED or LOCALE_CUSTOM_UI_DEFAULT. Note that this function does not necessarily return the identifier for the first language in the system preferred UI languages list. Therefore the return might not match the first element retrieved by GetSystemPreferredUILanguages. ",
+    "return_type": "LANGID",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "GetSystemDefaultUILanguage",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the system preferred UI languages. For more information, see User Interface Language Management.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns TRUE if successful or FALSE otherwise. To get extended error information, the application can call GetLastError, which can return one of the following error codes: If the function fails for any other reason, the parameters pulNumLanguages and pcchLanguagesBuffer are undefined. ",
+    "remarks": "When MUI_LANGUAGE_ID is specified, the language strings retrieved will be hexadecimal language identifiers   that do not include the leading 0x, and will be 4 characters in length. For example, en-US will be returned   as \"0409\" and en as \"0009\". The system preferred UI languages cannot include more than one Language Interface Pack (LIP) language that corresponds to a supplemental locale. If the list includes more than one of these languages, and if the application specifies MUI_LANGUAGE_ID in the call to the function, the language buffer contains \"1400\" for that language. This string corresponds to the hexadecimal value of LOCALE_CUSTOM_UI_DEFAULT. If the MUI_MACHINE_LANGUAGE_SETTINGS flag is set, this function checks each language in the list that represents a valid NLS locale. The retrieved list can contain the following items: If the MUI_MACHINE_LANGUAGE_SETTINGS flag is set and the system preferred UI languages list is empty, the function retrieves an empty string in the language buffer (two null characters, because it is a multistring buffer), 0 for the number of languages, and 2 for the buffer size. If the MUI_MACHINE_LANGUAGE_SETTINGS flag is not set, the retrieved language list has the following characteristics: ",
+    "return_type": "BOOL",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "GetSystemPreferredUILanguages",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags identifying language format and filtering. The following flags specify the format to use for the system preferred UI languages. The flags are mutually exclusive, and the default is MUI_LANGUAGE_NAME.  ValueMeaning  MUI_LANGUAGE_ID   Retrieve the language strings in language identifier format.   MUI_LANGUAGE_NAME   Retrieve the language strings in language name format.     The following flag specifies whether the function is to validate the list of languages (default) or retrieve the system preferred UI languages list exactly as it is stored in the registry.  ValueMeaning  MUI_MACHINE_LANGUAGE_SETTINGS   Retrieve the stored system preferred UI languages list, checking only to ensure that each language name corresponds to a valid NLS locale. If this flag is not set, the function retrieves the system preferred UI languages in pwszLanguagesBuffer, as long as the list is non-empty and meets the validation criteria. Otherwise, the function retrieves the system default user interface language in the language buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONG",
+        "name": "pulNumLanguages",
+        "description": "Pointer to the number of languages retrieved in pwszLanguagesBuffer."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PZZWSTR",
+        "name": "pwszLanguagesBuffer",
+        "description": "Optional. Pointer to a buffer in which this function retrieves an ordered, null-delimited system preferred UI languages list, in the format specified by dwFlags. This list ends with two null characters. Alternatively if this parameter is set to NULL and pcchLanguagesBuffer is set to 0, the function retrieves the required size of the language buffer in pcchLanguagesBuffer. The required size includes the two null characters"
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "pcchLanguagesBuffer",
+        "description": "Pointer to the size, in characters, for the language buffer indicated by pwszLanguagesBuffer. On successful return from the function, the parameter contains the size of the retrieved language buffer. Alternatively if this parameter is set to 0 and pwszLanguagesBuffer is set to NULL, the function retrieves the required size of the language buffer in pcchLanguagesBuffer."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the thread preferred UI languages for the current thread. For more information, see User Interface Language Management.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns TRUE if successful or FALSE otherwise. To get extended error information, the application can call GetLastError, which returns one of the following error codes: If the function fails for any other reason, the parameters pulNumLanguages and pcchLanguagesBuffer are undefined. ",
+    "remarks": "Depending on the flags specified by the application, this function can retrieve a composite list consisting of the thread preferred UI languages, process preferred UI languages, user preferred UI languages or system preferred UI languages, and the system default UI language. If it encounters a duplicate language, the function only retrieves the first language. If the application has called SetThreadPreferredUILanguages with the MUI_CONSOLE_FILTER or MUI_COMPLEX_SCRIPT_FILTER flag, GetThreadPreferredUILanguages filters the languages in the result list. The function replaces the languages the console cannot display with a substitute language. The substitution for a language is determined from the value of LOCALE_SCONSOLEFALLBACKNAME for the language. For more console information, see the description of SetThreadUILanguage. Use of MUI_LANGUAGE_NAME is recommended over MUI_LANGUAGE_ID because the MUI_LANGUAGE_NAME flag can do a better job of handling Language Interface Pack (LIP) languages that correspond to supplemental locales. When MUI_LANGUAGE_ID is specified, the language strings retrieved will be hexadecimal language identifiers   that do not include the leading 0x, and will be 4 characters in length. For example, en-US will be returned   as \"0409\" and en as \"0009\". If the application sets the MUI_LANGUAGE_ID flag, the thread preferred UI languages can include one or more languages that correspond to supplemental locales. On successful return from the function, the language buffer contains \"1400\" for any language corresponding to a supplemental locale. There can be only one such language in this list. The string \"1400\" corresponds to the hexadecimal value of LOCALE_CUSTOM_UI_DEFAULT. Also on successful return from the function, the pwszLanguagesBuffer contains \"1000\" for any other language that corresponds to a supplemental locale. The string \"1000\" corresponds to the hexadecimal value of LOCALE_CUSTOM_UNSPECIFIED, which is not useful as an input to any function, because it cannot distinguish among supplemental locales. ",
+    "return_type": "BOOL",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "GetThreadPreferredUILanguages",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags identifying language format and filtering. The following flags specify the language format to use for the thread preferred UI languages. The flags are mutually exclusive, and the default is MUI_LANGUAGE_NAME.   ValueMeaning  MUI_LANGUAGE_ID   Retrieve the language strings in language identifier format.   MUI_LANGUAGE_NAME   Retrieve the language strings in language name format.     The following flags specify filtering for the function to use in retrieving the thread preferred UI languages. The default flag is MUI_MERGE_USER_FALLBACK.  ValueMeaning  MUI_MERGE_SYSTEM_FALLBACK   Use the system fallback to retrieve a list that corresponds exactly to the language list used by the resource loader. This flag can be used only in combination with MUI_MERGE_USER_FALLBACK. Using the flags in combination alters the usual effect of MUI_MERGE_USER_FALLBACK by including fallback and neutral languages in the list.   MUI_MERGE_USER_FALLBACK   Retrieve a composite list consisting of the thread preferred UI languages, followed by process preferred UI languages, followed by any user preferred UI languages that are distinct from these, followed by the system default UI language, if it is not already in the list. If the user preferred UI languages list is empty, the function retrieves the system preferred UI languages. This flag cannot be combined with MUI_THREAD_LANGUAGES.   MUI_THREAD_LANGUAGES   Retrieve only the thread preferred UI languages for the current thread, or an empty list if no preferred languages are set for the current thread. This flag cannot be combined with MUI_MERGE_USER_FALLBACK or MUI_MERGE_SYSTEM_FALLBACK.   MUI_UI_FALLBACK   Retrieve a complete thread preferred UI languages list along with associated fallback and neutral languages. Use of this flag is equivalent to combining MUI_MERGE_SYSTEM_FALLBACK and MUI_MERGE_USER_FALLBACK. (Applicable only for Windows 7 and later)."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONG",
+        "name": "pulNumLanguages",
+        "description": "Pointer to the number of languages retrieved in pwszLanguagesBuffer."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PZZWSTR",
+        "name": "pwszLanguagesBuffer",
+        "description": "Optional. Pointer to a buffer in which this function retrieves an ordered, null-delimited thread preferred UI languages list, in the format specified by dwFlags. This list ends with two null characters.  Alternatively if this parameter is set to NULL and pcchLanguagesBuffer is set to 0, the function retrieves the required size of the language buffer in pcchLanguagesBuffer. The required size includes the two null characters."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "pcchLanguagesBuffer",
+        "description": "Pointer to the size, in characters, for the language buffer indicated by pwszLanguagesBuffer. On successful return from the function, the parameter contains the size of the retrieved language buffer. Alternatively if this parameter is set to 0 and pwszLanguagesBuffer is set to NULL, the function retrieves the required size of the language buffer in pcchLanguagesBuffer."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Returns the language identifier of the first user interface language for the current thread.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns the identifier for a language explicitly associated with the thread by SetThreadUILanguage or SetThreadPreferredUILanguages. Alternatively, if no language has been explicitly associated with the current thread, the identifier can indicate a user or system user interface language. ",
+    "remarks": "Calling this function is identical to calling GetThreadPreferredUILanguages with dwFlags set to MUI_MERGE_SYSTEM_FALLBACK | MUI_MERGE_USER_FALLBACK | MUI_LANGUAGE_ID and using the first language in the retrieved list. The return value for this function does not provide useful information about a Language Interface Pack (LIP) language if that language corresponds to a supplemental locale. For such a language, the function returns the hexadecimal value \"1400\", which corresponds to LOCALE_CUSTOM_UI_DEFAULT if that language is specified in the user preferred UI languages list. If the language is not specified in the user preferred UI languages list, the function returns the value \"1000\", corresponding to LOCALE_CUSTOM_UNSPECIFIED. ",
+    "return_type": "LANGID",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "GetThreadUILanguage",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Gets a fallback list of UI languages represented as language names.",
+    "library": "Muiload.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Muiload.h",
+    "return_value": "Returns TRUE if the function retrieves a list of fallback languages or FALSE otherwise. To get extended error information, the application can call GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "GetUILanguageFallbackList",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_Out_opt_",
+        "type": "PWSTR",
+        "name": "pFallbackList",
+        "description": "Pointer to a double null-terminated buffer in which the function retrieves an ordered, null-delimited list of language names. Alternatively, this parameter contains NULL if cchFallbackList is set to 0. In this case, the function retrieves the required size of the language buffer in pcchFallbackListOut."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cchFallbackList",
+        "description": "Size, in characters, of the language buffer indicated by pFallbackList. Alternatively, the application can set this parameter to 0. In this case, the function retrieves the required size of the language buffer in pcchFallbackListOut."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PULONG",
+        "name": "pcchFallbackListOut",
+        "description": "Pointer to a buffer in which the function retrieves the size of the retrieved language list. Alternatively, if cchFallbackList specifies 0, the function retrieves the required size of the language buffer."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves a variety of information about an installed UI language:",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns TRUE if successful or FALSE otherwise. To get extended error information, the application can call GetLastError, which can return the following error codes: If GetLastError returns any other error code, the parameters pcchFallbackLanguages and pdwAttributes are undefined. ",
+    "remarks": "MUI_LANGUAGE_NAME is recommended over MUI_LANGUAGE_ID because it allows the function to do a better job of handling LIP languages that do not correspond to predefined locales, but instead correspond to a supplemental locale. LIP languages that correspond to predefined locales are handled just like non-LIP languages. If the MUI_LANGUAGE_ID flag is specified, the supplied language strings must   use hexadecimal language identifiers that do not include the leading 0x, and are 4 characters in length.   For example, en-US should be passed as \"0409\" and en as \"0009\". The returned language strings will be in the   same format. When MUI_LANGUAGE_ID is specified, and if there is such a language in the user preferred UI languages list, there can be only one such language in the list. That language can be specified in pwmszLanguage as \"1400\", which corresponds to the hexadecimal value of LOCALE_CUSTOM_UI_DEFAULT. No other such language can be specified using MUI_LANGUAGE_ID. Using \"1000\", which corresponds to the hexadecimal value of LOCALE_CUSTOM_UNSPECIFIED, in the string indicated by pwmszLanguage will result in an ERROR_INVALID_PARAMETER code. A partially localized language can have a fallback language that is partially localized, requiring repeated calls to GetUILanguageInfo to obtain full information. Consider the case of a partially localized language Lang1 that offers a choice of three fallback languages. The Lang3 fallback language is partially localized, and offers a choice of two fallback languages. The dependencies are as follows, with the default fallback listed first: To get the fallback language(s) of Lang1, the application passes in pwmszLanguage as \"Lang1\\0\\0\". On return from the function, pwszFallbackLanguages is set to \"Lang2\\0Lang3\\0Lang4\\0\\0\". Note that the ordering of this list indicates that Lang2 is the default fallback language. To get the fallback language(s) of Lang3 in relation to Lang1, the application passes in pwmszLanguage as \"lang1\\0\\lang3\\0\\0\". On return from the function, pwszFallbackLanguages is set to \"Lang5\\0Lang6\\0\\0\". This function returns ERROR_INVALID_PARAMETER for any of the following: The ERROR_OBJECT_NAME_NOT_FOUND error code occurs if pwmszLanguage can be parsed, but is not valid. The code might also be returned for an invalid locale identifier, or if the first language in the input list is not an installed language, or if a fully localized language has defined a fallback language. ",
+    "return_type": "BOOL",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "GetUILanguageInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags defining the format of the specified language. The flags are mutually exclusive, and the default is MUI_LANGUAGE_NAME.  ValueMeaning  MUI_LANGUAGE_ID   Retrieve the language strings in language identifier format.   MUI_LANGUAGE_NAME   Retrieve the language strings in language name format."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCZZWSTR",
+        "name": "pwmszLanguage",
+        "description": "Pointer to languages for which the function is to retrieve information. This parameter indicates an ordered, null-delimited list of language identifiers or language names, depending on the flag setting. For information on the use of this parameter, see the Remarks section."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PZZWSTR",
+        "name": "pwszFallbackLanguages",
+        "description": "Pointer to a buffer in which this function retrieves an ordered, null-delimited list of fallback languages, formatted as defined by the setting for dwFlags. This list ends with two null characters. Alternatively if this parameter is set to NULL and pcchLanguagesBuffer is set to 0, the function retrieves the required size of the language buffer in pcchLanguagesBuffer. The required size includes the two null characters."
+      },
+      {
+        "in_out": "_Inout_opt_",
+        "type": "PDWORD",
+        "name": "pcchFallbackLanguages",
+        "description": "Pointer to the size, in characters, for the language buffer indicated by pwszFallbackLanguages. On successful return from the function, the parameter contains the size of the retrieved language buffer. Alternatively if this parameter is set to 0 and pwszLanguagesBuffer is set to NULL, the function retrieves the required size of the language buffer in pcchLanguagesBuffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDWORD",
+        "name": "pdwAttributes",
+        "description": "Pointer to flags indicating attributes of the input language list. The function always retrieves the flag characterizing the last language listed.  ValueMeaning  MUI_FULL_LANGUAGE   The language is fully localized.   MUI_PARTIAL_LANGUAGE   The language is partially localized.   MUI_LIP_LANGUAGE   The language is an LIP language.     In addition, pdwAttributes includes one or both of the following flags, as appropriate.  ValueMeaning  MUI_LANGUAGE_INSTALLED   The language is installed on this computer.   MUI_LANGUAGE_LICENSED   The language is appropriately licensed for the current user."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Returns the language identifier for the user UI language for the current user. If the current user has not set a language, GetUserDefaultUILanguage returns the preferred language set for the system. If there is no preferred language set for the system, then the system default UI language (also known as \"install language\") is returned. For more information about the user UI language, see User Interface Language Management.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns the language identifier for the user UI language for the current user. ",
+    "remarks": "This function returns only a language identifier. An application can retrieve the language name using the GetUserPreferredUILanguages function. If the user UI language is part of a Language Interface Pack (LIP) and corresponds to a supplemental locale, this function returns LOCALE_CUSTOM_UI_DEFAULT. Windows Me, Windows 2000, Windows XP, Windows Server 2003: The GetUserDefaultUILanguage function retrieves the language identifier for the current user language. If MUI is not installed on the operating system, the function retrieves the default computer user interface language. ",
+    "return_type": "LANGID",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "GetUserDefaultUILanguage",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves information about the user preferred UI languages. For more information, see User Interface Language Management.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns TRUE if successful or FALSE otherwise. To get extended error information, the application can call GetLastError, which can return one of the following error codes: If the function fails for any other reason, the values of pulNumLanguages and pcchLanguagesBuffer are undefined. ",
+    "remarks": "When MUI_LANGUAGE_ID is specified, the language strings retrieved will be hexadecimal language identifiers   that do not include the leading 0x, and will be 4 characters in length. For example, en-US will be returned   as \"0409\" and en as \"0009\". The user preferred UI languages cannot include more than one Language Interface Pack (LIP) language that corresponds to a supplemental locale. If the list includes more than one of these languages, and if the application specifies MUI_LANGUAGE_ID in the call to the function, the language buffer contains \"1400\" for that language. This string corresponds to the hexadecimal value of LOCALE_CUSTOM_UI_DEFAULT. The language list retrieved by this function has the following characteristics: ",
+    "return_type": "BOOL",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "GetUserPreferredUILanguages",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags identifying language format and filtering. The following flags specify the language format to use for the user preferred UI languages list. The flags are mutually exclusive, and the default is MUI_LANGUAGE_NAME.  ValueMeaning  MUI_LANGUAGE_ID   Retrieve the language strings in language identifier format.   MUI_LANGUAGE_NAME   Retrieve the language strings in language name format."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONG",
+        "name": "pulNumLanguages",
+        "description": "Pointer to the number of languages retrieved in pwszLanguagesBuffer."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PZZWSTR",
+        "name": "pwszLanguagesBuffer",
+        "description": "Optional. Pointer to a buffer in which this function retrieves an ordered, null-delimited user preferred UI languages list, in the format specified by dwflags. This list ends with two null characters. Alternatively if this parameter is set to NULL and pcchLanguagesBuffer is set to 0, the function retrieves the required size of the language buffer in pcchLanguagesBuffer. The required size includes the two null characters."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "pcchLanguagesBuffer",
+        "description": "Pointer to the size, in characters, for the language buffer indicated by pwszLanguagesBuffer. On successful return from the function, the parameter contains the size of the retrieved language buffer. Alternatively if this parameter is set to 0 and pwszLanguagesBuffer is set to NULL, the function retrieves the required size of the language buffer in pcchLanguagesBuffer."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the process preferred UI languages for the application process. For more information, see User Interface Language Management.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns TRUE if successful or FALSE otherwise. To get extended error information, the application can call GetLastError, which can return the following error code: If the process preferred UI languages list is empty or if the languages specified for the process are not valid, the function succeeds and sets 0 in the pulNumLanguages parameter. ",
+    "remarks": "Ideally, applications will call SetProcessPreferredUILanguages as soon as possible after launching. After this function returns, the application can call GetProcessPreferredUILanguages to verify and examine the resulting language list. When MUI_LANGUAGE_ID is specified, the input parameter language strings must use hexadecimal language   identifiers that do not include the leading 0x, and are 4 characters in length. For example, en-US should be   passed as \"0409\" and en as \"0009\". ",
+    "return_type": "BOOL",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "SetProcessPreferredUILanguages",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags identifying the language format to use for the process preferred UI languages. The flags are mutually exclusive, and the default is MUI_LANGUAGE_NAME.   ValueMeaning  MUI_LANGUAGE_ID   The input parameter language strings are in language identifier format.   MUI_LANGUAGE_NAME   The input parameter language strings are in language name format."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCZZWSTR",
+        "name": "pwszLanguagesBuffer",
+        "description": "Pointer to a double null-terminated multi-string buffer that contains an ordered, null-delimited list in decreasing order of preference. If there are more than five languages in the buffer, the function only sets the first five valid languages. Alternatively, this parameter can contain NULL if no language list is required. In this case, the function clears the preferred UI languages for the process."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PULONG",
+        "name": "pulNumLanguages",
+        "description": "Pointer to the number of languages that has been set in the process language list from the input buffer, up to a maximum of five."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the thread preferred UI languages for the current thread. For more information, see User Interface Language Management.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns TRUE if the function succeeds or FALSE otherwise. ",
+    "remarks": "When the application loads resources after a call to this function, the thread-specific preferences take priority over the languages preferred by the user. This function can set up to five preferred languages for the thread, in order of preference. If the language buffer contains more than five valid languages, the function sets the first five valid languages and ignores the rest. If the application calls this function with the MUI_LANGUAGE_ID flag set, the strings in the language list must use hexadecimal language   identifiers that do not include the leading 0x, and are 4 characters in length. For example, en-US should be   passed as \"0409\" and en as \"0009\". When MUI_LANGUAGE_ID is specified, the hexadecimal values in the language list must each represent an actual language identifier. In particular, the following locale identifier values cannot be used to correspond to the language identifier: Calling this function with an empty language list and setting the MUI_CONSOLE_FILTER flag has the same effect as calling SetThreadUILanguage with the language identifier set to 0. The language is set appropriately for use in a console window. After this function returns, the application can call GetThreadPreferredUILanguages to verify and examine the resulting language list. When MUI_CONSOLE_FILTER or MUI_COMPLEX_FILTER has been set by SetThreadPreferredUILanguages, the GetThreadPreferredUILanguages function replaces with the fallback the languages the console cannot display using the current operating system language setting. The fallback for a language is determined based on the value of LOCALE_SCONSOLEFALLBACKNAME for the language. Setting the MUI_COMPLEX_SCRIPT_FILTER flag in the call to SetThreadPreferredUILanguages causes GetThreadPreferredUILanguages  to remove languages that the console cannot display with languages that can only be rendered using Uniscribe, and insert the fallback language as the ultimate fallback. Examples of such languages are Arabic or the various Indic languages. Setting the MUI_CONSOLE_FILTER flag in the call to SetThreadPreferredUILanguages causes GetThreadPreferredUILanguages to remove languages the console cannot display with the current system setting and insert the fallback language as the ultimate fallback, because the console is limited to displaying characters from a single code page. For example, if the user language is Japanese (Japan), but the current console code page is the code page for Russian (Russia), the console displays Japanese-language text mostly as a series of character-not-found symbols. GetThreadPreferredUILanguages chooses a language from the fallback list that will be legible in the console. To change the code page, the application uses the setlocale function, or equivalent. ",
+    "return_type": "BOOL",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "SetThreadPreferredUILanguages",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags identifying format and filtering for the languages to set. The following flags specify the language format to use for the thread preferred UI languages. The flags are mutually exclusive, and the default is MUI_LANGUAGE_NAME.  ValueMeaning  MUI_LANGUAGE_ID   The input parameter language strings are in language identifier format.   MUI_LANGUAGE_NAME   The input parameter language strings are in language name format.     The following flags specify filtering for the language list. The flags are mutually exclusive. By default, neither MUI_COMPLEX_SCRIPT_FILTER nor MUI_CONSOLE_FILTER is set. For more information about the filtering flags, see the Remarks section.  ValueMeaning  MUI_COMPLEX_SCRIPT_FILTER    GetThreadPreferredUILanguages should replace with the appropriate fallback all languages having complex scripts. When this flag is specified, NULL must be passed for all other parameters.   MUI_CONSOLE_FILTER    GetThreadPreferredUILanguages should replace with the appropriate fallback all languages that cannot display properly in a console window with the current operating system settings. When this flag is specified, NULL must be passed for all other parameters.   MUI_RESET_FILTERS   Reset the filtering for the language list by removing any other filter settings. When this flag is specified, NULL must be passed for all other parameters. After setting this flag, the application can call GetThreadPreferredUILanguages to retrieve the complete unfiltered list."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCZZWSTR",
+        "name": "pwszLanguagesBuffer",
+        "description": "Pointer to a double null-terminated multi-string buffer that contains an ordered, null-delimited list, in the format specified by dwFlags. To clear the thread preferred UI languages list, the application can set this parameter to a null string or an empty double null-terminated string. The application is recommended to pass a value of 0 for the dwFlags parameter in this case. When the application specifies one of the filtering flags, it must set this parameter to NULL. In this case, the function succeeds, but does not reset the thread preferred languages."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PULONG",
+        "name": "pulNumLanguages",
+        "description": "Pointer to the number of languages that the function has set in the thread preferred UI languages list. When the application specifies one of the filtering flags, the function must set this parameter to NULL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the user interface language for the current thread.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns the input language identifier if successful. If the input identifier is nonzero, the function returns that value. If the language identifier is 0, the function always succeeds and returns the identifier of the language that best supports the Windows console. See the Remarks section. If the input language identifier is nonzero and the function fails, the return value differs from the input language identifier. To get extended error information, the application can call GetLastError. ",
+    "remarks": "When a thread is created, the thread user interface language setting is empty and the user interface for the thread is displayed in the user-selected language. This function enables the application to change the user interface language for the current running thread. Windows Vista and later: Calling this function and specifying 0 for the language identifier is identical to calling SetThreadPreferredUILanguages with the MUI_CONSOLE_FILTER flag set. If the application specifies a valid nonzero language identifier, the function sets a particular user interface language for the thread. After specifying 0 for the language identifier, the application cannot use any of the following constants to correspond to a language identifier: Windows XP: When the application calls this function with a language identifier of 0, the function first verifies that the current user interface does not require Uniscribe, and that it is supported by the console code page. If the user interface passes these tests, the function uses the supplied value. If not, the function changes the thread user interface language to a language that the Windows console can display. Windows XP does not support a concept of thread user interface language separate from thread locale. Therefore, this function changes the thread locale on Windows XP. It is easy for your application to set a thread to use the most appropriate language for console display, based on user and system preferred UI languages, the language for non-Unicode applications, and the capabilities of the console. ",
+    "return_type": "LANGID",
+    "category": "Multilingual User Interface (MUI)",
+    "name": "SetThreadUILanguage",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LANGID",
+        "name": "LangId",
+        "description": "Language identifier for the user interface language for the thread. Windows Vista and later: The application can specify a language identifier of 0 or a nonzero identifier. For more information, see the Remarks section. Windows XP: The application can only set this parameter to 0. This setting causes the function to select the language that best supports the console display. For more information, see the Remarks section."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  }
+]
+

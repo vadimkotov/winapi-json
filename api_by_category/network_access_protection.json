@@ -1,0 +1,407 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "The AllocConnections function allocates memory for a specified number of Connections structures.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": " ",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI HRESULT WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "AllocConnections",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "Connections",
+        "name": "**connections",
+        "description": "A pointer to an array of newly allocated  Connections  structures."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT16",
+        "name": "connectionsCount",
+        "description": "The number of structures to allocate to connections."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The AllocCountedString function allocates memory for a null-terminated string and returns it in a CountedString structure.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": " ",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI HRESULT WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "AllocCountedString",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "CountedString",
+        "name": "**countedString",
+        "description": "A pointer to the address of  a  newly allocated CountedString structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const WCHAR",
+        "name": "*string",
+        "description": "A pointer to the null-terminated string that is to be returned in  countedString."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The AllocFixupInfo function allocates memory for  a FixupInfo structure of the specified size.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": " ",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI HRESULT WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "AllocFixupInfo",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "FixupInfo",
+        "name": "**fixupInfo",
+        "description": "A pointer to the address of a newly allocated FixupInfo structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT16",
+        "name": "countResultCodes",
+        "description": "The number of result codes to allocate to fixupInfo."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FreeConnections function frees  a Connections data structure.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": "",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI VOID WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "FreeConnections",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "Connections",
+        "name": "*connections",
+        "description": "A pointer to the Connections structure to free."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FreeCountedString function frees  a CountedString data structure.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": "",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI VOID WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "FreeCountedString",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "CountedString",
+        "name": "*countedString",
+        "description": "A pointer to the CountedString data structure to free."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FreeFixupInfo function frees a  FixupInfo data structure.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": "",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI VOID WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "FreeFixupInfo",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "FixupInfo",
+        "name": "*fixupInfo",
+        "description": "A pointer to the FixupInfo data structure to free."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FreeIsolationInfo function frees  an IsolationInfo data structure.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": "",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI VOID WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "FreeIsolationInfo",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IsolationInfo",
+        "name": "*isolationInfo",
+        "description": "A pointer to the IsolationInfo data structure to free."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FreeIsolationInfoEx function frees  an IsolationInfoEx data structure.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": "",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI VOID WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "FreeIsolationInfoEx",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IsolationInfoEx",
+        "name": "*isolationInfo",
+        "description": "A pointer to the IsolationInfoEx data structure to free."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The FreeNapComponentRegistrationInfoArray function frees  a specified number of  NapComponentRegistrationInfo data structures from an array.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": "",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI VOID WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "FreeNapComponentRegistrationInfoArray",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT16",
+        "name": "count",
+        "description": "The number of NapComponentRegistrationInfo structures in info to free."
+      },
+      {
+        "in_out": "_In_",
+        "type": "NapComponentRegistrationInfo",
+        "name": "**info",
+        "description": "A pointer to an array of NapComponentRegistrationInfo data structures to be freed."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FreeNetworkSoH function frees  a NetworkSoH data structure.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": "",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI VOID WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "FreeNetworkSoH",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "NetworkSoH",
+        "name": "*networkSoh",
+        "description": "A pointer to the NetworkSoH data structure to free."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FreePrivateData function frees  a PrivateData data structure.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": "",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI VOID WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "FreePrivateData",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PrivateData",
+        "name": "*privateData",
+        "description": "A pointer to the PrivateData data structure to free."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FreeSoH function frees a  SoH data structure.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": "",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI VOID WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "FreeSoH",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SoH",
+        "name": "*soh",
+        "description": "A pointer to the SoH data structure to free."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The FreeSoHAttributeValue function frees  an SoHAttributeValue data structure.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": "",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI VOID WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "FreeSoHAttributeValue",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SoHAttributeType",
+        "name": "type",
+        "description": "A SoHAttributeType value that specifies the type of SoH attribute value  to free."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SoHAttributeValue",
+        "name": "*value",
+        "description": "A pointer to the SoHAttributeValue to free."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FreeSystemHealthAgentState function frees  a SystemHealthAgentState data structure.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": "",
+    "remarks": " All the COM interfaces supported by the NAP system use standard COM memory management rules and the COM memory allocators (CoTaskMemAlloc and CoTaskMemFree): All NAP functions for freeing memory also free all embedded pointers. ",
+    "return_type": "NAPAPI VOID WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "FreeSystemHealthAgentState",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SystemHealthAgentState",
+        "name": "*state",
+        "description": "A pointer to the SystemHealthAgentState data structure to free."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The InitializeNapAgentNotifier function subscribes the calling process to NapAgent state change notifications and quarantine state change notifications. These notifications are provided by the NapAgent service.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": " ",
+    "remarks": "This function is not thread safe. Each process that requires a subscription to NapAgent service notifications of the specified type must call InitializeNapAgentNotifier to subscribe to notifications. If a process must subscribe to more than one type of notification, it must call InitializeNapAgentNotifier once for each type of notification. Once a process does not require further notifications, the process must call UninitializeNapAgentNotifier for the specified type. ",
+    "return_type": "NAPAPI HRESULT WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "InitializeNapAgentNotifier",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "NapNotifyType",
+        "name": "type",
+        "description": "A NapNotifyType value that specifies the type of service notifications to receive."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hNotifyEvent",
+        "description": "An event handle used for notification. The caller must pass an open handle to the hNotifyEvent parameter. The caller must also close the event handle when it is no longer needed."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The UninitializeNapAgentNotifier function unsubscribes the calling process from NapAgent state change notifications and quarantine state change notifications. These notifications are provided by the NapAgent service.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "NapUtil.h",
+    "return_value": "This function has no return values. ",
+    "remarks": "This function is not thread safe. Each process subscribed to NapAgent service notifications of the specified type must call UninitializeNapAgentNotifier to unsubscribe from notifications. If a process is subscribed to more than one type of notification, it must call UninitializeNapAgentNotifier once for each type of notification. This function will fail silently if the process had not previously called InitializeNapAgentNotifier for the notification type. ",
+    "return_type": "NAPAPI VOID WINAPI",
+    "category": "Network Access Protection (NAP)",
+    "name": "UninitializeNapAgentNotifier",
+    "is_callback": 0,
+    "dll": "Qutil.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "NapNotifyType",
+        "name": "type",
+        "description": "A NapNotifyType value that specifies the type of service notifications to unsubscribe from."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

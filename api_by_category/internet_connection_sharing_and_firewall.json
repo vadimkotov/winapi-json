@@ -1,0 +1,49 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "[Internet Connection Firewall may be altered or unavailable in subsequent versions. Instead, use the Windows Firewall API.]",
+    "library": "",
+    "min_server": "None supported",
+    "header": "NetCon.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "Internet Connection Sharing and Firewall",
+    "name": "NcFreeNetconProperties",
+    "is_callback": 0,
+    "dll": "Netshell.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "NETCON_PROPERTIES",
+        "name": "*pProps",
+        "description": "Pointer to a  NETCON_PROPERTIES structure to be freed."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[Internet Connection Firewall may be altered or unavailable in subsequent versions. Instead, use the Windows Firewall API.]",
+    "library": "",
+    "min_server": "None supported",
+    "header": "NetCon.h",
+    "return_value": "TRUE if connection name is valid. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Internet Connection Sharing and Firewall",
+    "name": "NcIsValidConnectionName",
+    "is_callback": 0,
+    "dll": "Netshell.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pszwName",
+        "description": "Connection name to check."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  }
+]
+

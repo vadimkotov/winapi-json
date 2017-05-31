@@ -1,0 +1,154 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "Copies the specified accelerator table. This function is used to obtain the accelerator-table data that corresponds to an accelerator-table handle, or to determine the size of the accelerator-table data.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If        lpAccelDst is NULL, the return value specifies the number of accelerator-table entries in the original table. Otherwise, it specifies the number of accelerator-table entries that were copied. For an example, see Creating User Editable Accelerators. ",
+    "remarks": "",
+    "return_type": "int WINAPI",
+    "category": "Keyboard Accelerators",
+    "name": "CopyAcceleratorTable",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HACCEL",
+        "name": "hAccelSrc",
+        "description": "Type: HACCEL A handle to the accelerator table to copy."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPACCEL",
+        "name": "lpAccelDst",
+        "description": "Type: LPACCEL An array of ACCEL structures that receives the accelerator-table information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cAccelEntries",
+        "description": "Type: int The number of ACCEL structures to copy to the buffer pointed to by the       lpAccelDst parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Creates an accelerator table.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HACCEL If the function succeeds, the return value is the handle to the created accelerator table; otherwise, it is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "Before an application closes, it can use the DestroyAcceleratorTable function to destroy any accelerator tables that it created by using the CreateAcceleratorTable function. For an example, see Creating User Editable Accelerators. ",
+    "return_type": "HACCEL WINAPI",
+    "category": "Keyboard Accelerators",
+    "name": "CreateAcceleratorTable",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPACCEL",
+        "name": "lpaccl",
+        "description": "Type: LPACCEL An array of ACCEL structures that describes the accelerator table."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cEntries",
+        "description": "Type: int The number of ACCEL structures in the array. This must be within the range 1 to 32767 or the function will fail."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Destroys an accelerator table.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. However, if the table has been loaded more than one call to LoadAccelerators, the function will return a nonzero value only when DestroyAcceleratorTable has been called an equal number of times. If the function fails, the return value is zero. For an example, see Creating User Editable Accelerators. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Keyboard Accelerators",
+    "name": "DestroyAcceleratorTable",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HACCEL",
+        "name": "hAccel",
+        "description": "Type: HACCEL A handle to the accelerator table to be destroyed. This handle must have been created by a call to the CreateAcceleratorTable or LoadAccelerators function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Loads the specified accelerator table.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HACCEL If the function succeeds, the return value is a handle to the loaded accelerator table. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "If the accelerator table has not yet been loaded, the function loads it from the specified executable file. Accelerator tables loaded from resources are freed automatically when the application terminates. For an example, see Creating Accelerators for Font Attributes. ",
+    "return_type": "HACCEL WINAPI",
+    "category": "Keyboard Accelerators",
+    "name": "LoadAccelerators",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to the module whose executable file contains the accelerator table to be loaded."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpTableName",
+        "description": "Type: LPCTSTR The name of the accelerator table to be loaded. Alternatively, this parameter can specify the resource identifier of an accelerator-table resource in the low-order word and zero in the high-order word. To create this value, use the MAKEINTRESOURCE macro."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Processes accelerator keys for menu commands. The function translates a WM_KEYDOWN or WM_SYSKEYDOWN message to a WM_COMMAND or WM_SYSCOMMAND message (if there is an entry for the key in the specified accelerator table) and then sends the WM_COMMAND or WM_SYSCOMMAND message directly to the specified window procedure. TranslateAccelerator does not return until the window procedure has processed the message.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "To differentiate the message that this function sends from messages sent by menus or controls, the high-order word of the         wParam parameter of the WM_COMMAND or WM_SYSCOMMAND message contains the value 1. Accelerator key combinations used to select items from the         window menu are translated into WM_SYSCOMMAND messages; all other accelerator key combinations are translated into WM_COMMAND messages. When TranslateAccelerator returns a nonzero value and the message is translated, the application should not use the TranslateMessage function to process the message again. An accelerator need not correspond to a menu command. If the accelerator command corresponds to a menu item, the application is sent WM_INITMENU and WM_INITMENUPOPUP messages, as if the user were trying to display the menu. However, these messages are not sent if any of the following conditions exist: If the specified window is the active window and no window has the keyboard focus (which is generally the case if the window is minimized), TranslateAccelerator translates         WM_SYSKEYUP and WM_SYSKEYDOWN messages instead of         WM_KEYUP and WM_KEYDOWN messages. If an accelerator keystroke occurs that corresponds to a menu item when the window that owns the menu is minimized, TranslateAccelerator does not send a WM_COMMAND message. However, if an accelerator keystroke occurs that does not match any of the items in the window's menu or in the         window menu, the function sends a WM_COMMAND message, even if the window is minimized. For an example, see Creating Accelerators for Font Attributes. ",
+    "return_type": "int WINAPI",
+    "category": "Keyboard Accelerators",
+    "name": "TranslateAccelerator",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window whose messages are to be translated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HACCEL",
+        "name": "hAccTable",
+        "description": "Type: HACCEL A handle to the accelerator table. The accelerator table must have been loaded by a call to the LoadAccelerators function or created by a call to the CreateAcceleratorTable function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPMSG",
+        "name": "lpMsg",
+        "description": "Type: LPMSG A pointer to an MSG structure that contains message information retrieved from the calling thread's message queue using the GetMessage or PeekMessage function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

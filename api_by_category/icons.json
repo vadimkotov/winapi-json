@@ -1,0 +1,717 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Copies the specified icon from another module to the current module.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HICON If the function succeeds, the return value is a handle to the duplicate icon. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "The CopyIcon function enables an application or DLL to get its own handle to an icon owned by another module. If the other module is freed, the application icon will still be able to use the icon. Before closing, an application must call the DestroyIcon function to free any system resources associated with the icon. ",
+    "return_type": "HICON WINAPI",
+    "category": "Icons",
+    "name": "CopyIcon",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HICON",
+        "name": "hIcon",
+        "description": "Type: HICON A handle to the icon to be copied."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Creates an icon that has the specified size, colors, and bit patterns.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HICON If the function succeeds, the return value is a handle to an icon. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "The nWidth and nHeight parameters must specify a width and height supported by the current display driver, because the system cannot create icons of other sizes. To determine the width and height supported by the display driver, use the GetSystemMetrics function, specifying the SM_CXICON or SM_CYICON value. CreateIcon applies the following truth table to the AND and XOR bitmasks.  When you are finished using the icon, destroy it using the DestroyIcon function. For an example, see Creating an Icon. ",
+    "return_type": "HICON WINAPI",
+    "category": "Icons",
+    "name": "CreateIcon",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to the instance of the module creating the icon."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nWidth",
+        "description": "Type: int The width, in pixels, of the icon."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nHeight",
+        "description": "Type: int The height, in pixels, of the icon."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "cPlanes",
+        "description": "Type: BYTE The number of planes in the XOR bitmask of the icon."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "cBitsPixel",
+        "description": "Type: BYTE The number of bits-per-pixel in the XOR bitmask of the icon."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "*lpbANDbits",
+        "description": "Type: const BYTE* An array of bytes that contains the bit values for the AND bitmask of the icon. This bitmask describes a monochrome bitmap."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "*lpbXORbits",
+        "description": "Type: const BYTE* An array of bytes that contains the bit values for the XOR bitmask of the icon. This bitmask describes a monochrome or device-dependent color bitmap."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates an icon or cursor from resource bits describing the icon.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HICON If the function succeeds, the return value is a handle to the icon or cursor. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "The CreateIconFromResource, CreateIconFromResourceEx, CreateIconIndirect, GetIconInfo, LookupIconIdFromDirectory, and LookupIconIdFromDirectoryEx functions allow shell applications and icon browsers to examine and use resources throughout the system. The CreateIconFromResource function calls CreateIconFromResourceEx passing LR_DEFAULTSIZE|LR_SHARED as flags. When you are finished using the icon, destroy it using the DestroyIcon function. ",
+    "return_type": "HICON WINAPI",
+    "category": "Icons",
+    "name": "CreateIconFromResource",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PBYTE",
+        "name": "presbits",
+        "description": "Type: PBYTE The buffer containing the icon or cursor resource bits. These bits are typically loaded by calls to the LookupIconIdFromDirectory, LookupIconIdFromDirectoryEx, and LoadResource functions."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwResSize",
+        "description": "Type: DWORD The size, in bytes, of the set of bits pointed to by the presbits parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fIcon",
+        "description": "Type: BOOL Indicates whether an icon or a cursor is to be created. If this parameter is TRUE, an icon is to be created. If it is FALSE, a cursor is to be created."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwVer",
+        "description": "Type: DWORD The version number of the icon or cursor format for the resource bits pointed to by the presbits parameter. The value must be greater than or equal to 0x00020000 and less than or equal to 0x00030000. This parameter is generally set to 0x00030000."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Creates an icon or cursor from resource bits describing the icon.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HICON If the function succeeds, the return value is a handle to the icon or cursor. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "The CreateIconFromResource, CreateIconFromResourceEx, CreateIconIndirect, GetIconInfo, and LookupIconIdFromDirectoryEx functions allow shell applications and icon browsers to examine and use resources throughout the system. You should call DestroyIcon for icons created with CreateIconFromResourceEx. For an example, see Sharing Icon Resources. ",
+    "return_type": "HICON WINAPI",
+    "category": "Icons",
+    "name": "CreateIconFromResourceEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PBYTE",
+        "name": "pbIconBits",
+        "description": "Type: PBYTE The icon or cursor resource bits. These bits are typically loaded by calls to the LookupIconIdFromDirectoryEx and LoadResource functions."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbIconBits",
+        "description": "Type: DWORD The size, in bytes, of the set of bits pointed to by the pbIconBits parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fIcon",
+        "description": "Type: BOOL Indicates whether an icon or a cursor is to be created. If this parameter is TRUE, an icon is to be created. If it is FALSE, a cursor is to be created."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwVersion",
+        "description": "Type: DWORD The version number of the icon or cursor format for the resource bits pointed to by the pbIconBits parameter. The value must be greater than or equal to 0x00020000 and less than or equal to 0x00030000. This parameter is generally set to 0x00030000."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cxDesired",
+        "description": "Type: int The desired width, in pixels, of the icon or cursor. If this parameter is zero, the function uses the SM_CXICON or SM_CXCURSOR system metric value to set the width."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cyDesired",
+        "description": "Type: int The desired height, in pixels, of the icon or cursor. If this parameter is zero, the function uses the SM_CYICON or SM_CYCURSOR system metric value to set the height."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uFlags",
+        "description": "Type: UINT A combination of the following values.  ValueMeaning  LR_DEFAULTCOLOR 0x00000000   Uses the default color format.   LR_DEFAULTSIZE 0x00000040   Uses the width or height specified by the system metric values for cursors or icons, if the cxDesired or cyDesired values are set to zero. If this flag is not specified and cxDesired and cyDesired are set to zero, the function uses the actual resource size. If the resource contains multiple images, the function uses the size of the first image.   LR_MONOCHROME 0x00000001   Creates a monochrome icon or cursor.    LR_SHARED 0x00008000   Shares the icon or cursor handle if the icon or cursor is created multiple times. If LR_SHARED is not set, a second call to CreateIconFromResourceEx for the same resource will create the icon or cursor again and return a different handle. When you use this flag, the system will destroy the resource when it is no longer needed.  Do not use LR_SHARED for icons or cursors that have non-standard sizes, that may change after loading, or that are loaded from a file. When loading a system icon or cursor, you must use LR_SHARED or the function will fail to load the resource."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Creates an icon or cursor from an ICONINFO structure.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HICON If the function succeeds, the return value is a handle to the icon or cursor that is created. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "The system copies the bitmaps in the ICONINFO structure before creating the icon or cursor. Because the system may temporarily select the bitmaps in a device context, the hbmMask and hbmColor members of the ICONINFO structure should not already be selected into a device context. The application must continue to manage the original bitmaps and delete them when they are no longer necessary. When you are finished using the icon, destroy it using the DestroyIcon function. ",
+    "return_type": "HICON WINAPI",
+    "category": "Icons",
+    "name": "CreateIconIndirect",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PICONINFO",
+        "name": "piconinfo",
+        "description": "Type: PICONINFO A pointer to an ICONINFO structure the function uses to create the icon or cursor."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Destroys an icon and frees any memory the icon occupied.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "It is only necessary to call DestroyIcon for icons and cursors created with the following functions: CreateIconFromResourceEx (if called without the LR_SHARED flag), CreateIconIndirect, and CopyIcon. Do not use this function to destroy a shared icon. A shared icon is valid as long as the module from which it was loaded remains in memory. The following functions obtain a shared icon. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Icons",
+    "name": "DestroyIcon",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HICON",
+        "name": "hIcon",
+        "description": "Type: HICON A handle to the icon to be destroyed. The icon must not be in use."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Draws an icon or cursor into the specified device context.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "DrawIcon places the icon's upper-left corner at the location specified by the X and Y parameters. The location is subject to the current mapping mode of the device context. DrawIcon draws the icon or cursor using the width and height specified by the system metric values for icons; for more information, see GetSystemMetrics. For an example, see Displaying an Icon. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Icons",
+    "name": "DrawIcon",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hDC",
+        "description": "Type: HDC A handle to the device context into which the icon or cursor will be drawn."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "X",
+        "description": "Type: int The logical x-coordinate of the upper-left corner of the icon."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Y",
+        "description": "Type: int The logical y-coordinate of the upper-left corner of the icon."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HICON",
+        "name": "hIcon",
+        "description": "Type: HICON A handle to the icon to be drawn."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 9,
+    "description": "Draws an icon or cursor into the specified device context, performing the specified raster operations, and stretching or compressing the icon or cursor as specified.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The DrawIconEx function places the icon's upper-left corner at the location specified by the xLeft and yTop parameters. The location is subject to the current mapping mode of the device context. To duplicate DrawIcon (hDC, X, Y, hIcon), call DrawIconEx as follows: ",
+    "return_type": "BOOL WINAPI",
+    "category": "Icons",
+    "name": "DrawIconEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC A handle to the device context into which the icon or cursor will be drawn."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "xLeft",
+        "description": "Type: int The logical x-coordinate of the upper-left corner of the icon or cursor."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "yTop",
+        "description": "Type: int The logical y-coordinate of the upper-left corner of the icon or cursor."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HICON",
+        "name": "hIcon",
+        "description": "Type: HICON A handle to the icon or cursor to be drawn. This parameter can identify an animated cursor."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cxWidth",
+        "description": "Type: int The logical width of the icon or cursor. If this parameter is zero and the diFlags parameter is DI_DEFAULTSIZE, the function uses the SM_CXICON system metric value to set the width. If this parameter is zero and DI_DEFAULTSIZE is not used, the function uses the actual resource width."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cyWidth",
+        "description": "Type: int The logical height of the icon or cursor. If this parameter is zero and the diFlags parameter is DI_DEFAULTSIZE, the function uses the SM_CYICON system metric value to set the width. If this parameter is zero and DI_DEFAULTSIZE is not used, the function uses the actual resource height."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "istepIfAniCur",
+        "description": "Type: UINT The index of the frame to draw, if hIcon identifies an animated cursor. This parameter is ignored if hIcon does not identify an animated cursor."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HBRUSH",
+        "name": "hbrFlickerFreeDraw",
+        "description": "Type: HBRUSH A handle to a brush that the system uses for flicker-free drawing. If hbrFlickerFreeDraw is a valid brush handle, the system creates an offscreen bitmap using the specified brush for the background color, draws the icon or cursor into the bitmap, and then copies the bitmap into the device context identified by hdc. If hbrFlickerFreeDraw is NULL, the system draws the icon or cursor directly into the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "diFlags",
+        "description": "Type: UINT The drawing flags. This parameter can be one of the following values.  ValueMeaning  DI_COMPAT 0x0004    This flag is ignored.   DI_DEFAULTSIZE 0x0008   Draws the icon or cursor using the width and height specified by the system metric values for icons, if the cxWidth and cyWidth parameters are set to zero. If this flag is not specified and cxWidth and cyWidth are set to zero, the function uses the actual resource size.    DI_IMAGE 0x0002   Draws the icon or cursor using the image.   DI_MASK 0x0001   Draws the icon or cursor using the mask.   DI_NOMIRROR 0x0010    \t\t\t\t\t\t Draws the icon as an unmirrored icon. By default, the icon is drawn as a mirrored icon if hdc is mirrored.   DI_NORMAL 0x0003   Combination of DI_IMAGE and DI_MASK."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Creates a duplicate of a specified icon.",
+    "library": "Shell32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Shellapi.h",
+    "return_value": "Type: HICON If successful, the function returns the handle to the new icon that was created. If unsuccessful, it returns NULL. ",
+    "remarks": "You must destroy the icon handle returned by DuplicateIcon by calling the DestroyIcon function. ",
+    "return_type": "HICON WINAPI",
+    "category": "Icons",
+    "name": "DuplicateIcon",
+    "is_callback": 0,
+    "dll": "Shell32.dll",
+    "arguments": [
+      {
+        "in_out": "_Reserved_",
+        "type": "HINSTANCE",
+        "name": "hInst",
+        "description": "Type: HINSTANCE This parameter is not used; it can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HICON",
+        "name": "hIcon",
+        "description": "Type: HICON A handle to the icon to be duplicated."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves a handle to an indexed icon found in a file or an icon found in an associated executable file.",
+    "library": "Shell32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Shellapi.h",
+    "return_value": "Type: HICON If the function succeeds, the return value is an icon handle. If the icon is extracted from an associated executable file, the function stores the full path and file name of the executable file in the string pointed to by lpIconPath, and stores the icon's identifier in the variable pointed to by lpiIcon. If the function fails, the return value is NULL. ",
+    "remarks": "You must destroy the icon handle returned by ExtractAssociatedIcon by calling the DestroyIcon function. The ExtractAssociatedIcon function first looks for the indexed icon in the file specified by lpIconPath. If the function cannot obtain the icon handle from that file, and the file has an associated executable file, it looks in that executable file for an icon. Associations with executable files are based on file name extensions, are stored in the per-user part of the registry, and can be defined using File Manager's Associate command. ",
+    "return_type": "HICON WINAPI",
+    "category": "Icons",
+    "name": "ExtractAssociatedIcon",
+    "is_callback": 0,
+    "dll": "Shell32.dll",
+    "arguments": [
+      {
+        "in_out": "_Reserved_",
+        "type": "HINSTANCE",
+        "name": "hInst",
+        "description": "Type: HINSTANCE A handle to the instance of the application calling the function."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPTSTR",
+        "name": "lpIconPath",
+        "description": "Type: LPTSTR The full path and file name of the file that contains the icon. The function extracts the icon handle from that file, or from an executable file associated with that file. If the icon handle is obtained from an executable file, the function stores the full path and file name of that executable in the string pointed to by lpIconPath."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "WORD",
+        "name": "*lpiIcon",
+        "description": "Type: WORD* The index of the icon whose handle is to be obtained. If the icon handle is obtained from an executable file, the function stores the icon's identifier in this parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves a handle to an icon from the specified executable file, DLL, or icon file.",
+    "library": "Shell32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Shellapi.h",
+    "return_value": "Type: HICON The return value is a handle to an icon. If the file specified was not an executable file, DLL, or icon file, the return is 1. If no icons were found in the file, the return value is NULL. ",
+    "remarks": "You must destroy the icon handle returned by ExtractIcon by calling the DestroyIcon function. ",
+    "return_type": "HICON WINAPI",
+    "category": "Icons",
+    "name": "ExtractIcon",
+    "is_callback": 0,
+    "dll": "Shell32.dll",
+    "arguments": [
+      {
+        "in_out": "_Reserved_",
+        "type": "HINSTANCE",
+        "name": "hInst",
+        "description": "Type: HINSTANCE A handle to the instance of the application calling the function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszExeFileName",
+        "description": "Type: LPCTSTR The name of an executable file, DLL, or icon file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nIconIndex",
+        "description": "Type: UINT The zero-based index of the icon to retrieve. ..."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Creates an array of handles to large or small icons extracted from the specified executable file, DLL, or icon file.",
+    "library": "Shell32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Shellapi.h",
+    "return_value": "Type: UINT If the nIconIndex parameter is -1, the phiconLarge parameter is NULL, and the phiconSmall parameter is NULL, then the return value is the number of icons contained in the specified file. Otherwise, the return value is the number of icons successfully extracted from the file. ",
+    "remarks": "You must destroy all icons extracted by ExtractIconEx by calling the DestroyIcon function. To retrieve the dimensions of the large and small icons, use the GetSystemMetrics function with the SM_CXICON, SM_CYICON, SM_CXSMICON, and SM_CYSMICON flags. ",
+    "return_type": "UINT WINAPI",
+    "category": "Icons",
+    "name": "ExtractIconEx",
+    "is_callback": 0,
+    "dll": "Shell32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszFile",
+        "description": "Type: LPCTSTR The name of an executable file, DLL, or icon file from which icons will be extracted."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIconIndex",
+        "description": "Type: int The zero-based index of the first icon to extract. ..."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "HICON",
+        "name": "*phiconLarge",
+        "description": "Type: HICON* An array of icon handles that receives handles to the large icons extracted from the file. If this parameter is NULL, no large icons are extracted from the file."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "HICON",
+        "name": "*phiconSmall",
+        "description": "Type: HICON* An array of icon handles that receives handles to the small icons extracted from the file. If this parameter is NULL, no small icons are extracted from the file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nIcons",
+        "description": "Type: UINT The number of icons to be extracted from the file."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves information about the specified icon or cursor.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero and the function fills in the members of the specified ICONINFO structure. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "GetIconInfo creates bitmaps for the hbmMask and hbmColor members of ICONINFO. The calling application must manage these bitmaps and delete them when they are no longer necessary. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Icons",
+    "name": "GetIconInfo",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HICON",
+        "name": "hIcon",
+        "description": "Type: HICON A handle to the icon or cursor. To retrieve information about a standard icon or cursor, specify one of the following values.   ValueMeaning  IDC_APPSTARTING MAKEINTRESOURCE(32650)   Standard arrow and small hourglass cursor.   IDC_ARROW MAKEINTRESOURCE(32512)   Standard arrow cursor.   IDC_CROSS MAKEINTRESOURCE(32515)   Crosshair cursor.   IDC_HAND MAKEINTRESOURCE(32649)    \t\t\t\t\t\t Hand cursor.   IDC_HELP MAKEINTRESOURCE(32651)   Arrow and question mark cursor.   IDC_IBEAM MAKEINTRESOURCE(32513)   I-beam cursor.   IDC_NO MAKEINTRESOURCE(32648)   Slashed circle cursor.   IDC_SIZEALL MAKEINTRESOURCE(32646)   Four-pointed arrow cursor pointing north, south, east, and west.   IDC_SIZENESW MAKEINTRESOURCE(32643)   Double-pointed arrow cursor pointing northeast and southwest.   IDC_SIZENS MAKEINTRESOURCE(32645)   Double-pointed arrow cursor pointing north and south.   IDC_SIZENWSE MAKEINTRESOURCE(32642)   Double-pointed arrow cursor pointing northwest and southeast.   IDC_SIZEWE MAKEINTRESOURCE(32644)   Double-pointed arrow cursor pointing west and east.   IDC_UPARROW MAKEINTRESOURCE(32516)   Vertical arrow cursor.   IDC_WAIT MAKEINTRESOURCE(32514)   Hourglass cursor.   IDI_APPLICATION MAKEINTRESOURCE(32512)   Application icon.   IDI_ASTERISK MAKEINTRESOURCE(32516)   Asterisk icon.   IDI_EXCLAMATION MAKEINTRESOURCE(32515)   Exclamation point icon.   IDI_HAND MAKEINTRESOURCE(32513)   Stop sign icon.   IDI_QUESTION MAKEINTRESOURCE(32514)   Question-mark icon.   IDI_WINLOGO MAKEINTRESOURCE(32517)    Application icon. Windows 2000:  Windows logo icon."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PICONINFO",
+        "name": "piconinfo",
+        "description": "Type: PICONINFO A pointer to an ICONINFO structure. The function fills in the structure's members."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves information about the specified icon or cursor. GetIconInfoEx extends GetIconInfo by using the newer ICONINFOEX structure.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL TRUE indicates success, FALSE indicates failure. ",
+    "remarks": "GetIconInfoEx creates bitmaps for the hbmMask and hbmCol or members of ICONINFOEX. The calling application must manage these bitmaps and delete them when they are no longer necessary. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Icons",
+    "name": "GetIconInfoEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HICON",
+        "name": "hIcon",
+        "description": "Type: HICON A handle to the icon or cursor. To retrieve information about a standard icon or cursor, specify one of the following values.  ValueMeaning  IDC_APPSTARTING MAKEINTRESOURCE(32650)   Standard arrow and small hourglass cursor.   IDC_ARROW MAKEINTRESOURCE(32512)   Standard arrow cursor.   IDC_CROSS MAKEINTRESOURCE(32515)   Crosshair cursor.   IDC_HAND MAKEINTRESOURCE(32649)    Hand cursor.   IDC_HELP MAKEINTRESOURCE(32651)   Arrow and question mark cursor.   IDC_IBEAM MAKEINTRESOURCE(32513)   I-beam cursor.   IDC_NO MAKEINTRESOURCE(32648)   Slashed circle cursor.   IDC_SIZEALL MAKEINTRESOURCE(32646)   Four-pointed arrow cursor pointing north, south, east, and west.   IDC_SIZENESW MAKEINTRESOURCE(32643)   Double-pointed arrow cursor pointing northeast and southwest.   IDC_SIZENS MAKEINTRESOURCE(32645)   Double-pointed arrow cursor pointing north and south.   IDC_SIZENWSE MAKEINTRESOURCE(32642)   Double-pointed arrow cursor pointing northwest and southeast.   IDC_SIZEWE MAKEINTRESOURCE(32644)   Double-pointed arrow cursor pointing west and east.   IDC_UPARROW MAKEINTRESOURCE(32516)   Vertical arrow cursor.   IDC_WAIT MAKEINTRESOURCE(32514)   Hourglass cursor.   IDI_APPLICATION MAKEINTRESOURCE(32512)   Application icon.   IDI_ASTERISK MAKEINTRESOURCE(32516)   Asterisk icon.   IDI_EXCLAMATION MAKEINTRESOURCE(32515)   Exclamation point icon.   IDI_HAND MAKEINTRESOURCE(32513)   Stop sign icon.   IDI_QUESTION MAKEINTRESOURCE(32514)   Question-mark icon.   IDI_WINLOGO MAKEINTRESOURCE(32517)    Application icon. Windows 2000:  Windows logo icon."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PICONINFOEX",
+        "name": "piconinfoex",
+        "description": "Type: PICONINFOEX When this method returns, contains a pointer to an ICONINFOEX structure. The function fills in the structure's members."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Loads the specified icon resource from the executable (.exe) file associated with an application instance.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HICON If the function succeeds, the return value is a handle to the newly loaded icon. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "LoadIcon loads the icon resource only if it has not been loaded; otherwise, it retrieves a handle to the existing resource. The function searches the icon resource for the icon most appropriate for the current display. The icon resource can be a color or monochrome bitmap. LoadIcon can only load an icon whose size conforms to the SM_CXICON and SM_CYICON system metric values. Use the LoadImage function to load icons of other sizes. ",
+    "return_type": "HICON WINAPI",
+    "category": "Icons",
+    "name": "LoadIcon",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to an instance of the module whose executable file contains the icon to be loaded. This parameter must be NULL when a standard icon is being loaded."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpIconName",
+        "description": "Type: LPCTSTR The name of the icon resource to be loaded. Alternatively, this parameter can contain the resource identifier in the low-order word and zero in the high-order word. Use the MAKEINTRESOURCE macro to create this value. To use one of the predefined icons, set the hInstance parameter to NULL and the lpIconName parameter to one of the following values.  ValueMeaning  IDI_APPLICATION MAKEINTRESOURCE(32512)   Default application icon.   IDI_ASTERISK MAKEINTRESOURCE(32516)   Asterisk icon. Same as IDI_INFORMATION.   IDI_ERROR MAKEINTRESOURCE(32513)   Hand-shaped icon.   IDI_EXCLAMATION MAKEINTRESOURCE(32515)   Exclamation point icon. Same as IDI_WARNING.   IDI_HAND MAKEINTRESOURCE(32513)   Hand-shaped icon. Same as IDI_ERROR.    IDI_INFORMATION MAKEINTRESOURCE(32516)   Asterisk icon.   IDI_QUESTION MAKEINTRESOURCE(32514)   Question mark icon.   IDI_SHIELD MAKEINTRESOURCE(32518)   Security Shield icon.    IDI_WARNING MAKEINTRESOURCE(32515)   Exclamation point icon.   IDI_WINLOGO MAKEINTRESOURCE(32517)     \t\t\t\t\t\tDefault application icon. Windows 2000:  Windows logo icon."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Searches through icon or cursor data for the icon or cursor that best fits the current display device.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the function succeeds, the return value is an integer resource identifier for the icon or cursor that best fits the current display device. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "A resource file of type RT_GROUP_ICON (RT_GROUP_CURSOR indicates cursors) contains icon (or cursor) data in several device-dependent and device-independent formats. LookupIconIdFromDirectory searches the resource file for the icon (or cursor) that best fits the current display device and returns its integer identifier. The FindResource and FindResourceEx functions use the MAKEINTRESOURCE macro with this identifier to locate the resource in the module. The icon directory is loaded from a resource file with resource type RT_GROUP_ICON (or RT_GROUP_CURSOR for cursors), and an integer resource name for the specific icon to be loaded. LookupIconIdFromDirectory returns an integer identifier that is the resource name of the icon that best fits the current display device. The LoadIcon, LoadCursor, and LoadImage functions use this function to search the specified resource data for the icon or cursor that best fits the current display device. ",
+    "return_type": "int WINAPI",
+    "category": "Icons",
+    "name": "LookupIconIdFromDirectory",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PBYTE",
+        "name": "presbits",
+        "description": "Type: PBYTE The icon or cursor directory data. Because this function does not validate the resource data, it causes a general protection (GP) fault or returns an undefined value if presbits is not pointing to valid resource data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fIcon",
+        "description": "Type: BOOL Indicates whether an icon or a cursor is sought. If this parameter is TRUE, the function is searching for an icon; if the parameter is FALSE, the function is searching for a cursor."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Searches through icon or cursor data for the icon or cursor that best fits the current display device.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the function succeeds, the return value is an integer resource identifier for the icon or cursor that best fits the current display device. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "A resource file of type RT_GROUP_ICON (RT_GROUP_CURSOR indicates cursors) contains icon (or cursor) data in several device-dependent and device-independent formats. LookupIconIdFromDirectoryEx searches the resource file for the icon (or cursor) that best fits the current display device and returns its integer identifier. The FindResource and FindResourceEx functions use the MAKEINTRESOURCE macro with this identifier to locate the resource in the module. The icon directory is loaded from a resource file with resource type RT_GROUP_ICON (or RT_GROUP_CURSOR for cursors), and an integer resource name for the specific icon to be loaded. LookupIconIdFromDirectoryEx returns an integer identifier that is the resource name of the icon that best fits the current display device. The LoadIcon, LoadImage, and LoadCursor functions use this function to search the specified resource data for the icon or cursor that best fits the current display device. For an example, see Sharing Icon Resources. ",
+    "return_type": "int WINAPI",
+    "category": "Icons",
+    "name": "LookupIconIdFromDirectoryEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PBYTE",
+        "name": "presbits",
+        "description": "Type: PBYTE The icon or cursor directory data. Because this function does not validate the resource data, it causes a general protection (GP) fault or returns an undefined value if presbits is not pointing to valid resource data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fIcon",
+        "description": "Type: BOOL Indicates whether an icon or a cursor is sought. If this parameter is TRUE, the function is searching for an icon; if the parameter is FALSE, the function is searching for a cursor."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cxDesired",
+        "description": "Type: int The desired width, in pixels, of the icon. If this parameter is zero, the function uses the SM_CXICON or SM_CXCURSOR system metric value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cyDesired",
+        "description": "Type: int The desired height, in pixels, of the icon. If this parameter is zero, the function uses the SM_CYICON or SM_CYCURSOR system metric value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "Flags",
+        "description": "Type: UINT A combination of the following values.  ValueMeaning  LR_DEFAULTCOLOR 0x00000000   Uses the default color format.   LR_MONOCHROME 0x00000001   Creates a monochrome icon or cursor."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "[This function is not intended for general       use. It may       be altered or unavailable in subsequent versions of Windows.]",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h",
+    "return_value": "Type: UINT If the phicon \t\t\t\tparameter is NULL and this function succeeds, then the return \t\t\t\tvalue is the number of icons in the file.  If the function fails then the \t\t\t\treturn value is 0. If the phicon parameter is         not NULL and the function succeeds, then the return value is the         number of icons extracted.  Otherwise, the return value is 0xFFFFFFFF if the file         is not found. ",
+    "remarks": "This function extracts from executable (.exe), DLL (.dll),       icon (.ico), cursor (.cur), animated cursor (.ani), and bitmap (.bmp) files.       Extractions from Windows 3.x 16-bit executables (.exe or .dll) are       also supported. The cxIcon and       cyIcon parameters specify the       size of the icons to extract.  Two sizes can be extracted by putting the       first size in the LOWORD of the parameter and the second size in the HIWORD.       For example, MAKELONG(24, 48) for both the cxIcon and cyIcon parameters would extract       both 24 and 48 size icons. You must destroy all icons extracted by PrivateExtractIcons \t\t\tby calling the DestroyIcon function. This function was not included in the SDK headers and libraries until Windows XP Service Pack 1 (SP1) and Windows Server 2003. If you do not have a header file and import library for this function, you can call the function using LoadLibrary and GetProcAddress. ",
+    "return_type": "UINT WINAPI",
+    "category": "Icons",
+    "name": "PrivateExtractIcons",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszFile",
+        "description": "Type: LPCTSTR The path and name of the file \t\t\t\tfrom which the icon(s) are to be extracted."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIconIndex",
+        "description": "Type: int The zero-based index of the first icon to extract. For example, \t\t\t\t  if this value is zero, the function extracts the first icon in the specified \t\t\t\t  file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cxIcon",
+        "description": "Type: int The horizontal icon size wanted. See Remarks."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cyIcon",
+        "description": "Type: int The vertical icon size wanted. See Remarks."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "HICON",
+        "name": "*phicon",
+        "description": "Type: HICON* A pointer to the returned array of icon handles."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "UINT",
+        "name": "*piconid",
+        "description": "Type: UINT* A pointer to a returned resource identifier for the icon that best \t\t\t\tfits the current display device.  The returned identifier is 0xFFFFFFFF if the \t\t\t\tidentifier is not available for this format.  The returned identifier is 0 if \t\t\t\tthe identifier cannot otherwise be obtained."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "nIcons",
+        "description": "Type: UINT The number of icons to extract from the file. This parameter \t\t\t\tis only valid when extracting from .exe and .dll files."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "flags",
+        "description": "Type: UINT Specifies flags that control this function.  These flags are the LR_* \t\t\t\tflags used by the LoadImage function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

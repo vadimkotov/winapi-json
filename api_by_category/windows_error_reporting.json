@@ -1,0 +1,1132 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "[The AddERExcludedApplication function is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use the WerAddExcludedApplication function.]",
+    "library": "Faultrep.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "ErrorRep.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, see  GetLastError. ",
+    "remarks": "This function stores the excluded application list under the HKEY_LOCAL_MACHINE hive. The calling process must have permissions to write to this registry hive. ",
+    "return_type": "BOOL APIENTRY",
+    "category": "Windows Error Reporting (WER)",
+    "name": "AddERExcludedApplication",
+    "is_callback": 0,
+    "dll": "Faultrep.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "szApplication",
+        "description": "The name of the executable file for the application, including the file name extension. The name cannot contain path information."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "WER calls this function to determine whether the exception handler is claiming the crash.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "Return S_OK, even if the exception handler is not claiming this crash. If you return other failure codes, WER reverts to its default crash reporting behavior if no other handlers are registered. ",
+    "remarks": "You must implement this function in your exception handler DLL. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "OutOfProcessExceptionEventCallback",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pContext",
+        "description": "A pointer to arbitrary context information that you specified when you called the WerRegisterRuntimeExceptionModule function to register the exception handler."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PWER_RUNTIME_EXCEPTION_INFORMATION",
+        "name": "pExceptionInformation",
+        "description": "A WER_RUNTIME_EXCEPTION_INFORMATION structure that contains the exception information. Use the information to determine whether you want to claim the crash."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BOOL",
+        "name": "*pbOwnershipClaimed",
+        "description": "Set to TRUE if the exception handler is claiming this crash; otherwise, FALSE. If you set this parameter to FALSE, do not set the rest of the out parameters."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWSTR",
+        "name": "pwszEventName",
+        "description": "A caller-allocated buffer that you use to specify the event name used to identify this crash."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PDWORD",
+        "name": "pchSize",
+        "description": "The size, in characters, of the pwszEventName buffer. The buffer is limited to MAX_PATH characters. The size includes the null-terminating character."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDWORD",
+        "name": "pdwSignatureCount",
+        "description": "The number of report parameters that you will provide. The valid range of values is one to 10. If you specify a value greater than 10, WER will ignore the value and collect only the first 10 parameters. If you specify zero, the reporting process will be indeterminate. This value determines the number of times that WER calls your OutOfProcessExceptionEventSignatureCallback function."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "WER calls this function to let you customize the debugger launch options and launch string.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "Return S_OK, even if no customer debugger is to be used. If you return other failure codes, WER reverts to its default crash reporting behavior. ",
+    "remarks": "You must implement this function in your exception handler DLL. WER uses this function to determine which debugger to launch and  whether to launch the debugger automatically or ask the user before launching the debugger. Specifying a custom debugger will override the default launch string (the AeDebug registry key contains the default launch string). WER calls this callback function only if you set the pbOwnershipClaimed parameter of your OutOfProcessExceptionEventCallback callback function to TRUE. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "OutOfProcessExceptionEventDebuggerLaunchCallback",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pContext",
+        "description": "A pointer to arbitrary context information that you specified when you called the WerRegisterRuntimeExceptionModule function to register the exception handler."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PWER_RUNTIME_EXCEPTION_INFORMATION",
+        "name": "pExceptionInformation",
+        "description": "A WER_RUNTIME_EXCEPTION_INFORMATION structure that contains the exception information."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBOOL",
+        "name": "pbIsCustomDebugger",
+        "description": "Set to TRUE if the custom debugger specified in the pwszDebuggerLaunch parameter is used to debug the crash; otherwise, set to FALSE to use the default debugger. If you set this parameter to  FALSE, do not set the pwszDebuggerLaunch parameter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWSTR",
+        "name": "pwszDebuggerLaunch",
+        "description": "A caller-allocated buffer that you use to specify the debugger launch string used to launch the debugger. The launch string must include the full path to the debugger and any arguments. If an argument includes multiple words, use quotes to delimit the argument. The debugger string should adhere to the same protocol as the default AeDebug debugger string (see Configuring Automatic Debugging). The string must contain two formatting specifiers: %ld for the crashing process ID, and %ld for the handle to an event object to be signaled after the custom debugger has attached to the target (for a description of these specifiers, see Enabling Postmortem Debugging). However, custom debuggers can choose to ignore these parameters."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PDWORD",
+        "name": "pchDebuggerLaunch",
+        "description": "The size, in characters, of the pwszDebuggerLaunch buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBOOL",
+        "name": "pbIsDebuggerAutolaunch",
+        "description": "Set to TRUE if you want WER to silently launch the debugger; otherwise, FALSE if you want WER to ask the user before launching the debugger."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "WER can call this function multiple times to get the report parameters that uniquely describe the problem.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "Return S_OK on success. If you return other failure codes, WER reverts to its default crash reporting behavior. ",
+    "remarks": "You must implement this function in your exception handler DLL. To generate error reports for application-specific issues, the application must create a short description of the problem using a few basic pieces of information called report parameters. Report parameters include information such as the application name, application version, module name, module version, and error code. The combination of these report parameters describes a unique problem. WER calls this callback function only if you set the pbOwnershipClaimed parameter of your OutOfProcessExceptionEventCallback callback function to TRUE. The pdwSignatureCount parameter of OutOfProcessExceptionEventCallback determines the number of times that  WER will call  this callback function. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "OutOfProcessExceptionEventSignatureCallback",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pContext",
+        "description": "A pointer to arbitrary context information that you specified when you called the WerRegisterRuntimeExceptionModule function to register the exception handler."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PWER_RUNTIME_EXCEPTION_INFORMATION",
+        "name": "pExceptionInformation",
+        "description": "A WER_RUNTIME_EXCEPTION_INFORMATION structure that contains the exception information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwIndex",
+        "description": "The index of the report parameter. Valid values are 0 to 9. The first call to this function must set the index to 0, and each successive call must increment the index value sequentially."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWSTR",
+        "name": "pwszName",
+        "description": "A caller-allocated buffer that you use to specify the parameter name."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PDWORD",
+        "name": "pchName",
+        "description": "The size, in characters, of the pwszName buffer. The size includes the null-terminating character."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWSTR",
+        "name": "pwszValue",
+        "description": "A caller-allocated buffer that you use to specify the parameter value."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PDWORD",
+        "name": "pchValue",
+        "description": "The size, in characters, of the pwszValue buffer. The size includes the null-terminating character."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Enables an application that performs its own exception handling to report faults to Microsoft. Although you can use this function to  report application crashes, we recommend that applications not handle fatal errors directly but instead rely on the crash reporting capability provided by the operating system.",
+    "library": "Faultrep.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "ErrorRep.h",
+    "return_value": "This function returns one of the following values.  These return values indicate whether the reporting application was successfully launched. A successful return value does not necessarily indicate that the fault was successfully reported. ",
+    "remarks": "The exact result of calling this function depends on how the user or system administrator has configured the error reporting system. ",
+    "return_type": "EFaultRepRetVal APIENTRY",
+    "category": "Windows Error Reporting (WER)",
+    "name": "ReportFault",
+    "is_callback": 0,
+    "dll": "Faultrep.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPEXCEPTION_POINTERS",
+        "name": "pep",
+        "description": "A pointer to an  EXCEPTION_POINTERS structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwMode",
+        "description": "This parameter is reserved for system use and should be set to zero."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Adds the specified application to the list of applications that are to be excluded from error reporting.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error code.  ",
+    "remarks": "If bAllUsers is TRUE, the list of excluded applications is stored under the HKEY_LOCAL_MACHINE registry hive. The calling process must have permissions to write to the HKLM registry hive. If bAllUsers is FALSE, the list of excluded applications is stored under the HKEY_CURRENT_USER registry hive. To remove the application from the list of excluded applications, call the WerRemoveExcludedApplication function. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerAddExcludedApplication",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwzExeName",
+        "description": "A pointer to a Unicode string that specifies the name of the executable file for the application, including the file name extension. The maximum length of this path is MAX_PATH characters."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bAllUsers",
+        "description": "If this parameter is TRUE, the application name is added to the list of excluded applications for all users. Otherwise, it is only added to the list of excluded applications for the current user."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Frees up the memory used to store a report key string. This should be called after each successive call to WerStoreGetFirstReportKey or WerStoreGetNextReportKey, once the particular report key string has been used and is no longer needed.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerFreeString",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "PCWSTR",
+        "name": "reportKey",
+        "description": "The string to be freed (value set to NULL)."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Gets a reference to the first report in the report store.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerStoreGetFirstReportKey",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HREPORTSTORE",
+        "name": "store",
+        "description": "The error report store (previously retrieved with WerStoreOpen)."
+      },
+      {
+        "in_out": "",
+        "type": "PCWSTR*",
+        "name": "reportKey",
+        "description": "A pointer to the report key string. On a successful call, this will point to the retrieved report key."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Gets a reference to the next report in the error report store.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerStoreGetNextReportKey",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HREPORTSTORE",
+        "name": "store",
+        "description": "The error report store (previously retrieved with WerStoreOpen)."
+      },
+      {
+        "in_out": "",
+        "type": "PCWSTR*",
+        "name": "reportKey",
+        "description": "A pointer to the report key string. On a successful call, this will point to the retrieved report key."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the fault reporting settings for the specified process.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerGetFlags",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hProcess",
+        "description": "A handle to the process. This handle must have the PROCESS_VM_READ or PROCESS_QUERY_INFORMATION access right."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDWORD",
+        "name": "pdwFlags",
+        "description": "This parameter can contain one or more of the following values.  ValueMeaning  WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION   Do not suspend the process threads before reporting the error.   WER_FAULT_REPORTING_FLAG_NOHEAP   Do not collect heap information in the event of an application crash or non-response.   WER_FAULT_REPORTING_FLAG_QUEUE   Queue critical reports for the specified process. This does not show any UI.   WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD   Queue critical reports and upload from the queue.   WER_FAULT_REPORTING_ALWAYS_SHOW_UI   Always show error reporting UI for this process. This is applicable for interactive applications only."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Registers a process to be included in the error report along with the main application process. Optionally specifies a thread within that registered process to get additional data from.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error codes.  ",
+    "remarks": "This API is for applications that have multiple processes interacting with each other. An application's main process would register the Id of another process. When the registering process crashes, WER will add an additional triage dump of the registered process to the resulting diagnostics. Optionally, the registering process can provide a thread Id as well to get more data for that specific thread. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerRegisterAdditionalProcess",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "processId",
+        "description": "The Id of the process to register."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "captureExtraInfoForThreadId",
+        "description": "The Id of a thread within the registered process from which more information is requested."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Registers app-specific metadata to be collected (in the form of key/value strings) when WER creates an error report.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error codes.  ",
+    "remarks": "This API allows apps to integrate their own app-level telemetry with system-level telemetry (WER) by associating app metadata with crash reports corresponding to their processes. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerRegisterCustomMetadata",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "PCWSTR",
+        "name": "key",
+        "description": "The \"key\" string for the metadata element being registered."
+      },
+      {
+        "in_out": "",
+        "type": "PCWSTR",
+        "name": "value",
+        "description": "The value string for the metadata element being registered."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Marks a memory block (that is normally included by default in error reports) to be excluded from the error report.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error codes.  ",
+    "remarks": "This mechanism is intended for applications that hold large amounts of data in memory that aren't useful for root cause debugging and increase the size of the dump file unnecessarily.  For example, some Xbox One games hold large amounts of texture data in memory that is included in error dumps by default. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerRegisterExcludedMemoryBlock",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "PVOID",
+        "name": "address",
+        "description": "The starting address of the memory block."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "size",
+        "description": "The size of the memory block, in bytes."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Registers a file to be collected when WER creates an error report.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error codes.  ",
+    "remarks": "The registered file is added to the report only when additional data is requested by the server. For crashes and non-responses, the operating system automatically provides error reporting (you do not need to provide any error reporting code in your application). If you use this function to register a file, the operating system will add the file to the error report created at the time of a crash or non-response (this file is added in addition to the files the operating system already collects). For generic event reporting, the application has to use the WerReportAddFile function instead. Alternatively, calling the WerReportSubmit function with the  WER_SUBMIT_ADD_REGISTERED_DATA flag will include the files that the WerRegisterFile function added. To remove the file from the list, call the WerUnregisterFile function. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerRegisterFile",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwzFile",
+        "description": "The full path to the file. The maximum length of this path is MAX_PATH characters."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WER_REGISTER_FILE_TYPE",
+        "name": "regFileType",
+        "description": "The file type. This parameter can be one of the following values from the WER_REGISTER_FILE_TYPE enumeration type.  ValueMeaning  WerRegFileTypeMax 3   The maximum value for the  WER_REGISTER_FILE_TYPE enumeration type.   WerRegFileTypeOther 2   Any other type of file.   WerRegFileTypeUserDocument 1   The document in use by the application at the time of the event. This document is only collected if the Watson server asks for it."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be one or more of the following values.  ValueMeaning  WER_FILE_ANONYMOUS_DATA   The file does not contain personal information that could be used to identify or contact the user.   WER_FILE_DELETE_WHEN_DONE   Automatically deletes the file after it is added to the report."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Registers a memory block to be collected when WER creates an error report.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error codes.  ",
+    "remarks": "Memory registered with this function is only added to heap or larger dump files. This memory is never added to mini dumps or smaller dump files. For crashes and no response, the operating system automatically provides error reporting (you do not need to provide any error reporting code in your application). If you use this function to register a memory block, the operating system will add the memory block information to the dump file at the time of the crash or non-response. The memory block is added to the dump file for the report only when additional data is requested by the server. For generic event reporting, the application has to call the WER generic event reporting functions directly. To add the memory block to a generic report, call the WerReportAddDump function and then call the WerReportSubmit function and specify the  WER_SUBMIT_ADD_REGISTERED_DATA flag. To remove the block from this list, call the WerUnregisterMemoryBlock function. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerRegisterMemoryBlock",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pvAddress",
+        "description": "The starting address of the memory block."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwSize",
+        "description": "The size of the memory block, in bytes. The maximum value for this parameter is WER_MAX_MEM_BLOCK_SIZE bytes."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Registers a custom runtime exception handler that is used to provide custom error reporting for crashes.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error codes.  ",
+    "remarks": "The exception handler is an out-of-process DLL that the WER service loads when a crash or unhandled exception occurs. The DLL must implement and export the following functions: (The DLL must also include the DllMain entry point.) Using an exception handler is more secure and reliable for reporting crash information than the current, in-process event reporting feature. Also, the current generic event reporting feature is suited only for reporting non-fatal errors. This function requires that the pwszOutOfProcessCallbackDll DLL be included in the WER exception handler module list in the registry. After registering an exception handler, if the process crashes or raises an unhandled exception, the WER service loads your exception handler and calls the OutOfProcessExceptionEventCallback callback function., which you use to state your claim on the crash and provide the event name and report parameters count. Note that if the process registers more than one exception handler, the service calls each handler until one of the handlers claims the crash. If no handlers claim the crash, WER defaults to native crash reporting. If an exception handler claims the exception, the WER service calls the OutOfProcessExceptionEventSignatureCallback callback function, which provides the reporting parameters that uniquely define the problem. Then, the WER service calls the OutOfProcessExceptionEventDebuggerLaunchCallback callback to determine whether to offer the user the option of launching  a debugger or launching the debugger automatically. The handler can also specify a custom debugger launch string, which will override the default string (the default is the debugger specified in the AeDebug registry key). After the handler has provided the event name, reporting parameters and debugger launch settings, the rest of the error reporting flow continues in the usual way. You must call the WerUnregisterRuntimeExceptionModule function to remove the registration before your process exits. A process can register up to WER_MAX_REGISTERED_RUNTIME_EXCEPTION_MODULES handlers. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerRegisterRuntimeExceptionModule",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszOutOfProcessCallbackDll",
+        "description": "The name of the exception handler DLL to register."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "pContext",
+        "description": "A pointer to arbitrary context information that is passed to the handler's callback functions."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Removes the specified application from the list of applications that are to be excluded from error reporting.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error code.  ",
+    "remarks": "This function removes applications that were added to the excluded applications list using the WerAddExcludedApplication function. If bAllUsers is TRUE, the list of excluded applications is stored under the HKEY_LOCAL_MACHINE registry hive. The calling process must have permissions to write to HKLM registry hive. If bAllUsers is FALSE, the list of excluded applications is stored under the HKEY_CURRENT_USER registry hive. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerRemoveExcludedApplication",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwzExeName",
+        "description": "A pointer to a Unicode string that specifies the name of the executable file for the application, including the file name extension. The maximum length of this path is MAX_PATH characters. This file must have been excluded using the WerAddExcludedApplication function or WerRemoveExcludedApplication fails."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bAllUsers",
+        "description": "If this parameter is TRUE, the application name is removed from the list of excluded applications for all users. Otherwise, it is only removed from the list of excluded applications for the current user."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Adds a dump of the specified type to the specified report.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure. ",
+    "remarks": "Use this function only for generic reporting\u00e2\u0080\u0094it has no effect on operating system crash or no-response reporting. If the server asks for a mini dump and you specify WerDumpTypeHeapDump for the dumpType parameter, WER will not send the heap dump to the Watson server. However, if the server asks for a heap dump and the dumpType is WerDumpTypeMiniDump, WER will send the mini dump to the server. Thus, it is recommended that you set dumpType to WerDumpTypeMiniDump. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerReportAddDump",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HREPORT",
+        "name": "hReportHandle",
+        "description": "A handle to the report. This handle is returned by the WerReportCreate function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hProcess",
+        "description": "A handle to the process for which the report is being generated. This handle must have the STANDARD_RIGHTS_READ and PROCESS_QUERY_INFORMATION access rights."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HANDLE",
+        "name": "hThread",
+        "description": "A handle to the thread of hProcess for which the report is being generated. If dumpType is WerDumpTypeMicro, this parameter is required. For other dump types, this parameter may be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WER_DUMP_TYPE",
+        "name": "dumpType",
+        "description": "The type of minidump. This parameter can be one of the following values from the WER_DUMP_TYPE enumeration type.  ValueMeaning  WerDumpTypeHeapDump   An extended minidump that contains additional data such as the process memory.  This type is equivalent to creating a minidump with the following options:  MiniDumpWithDataSegs MiniDumpWithProcessThreadData MiniDumpWithHandleData MiniDumpWithPrivateReadWriteMemory MiniDumpWithUnloadedModules MiniDumpWithFullMemoryInfo MiniDumpWithThreadInfo (Windows 7 and later) MiniDumpWithTokenInformation (Windows 7 and later) MiniDumpWithPrivateWriteCopyMemory (Windows 7 and later)    WerDumpTypeMicroDump   A limited minidump that contains only a stack trace.  This type is equivalent to creating a minidump with the following options:  MiniDumpWithDataSegs MiniDumpWithUnloadedModules MiniDumpWithProcessThreadData MiniDumpWithoutOptionalData    WerDumpTypeMiniDump   A minidump.  This type is equivalent to creating a minidump with the following options:  MiniDumpWithDataSegs MiniDumpWithUnloadedModules MiniDumpWithProcessThreadData MiniDumpWithTokenInformation (Windows 7 and later)"
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PWER_EXCEPTION_INFORMATION",
+        "name": "pExceptionParam",
+        "description": "A pointer to a WER_EXCEPTION_INFORMATION structure that specifies exception information."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PWER_DUMP_CUSTOM_OPTIONS",
+        "name": "pDumpCustomOptions",
+        "description": "A pointer to a WER_DUMP_CUSTOM_OPTIONS structure that specifies custom minidump options. If this parameter is NULL, the standard minidump information is collected."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be 0 or the following value.  ValueMeaning  WER_DUMP_NOHEAP_ONQUEUE   If the report is being queued, do not include a heap dump. Using this flag saves disk space."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Adds a file to the specified  report.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error code.  ",
+    "remarks": "Although this function can also be used to add memory dumps (using specific flags) to the error report, the preferred function to use for adding memory dumps is WerReportAddDump. You should use this function only if you want to collect the dump yourself and then add it to the report. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerReportAddFile",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HREPORT",
+        "name": "hReportHandle",
+        "description": "A handle to the report. This handle is returned by the WerReportCreate function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwzPath",
+        "description": "A pointer to a Unicode string that contains the full path to the file to be added. This path can use environment variables. The maximum length of this path is MAX_PATH characters."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WER_FILE_TYPE",
+        "name": "repFileType",
+        "description": "The type of file. This parameter can be one of the following values from the WER_FILE_TYPE enumeration type.  ValueMeaning  WerFileTypeHeapdump   An extended minidump that contains additional data such as the process memory.   WerFileTypeMicrodump   A limited minidump that contains only a stack trace.   WerFileTypeMinidump   A minidump file.   WerFileTypeOther   Any other type of file. This file will always get added to the cab (but only if the server asks for a cab).   WerFileTypeUserDocument   The document in use by the application at the time of the event. The document is added only if the server is asks for this type of document."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFileFlags",
+        "description": "This parameter can be one or more of the following values.  ValueMeaning  WER_FILE_ANONYMOUS_DATA   The file does not contain personal information that could be used to identify or contact the user.   WER_FILE_DELETE_WHEN_DONE   Automatically delete the file after the report is submitted."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes the specified report.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerReportCloseHandle",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HREPORT",
+        "name": "hReportHandle",
+        "description": "A handle to the report. This handle is returned by the WerReportCreate function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates a problem report that describes an application event.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure. ",
+    "remarks": "Use the following functions to specify additional information to be submitted: To submit the information, call the WerReportSubmit function. When you have finished with the report handle, call the WerReportCloseHandle function. Applications can also indicate that they would like the opportunity to recover data or restart on failure. For more information, see Application Recovery and Restart. To view the reports submitted by your application, go to Windows Quality Online Services. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerReportCreate",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwzEventType",
+        "description": "A pointer to a Unicode string that specifies the name of the event."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WER_REPORT_TYPE",
+        "name": "repType",
+        "description": "The type of report. This parameter can be one of the following values from the WER_REPORT_TYPE enumeration type.  ValueMeaning  WerReportApplicationCrash 2   An error that has caused the application to stop running has occurred.    WerReportApplicationHang 3   An error that has caused the application to stop responding has occurred.    WerReportInvalid 5   An error that has called out a return that is not valid has occurred.    WerReportKernel 4   An error in the kernel has occurred.    WerReportCritical 1   A critical error, such as a crash or non-response, has occurred. By default, processes that experience a critical error are terminated or restarted.   WerReportNonCritical 0   An error that is not critical has occurred. This type of report shows no UI; the report is silently queued. It may then be sent silently to the server in the background if adequate user consent is available."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PWER_REPORT_INFORMATION",
+        "name": "pReportInformation",
+        "description": "A pointer to a WER_REPORT_INFORMATION structure that specifies information for the report."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HREPORT",
+        "name": "*phReportHandle",
+        "description": "A handle to the report. If the function fails, this handle is NULL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Initiates \"no response\" reporting on the specified window.",
+    "library": "Faultrep.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "ErrorRep.h",
+    "return_value": "Returns S_OK if the function was able to initiate the reporting or an error code on failure. Note that S_OK does not necessarily mean that \"no response\" reporting has completed successfully, only that it was initiated. ",
+    "remarks": "This function will initiate no-response reporting which will then terminate the process that created the window. The caller is responsible for determining when a child window is not responding and should prompt the user for consent before reporting the non-response. A typical way to detect a window that is not responding is to check that it replies to window messages in a timely manner. You can use the SendMessageTimeout function to detect this condition. This function is asynchronous; it does not wait for no-response reporting to complete. There is no way to cancel no-response reporting after it is started. If you use this function, it is important that you adhere to the following requirements: ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerReportHang",
+    "is_callback": 0,
+    "dll": "Faultrep.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndHungWindow",
+        "description": "Handle to the window that is not responding."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCWSTR",
+        "name": "wszHungApplicationName",
+        "description": "The name of the not-responding application to be shown in the Hang Reporting UI. The name is limited to 128 characters including the NULL terminator. If NULL, WER tries to get the name from the target image resources. If it cannot get the name from the image, the image name will be used."
+      }
+    ],
+    "min_client": "Windows Vista with SP1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Sets the parameters that uniquely identify an event for the specified report.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error code.  ",
+    "remarks": "Each report supports parameters P0 through P9. This function sets one parameter at a time. If parameter Px is set, then all parameters from P0 and Px must be set. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerReportSetParameter",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HREPORT",
+        "name": "hReportHandle",
+        "description": "A handle to the report. This handle is returned by the WerReportCreate function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwparamID",
+        "description": "The identifier of the parameter to be set. This parameter can be one of the following values. WER_P0WER_P1WER_P2WER_P3WER_P4WER_P5WER_P6WER_P7WER_P8WER_P9"
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCWSTR",
+        "name": "pwzName",
+        "description": "A pointer to a Unicode string that contains the name of the parameter. If this parameter is NULL, the default name is Px, where x matches the integer portion of the value specified in dwparamID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwzValue",
+        "description": "The parameter value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the user interface options for the specified report.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerReportSetUIOption",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HREPORT",
+        "name": "hReportHandle",
+        "description": "A handle to the report. This handle is returned by the WerReportCreate function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WER_REPORT_UI",
+        "name": "repUITypeID",
+        "description": "The user interface element to be customized. This parameter can be one of the following values from the WER_REPORT_UI enumeration type.  ValueMeaning  WerUIAdditionalDataDlgHeader   The instructions for the additional data dialog box.   WerUICloseDlgBody   The contents of the close dialog box.   WerUICloseDlgButtonText   The text for the button in the close dialog box.   WerUICloseDlgHeader   The main instructions for the close dialog box.   WerUICloseText   The text for the link to just terminate the application.   WerUIConsentDlgBody   The contents of the consent dialog box.   WerUIConsentDlgHeader   The main instructions for the consent dialog box.   WerUIIconFilePath   The icon to be displayed in the consent dialog box.   WerUIOfflineSolutionCheckText   The text for the link to check for a solution when offline.   WerUIOnlineSolutionCheckText   The text for the link to check for a solution when online."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwzValue",
+        "description": "A pointer to a Unicode string that specifies the custom text. For more information, see the description of repUITypeID."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Submits the specified report.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure. ",
+    "remarks": "After the application calls this function, WER collects the specified data. If the consent parameter is WerConsentApproved, it submits the report to Microsoft. If consent is WerConsentNotAsked, WER displays the consent dialog box. To determine the submission status, check the pSubmitResult parameter. In the event of a critical application event, applications that have registered for restart will be restarted. The computer identifier is sent with the report when To view the reports submitted by your application, go to Windows Quality Online Services. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerReportSubmit",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HREPORT",
+        "name": "hReportHandle",
+        "description": "A handle to the report. This handle is returned by the WerReportCreate function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WER_CONSENT",
+        "name": "consent",
+        "description": "The consent status. This parameter can be one of the following values from the WER_CONSENT enumeration type.  ValueMeaning  WerConsentAlwaysPrompt 4   The user is always asked to submit the request.   WerConsentApproved 2   The user has approved the submission request.   WerConsentDenied 3   The user has denied the submission request.   WerConsentMax 5   The maximum value for the WER_CONSENT enumeration type.   WerConsentNotAsked 1   The user was not asked for consent."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be one or more of the following values. ..."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PWER_SUBMIT_RESULT",
+        "name": "pSubmitResult",
+        "description": "The result of the submission. This parameter can be one of the following values from the WER_SUBMIT_RESULT enumeration type.  ValueMeaning  WerCustomAction 9   Error reporting can be customized.   WerDisabled 5   Error reporting was disabled.   WerDisabledQueue 7   Queuing was disabled.   WerReportAsync 8   The report was asynchronous.   WerReportCancelled 6   The report was canceled.   WerReportDebug 3   The Debug button was clicked.   WerReportFailed 4   The report submission failed.   WerReportQueued 1   The report was queued.   WerReportUploaded 2   The report was uploaded."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the fault reporting settings for the current process.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerSetFlags",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "The fault reporting settings. You can specify one or more of the following values:  ValueMeaning  WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION   Do not suspend the process threads before reporting the error.   WER_FAULT_REPORTING_FLAG_NOHEAP   Do not collect heap information in the event of an application crash or non-response.   WER_FAULT_REPORTING_FLAG_QUEUE   Queue critical reports.   WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD   Queue critical reports and upload from the queue.   WER_FAULT_REPORTING_ALWAYS_SHOW_UI   Always show error reporting UI for this process. This is applicable for interactive applications only."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes the collection of stored reports.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerStoreClose",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HREPORTSTORE",
+        "name": "store",
+        "description": "The error report store to close (previously retrieved with WerStoreOpen)."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Opens the collection of stored error reports.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error code.  ",
+    "remarks": "A storeType value of E_STORE_MACHINE_QUEUE opens the queue of all error reports on the machine that have not yet been sent to Microsoft. A value of  E_STORE_MACHINE_ARCHIVE opens the store of error reports that have already been sent. The Windows Error Report (WER) Store is the queue of error reports that have been marked to be sent to Microsoft but have not yet been uploaded. The upload of an error report can be postponed under a number of circumstances. The WerStore functions allow developers to access the stored reports and query the status of each one. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerStoreOpen",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "REPORT_STORE_TYPES",
+        "name": "storeType",
+        "description": "The type of report store to open. See Remarks for details."
+      },
+      {
+        "in_out": "",
+        "type": "HREPORTSTORE*",
+        "name": "store",
+        "description": "A pointer to a report store. On a successful call, this will point to the retrieved report store."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves metadata about a report in the store.",
+    "library": "Wer.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerStoreQueryReportMetadataV2",
+    "is_callback": 0,
+    "dll": "Wer.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HREPORTSTORE",
+        "name": "store",
+        "description": "The error report store (previously retrieved with WerStoreOpen)."
+      },
+      {
+        "in_out": "",
+        "type": "PCWSTR",
+        "name": "reportKey",
+        "description": "The string identifying which report is being queried (previously retrieved with WerStoreGetFirstReportKey or WerStoreGetNextReportKey)."
+      },
+      {
+        "in_out": "",
+        "type": "WER_REPORT_METADATA_V2*",
+        "name": "metadata",
+        "description": "A pointer to the report store metadata in the form of a WER_REPORT_METADATA_V2 structure. The field SizeOfFileNames should be set to 0 during the first call. The function updates this field with the required size to hold the file names associated with the report. The field FileNames should then be allocated with SizeOfFileNames bytes and the function should be called again to get all of the file names."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Removes a process from the list of additional processes to be included in the error report.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error codes.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerUnregisterAdditionalProcess",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "processId",
+        "description": "The Id of the process to remove. It must have been previously registered with WerRegisterAdditionalProcess."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Removes an item of app-specific metadata being collected during error reporting for the application.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error codes.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerUnregisterCustomMetadata",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "PCWSTR",
+        "name": "key",
+        "description": "The \"key\" string for the metadata element being removed. It must have been previously registered with the WerRegisterCustomMetadata function."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Removes a memory block that was  previously marked as excluded (it will again be included in error reports).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerUnregisterExcludedMemoryBlock",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "PVOID",
+        "name": "address",
+        "description": "The starting address of the memory block. This memory block must have been registered using the WerRegisterExcludedMemoryBlock function."
+      }
+    ],
+    "min_client": "Windows 10, version 1703 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Removes a file from the list of files to be added to reports generated for the current process.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerUnregisterFile",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwzFilePath",
+        "description": "The full path to the file. This file must have been registered using the WerRegisterFile function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Removes a memory block from the list of data to be collected during error reporting for the application.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerUnregisterMemoryBlock",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pvAddress",
+        "description": "The starting address of the memory block. This memory block must have been registered using the WerRegisterMemoryBlock function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Removes the registration of your WER exception handler.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Werapi.h",
+    "return_value": "This function returns S_OK on success or an error code on failure, including the following error code.  ",
+    "remarks": "To register your runtime exception handler, call the WerRegisterRuntimeExceptionModule function. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Error Reporting (WER)",
+    "name": "WerUnregisterRuntimeExceptionModule",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszOutOfProcessCallbackDll",
+        "description": "The name of the exception handler DLL whose registration you want to remove."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "pContext",
+        "description": "A pointer to arbitrary context information that was passed to the callback."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  }
+]
+

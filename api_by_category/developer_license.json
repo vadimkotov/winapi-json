@@ -1,0 +1,78 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Checks to see if a developer license exists.",
+    "library": "",
+    "min_server": "",
+    "header": "",
+    "return_value": "Returns an HResult structure with any error codes that occurred. ",
+    "remarks": "The following is a list of common error codes that this function returns:  ",
+    "return_type": "STDAPI",
+    "category": "Developer License",
+    "name": "CheckDeveloperLicense",
+    "is_callback": 0,
+    "dll": "WSClient.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "FILETIME",
+        "name": "*pExpiration",
+        "description": "Indicates when the developer license expires."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 2,
+    "description": "Acquires a developer license.",
+    "library": "",
+    "min_server": "",
+    "header": "",
+    "return_value": "Returns an HResult structure with any error codes that occurred. ",
+    "remarks": "The following is a list of common error codes that this function returns:  ",
+    "return_type": "STDAPI",
+    "category": "Developer License",
+    "name": "AcquireDeveloperLicense",
+    "is_callback": 0,
+    "dll": "WSClient.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hwndParent",
+        "description": "The handler to the parent window."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "FILETIME",
+        "name": "*pExpiration",
+        "description": "Indicates when the developer license expires."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 1,
+    "description": "Removes a developer license.",
+    "library": "",
+    "min_server": "",
+    "header": "",
+    "return_value": "Returns an HResult structure with any error codes that occurred. ",
+    "remarks": "The following is a list of common error codes that this function returns:  ",
+    "return_type": "STDAPI",
+    "category": "Developer License",
+    "name": "RemoveDeveloperLicense",
+    "is_callback": 0,
+    "dll": "WSClient.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hwndParent",
+        "description": "The handler to the parent window."
+      }
+    ],
+    "min_client": ""
+  }
+]
+

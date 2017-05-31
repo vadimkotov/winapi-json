@@ -1,0 +1,26 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "The FwpmFreeMemory0 function is used to release memory resources allocated by the Windows Filtering Platform (WFP) functions.",
+    "library": "Fwpuclnt.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Fwpmu.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "FwpmFreeMemory0 is used to free memory returned by the various Fwpm* functions, such as FwpmFilterGetByKey0. Fwpm* functions that return a HANDLE, such as FwpmCalloutCreateEnumHandle0, have specific functions to release memory. If the caller passes a pointer that is not valid, the behavior is undefined. FwpmFreeMemory0 is a specific implementation of FwpmFreeMemory. See WFP Version-Independent Names and Targeting Specific Versions of Windows  for more information. ",
+    "return_type": "void WINAPI",
+    "category": "Windows Filtering Platform",
+    "name": "FwpmFreeMemory0",
+    "is_callback": 0,
+    "dll": "Fwpuclnt.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "void",
+        "name": "**p",
+        "description": "Type: void** Address of the pointer to be freed."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

@@ -1,0 +1,81 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "[This function is no longer available for use as of Windows 7.]",
+    "library": "",
+    "min_server": "None supported",
+    "header": "",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see       Common HRESULT Values. ",
+    "remarks": "The Windows Genuine Advantage (WGA) functions are available only on Windows Vista and      Windows XP installations that have been validated by clicking      Validate Windows on      http://www.microsoft.com/genuine. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Windows Genuine Advantage",
+    "name": "GetLastErrors",
+    "is_callback": 0,
+    "dll": "LegitLib.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "WCHAR",
+        "name": "**ppwszTrace",
+        "description": "A buffer that, on output, receives the trace output of the most recent validation session. The buffer is        allocated by this function. When you have finished using the  buffer, free it by calling the        LocalFree function."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "[This function is no longer available for use as of Windows 7.]",
+    "library": "",
+    "min_server": "None supported",
+    "header": "",
+    "return_value": "TRUE if the copy of Windows running on the current system is genuine; otherwise, FALSE. ",
+    "remarks": "The Windows Genuine Advantage (WGA) functions are available only on Windows Vista and Windows XP installations that have been validated by clicking Validate Windows on http://www.microsoft.com/genuine. ",
+    "return_type": "bool __stdcall",
+    "category": "Windows Genuine Advantage",
+    "name": "IsAlreadyGenuine",
+    "is_callback": 0,
+    "dll": "LegitLib.dll",
+    "arguments": [],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "[This function is no longer available for use as of Windows 7.]",
+    "library": "",
+    "min_server": "None supported",
+    "header": "",
+    "return_value": "This function returns zero if the copy of Windows running on the current system is genuine. If the value of this parameter is any other value, the copy of Windows running on the current system is not genuine. ",
+    "remarks": "The Windows Genuine Advantage (WGA) functions are available only on Windows Vista and Windows XP installations that have been validated by clicking Validate Windows on http://www.microsoft.com/genuine. ",
+    "return_type": "int __stdcall",
+    "category": "Windows Genuine Advantage",
+    "name": "LegitCheck",
+    "is_callback": 0,
+    "dll": "LegitLib.dll",
+    "arguments": [],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[This function is no longer available for use as of Windows 7.]",
+    "library": "",
+    "min_server": "None supported",
+    "header": "",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see Common HRESULT Values. ",
+    "remarks": "The Windows Genuine Advantage (WGA) functions are available only on Windows Vista and Windows XP installations that have been validated by clicking Validate Windows on http://www.microsoft.com/genuine. ",
+    "return_type": "HRESULT __stdcall",
+    "category": "Windows Genuine Advantage",
+    "name": "SetPartnerID",
+    "is_callback": 0,
+    "dll": "LegitLib.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "nPartnerID",
+        "description": "The partner ID to be set."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  }
+]
+

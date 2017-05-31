@@ -1,0 +1,491 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "Registers a vectored continue handler.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008, Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a pointer to the exception handler. If the function fails, the return value is NULL. ",
+    "remarks": "If the FirstHandler parameter is nonzero, the handler is the first handler to be called until a subsequent call to  AddVectoredContinueHandler is used to specify a different handler as the first handler. If the VectoredHandler parameter points to a function in a DLL and that DLL is unloaded, the handler is still registered. This can lead to application errors. To unregister the handler, use the  RemoveVectoredContinueHandler function. To compile an application that uses this function, define the _WIN32_WINNT macro as 0x0500 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "PVOID WINAPI",
+    "category": "Structured Exception Handling",
+    "name": "AddVectoredContinueHandler",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "FirstHandler",
+        "description": "The order in which the handler should be called. If the parameter is nonzero, the handler is the first handler to be called. If the parameter is zero, the handler is the last handler to be called."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVECTORED_EXCEPTION_HANDLER",
+        "name": "VectoredHandler",
+        "description": "A pointer to the handler to be called. For more information, see  VectoredHandler."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP Professional x64 Edition [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Registers a vectored exception handler.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the exception handler. If the function fails, the return value is NULL. ",
+    "remarks": "If the FirstHandler parameter is nonzero, the handler is the first handler to be called until a subsequent call to  AddVectoredExceptionHandler is used to specify a different handler as the first handler. If the VectoredHandler parameter points to a function in a DLL and that DLL is unloaded, the handler is still registered. This can lead to application errors. To unregister the handler, use the  RemoveVectoredExceptionHandler function. To compile an application that uses this function, define the _WIN32_WINNT macro as 0x0500 or later. For more information, see  Using the Windows Headers. For an example, see  Using a Vectored Exception Handler. ",
+    "return_type": "PVOID WINAPI",
+    "category": "Structured Exception Handling",
+    "name": "AddVectoredExceptionHandler",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "FirstHandler",
+        "description": "The order in which the handler should be called. If the parameter is nonzero, the handler is the first handler to be called. If the parameter is zero, the handler is the last handler to be called."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVECTORED_EXCEPTION_HANDLER",
+        "name": "VectoredHandler",
+        "description": "A pointer to the handler to be called. For more information, see  VectoredHandler."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Raises an exception in the calling thread.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The  RaiseException function enables a process to use structured exception handling to handle private, software-generated, application-defined exceptions. Raising an exception causes the exception dispatcher to go through the following search for an exception handler: The values specified in the dwExceptionCode, dwExceptionFlags, nNumberOfArguments, and lpArguments parameters can be retrieved in the filter expression of a frame-based exception handler by calling the  GetExceptionInformation function. A debugger can retrieve these values by calling the  WaitForDebugEvent function. For an example, see  Using an Exception Handler. ",
+    "return_type": "void WINAPI",
+    "category": "Structured Exception Handling",
+    "name": "RaiseException",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwExceptionCode",
+        "description": "An application-defined exception code of the exception being raised. The filter expression and exception-handler block of an exception handler can use the  GetExceptionCode function to retrieve this value.     Note that the system will clear bit 28 of dwExceptionCode before displaying a message This bit is a reserved exception bit, used by the system for its own purposes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwExceptionFlags",
+        "description": "The exception flags. This can be either zero to indicate a continuable exception, or EXCEPTION_NONCONTINUABLE to indicate a noncontinuable exception. Any attempt to continue execution after a noncontinuable exception causes the EXCEPTION_NONCONTINUABLE_EXCEPTION exception."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nNumberOfArguments",
+        "description": "The number of arguments in the lpArguments array. This value must not exceed EXCEPTION_MAXIMUM_PARAMETERS. This parameter is ignored if lpArguments is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG_PTR",
+        "name": "*lpArguments",
+        "description": "An array of arguments. This parameter can be NULL. These arguments can contain any application-defined data that needs to be passed to the filter expression of the exception handler."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Unregisters a vectored continue handler.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008, Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "To compile an application that uses this function, define the _WIN32_WINNT macro as 0x0500 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "ULONG WINAPI",
+    "category": "Structured Exception Handling",
+    "name": "RemoveVectoredContinueHandler",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "Handler",
+        "description": "A pointer to a vectored exception handler previously registered using the  AddVectoredContinueHandler function."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP Professional x64 Edition [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Unregisters a vectored exception handler.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "To compile an application that uses this function, define the _WIN32_WINNT macro as 0x0500 or later. For more information, see  Using the Windows Headers. For an example, see  Using a Vectored Exception Handler. ",
+    "return_type": "ULONG WINAPI",
+    "category": "Structured Exception Handling",
+    "name": "RemoveVectoredExceptionHandler",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "Handler",
+        "description": "A handle to the vectored exception handler previously registered using the  AddVectoredExceptionHandler function."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Informs the system of a dynamic function table representing a region of memory containing      code.",
+    "library": "Ntdll.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "This function returns zero on success. (More detail). See        http://msdn.microsoft.com/en-us/library/cc704588(PROT.10).aspx        for a list of NTSTATUS values. ",
+    "remarks": "The function table can grow as code is added to the memory region. The entries in the table must be sorted.       This table is used for dispatching exceptions through runtime-generated code and for collecting stack       backtraces. ",
+    "return_type": "NTSTATUS NTAPI",
+    "category": "Structured Exception Handling",
+    "name": "RtlAddGrowableFunctionTable",
+    "is_callback": 0,
+    "dll": "Ntdll.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "*DynamicTable",
+        "description": "A pointer to a variable that receives an opaque reference to the newly-added table on success."
+      },
+      {
+        "in_out": "",
+        "type": "_In_reads_(MaximumEntryCount)PRUNTIME_FUNCTION",
+        "name": "FunctionTable",
+        "description": "A pointer to a partially-filled array of         RUNTIME_FUNCTION entries which provides         unwind information for the region of code. The entries in this array must remain sorted in ascending order of         the BeginAddress members."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "EntryCount",
+        "description": "The number of entries currently populated in the function table. This value may be zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "MaximumEntryCount",
+        "description": "The capacity of the function table."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG_PTR",
+        "name": "RangeBase",
+        "description": "The beginning of the memory range described by the function table."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG_PTR",
+        "name": "RangeEnd",
+        "description": "The end of the memory range described by the function table."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Informs the system that a previously reported dynamic function table is no longer in use.",
+    "library": "Ntdll.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID NTAPI",
+    "category": "Structured Exception Handling",
+    "name": "RtlDeleteGrowableFunctionTable",
+    "is_callback": 0,
+    "dll": "Ntdll.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "DynamicTable",
+        "description": "An opaque reference returned by RtlAddGrowableFunctionTable."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Reports that a dynamic function table has increased in size.",
+    "library": "Ntdll.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "RtlGrowFunctionTable should be called after populating the corresponding entries in the RUNTIME_FUNCTION array specified in RtlAddGrowableFunctionTable. ",
+    "return_type": "VOID NTAPI",
+    "category": "Structured Exception Handling",
+    "name": "RtlGrowFunctionTable",
+    "is_callback": 0,
+    "dll": "Ntdll.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "PVOID",
+        "name": "DynamicTable",
+        "description": "An opaque reference returned by RtlAddGrowableFunctionTable.."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "NewEntryCount",
+        "description": "The new number of entries in the RUNTIME_FUNCTION array. This must be greater than the previously reported size of the array."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Enables an application to supersede the top-level exception handler of each thread of a process.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "The  SetUnhandledExceptionFilter function returns the address of the previous exception filter established with the function. A NULL return value means that there is no current top-level exception handler. ",
+    "remarks": "Issuing  SetUnhandledExceptionFilter replaces the existing top-level exception filter for all existing and all future threads in the calling process. The exception handler specified by lpTopLevelExceptionFilter is executed in the context of the thread that caused the fault. This can affect the exception handler's ability to recover from certain exceptions, such as an invalid stack. ",
+    "return_type": "LPTOP_LEVEL_EXCEPTION_FILTER WINAPI",
+    "category": "Structured Exception Handling",
+    "name": "SetUnhandledExceptionFilter",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTOP_LEVEL_EXCEPTION_FILTER",
+        "name": "lpTopLevelExceptionFilter",
+        "description": "A pointer to a top-level exception filter function that will be called whenever the  UnhandledExceptionFilter function gets control, and the process is not being debugged. A value of NULL for this parameter specifies default handling within  UnhandledExceptionFilter.     The filter function has syntax similar to that of  UnhandledExceptionFilter: It takes a single parameter of type LPEXCEPTION_POINTERS, has a WINAPI calling convention, and returns a value of type LONG. The filter function should return one of the following values.  ValueMeaning  EXCEPTION_EXECUTE_HANDLER 0x1   Return from  UnhandledExceptionFilter and execute the associated exception handler. This usually results in process termination.   EXCEPTION_CONTINUE_EXECUTION 0xffffffff   Return from  UnhandledExceptionFilter and continue execution from the point of the exception. Note that the filter function is free to modify the continuation state by modifying the exception information supplied through its LPEXCEPTION_POINTERS parameter.   EXCEPTION_CONTINUE_SEARCH 0x0   Proceed with normal execution of  UnhandledExceptionFilter. That means obeying the  SetErrorMode flags, or invoking the Application Error pop-up message box."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "An application-defined function that passes unhandled exceptions to the debugger, if the process is being debugged. Otherwise, it optionally displays an Application Error message box and causes the exception handler to be executed. This function can be called only from within the filter expression of an exception handler.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "The function returns one of the following values.  ",
+    "remarks": "If the process is not being debugged, the function displays an Application Error message box, depending on the current error mode. The default behavior is to display the dialog box, but this can be disabled by specifying SEM_NOGPFAULTERRORBOX in a call to the  SetErrorMode function. The system uses  UnhandledExceptionFilter internally to handle exceptions that occur during process and thread creation. ",
+    "return_type": "LONG WINAPI",
+    "category": "Structured Exception Handling",
+    "name": "UnhandledExceptionFilter",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "struct _EXCEPTION_POINTERS",
+        "name": "*ExceptionInfo",
+        "description": "A pointer to an  EXCEPTION_POINTERS structure that specifies a description of the exception and the processor context at the time of the exception. This pointer is the return value of a call to the  GetExceptionInformation function."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "An application-defined function that serves as a vectored exception handler. Specify this address when calling the  AddVectoredExceptionHandler function. The PVECTORED_EXCEPTION_HANDLER type defines a pointer to this callback function.  VectoredHandler is a placeholder for the application-defined name.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "To return control to the point at which the exception occurred, return EXCEPTION_CONTINUE_EXECUTION (0xffffffff). To continue the handler search, return EXCEPTION_CONTINUE_SEARCH (0x0). ",
+    "remarks": "The handler should not call functions that acquire synchronization objects or allocate memory, because this can cause problems. Typically, the handler will simply access the exception record and return. ",
+    "return_type": "LONG CALLBACK",
+    "category": "Structured Exception Handling",
+    "name": "VectoredHandler",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PEXCEPTION_POINTERS",
+        "name": "ExceptionInfo",
+        "description": "A pointer to an  EXCEPTION_POINTERS structure that receives the exception record."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Adds a dynamic function table to the dynamic function table list.",
+    "library": "Kernel32.lib",
+    "min_server": "",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is TRUE. Otherwise, the return value         is FALSE. ",
+    "remarks": "Function tables are used on 64-bit Windows to determine how to unwind or walk the stack. These tables are      usually generated by the compiler and stored as part of the image. However, applications must provide the      function table for dynamically generated code. For more information about function tables, see the architecture      guide for your system. This function is useful for code that is generated from a template or generated only once during the life of      the process. For more dynamically generated code, use the      RtlInstallFunctionTableCallback      function. ",
+    "return_type": "BOOLEAN WINAPI",
+    "category": "Structured Exception Handling",
+    "name": "RtlAddFunctionTable",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PRUNTIME_FUNCTION",
+        "name": "FunctionTable",
+        "description": "A pointer to an array of function entries. For a definition of the         PRUNTIME_FUNCTION type, see WinNT.h. For more information on runtime         function entries, see the calling convention documentation for the processor."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "EntryCount",
+        "description": "The number of entries in the FunctionTable array."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD64",
+        "name": "BaseAddress",
+        "description": "The base address to use when computing full virtual addresses from relative virtual addresses of function         table entries."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONGLONG",
+        "name": "TargetGp",
+        "description": "The target global pointer. This is part of the Intel IPF calling convention. It is a pointer to a data          area in an image. This parameter does not exist on x64."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves a     context record in the context of the caller.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID WINAPI",
+    "category": "Structured Exception Handling",
+    "name": "RtlCaptureContext",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PCONTEXT",
+        "name": "ContextRecord",
+        "description": "A pointer to a CONTEXT structure."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Removes a dynamic function table from the dynamic function table list.",
+    "library": "Kernel32.lib",
+    "min_server": "",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is TRUE. Otherwise, the return value        is FALSE. ",
+    "remarks": "Function tables are used on 64-bit Windows to determine how to unwind or walk the stack. These tables are      usually generated by the compiler and stored as part of the image. However, applications must provide the function      table for dynamically generated code. For more information about function tables, see the architecture guide for      your system. ",
+    "return_type": "BOOLEAN WINAPI",
+    "category": "Structured Exception Handling",
+    "name": "RtlDeleteFunctionTable",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PRUNTIME_FUNCTION",
+        "name": "FunctionTable",
+        "description": "A pointer to an array of function entries that were previously passed to        RtlAddFunctionTable or an identifier previously        passed to        RtlInstallFunctionTableCallback. For        a definition of the PRUNTIME_FUNCTION type, see WinNT.h."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 6,
+    "description": "Adds a dynamic function table to the dynamic function table list.",
+    "library": "Kernel32.lib",
+    "min_server": "",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the        return value is FALSE. ",
+    "remarks": "Function tables are used on 64-bit Windows to determine how to unwind or walk the stack. These tables are      usually generated by the compiler and stored as part of the image. However, applications must provide the function      table for dynamically generated code. For more information about function tables, see the architecture guide for      your system. This function is useful for very dynamic code. The application specifies the memory range for the generated      code, but does not need to generate a table until it is needed by an unwind request. At that time, the system      calls the callback function with the Context and the control address. The callback      function must return the runtime function entry for the specified address. Be sure to avoid creating a deadlock      between the callback function and the code generator. For code that is generated from a template or generated only once during the life of the process, use the      RtlAddFunctionTable function. ",
+    "return_type": "BOOLEAN WINAPI",
+    "category": "Structured Exception Handling",
+    "name": "RtlInstallFunctionTableCallback",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD64",
+        "name": "TableIdentifier",
+        "description": "The identifier for the dynamic function table callback. The two low-order bits must be set. For example,        BaseAddress|0x3."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD64",
+        "name": "BaseAddress",
+        "description": "The base address of the region of memory managed by the callback function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Length",
+        "description": "The size of the region of memory managed by the callback function, in bytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PGET_RUNTIME_FUNCTION_CALLBACK",
+        "name": "Callback",
+        "description": "A pointer to the callback function that is called to retrieve the function table entries for the functions        in the specified region of memory. For a definition of the        PGET_RUNTIME_FUNCTION_CALLBACK type, see WinNT.h."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "Context",
+        "description": "A pointer to the user-defined data to be passed to the callback function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "OutOfProcessCallbackDll",
+        "description": "An optional pointer to a string that specifies the path of a DLL that provides function table entries that         are outside the process. When a debugger unwinds to a function in the range of addresses managed by the callback function, it loads         this DLL and calls the OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK_EXPORT_NAME         function, whose type is POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK. For more         information, see the definitions of these items in WinNT.h."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 2,
+    "description": "Restores the context of the caller to the specified context record.",
+    "library": "Kernel32.lib",
+    "min_server": "",
+    "header": "WinNT.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID WINAPI",
+    "category": "Structured Exception Handling",
+    "name": "RtlRestoreContext",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCONTEXT",
+        "name": "ContextRecord",
+        "description": "A pointer to a CONTEXT structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PEXCEPTION_RECORD",
+        "name": "ExceptionRecord",
+        "description": "A pointer to an EXCEPTION_RECORD structure. This parameter is optional and should typically be NULL.  An exception record is used primarily with long jump and C++ catch-throw support. If the ExceptionCode member is STATUS_LONGJUMP, the ExceptionInformation member contains a pointer to a jump buffer. RtlRestoreContext will copy the non-volatile state from the jump buffer in to the context record before the context record is restored. If the ExceptionCode member is STATUS_UNWIND_CONSOLIDATE, the ExceptionInformation member contains a pointer to a callback function, such as a catch handler. RtlRestoreContext consolidates the call frames between its frame and the frame specified in the context record before calling the callback function. This hides frames from any exception handling that might occur in the callback function. The difference between this and a typical unwind is that the data on the stack is still present, so frame data such as a throw object is still available. The callback function returns a new program counter to update in the context record, which is then used in a normal restore context."
+      }
+    ],
+    "min_client": ""
+  }
+]
+

@@ -1,0 +1,712 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "Fills a specified  DCB structure with values specified in a device-control string. The device-control string uses the syntax of the mode command.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  BuildCommDCB function adjusts only those members of the  DCB structure that are specifically affected by the lpDef parameter, with the following exceptions: The  BuildCommDCB function only fills in the members of the  DCB structure. To apply these settings to a serial port, use the  SetCommState function. There are older and newer forms of the mode syntax. The  BuildCommDCB function supports both forms. However, you cannot mix the two forms together. The newer form of the mode syntax lets you explicitly set the values of the flow control members of the  DCB structure. If you use an older form of the mode syntax, the  BuildCommDCB function sets the flow control members of the  DCB structure, as follows: ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "BuildCommDCB",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpDef",
+        "description": "The device-control information. The function takes this string, parses it, and then sets appropriate values in the  DCB structure pointed to by lpDCB.     The string must have the same form as the mode command's command-line arguments: COMx[:][baud=b][parity=p][data=d][stop=s][to={on|off}][xon={on|off}][odsr={on|off}][octs={on|off}][dtr={on|off|hs}][rts={on|off|hs|tg}][idsr={on|off}] The device name is optional, but it must specify a valid device if used. For example, the following string specifies a baud rate of 1200, no parity, 8 data bits, and 1 stop bit: baud=1200 parity=N data=8 stop=1"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDCB",
+        "name": "lpDCB",
+        "description": "A pointer to a  DCB structure that receives the information."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Translates a device-definition string into appropriate device-control block codes and places them into      a device control block. The function can also set up time-out values, including the possibility of no      time-outs, for a device; the function's behavior in this regard depends on the contents of the device-definition      string.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. ",
+    "remarks": "The BuildCommDCBAndTimeouts function      modifies its time-out setting behavior based on the presence or absence of a \"to={on|off}\"      substring in lpDef: For more information, see the Remarks for the      BuildCommDCB function. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "BuildCommDCBAndTimeouts",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpDef",
+        "description": "The device-control information. The function takes this string, parses it, and then sets appropriate values         in the DCB structure pointed to by         lpDCB. The string must have the same form as the mode command's command-line arguments: COMx[:][baud={11|110|15|150|30|300|60|600|12|1200|24|2400|48|4800|96|9600|19|19200}][parity={n|e|o|m|s}][data={5|6|7|8}][stop={1|1.5|2}][to={on|off}][xon={on|off}][odsr={on|off}][octs={on|off}][dtr={on|off|hs}][rts={on|off|hs|tg}][idsr={on|off}] The \"baud\" substring can be any of the values listed, which are in pairs. The two-digit         values are the first two digits of the associated values that they represent. For example, 11 represents 110 baud, 19         represents 19,200 baud. The \"parity\" substring indicates how the parity bit is used to detect transmission errors.         The values represent \"none\", \"even\", \"odd\",                \"mark\", and \"space\". For more information, see the Mode command         reference in TechNet. For example, the following string specifies a baud rate of 1200, no parity, 8 data bits, and 1 stop bit: baud=1200 parity=N data=8 stop=1"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDCB",
+        "name": "lpDCB",
+        "description": "A pointer to a DCB structure that receives information        from the device-control information string pointed to by lpDef. This        DCB structure defines the control settings for a        communications device."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPCOMMTIMEOUTS",
+        "name": "lpCommTimeouts",
+        "description": "A pointer to a COMMTIMEOUTS structure that        receives time-out information."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Restores character transmission for a specified communications device and places the transmission line in a nonbreak state.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "A communications device is placed in a break state by the  SetCommBreak or  EscapeCommFunction function. Character transmission is then suspended until the break state is cleared by calling  ClearCommBreak. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "ClearCommBreak",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves information about a communications error and reports the current status of a communications device. The function is called when a communications error occurs, and it clears the device's error flag to enable additional input and output (I/O) operations.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If a communications port has been set up with a TRUE value for the fAbortOnError member of the setup  DCB structure, the communications software will terminate all read and write operations on the communications port when a communications error occurs. No new read or write operations will be accepted until the application acknowledges the communications error by calling the  ClearCommError function. The  ClearCommError function fills the status buffer pointed to by the lpStat parameter with the current status of the communications device specified by the hFile parameter. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "ClearCommError",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPDWORD",
+        "name": "lpErrors",
+        "description": "A pointer to a variable that receives a mask indicating the type of error. This parameter can be one or more of the following values.  ValueMeaning  CE_BREAK 0x0010   The hardware detected a break condition.   CE_FRAME 0x0008   The hardware detected a framing error.   CE_OVERRUN 0x0002   A character-buffer overrun has occurred. The next character is lost.   CE_RXOVER 0x0001   An input buffer overflow has occurred. There is either no room in the input buffer, or a character was received after the end-of-file (EOF) character.   CE_RXPARITY 0x0004   The hardware detected a parity error.     The following values are not supported:  CE_DNS  CE_IOE  CE_MODE  CE_OOP  CE_PTO      CE_TXFULL"
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPCOMSTAT",
+        "name": "lpStat",
+        "description": "A pointer to a  COMSTAT structure in which the device's status information is returned. If this parameter is NULL, no status information is returned."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Displays a driver-supplied configuration dialog box.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  CommConfigDialog function requires a dynamic-link library (DLL) provided by the communications hardware vendor. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "CommConfigDialog",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszName",
+        "description": "The name of the device for which a dialog box should be displayed. For example, COM1 through COM9 are serial ports and LPT1 through LPT9 are parallel ports."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the window that owns the dialog box. This parameter can be any valid window handle, or it should be NULL if the dialog box is to have no owner."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPCOMMCONFIG",
+        "name": "lpCC",
+        "description": "A pointer to a  COMMCONFIG structure. This structure contains initial settings for the dialog box before the call, and changed values after the call."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Directs the specified communications device to perform an extended function.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "EscapeCommFunction",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFunc",
+        "description": "The extended function to be performed. This parameter can be one of the following values.  ValueMeaning  CLRBREAK 9   Restores character transmission and places the transmission line in a nonbreak state. The CLRBREAK extended function code is identical to the  ClearCommBreak function.   CLRDTR 6   Clears the DTR (data-terminal-ready) signal.   CLRRTS 4   Clears the RTS (request-to-send) signal.   SETBREAK 8   Suspends character transmission and places the transmission line in a break state until the  ClearCommBreak function is called (or  EscapeCommFunction is called with the CLRBREAK extended function code). The SETBREAK extended function code is identical to the  SetCommBreak function. Note that this extended function does not flush data that has not been transmitted.   SETDTR 5   Sends the DTR (data-terminal-ready) signal.   SETRTS 3   Sends the RTS (request-to-send) signal.   SETXOFF 1   Causes transmission to act as if an XOFF character has been received.   SETXON 2   Causes transmission to act as if an XON character has been received."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the current configuration of a communications device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, use the  GetLastError function. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "GetCommConfig",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hCommDev",
+        "description": "A handle to the open communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPCOMMCONFIG",
+        "name": "lpCC",
+        "description": "A pointer to a buffer that receives a  COMMCONFIG structure."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpdwSize",
+        "description": "The size, in bytes, of the buffer pointed to by lpCC. When the function returns, the variable contains the number of bytes copied if the function succeeds, or the number of bytes required if the buffer was too small."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the value of the event mask for a specified communications device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  GetCommMask function uses a mask variable to indicate the set of events that can be monitored for a particular communications resource. A handle to the communications resource can be specified in a call to the  WaitCommEvent function, which waits for one of the events to occur. To modify the event mask of a communications resource, use the  SetCommMask function. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "GetCommMask",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpEvtMask",
+        "description": "A pointer to the variable that receives a mask of events that are currently enabled. This parameter can be one or more of the following values.     ValueMeaning  EV_BREAK 0x0040   A break was detected on input.   EV_CTS 0x0008   The CTS (clear-to-send) signal changed state.   EV_DSR 0x0010   The DSR (data-set-ready) signal changed state.   EV_ERR 0x0080   A line-status error occurred. Line-status errors are CE_FRAME, CE_OVERRUN, and CE_RXPARITY.   EV_EVENT1 0x0800   An event of the first provider-specific type occurred.   EV_EVENT2 0x1000   An event of the second provider-specific type occurred.   EV_PERR 0x0200   A printer error occurred.   EV_RING 0x0100   A ring indicator was detected.   EV_RLSD 0x0020   The RLSD (receive-line-signal-detect) signal changed state.   EV_RX80FULL 0x0400   The receive buffer is 80 percent full.   EV_RXCHAR 0x0001   A character was received and placed in the input buffer.   EV_RXFLAG 0x0002   The event character was received and placed in the input buffer. The event character is specified in the device's  DCB structure, which is applied to a serial port by using the  SetCommState function.   EV_TXEMPTY 0x0004   The last character in the output buffer was sent."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the modem control-register values.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  GetCommModemStatus function is useful when you are using the  WaitCommEvent function to monitor the CTS, RLSD, DSR, or ring indicator signals. To detect when these signals change state, use  WaitCommEvent and then use  GetCommModemStatus to determine the state after a change occurs. The function fails if the hardware does not support the control-register values. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "GetCommModemStatus",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpModemStat",
+        "description": "A pointer to a variable that receives the current state of the modem control-register values. This parameter can be one or more of the following values.  ValueMeaning  MS_CTS_ON 0x0010   The CTS (clear-to-send) signal is on.   MS_DSR_ON 0x0020   The DSR (data-set-ready) signal is on.   MS_RING_ON 0x0040   The ring indicator signal is on.   MS_RLSD_ON 0x0080   The RLSD (receive-line-signal-detect) signal is on."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves information about the communications properties for a specified communications device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  GetCommProperties function returns information from a device driver about the configuration settings that are supported by the driver. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "GetCommProperties",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPCOMMPROP",
+        "name": "lpCommProp",
+        "description": "A pointer to a  COMMPROP structure in which the communications properties information is returned. This information can be used in subsequent calls to the  SetCommState,  SetCommTimeouts, or  SetupComm function to configure the communications device."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the current control settings for a specified communications device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. For an example, see  Configuring a Communications Resource. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "GetCommState",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDCB",
+        "name": "lpDCB",
+        "description": "A pointer to a  DCB structure that receives the control settings information."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the time-out parameters for all read and write operations on a specified communications device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "For more information about time-out values for communications devices, see the  SetCommTimeouts \t\tfunction. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "GetCommTimeouts",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPCOMMTIMEOUTS",
+        "name": "lpCommTimeouts",
+        "description": "A pointer to a  COMMTIMEOUTS structure in which the time-out information is returned."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the default configuration for the specified communications device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, use the  GetLastError function. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "GetDefaultCommConfig",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszName",
+        "description": "The name of the device. For example, COM1 through COM9 are serial ports and LPT1 through LPT9 are parallel ports."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPCOMMCONFIG",
+        "name": "lpCC",
+        "description": "A pointer to a buffer that receives a  COMMCONFIG structure."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpdwSize",
+        "description": "A pointer to a variable that specifies the size of the buffer pointed to by lpCC, in bytes. Upon return, the variable contains the number of bytes copied if the function succeeds, or the number of bytes required if the buffer was too small."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Discards all characters from the output or input buffer of a specified communications resource. It can also terminate pending read or write operations on the resource.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If a thread uses  PurgeComm to flush an output buffer, the deleted characters are not transmitted. To empty the output buffer while ensuring that the contents are transmitted, call the  FlushFileBuffers function (a synchronous operation). Note, however, that FlushFileBuffers is subject to flow control but not to write time-outs, and it will not return until all pending write operations have been transmitted. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "PurgeComm",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications resource. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be one or more of the following values.  ValueMeaning  PURGE_RXABORT 0x0002   Terminates all outstanding overlapped read operations and returns immediately, even if the read operations have not been completed.   PURGE_RXCLEAR 0x0008   Clears the input buffer (if the device driver has one).   PURGE_TXABORT 0x0001   Terminates all outstanding overlapped write operations and returns immediately, even if the write operations have not been completed.   PURGE_TXCLEAR 0x0004   Clears the output buffer (if the device driver has one)."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Suspends character transmission for a specified communications device and places the transmission line in a break state until the  ClearCommBreak function is called.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "SetCommBreak",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the current configuration of a communications device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "SetCommConfig",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hCommDev",
+        "description": "A handle to the open communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCOMMCONFIG",
+        "name": "lpCC",
+        "description": "A pointer to a  COMMCONFIG structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwSize",
+        "description": "The size of the structure pointed to by lpCC, in bytes."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Specifies a set of events to be monitored for a communications device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  SetCommMask function specifies the set of events that can be monitored for a particular communications resource. A handle to the communications resource can be specified in a call to the  WaitCommEvent function, which waits for one of the events to occur. To get the current event mask of a communications resource, use the  GetCommMask function. For an example, see  Monitoring Communications Events. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "SetCommMask",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwEvtMask",
+        "description": "The events to be enabled. A value of zero disables all events. This parameter can be one or more of the following values.  ValueMeaning  EV_BREAK 0x0040   A break was detected on input.   EV_CTS 0x0008   The CTS (clear-to-send) signal changed state.   EV_DSR 0x0010   The DSR (data-set-ready) signal changed state.   EV_ERR 0x0080   A line-status error occurred. Line-status errors are CE_FRAME, CE_OVERRUN, and CE_RXPARITY.   EV_RING 0x0100   A ring indicator was detected.   EV_RLSD 0x0020   The RLSD (receive-line-signal-detect) signal changed state.   EV_RXCHAR 0x0001   A character was received and placed in the input buffer.   EV_RXFLAG 0x0002   The event character was received and placed in the input buffer. The event character is specified in the device's  DCB structure, which is applied to a serial port by using the  SetCommState function.   EV_TXEMPTY 0x0004   The last character in the output buffer was sent."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Configures a communications device according to the specifications in a device-control block (a  DCB structure). The function reinitializes all hardware and control settings, but it does not empty output or input queues.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  SetCommState function uses a  DCB structure to specify the desired configuration. The  GetCommState function returns the current configuration. To set only a few members of the  DCB structure, you should modify a  DCB structure that has been filled in by a call to  GetCommState. This ensures that the other members of the  DCB structure have appropriate values. The  SetCommState function fails if the XonChar member of the  DCB structure is equal to the XoffChar member. When  SetCommState is used to configure the 8250, the following restrictions apply to the values for the  DCB structure's ByteSize and StopBits members: The number of data bits must be 5 to 8 bits. For an example, see  Configuring a Communications Resource. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "SetCommState",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPDCB",
+        "name": "lpDCB",
+        "description": "A pointer to a  DCB structure that contains the configuration information for the specified communications device."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets the time-out parameters for all read and write operations on a specified communications device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "SetCommTimeouts",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCOMMTIMEOUTS",
+        "name": "lpCommTimeouts",
+        "description": "A pointer to a  COMMTIMEOUTS structure that contains the new time-out values."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the default configuration for a communications device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "SetDefaultCommConfig",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszName",
+        "description": "The name of the device. For example, COM1 through COM9 are serial ports and LPT1 through LPT9 are parallel ports."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCOMMCONFIG",
+        "name": "lpCC",
+        "description": "A pointer to a  COMMCONFIG structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwSize",
+        "description": "The size of the structure pointed to by lpCC, in bytes."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Initializes the communications parameters for a specified communications device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "After a process uses the  CreateFile function to open a handle to a communications device, but before doing any I/O with the device, it can call  SetupComm to set the communications parameters for the device. If it does not set them, the device uses the default parameters when the first call to another communications function occurs. The dwInQueue and dwOutQueue parameters specify the recommended sizes for the internal buffers used by the driver for the specified device. For example, YMODEM protocol packets are slightly larger than 1024 bytes. Therefore, a recommended buffer size might be 1200 bytes for YMODEM communications. For Ethernet-based communications, a recommended buffer size might be 1600 bytes, which is slightly larger than a single Ethernet frame. The device driver receives the recommended buffer sizes, but is free to use any input and output (I/O) buffering scheme, as long as it provides reasonable performance and data is not lost due to overrun (except under extreme circumstances). For example, the function can succeed even though the driver does not allocate a buffer, as long as some other portion of the system provides equivalent functionality. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "SetupComm",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwInQueue",
+        "description": "The recommended size of the device's internal input buffer, in bytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwOutQueue",
+        "description": "The recommended size of the device's internal output buffer, in bytes."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Transmits a specified character ahead of any pending data in the output buffer of the specified communications device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  TransmitCommChar function is useful for sending an interrupt character (such as a CTRL+C) to a host system. If the device is not transmitting,  TransmitCommChar cannot be called repeatedly. Once  TransmitCommChar places a character in the output buffer, the character must be transmitted before the function can be called again. If the previous character has not yet been sent,  TransmitCommChar returns an error. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "TransmitCommChar",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "char",
+        "name": "cChar",
+        "description": "The character to be transmitted."
+      }
+    ],
+    "min_client": "Windows XP"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Waits for an event to occur for a specified communications device. The set of events that are monitored by this function is contained in the event mask associated with the device handle.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  WaitCommEvent function monitors a set of events for a specified communications resource. To set and query the current event mask of a communications resource, use the  SetCommMask and  GetCommMask functions. If the overlapped operation cannot be completed immediately, the function returns FALSE and the GetLastError function returns ERROR_IO_PENDING, indicating that the operation is executing in the background. When this happens, the system sets the hEvent member of the OVERLAPPED structure to the not-signaled state before  WaitCommEvent returns, and then it sets it to the signaled state when one of the specified events or an error occurs. The calling process can use one of the  wait functions to determine the event object's state and then use the GetOverlappedResult function to determine the results of the  WaitCommEvent operation.  GetOverlappedResult reports the success or failure of the operation, and the variable pointed to by the lpEvtMask parameter is set to indicate the event that occurred. If a process attempts to change the device handle's event mask by using the  SetCommMask function while an overlapped  WaitCommEvent operation is in progress,  WaitCommEvent returns immediately. The variable pointed to by the lpEvtMask parameter is set to zero. For an example, see  Monitoring Communications Events. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Communications Resources",
+    "name": "WaitCommEvent",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the communications device. The  CreateFile function returns this handle."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpEvtMask",
+        "description": "A pointer to a variable that receives a mask indicating the type of event that occurred. If an error occurs, the value is zero; otherwise, it is one of the following values.  ValueMeaning  EV_BREAK 0x0040   A break was detected on input.   EV_CTS 0x0008   The CTS (clear-to-send) signal changed state.   EV_DSR 0x0010   The DSR (data-set-ready) signal changed state.   EV_ERR 0x0080   A line-status error occurred. Line-status errors are CE_FRAME, CE_OVERRUN, and CE_RXPARITY.   EV_RING 0x0100   A ring indicator was detected.   EV_RLSD 0x0020   The RLSD (receive-line-signal-detect) signal changed state.   EV_RXCHAR 0x0001   A character was received and placed in the input buffer.   EV_RXFLAG 0x0002   The event character was received and placed in the input buffer. The event character is specified in the device's  DCB structure, which is applied to a serial port by using the  SetCommState function.   EV_TXEMPTY 0x0004   The last character in the output buffer was sent."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOVERLAPPED",
+        "name": "lpOverlapped",
+        "description": "A pointer to an  OVERLAPPED structure. This structure is required if hFile was opened with FILE_FLAG_OVERLAPPED.     If hFile was opened with FILE_FLAG_OVERLAPPED, the lpOverlapped parameter must not be NULL. It must point to a valid OVERLAPPED structure. If hFile was opened with FILE_FLAG_OVERLAPPED and lpOverlapped is NULL, the function can incorrectly report that the operation is complete. If hFile was opened with FILE_FLAG_OVERLAPPED and lpOverlapped is not NULL,  WaitCommEvent is performed as an overlapped operation. In this case, the OVERLAPPED structure must contain a handle to a manual-reset event object (created by using the  CreateEvent function). If hFile was not opened with FILE_FLAG_OVERLAPPED,  WaitCommEvent does not return until one of the specified events or an error occurs."
+      }
+    ],
+    "min_client": "Windows XP"
+  }
+]
+

@@ -1,0 +1,2260 @@
+[
+  {
+    "n_arguments": 5,
+    "description": "The AddJob function adds a print job to the list of print jobs that can be scheduled by the print spooler. The function retrieves the name of the file you can use to store the job.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "You can call the CreateFile function to open the spool file specified by the Path member of the ADDJOB_INFO_1 structure, and then call the WriteFile function to write print job data to it. After that is done, call the ScheduleJob function to notify the print spooler that the print job can now be scheduled by the spooler for printing. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "AddJob",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle that specifies the printer for the print job. This must be a local printer that is configured as a spooled printer. If hPrinter is a handle to a remote printer connection, or if the printer is configured for direct printing, the AddJob function fails. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "The version of the print job information data structure that the function stores into the buffer pointed to by pData. Set this parameter to one."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "pData",
+        "description": "A pointer to a buffer that receives an ADDJOB_INFO_1 data structure and a path string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBuf",
+        "description": "The size, in bytes, of the buffer pointed to by pData. The buffer needs to be large enough to contain an ADDJOB_INFO_1 structure and a path string."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbNeeded",
+        "description": "A pointer to a variable that receives the total size, in bytes, of the ADDJOB_INFO_1 data structure plus the path string. If this value is less than or equal to cbBuf and the function succeeds, this is the actual number of bytes written to the buffer pointed to by pData. If this number is greater than cbBuf, the buffer is too small, and you must call the function again with a buffer size at least as large as *pcbNeeded."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The ClosePrinter function closes the specified printer object.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "When the ClosePrinter function returns, the handle hPrinter is invalid, regardless of whether the function has succeeded or failed. For a sample program that uses this function, see How To: Print Using the GDI Print API. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "ClosePrinter",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer object to be closed. This handle is returned by the OpenPrinter or AddPrinter function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "The DocumentEvent function is an event handler for events associated with printing a document.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "The function's return value is dependent on the escape supplied for iEsc. For some escape codes, the return value is not used (see below). If the function supplies a return value, it must be one of the following.  The following list indicates which escape codes that require a return value and which do not, and explains the meaning of the DOCUMENTEVENT_SUCCESS, DOCUMENTEVENT_FAILURE, and DOCUMENTEVENT_UNSUPPORTED return codes.  ",
+    "remarks": "For an iEsc value of DOCUMENTEVENT_QUERYFILTER, the spooler can interpret a DOCUMENTEVENT_SUCCESS value returned by DocumentEvent in two ways, depending on whether the driver modified certain members of the DOCEVENT_FILTER structure (which is documented in the Windows Driver Development Kit ). (The pvOut parameter points to this structure.) When the spooler allocates memory for a structure of this type, it initializes two members of this structure, cElementsReturned and cElementsNeeded, to known values. After DocumentEvent returns, the spooler determines whether the values of these members have changed, and uses that information to interpret the DocumentEvent return value. The following table summarizes this situation.  If the escape code supplied in the iEsc parameter is DOCUMENTEVENT_CREATEDCPRE, the following rules apply: ",
+    "return_type": "HRESULT",
+    "category": "Print Spooler",
+    "name": "DocumentEvent",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to a printer object. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A device context handle that is generated by a call of CreateDC. This is zero if iEsc is set to DOCUMENTEVENT_CREATEDCPRE. For restrictions on printing from a 32-bit application on a 64-bit version of Windows, see Remarks."
+      },
+      {
+        "in_out": "",
+        "type": "INT",
+        "name": "iEsc",
+        "description": "An escape code that identifies the event to be handled. This parameter can be one of the following integer constants.                    ConstantEvent  DOCUMENTEVENT_ABORTDOC   GDI is about to process a call to its AbortDoc function.   DOCUMENTEVENT_CREATEDCPOST   GDI has just processed a call to its CreateDC or CreateIC function. This escape code should not be used unless there has been a previous call to DocumentEvent with iEsc set to DOCUMENTEVENT_CREATEDCPRE.   DOCUMENTEVENT_CREATEDCPRE   GDI is about to process a call to its CreateDC or CreateIC function.   DOCUMENTEVENT_DELETEDC   GDI is about to process a call to its DeleteDC function.   DOCUMENTEVENT_ENDDOCPOST   GDI has just processed a call to its EndDoc function.   DOCUMENTEVENT_ENDDOCPRE or DOCUMENTEVENT_ENDDOC   GDI is about to process a call to its EndDoc function.   DOCUMENTEVENT_ENDPAGE   GDI is about to process a call to its EndPage function.   DOCUMENTEVENT_ESCAPE   GDI is about to process a call to its ExtEscape function.   DOCUMENTEVENT_QUERYFILTER   The DOCUMENTEVENT_QUERYFILTER event represents an opportunity for the spooler to query the driver for a list of the DOCUMENTEVENT_ XXX events to which the driver will respond. This event is issued just prior to a call to DocumentEvent that passes the DOCUMENTEVENT_CREATEDCPRE event.   DOCUMENTEVENT_RESETDCPOST   GDI has just processed a call to its ResetDC function. This escape code should not be used unless there has been a previous call to DocumentEvent with iEsc set to DOCUMENTEVENT_RESETDCPRE.   DOCUMENTEVENT_RESETDCPRE   GDI is about to process a call to its ResetDC function.   DOCUMENTEVENT_STARTDOCPOST   GDI has just processed a call to its StartDoc function.   DOCUMENTEVENT_STARTDOCPRE or DOCUMENTEVENT_STARTDOC   GDI is about to process a call to its StartDoc function.   DOCUMENTEVENT_STARTPAGE   GDI is about to process a call to its StartPage function."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "cbIn",
+        "description": "The size, in bytes, of the buffer pointed to by pvIn."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pvIn",
+        "description": "A pointer to a buffer. What the buffer contains depends on the value of iEsc, as shown in the following table.                    Constant                 pvin Contents  DOCUMENTEVENT_ABORTDOC   Not used.   DOCUMENTEVENT_CREATEDCPOST   pvIn contains the address of a pointer to the DEVMODE structure specified in the pvOut parameter in a previous call to this function, for which the iEsc parameter was set to DOCUMENTEVENT_CREATEDCPRE.   DOCUMENTEVENT_CREATEDCPRE   pvIn points to a DOCEVENT_CREATEDCPRE structure which is documented in the Windows Driver Development Kit.   DOCUMENTEVENT_DELETEDC   Not used.   DOCUMENTEVENT_ENDDOCPOST   Not used.   DOCUMENTEVENT_ENDDOCPRE or DOCUMENTEVENT_ENDDOC   Not used.   DOCUMENTEVENT_ENDPAGE   Not used.   DOCUMENTEVENT_ESCAPE   pvIn points to a DOCEVENT_ESCAPE structure which is documented in the Windows Driver Development Kit.   DOCUMENTEVENT_QUERYFILTER   Same as for DOCUMENTEVENT_CREATEDCPRE.   DOCUMENTEVENT_RESETDCPOST   pvIn contains the address of a pointer to the DEVMODE structure specified in the pvOut parameter in a previous call to this function, for which the iEsc parameter was set to DOCUMENTEVENT_RESETDCPRE.   DOCUMENTEVENT_RESETDCPRE   pvIn contains the address of a pointer to the DEVMODE structure supplied by the caller of ResetDC.   DOCUMENTEVENT_STARTDOCPOST   pvIn points to a LONG that specifies the print job identifier returned by StartDoc.   DOCUMENTEVENT_STARTDOCPRE or DOCUMENTEVENT_STARTDOC   pvIn contains the address of a pointer to a DOCINFO structure supplied by the caller of StartDoc.   DOCUMENTEVENT_STARTPAGE   Not used."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "cbOut",
+        "description": "Value                 Meaning IDOCUMENTEVENT_QUERYFILTERThe size, in bytes, of the buffer pointer to by pvOut. DOCUMENTEVENT_ESCAPEA value that is used as the cbOutput parameter for ExtEscape. For all other  valuesiEsc is not used."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "pvOut",
+        "description": "A pointer to a buffer. The contents of the buffer depend on the value supplied for iEsc, as shown in the following table.                    Constant                 pvOut Contents  DOCUMENTEVENT_CREATEDCPRE   A pointer to a driver-supplied DEVMODE structure, which GDI uses instead of the one supplied by the CreateDC caller. (If NULL, GDI uses the caller-supplied structure.)   DOCUMENTEVENT_ESCAPE   A pointer to a buffer that is used as the lpszOutData parameter for ExtEscape.   DOCUMENTEVENT_QUERYFILTER   A pointer to buffer containing a DOCEVENT_FILTER structure which is documented in the Windows Driver Development Kit.   DOCUMENTEVENT_RESETDCPRE   A pointer to a driver-supplied DEVMODE structure, which GDI uses instead of the one supplied by the ResetDC caller. (If NULL, GDI uses the caller-supplied structure.)"
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The DocumentProperties function retrieves or modifies printer initialization information or displays a printer-configuration property sheet for the specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the fMode parameter is zero, the return value is the size of the buffer required to contain the printer driver initialization data. Note that this buffer can be larger than a DEVMODE structure if the printer driver appends private data to the structure. If the function displays the property sheet, the return value is either IDOK or IDCANCEL, depending on which button the user selects. If the function does not display the property sheet and is successful, the return value is IDOK. If the function fails, the return value is less than zero. ",
+    "remarks": "The string pointed to by the pDeviceName parameter can be obtained by calling the GetPrinter function. The DEVMODE structure actually used by a printer driver contains the device-independent part (as defined above) followed by a driver-specific part that varies in size and content with each driver and driver version. Because of this driver dependence, it is very important for applications to query the driver for the correct size of the DEVMODE structure before allocating a buffer for it. To make changes to print settings that are local to an application, an application should follow these steps: To create a handle to a printer-device context using the current printer settings, you only need to call DocumentProperties twice, as described above. The first call gets the size of the full DEVMODE and the second call initializes the DEVMODE with the current printer settings. Pass the initialized DEVMODE to CreateDC to obtain the handle to the printer device context. ",
+    "return_type": "LONG",
+    "category": "Print Spooler",
+    "name": "DocumentProperties",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the parent window of the printer-configuration property sheet."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to a printer object. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pDeviceName",
+        "description": "A pointer to a null-terminated string that specifies the name of the device for which the printer-configuration property sheet is displayed."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDEVMODE",
+        "name": "pDevModeOutput",
+        "description": "A pointer to a DEVMODE structure that receives the printer configuration data specified by the user."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PDEVMODE",
+        "name": "pDevModeInput",
+        "description": "A pointer to a DEVMODE structure that the operating system uses to initialize the property sheet controls. This parameter is only used if the DM_IN_BUFFER flag is set in the fMode parameter. If DM_IN_BUFFER is not set, the operating system uses the printer's default DEVMODE."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "fMode",
+        "description": "The operations the function performs. If this parameter is zero, the DocumentProperties function returns the number of bytes required by the printer driver's DEVMODE data structure. Otherwise, use one or more of the following constants to construct a value for this parameter; note, however, that in order to change the print settings, an application must specify at least one input value and one output value.  ValueMeaning  DM_IN_BUFFER   Input value. Before prompting, copying, or updating, the function merges the printer driver's current print settings with the settings in the DEVMODE structure specified by the pDevModeInput parameter. The function updates the structure only for those members specified by the DEVMODE structure's dmFields member. This value is also defined as DM_MODIFY. In cases of conflict during the merge, the settings in the DEVMODE structure specified by pDevModeInput override the printer driver's current print settings.   DM_IN_PROMPT   Input value. The function presents the printer driver's Print Setup property sheet and then changes the settings in the printer's DEVMODE data structure to those values specified by the user. This value is also defined as DM_PROMPT.   DM_OUT_BUFFER   Output value. The function writes the printer driver's current print settings, including private data, to the DEVMODE data structure specified by the pDevModeOutput parameter. The caller must allocate a buffer sufficiently large to contain the information. If the bit DM_OUT_BUFFER sets is clear, the pDevModeOutput parameter can be NULL. This value is also defined as DM_COPY."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The EndDocPrinter function ends a print job for the specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "The EndDocPrinter function returns an error if the print job was not started by calling the StartDocPrinter function. The sequence for a print job is as follows: When a page in a spooled file exceeds approximately 350 MB, it may fail to print and not send an error message. For example, this can occur when printing large EMF files. The page size limit depends on many factors including the amount of virtual memory available, the amount of memory allocated by calling processes, and the amount of fragmentation in the process heap. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "EndDocPrinter",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "Handle to a printer for which the print job should be ended. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The EndPagePrinter function notifies the print spooler that the application is at the end of a page in a print job.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "The sequence for a print job is as follows: When a page in a spooled file exceeds approximately 350 MB, it can fail to print and not send an error message. For example, this can occur when printing large EMF files. The page size limit depends on many factors including the amount of virtual memory available, the amount of memory allocated by calling processes, and the amount of fragmentation in the process heap. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "EndPagePrinter",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "Handle to the printer for which the page will be concluded. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "The EnumJobs function retrieves information about a specified set of print jobs for a specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "The JOB_INFO_1 structure contains general print-job information; the JOB_INFO_2 structure has much more detailed information. The JOB_INFO_3 structure contains information about how jobs are linked. To determine the number of print jobs in the printer queue, call the GetPrinter function with the Level parameter set to 2. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "EnumJobs",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer object whose print jobs the function enumerates. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "FirstJob",
+        "description": "The zero-based position within the print queue of the first print job to enumerate. For example, a value of 0 specifies that enumeration should begin at the first print job in the print queue; a value of 9 specifies that enumeration should begin at the tenth print job in the print queue."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "NoJobs",
+        "description": "The total number of print jobs to enumerate."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "The type of information returned in the pJob buffer.  ValueMeaning  1   pJob receives an array of JOB_INFO_1 structures   2   pJob receives an array of JOB_INFO_2 structures   3   pJob receives an array of JOB_INFO_3 structures"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "pJob",
+        "description": "A pointer to a buffer that receives an array of JOB_INFO_1, JOB_INFO_2, or JOB_INFO_3 structures. The buffer must be large enough to receive the array of structures and any strings or other data to which the structure members point. To determine the required buffer size, call EnumJobs with cbBuf set to zero. EnumJobs fails, GetLastError returns ERROR_INSUFFICIENT_BUFFER, and the pcbNeeded parameter returns the size, in bytes, of the buffer required to hold the array of structures and their data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBuf",
+        "description": "The size, in bytes, of the pJob buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbNeeded",
+        "description": "A pointer to a variable that receives the number of bytes copied if the function succeeds. If the function fails, the variable receives the number of bytes required."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcReturned",
+        "description": "A pointer to a variable that receives the number of JOB_INFO_1, JOB_INFO_2, or JOB_INFO_3 structures returned in the pJob buffer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The GetJob function retrieves information about a specified print job.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "GetJob",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer for which the print-job data is retrieved. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "JobId",
+        "description": "Identifies the print job for which to retrieve data. Use the AddJob function or StartDoc function to get a print job identifier."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "The type of information returned in the pJob buffer. If Level is 1, pJob receives a JOB_INFO_1 structure. If Level is 2, pJob receives a JOB_INFO_2 structure."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "pJob",
+        "description": "A pointer to a buffer that receives a JOB_INFO_1 or a JOB_INFO_2 structure containing information about the job. The buffer must be large enough to store the strings pointed to by the structure members. To determine the required buffer size, call GetJob with cbBuf set to zero. GetJob fails, GetLastError returns ERROR_INSUFFICIENT_BUFFER, and the pcbNeeded parameter returns the size, in bytes, of the buffer required to hold the array of structures and their data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBuf",
+        "description": "The size, in bytes, of the array."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbNeeded",
+        "description": "A pointer to a value that specifies the number of bytes copied if the function succeeds or the number of bytes required if cbBuf is too small."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The OpenPrinter function retrieves a handle to the specified printer or print server or other types of handles in the print subsystem.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "Do not call this method in DllMain. The handle pointed to by phPrinter is not thread safe. If callers need to use it concurrently on multiple threads, they must provide custom synchronization access to the printer handle using the Synchronization Functions. To avoid writing custom code the application can open a printer handle on each thread, as needed. The pDefault parameter enables you to specify the data type and device mode values that are used for printing documents submitted by the StartDocPrinter function. However, you can override these values by using the SetJob function after a document has been started. The DEVMODE settings defined in the PRINTER_DEFAULTS structure of the pDefault parameter are not used when the value of the pDatatype member of the DOC_INFO_1 structure that was passed in the  pDocInfo parameter of the StartDocPrinter call is \"RAW\". When a high-level document (such as an Adobe PDF or Microsoft Word file) or other printer data (such PCL, PS, or HPGL) is sent directly to a printer with pDatatype set to \"RAW\", the document must fully describe the DEVMODE-style print job settings in the language understood by the hardware. You can call the OpenPrinter function to open a handle to a print server or to determine the access rights that a client has to a print server. To do so, specify the name of the print server in the pPrinterName parameter, set the pDatatype and pDevMode members of the PRINTER_DEFAULTS structure to NULL, and set the DesiredAccess member to specify a server access mask value such as SERVER_ALL_ACCESS. When you finish with the handle, pass it to the ClosePrinter function to close it. Use the DesiredAccess member of the PRINTER_DEFAULTS structure to specify the access rights that you need to the printer. The access rights can be one of the following. (If pDefault is NULL, then the access rights are PRINTER_ACCESS_USE.)  If a user does not have permission to open a specified printer or print server with the desired access, the OpenPrinter call will fail with a return value of zero and GetLastError will return the value ERROR_ACCESS_DENIED. For a sample program that uses this function, see How To: Print Using the GDI Print API. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "OpenPrinter",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pPrinterName",
+        "description": "A pointer to a null-terminated string that specifies the name of the printer or print server, the printer object, the XcvMonitor, or the XcvPort. For a printer object use: PrinterName, Job xxxx. For an XcvMonitor, use: ServerName, XcvMonitor MonitorName. For an XcvPort, use: ServerName, XcvPort PortName. If NULL, it indicates the local printer server."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPHANDLE",
+        "name": "phPrinter",
+        "description": "A pointer to a variable that receives a handle (not thread safe) to the open printer or print server object. The phPrinter parameter can return an Xcv handle for use with the XcvData function. For more information about XcvData, see the DDK."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPPRINTER_DEFAULTS",
+        "name": "pDefault",
+        "description": "A pointer to a PRINTER_DEFAULTS structure. This value can be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves a handle to the specified printer, print server, or other types of handles in the print subsystem, while setting some of the printer options.",
+    "library": "Winspool.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. For extended error information, call GetLastError. ",
+    "remarks": "Do not call this method in DllMain. The ANSI version of this function is not implemented and returns ERROR_NOT_SUPPORTED. The pDefault parameter enables you to specify the data type and device mode values that are used for printing documents submitted by the StartDocPrinter function. However, you can override these values by using the SetJob function after a document has been started. You can call the OpenPrinter2 function to open a handle to a print server or to determine client access rights to a print server. To do this, specify the name of the print server in the pPrinterName parameter, set the pDatatype and pDevMode members of the PRINTER_DEFAULTS structure to NULL, and set the DesiredAccess member to specify a server access mask value such as SERVER_ALL_ACCESS. When you are finished with the handle, pass it to the ClosePrinter function to close it. Use the DesiredAccess member of the PRINTER_DEFAULTS structure to specify the necessary access rights. The access rights can be one of the following.  If a user does not have permission to open a specified printer or print server with the desired access, the OpenPrinter2 call will fail, and GetLastError will return the value ERROR_ACCESS_DENIED. When pPrinterName is a local printer, then OpenPrinter2 ignores all values of the dwFlags that the PRINTER_OPTIONS structure pointed to using pOptions, except PRINTER_OPTION_CLIENT_CHANGE. If the latter is passed, then OpenPrinter2 will return ERROR_ACCESS_DENIED. Accordingly, when opening a local printer, OpenPrinter2 provides no advantage over OpenPrinter. Windows Vista: The printer data returned by OpenPrinter2 is retrieved from a local cache unless the PRINTER_OPTION_NO_CACHE flag is set in the dwFlags field of the PRINTER_OPTIONS structure referenced by pOptions. In this example, OpenPrinter2 fails when PRINTER_ACCESS_MANAGE_LIMITED is passed to the PRINTER_DEFAULTS structure, and the user does not have the appropriate permission. For a sample program that shows how to use this function, see How To: Print Using the GDI Print API. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "OpenPrinter2",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pPrinterName",
+        "description": "A pointer to a constant null-terminated string that specifies the name of the printer or print server, the printer object, the XcvMonitor, or the XcvPort. For a printer object, use: PrinterName,Job xxxx. For an XcvMonitor, use: ServerName,XcvMonitor MonitorName. For an XcvPort, use: ServerName,XcvPort PortName. Windows Vista: If NULL, it indicates the local print server."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPHANDLE",
+        "name": "phPrinter",
+        "description": "A pointer to a variable that receives a handle to the open printer or print server object."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPPRINTER_DEFAULTS",
+        "name": "pDefault",
+        "description": "A pointer to a PRINTER_DEFAULTS structure. This value can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PPRINTER_OPTIONS",
+        "name": "pOptions",
+        "description": "A pointer to a PRINTER_OPTIONS structure. This value can be NULL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Reports to the Print Spooler service whether an XPS print job is in the spooling or the rendering phase and what part of the processing is currently underway.",
+    "library": "Winspool.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the operation succeeds, the return value is S_OK, otherwise the HRESULT will contain an error code. For more information about COM error codes, see Error Handling. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Print Spooler",
+    "name": "ReportJobProcessingProgress",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "printerHandle",
+        "description": "A printer handle for which the function is to retrieve information. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "jobId",
+        "description": "Identifies the print job for which to retrieve data. Use the AddJob function or StartDoc function to get a print job identifier."
+      },
+      {
+        "in_out": "",
+        "type": "EPrintXPSJobOperation",
+        "name": "jobOperation",
+        "description": "Specifies whether the job is in the spooling phase or the rendering phase."
+      },
+      {
+        "in_out": "",
+        "type": "EPrintXPSJobProgress",
+        "name": "jobProgress",
+        "description": "Specifies what part of the processing is currently underway. This value refers to events in either the spooling or rendering phase depending on the value of jobOperation."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The ScheduleJob function requests that the print spooler schedule a specified print job for printing.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "You must successfully call the AddJob function before calling the ScheduleJob function. AddJob obtains the print job identifier that you pass to ScheduleJob as dwJobID. Both calls must use the same value for hPrinter. The ScheduleJob function checks for a valid spool file. If there is an invalid spool file, or if it is empty, ScheduleJob deletes both the spool file and the corresponding print job entry in the print spooler. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "ScheduleJob",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer for the print job. This must be a local printer that is configured as a spooled printer. If hPrinter is a handle to a remote printer connection, or if the printer is configured for direct printing, the ScheduleJob function fails. Use the OpenPrinter or AddPrinter function to retrieve a printer handle. hPrinter must be the same printer handle specified in the call to AddJob that obtained the dwJobID print job identifier."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwJobID",
+        "description": "The print job to be scheduled. You obtain this print job identifier by calling the AddJob function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The SetJob function pauses, resumes, cancels, or restarts a print job on a specified printer. You can also use the SetJob function to set print job parameters, such as the print job priority and the document name.",
+    "library": "WinSpool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "WinSpool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "You can use the SetJob function to set various print job parameters by supplying a pointer to a JOB_INFO_1, JOB_INFO_2, JOB_INFO_3, or JOB_INFO_4 structure that contains the necessary data. To remove or delete all of the print jobs for a particular printer, call the SetPrinter function with its Command parameter set to PRINTER_CONTROL_PURGE. The following members of a JOB_INFO_1, JOB_INFO_2, or JOB_INFO_4 structure are ignored on a call to SetJob: JobId, pPrinterName, pMachineName, pUserName, pDrivername, Size, Submitted, Time, and TotalPages. You must have PRINTER_ACCESS_ADMINISTER access permission for a printer in order to change a print job's position in the print queue. If you do not want to set a print job's position in the print queue, you should set the Position member of the JOB_INFO_1, JOB_INFO_2, or JOB_INFO_4 structure to JOB_POSITION_UNSPECIFIED. Use the SetJob function with the JOB_INFO_3 structure to link together a set of print jobs (also known as a chain). This is useful in situations where a single document consists of several parts that you want to render separately. To print jobs A, B, C, and D in order, call SetJob with JOB_INFO_4 to link A to B, B to C, and C to D. If you link print jobs, note the following: ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "SetJob",
+    "is_callback": 0,
+    "dll": "WinSpool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer object of interest. Use the OpenPrinter, OpenPrinter2, or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "JobId",
+        "description": "Identifier that specifies the print job. You obtain a print job identifier by calling the AddJob function or the StartDoc function. If the Level parameter is set to 3, the JobId parameter must match the JobId member of the JOB_INFO_3 structure pointed to by pJob"
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "The type of job information structure pointed to by the pJob parameter. All versions of Windows: You can set the Level parameter to 0, 1, or 2. When you set Level to 0, pJob should be NULL. Use these values when you are not setting any print job parameters. You can also set the Level parameter to 3. Starting with Windows Vista: You can also set the Level parameter to 4."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pJob",
+        "description": "A pointer to a structure that sets the print job parameters. All versions of Windows: pJob can point to a JOB_INFO_1 or JOB_INFO_2 structure. pJob can also point to a JOB_INFO_3 structure. You must have JOB_ACCESS_ADMINISTER access permission for the jobs specified by the JobId and NextJobId members of the JOB_INFO_3 structure. Starting with Windows Vista: pJob can also point to a JOB_INFO_4 structure. If the Level parameter is 0, pJob should be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Command",
+        "description": "The print job operation to perform. This parameter can be one of the following values.  ValueMeaning  JOB_CONTROL_CANCEL   Do not use. To delete a print job, use JOB_CONTROL_DELETE.   JOB_CONTROL_PAUSE   Pause the print job.   JOB_CONTROL_RESTART   Restart the print job. A job can only be restarted if it was printing.   JOB_CONTROL_RESUME   Resume a paused print job.   JOB_CONTROL_DELETE   Delete the print job.   JOB_CONTROL_SENT_TO_PRINTER   Used by port monitors to end the print job.   JOB_CONTROL_LAST_PAGE_EJECTED   Used by language monitors to end the print job.   JOB_CONTROL_RETAIN   Windows Vista and later: Keep the job in the queue after it prints.   JOB_CONTROL_RELEASE   Windows Vista and later:  Release the print job.     You can use the same call to the SetJob function to set print job parameters and to give a command to a print job. Thus, Command does not need to be 0 if you are setting print job parameters, although it can be."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The StartDocPrinter function notifies the print spooler that a document is to be spooled for printing.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value identifies the print job. If the function fails, the return value is zero. ",
+    "remarks": "The typical sequence for a print job is as follows: Note that calling StartPagePrinter and EndPagePrinter may not be necessary, such as if the print data type includes the page information. When a page in a spooled file exceeds approximately 350 MB, it can fail to print and not send an error message. For example, this can occur when printing large EMF files. The page size limit depends on many factors including the amount of virtual memory available, the amount of memory allocated by calling processes, and the amount of fragmentation in the process heap. For a sample program that uses this function, see How To: Print Using the GDI Print API. ",
+    "return_type": "DWORD",
+    "category": "Print Spooler",
+    "name": "StartDocPrinter",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "The version of the structure to which pDocInfo points. This value must be 1."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pDocInfo",
+        "description": "A pointer to a DOC_INFO_1 structure that describes the document to print."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The StartPagePrinter function notifies the spooler that a page is about to be printed on the specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "The sequence for a print job is as follows: When a page in a spooled file exceeds approximately 350 MB, it can fail to print and not send an error message. For example, this can occur when printing large EMF files. The page size limit depends on many factors including the amount of virtual memory available, the amount of memory allocated by calling processes, and the amount of fragmentation in the process heap. For a sample program that uses this function, see How To: Print Using the GDI Print API. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "StartPagePrinter",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "Handle to a printer. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The AdvancedDocumentProperties function displays a printer-configuration dialog box for the specified printer, allowing the user to configure that printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the DocumentProperties function with these parameters is successful, the return value of AdvancedDocumentProperties is 1. Otherwise, the return value is zero. ",
+    "remarks": "This function can only display the printer-configuration dialog box so a user can configure it. For more control, use DocumentProperties. The input parameters for this function are passed directly to DocumentProperties and the fMode value is set to DM_IN_BUFFER | DM_IN_PROMPT | DM_OUT_BUFFER. Unlike DocumentProperties, this function only returns 1 or 0. Thus, you cannot determine the required size of DEVMODE by setting pDevMode to zero. An application can obtain the name pointed to by the pDeviceName parameter by calling the GetPrinter function and then examining the pPrinterName member of the PRINTER_INFO_2 structure. ",
+    "return_type": "LONG",
+    "category": "Print Spooler",
+    "name": "AdvancedDocumentProperties",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the parent window of the printer-configuration dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to a printer object. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pDeviceName",
+        "description": "A pointer to a null-terminated string specifying the name of the device for which a printer-configuration dialog box should be displayed."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDEVMODE",
+        "name": "pDevModeOutput",
+        "description": "A pointer to a DEVMODE structure that will contain the configuration data specified by the user."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PDEVMODE",
+        "name": "pDevModeInput",
+        "description": "A pointer to a DEVMODE structure that contains the configuration data used to initialize the controls of the printer-configuration dialog box."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The ConfigurePort function displays the port-configuration dialog box for a port on the specified server.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "Before calling the ConfigurePort function, an application should call the EnumPorts function to determine valid port names. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "ConfigurePort",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pName",
+        "description": "Pointer to a null-terminated string that specifies the name of the server on which the specified port exists. If this parameter is NULL, the port is local."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Handle to the parent window of the port-configuration dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pPortName",
+        "description": "Pointer to a null-terminated string that specifies the name of the port to be configured."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The ConnectToPrinterDlg function displays a dialog box that lets users browse and connect to printers on a network. If the user selects a printer, the function attempts to create a connection to it; if a suitable driver is not installed on the server, the user is given the option of creating a printer locally.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds and the user selects a printer, the return value is a handle to the selected printer. If the function fails, or the user cancels the dialog box without selecting a printer, the return value is NULL. ",
+    "remarks": "The ConnectToPrinterDlg function attempts to create a connection to the selected printer. However, if the server on which the printer resides does not have a suitable driver installed, the function offers the user the option of creating a printer locally. A calling application can determine whether the function has created a printer locally by calling GetPrinter with a PRINTER_INFO_2 structure, then examining that structure's Attributes member. An application should call DeletePrinter to delete a local printer. An application should call DeletePrinterConnection to delete a connection to a printer. ",
+    "return_type": "HANDLE",
+    "category": "Print Spooler",
+    "name": "ConnectToPrinterDlg",
+    "is_callback": 0,
+    "dll": "WinSpool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Specifies the parent window of the dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Flags",
+        "description": "This parameter is reserved and must be zero."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The PrinterProperties function displays a printer-properties property sheet for the specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "PrinterProperties",
+    "is_callback": 0,
+    "dll": "Plotui.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the parent window of the property sheet."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to a printer object. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The AbortPrinter function deletes a printer's spool file if the printer is configured for spooling.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "If the printer is not configured for spooling, the AbortPrinter function has no effect. The sequence for a print job is as follows: When a page in a spooled file exceeds approximately 350 MB, it can fail to print and not send an error message. For example, this can occur when printing large EMF files. The page size limit depends on many factors including the amount of virtual memory available, the amount of memory allocated by calling processes, and the amount of fragmentation in the process heap. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "AbortPrinter",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "Handle to the printer from which the spool file is deleted. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The AddPrinter function adds a printer to the list of supported printers for a specified server.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle (not thread safe) to a new printer object. When you are finished with the handle, pass it to the ClosePrinter function to close it. If the function fails, the return value is NULL. ",
+    "remarks": "Do not call this method in DllMain. The caller must have the SeLoadDriverPrivilege. The returned handle is not thread safe. If callers need to use it concurrently on multiple threads, they must provide custom synchronization access to the printer handle using the Synchronization Functions. To avoid writing custom code the application can open a printer handle on each thread, as needed. The following are the members of the PRINTER_INFO_2 structure that can be set before the AddPrinter function is called: The Status, cJobs, and AveragePPM members of the PRINTER_INFO_2 structure are reserved for use by the GetPrinter function. They must not be set before calling AddPrinter. If pSecurityDescriptor is NULL, the system assigns a default security descriptor to the printer. The default security descriptor has the following permissions.  After an application creates a printer object with the AddPrinter function, it must use the PrinterProperties function to specify the correct settings for the printer driver associated with the printer object. The AddPrinter function returns an error if a printer object with the same name already exists, unless that object is marked as pending deletion. In that case, the existing printer is not deleted, and the AddPrinter creation parameters are used to change the existing printer settings (as if the application had used the SetPrinter function). Use the EnumPrintProcessors function to enumerate the set of print processors installed on a server. Use the EnumPrintProcessorDatatypes function to enumerate the set of data types that a print processor supports. Use the EnumPorts function to enumerate the set of available ports. Use the EnumPrinterDrivers function to enumerate the installed printer drivers. The caller of the AddPrinter function must have SERVER_ACCESS_ADMINISTER access to the server on which the printer is to be created. The handle returned by the function will have PRINTER_ALL_ACCESS permission, and can be used to perform administrative operations on the printer. If the DrvPrinterEvent function is passed the PRINTER_EVENT_FLAG_NO_UI flag, the driver should not use a UI call during DrvPrinterEvent. To do UI-related jobs, the installer should either use the VendorSetup entry in the printer's .inf file or, for Plug and Play devices, the installer can use a device-specific co-installer. For more information about VendorSetup, see the Microsoft Windows Driver Development Kit (DDK). The Internet Connection Firewall (ICF) blocks printer ports by default, but an exception for File and Print Sharing is enabled when you run AddPrinter. ",
+    "return_type": "HANDLE",
+    "category": "Print Spooler",
+    "name": "AddPrinter",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "*pName",
+        "description": "A pointer to a null-terminated string that specifies the name of the server on which the printer should be installed. If this string is NULL, the printer is installed locally."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "The version of the structure to which pPrinter points. This value must be 2."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pPrinter",
+        "description": "A pointer to a PRINTER_INFO_2 structure that contains information about the printer. You must specify non-NULL values for the pPrinterName, pPortName, pDriverName, and pPrintProcessor members of this structure before calling AddPrinter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The AddPrinterConnection function adds a connection to the specified printer for the current user.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "When Windows makes a connection to a printer, it may need to copy printer driver files to the server to which the printer is attached. If the user does not have permission to copy files to the appropriate location, the AddPrinterConnection function fails, and GetLastError returns ERROR_ACCESS_DENIED. A printer connection established by calling AddPrinterConnection will be enumerated when EnumPrinters is called with dwType set to PRINTER_ENUM_CONNECTION. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "AddPrinterConnection",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pName",
+        "description": "A pointer to a null-terminated string that specifies the name of a printer to which the current user wishes to establish a connection."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Adds a connection to the specified printer for the current user and specifies connection details.",
+    "library": "Winspool.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. For extended error information, call GetLastError. ",
+    "remarks": "When Windows Vista makes a connection to a printer, it may need to copy printer driver files from the server to which the printer is attached. If the user does not have permission to copy files to the appropriate location, the AddPrinterConnection2 function fails and GetLastError returns ERROR_ACCESS_DENIED. If the printer driver files must be copied from the print server but cannot be copied silently due to the group policies that are in effect and PRINTER_CONNECTION_NO_UI is set in pConnectionInfo->dwFlags, no dialog boxes will be displayed and the call will fail. If the local printer driver can be used to render print jobs for this printer and the version of the local driver must not match the version of the printer driver on the server, set PRINTER_CONNECTION_MISMATCH in pConnectionInfo->dwFlags and assign the pointer to a string variable that contains the path to the local printer driver to pConnectionInfo->pszDriverName. A printer connection that is established by calling AddPrinterConnection2 will be enumerated when EnumPrinters is called with dwType set to PRINTER_ENUM_CONNECTION. The ANSI version of this function, AddPrinterConnection2A, is not supported and returns ERROR_NOT_SUPPORTED. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "AddPrinterConnection2",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the parent window in which the dialog box will be displayed if the print system must download a printer driver from the print server for this connection."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pszName",
+        "description": "A pointer to a constant null-terminated string specifying the name of the printer to which the current user wishes to connect."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwLevel",
+        "description": "The version of the structure pointed to by pConnectionInfo. Currently, only level 1 is defined so the value of dwLevel must be 1."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pConnectionInfo",
+        "description": "A pointer to a PRINTER_CONNECTION_INFO_1 structure. See the Remarks section for more about this parameter."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The DeletePrinter function deletes the specified printer object.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "If there are print jobs remaining to be processed for the specified printer, DeletePrinter marks the printer for pending deletion, and then deletes it when all the print jobs have been printed. No print jobs can be added to a printer that is marked for pending deletion. A printer marked for pending deletion cannot be held, but its print jobs can be held, resumed, and restarted. If the printer is held and there are jobs for the printer, DeletePrinter fails with ERROR_ACCESS_DENIED. Note that DeletePrinter does not close the handle that is passed to it. Thus, the application must still call ClosePrinter. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "DeletePrinter",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "Handle to a printer object that will be deleted. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The DeletePrinterConnection function deletes a connection to a printer that was established by a call to AddPrinterConnection or ConnectToPrinterDlg.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "The DeletePrinterConnection function does not delete any printer driver files that were copied to the server to which the printer is attached. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "DeletePrinterConnection",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pName",
+        "description": "Pointer to a null-terminated string that specifies the name of the printer connection to delete."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The DeletePrinterData function deletes specified configuration data for a printer. A printer's configuration data consists of a set of named and typed values. The DeletePrinterData function deletes one of these values, specified by its value name.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is a system error code. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Print Spooler",
+    "name": "DeletePrinterData",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer whose configuration data is to be deleted. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pValueName",
+        "description": "A pointer to the null-terminated name of the configuration data value to be deleted."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The DeletePrinterDataEx function deletes a specified value from the configuration data for a printer. A printer's configuration data consists of a set of named and typed values stored in a hierarchy of registry keys. The function deletes a specified value under a specified key.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is a system error code. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Print Spooler",
+    "name": "DeletePrinterDataEx",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer for which the function deletes a value. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pKeyName",
+        "description": "A pointer to a null-terminated string that specifies the key containing the value to delete. Use the backslash ( \\ ) character as a delimiter to specify a path that has one or more subkeys. If pKeyName is NULL or an empty string, DeletePrinterDataEx returns ERROR_INVALID_PARAMETER."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pValueName",
+        "description": "A pointer to a null-terminated string that specifies the name of the value to delete."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The DeletePrinterKey function deletes a specified key and all its subkeys for a specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is a system error code. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Print Spooler",
+    "name": "DeletePrinterKey",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer for which the function deletes a key. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pKeyName",
+        "description": "A pointer to a null-terminated string that specifies the key to delete. Use the backslash ( \\ ) character as a delimiter to specify a path with one or more subkeys. If pKeyName is an empty string (\"\"), DeletePrinterKey deletes all keys below the top-level key for the printer. If pKeyName is NULL, DeletePrinterKey returns ERROR_INVALID_PARAMETER."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 9,
+    "description": "The EnumPrinterData function enumerates configuration data for a specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is a system error code. The function returns ERROR_NO_MORE_ITEMS when there are no more configuration data values to retrieve for a specified printer handle. ",
+    "remarks": "EnumPrinterData retrieves printer configuration data set by the SetPrinterData function. A printer's configuration data consists of a set of named and typed values. The EnumPrinterData function obtains one of these values, and its name and a type code, each time you call it. Call the EnumPrinterData function several times in succession to obtain all of a printer's configuration data values. Printer configuration data is stored in the registry. While enumerating printer configuration data, you should avoid calling registry functions that might change that data. If you want to have the operating system supply an adequate buffer size, first call EnumPrinterData with both the cbValueName and cbData parameters set to zero, as noted earlier in the Parameters section. The value of dwIndex does not matter for this call. When the function returns, *pcbValueName and *pcbData will contain buffer sizes that are large enough to enumerate all of the printer's configuration data value names and values. On the next call, allocate value name and data buffers, set cbValueName and cbData to the sizes in bytes of the allocated buffers, and set dwIndex to zero. Thereafter, continue to call the EnumPrinterData function, incrementing dwIndex by one each time, until the function returns ERROR_NO_MORE_ITEMS. ",
+    "return_type": "DWORD",
+    "category": "Print Spooler",
+    "name": "EnumPrinterData",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer whose configuration data is to be obtained. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwIndex",
+        "description": "An index value that specifies the configuration data value to retrieve. Set this parameter to zero for the first call to EnumPrinterData for a specified printer handle. Then increment the parameter by one for subsequent calls involving the same printer, until the function returns ERROR_NO_MORE_ITEMS. See the following Remarks section for further information. If you use the technique mentioned in the descriptions of the cbValueName and cbData parameters to obtain adequate buffer size values, setting both those parameters to zero in a first call to EnumPrinterData for a specified printer handle, the value of dwIndex does not matter for that call. Set dwIndex to zero in the next call to EnumPrinterData to start the actual enumeration process. Configuration data values are not ordered. New values will have an arbitrary index. This means that the EnumPrinterData function may return values in any order."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "pValueName",
+        "description": "A pointer to a buffer that receives the name of the configuration data value, including a terminating null character."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbValueName",
+        "description": "The size, in bytes, of the buffer pointed to by pValueName. If you want to have the operating system supply an adequate buffer size, set both this parameter and the cbData parameter to zero for the first call to EnumPrinterData for a specified printer handle. When the function returns, the variable pointed to by pcbValueName will contain a buffer size that is large enough to successfully enumerate all of the printer's configuration data value names."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbValueName",
+        "description": "A pointer to a variable that receives the number of bytes stored into the buffer pointed to by pValueName."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pType",
+        "description": "A pointer to a variable that receives a code indicating the type of data stored in the specified value. For a list of the possible type codes, see Registry Value Types. The pType parameter can be NULL if the type code is not required."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "pData",
+        "description": "A pointer to a buffer that receives the configuration data value. This parameter can be NULL if the configuration data value is not required."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbData",
+        "description": "The size, in bytes, of the buffer pointed to by pData. If you want to have the operating system supply an adequate buffer size, set both this parameter and the cbValueName parameter to zero for the first call to EnumPrinterData for a specified printer handle. When the function returns, the variable pointed to by pcbData will contain a buffer size that is large enough to successfully enumerate all of the printer's configuration data value names."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbData",
+        "description": "A pointer to a variable that receives the number of bytes stored into the buffer pointed to by pData. This parameter can be NULL if pData is NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The EnumPrinterDataEx function enumerates all value names and data for a specified printer and key.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is a system error code. ",
+    "remarks": "EnumPrinterDataEx retrieves printer configuration data set by the SetPrinterDataEx and SetPrinterData functions. ",
+    "return_type": "DWORD",
+    "category": "Print Spooler",
+    "name": "EnumPrinterDataEx",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer for which the function retrieves configuration data. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pKeyName",
+        "description": "A pointer to a null-terminated string that specifies the key containing the values to enumerate. Use the backslash ( \\ ) character as a delimiter to specify a path with one or more subkeys. EnumPrinterDataEx enumerates all values of the key, but does not enumerate values of subkeys of the specified key. Use the EnumPrinterKey function to enumerate subkeys. If pKeyName is NULL or an empty string, EnumPrinterDataEx returns ERROR_INVALID_PARAMETER."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "pEnumValues",
+        "description": "A pointer to a buffer that receives an array of PRINTER_ENUM_VALUES structures. Each structure contains the value name, type, data, and sizes of a value under the key."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbEnumValues",
+        "description": "The size, in bytes, of the buffer pointed to by pcbEnumValues. If you set cbEnumValues to zero, the pcbEnumValues parameter returns the required buffer size."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbEnumValues",
+        "description": "A pointer to a variable that receives the size, in bytes, of the retrieved configuration data. If the buffer size specified by cbEnumValues is too small, the function returns ERROR_MORE_DATA and pcbEnumValues indicates the required buffer size."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pnEnumValues",
+        "description": "A pointer to a variable that receives the number of PRINTER_ENUM_VALUES structures returned in pEnumValues."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The EnumPrinterKey function enumerates the subkeys of a specified key for a specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is a system error code. If pKeyName does not exist, the return value is ERROR_FILE_NOT_FOUND. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Print Spooler",
+    "name": "EnumPrinterKey",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer for which the function enumerates subkeys. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pKeyName",
+        "description": "A pointer to a null-terminated string that specifies the key containing the subkeys to enumerate. Use the backslash '\\' character as a delimiter to specify a path with one or more subkeys. EnumPrinterKey enumerates all subkeys of the key, but does not enumerate the subkeys of those subkeys. If pKeyName is an empty string (\"\"), EnumPrinterKey enumerates the top-level key for the printer. If pKeyName is NULL, EnumPrinterKey returns ERROR_INVALID_PARAMETER."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "pSubkey",
+        "description": "A pointer to a buffer that receives an array of null-terminated subkey names. The array is terminated by two null characters."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbSubkey",
+        "description": "The size, in bytes, of the buffer pointed to by pSubkey. If you set cbSubkey to zero, the pcbSubkey parameter returns the required buffer size."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbSubkey",
+        "description": "A pointer to a variable that receives the number of bytes retrieved in the pSubkey buffer. If the buffer size specified by cbSubkey is too small, the function returns ERROR_MORE_DATA and pcbSubkey indicates the required buffer size."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "The EnumPrinters function enumerates available printers, print servers, domains, or print providers.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "Do not call this method in DllMain. If EnumPrinters returns a PRINTER_INFO_1 structure in which PRINTER_ENUM_CONTAINER is specified, this indicates that there is a hierarchy of printer objects. An application can enumerate the hierarchy by calling EnumPrinters again, setting Name to the value of the PRINTER_INFO_1 structure's pName member. The EnumPrinters function does not retrieve security information. If  PRINTER_INFO_2 structures are returned in the array pointed to by pPrinterEnum, their pSecurityDescriptor members will be set to NULL. To get information about the default printer, call GetDefaultPrinter. The PRINTER_INFO_4 structure provides an easy and extremely fast way to retrieve the names of the printers installed on a local machine, as well as the remote connections that a user has established. When EnumPrinters is called with a PRINTER_INFO_4 data structure, that function queries the registry for the specified information, then returns immediately. This differs from the behavior of EnumPrinters when called with other levels of PRINTER_INFO_* data structures. In particular, when EnumPrinters is called with a level 2 (PRINTER_INFO_2) data structure, it performs an OpenPrinter call on each remote connection. If a remote connection is down, or the remote server no longer exists, or the remote printer no longer exists, the function must wait for RPC to time out and consequently fail the OpenPrinter call. This can take a while. Passing a PRINTER_INFO_4 structure lets an application retrieve a bare minimum of required information; if more detailed information is desired, a subsequent EnumPrinters level 2 call can be made. Windows Vista: The printer data returned by EnumPrinters is retrieved from a local cache when the value of Level is 4. The following table shows the EnumPrinters output for various Flags values when the Level parameter is set to 1. In the Name parameter column of the table, you should substitute an appropriate name for Print Provider, Domain, and Machine. For example, for \"Print Provider,\" you could use the name of the network print provider or the name of the local print provider. To retrieve print provider names, call EnumPrinters with Name set to NULL.   ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "EnumPrinters",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Flags",
+        "description": "The types of print objects that the function should enumerate. This value can be one or more of the following values.  ValueMeaning  PRINTER_ENUM_LOCAL   If the PRINTER_ENUM_NAME flag is not also passed, the function ignores the Name parameter, and enumerates the locally installed printers. If PRINTER_ENUM_NAME is also passed, the function enumerates the local printers on Name.    PRINTER_ENUM_NAME   The function enumerates the printer identified by Name. This can be a server, a domain, or a print provider. If Name is NULL, the function enumerates available print providers.   PRINTER_ENUM_SHARED   The function enumerates printers that have the shared attribute. Cannot be used in isolation; use an OR operation to combine with another PRINTER_ENUM type.   PRINTER_ENUM_CONNECTIONS                       The function enumerates the list of printers to which the user has made previous connections.   PRINTER_ENUM_NETWORK                       The function enumerates network printers in the computer's domain. This value is valid only if Level is 1.   PRINTER_ENUM_REMOTE                       The function enumerates network printers and print servers in the computer's domain. This value is valid only if Level is 1.   PRINTER_ENUM_CATEGORY_3D   The function enumerates only 3D printers.   PRINTER_ENUM_CATEGORY_ALL   The function enumerates all print devices, including 3D printers.     If Level is 4, you can only use the PRINTER_ENUM_CONNECTIONS and PRINTER_ENUM_LOCAL constants. Note  3D print devices are not enumerated by default. You must include both PRINTER_ENUM_CATEGORY_3D and PRINTER_ENUM_LOCAL to enumerate only 3D printers. To include 3D printers, along with all other local printers, use PRINTER_ENUM_CATEGORY_ALL and PRINTER_ENUM_LOCAL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "Name",
+        "description": "If Level is 1, Flags contains PRINTER_ENUM_NAME, and Name is non-NULL, then Name is a pointer to a null-terminated string that specifies the name of the object to enumerate. This string can be the name of a server, a domain, or a print provider. If Level is 1, Flags contains PRINTER_ENUM_NAME, and Name is NULL, then the function enumerates the available print providers. If Level is 1, Flags contains PRINTER_ENUM_REMOTE, and Name is NULL, then the function enumerates the printers in the user's domain. If Level is 2 or 5,Name is a pointer to a null-terminated string that specifies the name of a server whose printers are to be enumerated. If this string is NULL, then the function enumerates the printers installed on the local computer. If Level is 4, Name should be NULL. The function always queries on the local computer. When Name is NULL, setting Flags to PRINTER_ENUM_LOCAL | PRINTER_ENUM_CONNECTIONS enumerates printers that are installed on the local machine. These printers include those that are physically attached to the local machine as well as remote printers to which it has a network connection. When Name is not NULL, setting Flags to PRINTER_ENUM_LOCAL | PRINTER_ENUM_NAME enumerates the local printers that are installed on the server Name."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "The type of data structures pointed to by pPrinterEnum. Valid values are 1, 2, 4, and 5, which correspond to the PRINTER_INFO_1, PRINTER_INFO_2 , PRINTER_INFO_4, and PRINTER_INFO_5 data structures. This value can be 1, 2, 4, or 5."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "pPrinterEnum",
+        "description": "A pointer to a buffer that receives an array of PRINTER_INFO_1, PRINTER_INFO_2, PRINTER_INFO_4, or PRINTER_INFO_5 structures. Each structure contains data that describes an available print object. If Level is 1, the array contains PRINTER_INFO_1 structures. If Level is 2, the array contains PRINTER_INFO_2 structures. If Level is 4, the array contains PRINTER_INFO_4 structures. If Level is 5, the array contains PRINTER_INFO_5 structures. The buffer must be large enough to receive the array of data structures and any strings or other data to which the structure members point. If the buffer is too small, the pcbNeeded parameter returns the required buffer size."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBuf",
+        "description": "The size, in bytes, of the buffer pointed to by pPrinterEnum."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbNeeded",
+        "description": "A pointer to a value that receives the number of bytes copied if the function succeeds or the number of bytes required if cbBuf is too small."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcReturned",
+        "description": "A pointer to a value that receives the number of PRINTER_INFO_1, PRINTER_INFO_2 , PRINTER_INFO_4, or PRINTER_INFO_5 structures that the function returns in the array to which pPrinterEnum points."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The FlushPrinter function sends a buffer to the printer in order to clear it from a transient state.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "FlushPrinter should be called only if WritePrinter failed, leaving the printer in a transient state. For example, the printer could get into a transient state when the job gets aborted and the printer driver has partially sent some raw data to the printer. FlushPrinter also can specify an idle period during which the print spooler does not schedule any jobs to the corresponding printer port. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "FlushPrinter",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer object. This should be the same handle that was used, in a prior WritePrinter call, by the printer driver."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "pBuf",
+        "description": "A pointer to an array of bytes that contains the data to be written to the printer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBuf",
+        "description": "The size, in bytes, of the array pointed to by pBuf."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcWritten",
+        "description": "A pointer to a value that receives the number of bytes of data that were written to the printer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cSleep",
+        "description": "The time, in milliseconds, for which the I/O line to the printer port should be kept idle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The GetDefaultPrinter function retrieves the printer name of the default printer for the current user on the local computer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value and the variable pointed to by pcchBuffer contains the number of characters copied to the pszBuffer buffer, including the terminating null character. If the function fails, the return value is zero.  ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "GetDefaultPrinter",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pszBuffer",
+        "description": "A pointer to a buffer that receives a null-terminated character string containing the default printer name. If this parameter is NULL, the function fails and the variable pointed to by pcchBuffer returns the required buffer size, in characters."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "pcchBuffer",
+        "description": "On input, specifies the size, in characters, of the pszBuffer buffer. On output, receives the size, in characters, of the printer name string, including the terminating null character."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The GetPrinter function retrieves information about a specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "The pDevMode member in the PRINTER_INFO_2, PRINTER_INFO_8, and PRINTER_INFO_9 structures can be NULL. When this happens, the printer is unusable until the driver is reinstalled successfully. For the PRINTER_INFO_2 and PRINTER_INFO_3 structures that contain a pointer to a security descriptor, the function retrieves only those components of the security descriptor that the caller has permission to read. To retrieve particular security descriptor components, you must specify the necessary access rights when you call the OpenPrinter function to retrieve a handle to the printer. The following table shows the access rights required to read the various security descriptor components.  If you specify level 7, the dwAction member of PRINTER_INFO_7 returns one of the following values to indicate whether the printer is published in the directory service.  Starting with           Windows Vista, the printer data returned by GetPrinter is retrieved from a local cache when hPrinter refers to a printer hosted by a print server and there is at least one open connection to the print server. In all other configurations, the printer data is queried from the print server. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "GetPrinter",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer for which the function retrieves information. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "The level or type of structure that the function stores into the buffer pointed to by pPrinter. This value can be 1, 2, 3, 4, 5, 6, 7, 8 or 9."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "pPrinter",
+        "description": "A pointer to a buffer that receives a structure containing information about the specified printer. The buffer must be large enough to receive the structure and any strings or other data to which the structure members point. If the buffer is too small, the pcbNeeded parameter returns the required buffer size. The type of structure is determined by the value of  Level.  LevelStructure  1   A PRINTER_INFO_1 structure containing general printer information.   2   A PRINTER_INFO_2 structure containing detailed information about the printer.   3   A PRINTER_INFO_3 structure containing the printer's security information.   4   A PRINTER_INFO_4 structure containing minimal printer information, including the name of the printer, the name of the server, and whether the printer is remote or local.   5   A PRINTER_INFO_5 structure containing printer information such as printer attributes and time-out settings.   6   A PRINTER_INFO_6 structure specifying the status value of a printer.   7   A PRINTER_INFO_7 structure that indicates whether the printer is published in the directory service.   8   A PRINTER_INFO_8 structure specifying the global default printer settings.   9   A PRINTER_INFO_9 structure specifying the per-user default printer settings."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBuf",
+        "description": "The size, in bytes, of the buffer pointed to by pPrinter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbNeeded",
+        "description": "A pointer to a variable that the function sets to the size, in bytes, of the printer information. If cbBuf is smaller than this value, GetPrinter fails, and the value represents the required buffer size. If cbBuf is equal to or greater than this value, GetPrinter succeeds, and the value represents the number of bytes stored in the buffer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The GetPrinterData function retrieves configuration data for the specified printer or print server.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error value. ",
+    "remarks": "GetPrinterData retrieves printer configuration data that was set by the SetPrinterDataEx or SetPrinterData function. GetPrinterData might trigger a Windows call to GetPrinterDataFromPort, which might write to the registry. If it does, side effects can occur, such as triggering an update or upgrade printer event ID 20 in the client, if the printer is shared in a network. If hPrinter is a handle to a print server, pValueName can specify one of the following predefined values.  The following values of pValueName indicate the pool printing behavior when an error occurs.  The time specified in SPLREG_RESTART_JOB_ON_POOL_ERROR is a minimum time. The actual time can be longer, depending on the following port monitor settings, which are registry values under this registry key:  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Print\\Monitors\\<MonitorName>\\Ports Call the RegQueryValueEx function to query these values.  In Windows 7 and later versions of Windows, print jobs that are sent to a print server are rendered on the client by default. The following values configure client-side rendering of a print jobs and can be read if you set the following values in pValueName.  ",
+    "return_type": "DWORD",
+    "category": "Print Spooler",
+    "name": "GetPrinterData",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer or print server for which the function retrieves configuration data. Use the OpenPrinter, OpenPrinter2,  or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pValueName",
+        "description": "A pointer to a null-terminated string that identifies the data to retrieve. For printers, this string is the name of a registry value under the printer's \"PrinterDriverData\" key in the registry. For print servers, this string is one of the predefined strings listed in the following Remarks section."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pType",
+        "description": "A pointer to a variable that receives a value that indicates the type of data retrieved in pData. The function returns the type specified in the SetPrinterData or SetPrinterDataEx call that stored the data. Set this parameter to NULL if you don't need the data type."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "pData",
+        "description": "A pointer to a buffer that receives the configuration data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nSize",
+        "description": "The size, in bytes, of the buffer that  pData points to."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbNeeded",
+        "description": "A pointer to a variable that receives the size, in bytes, of the configuration data. If the buffer size specified by nSize is too small, the function returns ERROR_MORE_DATA, and pcbNeeded indicates the required buffer size."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "The GetPrinterDataEx function retrieves configuration data for the specified printer or print server. GetPrinterDataEx can retrieve values that  the SetPrinterData function stored. In addition, GetPrinterDataEx can retrieve values that the SetPrinterDataEx function stored under a specified key.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error value. ",
+    "remarks": "GetPrinterDataEx retrieves printer-configuration data that was set by the SetPrinterDataEx and SetPrinterData functions. Calling GetPrinterDataEx with the pKeyName parameter set to \"PrinterDriverData\" is equivalent to calling the GetPrinterData function. If hPrinter is a handle to a print server, pValueName can specify one of the following predefined values.  The following values of pValueName indicate the pool printing behavior when an error occurs.  The time specified in SPLREG_RESTART_JOB_ON_POOL_ERROR is a minimum time. The actual time can be longer, depending on the following port monitor settings, which are registry values under this registry key:  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Print\\Monitors\\<MonitorName>\\Ports Call the RegQueryValueEx function to query these values.  If pKeyName is one of the predefined Directory Service (DS) keys (see SetPrinter) and pValueName contains a comma (','), then the portion of pValueName before the comma is the value name and the portion of pValueName to the right of the comma is the DS Property OID. A subkey called OID is created and a new value that consists of the value name and OID is entered under the OID key. SetPrinterDataEx also adds the value name and data under the DS key. In Windows 7 and later versions of Windows, print jobs that are sent to a print server are rendered on the client by default. The configuration of client-side rendering for a printer can be read  by setting pKeyName to \"PrinterDriverData\" and pValueName to the setting value in the following table.  ",
+    "return_type": "DWORD",
+    "category": "Print Spooler",
+    "name": "GetPrinterDataEx",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer or print server for which the function retrieves configuration data. Use the OpenPrinter, OpenPrinter2, or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pKeyName",
+        "description": "A pointer to a null-terminated string that specifies the key containing the value to be retrieved. Use the backslash ( \\ ) character as a delimiter to specify a path that has one or more subkeys. If hPrinter is a handle to a printer and pKeyName is NULL or an empty string, GetPrinterDataEx returns ERROR_INVALID_PARAMETER. If hPrinter is a handle to a print server, pKeyName is ignored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pValueName",
+        "description": "A pointer to a null-terminated string that identifies the data to retrieve. For printers, this string specifies the name of a value under the pKeyName key. For print servers, this string is one of the predefined strings listed in the following Remarks section."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pType",
+        "description": "A pointer to a variable that receives the type of data stored in the value. The function returns the type specified in the SetPrinterDataEx call when the data was stored. This parameter can be NULL if you don't need the information. GetPrinterDataEx passes pType on as the lpdwType parameter of a RegQueryValueEx function call."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "pData",
+        "description": "A pointer to a buffer that receives the configuration data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nSize",
+        "description": "The size, in bytes, of the buffer pointed to by pData."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbNeeded",
+        "description": "A pointer to a variable that receives the size, in bytes, of the configuration data. If the buffer size specified by nSize is too small, the function returns ERROR_MORE_DATA, and pcbNeeded indicates the required buffer size."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The SetPrinterData function sets the configuration data for a printer or print server.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error value. ",
+    "remarks": "To retrieve existing configuration data for a printer, call the GetPrinterDataEx or GetPrinterData function. If hPrinter is a handle to a print server, pValueName can specify one of the following predefined values.  The following values of pValueName determine the pool printing behavior when an error occurs.  The time specified in SPLREG_RESTART_JOB_ON_POOL_ERROR is a minimum time. The actual time can be longer, depending on the following port monitor settings, which are registry values under this registry key:  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Print\\Monitors\\<MonitorName>\\Ports Call the RegSetValueEx function to set these values.  In Windows 7 and later versions of Windows, print jobs that are sent to a print server are rendered on the client by default. Client-side rendering of a print jobs can be configured for each printer by setting the following values in pValueName.  ",
+    "return_type": "DWORD",
+    "category": "Print Spooler",
+    "name": "SetPrinterData",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer or print server for which the function sets configuration data. Use the OpenPrinter, OpenPrinter2, or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pValueName",
+        "description": "A pointer to a null-terminated string that identifies the data to set. For printers, this string is the name of a registry value under the printer's \"PrinterDriverData\" key in the registry. For print servers, this string is one of the predefined strings listed in the following Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Type",
+        "description": "A code that indicates the type of data that the pData parameter points to. For a list of the possible type codes, see Registry Value Types."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pData",
+        "description": "A pointer to an array of bytes that contains the printer configuration data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbData",
+        "description": "The size, in bytes, of the array."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The SetPrinterDataEx function sets the configuration data for a printer or print server. The function stores the configuration data under the printer's registry key.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, the return value is an error value. ",
+    "remarks": "To retrieve existing configuration data for a printer or print spooler, call the GetPrinterDataEx function. Calling SetPrinterDataEx with the pKeyName parameter set to \"PrinterDriverData\" is equivalent to calling the SetPrinterData function. If hPrinter is a handle to a print server, pValueName can specify one of the following predefined values.  Passing one of the following predefined values as pValueName sets the pool printing behavior when an error occurs.  The time specified in SPLREG_RESTART_JOB_ON_POOL_ERROR is a minimum time. The actual time can be longer, depending on the following port monitor settings, which are registry values under this registry key:  HKLM\\SYSTEM\\CurrentControlSet\\Control\\Print\\Monitors\\<MonitorName>\\Ports Call the RegSetValueEx function to set these values.  To ensure that the spooler redirects jobs to the next available printer in the pool (when the print job is not printed within the set time), the port monitor must support SNMP and the network ports in the pool must be configured as \"SNMP status enabled.\" The port monitor that supports SNMP is Standard TCP/IP port monitor. In Windows 7 and later versions of Windows, print jobs that are sent to a print server are rendered on the client by default. Client-side rendering of print jobs can be configured by setting pKeyName to \"PrinterDriverData\" and pValueName to the setting value in the following table.  ",
+    "return_type": "DWORD",
+    "category": "Print Spooler",
+    "name": "SetPrinterDataEx",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer or print server for which the function sets configuration data. Use the OpenPrinter, OpenPrinter2, or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pKeyName",
+        "description": "A pointer to a null-terminated string that specifies the key containing the value to set. If the specified key or subkeys do not exist, the function creates them. To store configuration data that can be published in the directory service (DS), specify one of the following predefined registry keys.  ValueMeaning  SPLDS_DRIVER_KEY   Printer drivers use this key to store driver properties.   SPLDS_SPOOLER_KEY   Reserved. Used only by the print spooler to store internal spooler properties.   SPLDS_USER_KEY   Applications use this key to store printer properties such as printer asset numbers.     Values that are stored under the SPLDS_USER_KEY key are published in the directory service only if there is a corresponding property in the schema. A domain administrator must create the property if it doesn't already exist. To publish a user-defined property after you use SetPrinterDataEx to add or change a value, call SetPrinter with Level = 7 and with the dwAction member of PRINTER_INFO_7 set to DSPRINT_UPDATE. You can specify other keys to store non-DS configuration data. Use the backslash ( \\ ) character as a delimiter to specify a path that has one or more subkeys. If hPrinter is a handle to a printer and pKeyName is NULL or an empty string, SetPrinterDataEx returns ERROR_INVALID_PARAMETER. If hPrinter is a handle to a print server, pKeyName is ignored. Do not use SPLDS_SPOOLER_KEY. To change the spooler printer properties, use SetPrinter with Level = 2."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pValueName",
+        "description": "A pointer to a null-terminated string that identifies the data to set. For printers, this string specifies the name of a value under the pKeyName key. For print servers, this string is one of the predefined strings listed in the following Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Type",
+        "description": "A code indicating the type of data pointed to by the pData parameter. For a list of the possible type codes, see Registry Value Types. If pKeyName specifies one of the predefined directory service keys, Type must be REG_SZ, REG_MULTI_SZ, REG_DWORD, or REG_BINARY. If REG_BINARY is used, cbData must be equal to 1, and the directory service treats the data as a Boolean value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pData",
+        "description": "A pointer to a buffer that contains the printer configuration data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbData",
+        "description": "The size, in bytes, of the array."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The IsValidDevmode function verifies that the contents of a DEVMODE  structure are valid.",
+    "library": "Winspool.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winspool.h",
+    "return_value": "TRUE, if the DEVMODE is structurally valid. If minor errors are found the function will fix them and return TRUE. FALSE, if the DEVMODE has one or more significant structural problems. For example, its dmSize member is misaligned or specifies a buffer that is too small. Also, FALSE if pDevmode is NULL. ",
+    "remarks": "No private printer driver fields of the DEVMODE are checked, only the public fields. Callers should use dmSize+dmDriverExtra for DevmodeSize only if they can guarantee that the input buffer size is at least that big. Since the DEVMODE is generally untrusted data, the values that are in the input buffer at the dmSize and dmDriverExtra offsets are also untrusted. This function is executable in Least-Privileged User Account (LUA) context. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "IsValidDevmode",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PDEVMODE",
+        "name": "pDevmode",
+        "description": "A pointer to the DEVMODE to validate."
+      },
+      {
+        "in_out": "",
+        "type": "size_t",
+        "name": "DevmodeSize",
+        "description": "The size in bytes of the input byte buffer."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The ReadPrinter function retrieves data from the specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "ReadPrinter returns an error if the device or the printer is not bidirectional. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "ReadPrinter",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer object for which to retrieve data. Use the OpenPrinter function to retrieve a printer object handle. Use the format: Printername, Job xxxx."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID",
+        "name": "pBuf",
+        "description": "A pointer to a buffer that receives the printer data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBuf",
+        "description": "The size, in bytes, of the buffer to which pBuf points."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pNoBytesRead",
+        "description": "A pointer to a variable that receives the number of bytes of data copied into the array to which pBuf points."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The ResetPrinter function specifies the data type and device mode values to be used for printing documents submitted by the StartDocPrinter function. These values can be overridden by using the SetJob function after document printing has started.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "ResetPrinter",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "Handle to the printer. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPPRINTER_DEFAULTS",
+        "name": "pDefault",
+        "description": "Pointer to a PRINTER_DEFAULTS structure. The ResetPrinter function ignores the DesiredAccess member of the PRINTER_DEFAULTS structure. Set that member to zero."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The SetDefaultPrinter function sets the printer name of the default printer for the current user on the local computer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "When using this method, you must specify a valid printer, driver, and port. If they are invalid, the APIs do not fail but the result is not defined. This could cause other programs to set the printer back to the previous valid printer. You can use EnumPrinters to retrieve the printer name, driver name, and port name of all available printers. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "SetDefaultPrinter",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pszPrinter",
+        "description": "A pointer to a null-terminated string containing the default printer name. For a remote printer connection, the name format is \\\\server\\printername. For a local printer, the name format is printername. If this parameter is NULL or an empty string, that is, \"\", SetDefaultPrinter will select a default printer from one of the installed printers. If a default printer already exists, calling SetDefaultPrinter with a NULL or an empty string  in this parameter might change the default printer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The SetPort function sets the status associated with a printer port.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "The caller of the SetPort function must be executing as an Administrator. Additionally, if the caller is a Port Monitor or Language Monitor, it must call RevertToSelf to cease impersonation before it calls SetPort. All programs that call SetPort must have SERVER_ACCESS_ADMINISTER access to the server to which the port is connected. When you set a printer port status value with the severity value PORT_STATUS_TYPE_ERROR, the print spooler stops sending jobs to the port. The print spooler resumes sending jobs to the port when the port status is cleared by another call to SetPort. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "SetPort",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pName",
+        "description": "Pointer to a zero-terminated string that specifies the name of the printer server to which the port is connected. Set this parameter to NULL if the port is on the local machine."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pPortName",
+        "description": "Pointer to a zero-terminated string that specifies the name of the printer port."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwLevel",
+        "description": "Specifies the type of structure pointed to by the pPortInfo parameter. This value must be 3, which corresponds to a PORT_INFO_3 data structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pPortInfo",
+        "description": "Pointer to a PORT_INFO_3 structure that contains the port status information to set."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The SetPrinter function sets the data for a specified printer or sets the state of the specified printer by pausing printing, resuming printing, or clearing all print jobs.",
+    "library": "WinSpool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "WinSpool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. If Level is 7 and the publish action failed, SetPrinter returns ERROR_IO_PENDING and attempts to complete the action in the background. If Level is 7 and the update action failed, SetPrinter returns ERROR_FILE_NOT_FOUND. ",
+    "remarks": "You cannot use SetPrinter to change the default printer. To modify the current printer settings, call the GetPrinter function to retrieve the current settings into a PRINTER_INFO_2 structure, modify the members of that structure as necessary, and then call SetPrinter. The SetPrinter function ignores the pServerName, AveragePPM, Status, and cJobs members of a PRINTER_INFO_2 structure. Pausing a printer suspends scheduling of all print jobs for that printer, except for the one print job that may be currently printing. Print jobs can be submitted to a paused printer, but no jobs will be scheduled to print on that printer until printing is resumed. If a printer is cleared, all print jobs for that printer are deleted, except for the current print job. If you use SetPrinter to modify the default DEVMODE structure for a printer (globally setting the printer defaults), you must first call the DocumentProperties function to validate the DEVMODE structure. For the PRINTER_INFO_2 and PRINTER_INFO_3 structures that contain a pointer to a security descriptor, the function can set only those components of the security descriptor that the caller has permission to modify. To set particular security descriptor components, you must specify the necessary access rights when you call the OpenPrinter or OpenPrinter2 function to retrieve a handle to the printer. The following table shows the access rights required to modify the various security descriptor components.  If the security descriptor contains a component that the caller does not have the access right to modify, SetPrinter fails. Those components of a security descriptor that you don't want to modify should be NULL or not be present, as appropriate. If you do not want to modify the security descriptor, and are calling SetPrinter with a PRINTER_INFO_2 structure, set the pSecurityDescriptor member of that structure to NULL. The Internet Connection Firewall (ICF) blocks printer ports by default, but an exception for File and Print Sharing can be enabled. If SetPrinter is called by a machine admin, it enables the exception. If it is called by a non-admin and the exception has not already been enabled, the call fails. You can use level 7 with the PRINTER_INFO_7 structure to publish, unpublish, or update directory service data for the printer. The directory service data for a printer includes all the data stored under the SPLDS_* keys by calls to the SetPrinterDataEx function for the printer. Before calling SetPrinter, set the pszObjectGUID member of PRINTER_INFO_7 to NULL and set the dwAction member to one of the following values.  DSPRINT_PENDING is not a valid dwAction value for SetPrinter. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "SetPrinter",
+    "is_callback": 0,
+    "dll": "WinSpool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer. Use the OpenPrinter, OpenPrinter2, or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "The type of data that the function stores into the buffer pointed to by pPrinter. If the Command parameter is not equal to zero, the Level parameter must be zero. This value can be 0, 2, 3, 4, 5, 6, 7, 8, or 9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pPrinter",
+        "description": "A pointer to a buffer containing data to set for the printer, or containing information for the command specified by the Command parameter. The type of data in the buffer is determined by the value of Level.  LevelStructure  0   If the Command parameter is PRINTER_CONTROL_SET_STATUS, pPrinter must contain a DWORD value that specifies the new printer status to set. For a list of the possible status values, see the Status member of the PRINTER_INFO_2 structure. Note that PRINTER_STATUS_PAUSED and PRINTER_STATUS_PENDING_DELETION are not valid status values to set. If Level is 0, but the Command parameter is not PRINTER_CONTROL_SET_STATUS, pPrinter must be NULL.   2   A PRINTER_INFO_2 structure containing detailed information about the printer.   3   A PRINTER_INFO_3 structure containing the printer's security information.   4   A PRINTER_INFO_4 structure containing minimal printer information, including the name of the printer, the name of the server, and whether the printer is remote or local.   5   A PRINTER_INFO_5 structure containing printer information such as printer attributes and time-out settings.   6   A PRINTER_INFO_6 structure specifying the status value of a printer.   7   A PRINTER_INFO_7 structure. The dwAction member of this structure indicates whether SetPrinter should publish, unpublish, re-publish, or update the printer's data in the directory service.   8   A PRINTER_INFO_8 structure specifying the global default printer settings.   9   A PRINTER_INFO_9 structure specifying the per-user default printer settings."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Command",
+        "description": "The action to perform. If the Level parameter is nonzero, set the value of this parameter to  zero. In this case, the printer retains its current state and the function reconfigures the printer data as specified by the Level and pPrinter parameters. If the Level parameter is zero, set the value of this parameter to one of the following values.  ValueMeaning  PRINTER_CONTROL_PAUSE   Pause the printer.   PRINTER_CONTROL_PURGE   Delete all print jobs in the printer.   PRINTER_CONTROL_RESUME   Resume a paused printer.   PRINTER_CONTROL_SET_STATUS   Set the printer status. Set the pPrinter parameter to a pointer to a DWORD value that specifies the new printer status."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The WritePrinter function notifies the print spooler that data should be written to the specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "The sequence for a print job is as follows: When a high-level document (such as an Adobe PDF or Microsoft Word file) or other printer data (such PCL, PS, or HPGL) is sent directly to a printer, the print settings defined in the document take precedent over Windows print settings. Documents output when the value of the pDatatype member of the DOC_INFO_1 structure that was passed in the  pDocInfo parameter of the StartDocPrinter call is \"RAW\" must fully describe the DEVMODE-style print job settings in the language understood by the hardware. In versions of Windows prior to Windows XP, when a page in a spooled file exceeds approximately 350 MB, it can fail to print and not send an error message. For example, this can occur when printing large EMF files. The page size limit in versions of Windows prior to Windows XP depends on many factors including the amount of virtual memory available, the amount of memory allocated by calling processes, and the amount of fragmentation in the process heap. In Windows XP and later versions of Windows, EMF files must be 2GB or less in size. If WritePrinter is used to write non EMF data, such as printer-ready PDL, the size of the file is limited only by the available disk space. For a sample program that uses this function, see How To: Print Using the GDI Print API. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "WritePrinter",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "pBuf",
+        "description": "A pointer to an array of bytes that contains the data that should be written to the printer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBuf",
+        "description": "The size, in bytes, of the array."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcWritten",
+        "description": "A pointer to a value that receives the number of bytes of data that were written to the printer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FindClosePrinterChangeNotification function closes a change notification object created by calling the FindFirstPrinterChangeNotification function. The printer or print server associated with the change notification object will no longer be monitored by that object.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "After calling the FindClosePrinterChangeNotification function, you cannot use the hChange handle in subsequent calls to either FindFirstPrinterChangeNotification or FindNextPrinterChangeNotification. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "FindClosePrinterChangeNotification",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hChange",
+        "description": "A handle to the change notification object to be closed. This is a handle created by calling the FindFirstPrinterChangeNotification function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The FindFirstPrinterChangeNotification function creates a change notification object and returns a handle to the object. You can then use this handle in a call to one of the wait functions to monitor changes to the printer or print server.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to a change notification object associated with the specified printer or print server. If the function fails, the return value is INVALID_HANDLE_VALUE. ",
+    "remarks": "To monitor a printer or print server, call the FindFirstPrinterChangeNotification function, then use the returned change notification object handle in a call to one of the wait functions. A wait operation on a change notification object is satisfied when the change notification object enters the signaled state. The system signals the object when one or more of the changes specified by fdwFilter or pPrinterNotifyOptions occurs in the monitored printer or print server. When you call FindFirstPrinterChangeNotification, either fdwFilter must be nonzero or pPrinterNotifyOptions must be non-NULL. If both are specified, notifications will occur for both. When a wait operation on a printer change notification object is satisfied, call the FindNextPrinterChangeNotification function to determine the cause of the notification. For a condition specified by fdwFilter, FindNextPrinterChangeNotification reports the condition or conditions that changed. For a printer information field specified by pPrinterNotifyOptions, FindNextPrinterChangeNotification reports the field or fields that changed as well as the new information for these fields. FindNextPrinterChangeNotification also resets the change notification object to the nonsignaled state so you can use it in another wait operation to continue monitoring the printer or print server. With one exception, do not call the FindNextPrinterChangeNotification function if the change notification object is not in the signaled state. If the wait function returns the value WAIT_TIMEOUT, the change object is not in the signaled state. Call the FindNextPrinterChangeNotification function only if the wait function succeeds without timing out. The exception is when FindNextPrinterChangeNotification is called with the PRINTER_NOTIFY_OPTIONS_REFRESH bit set in the pPrinterNotifyOptions parameter. When you no longer need the change notification object, close it by calling the FindClosePrinterChangeNotification function. Callers of FindFirstPrinterChangeNotification must ensure that the printer handle passed into FindFirstPrinterChangeNotification remains valid until FindClosePrinterChangeNotification is called. If the printer handle is closed before the printer change notification handle, further notifications will fail to be delivered. FindFirstPrinterChangeNotification will not send change notifications for 3D printers to server handles. ",
+    "return_type": "HANDLE",
+    "category": "Print Spooler",
+    "name": "FindFirstPrinterChangeNotification",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer or print server that you want to monitor. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "fdwFilter",
+        "description": "The conditions that will cause the change notification object to enter a signaled state. A change notification occurs when one or more of the specified conditions are met. The fdwFilter parameter can be zero if pPrinterNotifyOptions is non-NULL. This parameter can be one or more of the following values.  ValueMeaning  PRINTER_CHANGE_FORM   Notify of any changes to a form. You can set this general flag or one or more of the following specific flags:  PRINTER_CHANGE_ADD_FORM PRINTER_CHANGE_SET_FORM PRINTER_CHANGE_DELETE_FORM    PRINTER_CHANGE_JOB   Notify of any changes to a job. You can set this general flag or one or more of the following specific flags:  PRINTER_CHANGE_ADD_JOB PRINTER_CHANGE_SET_JOB PRINTER_CHANGE_DELETE_JOB PRINTER_CHANGE_WRITE_JOB    PRINTER_CHANGE_PORT   Notify of any changes to a port. You can set this general flag or one or more of the following specific flags:  PRINTER_CHANGE_ADD_PORT PRINTER_CHANGE_CONFIGURE_PORT  PRINTER_CHANGE_DELETE_PORT    PRINTER_CHANGE_PRINT_PROCESSOR   Notify of any changes to a print processor. You can set this general flag or one or more of the following specific flags:   PRINTER_CHANGE_ADD_PRINT_PROCESSOR  PRINTER_CHANGE_DELETE_PRINT_PROCESSOR    PRINTER_CHANGE_PRINTER   Notify of any changes to a printer. You can set this general flag or one or more of the following specific flags:  PRINTER_CHANGE_ADD_PRINTER PRINTER_CHANGE_SET_PRINTER PRINTER_CHANGE_DELETE_PRINTER PRINTER_CHANGE_FAILED_CONNECTION_PRINTER    PRINTER_CHANGE_PRINTER_DRIVER   Notify of any changes to a printer driver. You can set this general flag or one or more of the following specific flags:  PRINTER_CHANGE_ADD_PRINTER_DRIVER PRINTER_CHANGE_SET_PRINTER_DRIVER PRINTER_CHANGE_DELETE_PRINTER_DRIVER    PRINTER_CHANGE_ALL   Notify if any of the preceding changes occur.   PRINTER_CHANGE_SERVER   Windows 7: Notify of any changes to the server. This flag is not included in the changes monitored by setting the PRINTER_CHANGE_ALL value.     For descriptions of the more specific flags in the preceding table, see the FindNextPrinterChangeNotification function."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "fdwOptions",
+        "description": "The flag that determines the category of printers for which notifications will work.   ValueMeaning  PRINTER_NOTIFY_CATEGORY_ALL 0x00    FindNextPrinterChangeNotification returns notifications for both 2D and 3D printers.   PRINTER_NOTIFY_CATEGORY_3D 0x01    FindNextPrinterChangeNotification returns notifications only for 3D printers.     When this flag is set to zero (0), FindFirstPrinterChangeNotification will only work for 2D printers. This is the default value."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPVOID",
+        "name": "pPrinterNotifyOptions",
+        "description": "A pointer to a PRINTER_NOTIFY_OPTIONS structure. The pTypes member of this structure is an array of one or more PRINTER_NOTIFY_OPTIONS_TYPE structures, each of which specifies a printer information field to monitor. A change notification occurs when one or more of the specified fields changes. When a change occurs, the FindNextPrinterChangeNotification function can retrieve the new printer information. This parameter can be NULL if fdwFilter is nonzero. For a list of fields that can be monitored, see PRINTER_NOTIFY_OPTIONS_TYPE."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The FindNextPrinterChangeNotification function retrieves information about the most recent change notification for a change notification object associated with a printer or print server. Call this function when a wait operation on the change notification object is satisfied.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "Call the FindNextPrinterChangeNotification function after a wait operation on a notification object created by FindFirstPrinterChangeNotification has been satisfied. Calling FindNextPrinterChangeNotification lets you obtain information about the change that satisfied the wait operation, and resets the notification object so it can be signaled when the next change occurs. With one exception, do not call the FindNextPrinterChangeNotification function if the change notification object is not in the signaled state. If a wait function returns the value WAIT_TIMEOUT, the change object is not in the signaled state. Call the FindNextPrinterChangeNotification function only if the wait function succeeds without timing out. The exception is when FindNextPrinterChangeNotification is called with the PRINTER_NOTIFY_OPTIONS_REFRESH bit set in the pPrinterNotifyOptions parameter. Note that even when this flag is set, it is still possible for the PRINTER_NOTIFY_INFO_DISCARDED flag to be set in the ppPrinterNotifyInfo parameter. To continue monitoring the printer or print server for changes, repeat the cycle of calling one of the wait functions , and then calling the FindNextPrinterChangeNotification function to examine the change and reset the notification object. FindNextPrinterChangeNotification may combine multiple changes to the same printer information field into a single notification. When this occurs, the function typically collapses all changes for the field into a single entry in the array of PRINTER_NOTIFY_INFO_DATA structures in ppPrinterNotifyInfo; the single entry reports only the most current information. However, for some job and printer information fields, the function can return multiple array entries for the same field. In this case, the last array entry for the field reports the current data, and the earlier entries contain the data for the intermediate stages. When you no longer need the change notification object, close it by calling the FindClosePrinterChangeNotification function. The following code sample illustrates how you might monitor printer status by using these functions. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "FindNextPrinterChangeNotification",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hChange",
+        "description": "A handle to a change notification object associated with a printer or print server. You obtain such a handle by calling the FindFirstPrinterChangeNotification function. The operating system sets this change notification object to the signaled state when it detects one of the changes specified in the object's change notification filter."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PDWORD",
+        "name": "pdwChange",
+        "description": "A pointer to a variable whose bits are set to indicate the changes that occurred to cause the most recent notification. The bit flags that might be set correspond to those specified in the fdwFilter parameter of the FindFirstPrinterChangeNotification call. The system sets one or more of the following bit flags.  ValueMeaning  PRINTER_CHANGE_ADD_FORM   A form was added to the server.   PRINTER_CHANGE_ADD_JOB   A print job was sent to the printer.   PRINTER_CHANGE_ADD_PORT   A port or monitor was added to the server.   PRINTER_CHANGE_ADD_PRINT_PROCESSOR   A print processor was added to the server.   PRINTER_CHANGE_ADD_PRINTER   A printer was added to the server.   PRINTER_CHANGE_ADD_PRINTER_DRIVER   A printer driver was added to the server.   PRINTER_CHANGE_CONFIGURE_PORT   A port was configured on the server.   PRINTER_CHANGE_DELETE_FORM   A form was deleted from the server.   PRINTER_CHANGE_DELETE_JOB   A job was deleted.   PRINTER_CHANGE_DELETE_PORT   A port or monitor was deleted from the server.   PRINTER_CHANGE_DELETE_PRINT_PROCESSOR   A print processor was deleted from the server.   PRINTER_CHANGE_DELETE_PRINTER   A printer was deleted.   PRINTER_CHANGE_DELETE_PRINTER_DRIVER   A printer driver was deleted from the server.   PRINTER_CHANGE_FAILED_CONNECTION_PRINTER   A printer connection has failed.   PRINTER_CHANGE_SET_FORM   A form was set on the server.   PRINTER_CHANGE_SET_JOB   A job was set.   PRINTER_CHANGE_SET_PRINTER   A printer was set.   PRINTER_CHANGE_SET_PRINTER_DRIVER   A printer driver was set.   PRINTER_CHANGE_WRITE_JOB   Job data was written.   PRINTER_CHANGE_TIMEOUT   The job timed out.   PRINTER_CHANGE_SERVER   Windows 7: A change occurred on the server."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPVOID",
+        "name": "pPrinterNotifyOptions",
+        "description": "A pointer to a PRINTER_NOTIFY_OPTIONS structure. Set the Flags member of this structure to PRINTER_NOTIFY_OPTIONS_REFRESH, to cause the function to return the current data for all monitored printer information fields. The function ignores all other members of the structure. This parameter can be NULL."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPVOID",
+        "name": "*ppPrinterNotifyInfo",
+        "description": "A pointer to a pointer variable that receives a pointer to a system-allocated, read-only buffer. Call the FreePrinterNotifyInfo function to free the buffer when you are finished with it. This parameter can be NULL if no information is required. The buffer contains a PRINTER_NOTIFY_INFO structure, which contains an array of PRINTER_NOTIFY_INFO_DATA structures. Each element of the array contains information about one of the fields specified in the pPrinterNotifyOptions parameter of the FindFirstPrinterChangeNotification call. Typically, the function provides data only for the fields that changed to cause the most recent notification. However, if the structure pointed to by the pPrinterNotifyOptions parameter specifies PRINTER_NOTIFY_OPTIONS_REFRESH, the function provides data for all monitored fields. If the PRINTER_NOTIFY_INFO_DISCARDED bit is set in the Flags member of the PRINTER_NOTIFY_INFO structure, an overflow or error occurred, and notifications may have been lost. In this case, no additional notifications will be sent until you make a second FindNextPrinterChangeNotification call that specifies PRINTER_NOTIFY_OPTIONS_REFRESH."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FreePrinterNotifyInfo function frees a system-allocated buffer created by the FindNextPrinterChangeNotification function.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "FreePrinterNotifyInfo",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PPRINTER_NOTIFY_INFO",
+        "name": "pPrinterNotifyInfo",
+        "description": "Pointer to a PRINTER_NOTIFY_INFO buffer returned from a call to the FindNextPrinterChangeNotification function. FreePrinterNotifyInfo deallocates this buffer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The AddForm function adds a form to the list of available forms that can be selected for the specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "An application can determine which forms are available for a printer by calling the EnumForms function. If pForm points to a FORM_INFO_2, then AddForm will fail if either a form with the specified name already exists or the structure's pKeyword value already exists. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "AddForm",
+    "is_callback": 0,
+    "dll": "Spoolss.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer that supports printing with the specified form. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "The level of the structure to which pForm points. This value must be 1 or 2."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pForm",
+        "description": "A pointer to a FORM_INFO_1 or FORM_INFO_2 structure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The DeleteForm function removes a form name from the list of supported forms.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "DeleteForm can only delete form names that were added by using the AddForm function. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "DeleteForm",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "Indicates the open printer handle that this function is to be performed upon. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pFormName",
+        "description": "Pointer to the form name to be removed."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The EnumForms function enumerates the forms supported by the specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "If the caller is remote, and the Level is 2, the StringType value of the returned FORM_INFO_2 structures will always be STRING_LANGPAIR. In Windows Vista, the form data returned by EnumForms is retrieved from a local cache when hPrinter refers to a remote print server or a printer hosted by a print server and there is at least one open connection to a printer on the remote print server. In all other configurations, the form data is queried from the remote print server. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "EnumForms",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "Handle to the printer for which the forms should be enumerated. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "Specifies the version of the structure to which pForm points. This value must be 1 or 2."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "pForm",
+        "description": "Pointer to one or more FORM_INFO_1 structures or to one or more FORM_INFO_2 structures. All the structures will have the same level."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBuf",
+        "description": "Specifies the size, in bytes, of the buffer to which pForm points."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbNeeded",
+        "description": "Pointer to a variable that receives the number of bytes copied to the array to which pForm points (if the operation succeeds) or the number of bytes required (if it fails because cbBuf is too small)."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcReturned",
+        "description": "Pointer to a variable that receives the number of structures copied into the array to which pForm points."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The GetForm function retrieves information about a specified form.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "If the caller is remote, and the Level is 2, the StringType value of the returned FORM_INFO_2 will always be STRING_LANGPAIR. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "GetForm",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pFormName",
+        "description": "A pointer to a null-terminated string that specifies the name of the form. To get the names of the forms supported by the printer, call the EnumForms function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "The version of the structure to which pForm points. This value must be 1 or 2."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "pForm",
+        "description": "A pointer to an array of bytes that receives the initialized FORM_INFO_1 or FORM_INFO_2 structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBuf",
+        "description": "The size, in bytes, of the pForm array."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbNeeded",
+        "description": "A pointer to a value that specifies the number of bytes copied if the function succeeds or the number of bytes required if cbBuf is too small."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The SetForm function sets the form information for the specified printer.",
+    "library": "Winspool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. ",
+    "remarks": "SetForm can be called multiple times for an existing FORM_INFO_2, each call adding additional pairs of pDisplayName and wLangId values. All languages versions of the form will get the Size and ImageableArea values of the FORM_INFO_2 in the most recent call to SetForm. If the caller is remote and the Level is 2, the StringType value of the FORM_INFO_2 cannot be STRING_MUIDLL. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "SetForm",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer for which the form information is set. Use the OpenPrinter or AddPrinter function to retrieve a printer handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pFormName",
+        "description": "A pointer to a null-terminated string that specifies the form name for which the form information is set."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Level",
+        "description": "The version of the structure to which pForm points. This value must be 1 or 2."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "pForm",
+        "description": "A pointer to a FORM_INFO_1 or FORM_INFO_2 structure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The CloseSpoolFileHandle function closes a handle to a spool file associated with the print job currently submitted by the application.",
+    "library": "Winspool.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "TRUE, if it succeeds, FALSE otherwise. ",
+    "remarks": "Your application must not call ClosePrinter on hPrinter until after it has accessed the spool file for the last time. Then it should call CloseSpoolFileHandle followed by ClosePrinter. Attempts to access the spool file handle after the original hPrinter has been closed will fail even if the file handle itself has not been closed. CloseSpoolFileHandle will fail if ClosePrinter is called first. ",
+    "return_type": "BOOL",
+    "category": "Print Spooler",
+    "name": "CloseSpoolFileHandle",
+    "is_callback": 0,
+    "dll": "WinSpool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer to which the job was submitted. This should be the same handle that was used to obtain hSpoolFile with GetSpoolFileHandle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hSpoolFile",
+        "description": "A handle to the spool file being closed. If CommitSpoolData has not been called since GetSpoolFileHandle was called, then this should be the same handle that was returned by GetSpoolFileHandle. Otherwise, it should be the handle that was returned by the most recent call to CommitSpoolData."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The CommitSpoolData function notifies the print spooler that a specified amount of data has been written to a specified spool file and is ready to be rendered.",
+    "library": "Winspool.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, it returns a handle to the spool file. If the function fails, it returns INVALID_HANDLE_VALUE. ",
+    "remarks": "Applications submitting a spooler print job can call GetSpoolFileHandle and then directly write data to the spool file handle by calling WriteFile. To notify the print spooler that the file contains data which is ready to be rendered, the application must call CommitSpoolData and provide the number of available bytes. If CommitSpoolData is called multiple times, each call must use the spool file handle returned by the previous call. When no more data will be written to the spool file, CloseSpoolFileHandle should be called for the file handle returned by the last call to CommitSpoolData. Before calling CommitSpoolData, applications must set the file pointer to the position it had before it wrote data to the file. In the process of rendering the data in the spooler file, the print spooler will move the spool file pointer cbCommit bytes from the current value of file pointer. ",
+    "return_type": "HANDLE",
+    "category": "Print Spooler",
+    "name": "CommitSpoolData",
+    "is_callback": 0,
+    "dll": "WinSpool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer to which the job was submitted. This should be the same handle that was used to obtain hSpoolFile with GetSpoolFileHandle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hSpoolFile",
+        "description": "A handle to the spool file being changed. On the first call of CommitSpoolData, this should be the same handle that was returned by GetSpoolFileHandle. Subsequent calls to CommitSpoolData should pass the handle returned by the preceding call. See Remarks."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "cbCommit",
+        "description": "The number of bytes committed to the print spooler."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetPrintExecutionData retrieves the current print context.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "Returns TRUE if the function succeeds; otherwise FALSE. If the return value is FALSE, call GetLastError to get the error status. ",
+    "remarks": "Printer drivers should call  GetProcAddress on the winspool.drv module to get the address of the GetPrintExecutionData function because GetPrintExecutionData is not supported on Windows Vista or earlier versions of Windows. GetPrintExecutionData only  fails if the value of pData is NULL. The value of the clientAppPID member of PRINT_EXECUTION_DATA is only meaningful if the value of  context is PRINT_EXECUTION_CONTEXT_WOW64. If the value of context is not PRINT_EXECUTION_CONTEXT_WOW64, the value of clientAppPID is 0. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Print Spooler",
+    "name": "GetPrintExecutionData",
+    "is_callback": 0,
+    "dll": "Winspool.drv",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PRINT_EXECUTION_DATA",
+        "name": "*pData",
+        "description": "A pointer to a variable that receives the address of the PRINT_EXECUTION_DATA structure."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetSpoolFileHandle function retrieves a handle for the spool file associated with the job currently submitted by the application.",
+    "library": "Winspool.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winspool.h (include Windows.h)",
+    "return_value": "If the function succeeds, it returns a handle to the spool file. If the function fails, it returns INVALID_HANDLE_VALUE. ",
+    "remarks": "With the handle to the spool file, your application can write to the spool file with calls to WriteFile followed by CommitSpoolData. Your application must not call ClosePrinter on hPrinter until after it has accessed the spool file for the last time. Then it should call CloseSpoolFileHandle followed by ClosePrinter. Attempts to access the spool file handle after the original hPrinter has been closed will fail even if the file handle itself has not been closed. CloseSpoolFileHandle will itself fail if ClosePrinter is called first. This function will fail if it is called before the print job has finished spooling. ",
+    "return_type": "HANDLE",
+    "category": "Print Spooler",
+    "name": "GetSpoolFileHandle",
+    "is_callback": 0,
+    "dll": "WinSpool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hPrinter",
+        "description": "A handle to the printer to which the job was submitted. This should be the same handle that was used to submit the job. (Use the OpenPrinter or AddPrinter function to retrieve a printer handle.)"
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

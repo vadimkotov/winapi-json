@@ -1,0 +1,154 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "Allows the caller to register a target window to which all pointer input of the specified type is redirected.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "WinUser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is non-zero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "An application with the UI Access privilege can use this function to register its own window to receive all input of the specified pointer input type. Each desktop allows only one such global redirection target window for each pointer input type at any given time. The first window to successfully register remains in effect until the window is unregistered or destroyed, at which point the role is available to the next qualified caller. While the registration is in effect, all input of the specified pointer type, whether from an input device or injected by an application, is redirected to the registered window. However, when the process that owns the registered window injects input of the specified pointer type, such injected is not redirected but is instead processed normally. An application that wishes to register the same window as a global redirection target for multiple pointer input types must call the RegisterPointerInputTarget function multiple times, once for each pointer input type of interest. If the calling thread does not have the UI Access privilege, this function fails with the last error set to ERROR_ACCESS_DENIED. If the specified pointer input type is not valid, this function fails with the last error set to ERROR_INVALID_PARAMETER. If the calling thread does not own the specified window, this function fails with the last error set to ERROR_ACCESS_DENIED. If the specified window's desktop already has a registered global redirection target for the specified pointer input type, this function fails with the last error set to ERROR_ACCESS_DENIED. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Accessibility",
+    "name": "RegisterPointerInputTarget",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "The window to register as a global redirection target. Redirection can cause the foreground window to lose activation (focus). To avoid this, ensure the window is a message-only window or has the WS_EX_NOACTIVATE style set."
+      },
+      {
+        "in_out": "_In_",
+        "type": "POINTER_INPUT_TYPE",
+        "name": "pointerType",
+        "description": "Type of pointer input to be redirected to the specified  window. This is any valid and supported value from the POINTER_INPUT_TYPE enumeration. Note that the generic PT_POINTER type and the PT_MOUSE type are not valid in this parameter."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[RegisterPointerInputTargetEx is not supported and may be altered or unavailable in the future. Instead, use RegisterPointerInputTarget.]",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "WinUser.h",
+    "return_value": "Not supported. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Accessibility",
+    "name": "RegisterPointerInputTargetEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Not supported."
+      },
+      {
+        "in_out": "_In_",
+        "type": "POINTER_INPUT_TYPE",
+        "name": "pointerType",
+        "description": "Not supported."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fObserve",
+        "description": "Not supported."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The SoundSentryProc function is an application-specific callback function that produces a customized visual signal when the SoundSentry accessibility feature is on and a Windows-based application (or an application running in a window) generates a sound through the computer's built-in speaker.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: LRESULT If the visual signal was or will be displayed correctly, the return value is TRUE. If the signal is asynchronous and the status is not available when the function is called, it should return TRUE. If an error prevented the signal from being displayed, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "The SoundSentryProc function must be defined in a DLL, and the DLL must export a function with the name SoundSentryProc. The SoundSentryProc function is called only after an application or library calls the SystemParametersInfo function, specifying the SPI_SETSOUNDSENTRY value and the address of a SOUNDSENTRY structure whose iWindowsEffect member is set to SSWF_CUSTOM. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Accessibility",
+    "name": "SoundSentryProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwMillisec",
+        "description": "Type: DWORD The duration, in milliseconds, of the visual signal that is displayed."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "fdwEffect",
+        "description": "Type: DWORD The type of visual signal to display. Currently, this value must always be SSWF_CUSTOM."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Allows the caller to unregister a target window to which all pointer input of the specified type is redirected.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "WinUser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is non-zero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "An application that has successfully called the RegisterPointerInputTarget function can call this function to un-register the window from the role of global redirected target for the specified pointer type. An application that has registered the same window as a global redirection target for multiple pointer input types can call the UnregisterPointerInputTarget to un-register the window for one of those types while leaving the window registered for the remaining types. If the calling thread does not have the UI Access privilege, this function fails with the last error set to ERROR_ACCESS_DENIED. If the specified pointer input type is not valid, this function fails with the last error set to ERROR_INVALID_PARAMETER. If the calling thread does not own the specified window, this function fails with the last error set to ERROR_ACCESS_DENIED. If the specified window is not the registered global redirection target for the specified pointer input type on its desktop, this function takes no action and returns success. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Accessibility",
+    "name": "UnregisterPointerInputTarget",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Window to be un-registered as a global redirection target on its desktop."
+      },
+      {
+        "in_out": "_In_",
+        "type": "POINTER_INPUT_TYPE",
+        "name": "pointerType",
+        "description": "Type of pointer input to no longer be redirected to the specified window. This is any valid and supported value from the POINTER_INPUT_TYPE  enumeration. Note that the generic PT_POINTER type and the PT_MOUSE type are not valid in this parameter."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[UnregisterPointerInputTargetEx is not supported and may be altered or unavailable in the future. Instead, use UnregisterPointerInputTarget.]",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "WinUser.h",
+    "return_value": "Not supported. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Accessibility",
+    "name": "UnregisterPointerInputTargetEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Not supported."
+      },
+      {
+        "in_out": "_In_",
+        "type": "POINTER_INPUT_TYPE",
+        "name": "pointerType",
+        "description": "Not supported."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps only]"
+  }
+]
+

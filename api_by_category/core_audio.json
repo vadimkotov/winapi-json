@@ -1,0 +1,50 @@
+[
+  {
+    "n_arguments": 5,
+    "description": "Enables Windows Store apps to access preexisting Component Object Model (COM) interfaces in the WASAPI family.",
+    "library": "Mmdevapi.lib",
+    "min_server": "Windows Server 2012 [desktop apps | Windows Store apps]",
+    "header": "Mmdevapi.idl",
+    "return_value": "The function returns an HRESULT. Possible values include, but are not limited to, those in the following table.  ",
+    "remarks": "This function enables Windows Store apps to  activate certain WASAPI COM interfaces after using Windows Runtime APIs in the Windows.Devices and Windows.Media.Devices namespaces to select an audio device. An application must call this function from the main UI thread to activate a COM interface in the WASAPI family. The application passes an IActivateAudioInterfaceCompletionHandler callback COM interface through completionHandler. Windows calls a method in the application's IActivateAudioInterfaceCompletionHandler interface from a worker thread in the COM Multi-threaded Apartment (MTA) when the activation results are available. The application can then call a method in the IActivateAudioInterfaceAsyncOperation interface  to retrieve the result code and the requested WASAPI interface. Windows holds a reference to the application's IActivateAudioInterfaceCompletionHandler interface until the operation is complete and the application releases the IActivateAudioInterfaceAsyncOperation interface. Depending on which WASAPI interface is activated, this function may display a consent prompt the first time it is called. For example, when the application calls this function to activate IAudioClient to access a microphone, the purpose of the consent prompt is to get the user's permission for the app to access the microphone. For more information about the consent prompt, see Guidelines for devices that access personal data. ActivateAudioInterfaceAsync must be called on the main UI thread so that the consent prompt can be shown. If the consent prompt can't be shown, the user can't grant device access to the app. ActivateAudioInterfaceAsync must be called on a thread in a COM Single-Threaded Apartment (STA). The completionHandler that is passed into ActivateAudioInterfaceAsync needs to implement IAgileObject to ensure that there is no deadlock when the completionHandler is called from the MTA. Otherwise, an E_ILLEGAL_METHOD_CALL will occur. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Core Audio",
+    "name": "ActivateAudioInterfaceAsync",
+    "is_callback": 0,
+    "dll": "Mmdevapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "deviceInterfacePath",
+        "description": "A device interface ID for an audio device. This is normally retrieved from a DeviceInformation object or one of the methods of the MediaDevice class.  The GUIDs DEVINTERFACE_AUDIO_CAPTURE  and DEVINTERFACE_AUDIO_RENDER  represent the default audio capture and render device respectively. Call StringFromIID to convert either of these GUIDs to an LPCWSTR to use for this argument."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "The IID of a COM interface in the WASAPI family, such as IAudioClient."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PROPVARIANT",
+        "name": "*activationParams",
+        "description": "Interface-specific activation parameters. For more information, see the pActivationParams parameter in IMMDevice::Activate."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IActivateAudioInterfaceCompletionHandler",
+        "name": "*completionHandler",
+        "description": "An interface implemented by the caller that is called by Windows when the result of the activation procedure is available."
+      },
+      {
+        "in_out": "_COM_Outptr_",
+        "type": "IActivateAudioInterfaceAsyncOperation",
+        "name": "**createAsync",
+        "description": "Returns an IActivateAudioInterfaceAsyncOperation interface that represents the asynchronous operation of activating the requested WASAPI interface."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps | Windows Store apps]"
+  }
+]
+

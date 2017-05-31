@@ -1,0 +1,437 @@
+[
+  {
+    "n_arguments": 4,
+    "description": "Application defined callback function called when codec component progress is made.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Wincodec.h",
+    "return_value": "Type: HRESULT If this callback function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "An operation can be canceled by returning WINCODEC_ERR_ABORTED. To register your callback function, query the encoder or decoder for the IWICBitmapCodecProgressNotification interface and call RegisterProgressNotification. ",
+    "return_type": "HRESULT CALLBACK",
+    "category": "Windows Imaging Component (WIC)",
+    "name": "ProgressNotificationCallback",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "LPVOID",
+        "name": "pvData",
+        "description": "Type: LPVOID Component data passed to the callback function."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "uFrameNum",
+        "description": "Type: ULONG The current frame number."
+      },
+      {
+        "in_out": "",
+        "type": "WICProgressOperation",
+        "name": "operation",
+        "description": "Type: WICProgressOperation The current operation the component is in."
+      },
+      {
+        "in_out": "",
+        "type": "double",
+        "name": "dblProgress",
+        "description": "Type: double The progress value. The range is 0.0 to 1.0."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Obtains a IWICBitmapSource in the desired pixel format from a given IWICBitmapSource.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Wincodec.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "If the pISrc bitmap is already in the desired format, pISrc is copied to the destination bitmap pointer and a reference is added. If it is not in the desired format however, WICConvertBitmapSource will instantiate a dstFormat format converter and initialize it with pISrc. The following example converts an IWICBitmapSource to a GUID_WICPixelFormat128bppPRGBAFloat pixel format. ",
+    "return_type": "HRESULT",
+    "category": "Windows Imaging Component (WIC)",
+    "name": "WICConvertBitmapSource",
+    "is_callback": 0,
+    "dll": "Windowscodecs.dll;  Wincodec.lib",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFWICPixelFormatGUID",
+        "name": "dstFormat",
+        "description": "Type: REFWICPixelFormatGUID The pixel format to convert to."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IWICBitmapSource",
+        "name": "*pISrc",
+        "description": "Type: IWICBitmapSource* The source bitmap."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "IWICBitmapSource",
+        "name": "**ppIDst",
+        "description": "Type: IWICBitmapSource** A pointer to the null-initialized destination bitmap pointer."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Returns a IWICBitmapSource that is backed by the pixels of a Windows Graphics Device Interface (GDI) section handle.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Wincodec.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The WICCreateBitmapFromSection function calls the WICCreateBitmapFromSectionEx function with the desiredAccessLevel parameter set to WICSectionAccessLevelRead. ",
+    "return_type": "HRESULT",
+    "category": "Windows Imaging Component (WIC)",
+    "name": "WICCreateBitmapFromSection",
+    "is_callback": 0,
+    "dll": "Windowscodecs.dll;  Wincodec.lib",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "width",
+        "description": "Type: UINT The width of the bitmap pixels."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "height",
+        "description": "Type: UINT The height of the bitmap pixels."
+      },
+      {
+        "in_out": "",
+        "type": "REFWICPixelFormatGUID",
+        "name": "pixelFormat",
+        "description": "Type: REFWICPixelFormatGUID The pixel format of the bitmap."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hSection",
+        "description": "Type: HANDLE The section handle. This is a file mapping object handle returned by the CreateFileMapping function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "stride",
+        "description": "Type: UINT The byte count of each scanline."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "offset",
+        "description": "Type: UINT The offset into the section."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "IWICBitmap",
+        "name": "**pIBitmap",
+        "description": "Type: IWICBitmap** A pointer that receives the bitmap."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "Returns a IWICBitmapSource that is backed by the pixels of a Windows Graphics Device Interface (GDI) section handle.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2, Windows Server 2008 with SP2 and Platform Update for Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Wincodec.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Windows Imaging Component (WIC)",
+    "name": "WICCreateBitmapFromSectionEx",
+    "is_callback": 0,
+    "dll": "Windowscodecs.dll;  Wincodec.lib",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "width",
+        "description": "Type: UINT The width of the bitmap pixels."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "height",
+        "description": "Type: UINT The height of the bitmap pixels."
+      },
+      {
+        "in_out": "",
+        "type": "REFWICPixelFormatGUID",
+        "name": "pixelFormat",
+        "description": "Type: REFWICPixelFormatGUID The pixel format of the bitmap."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hSection",
+        "description": "Type: HANDLE The section handle. This is a file mapping object handle returned by the CreateFileMapping function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "stride",
+        "description": "Type: UINT The byte count of each scanline."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "offset",
+        "description": "Type: UINT The offset into the section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WICSectionAccessLevel",
+        "name": "desiredAccessLevel",
+        "description": "Type: WICSectionAccessLevel The desired access level."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "IWICBitmap",
+        "name": "**pIBitmap",
+        "description": "Type: IWICBitmap** A pointer that receives the bitmap."
+      }
+    ],
+    "min_client": "Windows 7, Windows Vista with SP2 and Platform Update for Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Returns the size of the metadata content contained by the specified IWICMetadataWriter. The returned size accounts for the header and the length of the metadata.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Wincodec.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Windows Imaging Component (WIC)",
+    "name": "WICGetMetadataContentSize",
+    "is_callback": 0,
+    "dll": "Windowscodecs.dll;  Wincodec.lib",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFGUID",
+        "name": "guidContainerFormat",
+        "description": "Type: REFGUID The container GUID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IWICMetadataWriter",
+        "name": "*pIWriter",
+        "description": "Type: IWICMetadataWriter* The IWICMetadataWriter that contains the content."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ULARGE_INTEGER",
+        "name": "*pcbSize",
+        "description": "Type: ULARGE_INTEGER* A pointer that receives the size of the metadata content."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Obtains the short name associated with a given GUID.",
+    "library": "WindowsCodecs.lib",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "WinCodec.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Windows Imaging Component (WIC) short name mappings can be found within the following registry key: ",
+    "return_type": "HRESULT",
+    "category": "Windows Imaging Component (WIC)",
+    "name": "WICMapGuidToShortName",
+    "is_callback": 0,
+    "dll": "WindowsCodecs.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFGUID",
+        "name": "guid",
+        "description": "Type: REFGUID The GUID to retrieve the short name for."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cchName",
+        "description": "Type: UINT The size of the wzName buffer."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "WCHAR",
+        "name": "*wzName",
+        "description": "Type: WCHAR* A pointer that receives the short name associated with the GUID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcchActual",
+        "description": "Type: UINT* The actual size needed to retrieve the entire short name associated with the GUID."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Obtains the name associated with a given schema.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Wincodec.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "You can extend the schema name mapping by adding to the following registry key:  For more information, see How to Write a WIC-Enabled Codec. ",
+    "return_type": "HRESULT",
+    "category": "Windows Imaging Component (WIC)",
+    "name": "WICMapSchemaToName",
+    "is_callback": 0,
+    "dll": "Windowscodecs.dll;  Wincodec.lib",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFGUID",
+        "name": "guidMetadataFormat",
+        "description": "Type: REFGUID The metadata format GUID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "pwzSchema",
+        "description": "Type: LPWSTR The URI string of the schema for which the name is to be retrieved."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cchName",
+        "description": "Type: UINT The size of the wzName buffer."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "WCHAR",
+        "name": "*wzName",
+        "description": "Type: WCHAR* A pointer to a buffer that receives the schema's name. To obtain the required buffer size, call WICMapSchemaToName with cchName set to 0 and wzName set to NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "pcchActual",
+        "description": "Type: UINT The actual buffer size needed to retrieve the entire schema name."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Obtains the GUID associated with the given short name.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Wincodec.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "You can extend the short name mapping by adding to  the following registry key:  For more information, see How to Write a WIC-Enabled Codec. ",
+    "return_type": "HRESULT",
+    "category": "Windows Imaging Component (WIC)",
+    "name": "WICMapShortNameToGuid",
+    "is_callback": 0,
+    "dll": "Windowscodecs.dll;  Wincodec.lib",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WCHAR",
+        "name": "*wzName",
+        "description": "Type: const WCHAR* A pointer to the short name."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "GUID",
+        "name": "*pguid",
+        "description": "Type: GUID* A pointer that receives the GUID associated with the given short name."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Obtains a metadata format GUID for a specified container format and vendor that best matches the content within a given stream.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Wincodec.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Windows Imaging Component (WIC)",
+    "name": "WICMatchMetadataContent",
+    "is_callback": 0,
+    "dll": "Windowscodecs.dll;  Wincodec.lib",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFGUID",
+        "name": "guidContainerFormat",
+        "description": "Type: REFGUID The container format GUID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "GUID",
+        "name": "*pguidVendor",
+        "description": "Type: const GUID* The vendor GUID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IStream",
+        "name": "*pIStream",
+        "description": "Type: IStream* The content stream in which to match a metadata format."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "GUID",
+        "name": "*pguidMetadataFormat",
+        "description": "Type: GUID* A pointer that receives a metadata format GUID for the given parameters."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Writes metadata into a given stream.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps | Windows Store apps]",
+    "header": "Wincodec.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Windows Imaging Component (WIC)",
+    "name": "WICSerializeMetadataContent",
+    "is_callback": 0,
+    "dll": "Windowscodecs.dll;  Wincodec.lib",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFGUID",
+        "name": "guidContainerFormat",
+        "description": "Type: REFGUID The container format GUID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IWICMetadataWriter",
+        "name": "*pIWriter",
+        "description": "Type: IWICMetadataWriter* The metadata writer to write metadata to the stream."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwPersistOptions",
+        "description": "Type: DWORD The WICPersistOptions options to use when writing the metadata."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IStream",
+        "name": "*pIStream",
+        "description": "Type: IStream* A pointer to the stream in which to write the metadata."
+      }
+    ],
+    "min_client": "Windows XP with SP2, Windows Vista [desktop apps | Windows Store apps]"
+  }
+]
+

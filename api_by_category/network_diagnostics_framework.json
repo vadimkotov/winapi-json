@@ -1,0 +1,1007 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "The CopyHelperAttribute function creates a copy of a HELPER_ATTRIBUTE structure.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Ndattributils.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "CopyHelperAttribute",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "HELPER_ATTRIBUTE",
+        "name": "*Dest",
+        "description": "Type: HELPER_ATTRIBUTE* The structure to be updated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HELPER_ATTRIBUTE",
+        "name": "*Source",
+        "description": "Type: const HELPER_ATTRIBUTE* The existing structure to be copied."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The CopyRepairInfo function creates a copy of a RepairInfo structure.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Ndattributils.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "CopyRepairInfo",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "RepairInfo",
+        "name": "*Dest",
+        "description": "Type: RepairInfo* The structure to be updated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "RepairInfo",
+        "name": "*Source",
+        "description": "Type: const RepairInfo* The existing structure to be copied."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The CopyRootCauseInfo function creates a copy of a RootCauseInfo structure.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Ndattributils.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "CopyRootCauseInfo",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "RootCauseInfo",
+        "name": "*Dest",
+        "description": "Type: RootCauseInfo* The structure to be updated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "RootCauseInfo",
+        "name": "*Source",
+        "description": "Type: const RootCauseInfo* The existing structure to be copied."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The FreeRepairInfoExs function deallocates the memory allocated internally to an array of RepairInfoEx structures. This function calls CoTaskMemFree to deallocate memory.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Ndattributils.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "FreeRepairInfoExs",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "RepairInfoEx",
+        "name": "*pInfo",
+        "description": "Type: RepairInfoEx* The array of structures. The allocated memory pointed to by these structures will be freed."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "RepairCount",
+        "description": "Type: ULONG The number of structures  in the array pointed to by pInfo."
+      },
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "bFreePointer",
+        "description": "Type: BOOL True if the array of structures should also be deleted; otherwise, false."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The FreeRepairInfos function deallocates the memory allocated internally to an array of RepairInfo structures. This function calls CoTaskMemFree to deallocate memory.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Ndattributils.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "FreeRepairInfos",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "RepairInfo",
+        "name": "*pInfo",
+        "description": "Type: RepairInfo* The array of structures. The allocated memory pointed to by these structures will be freed."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "RepairCount",
+        "description": "Type: ULONG The number of structures  in the array pointed to by pInfo."
+      },
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "bFreePointer",
+        "description": "Type: BOOL True if the array of structures should also be deleted; otherwise, false."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The FreeRootCauseInfos function deallocates the memory allocated internally to an array of RootCauseInfo structures. This function calls CoTaskMemFree to deallocate memory.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Ndattributils.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "FreeRootCauseInfos",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "RootCauseInfo",
+        "name": "*pInfo",
+        "description": "Type: RootCauseInfo* The array of structures. The allocated memory pointed to by these structures will be freed."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "RootCauseCount",
+        "description": "Type: ULONG The number of structures  in the array pointed to by pInfo."
+      },
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "bFreePointer",
+        "description": "Type: BOOL True if the array of structures should also be deleted; otherwise, false."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The FreeHelperAttributes function deallocates the memory allocated internally to an array of HELPER_ATTRIBUTE structures. This function calls CoTaskMemFree to deallocate memory.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Ndattributils.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "FreeHelperAttributes",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HELPER_ATTRIBUTE",
+        "name": "*pInfo",
+        "description": "Type: HELPER_ATTRIBUTE* The array of structures. The allocated memory pointed to by these structures will be freed."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "HelperAttributeCount",
+        "description": "Type: ULONG The number of structures  in the array pointed to by pInfo."
+      },
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "bFreePointer",
+        "description": "Type: BOOL True if the array of structures should also be deleted; otherwise, false."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FreeUiInfo function deallocates the memory allocated internally to a UiInfo structure. This function calls CoTaskMemFree to deallocate memory.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Ndattributils.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "FreeUiInfo",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UiInfo",
+        "name": "*pInfo",
+        "description": "Type: UiInfo* The structure. The allocated memory pointed to by this structure will be freed."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The NdfCancelIncident function is used to cancel unneeded functions which have been previously called on an existing incident.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  Any result other than S_OK should be interpreted as an error. ",
+    "remarks": "Before using this API, an application must call an incident creation function such as NdfCreateWebIncident. NdfCancelIncident is primarily used to cancel calls to functions such as NdfDiagnoseIncident or NdfRepairIncident which have been previously called, but are no longer needed. When NdfCancelIncident is called, NDF will stop the diagnosis/repair as soon as possible rather than calling the other functions (unless results have already been returned from those functions, in which case NdfCancelIncident will have no effect). NdfCloseIncident should be used to close an incident once it has been resolved, as NdfCancelIncident does not actually close the incident itself. ",
+    "return_type": "HRESULT STDAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCancelIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "NDFHANDLE",
+        "name": "Handle",
+        "description": "Type: NDFHANDLE Handle to the Network Diagnostics Framework incident. This handle should match the handle of an existing incident."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The NdfCloseIncident function is used to close an Network Diagnostics Framework (NDF) incident following its resolution.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  To view an example, see NDF Diagnostics Example. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCloseIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "NDFHANDLE",
+        "name": "handle",
+        "description": "Type: NDFHANDLE Handle to the NDF incident that is being closed."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The NdfCreateConnectivityIncident function diagnoses generic Internet connectivity problems.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCreateConnectivityIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "NDFHANDLE",
+        "name": "*handle",
+        "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The NdfCreateDNSIncident function diagnoses name resolution issues in resolving a specific host name.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCreateDNSIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "hostname",
+        "description": "Type: LPCWSTR The host name  with which there is a name resolution issue."
+      },
+      {
+        "in_out": "",
+        "type": "WORD",
+        "name": "querytype",
+        "description": "Type: WORD The numeric representation of the type of record that was queried when the issue occurred.  For more information and a complete listing of record set types and their numeric representations, see the windns.h header file. This parameter should be set to  DNS_TYPE_ZERO for generic DNS resolution diagnosis."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "NDFHANDLE",
+        "name": "*handle",
+        "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "The NdfCreateGroupingIncident function creates  a session to diagnose peer-to-peer grouping functionality issues.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "The level of diagnosis performed depends on the parameters supplied. ",
+    "return_type": "HRESULT STDAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCreateGroupingIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "CloudName",
+        "description": "Type: LPCWSTR The name of the Peer Name Resolution Protocol (PNRP) cloud where the group is created. If  NULL, the session will  not attempt to diagnose issues related to PNRP."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "GroupName",
+        "description": "Type: LPCWSTR The name of the group to be diagnosed. If NULL, the session will  not attempt to diagnose issues related to group availability."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "Identity",
+        "description": "Type: LPCWSTR The identity that a peer uses to access the group. If  NULL, the session will  not attempt to diagnose issues related to the group's ability to register in PNRP."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "Invitation",
+        "description": "Type: LPCWSTR An XML invitation granted by another peer. An invitation is created when the inviting peer calls PeerGroupCreateInvitation or PeerGroupIssueCredentials. If this value is present, the invitation will be checked to ensure its format and expiration are valid."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "SOCKET_ADDRESS_LIST",
+        "name": "*Addresses",
+        "description": "Type: SOCKET_ADDRESS_LIST* Optional list of addresses of the peers to which the application is trying to connect. If this parameter is used, the helper class will diagnose connectivity to these addresses."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "appId",
+        "description": "Type: LPCWSTR Application ID for the calling application."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "NDFHANDLE",
+        "name": "*handle",
+        "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "The NdfCreateInboundIncident function creates  a session to diagnose inbound connectivity for a specific application or service.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "Either applicationID or serviceID must be specified, but not both. ",
+    "return_type": "HRESULT STDAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCreateInboundIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "applicationID",
+        "description": "Type: LPCWSTR The fully qualified path to the application receiving the inbound traffic."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "serviceID",
+        "description": "Type: LPCWSTR The Windows service receiving the inbound traffic.  @FirewallAPI.dll,-28502 (File/Print Sharing) @FirewallAPI.dll,-28752 (Remote Desktop) @FirewallAPI.dll,-32752 (Network Discovery)"
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "SID",
+        "name": "*userID",
+        "description": "Type: SID* The SID for the application receiving the traffic. If NULL, the caller's SID is automatically used."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "SOCKADDR_STORAGE",
+        "name": "localTarget",
+        "description": "Type: const SOCKADDR_STORAGE A SOCKADDR_STORAGE structure which limits the diagnosis to traffic to a specific IP address. If NULL, all traffic will be included in the diagnosis."
+      },
+      {
+        "in_out": "",
+        "type": "IPPROTO",
+        "name": "protocol",
+        "description": "Type: IPPROTO The protocol which should be diagnosed. For example, IPPROTO_TCP would be used to indicate the TCP/IP protocol."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD Possible values:  NDF_INBOUND_FLAG_EDGETRAVERSAL (Indicates that a configuration should be considered unhealthy if both gateways on the local network are within the private access range, rather than only considering the configuration to be healthy if both gateways are Internet Gateway Devices (IGDs).) NDF_INBOUND_FLAG_HEALTHCHECK (Ends the session immediately if no inbound traffic problems are diagnosed, instead of turning on detailed tracing and allowing the user to reproduce their problem for a second diagnosis.)"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "NDFHANDLE",
+        "name": "*handle",
+        "description": "Type: NDFHANDLE* Pointer to a handle to the Network Diagnostics Framework incident."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The NdfCreateIncident function is used internally by application developers to test the NDF functionality incorporated into their application.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  To view an example, see NDF Diagnostics Example. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCreateIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "helperClassName",
+        "description": "Type: LPCWSTR The name of the helper class to be used in the diagnoses of the incident."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "celt",
+        "description": "Type: ULONG A count of elements in the attributes array."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HELPER_ATTRIBUTE",
+        "name": "*attributes",
+        "description": "Type: HELPER_ATTRIBUTE* The applicable HELPER_ATTRIBUTE structure."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "NDFHANDLE",
+        "name": "*handle",
+        "description": "Type: NDFHANDLE* A handle to the Network Diagnostics Framework incident."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The NdfCreateNetConnectionIncident function diagnoses connectivity issues using the NetConnection helper class.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCreateNetConnectionIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "NDFHANDLE",
+        "name": "*handle",
+        "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
+      },
+      {
+        "in_out": "",
+        "type": "GUID",
+        "name": "id",
+        "description": "Type: GUID Identifier of the network interface that the caller would like to create the incident for.   The NULL GUID {00000000-0000-0000-0000-000000000000} may be used if the caller does not want to specify an interface. The system will attempt to determine the most appropriate interface based on the current state of the system."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The NdfCreatePnrpIncident function creates  a session to diagnose issues with the Peer Name Resolution Protocol (PNRP) service.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "The level of diagnosis performed depends on the parameters supplied. The availability of the PNRP service and the availability of the IPv6 networking class will be diagnosed, and additional diagnosis will be performed if certain parameters are supplied. ",
+    "return_type": "HRESULT STDAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCreatePnrpIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "cloudname",
+        "description": "Type: LPCWSTR The name of the cloud to be diagnosed."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "peername",
+        "description": "Type: LPCWSTR Optional name of a peer node which PNRP can attempt to resolve. The results will be used to help diagnose any problems."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "diagnosePublish",
+        "description": "Type: BOOL Specifies whether the helper class should verify that the node can publish IDs. If FALSE, this diagnostic step will be skipped."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "appId",
+        "description": "Type: LPCWSTR Application ID for the calling application."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "NDFHANDLE",
+        "name": "*handle",
+        "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The NdfCreateSharingIncident function diagnoses network problems in accessing a specific network share.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCreateSharingIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "sharename",
+        "description": "Type: LPCWSTR The full UNC string (for example, \"\\\\server\\folder\\file.ext\") for the shared asset with which there is a connectivity issue."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "NDFHANDLE",
+        "name": "*handle",
+        "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The NdfCreateWebIncident function diagnoses web connectivity problems concerning a specific URL.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCreateWebIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "url",
+        "description": "Type: LPCWSTR The URL with which there is a connectivity issue."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "NDFHANDLE",
+        "name": "*handle",
+        "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The NdfCreateWebIncidentEx function diagnoses web connectivity problems concerning a specific URL.  This function allows for more control over the underlying diagnosis than the NdfCreateWebIncident function.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCreateWebIncidentEx",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "url",
+        "description": "Type: LPCWSTR The URL with which there is a connectivity issue."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "useWinHTTP",
+        "description": "Type: BOOL TRUE if diagnosis will be performed using the WinHTTP APIs;  FALSE if the WinInet APIs will be used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "moduleName",
+        "description": "Type: LPWSTR The module name to use when checking against application-specific filtering rules (for example, \"C:\\Program Files\\Internet Explorer\\iexplorer.exe\").  If NULL, the value is autodetected during the diagnosis."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "NDFHANDLE",
+        "name": "*handle",
+        "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The NdfCreateWinSockIncident function provides access to the Winsock Helper Class provided by Microsoft.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfCreateWinSockIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "SOCKET",
+        "name": "sock",
+        "description": "Type: SOCKET A descriptor identifying a connected socket."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "host",
+        "description": "Type: LPCWSTR A pointer to the local host."
+      },
+      {
+        "in_out": "",
+        "type": "USHORT",
+        "name": "port",
+        "description": "Type: USHORT The port providing Winsock access."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "appID",
+        "description": "Type: LPCWSTR Unique identifier associated with the application."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "SID",
+        "name": "*userId",
+        "description": "Type: SID* Unique identifier associated with the user."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "NDFHANDLE",
+        "name": "*handle",
+        "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The NdfDiagnoseIncident function diagnoses the root cause of an incident  without displaying a user interface.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "This function is intended for use with scenarios where no user interface is shown, or where the standard Windows experience is not being used (as with Media Center and  embedded applications). NdfExecuteDiagnosis will launch the diagnostics user interface, and should be used in scenarios using the standard Windows experience. You can call either NdfExecuteDiagnosis or NdfDiagnoseIncident, but not both. Before using this API, an application must call an incident creation function such as NdfCreateWebIncident to begin the NDF diagnostics process. The application then calls NdfDiagnoseIncident to diagnose the issue. If the diagnostics process identifies some possible repairs, the application can call NdfRepairIncident to repair the problem without displaying a user interface. NdfCancelIncident can optionally be called from a separate thread if the application wants to cancel an ongoing NdfDiagnoseIncident call. Finally, the application calls NdfCloseIncident. The following table shows some examples of root causes and their corresponding repairs.   ",
+    "return_type": "HRESULT STDAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfDiagnoseIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "NDFHANDLE",
+        "name": "Handle",
+        "description": "Type: NDFHANDLE A handle to the Network Diagnostics Framework incident."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ULONG",
+        "name": "*RootCauseCount",
+        "description": "Type: ULONG* The number of root causes that could potentially have caused this incident. If diagnosis does not succeed, the contents of this parameter should be ignored."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "RootCauseInfo",
+        "name": "**RootCauses",
+        "description": "Type: RootCauseInfo** A collection of RootCauseInfo structures that contain a detailed description of the root cause. If diagnosis succeeds, this parameter contains both the leaf root causes identified in the diagnosis session and any non-leaf root causes that have an available repair. If diagnosis does not succeed, the contents of this parameter should be ignored. Memory allocated to these structures should later be freed.  For an example of how to do this, see the Microsoft Windows Network Diagnostics Samples."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwWait",
+        "description": "Type: DWORD The length of time, in milliseconds, to wait before terminating the diagnostic routine. INFINITE may be passed to this parameter if no time-out is desired."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD Possible values:  ValueMeaning  NDF_ADD_CAPTURE_TRACE 0x0001   Turns on network tracing during diagnosis. Diagnostic results will be included in the Event Trace Log (ETL) file returned by NdfGetTraceFile.   NDF_APPLY_INCLUSION_LIST_FILTER  0x0002   Applies filtering to the returned root causes so that they are consistent with the in-box scripted diagnostics behavior. Without this flag, root causes will not be filtered. This flag must be set by the caller, so existing callers will not see a change in behavior unless they explicitly specify this flag. Note  Available only in Windows 8 and Windows Server 2012."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The NdfExecuteDiagnosis function is used to diagnose the root cause of the incident that has occurred.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  To view an example, see NDF Diagnostics Example. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfExecuteDiagnosis",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "NDFHANDLE",
+        "name": "handle",
+        "description": "Type: NDFHANDLE Handle to the Network Diagnostics Framework incident."
+      },
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Handle to the window that is intended to display the diagnostic information. If specified, the NDF UI is modal to the window.  If NULL, the UI is non-modal."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The NdfGetTraceFile function is used to retrieve the path containing an Event Trace Log (ETL) file that contains Event Tracing for Windows (ETW) events from a diagnostic session.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  Any result other than S_OK should be interpreted as an error. ",
+    "remarks": "This function cannot be called on an incident which has already been closed. ETL files contain information such as which components were diagnosed, component configuration information, and diagnosis results. For more information about ETL files, see Network Tracing in Windows 7. ",
+    "return_type": "HRESULT STDAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfGetTraceFile",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "NDFHANDLE",
+        "name": "Handle",
+        "description": "Type: NDFHANDLE Handle to a Network Diagnostics Framework incident. This handle should match the handle of an existing incident."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPCWSTR",
+        "name": "*TraceFileLocation",
+        "description": "Type: LPCWSTR* The location of the trace file."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The NdfRepairIncident function repairs an incident without displaying a user interface.",
+    "library": "Ndfapi.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Ndfapi.h",
+    "return_value": "Possible return values include, but are not limited to, the following.  Other failure codes are returned if the repair failed to execute. In that case, the client can call NdfRepairIncident again with a different repair. ",
+    "remarks": "NdfRepairIncident can only be called when NdfDiagnoseIncident is used for diagnostics. This is typically the case in scenarios where no user interface is shown, or where the standard Windows experience is not being used (as with Media Center and embedded applications). NdfRepairIncident should not be called when NdfExecuteDiagnosis is used. Before using this API, an application must call an incident creation function such as NdfCreateWebIncident to begin the NDF diagnostics process. The application then calls NdfDiagnoseIncident to diagnose the issue. If the diagnostics process identifies some possible repairs, the application can call NdfRepairIncident to repair the problem without displaying a user interface. NdfCancelIncident can optionally be called from a separate thread if the application wants to cancel an ongoing NdfRepairIncident call. Finally, the application calls NdfCloseIncident. ",
+    "return_type": "void STDAPI",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "NdfRepairIncident",
+    "is_callback": 0,
+    "dll": "Ndfapi.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "NDFHANDLE",
+        "name": "Handle",
+        "description": "Type: NDFHANDLE Handle to the Network Diagnostics Framework incident. This handle should match the handle passed to NdfDiagnoseIncident."
+      },
+      {
+        "in_out": "_In_",
+        "type": "RepairInfoEx",
+        "name": "*RepairEx",
+        "description": "Type: RepairInfoEx* A structure (obtained from NdfDiagnoseIncident) which indicates the particular repair to be performed. Memory allocated to these structures should later be freed.  For an example of how to do this, see the Microsoft Windows Network Diagnostics Samples."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwWait",
+        "description": "Type: DWORD The length of time, in milliseconds, to wait before terminating the diagnostic routine. INFINITE may be passed to this parameter if no timeout is desired."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The UtilAssembleStringsWithAlloc function allocates a string and formats it using strings provided by the string table.  This function uses StringCchPrintf to create the formatted string.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Ndattributils.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "UtilAssembleStringsWithAlloc",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "*Buffer",
+        "description": "Type: LPWSTR* The location where the newly allocated string will be placed.  When the string is no longer needed, it must be released with CoTaskMemFree."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "BufferMax",
+        "description": "Type: UINT The maximum number of characters allowed in the string allocated by Buffer.  If the resulting formatted string is longer than the number of characters specified, it is truncated and null-terminated. Note  This parameter may not be set to zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "InputFormat",
+        "description": "Type: LPCWSTR String resource out of the string table representing a format parameter passed to StringCchPrintf.   It is constructed using MAKEINTRESOURCE.    The resource string format must specify either a format parameter taking a wide string, or a format parameter taking an unsigned long and a wide string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "InputString",
+        "description": "Type: LPCWSTR String resource out of the string table representing an argument passed to StringCchPrintf in place of the wide string in the format parameter.   It is constructed using MAKEINTRESOURCE."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOLEAN",
+        "name": "AdditionalArgument",
+        "description": "Type: BOOLEAN True if AdditionalValue should be passed in as the first formatting argument to StringCchPrintf; otherwise, false (and only the resource string identified by InputString will be passed)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "AdditionalValue",
+        "description": "Type: ULONG The value to pass as the first formatting argument to StringCchPrintf if AdditionalArgument is true."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The UtilLoadStringWithAlloc function allocates and loads a string out of the resource table.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Ndattributils.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "UtilLoadStringWithAlloc",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uID",
+        "description": "Type: UINT Identifier of of the string to be loaded."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "*ppwzBuffer",
+        "description": "Type: LPWSTR* The location where the newly allocated string will be placed.   The string must be freed using CoTaskMemFree when it is no longer needed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cchBufferMax",
+        "description": "Type: UINT The maximum number of characters to load from the resource table.  If the resource string is longer than the number of characters specified, it is truncated and null-terminated. Note  This parameter may not be set to zero."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The UtilStringCopyWithAlloc function allocates and copies a source string.",
+    "library": "",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Ndattributils.h",
+    "return_value": "Type: HRESULT Possible return values include, but are not limited to, the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Network Diagnostics Framework (NDF)",
+    "name": "UtilStringCopyWithAlloc",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "*Buffer",
+        "description": "Type: LPWSTR* The location where the pointer to the allocated memory is stored.  When no longer needed, it must be released with CoTaskMemFree.  This buffer is always null-terminated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "BufferMax",
+        "description": "Type: UINT The maximum number of characters to read from Source."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "Source",
+        "description": "Type: LPCWSTR The string to be copied."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  }
+]
+

@@ -1,0 +1,978 @@
+[
+  {
+    "n_arguments": 4,
+    "description": "Creates a modeless dialog box from a dialog box template resource. The CreateDialog macro uses the CreateDialogParam function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HWND If the function succeeds, the return value is the handle to the dialog box. If the function fails, the return value is NULL. To get extended error information, call GetLastError. This function typically fails for one of the following reasons: ",
+    "remarks": "The CreateDialog function uses the CreateWindowEx function to create the dialog box. CreateDialog then sends a WM_INITDIALOG message (and a WM_SETFONT message if the template specifies the DS_SETFONT or DS_SHELLFONT style) to the dialog box procedure. The function displays the dialog box if the template specifies the WS_VISIBLE style. Finally, CreateDialog returns the window handle to the dialog box. After CreateDialog returns, the application displays the dialog box (if it is not already displayed) by using the ShowWindow function. The application destroys the dialog box by using the DestroyWindow function. To support keyboard navigation and other dialog box functionality, the message loop for the dialog box must call the IsDialogMessage function. For an example, see Creating a Modeless Dialog Box. ",
+    "return_type": "HWND WINAPI",
+    "category": "Dialog Boxes",
+    "name": "CreateDialog",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to the module which contains the dialog box template. If this parameter is NULL, then the current executable is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpTemplate",
+        "description": "Type: LPCTSTR The dialog box template. This parameter is either the pointer to a null-terminated character string that specifies the name of the dialog box template or an integer value that specifies the resource identifier of the dialog box template. If the parameter specifies a resource identifier, its high-order word must be zero and its low-order word must contain the identifier. You can use the MAKEINTRESOURCE macro to create this value."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWndParent",
+        "description": "Type: HWND A handle to the window that owns the dialog box."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "DLGPROC",
+        "name": "lpDialogFunc",
+        "description": "Type: DLGPROC A pointer to the dialog box procedure. For more information about the dialog box procedure, see DialogProc."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates a modeless dialog box from a dialog box template in memory. The CreateDialogIndirect macro uses the CreateDialogIndirectParam function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HWND If the function succeeds, the return value is the window handle to the dialog box. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "The CreateDialogIndirect macro uses the CreateWindowEx function to create the dialog box. CreateDialogIndirect then sends a WM_INITDIALOG message to the dialog box procedure. If the template specifies the DS_SETFONT or DS_SHELLFONT style, the function also sends a WM_SETFONT message to the dialog box procedure. The function displays the dialog box if the template specifies the WS_VISIBLE style. Finally, CreateDialogIndirect returns the window handle to the dialog box. After CreateDialogIndirect returns, you can use the ShowWindow function to display the dialog box (if it is not already visible). To destroy the dialog box, use the DestroyWindow function. To support keyboard navigation and other dialog box functionality, the message loop for the dialog box must call the IsDialogMessage function. In a standard dialog box template, the DLGTEMPLATE structure and each of the DLGITEMTEMPLATE structures must be aligned on DWORD boundaries. The creation data array that follows a DLGITEMTEMPLATE structure must also be aligned on a DWORD boundary. All of the other variable-length arrays in the template must be aligned on WORD boundaries. In an extended dialog box template, the DLGTEMPLATEEX header and each of the DLGITEMTEMPLATEEX control definitions must be aligned on DWORD boundaries. The creation data array, if any, that follows a DLGITEMTEMPLATEEX structure must also be aligned on a DWORD boundary. All of the other variable-length arrays in the template must be aligned on WORD boundaries. All character strings in the dialog box template, such as titles for the dialog box and buttons, must be Unicode strings. Use the MultiByteToWideChar function to generate Unicode strings from ANSI strings. ",
+    "return_type": "HWND WINAPI",
+    "category": "Dialog Boxes",
+    "name": "CreateDialogIndirect",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to the module that creates the dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCDLGTEMPLATE",
+        "name": "lpTemplate",
+        "description": "Type: LPCDLGTEMPLATE A template that CreateDialogIndirect uses to create the dialog box. A dialog box template consists of a header that describes the dialog box, followed by one or more additional blocks of data that describe each of the controls in the dialog box. The template can use either the standard format or the extended format.  \t\t\t\t\t In a standard template, the header is a DLGTEMPLATE structure followed by additional variable-length arrays. The data for each control consists of a DLGITEMTEMPLATE structure followed by additional variable-length arrays. In an extended dialog box template, the header uses the DLGTEMPLATEEX format and the control definitions use the DLGITEMTEMPLATEEX format. After CreateDialogIndirect returns, you can free the template, which is only used to get the dialog box started."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWndParent",
+        "description": "Type: HWND A handle to the window that owns the dialog box."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "DLGPROC",
+        "name": "lpDialogFunc",
+        "description": "Type: DLGPROC A pointer to the dialog box procedure. For more information about the dialog box procedure, see DialogProc."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Creates a modeless dialog box from a dialog box template in memory. Before displaying the dialog box, the function passes an application-defined value to the dialog box procedure as the lParam parameter of the WM_INITDIALOG message. An application can use this value to initialize dialog box controls.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HWND If the function succeeds, the return value is the window handle to the dialog box. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "The CreateDialogIndirectParam function uses the CreateWindowEx function to create the dialog box. CreateDialogIndirectParam then sends a WM_INITDIALOG message to the dialog box procedure. If the template specifies the DS_SETFONT or DS_SHELLFONT style, the function also sends a WM_SETFONT message to the dialog box procedure. The function displays the dialog box if the template specifies the WS_VISIBLE style. Finally, CreateDialogIndirectParam returns the window handle to the dialog box. After CreateDialogIndirectParam returns, you can use the ShowWindow function to display the dialog box (if it is not already visible). To destroy the dialog box, use the DestroyWindow function. To support keyboard navigation and other dialog box functionality, the message loop for the dialog box must call the IsDialogMessage function. In a standard dialog box template, the DLGTEMPLATE structure and each of the DLGITEMTEMPLATE structures must be aligned on DWORD boundaries. The creation data array that follows a DLGITEMTEMPLATE structure must also be aligned on a DWORD boundary. All of the other variable-length arrays in the template must be aligned on WORD boundaries. In an extended dialog box template, the DLGTEMPLATEEX header and each of the DLGITEMTEMPLATEEX control definitions must be aligned on DWORD boundaries. The creation data array, if any, that follows a DLGITEMTEMPLATEEX structure must also be aligned on a DWORD boundary. All of the other variable-length arrays in the template must be aligned on WORD boundaries. All character strings in the dialog box template, such as titles for the dialog box and buttons, must be Unicode strings. ",
+    "return_type": "HWND WINAPI",
+    "category": "Dialog Boxes",
+    "name": "CreateDialogIndirectParam",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to the module which contains the dialog box template. If this parameter is NULL, then the current executable is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCDLGTEMPLATE",
+        "name": "lpTemplate",
+        "description": "Type: LPCDLGTEMPLATE The template CreateDialogIndirectParam uses to create the dialog box. A dialog box template consists of a header that describes the dialog box, followed by one or more additional blocks of data that describe each of the controls in the dialog box. The template can use either the standard format or the extended format.  \t\t\t\t\t In a standard template, the header is a DLGTEMPLATE structure followed by additional variable-length arrays. The data for each control consists of a DLGITEMTEMPLATE structure followed by additional variable-length arrays.  In an extended dialog box template, the header uses the DLGTEMPLATEEX format and the control definitions use the DLGITEMTEMPLATEEX format.  After CreateDialogIndirectParam returns, you can free the template, which is only used to get the dialog box started."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWndParent",
+        "description": "Type: HWND A handle to the window that owns the dialog box."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "DLGPROC",
+        "name": "lpDialogFunc",
+        "description": "Type: DLGPROC A pointer to the dialog box procedure. For more information about the dialog box procedure, see DialogProc."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParamInit",
+        "description": "Type: LPARAM The value to pass to the dialog box in the lParam parameter of the WM_INITDIALOG message."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Creates a modeless dialog box from a dialog box template resource. Before displaying the dialog box, the function passes an application-defined value to the dialog box procedure as the lParam parameter of the WM_INITDIALOG message. An application can use this value to initialize dialog box controls.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HWND If the function succeeds, the return value is the window handle to the dialog box. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "The CreateDialogParam function uses the CreateWindowEx function to create the dialog box. CreateDialogParam then sends a WM_INITDIALOG message (and a WM_SETFONT message if the template specifies the DS_SETFONT or DS_SHELLFONT style) to the dialog box procedure. The function displays the dialog box if the template specifies the WS_VISIBLE style. Finally, CreateDialogParam returns the window handle of the dialog box. After CreateDialogParam returns, the application displays the dialog box (if it is not already displayed) using the ShowWindow function. The application destroys the dialog box by using the DestroyWindow function. To support keyboard navigation and other dialog box functionality, the message loop for the dialog box must call the IsDialogMessage function. ",
+    "return_type": "HWND WINAPI",
+    "category": "Dialog Boxes",
+    "name": "CreateDialogParam",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to the module which contains the dialog box template. If this parameter is NULL, then the current executable is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpTemplateName",
+        "description": "Type: LPCTSTR The dialog box template. This parameter is either the pointer to a null-terminated character string that specifies the name of the dialog box template or an integer value that specifies the resource identifier of the dialog box template. If the parameter specifies a resource identifier, its high-order word must be zero and low-order word must contain the identifier. You can use the MAKEINTRESOURCE macro to create this value."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWndParent",
+        "description": "Type: HWND A handle to the window that owns the dialog box."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "DLGPROC",
+        "name": "lpDialogFunc",
+        "description": "Type: DLGPROC A pointer to the dialog box procedure. For more information about the dialog box procedure, see DialogProc."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "dwInitParam",
+        "description": "Type: LPARAM The value to be passed to the dialog box procedure in the lParam parameter in the WM_INITDIALOG message."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Calls the default dialog box window procedure to provide default processing for any window messages that a dialog box with a private window class does not process.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: LRESULT The return value specifies the result of the message processing and depends on the message sent. ",
+    "remarks": "The DefDlgProc function is the window procedure for the predefined class of dialog box. This procedure provides internal processing for the dialog box by forwarding messages to the dialog box procedure and carrying out default processing for any messages that the dialog box procedure returns as FALSE. Applications that create custom window procedures for their custom dialog boxes often use DefDlgProc instead of the DefWindowProc function to carry out default message processing. Applications create custom dialog box classes by filling a WNDCLASS structure with appropriate information and registering the class with the RegisterClass function. Some applications fill the structure by using the GetClassInfo function, specifying the name of the predefined dialog box. In such cases, the applications modify at least the lpszClassName member before registering. In all cases, the cbWndExtra member of WNDCLASS for a custom dialog box class must be set to at least DLGWINDOWEXTRA. The DefDlgProc function must not be called by a dialog box procedure; doing so results in recursive execution. ",
+    "return_type": "LRESULT WINAPI",
+    "category": "Dialog Boxes",
+    "name": "DefDlgProc",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "Msg",
+        "description": "Type: UINT The message."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM Additional message-specific information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM Additional message-specific information."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates a modal dialog box from a dialog box template resource. DialogBox does not return control until the specified callback function terminates the modal dialog box by calling the EndDialog function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: INT_PTR If the function succeeds, the return value is the nResult parameter in the call to the EndDialog function used to terminate the dialog box. If the function fails because the hWndParent parameter is invalid, the return value is zero. The function returns zero in this case for compatibility with previous versions of Windows. If the function fails for any other reason, the return value is \u00e2\u0080\u00931. To get extended error information, call GetLastError. This function typically fails for one of the following reasons: ",
+    "remarks": "The DialogBox macro uses the CreateWindowEx function to create the dialog box. DialogBox then sends a WM_INITDIALOG message (and a WM_SETFONT message if the template specifies the DS_SETFONT or DS_SHELLFONT style) to the dialog box procedure. The function displays the dialog box (regardless of whether the template specifies the WS_VISIBLE style), disables the owner window, and starts its own message loop to retrieve and dispatch messages for the dialog box. When the dialog box procedure calls the EndDialog function, DialogBox destroys the dialog box, ends the message loop, enables the owner window (if previously enabled), and returns the nResult parameter specified by the dialog box procedure when it called EndDialog. For an example, see Creating a Modal Dialog Box. ",
+    "return_type": "INT_PTR WINAPI",
+    "category": "Dialog Boxes",
+    "name": "DialogBox",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to the module which contains the dialog box template. If this parameter is NULL, then the current executable is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpTemplate",
+        "description": "Type: LPCTSTR The dialog box template. This parameter is either the pointer to a null-terminated character string that specifies the name of the dialog box template or an integer value that specifies the resource identifier of the dialog box template. If the parameter specifies a resource identifier, its high-order word must be zero and its low-order word must contain the identifier. You can use the MAKEINTRESOURCE macro to create this value."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWndParent",
+        "description": "Type: HWND A handle to the window that owns the dialog box."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "DLGPROC",
+        "name": "lpDialogFunc",
+        "description": "Type: DLGPROC A pointer to the dialog box procedure. For more information about the dialog box procedure, see DialogProc."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates a modal dialog box from a dialog box template in memory. DialogBoxIndirect does not return control until the specified callback function terminates the modal dialog box by calling the EndDialog function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: INT_PTR If the function succeeds, the return value is the nResult parameter specified in the call to the EndDialog function that was used to terminate the dialog box. If the function fails because the hWndParent parameter is invalid, the return value is zero. The function returns zero in this case for compatibility with previous versions of Windows. If the function fails for any other reason, the return value is \u00e2\u0080\u00931. To get extended error information, call GetLastError. ",
+    "remarks": "The DialogBoxIndirect macro uses the CreateWindowEx function to create the dialog box. DialogBoxIndirect then sends a WM_INITDIALOG message to the dialog box procedure. If the template specifies the DS_SETFONT or DS_SHELLFONT style, the function also sends a WM_SETFONT message to the dialog box procedure. The function displays the dialog box (regardless of whether the template specifies the WS_VISIBLE style), disables the owner window, and starts its own message loop to retrieve and dispatch messages for the dialog box. When the dialog box procedure calls the EndDialog function, DialogBoxIndirect destroys the dialog box, ends the message loop, enables the owner window (if previously enabled), and returns the nResult parameter specified by the dialog box procedure when it called EndDialog. In a standard dialog box template, the DLGTEMPLATE structure and each of the DLGITEMTEMPLATE structures must be aligned on DWORD boundaries. The creation data array that follows a DLGITEMTEMPLATE structure must also be aligned on a DWORD boundary. All of the other variable-length arrays in the template must be aligned on WORD boundaries. In an extended dialog box template, the DLGTEMPLATEEX header and each of the DLGITEMTEMPLATEEX control definitions must be aligned on DWORD boundaries. The creation data array, if any, that follows a DLGITEMTEMPLATEEX structure must also be aligned on a DWORD boundary. All of the other variable-length arrays in the template must be aligned on WORD boundaries. All character strings in the dialog box template, such as titles for the dialog box and buttons, must be Unicode strings. Use the MultiByteToWideChar function to generate Unicode strings from ANSI strings. For an example, see Creating a Template in Memory. ",
+    "return_type": "INT_PTR WINAPI",
+    "category": "Dialog Boxes",
+    "name": "DialogBoxIndirect",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to the module that creates the dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCDLGTEMPLATE",
+        "name": "lpTemplate",
+        "description": "Type: LPCDLGTEMPLATE The template that DialogBoxIndirect uses to create the dialog box. A dialog box template consists of a header that describes the dialog box, followed by one or more additional blocks of data that describe each of the controls in the dialog box. The template can use either the standard format or the extended format.  \t\t\t\t\t In a standard template for a dialog box, the header is a DLGTEMPLATE structure followed by additional variable-length arrays. The data for each control consists of a DLGITEMTEMPLATE structure followed by additional variable-length arrays.  In an extended template for a dialog box, the header uses the DLGTEMPLATEEX format and the control definitions use the DLGITEMTEMPLATEEX format."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWndParent",
+        "description": "Type: HWND A handle to the window that owns the dialog box."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "DLGPROC",
+        "name": "lpDialogFunc",
+        "description": "Type: DLGPROC A pointer to the dialog box procedure. For more information about the dialog box procedure, see DialogProc."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Creates a modal dialog box from a dialog box template in memory. Before displaying the dialog box, the function passes an application-defined value to the dialog box procedure as the lParam parameter of the WM_INITDIALOG message. An application can use this value to initialize dialog box controls.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: INT_PTR If the function succeeds, the return value is the nResult parameter specified in the call to the EndDialog function that was used to terminate the dialog box. If the function fails because the hWndParent parameter is invalid, the return value is zero. The function returns zero in this case for compatibility with previous versions of Windows. If the function fails for any other reason, the return value is \u00e2\u0080\u00931. To get extended error information, call GetLastError. ",
+    "remarks": "The DialogBoxIndirectParam function uses the CreateWindowEx function to create the dialog box. DialogBoxIndirectParam then sends a WM_INITDIALOG message to the dialog box procedure. If the template specifies the DS_SETFONT or DS_SHELLFONT style, the function also sends a WM_SETFONT message to the dialog box procedure. The function displays the dialog box (regardless of whether the template specifies the WS_VISIBLE style), disables the owner window, and starts its own message loop to retrieve and dispatch messages for the dialog box. When the dialog box procedure calls the EndDialog function, DialogBoxIndirectParam destroys the dialog box, ends the message loop, enables the owner window (if previously enabled), and returns the nResult parameter specified by the dialog box procedure when it called EndDialog. In a standard dialog box template, the DLGTEMPLATE structure and each of the DLGITEMTEMPLATE structures must be aligned on DWORD boundaries. The creation data array that follows a DLGITEMTEMPLATE structure must also be aligned on a DWORD boundary. All of the other variable-length arrays in the template must be aligned on WORD boundaries. In an extended dialog box template, the DLGTEMPLATEEX header and each of the DLGITEMTEMPLATEEX control definitions must be aligned on DWORD boundaries. The creation data array, if any, that follows a DLGITEMTEMPLATEEX structure must also be aligned on a DWORD boundary. All of the other variable-length arrays in the template must be aligned on WORD boundaries. All character strings in the dialog box template, such as titles for the dialog box and buttons, must be Unicode strings. ",
+    "return_type": "INT_PTR WINAPI",
+    "category": "Dialog Boxes",
+    "name": "DialogBoxIndirectParam",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to the module that creates the dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCDLGTEMPLATE",
+        "name": "hDialogTemplate",
+        "description": "Type: LPCDLGTEMPLATE The template that DialogBoxIndirectParam uses to create the dialog box. A dialog box template consists of a header that describes the dialog box, followed by one or more additional blocks of data that describe each of the controls in the dialog box. The template can use either the standard format or the extended format.  \t\t\t\t\t In a standard template for a dialog box, the header is a DLGTEMPLATE structure followed by additional variable-length arrays. The data for each control consists of a DLGITEMTEMPLATE structure followed by additional variable-length arrays.  In an extended template for a dialog box, the header uses the DLGTEMPLATEEX format and the control definitions use the DLGITEMTEMPLATEEX format."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWndParent",
+        "description": "Type: HWND A handle to the window that owns the dialog box."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "DLGPROC",
+        "name": "lpDialogFunc",
+        "description": "Type: DLGPROC A pointer to the dialog box procedure. For more information about the dialog box procedure, see DialogProc."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "dwInitParam",
+        "description": "Type: LPARAM The value to pass to the dialog box in the lParam parameter of the WM_INITDIALOG message."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Creates a modal dialog box from a dialog box template resource. Before displaying the dialog box, the function passes an application-defined value to the dialog box procedure as the lParam parameter of the WM_INITDIALOG message. An application can use this value to initialize dialog box controls.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: INT_PTR If the function succeeds, the return value is the value of the nResult parameter specified in the call to the EndDialog function used to terminate the dialog box. If the function fails because the hWndParent parameter is invalid, the return value is zero. The function returns zero in this case for compatibility with previous versions of Windows. If the function fails for any other reason, the return value is \u00e2\u0080\u00931. To get extended error information, call GetLastError. ",
+    "remarks": "The DialogBoxParam function uses the CreateWindowEx function to create the dialog box. DialogBoxParam then sends a WM_INITDIALOG message (and a WM_SETFONT message if the template specifies the DS_SETFONT or DS_SHELLFONT style) to the dialog box procedure. The function displays the dialog box (regardless of whether the template specifies the WS_VISIBLE style), disables the owner window, and starts its own message loop to retrieve and dispatch messages for the dialog box. When the dialog box procedure calls the EndDialog function, DialogBoxParam destroys the dialog box, ends the message loop, enables the owner window (if previously enabled), and returns the nResult parameter specified by the dialog box procedure when it called EndDialog. ",
+    "return_type": "INT_PTR WINAPI",
+    "category": "Dialog Boxes",
+    "name": "DialogBoxParam",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to the module which contains the dialog box template. If this parameter is NULL, then the current executable is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpTemplateName",
+        "description": "Type: LPCTSTR The dialog box template. This parameter is either the pointer to a null-terminated character string that specifies the name of the dialog box template or an integer value that specifies the resource identifier of the dialog box template. If the parameter specifies a resource identifier, its high-order word must be zero and its low-order word must contain the identifier. You can use the MAKEINTRESOURCE macro to create this value."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWndParent",
+        "description": "Type: HWND A handle to the window that owns the dialog box."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "DLGPROC",
+        "name": "lpDialogFunc",
+        "description": "Type: DLGPROC A pointer to the dialog box procedure. For more information about the dialog box procedure, see DialogProc."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "dwInitParam",
+        "description": "Type: LPARAM The value to pass to the dialog box in the lParam parameter of the WM_INITDIALOG message."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Application-defined callback function used with the CreateDialog and DialogBox families of functions. It processes messages sent to a modal or modeless dialog box. The DLGPROC type defines a pointer to this callback function. DialogProc is a placeholder for the application-defined function name.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: INT_PTR Typically, the dialog box procedure should return TRUE if it processed the message, and FALSE if it did not. If the dialog box procedure returns FALSE, the dialog manager performs the default dialog operation in response to the message. If the dialog box procedure processes a message that requires a specific return value, the dialog box procedure should set the desired return value by calling SetWindowLong(hwndDlg, DWL_MSGRESULT, lResult) immediately before returning TRUE. Note that you must call SetWindowLong immediately before returning TRUE; doing so earlier may result in the DWL_MSGRESULT value being overwritten by a nested dialog box message. The following messages are exceptions to the general rules stated above. Consult the documentation for the specific message for details on the semantics of the return value. ",
+    "remarks": "You should use the dialog box procedure only if you use the dialog box class for the dialog box. This is the default class and is used when no explicit class is specified in the dialog box template. Although the dialog box procedure is similar to a window procedure, it must not call the DefWindowProc function to process unwanted messages. Unwanted messages are processed internally by the dialog box window procedure. ",
+    "return_type": "INT_PTR CALLBACK",
+    "category": "Dialog Boxes",
+    "name": "DialogProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndDlg",
+        "description": "Type: HWND A handle to the dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uMsg",
+        "description": "Type: UINT The message."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM Additional message-specific information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM Additional message-specific information."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Destroys a modal dialog box, causing the system to end any processing for the dialog box.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "Dialog boxes created by the DialogBox, DialogBoxParam, DialogBoxIndirect, and DialogBoxIndirectParam functions must be destroyed using the EndDialog function. An application calls EndDialog from within the dialog box procedure; the function must not be used for any other purpose. A dialog box procedure can call EndDialog at any time, even during the processing of the WM_INITDIALOG message. If your application calls the function while WM_INITDIALOG is being processed, the dialog box is destroyed before it is shown and before the input focus is set. EndDialog does not destroy the dialog box immediately. Instead, it sets a flag and allows the dialog box procedure to return control to the system. The system checks the flag before attempting to retrieve the next message from the application queue. If the flag is set, the system ends the message loop, destroys the dialog box, and uses the value in nResult as the return value from the function that created the dialog box. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Dialog Boxes",
+    "name": "EndDialog",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box to be destroyed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "INT_PTR",
+        "name": "nResult",
+        "description": "Type: INT_PTR The value to be returned to the application from the function that created the dialog box."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the system's dialog base units, which are the average width and height of characters in the system font. For dialog boxes that use the system font, you can use these values to convert between dialog template units, as specified in dialog box templates, and pixels. For dialog boxes that do not use the system font, the conversion from dialog template units to pixels depends on the font used by the dialog box.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: LONG The function returns the dialog base units. The low-order word of the return value contains the horizontal dialog box base unit, and the high-order word contains the vertical dialog box base unit. ",
+    "remarks": "The horizontal base unit returned by GetDialogBaseUnits is equal to the average width, in pixels, of the characters in the system font; the vertical base unit is equal to the height, in pixels, of the font. The system font is used only if the dialog box template fails to specify a font. Most dialog box templates specify a font; as a result, this function is not useful for most dialog boxes. For a dialog box that does not use the system font, the base units are the average width and height, in pixels, of the characters in the dialog's font. You can use the GetTextMetrics and GetTextExtentPoint32 functions to calculate these values for a selected font. However, by using the MapDialogRect function, you can avoid errors that might result if your calculations differ from those performed by the system. Each horizontal base unit is equal to 4 horizontal dialog template units; each vertical base unit is equal to 8 vertical dialog template units. Therefore, to convert dialog template units to pixels, use the following formulas: Similarly, to convert from pixels to dialog template units, use the following formulas: For an example, see \"Creating a Combo Box Toolbar\" in Using Combo Boxes. ",
+    "return_type": "LONG WINAPI",
+    "category": "Dialog Boxes",
+    "name": "GetDialogBaseUnits",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the identifier of the specified control.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the function succeeds, the return value is the identifier of the control. If the function fails, the return value is zero. An invalid value for the hwndCtl parameter, for example, will cause the function to fail. To get extended error information, call GetLastError. ",
+    "remarks": "GetDlgCtrlID accepts child window handles as well as handles of controls in dialog boxes. An application sets the identifier for a child window when it creates the window by assigning the identifier value to the hmenu parameter when calling the CreateWindow or CreateWindowEx function. Although GetDlgCtrlID may return a value if hwndCtl is a handle to a top-level window, top-level windows cannot have identifiers and such a return value is never valid. For an example, see Initializing a Dialog Box. ",
+    "return_type": "int WINAPI",
+    "category": "Dialog Boxes",
+    "name": "GetDlgCtrlID",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndCtl",
+        "description": "Type: HWND A handle to the control."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves a handle to a control in the specified dialog box.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HWND If the function succeeds, the return value is the window handle of the specified control. If the function fails, the return value is NULL, indicating an invalid dialog box handle or a nonexistent control. To get extended error information, call GetLastError. ",
+    "remarks": "You can use the GetDlgItem function with any parent-child window pair, not just with dialog boxes. As long as the hDlg parameter specifies a parent window and the child window has a unique identifier (as specified by the hMenu parameter in the CreateWindow or CreateWindowEx function that created the child window), GetDlgItem returns a valid handle to the child window. For an example, see Initializing a Dialog Box. ",
+    "return_type": "HWND WINAPI",
+    "category": "Dialog Boxes",
+    "name": "GetDlgItem",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box that contains the control."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIDDlgItem",
+        "description": "Type: int The identifier of the control to be retrieved."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Translates the text of a specified control in a dialog box into an integer value.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: UINT If the function succeeds, the variable pointed to by lpTranslated is set to TRUE, and the return value is the translated value of the control text. If the function fails, the variable pointed to by lpTranslated is set to FALSE, and the return value is zero. Note that, because zero is a possible translated value, a return value of zero does not by itself indicate failure. If lpTranslated is NULL, the function returns no information about success or failure. Note that, if the bSigned parameter is TRUE and there is a minus sign (\u00e2\u0080\u0093) at the beginning of the text, GetDlgItemInt translates the text into a signed integer value. Otherwise, the function creates an unsigned integer value. To obtain the proper value in this case, cast the return value to an int type. To get extended error information, call GetLastError. ",
+    "remarks": "The GetDlgItemInt function retrieves the text of the specified control by sending the control a WM_GETTEXT message. The function translates the retrieved text by stripping any extra spaces at the beginning of the text and then converting the decimal digits. The function stops translating when it reaches the end of the text or encounters a nonnumeric character. The GetDlgItemInt function returns zero if the translated value is greater than INT_MAX (for signed numbers) or UINT_MAX (for unsigned numbers). For an example, see Creating a Modeless Dialog Box. ",
+    "return_type": "UINT WINAPI",
+    "category": "Dialog Boxes",
+    "name": "GetDlgItemInt",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box that contains the control of interest."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIDDlgItem",
+        "description": "Type: int The identifier of the control whose text is to be translated."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "BOOL",
+        "name": "*lpTranslated",
+        "description": "Type: BOOL* Indicates success or failure (TRUE indicates success, FALSE indicates failure).  If this parameter is NULL, the function returns no information about success or failure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bSigned",
+        "description": "Type: BOOL Indicates whether the function should examine the text for a minus sign at the beginning and return a signed integer value if it finds one (TRUE specifies this should be done, FALSE that it should not)."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the title or text associated with a control in a dialog box.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: UINT If the function succeeds, the return value specifies the number of characters copied to the buffer, not including the terminating null character. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If the string is as long or longer than the buffer, the buffer will contain the truncated string with a terminating null character. The GetDlgItemText function sends a WM_GETTEXT message to the control. For an example, see Creating a Modal Dialog Box. ",
+    "return_type": "UINT WINAPI",
+    "category": "Dialog Boxes",
+    "name": "GetDlgItemText",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box that contains the control."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIDDlgItem",
+        "description": "Type: int The identifier of the control whose title or text is to be retrieved."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpString",
+        "description": "Type: LPTSTR The buffer to receive the title or text."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nMaxCount",
+        "description": "Type: int The maximum length, in characters, of the string to be copied to the buffer pointed to by lpString. If the length of the string, including the null character, exceeds the limit, the string is truncated."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves a handle to the first control in a group of controls that precedes (or follows) the specified control in a dialog box.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HWND If the function succeeds, the return value is a handle to the previous (or next) control in the group of controls. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "The GetNextDlgGroupItem function searches controls in the order (or reverse order) they were created in the dialog box template. The first control in the group must have the WS_GROUP style; all other controls in the group must have been consecutively created and must not have the WS_GROUP style. When searching for the previous control, the function returns the first control it locates that is visible and not disabled. If the control specified by hCtl has the WS_GROUP style, the function temporarily reverses the search to locate the first control having the WS_GROUP style, then resumes the search in the original direction, returning the first control it locates that is visible and not disabled, or returning hCtl if no such control is found. When searching for the next control, the function returns the first control it locates that is visible, not disabled, and does not have the WS_GROUP style. If it encounters a control having the WS_GROUP style, the function reverses the search, locates the first control having the WS_GROUP style, and returns this control if it is visible and not disabled. Otherwise, the function resumes the search in the original direction and returns the first control it locates that is visible and not disabled, or returns hCtl if no such control is found. If the search for the next control in the group encounters a window with the WS_EX_CONTROLPARENT style, the system recursively searches the window's children. ",
+    "return_type": "HWND WINAPI",
+    "category": "Dialog Boxes",
+    "name": "GetNextDlgGroupItem",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box to be searched."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hCtl",
+        "description": "Type: HWND A handle to the control to be used as the starting point for the search. If this parameter is NULL, the function uses the last (or first) control in the dialog box as the starting point for the search."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bPrevious",
+        "description": "Type: BOOL Indicates how the function is to search the group of controls in the dialog box. If this parameter is TRUE, the function searches for the previous control in the group. If it is FALSE, the function searches for the next control in the group."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves a handle to the first  \t\tcontrol that has the WS_TABSTOP  \t\tstyle that precedes (or follows) the specified control.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HWND If the function succeeds, the return value is the window handle  \t\t\t\tof the previous (or next) control that has the  \t\t\t\tWS_TABSTOP style set. If the function fails, the return value is NULL. To get extended error  \t\t\t\tinformation, call GetLastError. ",
+    "remarks": "The GetNextDlgTabItem function searches controls in the order (or reverse order) they were created in the dialog box template. The function returns the first control it locates that is visible, not disabled, and has the WS_TABSTOP style. If no such control exists, the function returns hCtl. If the search for the next control with the WS_TABSTOP style encounters a window with the WS_EX_CONTROLPARENT style, the system recursively searches the window's children. ",
+    "return_type": "HWND WINAPI",
+    "category": "Dialog Boxes",
+    "name": "GetNextDlgTabItem",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box to be searched."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hCtl",
+        "description": "Type: HWND A handle to the control to be used as the starting point for the search.  \t\t\t\tIf this parameter is NULL, the function fails."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bPrevious",
+        "description": "Type: BOOL Indicates how the function is to search the dialog box. If this parameter  \t\t\t\tis TRUE, the function searches for the previous control  \t\t\t\tin the dialog box. If this parameter is FALSE, the function searches  \t\t\t\tfor the next control in the dialog box."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Determines whether a message is intended for the specified dialog box and, if it is, processes the message.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the message has been processed, the return value is nonzero. If the message has not been processed, the return value is zero. ",
+    "remarks": "Although the IsDialogMessage function is intended for modeless dialog boxes, you can use it with any window that contains controls, enabling the windows to provide the same keyboard selection as is used in a dialog box. When IsDialogMessage processes a message, it checks for keyboard messages and converts them into selections for the corresponding dialog box. For example, the TAB key, when pressed, selects the next control or group of controls, and the DOWN ARROW key, when pressed, selects the next control in a group. Because the IsDialogMessage function performs all necessary translating and dispatching of messages, a message processed by IsDialogMessage must not be passed to the TranslateMessage or DispatchMessage function. IsDialogMessage sends WM_GETDLGCODE messages to the dialog box procedure to determine which keys should be processed. IsDialogMessage can send DM_GETDEFID and DM_SETDEFID messages to the window. These messages are defined in the Winuser.h header file as WM_USER and WM_USER + 1, so conflicts are possible with application-defined messages having the same values. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Dialog Boxes",
+    "name": "IsDialogMessage",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPMSG",
+        "name": "lpMsg",
+        "description": "Type: LPMSG A pointer to an MSG structure that contains the message to be checked."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Converts the specified dialog box units to screen units (pixels). The function replaces the coordinates in the specified RECT structure with the converted coordinates, which allows the structure to be used to create a dialog box or position a control within a dialog box.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The MapDialogRect function assumes that the initial coordinates in the RECT structure represent dialog box units. To convert these coordinates from dialog box units to pixels, the function retrieves the current horizontal and vertical base units for the dialog box, then applies the following formulas: If the dialog box template has the DS_SETFONT or DS_SHELLFONT style, the base units are the average width and height, in pixels, of the characters in the font specified by the template. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Dialog Boxes",
+    "name": "MapDialogRect",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to a dialog box. This function accepts only handles returned by one of the dialog box creation functions; handles for other windows are not valid."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPRECT",
+        "name": "lpRect",
+        "description": "Type: LPRECT A pointer to a RECT structure that contains the dialog box coordinates to be converted."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Displays a modal dialog box that contains a system icon, a set of buttons, and a brief application-specific message, such as status or error information. The message box returns an integer value that indicates which button the user clicked.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If a message box has a Cancel button, the function returns the IDCANCEL value if either the ESC key is pressed or the Cancel button is selected. If the message box has no Cancel button, pressing ESC has no effect. If the function fails, the return value is zero. To get extended error information, call GetLastError. If the function succeeds, the return value is one of the following menu-item values.  ",
+    "remarks": "The following system icons can be used in a message box by setting the uType parameter to the corresponding flag value.  Adding two right-to-left marks (RLMs), represented by Unicode formatting character U+200F, in the beginning of a MessageBox display string is interpreted by the MessageBox rendering engine so as to cause the reading order of the MessageBox to be rendered as right-to-left (RTL). When you use a system-modal message box to indicate that the system is low on memory, the strings pointed to by the lpText and lpCaption parameters should not be taken from a resource file because an attempt to load the resource may fail. If you create a message box while a dialog box is present, use a handle to the dialog box as the hWnd parameter. The hWnd parameter should not identify a child window, such as a control in a dialog box. In the following example, the application displays a message box that prompts the user for an action after an error condition has occurred. The message box displays the message that describes the error condition and how to resolve it. The MB_CANCELTRYCONTINUE style directs MessageBox to provide three buttons with which the user can choose how to proceed. The MB_DEFBUTTON2 style sets the default focus on the second button of the message box, in this case, the Try Again button. The following image shows the output from the preceding code example:  For another message box example, see Displaying a Message Box. ",
+    "return_type": "int WINAPI",
+    "category": "Dialog Boxes",
+    "name": "MessageBox",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the owner window of the message box to be created. If this parameter is NULL, the message box has no owner window."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpText",
+        "description": "Type: LPCTSTR The message to be displayed. If the string consists of more than one line, you can separate the lines using a carriage return and/or linefeed character between each line."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpCaption",
+        "description": "Type: LPCTSTR The dialog box title. If this parameter is NULL, the default title is Error."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uType",
+        "description": "Type: UINT The contents and behavior of the dialog box. This parameter can be a combination of flags from the following groups of flags.  To indicate the buttons displayed in the message box, specify one of the following values.  ValueMeaning  MB_ABORTRETRYIGNORE 0x00000002L   The message box contains three push buttons: Abort, Retry, and Ignore.   MB_CANCELTRYCONTINUE 0x00000006L    The message box contains three push buttons: Cancel, Try Again, Continue. Use this message box type instead of MB_ABORTRETRYIGNORE.   MB_HELP 0x00004000L    Adds a Help button to the message box. When the user clicks the Help button or presses F1, the system sends a WM_HELP message to the owner.   MB_OK 0x00000000L   The message box contains one push button: OK. This is the default.   MB_OKCANCEL 0x00000001L   The message box contains two push buttons: OK and Cancel.   MB_RETRYCANCEL 0x00000005L   The message box contains two push buttons: Retry and Cancel.   MB_YESNO 0x00000004L   The message box contains two push buttons: Yes and No.   MB_YESNOCANCEL 0x00000003L   The message box contains three push buttons: Yes, No, and Cancel.      To display an icon in the message box, specify one of the following values.  ValueMeaning  MB_ICONEXCLAMATION 0x00000030L   An exclamation-point icon appears in the message box.   MB_ICONWARNING 0x00000030L   An exclamation-point icon appears in the message box.   MB_ICONINFORMATION 0x00000040L   An icon consisting of a lowercase letter i in a circle appears in the message box.   MB_ICONASTERISK 0x00000040L   An icon consisting of a lowercase letter i in a circle appears in the message box.   MB_ICONQUESTION 0x00000020L   A question-mark icon appears in the message box. The question-mark message icon is no longer recommended because it does not clearly represent a specific type of message and because the phrasing of a message as a question could apply to any message type. In addition, users can confuse the message symbol question mark with Help information. Therefore, do not use this question mark message symbol in your message boxes. The system continues to support its inclusion only for backward compatibility.   MB_ICONSTOP 0x00000010L   A stop-sign icon appears in the message box.   MB_ICONERROR 0x00000010L   A stop-sign icon appears in the message box.   MB_ICONHAND 0x00000010L   A stop-sign icon appears in the message box.      To indicate the default button, specify one of the following values.  ValueMeaning  MB_DEFBUTTON1 0x00000000L   The first button is the default button. MB_DEFBUTTON1 is the default unless MB_DEFBUTTON2, MB_DEFBUTTON3, or MB_DEFBUTTON4 is specified.   MB_DEFBUTTON2 0x00000100L   The second button is the default button.   MB_DEFBUTTON3 0x00000200L   The third button is the default button.   MB_DEFBUTTON4 0x00000300L   The fourth button is the default button.      To indicate the modality of the dialog box, specify one of the following values.  ValueMeaning  MB_APPLMODAL 0x00000000L   The user must respond to the message box before continuing work in the window identified by the hWnd parameter. However, the user can move to the windows of other threads and work in those windows. \t\t\t\t\t\t\t                              Depending on the hierarchy of windows in the application, the user may be able to move to other windows within the thread. All child windows of the parent of the message box are automatically disabled, but pop-up windows are not. MB_APPLMODAL is the default if neither MB_SYSTEMMODAL nor MB_TASKMODAL is specified.   MB_SYSTEMMODAL 0x00001000L   Same as MB_APPLMODAL except that the message box has the WS_EX_TOPMOST style. Use system-modal message boxes to notify the user of serious, potentially damaging errors that require immediate attention (for example, running out of memory). This flag has no effect on the user's ability to interact with windows other than those associated with hWnd.   MB_TASKMODAL 0x00002000L   Same as MB_APPLMODAL except that all the top-level windows belonging to the current thread are disabled if the hWnd parameter is NULL. Use this flag when the calling application or library does not have a window handle available but still needs to prevent input to other windows in the calling thread without suspending other threads.      To specify other options, use one or more of the following values.  ValueMeaning  MB_DEFAULT_DESKTOP_ONLY 0x00020000L    Same as desktop of the interactive window station. For more information, see Window Stations. \t\t\t\t\t                     \t\t \t\t\t\t\t                     \t\t  If the current input desktop is not the default desktop, MessageBox does not return until the user switches to the default desktop.   MB_RIGHT 0x00080000L   The text is right-justified.   MB_RTLREADING 0x00100000L   Displays message and caption text using right-to-left reading order on Hebrew and Arabic systems.   MB_SETFOREGROUND 0x00010000L   The message box becomes the foreground window. Internally, the system calls the SetForegroundWindow function for the message box.   MB_TOPMOST 0x00040000L   The message box is created with the WS_EX_TOPMOST window style.   MB_SERVICE_NOTIFICATION 0x00200000L   The caller is a service notifying the user of an event. The function displays a message box on the current active desktop, even if there is no user logged on to the computer. Terminal Services: If the calling thread has an impersonation token, the function directs the message box to the session specified in the impersonation token. If this flag is set, the hWnd parameter must be NULL. This is so that the message box can appear on a desktop other than the desktop corresponding to the hWnd. For information on security considerations in regard to using this flag, see Interactive Services. In particular, be aware that this flag can produce interactive content on a locked desktop and should therefore be used for only a very limited set of scenarios, such as resource exhaustion."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Creates, displays, and operates a message box. The message box contains an application-defined message and title, plus any combination of predefined icons and push buttons. The buttons are in the language of the system user interface.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If a message box has a Cancel button, the function returns the IDCANCEL value if either the ESC key is pressed or the Cancel button is selected. If the message box has no Cancel button, pressing ESC has no effect. If the function fails, the return value is zero. To get extended error information, call GetLastError. If the function succeeds, the return value is one of the following menu-item values.  ",
+    "remarks": "When you use a system-modal message box to indicate that the system is low on memory, the strings pointed to by the lpText and lpCaption parameters should not be taken from a resource file because an attempt to load the resource may fail. If you create a message box while a dialog box is present, use a handle to the dialog box as the hWnd parameter. The hWnd parameter should not identify a child window, such as a control in a dialog box. ",
+    "return_type": "int WINAPI",
+    "category": "Dialog Boxes",
+    "name": "MessageBoxEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the owner window of the message box to be created. If this parameter is NULL, the message box has no owner window."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpText",
+        "description": "Type: LPCTSTR The message to be displayed."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpCaption",
+        "description": "Type: LPCTSTR The dialog box title. If this parameter is NULL, the default title Error is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uType",
+        "description": "Type: UINT The contents and behavior of the dialog box. For information on the supported flags, see MessageBox."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "wLanguageId",
+        "description": "Type: WORD The language for the text displayed in the message box button(s). Specifying a value of zero (0) indicates to display the button text in the default system language. If this parameter is MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), the current language associated with the calling thread is used.             To specify a language other than the current language, use the MAKELANGID macro to create this parameter. For more information, see MAKELANGID."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Creates, displays, and operates a message box. The message box contains application-defined message text and title, any icon, and any combination of predefined push buttons.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the function succeeds, the return value is one of the following menu-item values. If a message box has a Cancel button, the function returns the IDCANCEL value if either the ESC key is pressed or the Cancel button is selected. If the message box has no Cancel button, pressing ESC has no effect. If there is not enough memory to create the message box, the return value is zero.  ",
+    "remarks": "When you use a system-modal message box to indicate that the system is low on memory, the strings pointed to by the lpszText and lpszCaption members of the MSGBOXPARAMS structure should not be taken from a resource file, because an attempt to load the resource may fail. If you create a message box while a dialog box is present, use a handle to the dialog box as the hWnd parameter. The hWnd parameter should not identify a child window, such as a control in a dialog box. ",
+    "return_type": "int WINAPI",
+    "category": "Dialog Boxes",
+    "name": "MessageBoxIndirect",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPMSGBOXPARAMS",
+        "name": "lpMsgBoxParams",
+        "description": "Type: const LPMSGBOXPARAMS A pointer to a MSGBOXPARAMS structure that contains information used to display the message box."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Sends a message to the specified control in a dialog box.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: LRESULT The return value specifies the result of the message processing and depends on the message sent. ",
+    "remarks": "The SendDlgItemMessage function does not return until the message has been processed. Using SendDlgItemMessage is identical to retrieving a handle to the specified control and calling the SendMessage function. For an example, see Creating a Modeless Dialog Box. ",
+    "return_type": "LRESULT WINAPI",
+    "category": "Dialog Boxes",
+    "name": "SendDlgItemMessage",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box that contains the control."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIDDlgItem",
+        "description": "Type: int The identifier of the control that receives the message."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "Msg",
+        "description": "Type: UINT The message to be sent. For lists of the system-provided messages, see System-Defined Messages."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM Additional message-specific information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM Additional message-specific information."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Sets the text of a control in a dialog box to the string representation of a specified integer value.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "To set the new text, this function sends a WM_SETTEXT message to the specified control. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Dialog Boxes",
+    "name": "SetDlgItemInt",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box that contains the control."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIDDlgItem",
+        "description": "Type: int The control to be changed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uValue",
+        "description": "Type: UINT The integer value used to generate the item text."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bSigned",
+        "description": "Type: BOOL Indicates whether the uValue parameter is signed or unsigned. If this parameter is TRUE, uValue is signed. If this parameter is TRUE and uValue is less than zero, a minus sign is placed before the first digit in the string. If this parameter is FALSE, uValue is unsigned."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the title or text of a control in a dialog box.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The SetDlgItemText function sends a WM_SETTEXT message to the specified control. For an example, see Using List Boxes. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Dialog Boxes",
+    "name": "SetDlgItemText",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box that contains the control."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIDDlgItem",
+        "description": "Type: int The control with a title or text to be set."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpString",
+        "description": "Type: LPCTSTR The text to be copied to the control."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

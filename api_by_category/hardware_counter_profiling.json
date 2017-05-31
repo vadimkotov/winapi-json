@@ -1,0 +1,131 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Disables thread profiling.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Returns ERROR_SUCCESS if the call is successful; otherwise, a system error code (see Winerror.h). ",
+    "remarks": "You must call this function from the same thread that enabled profiling for the specified handle. You must call this function before exiting the thread; otherwise, you will leak resources (the resources are not reclaimed until the process exits). ",
+    "return_type": "DWORD APIENTRY",
+    "category": "Hardware Counter Profiling (HCP)",
+    "name": "DisableThreadProfiling",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "PerformanceDataHandle",
+        "description": "The handle that the EnableThreadProfiling function returned."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Enables thread profiling on the specified thread.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Returns ERROR_SUCCESS if the call is successful; otherwise, a system error code (see Winerror.h). ",
+    "remarks": "You must call the DisableThreadProfiling function before exiting the thread. To profile hardware performance counters, you need a driver to configure the counters. The performance counters are configured globally for the system, so every thread has access to the same hardware counter data. The counters must be configured before you enable profiling. For information on configuring hardware performance counters, see the KeSetHardwareCounterConfiguration function in the Windows Driver Kit (WDK). ",
+    "return_type": "DWORD APIENTRY",
+    "category": "Hardware Counter Profiling (HCP)",
+    "name": "EnableThreadProfiling",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "ThreadHandle",
+        "description": "The handle to the thread on which you want to enable profiling. This must be the current thread."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Flags",
+        "description": "To receive thread profiling data such as context switch count, set this parameter to THREAD_PROFILING_FLAG_DISPATCH; otherwise, set to 0."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD64",
+        "name": "HardwareCounters",
+        "description": "To receive hardware performance counter data, set this parameter to a bitmask that identifies the hardware counters to collect. You can specify up to 16 performance counters. Each bit relates directly to the zero-based hardware counter index for the hardware performance counters that you configured. Set to zero if you are not collecting hardware counter data. If you set a bit for a hardware counter that has not been configured, the counter value that is read for that counter is zero."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HANDLE",
+        "name": "PerformanceDataHandle",
+        "description": "An opaque handle that you use when calling the ReadThreadProfilingData and DisableThreadProfiling functions."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Determines whether thread profiling is enabled for the specified thread.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Returns ERROR_SUCCESS if the call is successful; otherwise, a system error code (see Winerror.h). ",
+    "remarks": "",
+    "return_type": "DWORD APIENTRY",
+    "category": "Hardware Counter Profiling (HCP)",
+    "name": "QueryThreadProfiling",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "ThreadHandle",
+        "description": "The handle to the thread of interest."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBOOLEAN",
+        "name": "Enabled",
+        "description": "Is TRUE if thread profiling is enabled for the specified thread; otherwise, FALSE."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Reads the specified profiling data associated with the thread.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Returns ERROR_SUCCESS if the call is successful; otherwise, a system error code (see Winerror.h). ",
+    "remarks": "",
+    "return_type": "DWORD APIENTRY",
+    "category": "Hardware Counter Profiling (HCP)",
+    "name": "ReadThreadProfilingData",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "PerformanceDataHandle",
+        "description": "The handle that the EnableThreadProfiling function returned."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "Flags",
+        "description": "One or more of the following flags that specify the counter data to read. The flags must have been set when you called the EnableThreadProfiling function.  ValueMeaning  READ_THREAD_PROFILING_FLAG_DISPATCHING 0x00000001   Get the thread profiling data.   READ_THREAD_PROFILING_FLAG_HARDWARE_COUNTERS 0x00000002   Get the hardware performance counters data."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PPERFORMANCE_DATA",
+        "name": "PerformanceData",
+        "description": "A PERFORMANCE_DATA structure that contains the thread profiling and hardware counter data."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  }
+]
+

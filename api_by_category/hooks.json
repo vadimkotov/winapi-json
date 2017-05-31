@@ -1,0 +1,662 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "Passes the specified message and hook code to the hook procedures associated with the WH_SYSMSGFILTER and WH_MSGFILTER hooks. A WH_SYSMSGFILTER or WH_MSGFILTER hook procedure is an application-defined callback function that examines and, optionally, modifies messages for a dialog box, message box, menu, or scroll bar.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: BOOL If the application should process the message further, the return value is zero. If the application should not process the message further, the return value is nonzero. ",
+    "remarks": "The system calls CallMsgFilter to enable applications to examine and control the flow of messages during internal processing of dialog boxes, message boxes, menus, and scroll bars, or when the user activates a different window by pressing the ALT+TAB key combination. Install this hook procedure by using the SetWindowsHookEx function. For an example, see WH_MSGFILTER and WH_SYSMSGFILTER Hooks. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Hooks",
+    "name": "CallMsgFilter",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPMSG",
+        "name": "lpMsg",
+        "description": "Type: LPMSG A pointer to an MSG structure that contains the message to be passed to the hook procedures."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCode",
+        "description": "Type: int An application-defined code used by the hook procedure to determine how to process the message. The code must not have the same value as system-defined hook codes (MSGF_ and HC_) associated with the WH_SYSMSGFILTER and WH_MSGFILTER hooks."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Passes the hook information to the next hook procedure in the current hook chain. A hook procedure can call this function either before or after processing the hook information.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT This value is returned by the next hook procedure in the chain. The current hook procedure must also return this value. The meaning of the return value depends on the hook type. For more information, see the descriptions of the individual hook procedures. ",
+    "remarks": "Hook procedures are installed in chains for particular hook types. CallNextHookEx calls the next hook in the chain. Calling CallNextHookEx is optional, but it is highly recommended; otherwise, other applications that have installed hooks will not receive hook notifications and may behave incorrectly as a result. You should call CallNextHookEx unless you absolutely need to prevent the notification from being seen by other applications. ",
+    "return_type": "LRESULT WINAPI",
+    "category": "Hooks",
+    "name": "CallNextHookEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HHOOK",
+        "name": "hhk",
+        "description": "Type: HHOOK                      This parameter is ignored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCode",
+        "description": "Type: int The hook code passed to the current hook procedure. The next hook procedure uses this code to determine how to process the hook information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM The wParam value passed to the current hook procedure. The meaning of this parameter depends on the type of hook associated with the current hook chain."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM The lParam value passed to the current hook procedure. The meaning of this parameter depends on the type of hook associated with the current hook chain."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function.   \t\t\tThe system calls this function before calling the window procedure to process a message sent to the thread.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. If nCode is greater than or equal to zero, it is highly recommended that you call CallNextHookEx and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC hooks will not receive hook notifications and may behave incorrectly as a result. If the hook procedure does not call CallNextHookEx, the return value should be zero. ",
+    "remarks": "The CallWndProc hook procedure can examine the message, but it cannot modify it. After the hook procedure returns control to the system, the message is passed to the window procedure. An application installs the hook procedure by specifying the WH_CALLWNDPROC hook type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "CallWndProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCode",
+        "description": "Type: int Specifies whether the hook procedure must process the message. If nCode is HC_ACTION, the hook procedure must process the message. If \tnCode is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and must return the value returned by CallNextHookEx."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM Specifies whether the message was sent by the current thread. If the message was sent by the current thread, it is nonzero; otherwise, it is zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM A pointer to a CWPSTRUCT structure that contains details about the message."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The system calls this function after the SendMessage function is called. The hook procedure can examine the message; it cannot modify it.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. If nCode is greater than or equal to zero, it is highly recommended that you call CallNextHookEx and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROCRET hooks will not receive hook notifications and may behave incorrectly as a result. If the hook procedure does not call CallNextHookEx, the return value should be zero. ",
+    "remarks": "An application installs the hook procedure by specifying the WH_CALLWNDPROCRET hook type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "CallWndRetProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCode",
+        "description": "Type: int Specifies whether the hook procedure must process the message. If nCode is HC_ACTION, the hook procedure must process the message. If \tnCode is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM Specifies whether the message is sent by the current process. If the message is sent by the current process, it is nonzero; otherwise, it is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM A pointer to a CWPRETSTRUCT structure that contains details about the message."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The system calls this function before activating, creating, destroying, minimizing, maximizing, moving, or sizing a window; before completing a system command; before removing a mouse or keyboard event from the system message queue; before setting the keyboard focus; or before synchronizing with the system message queue. A computer-based training (CBT) application uses this hook procedure to receive useful notifications from the system.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT The value returned by the hook procedure determines whether the system allows or prevents one of these operations. For operations corresponding to the following CBT hook codes, the return value must be 0 to allow the operation, or 1 to prevent it. For operations corresponding to the following CBT hook codes, the return value is ignored. ",
+    "remarks": "The hook procedure should not install a WH_JOURNALPLAYBACK hook procedure except in the situations described in the preceding list of hook codes. An application installs the hook procedure by specifying the WH_CBT hook type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. The following table describes the wParam and lParam parameters for each HCBT_ hook code.  For information, see WinEvents. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "CBTProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCode",
+        "description": "Type: int The code that the hook procedure uses to determine how to process the message. If nCode is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx. This parameter can be one of the following values.   ValueMeaning  HCBT_ACTIVATE 5   The system is about to activate a window.   HCBT_CLICKSKIPPED 6   The system has removed a mouse message from the system message queue. Upon receiving this hook code, a CBT application must install a WH_JOURNALPLAYBACK hook procedure in response to the mouse message.   HCBT_CREATEWND 3   A window is about to be created. The system calls the hook procedure before sending the WM_CREATE or WM_NCCREATE message to the window. If the hook procedure returns a nonzero value, the system destroys the window; the CreateWindow function returns NULL, but the WM_DESTROY message is not sent to the window. If the hook procedure returns zero, the window is created normally.  \t\t\t\t\t     At the time of the HCBT_CREATEWND notification, the window has been created, but its final size and position may not have been determined and its parent window may not have been established. It is possible to send messages to the newly created window, although it has not yet received WM_NCCREATE or WM_CREATE messages. It is also possible to change the position in the z-order of the newly created window by modifying the hwndInsertAfter member of the CBT_CREATEWND structure.   HCBT_DESTROYWND 4   A window is about to be destroyed.   HCBT_KEYSKIPPED 7   The system has removed a keyboard message from the system message queue. Upon receiving this hook code, a CBT application must install a WH_JOURNALPLAYBACK hook procedure in response to the keyboard message.   HCBT_MINMAX 1   A window is about to be minimized or maximized.   HCBT_MOVESIZE 0   A window is about to be moved or sized.   HCBT_QS 2   The system has retrieved a WM_QUEUESYNC message from the system message queue.   HCBT_SETFOCUS 9   A window is about to receive the keyboard focus.   HCBT_SYSCOMMAND 8   A system command is about to be carried out. This allows a CBT application to prevent task switching by means of hot keys."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM Depends on the nCode parameter. For details, see the following Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM Depends on the nCode parameter. For details, see the following Remarks section."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The system calls this function before calling the hook procedures associated with any type of hook. The system passes information about the hook to be called to the DebugProc hook procedure, which examines the information and determines whether to allow the hook to be called.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT To prevent the system from calling the hook, the hook procedure must return a nonzero value. Otherwise, the hook procedure must call CallNextHookEx. ",
+    "remarks": "An application installs this hook procedure by specifying the WH_DEBUG hook type and the pointer to the hook procedure in a call to the SetWindowsHookEx function. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "DebugProc",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCode",
+        "description": "Type: int Specifies whether the hook procedure must process the message. If nCode is HC_ACTION, the hook procedure must process the message. If nCode is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM The type of hook about to be called. This parameter can be one of the following values.   ValueMeaning  WH_CALLWNDPROC 4   Installs a hook procedure that monitors messages sent to a window procedure. For more information, see the description of the CallWndProc hook procedure.   WH_CALLWNDPROCRET 12   Installs a hook procedure that monitors messages that have just been processed by a window procedure. For more information, see the description of the CallWndRetProc hook procedure.   WH_CBT 5   Installs a hook procedure that receives notifications useful to a CBT application. For more information, see the description of the CBTProc hook procedure.   WH_DEBUG 9   Installs a hook procedure useful for debugging other hook procedures. For more information, see the description of the DebugProc hook procedure.   WH_GETMESSAGE 3   Installs a hook procedure that monitors messages posted to a message queue. For more information, see the description of the GetMsgProc hook procedure.   WH_JOURNALPLAYBACK 1   Installs a hook procedure that posts messages previously recorded by a WH_JOURNALRECORD hook procedure. For more information, see the description of the JournalPlaybackProc hook procedure.   WH_JOURNALRECORD 0   Installs a hook procedure that records input messages posted to the system message queue. This hook is useful for recording macros. For more information, see the description of the JournalRecordProc hook procedure.   WH_KEYBOARD 2   Installs a hook procedure that monitors keystroke messages. For more information, see the description of the KeyboardProc hook procedure.   WH_MOUSE 7   Installs a hook procedure that monitors mouse messages. For more information, see the description of the MouseProc hook procedure.   WH_MSGFILTER -1   Installs a hook procedure that monitors messages generated as a result of an input event in a dialog box, message box, menu, or scroll bar. The hook procedure monitors these messages only for the application that installed the hook procedure. For more information, see the description of the MessageProc hook procedure.   WH_SHELL 10   Installs a hook procedure that receives notifications useful to a Shell application. For more information, see the description of the ShellProc hook procedure and the WH_SHELL hook section.   WH_SYSMSGFILTER 6   Installs a hook procedure that monitors messages generated as a result of an input event in a dialog box, message box, menu, or scroll bar. The hook procedure monitors these messages for all applications in the system. For more information, see the description of the SysMsgProc hook procedure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM A pointer to a DEBUGHOOKINFO structure that contains the parameters to be passed to the destination hook procedure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The system calls this function whenever the foreground thread is about to become idle.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: DWORD If code is less than zero, the hook procedure must return the value returned by CallNextHookEx. If code is greater than or equal to zero, it is highly recommended that you call CallNextHookEx and return the value it returns; otherwise, other applications that have installed WH_FOREGROUNDIDLE hooks will not receive hook notifications and may behave incorrectly as a result. If the hook procedure does not call CallNextHookEx, the return value should be zero. ",
+    "remarks": "An application installs this hook procedure by specifying the WH_FOREGROUNDIDLE hook type and the pointer to the hook procedure in a call to the SetWindowsHookEx function. While processing this callback function, avoid calling any functions that retrieve window messages from the calling thread's message queue. This includes GetMessage, PeekMessage, modal dialog box, and COM functions.  Calling such functions may result in the thread not returning from GetMessage or WaitMessage when there are messages in the calling thread's message queue. ",
+    "return_type": "DWORD CALLBACK",
+    "category": "Hooks",
+    "name": "ForegroundIdleProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "code",
+        "description": "Type: int If code is HC_ACTION, the hook procedure must process the message. If code is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "wParam",
+        "description": "Type: DWORD This parameter is not used."
+      },
+      {
+        "in_out": "",
+        "type": "LONG",
+        "name": "lParam",
+        "description": "Type: LONG This parameter is not used."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The system calls this function whenever the GetMessage or PeekMessage function has retrieved a message from an application message queue. Before returning the retrieved message to the caller, the system passes the message to the hook procedure.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT If code is less than zero, the hook procedure must return the value returned by CallNextHookEx. If code is greater than or equal to zero, it is highly recommended that you call CallNextHookEx and return the value it returns; otherwise, other applications that have installed WH_GETMESSAGE hooks will not receive hook notifications and may behave incorrectly as a result. If the hook procedure does not call CallNextHookEx, the return value should be zero. ",
+    "remarks": "The GetMsgProc hook procedure can examine or modify the message. After the hook procedure returns control to the system, the GetMessage or PeekMessage function returns the message, along with any modifications, to the application that originally called it. An application installs this hook procedure by specifying the WH_GETMESSAGE hook type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "GetMsgProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "code",
+        "description": "Type: int Specifies whether the hook procedure must process the message. If code is HC_ACTION, the hook procedure must process the message. If code is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM Specifies whether the message has been removed from the queue. This parameter can be one of the following values.   ValueMeaning  PM_NOREMOVE 0x0000   The message has not been removed from the queue. (An application called the PeekMessage function, specifying the PM_NOREMOVE flag.)   PM_REMOVE 0x0001   The message has been removed from the queue. (An application called GetMessage, or it called the PeekMessage function, specifying the PM_REMOVE flag.)"
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM A pointer to an MSG structure that contains details about the message."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. Typically, an application uses this function to play back a series of mouse and keyboard messages recorded previously by the JournalRecordProc hook procedure. As long as a JournalPlaybackProc hook procedure is installed, regular mouse and keyboard input is disabled.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT To have the system wait before processing the message, the return value must be the amount of time, in clock ticks, that the system should wait. (This value can be computed by calculating the difference between the time members in the current and previous input messages.) To process the message immediately, the return value should be zero. The return value is used only if the hook code is HC_GETNEXT; otherwise, it is ignored. ",
+    "remarks": "A JournalPlaybackProc hook procedure should copy an input message to the lParam parameter. The message must have been previously recorded by using a JournalRecordProc hook procedure, which should not modify the message. To retrieve the same message over and over, the hook procedure can be called several times with the code parameter set to HC_GETNEXT without an intervening call with code set to HC_SKIP. If code is HC_GETNEXT and the return value is greater than zero, the system sleeps for the number of milliseconds specified by the return value. When the system continues, it calls the hook procedure again with code set to HC_GETNEXT to retrieve the same message. The return value from this new call to JournalPlaybackProc should be zero; otherwise, the system will go back to sleep for the number of milliseconds specified by the return value, call JournalPlaybackProc again, and so on. The system will appear to be not responding. Unlike most other global hook procedures, the JournalRecordProc and JournalPlaybackProc hook procedures are always called in the context of the thread that set the hook. After the hook procedure returns control to the system, the message continues to be processed. If code is HC_SKIP, the hook procedure must prepare to return the next recorded event message on its next call. Install the JournalPlaybackProc hook procedure by specifying the WH_JOURNALPLAYBACK type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. If the user presses CTRL+ESC OR CTRL+ALT+DEL during journal playback, the system stops the playback, unhooks the journal playback procedure, and posts a WM_CANCELJOURNAL message to the journaling application. If the hook procedure returns a message in the range WM_KEYFIRST to WM_KEYLAST, the following conditions apply: ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "JournalPlaybackProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "code",
+        "description": "Type: int A code the hook procedure uses to determine how to process the message. If code is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx. This parameter can be one of the following values.   ValueMeaning  HC_GETNEXT 1   The hook procedure must copy the current mouse or keyboard message to the EVENTMSG structure pointed to by the lParam parameter.    HC_NOREMOVE 3   An application has called the PeekMessage function with wRemoveMsg set to PM_NOREMOVE, indicating that the message is not removed from the message queue after PeekMessage processing.    HC_SKIP 2   The hook procedure must prepare to copy the next mouse or keyboard message to the EVENTMSG structure pointed to by lParam. Upon receiving the HC_GETNEXT code, the hook procedure must copy the message to the structure.    HC_SYSMODALOFF 5   A system-modal dialog box has been destroyed. The hook procedure must resume playing back the messages.   HC_SYSMODALON 4   A system-modal dialog box is being displayed. Until the dialog box is destroyed, the hook procedure must stop playing back messages."
+      },
+      {
+        "in_out": "",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM This parameter is not used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM A pointer to an EVENTMSG structure that represents a message being processed by the hook procedure. This parameter is valid only when the code parameter is HC_GETNEXT."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The function records messages the system removes from the system message queue. Later, an application can use a JournalPlaybackProc hook procedure to play back the messages.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT The return value is ignored. ",
+    "remarks": "A JournalRecordProc hook procedure must copy but not modify the messages. After the hook procedure returns control to the system, the message continues to be processed. Install the JournalRecordProc hook procedure by specifying the WH_JOURNALRECORD type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. A JournalRecordProc hook procedure does not need to live in a dynamic-link library. A JournalRecordProc hook procedure can live in the application itself. Unlike most other global hook procedures, the JournalRecordProc and JournalPlaybackProc hook procedures are always called in the context of the thread that set the hook. An application that has installed a JournalRecordProc hook procedure should watch for the VK_CANCEL virtual key code (which is implemented as the CTRL+BREAK key combination on most keyboards). This virtual key code should be interpreted by the application as a signal that the user wishes to stop journal recording. The application should respond by ending the recording sequence and removing the JournalRecordProc hook procedure. Removal is important. It prevents a journaling application from locking up the system by hanging inside a hook procedure. This role as a signal to stop journal recording means that a CTRL+BREAK key combination cannot itself be recorded. Since the CTRL+C key combination has no such role as a journaling signal, it can be recorded. There are two other key combinations that cannot be recorded: CTRL+ESC and CTRL+ALT+DEL. Those two key combinations cause the system to stop all journaling activities (record or playback), remove all journaling hooks, and post a WM_CANCELJOURNAL message to the journaling application. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "JournalRecordProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "code",
+        "description": "Type: int Specifies how to process the message. If code is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx. This parameter can be one of the following values.   ValueMeaning  HC_ACTION 0   The lParam parameter is a pointer to an EVENTMSG structure containing information about a message removed from the system queue. The hook procedure must record the contents of the structure by copying them to a buffer or file.   HC_SYSMODALOFF 5   A system-modal dialog box has been destroyed. The hook procedure must resume recording.   HC_SYSMODALON 4   A system-modal dialog box is being displayed. Until the dialog box is destroyed, the hook procedure must stop recording."
+      },
+      {
+        "in_out": "",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM This parameter is not used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM A pointer to an EVENTMSG structure that contains the message to be recorded."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The system calls this function whenever an application calls the GetMessage or PeekMessage function and there is a keyboard message (WM_KEYUP or WM_KEYDOWN) to be processed.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT If code is less than zero, the hook procedure must return the value returned by CallNextHookEx. If code is greater than or equal to zero, and the hook procedure did not process the message, it is highly recommended that you call CallNextHookEx and return the value it returns; otherwise, other applications that have installed WH_KEYBOARD hooks will not receive hook notifications and may behave incorrectly as a result. If the hook procedure processed the message, it may return a nonzero value to prevent the system from passing the message to the rest of the hook chain or the target window procedure. ",
+    "remarks": "An application installs the hook procedure by specifying the WH_KEYBOARD hook type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. This hook may be called in the context of the thread that installed it. The call is made by sending a message to the thread that installed the hook. Therefore, the thread that installed the hook must have a message loop. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "KeyboardProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "code",
+        "description": "Type: int A code the hook procedure uses to determine how to process the message. If code is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx. This parameter can be one of the following values.  ValueMeaning  HC_ACTION 0   The wParam and lParam parameters contain information about a keystroke message.   HC_NOREMOVE 3   The wParam and lParam parameters contain information about a keystroke message, and the keystroke message has not been removed from the message queue. (An application called the PeekMessage function, specifying the PM_NOREMOVE flag.)"
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM The virtual-key code of the key that generated the keystroke message."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM The repeat count, scan code, extended-key flag, context code, previous key-state flag, and transition-state flag. For more information about the lParam parameter, see Keystroke Message Flags. The following table describes the bits of this value.  BitsDescription 0-15The repeat count. The value is the number of times the keystroke is repeated as a result of the user's holding down the key. 16-23The scan code. The value depends on the OEM. 24Indicates whether the key is an extended key, such as a function key or a key on the numeric keypad. The value is 1 if the key is an extended key; otherwise, it is 0. 25-28Reserved. 29The context code. The value is 1 if the ALT key is down; otherwise, it is 0. 30The previous key state. The value is 1 if the key is down before the message is sent; it is 0 if the key is up. 31The transition state. The value is 0 if the key is being pressed and 1 if it is being released."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The system calls this function every time a new keyboard input event is about to be posted into a thread input queue.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT If  \t\t\t\t\t\tnCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. If nCode is greater than or equal to zero, and the hook procedure did not process the message, it is highly recommended that you call CallNextHookEx and return the value it returns; otherwise, other applications that have installed WH_KEYBOARD_LL hooks will not receive hook notifications and may behave incorrectly as a result. If the hook procedure processed the message, it may return a nonzero value to prevent the system from passing the message to the rest of the hook chain or the target window procedure. ",
+    "remarks": "An application installs the hook procedure by specifying the WH_KEYBOARD_LL hook type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. This hook is called in the context of the thread that installed it. The call is made by sending a message to the thread that installed the hook. Therefore, the thread that installed the hook must have a message loop. The keyboard input can come from the local keyboard driver or from calls to the keybd_event function. If the input comes from a call to keybd_event, the input was \"injected\". However, the WH_KEYBOARD_LL hook is not injected into another process. Instead, the context switches back to the process that installed the hook and it is called in its original context. Then the context switches back to the application that generated the event. The hook procedure should process a message in less time than the data entry specified in the LowLevelHooksTimeout value in the following registry key: HKEY_CURRENT_USER\\Control Panel\\Desktop The value is in milliseconds. If the hook procedure times out, the system passes the message to the next hook. However, on Windows 7 and later, the hook is silently removed without being called. There is no way for the application to know whether the hook is removed. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "LowLevelKeyboardProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCode",
+        "description": "Type: int A code the hook procedure uses to determine how to process the message. If nCode is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx. This parameter can be one of the following values.   ValueMeaning  HC_ACTION 0   The wParam and lParam parameters contain information about a keyboard message."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM The identifier of the keyboard message. This parameter can be one of the following messages: WM_KEYDOWN, WM_KEYUP, WM_SYSKEYDOWN, or WM_SYSKEYUP."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM A pointer to a KBDLLHOOKSTRUCT structure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The system calls this function every time a new mouse input event is about to be posted into a thread input queue.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. If nCode is greater than or equal to zero, and the hook procedure did not process the message, it is highly recommended that you call CallNextHookEx and return the value it returns; otherwise, other applications that have installed WH_MOUSE_LL hooks will not receive hook notifications and may behave incorrectly as a result. If the hook procedure processed the message, it may return a nonzero value to prevent the system from passing the message to the rest of the hook chain or the target window procedure. ",
+    "remarks": "An application installs the hook procedure by specifying the WH_MOUSE_LL hook type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. This hook is called in the context of the thread that installed it. The call is made by sending a message to the thread that installed the hook. Therefore, the thread that installed the hook must have a message loop. The mouse input can come from the local mouse driver or from calls to the mouse_event function. If the input comes from a call to mouse_event, the input was \"injected\". However, the WH_MOUSE_LL hook is not injected into another process. Instead, the context switches back to the process that installed the hook and it is called in its original context. Then the context switches back to the application that generated the event. The hook procedure should process a message in less time than the data entry specified in the LowLevelHooksTimeout value in the following registry key: HKEY_CURRENT_USER\\Control Panel\\Desktop The value is in milliseconds. If the hook procedure times out, the system passes the message to the next hook. However, on Windows 7 and later, the hook is silently removed without being called. There is no way for the application to know whether the hook is removed. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "LowLevelMouseProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCode",
+        "description": "Type: int A code the hook procedure uses to determine how to process the message. If nCode is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx. This parameter can be one of the following values.   ValueMeaning  HC_ACTION 0   The wParam and lParam parameters contain information about a mouse message."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM The identifier of the mouse message. This parameter can be one of the following messages: WM_LBUTTONDOWN, WM_LBUTTONUP, WM_MOUSEMOVE, WM_MOUSEWHEEL, WM_MOUSEHWHEEL, WM_RBUTTONDOWN, or WM_RBUTTONUP."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM A pointer to an MSLLHOOKSTRUCT structure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The system calls this function after an input event occurs in a dialog box, message box, menu, or scroll bar, but before the message generated by the input event is processed. The hook procedure can monitor messages for a dialog box, message box, menu, or scroll bar created by a particular application or all applications.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT If code is less than zero, the hook procedure must return the value returned by CallNextHookEx. If code is greater than or equal to zero, and the hook procedure did not process the message, it is highly recommended that you call CallNextHookEx and return the value it returns; otherwise, other applications that have installed WH_MSGFILTER hooks will not receive hook notifications and may behave incorrectly as a result. If the hook procedure processed the message, it may return a nonzero value to prevent the system from passing the message to the rest of the hook chain or the target window procedure. ",
+    "remarks": "An application installs the hook procedure by specifying the WH_MSGFILTER hook type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. If an application that uses the DDEML and performs synchronous transactions must process messages before they are dispatched, it must use the WH_MSGFILTER hook. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "MessageProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "code",
+        "description": "Type: int The type of input event that generated the message. If code is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and return the value returned by CallNextHookEx. This parameter can be one of the following values.   ValueMeaning  MSGF_DDEMGR 0x8001   The input event occurred while the DDEML was waiting for a synchronous transaction to finish. For more information about DDEML, see Dynamic Data Exchange Management Library.   MSGF_DIALOGBOX 0   The input event occurred in a message box or dialog box.   MSGF_MENU 2   The input event occurred in a menu.   MSGF_SCROLLBAR 5   The input event occurred in a scroll bar."
+      },
+      {
+        "in_out": "",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM This parameter is not used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM A pointer to an MSG structure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The system calls this function whenever an application calls the GetMessage or PeekMessage function and there is a mouse message to be processed.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. If nCode is greater than or equal to zero, and the hook procedure did not process the message, it is highly recommended that you call CallNextHookEx and return the value it returns; otherwise, other applications that have installed WH_MOUSE hooks will not receive hook notifications and may behave incorrectly as a result. If the hook procedure processed the message, it may return a nonzero value to prevent the system from passing the message to the target window procedure. ",
+    "remarks": "An application installs the hook procedure by specifying the WH_MOUSE hook type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. The hook procedure must not install a WH_JOURNALPLAYBACK callback function. This hook may be called in the context of the thread that installed it. The call is made by sending a message to the thread that installed the hook. Therefore, the thread that installed the hook must have a message loop. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "MouseProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCode",
+        "description": "Type: int A code that the hook procedure uses to determine how to process the message. If nCode is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx. This parameter can be one of the following values.   ValueMeaning  HC_ACTION 0   The  \t\t\t\t\t\twParam and  \t\t\t\t\t\tlParam parameters contain information about a mouse message.   HC_NOREMOVE 3   The wParam and lParam parameters contain information about a mouse message, and the mouse message has not been removed from the message queue. (An application called the PeekMessage function, specifying the PM_NOREMOVE flag.)"
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM The identifier of the mouse message."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM A pointer to a MOUSEHOOKSTRUCT structure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Installs an application-defined hook procedure into a hook chain. You would install a hook procedure to monitor the system for certain types of events. These events are associated either with a specific thread or with all threads in the same desktop as the calling thread.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: HHOOK If the function succeeds, the return value is the handle to the hook procedure. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "SetWindowsHookEx can be used to inject a DLL into another process. A 32-bit DLL cannot be injected into a 64-bit process, and a 64-bit DLL cannot be injected into a 32-bit process. If an application requires the use of hooks in other processes, it is required that a 32-bit application call SetWindowsHookEx to inject a 32-bit DLL into 32-bit processes, and a 64-bit application call SetWindowsHookEx to inject a 64-bit DLL into 64-bit processes. The 32-bit and 64-bit DLLs must have different names. Because hooks run in the context of an application, they must match the \"bitness\" of the application. If a 32-bit application installs a global hook on 64-bit Windows, the 32-bit hook is injected into each 32-bit process (the usual security boundaries apply). In a 64-bit process, the threads are still marked as \"hooked.\" However, because a 32-bit application must run the hook code, the system executes the hook in the hooking app's context; specifically, on the thread that called SetWindowsHookEx. This means that the hooking application must continue to pump messages or it might block the normal functioning of the 64-bit processes. If a 64-bit application installs a global hook on 64-bit Windows, the 64-bit hook is injected into each 64-bit process, while all 32-bit processes use a callback to the hooking application. To hook all applications on the desktop of a 64-bit Windows installation, install a 32-bit global hook and a 64-bit global hook, each from appropriate processes, and be sure to keep pumping messages in the hooking application to avoid blocking normal functioning. If you already have a 32-bit global hooking application and it doesn't need to run in each application's context, you may not need to create a 64-bit version. An error may occur if the hMod parameter is NULL and the dwThreadId parameter is zero or specifies the identifier of a thread created by another process. Calling the CallNextHookEx function to chain to the next hook procedure is optional, but it is highly recommended; otherwise, other applications that have installed hooks will not receive hook notifications and may behave incorrectly as a result. You should call CallNextHookEx unless you absolutely need to prevent the notification from being seen by other applications. Before terminating, an application must call the UnhookWindowsHookEx function to free system resources associated with the hook. The scope of a hook depends on the hook type. Some hooks can be set only with global scope; others can also be set for only a specific thread, as shown in the following table.  For a specified hook type, thread hooks are called first, then global hooks. Be aware that the WH_MOUSE, WH_KEYBOARD, WH_JOURNAL*, WH_SHELL, and low-level hooks can be called on the thread that installed the hook rather than the thread processing the hook. For these hooks, it is possible that both the 32-bit and 64-bit hooks will be called if a 32-bit hook is ahead of a 64-bit hook in the hook chain. The global hooks are a shared resource, and installing one affects all applications in the same desktop as the calling thread. All global hook functions must be in libraries. Global hooks should be restricted to special-purpose applications or to use as a development aid during application debugging. Libraries that no longer need a hook should remove its hook procedure. Windows Store app development If dwThreadId is zero, then window hook DLLs are not loaded in-process for the Windows Store app processes and the Windows Runtime broker process unless they are installed by either UIAccess processes (accessibility tools). The notification is delivered on the installer's thread for these hooks: This behavior is similar to what happens when there is an architecture mismatch between the hook DLL and the target application process, for example, when the hook DLL is 32-bit and the application process 64-bit. For an example, see Installing and Releasing Hook Procedures. ",
+    "return_type": "HHOOK WINAPI",
+    "category": "Hooks",
+    "name": "SetWindowsHookEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "idHook",
+        "description": "Type: int The type of hook procedure to be installed. This parameter can be one of the following values.   ValueMeaning  WH_CALLWNDPROC 4   Installs a hook procedure that monitors messages before the system sends them to the destination window procedure. For more information, see the CallWndProc hook procedure.   WH_CALLWNDPROCRET 12   Installs a hook procedure that monitors messages after they have been processed by the destination window procedure. For more information, see the CallWndRetProc hook procedure.   WH_CBT 5   Installs a hook procedure that receives notifications useful to a CBT application. For more information, see the CBTProc hook procedure.   WH_DEBUG 9   Installs a hook procedure useful for debugging other hook procedures. For more information, see the DebugProc hook procedure.   WH_FOREGROUNDIDLE 11   Installs a hook procedure that will be called when the application's foreground thread is about to become idle. This hook is useful for performing low priority tasks during idle time. For more information, see the ForegroundIdleProc hook procedure.    WH_GETMESSAGE 3   Installs a hook procedure that monitors messages posted to a message queue. For more information, see the GetMsgProc hook procedure.   WH_JOURNALPLAYBACK 1   Installs a hook procedure that posts messages previously recorded by a WH_JOURNALRECORD hook procedure. For more information, see the JournalPlaybackProc hook procedure.   WH_JOURNALRECORD 0   Installs a hook procedure that records input messages posted to the system message queue. This hook is useful for recording macros. For more information, see the JournalRecordProc hook procedure.   WH_KEYBOARD 2   Installs a hook procedure that monitors keystroke messages. For more information, see the KeyboardProc hook procedure.   WH_KEYBOARD_LL 13    Installs a hook procedure that monitors low-level keyboard input events. For more information, see the LowLevelKeyboardProc hook procedure.   WH_MOUSE 7   Installs a hook procedure that monitors mouse messages. For more information, see the MouseProc hook procedure.   WH_MOUSE_LL 14    Installs a hook procedure that monitors low-level mouse input events. For more information, see the LowLevelMouseProc hook procedure.   WH_MSGFILTER -1   Installs a hook procedure that monitors messages generated as a result of an input event in a dialog box, message box, menu, or scroll bar. For more information, see the MessageProc hook procedure.   WH_SHELL 10   Installs a hook procedure that receives notifications useful to shell applications. For more information, see the ShellProc hook procedure.   WH_SYSMSGFILTER 6   Installs a hook procedure that monitors messages generated as a result of an input event in a dialog box, message box, menu, or scroll bar. The hook procedure monitors these messages for all applications in the same desktop as the calling thread. For more information, see the SysMsgProc hook procedure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HOOKPROC",
+        "name": "lpfn",
+        "description": "Type: HOOKPROC A pointer to the hook procedure. If the dwThreadId parameter is zero or specifies the identifier of a thread created by a different process, the lpfn parameter must point to a hook procedure in a DLL. Otherwise, lpfn can point to a hook procedure in the code associated with the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HINSTANCE",
+        "name": "hMod",
+        "description": "Type: HINSTANCE A handle to the DLL containing the hook procedure pointed to by the lpfn parameter. The hMod parameter must be set to NULL if the dwThreadId parameter specifies a thread created by the current process and if the hook procedure is within the code associated with the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwThreadId",
+        "description": "Type: DWORD The identifier of the thread with which the hook procedure is to be associated. For desktop apps, if this parameter is zero, the hook procedure is associated with all existing threads running in the same desktop as the calling thread. For Windows Store apps, see the Remarks section."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The function receives notifications of Shell events from the system.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT The return value should be zero unless the value of nCode is HSHELL_APPCOMMAND and the shell procedure handles the WM_COMMAND message. In this case, the return should be nonzero. ",
+    "remarks": "Install this hook procedure by specifying the WH_SHELL hook type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "ShellProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCode",
+        "description": "Type: int The hook code. If nCode is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx. This parameter can be one of the following values.   ValueMeaning  HSHELL_ACCESSIBILITYSTATE 11    The accessibility state has changed.    HSHELL_ACTIVATESHELLWINDOW 3   The shell should activate its main window.   HSHELL_APPCOMMAND 12    The user completed an input event (for example, pressed an application command button on the mouse or an application command key on the keyboard), and the application did not handle the WM_APPCOMMAND message generated by that input.  If the Shell procedure handles the WM_COMMAND message, it should not call CallNextHookEx. See the Return Value section for more information.   HSHELL_GETMINRECT 5   A window is being minimized or maximized. The system needs the coordinates of the minimized rectangle for the window.    HSHELL_LANGUAGE 8   Keyboard language was changed or a new keyboard layout was loaded.   HSHELL_REDRAW 6   The title of a window in the task bar has been redrawn.    HSHELL_TASKMAN 7   The user has selected the task list. A shell application that provides a task list should return TRUE to prevent Windows from starting its task list.   HSHELL_WINDOWACTIVATED 4   The activation has changed to a different top-level, unowned window.    HSHELL_WINDOWCREATED 1   A top-level, unowned window has been created. The window exists when the system calls this hook.   HSHELL_WINDOWDESTROYED 2   A top-level, unowned window is about to be destroyed. The window still exists when the system calls this hook.   HSHELL_WINDOWREPLACED 13    A top-level window is being replaced. The window exists when the system calls this hook."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM This parameter depends on the value of the nCode parameter, as shown in the following table. \t\t\t\t \t\t\t\t\t  nCodewParam HSHELL_ACCESSIBILITYSTATE Indicates which accessibility feature has changed state. This value is one of the following: ACCESS_FILTERKEYS, ACCESS_MOUSEKEYS, or ACCESS_STICKYKEYS.  HSHELL_APPCOMMAND Indicates where the WM_APPCOMMAND message was originally sent; for example, the handle to a window. For more information, see cmd parameter in WM_APPCOMMAND. HSHELL_GETMINRECTA handle to the minimized or maximized window. HSHELL_LANGUAGEA handle to the window. HSHELL_REDRAWA handle to the redrawn window. HSHELL_WINDOWACTIVATEDA handle to the activated window. HSHELL_WINDOWCREATEDA handle to the created window. HSHELL_WINDOWDESTROYEDA handle to the destroyed window. HSHELL_WINDOWREPLACED A handle to the window being replaced.Windows 2000:  Not supported."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM This parameter depends on the value of the nCode parameter, as shown in the following table. \t\t\t\t \t\t\t\t\t  nCodelParam HSHELL_APPCOMMAND GET_APPCOMMAND_LPARAM(lParam) is the application command corresponding to the input event. GET_DEVICE_LPARAM(lParam) indicates what generated the input event; for example, the mouse or keyboard. For more information, see the uDevice parameter description under WM_APPCOMMAND.  GET_FLAGS_LPARAM(lParam) depends on the value of cmd in WM_APPCOMMAND. For example, it might indicate which virtual keys were held down when the WM_APPCOMMAND message was originally sent. For more information, see the dwCmdFlags description parameter under WM_APPCOMMAND.  HSHELL_GETMINRECTA pointer to a RECT structure.  HSHELL_LANGUAGEA handle to a keyboard layout.  HSHELL_MONITORCHANGED                     A handle to the window that moved to a different monitor. HSHELL_REDRAWThe value is TRUE if the window is flashing, or FALSE otherwise.  HSHELL_WINDOWACTIVATEDThe value is TRUE if the window is in full-screen mode, or FALSE otherwise.  HSHELL_WINDOWREPLACED A handle to the new window.Windows 2000:  Not supported."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined or library-defined callback function used with the SetWindowsHookEx function. The system calls this function after an input event occurs in a dialog box, message box, menu, or scroll bar, but before the message generated by the input event is processed. The function can monitor messages for any dialog box, message box, menu, or scroll bar in the system.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LRESULT If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. If nCode is greater than or equal to zero, and the hook procedure did not process the message, it is highly recommended that you call CallNextHookEx and return the value it returns; otherwise, other applications that have installed WH_SYSMSGFILTER hooks will not receive hook notifications and may behave incorrectly as a result. If the hook procedure processed the message, it may return a nonzero value to prevent the system from passing the message to the target window procedure. ",
+    "remarks": "An application installs the hook procedure by specifying the WH_SYSMSGFILTER hook type and a pointer to the hook procedure in a call to the SetWindowsHookEx function. ",
+    "return_type": "LRESULT CALLBACK",
+    "category": "Hooks",
+    "name": "SysMsgProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCode",
+        "description": "Type: int The type of input event that generated the message. If nCode is less than zero, the hook procedure must pass the message to the CallNextHookEx function without further processing and should return the value returned by CallNextHookEx. This parameter can be one of the following values.   ValueMeaning  MSGF_DIALOGBOX 0   The input event occurred in a message box or dialog box.   MSGF_MENU 2   The input event occurred in a menu.   MSGF_SCROLLBAR 5   The input event occurred in a scroll bar."
+      },
+      {
+        "in_out": "",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM This parameter is not used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM A pointer to an MSG message structure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Removes a hook procedure installed in a hook chain by the SetWindowsHookEx function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The hook procedure can be in the state of being called by another thread even after UnhookWindowsHookEx returns. If the hook procedure is not being called concurrently, the hook procedure is removed immediately before UnhookWindowsHookEx returns. For an example, see Monitoring System Events. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Hooks",
+    "name": "UnhookWindowsHookEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HHOOK",
+        "name": "hhk",
+        "description": "Type: HHOOK A handle to the hook to be removed. This parameter is a hook handle obtained by a previous call to SetWindowsHookEx."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

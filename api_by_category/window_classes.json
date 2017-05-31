@@ -1,0 +1,503 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "Retrieves information about a window class.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: BOOL If the function finds a matching class and successfully copies the data, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Classes",
+    "name": "GetClassInfo",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to the instance of the application that created the class. To retrieve information about classes defined by the system (such as buttons or list boxes), set this parameter to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpClassName",
+        "description": "Type: LPCTSTR The class name. The name must be that of a preregistered class or a class registered by a previous call to the RegisterClass or RegisterClassEx function.  Alternatively, this parameter can be an atom. If so, it must be a class atom created by a previous call to RegisterClass or RegisterClassEx. The atom must be in the low-order word of  \t\t\t\t\tlpClassName; the high-order word must be zero."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWNDCLASS",
+        "name": "lpWndClass",
+        "description": "Type: LPWNDCLASS A pointer to a WNDCLASS structure that receives the information about the class."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves information about a window class, including a handle to the small icon associated with the window class. The GetClassInfo function does not retrieve a handle to the small icon.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: BOOL If the function finds a matching class and successfully copies the data, the return value is nonzero. If the function does not find a matching class and successfully copy the data, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "Class atoms are created using the RegisterClass or RegisterClassEx function, not the  \t\t\t\tGlobalAddAtom function. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Classes",
+    "name": "GetClassInfoEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hinst",
+        "description": "Type: HINSTANCE A handle to the instance of the application that created the class. To retrieve information about classes defined by the system (such as buttons or list boxes), set this parameter to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszClass",
+        "description": "Type: LPCTSTR The class name. The name must be that of a preregistered class or a class registered by a previous call to the RegisterClass or RegisterClassEx function. Alternatively, this parameter can be a class atom created by a previous call to RegisterClass or RegisterClassEx. The atom must be in the low-order word of  \t\t\t\t\tlpszClass; the high-order word must be zero."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWNDCLASSEX",
+        "name": "lpwcx",
+        "description": "Type: LPWNDCLASSEX A pointer to a WNDCLASSEX structure that receives the information about the class."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the specified 32-bit (DWORD) value from the WNDCLASSEX structure associated with the specified window.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: DWORD If the function succeeds, the return value is the requested value. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "Reserve extra class memory by specifying a nonzero value in the  \t\t\t\tcbClsExtra member of the WNDCLASSEX structure used with the RegisterClassEx function. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Window Classes",
+    "name": "GetClassLong",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window and, indirectly, the class to which the window belongs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "Type: int The value to be retrieved. To retrieve a value from the extra class memory, specify the positive, zero-based byte offset of the value to be retrieved. Valid values are in the range zero through the number of bytes of extra class memory, minus four; for example, if you specified 12 or more bytes of extra class memory, a value of 8 would be an index to the third integer. To retrieve any other value from the WNDCLASSEX structure, specify one of the following values.   ValueMeaning  GCW_ATOM -32   Retrieves an  \t\t\t\t\t\tATOM value that uniquely identifies the window class. This is the same atom that the RegisterClassEx function returns.   GCL_CBCLSEXTRA -20   Retrieves the size, in bytes, of the extra memory associated with the class.   GCL_CBWNDEXTRA -18   Retrieves the size, in bytes, of the extra window memory associated with each window in the class. For information on how to access this memory, see GetWindowLong.   GCL_HBRBACKGROUND -10   Retrieves a handle to the background brush associated with the class.   GCL_HCURSOR -12   Retrieves a handle to the cursor associated with the class.   GCL_HICON -14   Retrieves a handle to the icon associated with the class.   GCL_HICONSM -34   Retrieves a handle to the small icon associated with the class.   GCL_HMODULE -16   Retrieves a handle to the module that registered the class.   GCL_MENUNAME -8   Retrieves the address of the menu name string. The string identifies the menu resource associated with the class.   GCL_STYLE -26   Retrieves the window-class style bits.   GCL_WNDPROC -24   Retrieves the address of the window procedure, or a handle representing the address of the window procedure. You must use the CallWindowProc function to call the window procedure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the specified value from the WNDCLASSEX structure associated with the specified window.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: ULONG_PTR If the function succeeds, the return value is the requested value. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "Reserve extra class memory by specifying a nonzero value in the  \t\t\t\tcbClsExtra member of the WNDCLASSEX structure used with the RegisterClassEx function. ",
+    "return_type": "ULONG_PTR WINAPI",
+    "category": "Window Classes",
+    "name": "GetClassLongPtr",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window and, indirectly, the class to which the window belongs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "Type: int The value to be retrieved. To retrieve a value from the extra class memory, specify the positive, zero-based byte offset of the value to be retrieved. Valid values are in the range zero through the number of bytes of extra class memory, minus eight; for example, if you specified 24 or more bytes of extra class memory, a value of 16 would be an index to the third integer. To retrieve any other value from the WNDCLASSEX structure, specify one of the following values.   ValueMeaning  GCW_ATOM -32   Retrieves an  \t\t\t\t\t\tATOM value that uniquely identifies the window class. This is the same atom that the RegisterClassEx function returns.   GCL_CBCLSEXTRA -20   Retrieves the size, in bytes, of the extra memory associated with the class.   GCL_CBWNDEXTRA -18   Retrieves the size, in bytes, of the extra window memory associated with each window in the class. For information on how to access this memory, see GetWindowLongPtr.   GCLP_HBRBACKGROUND -10   Retrieves a handle to the background brush associated with the class.   GCLP_HCURSOR -12   Retrieves a handle to the cursor associated with the class.   GCLP_HICON -14   Retrieves a handle to the icon associated with the class.   GCLP_HICONSM -34   Retrieves a handle to the small icon associated with the class.   GCLP_HMODULE -16   Retrieves a handle to the module that registered the class.   GCLP_MENUNAME -8   Retrieves the pointer to the menu name string. The string identifies the menu resource associated with the class.   GCL_STYLE -26   Retrieves the window-class style bits.   GCLP_WNDPROC -24   Retrieves the address of the window procedure, or a handle representing the address of the window procedure. You must use the CallWindowProc function to call the window procedure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the name of the class to which the specified window belongs.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: int If the function succeeds, the return value is the number of  \t\t\t\t\t\tcharacters copied to the buffer, not including the terminating null character. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "",
+    "return_type": "int WINAPI",
+    "category": "Window Classes",
+    "name": "GetClassName",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window and, indirectly, the class to which the window belongs."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpClassName",
+        "description": "Type: LPTSTR The class name string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nMaxCount",
+        "description": "Type: int The length \t\t\t\t\t \t\t\t\t\t of the  \t\t\t\t\tlpClassName buffer, in  \t  \t\t\t\t\tcharacters. The buffer must be large enough to include the terminating null character; otherwise, the class name string is truncated to nMaxCount-1 characters."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the 16-bit (WORD) value at the specified offset into the extra class memory for the window class to which the specified window belongs.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: WORD If the function succeeds, the return value is the requested 16-bit value. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "Reserve extra class memory by specifying a nonzero value in the  \t\t\t\tcbClsExtra member of the WNDCLASS structure used with the RegisterClass function. ",
+    "return_type": "WORD WINAPI",
+    "category": "Window Classes",
+    "name": "GetClassWord",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window and, indirectly, the class to which the window belongs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "Type: int The zero-based byte offset of the value to be retrieved. Valid values are in the range zero through the number of bytes of class memory, minus two; for example, if you specified 10 or more bytes of extra class memory, a value of eight would be an index to the fifth 16-bit integer. There is an additional valid value as shown in the following table.   ValueMeaning  GCW_ATOM -32   Retrieves an ATOM value that uniquely identifies the window class. This is the same atom that the RegisterClass or RegisterClassEx function returns."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves information about the specified window. The function also retrieves the 32-bit (DWORD) value at the specified offset into the extra window memory.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LONG If the function succeeds, the return value is the requested value. If the function fails, the return value is zero. To get extended error information, call GetLastError. If SetWindowLong has not been called previously, GetWindowLong returns zero for values in the extra window or class memory. ",
+    "remarks": "Reserve extra window memory by specifying a nonzero value in the  \t\t\t\tcbWndExtra member of the WNDCLASSEX structure used with the RegisterClassEx function. For an example, see Creating, Enumerating, and Sizing Child Windows. ",
+    "return_type": "LONG WINAPI",
+    "category": "Window Classes",
+    "name": "GetWindowLong",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window and, indirectly, the class to which the window belongs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "Type: int The zero-based offset to the value to be retrieved. Valid values are in the range zero through the number of bytes of extra window memory, minus four; for example, if you specified 12 or more bytes of extra memory, a value of 8 would be an index to the third 32-bit integer. To retrieve any other value, specify one of the following values.   ValueMeaning  GWL_EXSTYLE -20   Retrieves the extended window styles.    GWL_HINSTANCE -6   Retrieves a handle to the application instance.   GWL_HWNDPARENT -8   Retrieves a handle to the parent window, if any.   GWL_ID -12   Retrieves the identifier of the window.   GWL_STYLE -16   Retrieves the window styles.   GWL_USERDATA -21   Retrieves the user data associated with the window. This data is intended for use by the application that created the window. Its value is initially zero.   GWL_WNDPROC -4   Retrieves the address of the window procedure, or a handle representing the address of the window procedure. You must use the CallWindowProc function to call the window procedure.      The following values are also available when the hWnd parameter identifies a dialog box.  ValueMeaning  DWL_DLGPROC DWLP_MSGRESULT + sizeof(LRESULT)   Retrieves the address of the dialog box procedure, or a handle representing the address of the dialog box procedure. You must use the CallWindowProc function to call the dialog box procedure.   DWL_MSGRESULT 0   Retrieves the return value of a message processed in the dialog box procedure.   DWL_USER DWLP_DLGPROC + sizeof(DLGPROC)   Retrieves extra information private to the application, such as handles or pointers."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LONG_PTR If the function succeeds, the return value is the requested value. If the function fails, the return value is zero. To get extended error information, call GetLastError. If SetWindowLong or SetWindowLongPtr has not been called previously, GetWindowLongPtr returns zero for values in the extra window or class memory. ",
+    "remarks": "Reserve extra window memory by specifying a nonzero value in the  \t\t\t\tcbWndExtra member of the WNDCLASSEX structure used with the RegisterClassEx function. ",
+    "return_type": "LONG_PTR WINAPI",
+    "category": "Window Classes",
+    "name": "GetWindowLongPtr",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window and, indirectly, the class to which the window belongs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "Type: int The zero-based offset to the value to be retrieved. Valid values are in the range zero through the number of bytes of extra window memory, minus the size of an integer. To retrieve any other value, specify one of the following values.  ValueMeaning  GWL_EXSTYLE -20   Retrieves the extended window styles.    GWLP_HINSTANCE -6   Retrieves a handle to the application instance.   GWLP_HWNDPARENT -8   Retrieves a handle to the parent window, if there is one.   GWLP_ID -12   Retrieves the identifier of the window.   GWL_STYLE -16   Retrieves the window styles.   GWLP_USERDATA -21   Retrieves the user data associated with the window. This data is intended for use by the application that created the window. Its value is initially zero.   GWLP_WNDPROC -4   Retrieves the pointer to the window procedure, or a handle representing the pointer to the window procedure. You must use the CallWindowProc function to call the window procedure.      The following values are also available when the hWnd parameter identifies a dialog box.  ValueMeaning  DWLP_DLGPROC DWLP_MSGRESULT + sizeof(LRESULT)   Retrieves the pointer to the dialog box procedure, or a handle representing the pointer to the dialog box procedure. You must use the CallWindowProc function to call the dialog box procedure.   DWLP_MSGRESULT 0   Retrieves the return value of a message processed in the dialog box procedure.   DWLP_USER DWLP_DLGPROC + sizeof(DLGPROC)   Retrieves extra information private to the application, such as handles or pointers."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Registers a window class for subsequent use in calls to the CreateWindow or CreateWindowEx function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: ATOM If the function succeeds, the return value is a class atom that uniquely identifies the class being registered. This atom can only be used by the CreateWindow, CreateWindowEx, GetClassInfo, GetClassInfoEx, FindWindow, FindWindowEx, and UnregisterClass functions and the IActiveIMMap::FilterClientWindows method. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If you register the window class by using  \t\t\t\tRegisterClassA, the application tells the system that the windows of the created class expect messages with text or character parameters to use the ANSI character set; if you register it by using  \t\t\t\tRegisterClassW, the application requests that the system pass text parameters of messages as Unicode. The IsWindowUnicode function enables applications to query the nature of each window. For more information on ANSI and Unicode functions, see Conventions for Function Prototypes. All window classes that an application registers are unregistered when it terminates. No window classes registered by a DLL are unregistered when the DLL is unloaded. A DLL must explicitly unregister its classes when it is unloaded. For an example, see Associating a Window Procedure with a Window Class. ",
+    "return_type": "ATOM WINAPI",
+    "category": "Window Classes",
+    "name": "RegisterClass",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WNDCLASS",
+        "name": "*lpWndClass",
+        "description": "Type: const WNDCLASS* A pointer to a WNDCLASS structure. You must fill the structure with the appropriate class attributes before passing it to the function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Registers a window class for subsequent use in calls to the CreateWindow or CreateWindowEx function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: ATOM If the function succeeds, the return value is a class atom that uniquely identifies the class being registered. This atom can only be used by the CreateWindow, CreateWindowEx, GetClassInfo, GetClassInfoEx, FindWindow, FindWindowEx, and UnregisterClass functions and the IActiveIMMap::FilterClientWindows method. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If you register the window class by using  \t\t\t\tRegisterClassExA, the application tells the system that the windows of the created class expect messages with text or character parameters to use the ANSI character set; if you register it by using  \t\t\t\tRegisterClassExW, the application requests that the system pass text parameters of messages as Unicode. The IsWindowUnicode function enables applications to query the nature of each window. For more information on ANSI and Unicode functions, see Conventions for Function Prototypes. All window classes that an application registers are unregistered when it terminates. No window classes registered by a DLL are unregistered when the DLL is unloaded. A DLL must explicitly unregister its classes when it is unloaded. For an example, see Using Window Classes. ",
+    "return_type": "ATOM WINAPI",
+    "category": "Window Classes",
+    "name": "RegisterClassEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WNDCLASSEX",
+        "name": "*lpwcx",
+        "description": "Type: const WNDCLASSEX* A pointer to a WNDCLASSEX structure. You must fill the structure with the appropriate class attributes before passing it to the function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Replaces the specified 32-bit (long) value at the specified offset into the extra class memory or the WNDCLASSEX structure for the class to which the specified window belongs.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: DWORD If the function succeeds, the return value is the previous value of the specified 32-bit integer. If the value was not previously set, the return value is zero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If you use the SetClassLong function and the GCL_WNDPROC index to replace the window procedure, the window procedure must conform to the guidelines specified in the description of the WindowProc callback function. Calling SetClassLong with the GCL_WNDPROC index creates a subclass of the window class that affects all windows subsequently created with the class. An application can subclass a system class, but should not subclass a window class created by another process. Reserve extra class memory by specifying a nonzero value in the cbClsExtra member of the WNDCLASSEX structure used with the RegisterClassEx function. Use the SetClassLong function with care. For example, it is possible to change the background color for a class by using SetClassLong, but this change does not immediately repaint all windows belonging to the class. For an example, see Displaying an Icon. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Window Classes",
+    "name": "SetClassLong",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window and, indirectly, the class to which the window belongs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "Type: int The value to be replaced. To set a 32-bit value in the extra class memory, specify the positive, zero-based byte offset of the value to be set. Valid values are in the range zero through the number of bytes of extra class memory, minus four; for example, if you specified 12 or more bytes of extra class memory, a value of 8 would be an index to the third 32-bit integer. To set any other value from the WNDCLASSEX structure, specify one of the following values.   ValueMeaning  GCL_CBCLSEXTRA -20   Sets the size, in bytes, of the extra memory associated with the class. Setting this value does not change the number of extra bytes already allocated.   GCL_CBWNDEXTRA -18   Sets the size, in bytes, of the extra window memory associated with each window in the class. Setting this value does not change the number of extra bytes already allocated. For information on how to access this memory, see SetWindowLong.   GCL_HBRBACKGROUND -10   Replaces a handle to the background brush associated with the class.   GCL_HCURSOR -12   Replaces a handle to the cursor associated with the class.   GCL_HICON -14   Replaces a handle to the icon associated with the class.   GCL_HICONSM -34   Replace a handle to the small icon associated with the class.   GCL_HMODULE -16   Replaces a handle to the module that registered the class.   GCL_MENUNAME -8   Replaces the address of the menu name string. The string identifies the menu resource associated with the class.   GCL_STYLE -26   Replaces the window-class style bits.   GCL_WNDPROC -24   Replaces the address of the window procedure associated with the class."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "dwNewLong",
+        "description": "Type: LONG The replacement value."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Replaces the specified value at the specified offset in the extra class memory or the WNDCLASSEX structure for the class to which the specified window belongs.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: ULONG_PTR If the function succeeds, the return value is the previous value of the specified offset. If this was not previously set, the return value is zero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "If you use the SetClassLongPtr function and the GCLP_WNDPROC index to replace the window procedure, the window procedure must conform to the guidelines specified in the description of the WindowProc callback function. Calling SetClassLongPtr with the GCLP_WNDPROC index creates a subclass of the window class that affects all windows subsequently created with the class. An application can subclass a system class, but should not subclass a window class created by another process. Reserve extra class memory by specifying a nonzero value in the  \t\t\t\tcbClsExtra member of the WNDCLASSEX structure used with the RegisterClassEx function. Use the SetClassLongPtr function with care. For example, it is possible to change the background color for a class by using SetClassLongPtr, but this change does not immediately repaint all windows belonging to the class. ",
+    "return_type": "ULONG_PTR WINAPI",
+    "category": "Window Classes",
+    "name": "SetClassLongPtr",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window and, indirectly, the class to which the window belongs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "Type: int The value to be replaced. To set a value in the extra class memory, specify the positive, zero-based byte offset of the value to be set. Valid values are in the range zero through the number of bytes of extra class memory, minus eight; for example, if you specified 24 or more bytes of extra class memory, a value of 16 would be an index to the third integer. To set a value other than the WNDCLASSEX structure, specify one of the following values.   ValueMeaning  GCL_CBCLSEXTRA -20   Sets the size, in bytes, of the extra memory associated with the class. Setting this value does not change the number of extra bytes already allocated.   GCL_CBWNDEXTRA -18   Sets the size, in bytes, of the extra window memory associated with each window in the class. Setting this value does not change the number of extra bytes already allocated. For information on how to access this memory, see SetWindowLongPtr.   GCLP_ HBRBACKGROUND -10   Replaces a handle to the background brush associated with the class.   GCLP_HCURSOR -12   Replaces a handle to the cursor associated with the class.   GCLP_HICON -14   Replaces a handle to the icon associated with the class.   GCLP_HICONSM -34   Retrieves a handle to the small icon associated with the class.   GCLP_HMODULE -16   Replaces a handle to the module that registered the class.   GCLP_MENUNAME -8   Replaces the pointer to the menu name string. The string identifies the menu resource associated with the class.   GCL_STYLE -26   Replaces the window-class style bits.   GCLP_WNDPROC -24   Replaces the pointer to the window procedure associated with the class."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "dwNewLong",
+        "description": "Type: LONG_PTR The replacement value."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Replaces the 16-bit (WORD) value at the specified offset into the extra class memory for the window class to which the specified window belongs.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: WORD If the function succeeds, the return value is the previous value of the specified 16-bit integer. If the value was not previously set, the return value is zero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "Reserve extra class memory by specifying a nonzero value in the  \t\t\t\tcbClsExtra member of the WNDCLASS structure used with the RegisterClass function. ",
+    "return_type": "WORD WINAPI",
+    "category": "Window Classes",
+    "name": "SetClassWord",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window and, indirectly, the class to which the window belongs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "Type: int The zero-based byte offset of the value to be replaced. Valid values are in the range zero through the number of bytes of class memory minus two; for example, if you specified 10 or more bytes of extra class memory, a value of 8 would be an index to the fifth 16-bit integer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "wNewWord",
+        "description": "Type: WORD The replacement value."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Changes an attribute of the specified window. The function also sets the 32-bit (long) value at the specified offset into the extra window memory.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LONG If the function succeeds, the return value is the previous value of the specified 32-bit integer. If the function fails, the return value is zero. To get extended error information, call GetLastError. If the previous value of the specified 32-bit integer is zero, and the function succeeds, the return value is zero, but the function does not clear the last error information. This makes it difficult to determine success or failure. To deal with this, you should clear the last error information by calling SetLastError with 0 before calling SetWindowLong. Then, function failure will be indicated by a return value of zero and a GetLastError result that is nonzero. ",
+    "remarks": "Certain window data is cached, so changes you make using SetWindowLong will not take effect until you call the SetWindowPos function. Specifically, if you change any of the frame styles, you must call SetWindowPos with the SWP_FRAMECHANGED flag for the cache to be updated properly. If you use SetWindowLong with the GWL_WNDPROC index to replace the window procedure, the window procedure must conform to the guidelines specified in the description of the WindowProc callback function. If you use SetWindowLong with the DWL_MSGRESULT index to set the return value for a message processed by a dialog procedure, you should return TRUE directly afterward. Otherwise, if you call any function that results in your dialog procedure receiving a window message, the nested window message could overwrite the return value you set using DWL_MSGRESULT. Calling SetWindowLong with the GWL_WNDPROC index creates a subclass of the window class used to create the window. An application can subclass a system class, but should not subclass a window class created by another process. The SetWindowLong function creates the window subclass by changing the window procedure associated with a particular window class, causing the system to call the new window procedure instead of the previous one. An application must pass any messages not processed by the new window procedure to the previous window procedure by calling CallWindowProc. This allows the application to create a chain of window procedures. Reserve extra window memory by specifying a nonzero value in the  \t\t\t\tcbWndExtra member of the WNDCLASSEX structure used with the RegisterClassEx function. You must not call SetWindowLong with the GWL_HWNDPARENT index to change the parent of a child window. Instead, use the SetParent function. If the window has a class style of CS_CLASSDC or CS_OWNDC, do not set the extended window styles WS_EX_COMPOSITED or WS_EX_LAYERED. Calling SetWindowLong to set the style on a progressbar will reset its position. For an example, see Subclassing a Window. ",
+    "return_type": "LONG WINAPI",
+    "category": "Window Classes",
+    "name": "SetWindowLong",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window and, indirectly, the class to which the window belongs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "Type: int The zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size of an integer. To set any other value, specify one of the following values.   ValueMeaning  GWL_EXSTYLE -20   Sets a new extended window style.    GWL_HINSTANCE -6   Sets a new application instance handle.   GWL_ID -12   Sets a new identifier of the child window. The window cannot be a top-level window.   GWL_STYLE -16   Sets a new window style.   GWL_USERDATA -21   Sets the user data associated with the window. This data is intended for use by the application that created the window. Its value is initially zero.   GWL_WNDPROC -4   Sets a new address for the window procedure.  \t\t\t\t\t\t\t\t You cannot change this attribute if the window does not belong to the same process as the calling thread.      The following values are also available when the hWnd parameter identifies a dialog box.  ValueMeaning  DWL_DLGPROC DWLP_MSGRESULT + sizeof(LRESULT)   Sets the new address of the dialog box procedure.   DWL_MSGRESULT 0   Sets the return value of a message processed in the dialog box procedure.   DWL_USER DWLP_DLGPROC + sizeof(DLGPROC)   Sets new extra information that is private to the application, such as handles or pointers."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "dwNewLong",
+        "description": "Type: LONG The replacement value."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: LONG_PTR If the function succeeds, the return value is the previous value of the specified offset. If the function fails, the return value is zero. To get extended error information, call GetLastError. If the previous value is zero and the function succeeds, the return value is zero, but the function does not clear the last error information. To determine success or failure, clear the last error information by calling SetLastError with 0, then call SetWindowLongPtr. Function failure will be indicated by a return value of zero and a GetLastError result that is nonzero. ",
+    "remarks": "Certain window data is cached, so changes you make using SetWindowLongPtr will not take effect until you call the SetWindowPos function. If you use SetWindowLongPtr with the GWLP_WNDPROC index to replace the window procedure, the window procedure must conform to the guidelines specified in the description of the WindowProc callback function. If you use SetWindowLongPtr with the DWLP_MSGRESULT index to set the return value for a message processed by a dialog box procedure, the dialog box procedure should return TRUE directly afterward. Otherwise, if you call any function that results in your dialog box procedure receiving a window message, the nested window message could overwrite the return value you set by using DWLP_MSGRESULT. Calling SetWindowLongPtr with the GWLP_WNDPROC index creates a subclass of the window class used to create the window. An application can subclass a system class, but should not subclass a window class created by another process. The SetWindowLongPtr function creates the window subclass by changing the window procedure associated with a particular window class, causing the system to call the new window procedure instead of the previous one. An application must pass any messages not processed by the new window procedure to the previous window procedure by calling CallWindowProc. This allows the application to create a chain of window procedures. Reserve extra window memory by specifying a nonzero value in the  \t\t\t\tcbWndExtra member of the WNDCLASSEX structure used with the RegisterClassEx function. Do not call SetWindowLongPtr with the GWLP_HWNDPARENT index to change the parent of a child window. Instead, use the SetParent function. If the window has a class style of CS_CLASSDC or CS_PARENTDC, do not set the extended window styles WS_EX_COMPOSITED or WS_EX_LAYERED. Calling SetWindowLongPtr to set the style on a progressbar will reset its position. ",
+    "return_type": "LONG_PTR WINAPI",
+    "category": "Window Classes",
+    "name": "SetWindowLongPtr",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window and, indirectly, the class to which the window belongs. The SetWindowLongPtr function fails if the process that owns the window specified by the hWnd parameter is at a higher process privilege in the UIPI hierarchy than the process the calling thread resides in. Windows XP/2000:   The SetWindowLongPtr function fails if the window specified by the hWnd parameter does not belong to the same process as the calling thread."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "Type: int The zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size of an integer. To set any other value, specify one of the following values.  ValueMeaning  GWL_EXSTYLE -20   Sets a new extended window style.    GWLP_HINSTANCE -6   Sets a new application instance handle.   GWLP_ID -12   Sets a new identifier of the child window. The window cannot be a top-level window.   GWL_STYLE -16   Sets a new window style.   GWLP_USERDATA -21   Sets the user data associated with the window. This data is intended for use by the application that created the window. Its value is initially zero.   GWLP_WNDPROC -4   Sets a new address for the window procedure.       The following values are also available when the hWnd parameter identifies a dialog box.  ValueMeaning  DWLP_DLGPROC DWLP_MSGRESULT + sizeof(LRESULT)   Sets the new pointer to the dialog box procedure.   DWLP_MSGRESULT 0   Sets the return value of a message processed in the dialog box procedure.   DWLP_USER DWLP_DLGPROC + sizeof(DLGPROC)   Sets new extra information that is private to the application, such as handles or pointers."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "dwNewLong",
+        "description": "Type: LONG_PTR The replacement value."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Unregisters a window class, freeing the memory required for the class.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: BOOL If the function succeeds, the return value is nonzero. If the class could not be found or if a window still exists that was created with the class, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "Before calling this function, an application must destroy all windows created with the specified class. All window classes that an application registers are unregistered when it terminates. Class atoms are special atoms returned only by RegisterClass and RegisterClassEx. No window classes registered by a DLL are unregistered when the .dll is unloaded. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Classes",
+    "name": "UnregisterClass",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpClassName",
+        "description": "Type: LPCTSTR A null-terminated string or a class atom. If lpClassName is a string, it specifies the window class name. This class name must have been registered by a previous call to the RegisterClass or RegisterClassEx function. System classes, such as dialog box controls, cannot be unregistered. If this parameter is an atom, it must be a class atom created by a previous call to the RegisterClass or RegisterClassEx function. The atom must be in the low-order word of lpClassName; the high-order word must be zero."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hInstance",
+        "description": "Type: HINSTANCE A handle to the instance of the module that created the class."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

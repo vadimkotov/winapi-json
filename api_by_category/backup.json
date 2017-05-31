@@ -1,0 +1,957 @@
+[
+  {
+    "n_arguments": 7,
+    "description": "The BackupRead function can be used to back up      a file or directory, including the security information. The function reads data associated with a      specified file or directory into a buffer, which can then be written to the backup medium using the      WriteFile function.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero, indicating that an I/O error occurred. To get extended         error information, call GetLastError. ",
+    "remarks": "This function is not intended for use in backing up files encrypted under the      Encrypted File System. Use      ReadEncryptedFileRaw for that purpose. If an error occurs while BackupRead is reading data,      the calling process can skip the bad data by calling the      BackupSeek function. The file or directory should be restored using the      BackupWrite function. ",
+    "return_type": "BOOL",
+    "category": "Backup",
+    "name": "BackupRead",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "Handle to the file or directory to be backed up. To obtain the handle, call the        CreateFile function. The SACLs are not read unless the        file handle was created with the ACCESS_SYSTEM_SECURITY access right. For more        information, see File Security and Access        Rights.       The handle must be synchronous (nonoverlapped). This means that the FILE_FLAG_OVERLAPPED flag must not be set when CreateFile is called. This function does not validate that the handle it receives is synchronous, so it does not return an error code for a synchronous handle, but calling it with an asynchronous (overlapped) handle can result in subtle errors that are very difficult to debug. The BackupRead function may fail if        CreateFile was called with the flag        FILE_FLAG_NO_BUFFERING. In this case, the        GetLastError function returns the value        ERROR_INVALID_PARAMETER."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPBYTE",
+        "name": "lpBuffer",
+        "description": "Pointer to a buffer that receives the data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nNumberOfBytesToRead",
+        "description": "Length of the buffer, in bytes. The buffer size must be greater than the size of a        WIN32_STREAM_ID structure."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfBytesRead",
+        "description": "Pointer to a variable that receives the number of bytes read.        If the function returns a nonzero value, and the variable pointed to by        lpNumberOfBytesRead is zero, then all the data associated with the file handle has        been read."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bAbort",
+        "description": "Indicates whether you have finished using BackupRead        on the handle. While you are backing up the file, specify this parameter as FALSE.        Once you are done using BackupRead, you must call        BackupRead one more time specifying        TRUE for this parameter and passing the appropriate        lpContext. lpContext must be passed when        bAbort is TRUE; all other parameters are ignored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bProcessSecurity",
+        "description": "Indicates whether the function will restore the access-control list (ACL) data for the file or directory.        If bProcessSecurity is TRUE, the ACL data will be backed        up."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID",
+        "name": "*lpContext",
+        "description": "Pointer to a variable that receives a pointer to an internal data structure used by        BackupRead to maintain context information during a        backup operation.       You must set the variable pointed to by lpContext to NULL        before the first call to BackupRead for the specified        file or directory. The function allocates memory for the data structure, and then sets the variable to point to        that structure. You must not change lpContext or the variable that it points to        between calls to BackupRead. To release the memory used by the data structure, call        BackupRead with the        bAbort parameter set to TRUE when the backup operation is complete."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The  BackupSeek function seeks forward in a data stream initially accessed by using the  BackupRead or  BackupWrite function.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function could seek the requested amount, the function returns a nonzero value. If the function could not seek the requested amount, the function returns zero. To get extended error information, call  GetLastError. ",
+    "remarks": "Applications use the BackupSeek function to skip portions of a data stream that cause errors. This function does not seek across stream headers. For example, this function cannot be used to skip the stream name. If an application attempts to seek past the end of a substream, the function fails, the lpdwLowByteSeeked and lpdwHighByteSeeked parameters indicate the actual number of bytes the function seeks, and the file position is placed at the start of the next stream header. ",
+    "return_type": "BOOL",
+    "category": "Backup",
+    "name": "BackupSeek",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "Handle to the file or directory. This handle is created by using the  CreateFile function. The handle must be synchronous (nonoverlapped). This means that the FILE_FLAG_OVERLAPPED flag must not be set when CreateFile is called. This function does not validate that the handle it receives is synchronous, so it does not return an error code for a synchronous handle, but calling it with an asynchronous (overlapped) handle can result in subtle errors that are very difficult to debug."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwLowBytesToSeek",
+        "description": "Low-order part of the number of bytes to seek."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwHighBytesToSeek",
+        "description": "High-order part of the number of bytes to seek."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpdwLowByteSeeked",
+        "description": "Pointer to a variable that receives the low-order bits of the number of bytes the function actually seeks."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpdwHighByteSeeked",
+        "description": "Pointer to a variable that receives the high-order bits of the number of bytes the function actually seeks."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "*lpContext",
+        "description": "Pointer to an internal data structure used by the function. This structure must be the same structure that was initialized by the  BackupRead or BackupWrite function. An application must not touch the contents of this structure."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "The BackupWrite function can be used to      restore a file or directory that was backed up using      BackupRead. Use the      ReadFile function to get a stream of data from the backup      medium, then use BackupWrite to write the data to the specified file or      directory.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero, indicating that an I/O error occurred. To get extended         error information, call GetLastError. ",
+    "remarks": "This function is not intended for use in restoring files encrypted under the      Encrypted File System. Use      WriteEncryptedFileRaw for that purpose. The data read from the backup medium must be substreams separated by      WIN32_STREAM_ID structures. The BACKUP_LINK stream type lets you restore files with hard links. ",
+    "return_type": "BOOL",
+    "category": "Backup",
+    "name": "BackupWrite",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "Handle to the file or directory to be restored. To obtain the handle, call the        CreateFile function. The SACLs are not restored unless         the file handle was created with the ACCESS_SYSTEM_SECURITY access right. To ensure that the integrity ACEs are restored correctly, the file handle must also have been created with the WRITE_OWNER access right. For more        information, see File Security and Access        Rights.       Windows Server 2003 and Windows XP:  The WRITE_OWNER access right is not required. The handle must be synchronous (nonoverlapped). This means that the FILE_FLAG_OVERLAPPED flag must not be set when CreateFile is called. This function does not validate that the handle it receives is synchronous, so it does not return an error code for a synchronous handle, but calling it with an asynchronous (overlapped) handle can result in subtle errors that are very difficult to debug. The BackupWrite function may fail if        CreateFile was called with the flag        FILE_FLAG_NO_BUFFERING. In this case, the        GetLastError function returns the value       ERROR_INVALID_PARAMETER."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "lpBuffer",
+        "description": "Pointer to a buffer that the function writes data from."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nNumberOfBytesToWrite",
+        "description": "Size of the buffer, in bytes. The buffer size must be greater than the size of a        WIN32_STREAM_ID structure."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpNumberOfBytesWritten",
+        "description": "Pointer to a variable that receives the number of bytes written."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bAbort",
+        "description": "Indicates whether you have finished using BackupWrite on the handle.        While you are restoring the file, specify this parameter as FALSE. After you are done        using BackupWrite, you must call BackupWrite        one more time specifying TRUE for this parameter and passing the appropriate        lpContext. lpContext must be passed when        bAbort is TRUE; all other parameters are ignored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bProcessSecurity",
+        "description": "Specifies whether the function will restore the access-control list (ACL) data for the file or directory.        If bProcessSecurity is TRUE, you need to specify        WRITE_OWNER and WRITE_DAC access when opening the file or        directory handle. If the handle does not have those access rights, the operating system denies access to the        ACL data, and ACL data restoration will not occur."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID",
+        "name": "*lpContext",
+        "description": "Pointer to a variable that receives a pointer to an internal data structure used by        BackupWrite to maintain context information during a restore operation.        You must set the variable pointed to by lpContext to NULL        before the first call to BackupWrite for the specified file or directory. The        function allocates memory for the data structure, and then sets the variable to point to that structure. You        must not change lpContext or the variable that it points to between calls to        BackupWrite. To release the memory used by the data structure, call BackupWrite with the        bAbort parameter set to TRUE when the restore operation is        complete."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The  CreateTapePartition function reformats a tape.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, it can return one of the following error codes.  ",
+    "remarks": "Creating partitions reformats the tape. All previous information recorded on the tape is destroyed. ",
+    "return_type": "DWORD",
+    "category": "Backup",
+    "name": "CreateTapePartition",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hDevice",
+        "description": "Handle to the device where the new partition is to be created. This handle is created by using the  CreateFile function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwPartitionMethod",
+        "description": "Type of partition to create. To determine what type of partitions your device supports, see the documentation for your hardware. This parameter can have one of the following values.     ValueMeaning  TAPE_FIXED_PARTITIONS 0L   Partitions the tape based on the device's default definition of partitions. The dwCount and dwSize parameters are ignored.   TAPE_INITIATOR_PARTITIONS 2L   Partitions the tape into the number and size of partitions specified by dwCount and dwSize, respectively, except for the last partition. The size of the last partition is the remainder of the tape.   TAPE_SELECT_PARTITIONS 1L   Partitions the tape into the number of partitions specified by dwCount. The dwSize parameter is ignored. The size of the partitions is determined by the device's default partition size. For more specific information, see the documentation for your tape device."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwCount",
+        "description": "Number of partitions to create. The  GetTapeParameters function provides the maximum number of partitions a tape can support."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwSize",
+        "description": "Size of each partition, in megabytes. This value is ignored if the dwPartitionMethod parameter is TAPE_SELECT_PARTITIONS."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The  EraseTape function erases all or part of a tape.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, it can return one of the following error codes.  ",
+    "remarks": "Some tape devices do not support certain tape operations. To determine your tape device's capabilities, see your tape device documentation and use the  GetTapeParameters function. ",
+    "return_type": "DWORD",
+    "category": "Backup",
+    "name": "EraseTape",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hDevice",
+        "description": "Handle to the device where the tape is to be erased. This handle is created by using the  CreateFile function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwEraseType",
+        "description": "Erasing technique. This parameter can be one of the following values.     ValueMeaning  TAPE_ERASE_LONG 1L   Erases the tape from the current position to the end of the current partition.   TAPE_ERASE_SHORT 0L   Writes an erase gap or end-of-data marker at the current position."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bImmediate",
+        "description": "If this parameter is TRUE, the function returns immediately; if it is FALSE, the function does not return until the erase operation has been completed."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The  GetTapeParameters function retrieves information that describes the tape or the tape drive.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, it can return one of the following error codes.  ",
+    "remarks": "The block size range values (maximum and minimum) returned by the  GetTapeParameters function called with the dwOperation parameter set to the GET_TAPE_DRIVE_INFORMATION value will indicate system limits, not drive limits. However, it is the tape drive device and the media present in the drive that determine the true block size limits. Thus, an application may not be able to set all the block sizes mentioned in the range obtained by specifying GET_TAPE_DRIVE_INFORMATION in dwOperation. ",
+    "return_type": "DWORD",
+    "category": "Backup",
+    "name": "GetTapeParameters",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hDevice",
+        "description": "Handle to the device about which information is sought. This handle is created by using the  CreateFile function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwOperation",
+        "description": "Type of information requested. This parameter must be one of the following values.     ValueMeaning  GET_TAPE_DRIVE_INFORMATION 1   Retrieves information about the tape device.   GET_TAPE_MEDIA_INFORMATION 0   Retrieves information about the tape in the tape device."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpdwSize",
+        "description": "Pointer to a variable that receives the size, in bytes, of the buffer specified by the lpTapeInformation parameter. If the buffer is too small, this parameter receives the required size."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID",
+        "name": "lpTapeInformation",
+        "description": "Pointer to a structure that contains the requested information. If the dwOperation parameter is GET_TAPE_MEDIA_INFORMATION, lpTapeInformation points to a  TAPE_GET_MEDIA_PARAMETERS structure.     If dwOperation is GET_TAPE_DRIVE_INFORMATION, lpTapeInformation points to a  TAPE_GET_DRIVE_PARAMETERS structure."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The  GetTapePosition function retrieves the current address of the tape, in logical or absolute blocks.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, it can return one of the following error codes.  ",
+    "remarks": "A logical block address is relative to a partition. The first logical block address on each partition is zero. Call the  GetTapeParameters \t\t\t function to obtain information about the status, capabilities, and capacities of tape drives and media. ",
+    "return_type": "DWORD",
+    "category": "Backup",
+    "name": "GetTapePosition",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hDevice",
+        "description": "Handle to the device on which to get the tape position. This handle is created by using  CreateFile."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwPositionType",
+        "description": "Type of address to obtain. This parameter can be one of the following values.     ValueMeaning  TAPE_ABSOLUTE_POSITION 0L   The lpdwOffsetLow and lpdwOffsetHigh parameters receive the device-specific block address. The dwPartition parameter receives zero.   TAPE_LOGICAL_POSITION 1L   The lpdwOffsetLow and lpdwOffsetHigh parameters receive the logical block address. The dwPartition parameter receives the logical tape partition."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpdwPartition",
+        "description": "Pointer to a variable that receives the number of the current tape partition. Partitions are numbered logically from 1 through n, where 1 is the first partition on the tape and n is the last. When a device-specific block address is retrieved, or if the device supports only one partition, this parameter receives zero."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpdwOffsetLow",
+        "description": "Pointer to a variable that receives the low-order bits of the current tape position."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpdwOffsetHigh",
+        "description": "Pointer to a variable that receives the high-order bits of the current tape position. This parameter can be NULL if the high-order bits are not required."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The  GetTapeStatus function determines whether the tape device is ready to process tape commands.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the tape device is ready to accept appropriate tape-access commands without returning errors, the return value is NO_ERROR. If the function fails, it can return one of the following error codes.  ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Backup",
+    "name": "GetTapeStatus",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hDevice",
+        "description": "Handle to the device for which to get the device status. This handle is created by using the  CreateFile function."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The  PrepareTape function prepares the tape to be accessed or removed.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, it can return one of the following error codes.  ",
+    "remarks": "Some tape devices do not support certain tape operations. See your tape device documentation and use the  GetTapeParameters function to determine your tape device's capabilities. ",
+    "return_type": "DWORD",
+    "category": "Backup",
+    "name": "PrepareTape",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hDevice",
+        "description": "Handle to the device preparing the tape. This handle is created by using the  CreateFile function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwOperation",
+        "description": "Tape device preparation. This parameter can be one of the following values.     ValueMeaning  TAPE_FORMAT 5L   Performs a low-level format of the tape. Currently, only the QIC117 device supports this feature.   TAPE_LOAD 0L   Loads the tape and moves the tape to the beginning.   TAPE_LOCK 3L   Locks the tape ejection mechanism so that the tape is not ejected accidentally.   TAPE_TENSION 2L   Adjusts the tension by moving the tape to the end of the tape and back to the beginning. This option is not supported by all devices. This value is ignored if it is not supported.   TAPE_UNLOAD 1L   Moves the tape to the beginning for removal from the device. After a successful unload operation, the device returns errors to applications that attempt to access the tape, until the tape is loaded again.   TAPE_UNLOCK 4L   Unlocks the tape ejection mechanism."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bImmediate",
+        "description": "If this parameter is TRUE, the function returns immediately. If it is FALSE, the function does not return until the operation has been completed."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The  SetTapeParameters function either specifies the block size of a tape or configures the tape device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, it can return one of the following error codes.  ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Backup",
+    "name": "SetTapeParameters",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hDevice",
+        "description": "Handle to the device for which to set configuration information. This handle is created by using the  CreateFile function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwOperation",
+        "description": "Type of information to set. This parameter must be one of the following values.     ValueMeaning  SET_TAPE_DRIVE_INFORMATION 1L   Sets the device-specific information specified by lpTapeInformation.   SET_TAPE_MEDIA_INFORMATION 0L   Sets the tape-specific information specified by the lpTapeInformation parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "lpTapeInformation",
+        "description": "Pointer to a structure that contains the information to set. If the dwOperation parameter is SET_TAPE_MEDIA_INFORMATION, lpTapeInformation points to a  TAPE_SET_MEDIA_PARAMETERS structure.     If dwOperation is SET_TAPE_DRIVE_INFORMATION, lpTapeInformation points to a  TAPE_SET_DRIVE_PARAMETERS structure."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The  SetTapePosition function sets the tape position on the specified device.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, it can return one of the following error codes.  ",
+    "remarks": "If the offset specified by dwOffsetLow and dwOffsetHigh specifies the number of blocks, filemarks, or setmarks to move, a positive offset moves the tape forward to the end of the last block, filemark, or setmark. A negative offset moves the tape backward to the beginning of the last block, filemark, or setmark. If the offset is zero, the tape does not move. To obtain information about the status, capabilities, and capacities of tape drives and media, call the  GetTapeParameters \t\t\tfunction. ",
+    "return_type": "DWORD",
+    "category": "Backup",
+    "name": "SetTapePosition",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hDevice",
+        "description": "Handle to the device on which to set the tape position. This handle is created by using the  CreateFile function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwPositionMethod",
+        "description": "Type of positioning to perform. This parameter must be one of the following values.     ValueMeaning  TAPE_ABSOLUTE_BLOCK 1L   Moves the tape to the device-specific block address specified by the dwOffsetLow and dwOffsetHigh parameters. The dwPartition parameter is ignored.   TAPE_LOGICAL_BLOCK 2L   Moves the tape to the block address specified by dwOffsetLow and dwOffsetHigh in the partition specified by dwPartition.   TAPE_REWIND 0L   Moves the tape to the beginning of the current partition. The dwPartition, dwOffsetLow, and dwOffsetHigh parameters are ignored.   TAPE_SPACE_END_OF_DATA 4L   Moves the tape to the end of the data on the partition specified by dwPartition.   TAPE_SPACE_FILEMARKS 6L   Moves the tape forward (or backward) the number of filemarks specified by dwOffsetLow and dwOffsetHigh in the current partition. The dwPartition parameter is ignored.   TAPE_SPACE_RELATIVE_BLOCKS 5L   Moves the tape forward (or backward) the number of blocks specified by dwOffsetLow and dwOffsetHigh in the current partition. The dwPartition parameter is ignored.   TAPE_SPACE_SEQUENTIAL_FMKS 7L   Moves the tape forward (or backward) to the first occurrence of n filemarks in the current partition, where n is the number specified by dwOffsetLow and dwOffsetHigh. The dwPartition parameter is ignored.   TAPE_SPACE_SEQUENTIAL_SMKS 9L   Moves the tape forward (or backward) to the first occurrence of n setmarks in the current partition, where n is the number specified by dwOffsetLow and dwOffsetHigh. The dwPartition parameter is ignored.   TAPE_SPACE_SETMARKS 8L   Moves the tape forward (or backward) the number of setmarks specified by dwOffsetLow and dwOffsetHigh in the current partition. The dwPartition parameter is ignored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwPartition",
+        "description": "Partition to position within. If dwPartition is zero, the current partition is used. Partitions are numbered logically from 1 through n, where 1 is the first partition on the tape and n is the last."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwOffsetLow",
+        "description": "Low-order bits of the block address or count for the position operation specified by the dwPositionMethod parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwOffsetHigh",
+        "description": "High-order bits of the block address or count for the position operation specified by the dwPositionMethod parameter. If the high-order bits are not required, this parameter should be zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bImmediate",
+        "description": "Indicates whether to return as soon as the move operation begins. If this parameter is TRUE, the function returns immediately; if FALSE, the function does not return until the move operation has been completed."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The  WriteTapemark function writes a specified number of filemarks, setmarks, short filemarks, or long filemarks to a tape device. These tapemarks divide a tape partition into smaller areas.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, it can return one of the following error codes.  ",
+    "remarks": "Filemarks, setmarks, short filemarks, and long filemarks are special recorded elements that denote the linear organization of the tape. None of these marks contain user data. Filemarks are the most general marks; setmarks provide a hierarchy not available with filemarks. A short filemark contains a short erase gap that cannot be overwritten unless the write operation is performed from the beginning of the partition or from an earlier long filemark. A long filemark contains a long erase gap that allows an application to position the tape at the beginning of the filemark and to overwrite the filemark and the erase gap. ",
+    "return_type": "DWORD",
+    "category": "Backup",
+    "name": "WriteTapemark",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hDevice",
+        "description": "Handle to the device on which to write tapemarks. This handle is created by using the  CreateFile function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwTapemarkType",
+        "description": "Type of tapemarks to write. This parameter can be one of the following values.     ValueMeaning  TAPE_FILEMARKS 1L   Writes the number of filemarks specified by the dwTapemarkCount parameter.   TAPE_LONG_FILEMARKS 3L   Writes the number of long filemarks specified by dwTapemarkCount.   TAPE_SETMARKS 0L   Writes the number of setmarks specified by dwTapemarkCount.   TAPE_SHORT_FILEMARKS 2L   Writes the number of short filemarks specified by dwTapemarkCount."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwTapemarkCount",
+        "description": "Number of tapemarks to write."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bImmediate",
+        "description": "If this parameter is TRUE, the function returns immediately; if it is FALSE, the function does not return until the operation has been completed."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The  SisCreateBackupStructure function creates a SIS backup structure based on the supplied information.",
+    "library": "Sisbkup.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Sisbkup.h",
+    "return_value": "This function returns TRUE if it completes successfully and FALSE otherwise. Call  GetLastError to get more information about the reason the call failed. ",
+    "remarks": "This function creates a SIS backup structure, which is used by the SIS backup API to create and maintain a list of the file links on the volume and the original files the links point to. This function should be called only once for each SIS-enabled volume being backed up. All files within the specified volume should be treated as common-store files and backed up only if SIS indicates that they should. The countOfCommonStoreFilesToBackUp and commonStoreFilesToBackUp parameters together return a list of files that must be backed up regardless of which links are backed up. If countOfCommonStoreFilesToBackUp is 0, commonStoreFilesToBackUp may be a NULL pointer. The value of the commonStoreFilesToBackUp parameter should be ignored. After the backup operation is complete, deallocate the memory used by the commonStoreFilesToBackUp array of strings by calling  SisFreeAllocatedMemory. ",
+    "return_type": "BOOL",
+    "category": "Backup",
+    "name": "SisCreateBackupStructure",
+    "is_callback": 0,
+    "dll": "Sisbkup.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PWCHAR",
+        "name": "volumeRoot",
+        "description": "File name of the volume root, without the trailing backslash, of the volume to be backed up. For example, specify \"C:\" and not \"C:\\\"."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "*sisBackupStructure",
+        "description": "Returned SIS backup structure."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWCHAR",
+        "name": "*commonStoreRootPathname",
+        "description": "Fully qualified path name of the specified volume's common store. For example, \"c:\\SIS Common Store\"."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONG",
+        "name": "countOfCommonStoreFilesToBackUp",
+        "description": "Number of files listed in the commonStoreFilesToBackUp parameter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWCHAR",
+        "name": "**commonStoreFilesToBackUp",
+        "description": "Pointer to an array of file names that specifies a list of internal files used by SIS to manage the specified volume. These files should be backed up at the same time and in the same manner as the common-store files requested by  SisCSFilesToBackupForLink"
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The  SisCreateRestoreStructure function creates a SIS restore structure based on the supplied information.",
+    "library": "Sisbkup.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Sisbkup.h",
+    "return_value": "This function returns TRUE if it completes successfully and FALSE otherwise. Call  GetLastError to get more information about the reason the call failed. ",
+    "remarks": "This function establishes the restore environment on the specified volume in the way that  SisCreateBackupStructure establishes the backup environment on the specified volume. Note that this function will not necessarily identify the common-store file or files corresponding to a set of SIS links on the backup media if those common store file or files still exist on disk. The contents of a common-store file's data stream never change once it is created, so if the file already exists on the disk there is no need to restore it. Common-store file names are globally unique to ensure the integrity of the restore operation even if it does not occur on the same SIS-enabled volume that the backup operation has accessed. After the restore operation is complete, deallocate the memory used by the commonStoreFilesToRestore array of strings by calling  SisFreeAllocatedMemory. ",
+    "return_type": "BOOL",
+    "category": "Backup",
+    "name": "SisCreateRestoreStructure",
+    "is_callback": 0,
+    "dll": "Sisbkup.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PWCHAR",
+        "name": "volumeRoot",
+        "description": "File name of the volume root, without the trailing backslash, of the volume to be backed up. For example, specify \"C:\" and not \"C:\\\". The volume cannot be the system or boot volume."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "*sisRestoreStructure",
+        "description": "Returned SIS restore structure. This structure should be treated as opaque by the caller."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWCHAR",
+        "name": "*commonStoreRootPathname",
+        "description": "Fully qualified path name of the specified volume's common store. For example, \"c:\\SIS Common Store\"."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONG",
+        "name": "countOfCommonStoreFilesToRestore",
+        "description": "Number of files listed in the commonStoreFilesToRestore parameter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWCHAR",
+        "name": "**commonStoreFilesToRestore",
+        "description": "Pointer to an array of file names that specifies the list of internal files used by SIS to manage the specified volume. These files should be restored at the same time and in the same manner as the common-store files requested by  SisCSFilesToBackupForLink."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "The  SisCSFilesToBackupForLink function returns information describing the common-store files the specified SIS link points to.",
+    "library": "Sisbkup.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Sisbkup.h",
+    "return_value": "This function returns TRUE if it completes successfully and FALSE otherwise. Call  GetLastError to get more information about the reason the call failed. ",
+    "remarks": "The backup application should call this function only once for each SIS link file being backed up. The backup application can identify a SIS reparse point by its tag, IO_REPARSE_TAG_SIS. This tag is defined in Winnt.h. If this reparse point identified by the value of the reparseData parameter describes the first instance of a file to be backed up, this function will return NULL as the value of the matchingFileContext parameter, and initialize the value of the commonStoreFilesToBackUp array of strings with the names of the common-store file or files to be backed up. Otherwise, this function will set the value of the matchingFileContext parameter to the context string corresponding to the first instance of the specified file and set the value of the countOfCommonStoreFilesToBackUp parameter to 0. If there are multiple common-store files corresponding to the specified link, the value of the thisFileContext parameter will be the context string corresponding to the first common-store file returned in the array\u00e2\u0080\u0094that is, commonStoreFilesToBackUp[0]. The current version of this function will return at most one common-store file, but it is possible that in future versions a single link may be backed by several common-store files\u00e2\u0080\u0094for example, one for each stream in the file\u00e2\u0080\u0094so your backup application should support multiple files in each call to this function. In any case, each common-store file will be returned at most once for each backup pass. Your backup application should back up or restore the common-store file or files identified by the file name or file names returned in the commonStoreFilesToBackUp parameter. Regardless of whether there is a corresponding common-store file, your backup application should back up the SIS link file as it exists on the disk\u00e2\u0080\u0094for example, as a reparse point and a sparse file, and most likely with no ranges filled in. Your backup application may back up or restore the common-store file or files immediately, postpone backing them up, or mix them together as necessary. After the backup operation is complete, deallocate the memory used by the commonStoreFilesToBackUp array of strings by calling  SisFreeAllocatedMemory. ",
+    "return_type": "BOOL",
+    "category": "Backup",
+    "name": "SisCSFilesToBackupForLink",
+    "is_callback": 0,
+    "dll": "Sisbkup.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "sisBackupStructure",
+        "description": "Pointer to the SIS backup structure returned from  SisCreateBackupStructure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "reparseData",
+        "description": "Pointer to the contents of the SIS reparse point. This reparse point contains data describing a SIS link. \t\t\t\t\tTo retrieve the reparse point data for a file, use the FSCTL_GET_REPARSE_POINT control code."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "reparseDataSize",
+        "description": "Size of the contents of the SIS reparse point pointed to by reparseData, in bytes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "thisFileContext",
+        "description": "Pointer to a context string supplied by the backup application calling this function. The contents of this content string are entirely determined by this backup application and is not interpreted by the SIS Backup API. This parameter is optional; if not used, set the value of this parameter to NULL. The value of this parameter will not be processed in this case."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "*matchingFileContext",
+        "description": "Doubly-indirect pointer to the context string of the SIS link identified by the information passed in the first four parameters of this function. This parameter is optional; if a context string is not provided as the value of the thisFileContext parameter, set the value of this parameter to NULL. The value of this parameter will not be processed in this case."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONG",
+        "name": "countOfCommonStoreFilesToBackUp",
+        "description": "Number of files listed in the commonStoreFilesToBackUp parameter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWCHAR",
+        "name": "**commonStoreFilesToBackUp",
+        "description": "Pointer to an array of file names. These files should be backed up at the same time and in the same manner as the common-store files requested by  SisCreateBackupStructure."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The  SisFreeAllocatedMemory function frees memory allocated by SIS API functions.",
+    "library": "Sisbkup.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Sisbkup.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "After the call to this function completes, the caller may no longer access the freed memory. This call should be used to deallocate the memory allocated for the commonStoreRootPathname parameter strings returned from  SisCreateBackupStructure and  SisCreateRestoreStructure, and the array of strings containing common-store file names returned from  SisCreateBackupStructure,  SisCSFilesToBackupForLink,  SisCreateRestoreStructure, and  SisRestoredLink. In the latter case, the array itself also must be freed by calling  SisFreeAllocatedMemory. ",
+    "return_type": "void",
+    "category": "Backup",
+    "name": "SisFreeAllocatedMemory",
+    "is_callback": 0,
+    "dll": "Sisbkup.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "allocatedSpace",
+        "description": "Pointer to the memory allocated by the SIS API."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The  SisFreeBackupStructure function frees the specified SIS backup structure.",
+    "library": "Sisbkup.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Sisbkup.h",
+    "return_value": "This function returns TRUE if it completes successfully and FALSE otherwise. Call  GetLastError to get more information about the reason the call failed. ",
+    "remarks": "This function should be called after the backup operation is completed for the volume identified by the value of the sisBackupStructure parameter. Note that it is not safe to assume that this only deallocates memory. For example, this function may also perform additional administrative operations for the SIS architecture. Therefore, call this function even if your backup operation will exit immediately afterward. ",
+    "return_type": "BOOL",
+    "category": "Backup",
+    "name": "SisFreeBackupStructure",
+    "is_callback": 0,
+    "dll": "Sisbkup.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "sisBackupStructure",
+        "description": "Pointer to the SIS backup structure returned from  SisCreateBackupStructure."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The  SisFreeRestoreStructure function frees the memory allocated for the specified SIS restore structure, and performs tasks that prepare the SIS filter to properly set up the links created during the restore operation.",
+    "library": "Sisbkup.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Sisbkup.h",
+    "return_value": "This function returns TRUE if it completes successfully and FALSE otherwise. Call  GetLastError to get more information about the reason the call failed. ",
+    "remarks": "Accessing the SIS links before the call to this function completes can result in a volume check or a partial read of the link's contents. Note that it is not safe to assume that this only deallocates memory. For example, this function may also perform additional administrative operations for the SIS architecture. Therefore, call this function even if your restore operation will exit immediately afterward. ",
+    "return_type": "BOOL",
+    "category": "Backup",
+    "name": "SisFreeRestoreStructure",
+    "is_callback": 0,
+    "dll": "Sisbkup.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "sisRestoreStructure",
+        "description": "Pointer to a SIS restore structure returned from  SisCreateRestoreStructure."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The  SisRestoredCommonStoreFile function reports to the SIS architecture that a common-store file has been written.",
+    "library": "Sisbkup.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Sisbkup.h",
+    "return_value": "This function returns TRUE if it completes successfully and FALSE otherwise. Call  GetLastError to get more information about the reason the call failed. ",
+    "remarks": "This function should be called after you have restored a common-store file. It notifies the SIS architecture that a new common-store file has been written, so that the SIS architecture can perform internal maintenance tasks such as initializing its internal data structures or fixing the links to the common-store file. Your restore operation should restore only common-store files reported by  SisRestoredLink, even if there are additional common-store files on the backup media. Your restore operation can restore the SIS links and common-store files in any order it chooses; however, it must call  SisRestoredLink after it restores any link, and it must call this function after it restores any common-store file. Because your restore operation cannot identify which common-store files will be restored until the file names are reported to it as a result of restoring a link, your restore operation will always restore a common-store file after at least one link referring to it is restored. However, you can then restore additional SIS links that point to that common-store file. ",
+    "return_type": "BOOL",
+    "category": "Backup",
+    "name": "SisRestoredCommonStoreFile",
+    "is_callback": 0,
+    "dll": "Sisbkup.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "sisRestoreStructure",
+        "description": "Pointer to a SIS restore structure returned from  SisCreateRestoreStructure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PWCHAR",
+        "name": "commonStoreFileName",
+        "description": "Name of the restored common-store file."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The  SisRestoredLink function returns the names of the common-store file or files pointed to by the specified restored SIS link.",
+    "library": "Sisbkup.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Sisbkup.h",
+    "return_value": "This function returns TRUE if it completes successfully and FALSE otherwise. Call  GetLastError to get more information about the reason the call failed. ",
+    "remarks": "You should call this function for each SIS link that has been restored. This function will return each common-store file at most once for each restore operation; any attempt to restore additional SIS links that see the same common-store file will not result in that common-store file name being returned. This function will not return a common-store file that was not also returned in a call to  SisCSFilesToBackupForLink during the backup operation, assuming that the SIS reparse data stored on the media has not been corrupted. When restoring a SIS link, your restore operation should create only the appropriate sparse file, initialize any allocated ranges, and then write the SIS reparse data exactly as it was read during the backup operation. It is crucial that your restore operation create sparse files with unallocated ranges rather than sparse files (or nonsparse files) initialized with zeroes. Note that this function will not necessarily identify the common-store file or files corresponding to a set of SIS links on the backup media if those common-store file or files still exist on disk. The contents of a common-store file's data stream never changes once it is created, so if the file already exists on the disk there is no need to restore it. Common-store file names are globally unique to ensure the integrity of the restore operation even if it does not occur on the same SIS-enabled volume that the backup operation has accessed. ",
+    "return_type": "BOOL",
+    "category": "Backup",
+    "name": "SisRestoredLink",
+    "is_callback": 0,
+    "dll": "Sisbkup.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "sisRestoreStructure",
+        "description": "Pointer to a SIS restore structure returned from  SisCreateRestoreStructure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PWCHAR",
+        "name": "restoredFileName",
+        "description": "Fully qualified file name of the restored SIS link file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "reparseData",
+        "description": "Pointer to the contents of the SIS reparse point. This reparse point contains data describing the restored SIS link. \t\t\t\t\tTo retrieve the reparse point data for a file, use the FSCTL_GET_REPARSE_POINT control code."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "reparseDataSize",
+        "description": "Size of the contents of the SIS reparse point pointed to by reparseData, in bytes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PULONG",
+        "name": "countOfCommonStoreFilesToRestore",
+        "description": "Number of files listed in the commonStoreFilesToRestore parameter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWCHAR",
+        "name": "**commonStoreFilesToRestore",
+        "description": "Pointer to an array of common-store file names. These files should be restored at the same time and in the same manner as the common-store files requested by  SisCSFilesToBackupForLink.     If the value of the countOfCommonStoreFilesToRestore parameter is not 0, the value of the commonStoreFilesToRestore parameter will contain the names of the common-store files to be restored as a result of restoring the SIS link. If the value is 0, then either the common-store files have been returned once, or they are already present on the volume."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes an encrypted file after a backup  or restore operation, and frees associated system resources. This is one of a group of Encrypted File System (EFS) functions that is intended  to implement backup and restore functionality, while maintaining files in their encrypted state.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The CloseEncryptedFileRaw function frees allocated system resources       such as the system-defined context block and closes the file. The  BackupRead and BackupWrite functions handle backup and restore of unencrypted files. In Windows 8, Windows Server 2012, and later, this function is supported by the following technologies.  Note that SMB 3.0 does not support EFS on shares with continuous availability capability. ",
+    "return_type": "void WINAPI",
+    "category": "Backup",
+    "name": "CloseEncryptedFileRaw",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pvContext",
+        "description": "A pointer to a system-defined context block. The          OpenEncryptedFileRaw function returns the context block."
+      }
+    ],
+    "min_client": "Windows XP Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Opens an encrypted file in order to backup (export) or restore (import) the file.  This is one of a group of Encrypted File System (EFS) functions that is intended  to implement backup and restore functionality, while maintaining files in their encrypted state.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, it returns ERROR_SUCCESS. If the function fails, it returns a nonzero error code defined in       WinError.h. You can use FormatMessage with the       FORMAT_MESSAGE_FROM_SYSTEM flag to get a generic text description of       the error. ",
+    "remarks": "The caller must either have read or write access to the file, or it must have backup privilege SeBackupPrivilege on the machine on which the files reside in order for the call to succeed. To back up an encrypted file, call OpenEncryptedFileRaw to open the       file and then call ReadEncryptedFileRaw. When the backup is       complete, call CloseEncryptedFileRaw. To restore an encrypted file, call OpenEncryptedFileRaw, specifying       CREATE_FOR_IMPORT in the ulFlags parameter, and then call       WriteEncryptedFileRaw once. When the operation is completed, call       CloseEncryptedFileRaw. OpenEncryptedFileRaw fails if lpFileName exceeds MAX_PATH characters when opening an encrypted file on a remote machine. If the caller does not have access to the key for the file, the caller needs SeBackupPrivilege to export encrypted files or SeRestorePrivilege to import encrypted files. The  BackupRead and BackupWrite functions handle backup and restore of unencrypted files. In Windows 8, Windows Server 2012, and later, this function is supported by the following technologies.  SMB 3.0 does not support EFS on shares with continuous availability capability. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Backup",
+    "name": "OpenEncryptedFileRaw",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpFileName",
+        "description": "The name of the file to be opened. The string must consist of characters from the Windows character set."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "ulFlags",
+        "description": "The operation to be performed. This parameter may be one of the          following values.  ValueMeaning   0   Open the file for export                                      (backup).   CREATE_FOR_IMPORT 1   The file is being opened for import                                      (restore).   CREATE_FOR_DIR 2   Import (restore) a directory containing encrypted files.  This must be combined with one of the previous two flags to indicate the operation.   OVERWRITE_HIDDEN 4   Overwrite a hidden file on import."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "*pvContext",
+        "description": "The address of a  context          block that must be presented in subsequent calls to           ReadEncryptedFileRaw, WriteEncryptedFileRaw, or           CloseEncryptedFileRaw.  Do not modify it."
+      }
+    ],
+    "min_client": "Windows XP Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Backs up (export) encrypted files.  This is one of a group of Encrypted File System (EFS)      functions that is intended  to implement backup and restore functionality, while maintaining files in their      encrypted state.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, it returns a nonzero error code defined in WinError.h. You can use         FormatMessage with the         FORMAT_MESSAGE_FROM_SYSTEM flag to get a generic text description of the error. ",
+    "remarks": "The file being backed up is not decrypted;  it is backed up in its encrypted state. To back up an encrypted file, call       OpenEncryptedFileRaw to open the file. Then call       ReadEncryptedFileRaw, passing it the address of an       application-defined export callback function. The system calls this callback function multiple times until the       entire file's contents have been read and backed up.  When the backup is complete, call       CloseEncryptedFileRaw to free resources and close       the file. See ExportCallback for details about how to       declare the export callback function. To restore an encrypted file, call       OpenEncryptedFileRaw, specifying       CREATE_FOR_IMPORT in the ulFlags parameter. Then call       WriteEncryptedFileRaw, passing it the address of       an application-defined import callback function. The system calls this callback function multiple times until the       entire file's contents have been read and restored. When the restore is complete, call       CloseEncryptedFileRaw to free resources and close       the file. See ImportCallback for details about how to       declare the import callback function. This function is intended for the backup of only encrypted files; see      BackupRead for backup of unencrypted files. In Windows 8, Windows Server 2012, and later, this function is supported by the following technologies.  SMB 3.0 does not support EFS on shares with continuous availability capability. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Backup",
+    "name": "ReadEncryptedFileRaw",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PFE_EXPORT_FUNC",
+        "name": "pfExportCallback",
+        "description": "A pointer to the export callback function. The system calls the callback function multiple times, each time        passing a block of the file's data to the callback function until the entire file has been read. For more        information, see ExportCallback."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "pvCallbackContext",
+        "description": "A pointer to an application-defined and allocated context block. The system passes this pointer to the        callback function as a parameter so that the callback function can have access to application-specific data.        This can be a structure and can contain any data the application needs, such as the handle to the file that will        contain the backup copy of the encrypted file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pvContext",
+        "description": "A pointer to a system-defined context block. The context block is returned by the        OpenEncryptedFileRaw function. Do not modify        it."
+      }
+    ],
+    "min_client": "Windows XP Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Restores (import) encrypted files. This is one of a group of Encrypted File System (EFS)      functions that is intended  to implement backup and restore functionality, while maintaining files in their      encrypted state.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the function fails, it returns a nonzero error code defined in WinError.h. You can use         FormatMessage with the         FORMAT_MESSAGE_FROM_SYSTEM flag to get a generic text description of the error. ",
+    "remarks": "The file being restored is not decrypted;  it is restored in its encrypted state. To back up an encrypted file, call       OpenEncryptedFileRaw to open the file. Then call       ReadEncryptedFileRaw, passing it the address of an       application-defined export callback function. The system calls this callback function multiple times until the       entire file's contents have been read and backed up.  When the backup is complete, call       CloseEncryptedFileRaw to free resources and close       the file. See ExportCallback for details about how to       declare the export callback function. To restore an encrypted file, call       OpenEncryptedFileRaw, specifying       CREATE_FOR_IMPORT in the ulFlags parameter. Then call       WriteEncryptedFileRaw, passing it the address of       an application-defined import callback function. The system calls this callback function multiple times until the       entire file's contents have been read and restored. When the restore is complete, call       CloseEncryptedFileRaw to free resources and close       the file. See ImportCallback for details about how to       declare the export callback function. If the file is a sparse file that was backed up from a volume with a smaller sparse allocation unit size than      the volume it is being restored to, the sparse blocks in the middle of the file may not properly align with the      larger blocks and the function call would fail and set an ERROR_INVALID_PARAMETER last      error code. The sparse allocation unit size is either 16 clusters or 64 KB, whichever is smaller. This function is intended for restoring only encrypted files; see      BackupWrite for restoring unencrypted files. In Windows 8, Windows Server 2012, and later, this function is supported by the following technologies.  SMB 3.0 does not support EFS on shares with continuous availability capability. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Backup",
+    "name": "WriteEncryptedFileRaw",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PFE_IMPORT_FUNC",
+        "name": "pfImportCallback",
+        "description": "A pointer to the import callback function. The system calls the callback function multiple times, each time        passing a buffer that will be filled by the callback function with a portion of backed-up file's data. When the        callback function signals that the entire file has been processed, it tells the system that the restore        operation is finished. For more information, see        ImportCallback."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "pvCallbackContext",
+        "description": "A pointer to an application-defined and allocated context block. The system passes this pointer to the        callback function as a parameter so that the callback function can have access to application-specific data.        This can be a structure and can contain any data the application needs, such as the handle to the file that will        contain the backup copy of the encrypted file."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pvContext",
+        "description": "A pointer to a system-defined context block. The context block is returned by the        OpenEncryptedFileRaw function. Do not modify        it."
+      }
+    ],
+    "min_client": "Windows XP Professional [desktop apps only]"
+  }
+]
+

@@ -1,0 +1,406 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "The  RadiusExtensionFreeAttributes function is an application-defined function and is called by NPS to free the memory occupied by attributes returned by  RadiusExtensionProcessEx.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "This callback function does not return a value. ",
+    "remarks": "If you implement  RadiusExtensionProcessEx, you must also implement  RadiusExtensionFreeAttributes. ",
+    "return_type": "VOID WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "RadiusExtensionFreeAttributes",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "PRADIUS_ATTRIBUTE",
+        "name": "pAttrs",
+        "description": "Pointer to an array of attributes. The  RadiusExtensionFreeAttributes function should deallocate the memory occupied by these attributes. These attributes were returned in the pOutAttrs parameter in a previous call to the  RadiusExtensionProcessEx function."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 0,
+    "description": "The  RadiusExtensionInit function is an application-defined function and is called by NPS while the service is starting up. Use  RadiusExtensionInit to perform any initialization operations for the Extension DLL.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value should be an appropriate error code from WinError.h. ",
+    "remarks": "A return value other then NO_ERROR will cause NPS to fail to start. RadiusExtensionInit is an optional function. The RADIUS Extension DLL need not implement  RadiusExtensionInit. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "RadiusExtensionInit",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The  RadiusExtensionProcess function is an application-defined function and is called by NPS for each authentication or accounting packet that NPS receives from the network access server (NAS).",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value should be an appropriate error code from Winerror.h. ",
+    "remarks": "If the return value is anything other than NO_ERROR, NPS discards the request. NPS supports multiple Extension DLLs. NPS calls  RadiusExtensionProcess for each of the DLLs listed in the registry. For more information see  Setting Up the Extension DLLs. The Extension DLL may export  RadiusExtensionProcessEx instead of  RadiusExtensionProcess. The Extension DLL may export  RadiusExtensionProcess2. For more information on the use of this function, see NPS Extensions Process. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "RadiusExtensionProcess",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const RADIUS_ATTRIBUTE",
+        "name": "*pAttrs",
+        "description": "Pointer to an array of  attributes from the request. The array is terminated by an attribute with dwAttrType set to ratMinimum. These attributes should be treated as read-only; they should not be modified by  RadiusExtensionProcess. Also, these attributes should not be referenced in any way after  RadiusExtensionProcess returns."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PRADIUS_ACTION",
+        "name": "pfAction",
+        "description": "Pointer to a value of type  RADIUS_ACTION, initially set to raContinue. This parameter specifies the action that NPS should take in response to an Access-Request."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The  RadiusExtensionProcessEx function is an application-defined function and is called by NPS for each authentication or accounting packet that NPS receives from the network access server (NAS). This function is similar to  RadiusExtensionProcess. However,  RadiusExtensionProcessEx enables the Extension DLL to append attributes to the authentication response.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "Authif.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value should be an appropriate error code from WinError.h. ",
+    "remarks": "If the return value is anything other than NO_ERROR, NPS discards the request. NPS supports multiple Extension DLLs. NPS calls  RadiusExtensionProcessEx for each of the DLLs listed in the registry. For more information see  Setting Up the Extension DLLs. NPS calls  RadiusExtensionFreeAttributes to free the memory occupied by the array of attributes returned by  RadiusExtensionProcessEx. For this reason, if you implement  RadiusExtensionProcessEx, you must also implement  RadiusExtensionFreeAttributes. For more information on the use of this function, see NPS Extensions Process. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "RadiusExtensionProcessEx",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const RADIUS_ATTRIBUTE",
+        "name": "*pInAttrs",
+        "description": "Pointer to an array of  attributes from the request. The array is terminated by an attribute with dwAttrType set to ratMinimum. These attributes should be treated as read-only; they should not be modified by  RadiusExtensionProcessEx. Also, these attributes should not be referenced in any way after  RadiusExtensionProcessEx returns."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PRADIUS_ATTRIBUTE",
+        "name": "*pOutAttrs",
+        "description": "Pointer to an array of  attributes provided by the NPS Extension DLL. The array is terminated by an attribute with dwAttrType set to ratMinimum. NPS  adds these attributes to the authentication response. The NPS Extension DLL allocates the memory for the array of attributes. NPS calls  RadiusExtensionFreeAttributes to free the memory occupied by the array of attributes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PRADIUS_ACTION",
+        "name": "pfAction",
+        "description": "Pointer to a value of type  RADIUS_ACTION, initially set to raContinue. This parameter specifies the action that NPS should take in response to an Access-Request."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The  RadiusExtensionProcess2 function is an application defined-function and is called by NPS for each authentication or accounting packet that NPS receives from the network access server (NAS). This function is similar to  RadiusExtensionProcess. However,  RadiusExtensionProcess2 enables an Extension DLL to add, modify, and remove attributes to and from the authentication request or response.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value should be an appropriate error code from WinError.h. ",
+    "remarks": "If the return value is anything other than NO_ERROR, NPS discards the request. The following attributes are read-only. Extension DLLs that implement RadiusExtensionProcess2 cannot add, modify, or remove  these attributes within a request or response contained in a RADIUS_EXTENSION_CONTROL_BLOCK. NPS supports multiple Extension DLLs. NPS calls  RadiusExtensionProcess2 for each of the DLLs listed in the registry. For more information see  Setting Up the Extension  DLLs. NPS Extension DLLs that export  RadiusExtensionProcess2 do not need to export  RadiusExtensionFreeAttributes. For more information on the use of this function, see NPS Extensions Process. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "RadiusExtensionProcess2",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "PRADIUS_EXTENSION_CONTROL_BLOCK",
+        "name": "pECB",
+        "description": "Pointer to a  RADIUS_EXTENSION_CONTROL_BLOCK structure. The members of this structure contain values and function pointers that enable the NPS Extension DLL to process the RADIUS packet."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 0,
+    "description": "The  RadiusExtensionTerm function is an application-defined function and is called by NPS prior to unloading the Extension DLL. Use  RadiusExtensionTerm to perform any clean-up operations for the Extension DLL.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "This callback function does not return a value. ",
+    "remarks": "RadiusExtensionTerm is an optional function. The RADIUS Extension DLL need not implement  RadiusExtensionTerm. ",
+    "return_type": "VOID WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "RadiusExtensionTerm",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The  GetRequest function returns the attributes received in the RADIUS request process and any internal attributes describing the request state.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "If the function succeeds, the return value is a pointer to a  RADIUS_ATTRIBUTE_ARRAY structure that represents the attributes in the RADIUS request. If the function fails, the return value is a NULL pointer. ",
+    "remarks": "The Extension DLL can modify the attributes in the RADIUS request. For example, if NPS is acting as a RADIUS proxy, an Extension DLL could filter which attributes are forwarded to the remote RADIUS server. To modify the attributes, the Extension DLL uses the functions provided as members of the  RADIUS_ATTRIBUTE_ARRAY structure. This function is provided by NPS. NPS returns a pointer to this function as a member of the  RADIUS_EXTENSION_CONTROL_BLOCK structure. ",
+    "return_type": "PRADIUS_ATTRIBUTE_ARRAY WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "GetRequest",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "_RADIUS_EXTENSION_CONTROL_BLOCK",
+        "name": "*This",
+        "description": "Pointer to a  RADIUS_EXTENSION_CONTROL_BLOCK structure. NPS passes the Extension DLL a pointer to this structure when it calls the  RadiusExtensionProcess2 structure."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The  GetResponse function returns the attributes that are sent in the response if the final outcome of request processing matches the specified response type.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "If the function succeeds, the return value is a pointer to a  RADIUS_ATTRIBUTE_ARRAY structure that represents the attributes in the RADIUS response. If the function fails, the return value is a NULL pointer. ",
+    "remarks": "An Extension DLL can use  GetResponse to retrieve and modify the attributes for any valid response type regardless of the request's current disposition. For example, an Extension DLL could  set the response type to rcAccessAccept, but still add attributes to those returned in the case of an rcAccessReject. The response specified by the Extension DLL (rcAccessAccept in this example) could be overridden during further processing. To modify the attributes, the Extension DLL uses the functions provided as members of the  RADIUS_ATTRIBUTE_ARRAY structure. This function is provided by NPS. NPS returns a pointer to this function as a member of the  RADIUS_EXTENSION_CONTROL_BLOCK structure. ",
+    "return_type": "PRADIUS_ATTRIBUTE_ARRAY WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "GetResponse",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "_RADIUS_EXTENSION_CONTROL_BLOCK",
+        "name": "*This",
+        "description": "Pointer to a  RADIUS_EXTENSION_CONTROL_BLOCK structure. NPS passes the Extension DLL a pointer to this structure when it calls the  RadiusExtensionProcess2 function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "RADIUS_CODE",
+        "name": "rcResponseType",
+        "description": "Specifies the response type. This parameter must be one of the values enumerated by the  RADIUS_CODE enumeration type. Otherwise, the function fails, returning NULL."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The  SetResponseType function sets the final disposition of the request.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is one of the following error codes. ",
+    "remarks": "Note that the disposition set by the Extension DLL can be overridden during further processing. For example, the Extension DLL may set the response type to rcAccessAccept, but during further processing, the response can be changed to rcAccessReject. This function is provided by NPS. NPS returns a pointer to this function as a member of the  RADIUS_EXTENSION_CONTROL_BLOCK structure. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "SetResponseType",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "_RADIUS_EXTENSION_CONTROL_BLOCK",
+        "name": "*This",
+        "description": "Pointer to a  RADIUS_EXTENSION_CONTROL_BLOCK structure. NPS passes the Extension DLL a pointer to this structure when it calls the  RadiusExtensionProcess2 \t\t\t\t\t\tfunction."
+      },
+      {
+        "in_out": "_In_",
+        "type": "RADIUS_CODE",
+        "name": "rcResponseType",
+        "description": "Specifies the response type. This parameter must be one of the values contained within the  RADIUS_CODE enumerated type and is related to the rcRequestType member of the RADIUS_EXTENSION_CONTROL_BLOCK structure. If rcRequestType equals rcAccessRequest,  this value may be rcAccessAccept, rcAccessReject, rcAccessChallenge, or rcDiscard. If rcRequestType equals rcAccountingRequest, this value can be rcAccountingResponse or rcDiscard. Otherwise, the function fails, returning ERROR_INVALID_PARAMETER."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The  Add function appends a new attribute to the end of the array.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is one of the following error codes: ",
+    "remarks": "This function is provided by NPS. NPS returns a pointer to this function as a member of the  RADIUS_ATTRIBUTE_ARRAY structure. NPS copies the contents of the  RADIUS_ATTRIBUTE structure pointed to by the pAttr parameter. Therefore, Extension DLLs that export  RadiusExtensionProcess2 need not export  RadiusExtensionFreeAttributes. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "Add",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "_RADIUS_ATTRIBUTE_ARRAY",
+        "name": "*This",
+        "description": "Pointer to the  RADIUS_ATTRIBUTE_ARRAY structure that represents the array of attributes to which to append the specified attribute. The  GetRequest and  GetResponse functions return pointers to  RADIUS_ATTRIBUTE_ARRAY structures."
+      },
+      {
+        "in_out": "_In_",
+        "type": "RADIUS_ATTRIBUTE",
+        "name": "*pAttr",
+        "description": "Pointer to a  RADIUS_ATTRIBUTE structure for the attribute to append to the array."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The  AttributeAt function returns a const pointer to the specified attribute within the array.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "If the function succeeds, the return value is a pointer to a  RADIUS_ATTRIBUTE structure. If the function fails, the return value is NULL. ",
+    "remarks": "This function is provided by NPS. NPS returns a pointer to this function as a member of the  RADIUS_ATTRIBUTE_ARRAY structure. ",
+    "return_type": "RADIUS_ATTRIBUTE * WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "AttributeAt",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "_RADIUS_ATTRIBUTE_ARRAY",
+        "name": "*This",
+        "description": "Pointer to the  RADIUS_ATTRIBUTE_ARRAY structure that represents the array of attributes from which to retrieve the specified attribute. The  GetRequest and  GetResponse functions return pointers to  RADIUS_ATTRIBUTE_ARRAY structures."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwIndex",
+        "description": "Specifies the index of the attribute to retrieve. The function returns NULL if this index is out of range. Use the  GetSize function to determine the size of the array. The largest index is one less than the size of the array."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The  GetSize function returns the size of the attribute array.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "If the function succeeds, the return value is the size of the array. If the function fails, the return value is ERROR_INVALID_PARAMETER. ",
+    "remarks": "The  GetSize function returns the size of the attribute array, not the largest index. Because attribute arrays use zero-based indexes, the size of the array is one greater than the largest index. This function is provided by NPS. NPS returns a pointer to this function as a member of the  RADIUS_ATTRIBUTE_ARRAY structure. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "GetSize",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "_RADIUS_ATTRIBUTE_ARRAY",
+        "name": "*This",
+        "description": "Pointer to the  RADIUS_ATTRIBUTE_ARRAY structure that represents the array of attributes for which to retrieve the size. The  GetRequest and  GetResponse functions return pointers to  RADIUS_ATTRIBUTE_ARRAY structures."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The  InsertAt function inserts the specified attribute at the specified index in the array.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is one of the following error codes: ",
+    "remarks": "When the  InsertAt function inserts a new attribute into the array, it increments the index of the pre-existing attribute at this index. Similarly, it increments the index of any pre-existing attributes at higher indexes. To append an attribute to the end of the attribute array, use the  Add function. This function is provided by NPS. NPS returns a pointer to this function as a member of the  RADIUS_ATTRIBUTE_ARRAY structure. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "InsertAt",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "_RADIUS_ATTRIBUTE_ARRAY",
+        "name": "*This",
+        "description": "Pointer to the  RADIUS_ATTRIBUTE_ARRAY structure that represents the array of attributes in which to insert the specified attribute. The  GetRequest and  GetResponse functions return pointers to  RADIUS_ATTRIBUTE_ARRAY structures."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwIndex",
+        "description": "Specifies the index at which to insert the specified attribute. Use the  GetSize function to determine the size of the array. The largest index is one less than the size of the array."
+      },
+      {
+        "in_out": "_In_",
+        "type": "RADIUS_ATTRIBUTE",
+        "name": "*pAttr",
+        "description": "Pointer to a  RADIUS_ATTRIBUTE structure for the attribute to insert into the array."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The  RemoveAt function removes the attribute at the specified index in the array.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is one of the following error codes: ",
+    "remarks": "When the RemoveAt function removes an attribute from the array, it decrements the index of any pre-existing attributes at higher indexes. This function is provided by NPS. NPS returns a pointer to this function as a member of the  RADIUS_ATTRIBUTE_ARRAY structure. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "RemoveAt",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "_RADIUS_ATTRIBUTE_ARRAY",
+        "name": "*This",
+        "description": "Pointer to the  RADIUS_ATTRIBUTE_ARRAY structure that represents the array of attributes from which to remove the specified attribute. The  GetRequest and  GetResponse functions return pointers to  RADIUS_ATTRIBUTE_ARRAY structures."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwIndex",
+        "description": "Specifies the index of the attribute to remove. Use the  GetSize function to determine the size of the array. The largest index is one less than the size of the array."
+      }
+    ],
+    "min_client": "None supported"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The  SetAt function replaces the attribute at the specified index with the specified attribute.",
+    "library": "",
+    "min_server": "Windows Server 2008",
+    "header": "AuthIf.h",
+    "return_value": "If the function succeeds, the return value is NO_ERROR. If the function fails, the return value is one of the following error codes: ",
+    "remarks": "This function is provided by NPS. NPS returns a pointer to this function as a member of the  RADIUS_ATTRIBUTE_ARRAY structure. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Network Policy Server Extensions (NPS)",
+    "name": "SetAt",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "_RADIUS_ATTRIBUTE_ARRAY",
+        "name": "*This",
+        "description": "Pointer to the  RADIUS_ATTRIBUTE_ARRAY structure that represents the array of attributes that contains the attribute to replace. The  GetRequest and  GetResponse functions return pointers to  RADIUS_ATTRIBUTE_ARRAY structures."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwIndex",
+        "description": "Specifies the index of the attribute to replace. Use the  GetSize function to determine the size of the array. The largest index is one less than the size of the array."
+      },
+      {
+        "in_out": "_In_",
+        "type": "RADIUS_ATTRIBUTE",
+        "name": "*pAttr",
+        "description": "Pointer to a  RADIUS_ATTRIBUTE structure. The attribute represented by this structure replaces the attribute at the specified index."
+      }
+    ],
+    "min_client": "None supported"
+  }
+]
+

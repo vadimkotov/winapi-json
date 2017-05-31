@@ -1,0 +1,171 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "Specifies an application-defined callback function that a property sheet extension uses to add a page to a property sheet.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Prsht.h",
+    "return_value": "Type: BOOL Returns TRUE if successful, or FALSE otherwise. ",
+    "remarks": "",
+    "return_type": "BOOL CALLBACK",
+    "category": "Property Sheets",
+    "name": "AddPropSheetPageProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HPROPSHEETPAGE",
+        "name": "hpage",
+        "description": "Type: HPROPSHEETPAGE Handle to a property sheet page."
+      },
+      {
+        "in_out": "",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM Application-defined 32-bit value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Creates a new page for a property sheet.",
+    "library": "Comctl32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Prsht.h",
+    "return_value": "Type: HPROPSHEETPAGE Returns the handle to the new property page if successful, or NULL otherwise. ",
+    "remarks": "An application uses the PropertySheet function to create a property sheet that includes the new page. If you are not using the Aero wizard style (PSH_AEROWIZARD), the application can use the PSM_ADDPAGE message to add the new page to an existing property sheet. Windows 95: The system can support a maximum of 16,364 window handles. ",
+    "return_type": "HPROPSHEETPAGE",
+    "category": "Property Sheets",
+    "name": "CreatePropertySheetPage",
+    "is_callback": 0,
+    "dll": "Comctl32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "LPCPROPSHEETPAGE",
+        "name": "lppsp",
+        "description": "Type: LPCPROPSHEETPAGE Pointer to a PROPSHEETPAGE structure that defines a page to be included in a property sheet."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Destroys a property sheet page. An application must call this function for pages that have not been passed to the PropertySheet function.",
+    "library": "Comctl32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Prsht.h",
+    "return_value": "Type: BOOL Returns nonzero if successful, or zero otherwise. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Property Sheets",
+    "name": "DestroyPropertySheetPage",
+    "is_callback": 0,
+    "dll": "Comctl32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HPROPSHEETPAGE",
+        "name": "hPSPage",
+        "description": "Type: HPROPSHEETPAGE Handle to the property sheet page to delete."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Creates a property sheet and adds the pages defined in the specified property sheet header structure.",
+    "library": "Comctl32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Prsht.h",
+    "return_value": "Type: INT_PTR For modal property sheets, the return value is as follows:  For modeless property sheets, the return value is  the property sheet's window handle. The following return values have a special meaning.  ",
+    "remarks": "To retrieve extended error information, call GetLastError. If you attempt to add more than 99 pages to a property sheet, this function will fail, but with no indication of the cause of the error: PropertySheet returns a value of -1, but GetLastError returns 0. By default, the PropertySheet function creates a modal dialog box. If the dwFlags member of the PROPSHEETHEADER structure specifies the PSH_MODELESS flag, PropertySheet creates a modeless dialog box and returns immediately after it is created. In this case, the PropertySheet return value is the window handle to the modeless dialog box. For a modeless property sheet, your message loop should use PSM_ISDIALOGMESSAGE to pass messages to the property sheet dialog box. Your message loop should use PSM_GETCURRENTPAGEHWND to determine when to destroy the dialog box. When the user clicks the OK or Cancel button, PSM_GETCURRENTPAGEHWND returns NULL. You can then use the DestroyWindow function to destroy the dialog box. Version 5.80. The PropertySheet return value carries different information for modal and modeless property sheets. In some cases, modeless property sheets might need the information they would have received from PropertySheet if they had been modal. In particular, they may need to know whether ID_PSREBOOTSYSTEM or ID_PSRESTARTWINDOWS would have been returned. A modeless property sheet can retrieve the value that a modal property sheet would have received from PropertySheet by waiting until PSM_GETCURRENTPAGEHWND returns NULL and then sending a PSM_GETRESULT message. ",
+    "return_type": "INT_PTR",
+    "category": "Property Sheets",
+    "name": "PropertySheet",
+    "is_callback": 0,
+    "dll": "Comctl32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "LPCPROPSHEETHEADER",
+        "name": "lppsph",
+        "description": "Type: LPCPROPSHEETHEADER Pointer to a PROPSHEETHEADER structure that defines the frame and pages of a property sheet."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Specifies an application-defined callback function that a property sheet calls when a page is created and when it is about to be destroyed. An application can use this function to perform initialization and cleanup operations for the page.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Prsht.h",
+    "return_value": "Type: UINT The return value depends on the value of the uMsg parameter. ",
+    "remarks": "An application must specify the address of this callback function in the pfnCallback member of a PROPSHEETPAGE structure before passing the structure to the CreatePropertySheetPage function. With the exception of the lParam member, your application should not modify the PROPSHEETPAGE structure. Doing so will have unpredictable results. The lParam member contains application-defined data and can be modified as needed. ",
+    "return_type": "UINT CALLBACK",
+    "category": "Property Sheets",
+    "name": "PropSheetPageProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Reserved; must be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uMsg",
+        "description": "Type: UINT Action flag. This parameter can be one of the following values.  ValueMeaning  PSPCB_ADDREF    Version 5.80 or later. A page is being created. The return value is not used.   PSPCB_CREATE   A dialog box for a page is being created. Return nonzero to allow it to be created, or zero to prevent it.   PSPCB_RELEASE   A page is being destroyed. The return value is ignored."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPPROPSHEETPAGE",
+        "name": "ppsp",
+        "description": "Type: LPPROPSHEETPAGE Pointer to a PROPSHEETPAGE structure that defines the page being created or destroyed. See the Remarks section for further discussion."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined callback function that the system calls when the property sheet is being created and initialized.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Prsht.h",
+    "return_value": "Type: int Returns zero. ",
+    "remarks": "To enable a PropSheetProc callback function, use the PROPSHEETHEADER structure when you call the PropertySheet function to create the property sheet. Use the pfnCallback member to specify an address of the callback function, and set the PSP_USECALLBACK flag in the dwFlags member. PropSheetProc is a placeholder for the application-defined function name. The PFNPROPSHEETCALLBACK type is the address of a PropSheetProc callback function. ",
+    "return_type": "int CALLBACK",
+    "category": "Property Sheets",
+    "name": "PropSheetProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwndDlg",
+        "description": "Type: HWND Handle to the property sheet dialog box."
+      },
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "uMsg",
+        "description": "Type: UINT Message being received. This parameter is one of the following values.  ValueMeaning  PSCB_BUTTONPRESSED    Version 6.0 and later. Indicates the user pressed a button in the property sheet dialog box. To enable this, specify PSH_USECALLBACK in PROPSHEETHEADER.dwFlags and specify the name of this callback function in PROPSHEETHEADER.pfnCallback. The lParam value is one of the following. Note that only PSBTN_CANCEL is valid when you are using the Aero wizard style (PSH_AEROWIZARD). Button pressedlParam valueOKPSBTN_OKCancelPSBTN_CANCELApplyPSBTN_APPLYNOWClosePSBTN_FINISH   Note that Comctl32.dll versions 6 and later are not redistributable. To use these versions of Comctl32.dll, specify the particular version in a manifest. For more information on manifests, see Enabling Visual Styles.   PSCB_INITIALIZED   Indicates that the property sheet is being initialized. The lParam value is zero for this message.   PSCB_PRECREATE   Indicates that the property sheet is about to be created. The hwndDlg parameter is NULL, and the lParam parameter is the address of a dialog template in memory. This template is in the form of a DLGTEMPLATE or DLGTEMPLATEEX structure followed by one or more DLGITEMTEMPLATE structures. This message is not applicable if you are using the Aero wizard style (PSH_AEROWIZARD)."
+      },
+      {
+        "in_out": "",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "Type: LPARAM Additional information about the message. The meaning of this value depends on the uMsg parameter.  If uMsg is  PSCB_INITIALIZED or PSCB_BUTTONPRESSED, the value of lParam is zero. If uMsg is PSCB_PRECREATE, then lParam will be a pointer to either a  DLGTEMPLATE or DLGTEMPLATEEX structure describing the property sheet dialog box. Test the signature of the structure to determine the type. If signature is equal to 0xFFFF then the structure is an extended dialog template, otherwise the structure is a standard dialog template.       Copy          if (uMsg == PSCB_PRECREATE)     {         if (lParam)         {              DLGTEMPLATE *pDlgTemplate;              DLGTEMPLATEEX *pDlgTemplateEx;                           pDlgTemplateEx = (DLGTEMPLATEEX *)lParam;              if (pDlgTemplateEx->signature == 0xFFFF)              {                     // pDlgTemplateEx points to an extended                       // dialog template structure.              }              else              {                     // This is a standard dialog template                     //  structure.                     pDlgTemplate = (DLGTEMPLATE *)lParam;              }         }        }"
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

@@ -1,0 +1,643 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "Defines, redefines, or deletes MS-DOS device names.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. ",
+    "remarks": "MS-DOS device names are stored as junctions in the object namespace. The code that converts an MS-DOS path      into a corresponding path uses these junctions to map MS-DOS devices and drive letters. The      DefineDosDevice function enables an application to modify the junctions used to      implement the MS-DOS device namespace. To retrieve the current mapping for a particular MS-DOS device name or to obtain a list of all MS-DOS devices      known to the system, use the QueryDosDevice      function. To define a drive letter assignment that is persistent across boots and not a network share, use the      SetVolumeMountPoint function. If the volume to      be mounted already has a drive letter assigned to it, use the      DeleteVolumeMountPoint function to remove the      assignment. Drive letters and device names defined at system boot time are protected from redefinition and deletion unless      the user is an administrator. Starting with Windows XP, this function creates a device name for a caller that is not running in      the \"LocalSystem\" context in its own Local MS-DOS device namespace. If the caller  is running in      the \"LocalSystem\" context, the function creates the device name in the Global MS-DOS device      namespace. For more information, see      Defining an MS DOS Device Name and      File Names, Paths, and Namespaces. In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. For CsvFs, a new name will not be replicated to the other nodes on the cluster. For an example, see       Editing Drive Letter Assignments. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "DefineDosDevice",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "The controllable aspects of the DefineDosDevice function. This parameter        can be one or more of the following values.  ValueMeaning  DDD_EXACT_MATCH_ON_REMOVE 0x00000004   If this value is specified along with DDD_REMOVE_DEFINITION, the function will          use an exact match to determine which mapping to remove. Use this value to ensure that you do not delete          something that you did not define.   DDD_NO_BROADCAST_SYSTEM 0x00000008   Do not broadcast the WM_SETTINGCHANGE message.          By default, this message is broadcast to notify the shell and applications of the change.   DDD_RAW_TARGET_PATH 0x00000001   Uses the lpTargetPath string as is. Otherwise, it is converted from an MS-DOS          path to a path.   DDD_REMOVE_DEFINITION 0x00000002   Removes the specified definition for the specified device. To determine which definition to remove, the           function walks the list of mappings for the device, looking for a match of           lpTargetPath against a prefix of each mapping associated with this device. The           first mapping that matches is the one removed, and then the function returns. If lpTargetPath is NULL or a pointer to a           NULL string, the function will remove the first mapping associated with the device           and pop the most recent one pushed. If there is nothing left to pop, the device name will be removed. If this value is not specified, the string pointed to by the lpTargetPath           parameter will become the new mapping for this device."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpDeviceName",
+        "description": "A pointer to an MS-DOS device name string specifying the device the function is defining, redefining, or        deleting. The device name string must not have a colon as the last character, unless a drive letter is being        defined, redefined, or deleted. For example, drive C  would be the string \"C:\". In no case is a        trailing backslash (\"\\\") allowed."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpTargetPath",
+        "description": "A pointer to a path string that will implement this device. The string is an MS-DOS path string unless the        DDD_RAW_TARGET_PATH flag is specified, in which case this string is a path        string."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Deletes a drive letter or mounted folder.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. ",
+    "remarks": "Deleting a mounted folder does not cause the underlying directory to be deleted. If the lpszVolumeMountPoint parameter is a directory that is not a mounted folder,      the function does nothing. The directory is not deleted. In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. For CsvFs, a new mount point will not be replicated to the other nodes on the cluster. For an example, see       Unmounting a Volume at a Mount Point. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "DeleteVolumeMountPoint",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszVolumeMountPoint",
+        "description": "The drive letter or mounted folder to be deleted. A trailing backslash is required, for example,        \"X:\\\" or \"Y:\\MountX\\\"."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the name of a volume on a computer. FindFirstVolume is used to begin scanning the volumes of a computer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a search handle used in a subsequent call to the         FindNextVolume and         FindVolumeClose functions. If the function fails to find any volumes, the return value is the         INVALID_HANDLE_VALUE error code. To get extended error information, call         GetLastError. ",
+    "remarks": "The FindFirstVolume function opens a volume search handle and returns      information about the first volume found on a computer. After the search handle is established, you can use the      FindNextVolume function to search for other volumes. When      the search handle is no longer needed, close it by using the      FindVolumeClose function. You should not assume any correlation between the order of the volumes that are returned by these functions      and the order of the volumes that are on the computer. In particular, do not assume any correlation between volume      order and drive letters as assigned by the BIOS (if any) or the Disk Administrator. In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. For an example, see       Displaying Volume Paths. ",
+    "return_type": "HANDLE WINAPI",
+    "category": "Volume Management",
+    "name": "FindFirstVolume",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszVolumeName",
+        "description": "A pointer to a buffer that receives a null-terminated string that specifies a volume        GUID path for the first volume that is found."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cchBufferLength",
+        "description": "The length of the buffer to receive the volume GUID path, in        TCHARs."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the name of a mounted folder on the specified volume. FindFirstVolumeMountPoint is used to begin scanning the mounted folders on a      volume.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a search handle used in a subsequent call to the         FindNextVolumeMountPoint and         FindVolumeMountPointClose functions. If the function fails to find a mounted folder on the volume, the return value is the         INVALID_HANDLE_VALUE error code. To get extended error information, call         GetLastError. ",
+    "remarks": "The FindFirstVolumeMountPoint function      opens a mounted folder search handle and returns information about the first mounted folder that is found on the      specified volume. After the search handle is established, you can use the      FindNextVolumeMountPoint function to search for      other mounted folders. When the search handle is no longer needed, close it with the      FindVolumeMountPointClose function. The FindFirstVolumeMountPoint,      FindNextVolumeMountPoint, and      FindVolumeMountPointClose functions return      paths to mounted folders for a specified volume. They do not return drive letters or volume      GUID paths. For information about enumerating the volume      GUID paths for a volume, see      Enumerating Volume GUID Paths. You should not assume any correlation between the order of the mounted folders that are returned by these      functions and the order of the mounted folders that are returned by other functions or tools. In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. CsvFS does not support adding mount point on a CSV volume.       ReFS does not index mount points. ",
+    "return_type": "HANDLE WINAPI",
+    "category": "Volume Management",
+    "name": "FindFirstVolumeMountPoint",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszRootPathName",
+        "description": "A volume GUID path for the volume to scan for mounted folders. A trailing backslash is required."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszVolumeMountPoint",
+        "description": "A pointer to a buffer that receives the name of the first mounted folder that is found."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cchBufferLength",
+        "description": "The length of the buffer that receives the path to the mounted folder, in        TCHARs."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Continues a volume search started by a call to the      FindFirstVolume function. FindNextVolume finds one volume per call.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. If no matching files can be found, the         GetLastError function returns the         ERROR_NO_MORE_FILES error code. In that case, close the search with the         FindVolumeClose function. ",
+    "remarks": "After the search handle is established by calling      FindFirstVolume, you can use the      FindNextVolume function to search for other volumes. You should not assume any correlation between the order of the volumes that are returned by these functions      and the order of the volumes that are on the computer. In particular, do not assume any correlation between volume      order and drive letters as assigned by the BIOS (if any) or the Disk Administrator. In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. For an example, see       Displaying Volume Paths. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "FindNextVolume",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFindVolume",
+        "description": "The volume search handle returned by a previous call to the        FindFirstVolume function."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszVolumeName",
+        "description": "A pointer to a string that receives the volume GUID path that is found."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cchBufferLength",
+        "description": "The length of the buffer that receives the volume GUID path, in        TCHARs."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Continues a mounted folder search started by a call to the      FindFirstVolumeMountPoint      function. FindNextVolumeMountPoint finds one mounted      folder per call.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. If no more mounted folders can be found,         the GetLastError function returns the         ERROR_NO_MORE_FILES error code. In that case, close the search with the         FindVolumeMountPointClose function. ",
+    "remarks": "After the search handle is established by calling      FindFirstVolumeMountPoint, you can      use the FindNextVolumeMountPoint function to      search for other mounted folders. The FindFirstVolumeMountPoint,      FindNextVolumeMountPoint, and      FindVolumeMountPointClose functions return      paths to mounted folders for a specified volume. They do not return drive letters or volume GUID paths. For      information about enumerating the volume GUID paths for a volume, see      Enumerating Volume GUID Paths. You should not assume any correlation between the order of the mounted folders that are returned with these      functions and the order of the mounted folders that are returned by other functions or tools. In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. CsvFS does not support adding mount point on a CSV volume.       ReFS does not index mount points. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "FindNextVolumeMountPoint",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFindVolumeMountPoint",
+        "description": "A mounted folder search handle returned by a previous call to the        FindFirstVolumeMountPoint function."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszVolumeMountPoint",
+        "description": "A pointer to a buffer that receives the name of the mounted folder that is found."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cchBufferLength",
+        "description": "The length of the buffer that receives the mounted folder name, in        TCHARs."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes the specified volume search handle. The FindFirstVolume and  FindNextVolume functions use this search handle to locate volumes.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "After the  FindVolumeClose function is called, the handle hFindVolume cannot be used in subsequent calls to either  FindNextVolume or  FindVolumeClose. In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. For an example, see       Displaying Volume Paths. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "FindVolumeClose",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFindVolume",
+        "description": "The volume search handle to be closed. This handle must have been previously opened by the  FindFirstVolume function."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes the specified mounted folder search handle. The      FindFirstVolumeMountPoint and  FindNextVolumeMountPoint     functions use this search handle to locate mounted folders on a specified volume.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "After the  FindVolumeMountPointClose function is called, the handle hFindVolumeMountPoint cannot be used in subsequent calls to either  FindNextVolumeMountPoint or  FindVolumeMountPointClose. The FindFirstVolumeMountPoint, FindNextVolumeMountPoint, and FindVolumeMountPointClose functions return paths to mounted folders for a specified volume. They do not return drive letters or volume GUID paths. For information about enumerating the volume GUID paths for a volume, see Enumerating Volume GUID Paths. In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. CsvFS does not support adding mount point on a CSV volume. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "FindVolumeMountPointClose",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFindVolumeMountPoint",
+        "description": "The mounted folder search handle to be closed. This handle must have been previously opened by the  FindFirstVolumeMountPoint function."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines whether a disk drive is a removable, fixed, CD-ROM, RAM disk, or network      drive.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "The return value specifies the type of drive, which can be one of the following values.  ",
+    "remarks": "In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. ",
+    "return_type": "UINT WINAPI",
+    "category": "Volume Management",
+    "name": "GetDriveType",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpRootPathName",
+        "description": "The root directory for the drive.        A trailing backslash is required. If this parameter is NULL, the function uses the         root of the current directory."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves a bitmask representing the currently available disk drives.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a bitmask representing the currently available disk drives. Bit position 0 (the least-significant bit) is drive A, bit position 1 is drive B, bit position 2 is drive C, and so on. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Volume Management",
+    "name": "GetLogicalDrives",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Fills a buffer with strings that specify valid drives in the system.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the length, in characters, of the strings copied to the buffer,         not including the terminating null character. Note that an ANSI-ASCII null character uses one byte, but a         Unicode (UTF-16) null character uses two bytes. If the buffer is not large enough, the return value is greater than nBufferLength.         It is the size of the buffer required to hold the drive strings. If the function fails, the return value is zero. To get extended error information, use the         GetLastError function. ",
+    "remarks": "Each string in the buffer may be used wherever a root directory is required, such as for the      GetDriveType and      GetDiskFreeSpace functions. This function returns a concatenation of the drives in the Global and Local MS-DOS Device namespaces. If a      drive exists in both namespaces, this function will return the entry in the Local MS-DOS Device namespace. For      more information, see      Defining an MS DOS Device Name. In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. For an example, see       Obtaining a File Name From a File Handle. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Volume Management",
+    "name": "GetLogicalDriveStrings",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nBufferLength",
+        "description": "The maximum size of the buffer pointed to by lpBuffer, in        TCHARs. This size does not include the terminating null character. If this        parameter is zero, lpBuffer is not used."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpBuffer",
+        "description": "A pointer to a buffer that receives a series of null-terminated strings, one for each valid drive in the        system, plus with an additional null character. Each string is a device name."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "Retrieves information about the file system and volume associated with the specified root      directory.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If all the requested information is retrieved, the return value is nonzero. If not all the requested information is retrieved, the return value is zero. To get extended error         information, call GetLastError. ",
+    "remarks": "When a user attempts to get information about a floppy drive that does not have a floppy disk, or a CD-ROM       drive that does not have a compact disc, the system displays a message box for the user to insert a floppy disk       or a compact disc, respectively. To prevent the system from displaying this message box, call the       SetErrorMode function with       SEM_FAILCRITICALERRORS. The FILE_VOL_IS_COMPRESSED flag is the only indicator of volume-based compression. The       file system name is not altered to indicate compression, for example, this flag is returned set on a DoubleSpace       volume. When compression is volume-based, an entire volume is  compressed or not compressed. The FILE_FILE_COMPRESSION flag indicates whether a file system supports file-based       compression. When compression is file-based, individual files can be compressed or not compressed. The FILE_FILE_COMPRESSION and FILE_VOL_IS_COMPRESSED flags are       mutually exclusive. Both bits cannot be returned set. The maximum component length value that is stored in lpMaximumComponentLength is the       only indicator that a volume supports longer-than-normal FAT file system (or other file system) file names. The       file system name is not altered to indicate support for long file names. The GetCompressedFileSize function obtains the       compressed size of a file. The GetFileAttributes       function can determine whether an individual file is compressed. Symbolic link behavior\u00e2\u0080\u0094 If the path points to a symbolic link, the function returns volume information for the target. Starting with Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. If the volume supports file system transactions, the function returns        FILE_SUPPORTS_TRANSACTIONS in lpFileSystemFlags. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "GetVolumeInformation",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpRootPathName",
+        "description": "A pointer to a string that contains the root directory of the volume to be described. If this parameter is NULL, the root of the current directory is used. A trailing         backslash is required. For example, you  specify \\\\MyServer\\MyShare as         \"\\\\MyServer\\MyShare\\\", or the C drive as         \"C:\\\"."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPTSTR",
+        "name": "lpVolumeNameBuffer",
+        "description": "A pointer to a buffer that receives the name of a specified volume. The buffer size is specified by the         nVolumeNameSize parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nVolumeNameSize",
+        "description": "The length of a volume name buffer, in TCHARs. The maximum buffer size is         MAX_PATH+1. This parameter is ignored if the volume name buffer is not supplied."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPDWORD",
+        "name": "lpVolumeSerialNumber",
+        "description": "A pointer to a variable that receives the volume serial number. This parameter can be NULL if the serial number is not required. This function returns the volume serial number that the operating system assigns when a hard disk is         formatted.  To programmatically obtain the hard disk's serial number that the manufacturer assigns, use the         Windows Management Instrumentation (WMI)         Win32_PhysicalMedia  property         SerialNumber."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPDWORD",
+        "name": "lpMaximumComponentLength",
+        "description": "A pointer to a variable that receives the maximum length, in TCHARs, of a file         name component  that a specified file system supports. A file name component is the portion of a file name between backslashes. The value that is stored in the variable  that  *lpMaximumComponentLength points to         is used to indicate that a specified file system supports long names. For example, for a FAT file system that         supports long names, the function stores the value 255, rather than the previous 8.3 indicator. Long names can         also be supported on systems that use the NTFS file system."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPDWORD",
+        "name": "lpFileSystemFlags",
+        "description": "A pointer to a variable that receives flags associated with the specified file system. This parameter can be one or more of the following flags. However,         FILE_FILE_COMPRESSION and FILE_VOL_IS_COMPRESSED are mutually         exclusive.  ValueMeaning  FILE_CASE_PRESERVED_NAMES 0x00000002   The specified volume supports preserved case of file names when it places a name on disk.   FILE_CASE_SENSITIVE_SEARCH 0x00000001   The specified volume supports case-sensitive file names.   FILE_DAX_VOLUME         0x20000000   The specified volume is a direct access (DAX) volume. Note  This flag was introduced in Windows 10, version 1607.     FILE_FILE_COMPRESSION 0x00000010   The specified volume supports file-based compression.   FILE_NAMED_STREAMS 0x00040000   The specified volume supports named streams.   FILE_PERSISTENT_ACLS 0x00000008   The specified volume preserves and enforces access control lists (ACL). For example, the NTFS file system          preserves and enforces ACLs, and the FAT file system does not.   FILE_READ_ONLY_VOLUME 0x00080000   The specified volume is read-only.   FILE_SEQUENTIAL_WRITE_ONCE 0x00100000   The specified volume supports a single sequential write.   FILE_SUPPORTS_ENCRYPTION 0x00020000   The specified volume supports the Encrypted File System (EFS). For more information, see          File Encryption.   FILE_SUPPORTS_EXTENDED_ATTRIBUTES 0x00800000   The specified volume supports extended attributes. An extended attribute is a piece of          application-specific metadata that an application can associate with a file and is not part of the file's data. Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This value is not supported until Windows Server 2008 R2 and Windows 7.   FILE_SUPPORTS_HARD_LINKS 0x00400000   The specified volume supports hard links. For more information, see          Hard Links and Junctions. Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This value is not supported until Windows Server 2008 R2 and Windows 7.   FILE_SUPPORTS_OBJECT_IDS 0x00010000   The specified volume supports object identifiers.   FILE_SUPPORTS_OPEN_BY_FILE_ID 0x01000000   The file system supports open by FileID. For more information, see          FILE_ID_BOTH_DIR_INFO. Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This value is not supported until Windows Server 2008 R2 and Windows 7.   FILE_SUPPORTS_REPARSE_POINTS 0x00000080   The specified volume supports reparse points. ReFS:  ReFS supports reparse points but does not index them so            FindFirstVolumeMountPoint and            FindNextVolumeMountPoint will not            function as expected.   FILE_SUPPORTS_SPARSE_FILES 0x00000040   The specified volume supports sparse files.   FILE_SUPPORTS_TRANSACTIONS 0x00200000   The specified volume supports transactions. For more information, see          About KTM.   FILE_SUPPORTS_USN_JOURNAL 0x02000000   The specified volume supports update sequence number (USN) journals. For more information, see          Change Journal Records. Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This value is not supported until Windows Server 2008 R2 and Windows 7.   FILE_UNICODE_ON_DISK 0x00000004   The specified volume supports Unicode in file names as they appear on disk.   FILE_VOLUME_IS_COMPRESSED 0x00008000   The specified volume is a compressed volume, for example, a DoubleSpace volume.   FILE_VOLUME_QUOTAS 0x00000020   The specified volume supports disk quotas."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPTSTR",
+        "name": "lpFileSystemNameBuffer",
+        "description": "A pointer to a buffer that receives the name of the file system, for example, the FAT file system or the NTFS         file system. The buffer size is specified by the nFileSystemNameSize parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nFileSystemNameSize",
+        "description": "The length of the file system name buffer, in TCHARs. The maximum buffer size is         MAX_PATH+1. This parameter is ignored if the file system name buffer is not supplied."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "Retrieves information about the file system and volume associated with the specified      file.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008 and Windows Vista (include Windows.h)",
+    "return_value": "If all the requested information is retrieved, the return value is nonzero. If not all the requested information is retrieved, the return value is zero. To get extended error         information, call GetLastError. ",
+    "remarks": "In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "GetVolumeInformationByHandleW",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "A handle to the file."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPWSTR",
+        "name": "lpVolumeNameBuffer",
+        "description": "A pointer to a buffer that receives the name of a specified volume. The maximum buffer size is        MAX_PATH+1."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nVolumeNameSize",
+        "description": "The length of a volume name buffer, in WCHARs. The maximum buffer size is         MAX_PATH+1. This parameter is ignored if the volume name buffer is not supplied."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPDWORD",
+        "name": "lpVolumeSerialNumber",
+        "description": "A pointer to a variable that receives the volume serial number. This parameter can be NULL if the serial number is not required. This function returns the volume serial number that the operating system assigns when a hard disk is         formatted. To programmatically obtain the hard disk's serial number that the manufacturer assigns, use the         Windows Management Instrumentation (WMI)         Win32_PhysicalMedia property         SerialNumber."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPDWORD",
+        "name": "lpMaximumComponentLength",
+        "description": "A pointer to a variable that receives the maximum length, in WCHARs, of a file         name component  that a specified file system supports. A file name component is the portion of a file name between backslashes. The value that is stored in the variable  that  *lpMaximumComponentLength points to         is used to indicate that a specified file system supports long names. For example, for a FAT file system that         supports long names, the function stores the value 255, rather than the previous 8.3 indicator. Long names can         also be supported on systems that use the NTFS file system."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPDWORD",
+        "name": "lpFileSystemFlags",
+        "description": "A pointer to a variable that receives flags associated with the specified file system. This parameter can be one or more of the following flags. However,         FILE_FILE_COMPRESSION and FILE_VOL_IS_COMPRESSED are mutually         exclusive.  ValueMeaning  FILE_CASE_PRESERVED_NAMES 0x00000002   The specified volume supports preserved case of file names when it places a name on disk.   FILE_CASE_SENSITIVE_SEARCH 0x00000001   The specified volume supports case-sensitive file names.   FILE_FILE_COMPRESSION 0x00000010   The specified volume supports file-based compression.   FILE_NAMED_STREAMS 0x00040000   The specified volume supports named streams.   FILE_PERSISTENT_ACLS 0x00000008   The specified volume preserves and enforces access control lists (ACL). For example, the NTFS file system          preserves and enforces ACLs, and the FAT file system does not.   FILE_READ_ONLY_VOLUME 0x00080000   The specified volume is read-only.   FILE_SEQUENTIAL_WRITE_ONCE 0x00100000   The specified volume supports a single sequential write.   FILE_SUPPORTS_ENCRYPTION 0x00020000   The specified volume supports the Encrypted File System (EFS). For more information, see          File Encryption.   FILE_SUPPORTS_EXTENDED_ATTRIBUTES 0x00800000   The specified volume supports extended attributes. An extended attribute is a piece of          application-specific metadata that an application can associate with a file and is not part of the file's data. Windows Vista and Windows Server 2008:  This value is not supported.   FILE_SUPPORTS_HARD_LINKS 0x00400000   The specified volume supports hard links. For more information, see          Hard Links and Junctions. Windows Vista and Windows Server 2008:  This value is not supported.   FILE_SUPPORTS_OBJECT_IDS 0x00010000   The specified volume supports object identifiers.   FILE_SUPPORTS_OPEN_BY_FILE_ID 0x01000000   The file system supports open by FileID. For more information, see          FILE_ID_BOTH_DIR_INFO. Windows Vista and Windows Server 2008:  This value is not supported.   FILE_SUPPORTS_REPARSE_POINTS 0x00000080   The specified volume supports re-parse points.   FILE_SUPPORTS_SPARSE_FILES 0x00000040   The specified volume supports sparse files.   FILE_SUPPORTS_TRANSACTIONS 0x00200000   The specified volume supports transactions. For more information, see          About KTM.   FILE_SUPPORTS_USN_JOURNAL 0x02000000   The specified volume supports update sequence number (USN) journals. For more information, see          Change Journal Records. Windows Vista and Windows Server 2008:  This value is not supported.   FILE_UNICODE_ON_DISK 0x00000004   The specified volume supports Unicode in file names as they appear on disk.   FILE_VOLUME_IS_COMPRESSED 0x00008000   The specified volume is a compressed volume.   FILE_VOLUME_QUOTAS 0x00000020   The specified volume supports disk quotas."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPWSTR",
+        "name": "lpFileSystemNameBuffer",
+        "description": "A pointer to a buffer that receives the name of the file system, for example, the FAT file system or the        NTFS file system. The buffer size is specified by the nFileSystemNameSize        parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nFileSystemNameSize",
+        "description": "The length of the file system name buffer, in WCHARs. The maximum buffer size         is MAX_PATH+1. This parameter is ignored if the file system name buffer is not supplied."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves a volume GUID path for the volume that is associated with the specified volume mount point (     drive letter, volume GUID path, or mounted folder).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "Use  GetVolumeNameForVolumeMountPoint to obtain a volume GUID path for use with functions such as SetVolumeMountPoint and FindFirstVolumeMountPoint that require a volume GUID path as an input parameter. For more information about volume GUID paths, see  Naming A Volume. In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. Mount points aren't supported by ReFS volumes. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "GetVolumeNameForVolumeMountPoint",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszVolumeMountPoint",
+        "description": "A pointer to a string that contains the path of a mounted folder (for example, \"Y:\\MountX\\\") or a drive letter (for example, \"X:\\\"). The string must end with a trailing backslash ('\\')."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszVolumeName",
+        "description": "A pointer to a string that receives the volume GUID path. This path is of the form \"\\\\?\\Volume{GUID}\\\" where GUID is a GUID that identifies the volume. If there is more than one volume GUID path for the volume, only the first one in the mount manager's cache is returned."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cchBufferLength",
+        "description": "The length of the output buffer, in TCHARs. A reasonable size for the buffer to accommodate the largest possible volume GUID path is 50 characters."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the volume mount point where the specified path is mounted.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call        GetLastError. ",
+    "remarks": "If a specified path is passed, GetVolumePathName      returns the path to the volume mount point, which means that it returns the root of the volume where the end point      of the specified path is located. For example, assume that you have volume D mounted at C:\\Mnt\\Ddrive      and volume E mounted at \"C:\\Mnt\\Ddrive\\Mnt\\Edrive\". Also assume that you      have a file with the path \"E:\\Dir\\Subdir\\MyFile\". If you pass      \"C:\\Mnt\\Ddrive\\Mnt\\Edrive\\Dir\\Subdir\\MyFile\" to      GetVolumePathName, it returns the path      \"C:\\Mnt\\Ddrive\\Mnt\\Edrive\\\". If either a relative directory or a file is passed without a volume qualifier, the function returns the drive      letter of the boot volume. The drive letter of the boot volume is also returned if an invalid file or directory      name is specified without a valid volume qualifier. If a valid volume specifier is given, and the volume exists,      but an invalid file or directory name is specified, the function will succeed and that volume name will be      returned. For examples, see the Examples section of this topic. You must specify a valid Win32 namespace path. If you specify an NT namespace path, for example,      \"\\DosDevices\\H:\" or      \"\\Device\\HardDiskVolume6\", the function returns the drive letter of the      boot volume, not the drive letter of that NT namespace path. For more information about path names and namespaces, see      Naming Files, Paths, and Namespaces. You can specify both local and remote paths. If you specify a local path,      GetVolumePathName returns a full path whose prefix is      the longest prefix that represents a volume. If a network share is specified, GetVolumePathName      returns the shortest path for which GetDriveType returns      DRIVE_REMOTE, which means that the path is validated as a remote drive that exists,      which the current user can access. There are certain special cases that do not return a trailing backslash. These occur when the output buffer      length is one character too short. For example, if lpszFileName is      C: and lpszVolumePathName is 4 characters long, the value      returned is \"C:\\\"; however, if      lpszVolumePathName is 3 characters long, the value returned is      \"C:\". A safer but slower way to set the size of the return buffer is to      call the GetFullPathName function, and then make sure      that the buffer size is at least the same size as the full path that      GetFullPathName returns. If the output buffer is more      than one character too short, the function will fail and return an error. In Windows 8 and Windows Server 2012, this function is supported by the following      technologies.  SMB does not support volume management functions. Trailing path elements that are invalid are ignored. For remote paths, the entire path (not just trailing        elements) is considered invalid if one of the following conditions is true: If the specified path traverses a junction point,        GetVolumePathName returns the volume to which the        junction point refers. For example, if W:\\Adir is a junction point        that points to C:\\Adir, then        GetVolumePathName invoked on        W:\\Adir\\Afile returns \"C:\\\".        If the specified path traverses multiple junction points, the entire chain is followed, and        GetVolumePathName returns the volume to which the        last junction point in the chain refers. If a remote path to a mounted folder or junction point is specified, the path is parsed as a remote path, and        the mounted folder or junction point are ignored. For example if        C:\\Dir_C is linked to        D:\\Dir_D and C: is mapped to        X: on a remote computer, calling        GetVolumePathName and specifying        X:\\Dir_C on the remote computer returns        X:\\. For the following set of examples, U: is mapped to the remote computer       \\\\YourComputer\\C$, and Q is a local drive.  For the following set of examples, the paths contain invalid trailing path elements.  ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "GetVolumePathName",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszFileName",
+        "description": "A pointer to the input path string. Both absolute and relative file and directory names, for example         \"..\", are acceptable in this path. If you specify a relative directory or file name without a volume qualifier,         GetVolumePathName returns the drive letter of the         boot volume. If this parameter is an empty string, \"\", the function fails but the last error is set to         ERROR_SUCCESS."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszVolumePathName",
+        "description": "A pointer to a string that receives the volume mount point for the input path."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cchBufferLength",
+        "description": "The length of the output buffer, in TCHARs."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves a list of drive letters and mounted folder paths for the specified volume.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. If the buffer is not large enough to         hold the complete list, the error code is ERROR_MORE_DATA and the         lpcchReturnLength parameter receives the required buffer size. ",
+    "remarks": "In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. For an example, see       Displaying Volume Paths. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "GetVolumePathNamesForVolumeName",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszVolumeName",
+        "description": "A volume GUID path for the volume. A volume GUID        path is of the form        \"\\\\?\\Volume{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\\\"."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszVolumePathNames",
+        "description": "A pointer to a buffer that receives the list of drive letters and mounted folder paths. The list is an        array of null-terminated strings terminated by an additional NULL character. If the        buffer is not large enough to hold the complete list, the buffer holds as much of the list as possible."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cchBufferLength",
+        "description": "The length of the lpszVolumePathNames buffer, in        TCHARs, including all NULL characters."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDWORD",
+        "name": "lpcchReturnLength",
+        "description": "If the call is successful, this parameter is the number of TCHARs copied to        the lpszVolumePathNames buffer. Otherwise, this parameter is the size of the buffer        required to hold the complete list, in TCHARs."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves information about MS-DOS device names. The function can obtain the current      mapping for a particular MS-DOS device name. The function can also obtain a list of all existing MS-DOS device      names.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "FileAPI.h (include Windows.h);  WinBase.h on Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the number of TCHARs stored into         the buffer pointed to by lpTargetPath. If the function fails, the return value is zero. To get extended error information, call         GetLastError. If the buffer is too small, the function fails and the last error code is         ERROR_INSUFFICIENT_BUFFER. ",
+    "remarks": "The DefineDosDevice function enables an application      to create and modify the junctions used to implement the MS-DOS device namespace. Windows Server 2003 and Windows XP:  QueryDosDevice first searches the Local MS-DOS       Device namespace for the specified device name. If the device name is not found, the function will then search       the Global MS-DOS Device namespace. When all existing MS-DOS device names are queried, the list of device names that are returned is dependent on       whether it is running in the \"LocalSystem\" context. If so, only the device names included in the Global MS-DOS       Device namespace will be returned. If not, a concatenation of the device names in the Global and Local MS-DOS       Device namespaces will be returned. If a device name exists in both namespaces,       QueryDosDevice will return the entry in the Local MS-DOS       Device namespace. For more information on the Global and Local MS-DOS Device namespaces and changes to the accessibility of       MS-DOS device names, see       Defining an MS DOS Device Name. In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. For an example, see       Obtaining a File Name From a File Handle       or Displaying Volume Paths. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Volume Management",
+    "name": "QueryDosDevice",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpDeviceName",
+        "description": "An MS-DOS device name string specifying the target of the query. The device name cannot have a trailing         backslash; for example, use \"C:\", not \"C:\\\". This parameter can be NULL. In that case, the         QueryDosDevice function will store a list of all         existing MS-DOS device names into the buffer pointed to by lpTargetPath."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpTargetPath",
+        "description": "A pointer to a buffer that will receive the result of the query. The function fills this buffer with one or         more null-terminated strings. The final null-terminated string is followed by an additional         NULL. If lpDeviceName is non-NULL, the function retrieves         information about the particular MS-DOS device specified by lpDeviceName. The first         null-terminated string stored into the buffer is the current mapping for the device. The other null-terminated         strings represent undeleted prior mappings for the device. If lpDeviceName is NULL, the function retrieves a list of         all existing MS-DOS device names. Each null-terminated string stored into the buffer is the name of an existing         MS-DOS device, for example, \\Device\\HarddiskVolume1 or \\Device\\Floppy0."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "ucchMax",
+        "description": "The maximum number of TCHARs that can be stored into the buffer pointed to by        lpTargetPath."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets the label of a file system volume.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. ",
+    "remarks": "The maximum volume label length is 32 characters. FAT filesystems:  The maximum volume label length is 11 characters. A label is a user-friendly name that a user assigns to a volume to make it easier to recognize. A volume can      have a label, a drive letter, both, or neither. For more information, see      Naming a Volume. In Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "SetVolumeLabel",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpRootPathName",
+        "description": "A pointer to a string that contains the volume's drive letter (for example, X:\\) or the path        of a mounted folder that is associated with the volume (for example, Y:\\MountX\\). The string must        end with a trailing backslash ('\\'). If this parameter is NULL, the root of the        current directory is used."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpVolumeName",
+        "description": "A pointer to a string that contains the new label for the volume. If this parameter is        NULL, the function deletes any existing label from the specified volume and does not        assign a new label."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Associates a volume with a drive letter or a directory on another volume.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinBase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. If the lpszVolumeMountPoint parameter contains a path to a mounted folder, GetLastError returns ERROR_DIR_NOT_EMPTY, even if the directory is empty. ",
+    "remarks": "When this function is used to associate a volume with a directory on another volume, the associated directory is called a mounted folder. It is an error to associate a volume with a directory that has any files or subdirectories in it. This      error occurs for system and hidden directories as well as other directories, and it occurs for system and hidden      files. When mounted folders are created on a volume on a clustered disk, they may be deleted unexpectedly under certain      circumstances. For information on how to create and configure mounted folders to ensure that this does not happen,      see Cluster Disk and Drive Connection Problems. IIn Windows 8 and Windows Server 2012, this function is supported by the following technologies.  SMB does not support volume management functions. For CsvFS a new mount point will not be replicated to the other nodes on the cluster. For an example, see       Creating a Mounted Folder. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Volume Management",
+    "name": "SetVolumeMountPoint",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszVolumeMountPoint",
+        "description": "The user-mode path to be associated with the volume. This may be a drive letter (for example, \"X:\\\") or a directory        on another volume (for example, \"Y:\\MountX\\\"). The string must end with a trailing backslash ('\\')."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszVolumeName",
+        "description": "A volume GUID path for the volume. This string must be of the form        \"\\\\?\\Volume{GUID}\\\" where GUID is a GUID that identifies        the volume. The \"\\\\?\\\" turns off path parsing and is ignored as part of the path, as discussed in        Naming a Volume."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  }
+]
+

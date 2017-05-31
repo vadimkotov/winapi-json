@@ -1,0 +1,2270 @@
+[
+  {
+    "n_arguments": 7,
+    "description": "Acquires a use license from the Software License Server (SLS).",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLActivateProduct",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID*  A pointer to the product ID."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "UINT",
+        "name": "cbAppSpecificData",
+        "description": "Type: UINT The size of application specific data."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const PVOID",
+        "name": "pvAppSpecificData",
+        "description": "Type: const PVOID A pointer to application specific data. The license server can use this      \t\tinformation to embed application specific run-time information."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SL_ACTIVATION_INFO_HEADER",
+        "name": "*pActivationInfo",
+        "description": "Type: const SL_ACTIVATION_INFO_HEADER* A pointer to additional product activation information."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCWSTR",
+        "name": "pwszProxyServer",
+        "description": "Type: PCWSTR The proxy server name. Set this to NULL to use automatic proxy discovery."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WORD",
+        "name": "wProxyPort",
+        "description": "Type: WORD The proxy server port. To use the default port, set wProxyPort to 0."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Gets a XrML genuine ticket acquired from the Software Licensing Server (SLS).",
+    "library": "Slcext.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see Common HRESULT Values. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLAcquireGenuineTicket",
+    "is_callback": 0,
+    "dll": "Slcext.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "VOID",
+        "name": "**ppTicketBlob",
+        "description": "The address of a pointer to a buffer that receives the ticket BLOB. When you have finished using this buffer, free it by calling the LocalFree function."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbTicketBlob",
+        "description": "A pointer to the size, in bytes, of the ppTicketBlob buffer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszTemplateId",
+        "description": "A pointer to a null-terminated string that contains the ID of the BLOB template stored on the SLS."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszServerUrl",
+        "description": "A pointer to a null-terminated string that contains the URL of the SLS."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCWSTR",
+        "name": "pwszClientToken",
+        "description": "Reserved."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes the Software Licensing Client (SLC) context handle. When this function is called, \tthe associated context on the Software Licensing Service (SLS) is released.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLClose",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Let an application to exercise rights on a locally-stored licenses. Calling this function binds a license to the right.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLConsumeRight",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pAppId",
+        "description": "Type: const SLID* A pointer to the identifier of the application who's right is going to be           \t\tconsumed."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to the identifier of product SKU. If set to NULL, all of the  product  SKU's           \t\tlicenses will be consumed."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCWSTR",
+        "name": "pwszRightName",
+        "description": "Type: PCWSTR The name of right to be consumed."
+      },
+      {
+        "in_out": "_Reserved_",
+        "type": "PVOID",
+        "name": "pvReserved",
+        "description": "Type: PVOID Reserved."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Deposits licensing information previously collected and gathered using the SLGatherMigrationBlob function.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLDepositMigrationBlob",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "Type: HANDLE The file handle for the licensing state BLOB."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Gathers licensing information for the provided file handle. This licensing information   \tcan later be applied or deposited using the SLDepositMigrationBlob function.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGatherMigrationBlob",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bMigratableOnly",
+        "description": "Type: BOOL TRUE if only data that can be migrated should be gathered; FALSE otherwise."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCWSTR",
+        "name": "pwszEncryptorUri",
+        "description": "Type: LPCWSTR The URI of the encrypting session key used to encrypt       \t\tany sensitive data in the output BLOB. Only valid values are NULL and SL_DEFAULT_MIGRATION_ENCRYPTOR_URI,      \t\twhich both refer to the same key."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hFile",
+        "description": "Type: HANDLE The handle to the file where the licensing state BLOB should be written."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Deposits Installation ID (IID) and Confirmation ID (CID) for offline activation.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLDepositOfflineConfirmationId",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to the product ID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszInstallationId",
+        "description": "Type: PCWSTR The Installation ID generated by the SLGenerateOfflineInstallationId function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszConfirmationId",
+        "description": "Type: PCWSTR The confirmation ID CSR."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Deposits Installation ID (IID) and Confirmation ID (CID) for offline activation.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLDepositOfflineConfirmationIdEx",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to the product ID."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SL_ACTIVATION_INFO_HEADER",
+        "name": "*pActivationInfo",
+        "description": "Type: const SL_ACTIVATION_INFO_HEADER* A pointer to additional information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszInstallationId",
+        "description": "Type: PCWSTR The Installation ID generated by the SLGenerateOfflineInstallationId function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszConfirmationId",
+        "description": "Type: PCWSTR The Confirmation ID CSR."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sends a specified event to a registered listener.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLFireEvent",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszEventId",
+        "description": "Type: PCWSTR The ID of the event to be fired."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pApplicationId",
+        "description": "Type: const SLID* A pointer to the application ID."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Generates the  Installation ID (IID).     \t Users can send the IID to CSR to get the Confirmation ID (CID).",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGenerateOfflineInstallationId",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to the product ID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWSTR",
+        "name": "*ppwszInstallationId",
+        "description": "Type: PWSTR* The Installation ID string. Once you are finished, call the LocalFree function to       \t\tfree the memory."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Generates Installation ID (IID). Users can send the IID to CSR to get the Confirmation ID (CID).",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGenerateOfflineInstallationIdEx",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer the product ID."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SL_ACTIVATION_INFO_HEADER",
+        "name": "*pActivationInfo",
+        "description": "Type: const SL_ACTIVATION_INFO_HEADER* A pointer to additional information."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWSTR",
+        "name": "*ppwszInstallationId",
+        "description": "Type: PWSTR* The Installation ID string. Once you are finished, call the LocalFree function to       \t\tfree the memory."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Gets information about the specified application.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetApplicationInformation",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pApplicationId",
+        "description": "Type: const SLID* A pointer to the application ID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "Type: PCWSTR  ValueMeaning  SL_INFO_KEY_IS_KMS L\"IsKeyManagementService\"   Indicates whether the machine has a Key Management Service (KMS) enabled.   SL_INFO_KEY_KMS_CURRENT_COUNT L\"KeyManagementServiceCurrentCount\"    The number of volume clients on a KMS host that are currently active.   SL_INFO_KEY_KMS_REQUIRED_CLIENT_COUNT L\"KeyManagementServiceRequiredClientCount\"   The minimum number of VL clients required to connect to a KMS host for enabling activation.   SL_INFO_KEY_KMS_UNLICENSED_REQUESTS L\"KeyManagementServiceUnlicensedRequests\"   The number of KMS requests from VL clients with License Status=Unlicensed.   SL_INFO_KEY_KMS_LICENSED_REQUESTS L\"KeyManagementServiceLicensedRequests\"   The number of KMS requests from VL clients with License Status=Licensed.   SL_INFO_KEY_KMS_OOB_GRACE_REQUESTS L\"KeyManagementServiceOOBGraceRequests\"   The number of KMS requests from VL clients with License Status=OOB Grace.   SL_INFO_KEY_KMS_OOT_GRACE_REQUESTS L\"KeyManagementServiceOOTGraceRequests\"   The number of KMS requests from VL clients with License Status=OOT Grace.   SL_INFO_KEY_KMS_NON_GENUINE_GRACE_REQUESTS L\"KeyManagementServiceNonGenuineGraceRequests\"   The number of KMS requests from VL clients with License Status=Non-Genuine Grace.   SL_INFO_KEY_KMS_NOTIFICATION_REQUESTS L\"KeyManagementServiceNotificationRequests\"   The number of KMS requests from VL clients with License Status=Notification.   SL_INFO_KEY_KMS_TOTAL_REQUESTS L\"KeyManagementServiceTotalRequests\"   Total number of valid KMS requests.   SL_INFO_KEY_KMS_FAILED_REQUESTS L\"KeyManagementServiceFailedRequests\"   Total number of failed KMS requests."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "SLDATATYPE",
+        "name": "*peDataType",
+        "description": "Type: SLDATATYPE* A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer.  The following values are valid.  ValueMeaning  SL_DATA_SZ    UNICODE string   SL_DATA_DWORD    DWORD   SL_DATA_BINARY    Binary blob"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbValue",
+        "description": "Type: UINT* A pointer to the size, in bytes, of the ppbValue buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*ppbValue",
+        "description": "Type: PBYTE* If successful, the data is returned in the buffer allocated by the SLC.        \t\tWhen finished using the memory, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Queries a policy from the set stored with the SLPersistApplicationPolicies function      \tand loaded using the SLLoadApplicationPolicies function.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetApplicationPolicy",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLP",
+        "name": "hPolicyContext",
+        "description": "Type: HSLP The context handle returned by the SLLoadApplicationPolicies function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "Type: PCWSTR The name of the policy to query, or \"*\" for all policies."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "SLDATATYPE",
+        "name": "*peDataType",
+        "description": "Type: SLDATATYPE* A pointer to the type of the data, if available."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbValue",
+        "description": "Type: UINT* A pointer to  the size, in bytes, of the data, if  available."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*ppbValue",
+        "description": "Type: PBYTE*  The data, if available."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Stores the current consumed policies to disk for fast policy access.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "If the internal consumption fails then any current cache data is deleted.    \tSubsequent calls to the SLLoadApplicationPolicies function will return      \tSL_E_APPLICATION_POLICIES_MISSING. The SLPersistApplicationPolicies function returns success if the policy update succeeds,    \tregardless of internal consumption results. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLPersistApplicationPolicies",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pApplicationId",
+        "description": "Type: const SLID* A pointer to the identifier of the application ID to be used for the fast policy queries."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to the identifier of the ACID to be used for the fast policy queries."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD Additional flags."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Loads the application policies set with the SLPersistApplicationPolicies function    \tfor use by the SLGetApplicationPolicy function.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLLoadApplicationPolicies",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pApplicationId",
+        "description": "Type: const SLID* A pointer to the identifier of the application ID to be used for the fast policy queries."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to the identifier of the ACID to be used for the fast policy queries."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD Additional flags."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HSLP",
+        "name": "*phPolicyContext",
+        "description": "Type: HSLP* A pointer to a policy context for use in the SLGetApplicationPolicy function and     \t\tthe SLUnloadApplicationPolicies function."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Gets the authentication results.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetAuthenticationResult",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbValue",
+        "description": "Type: UINT* A pointer to the size, in bytes, of the authentication result."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*ppbValue",
+        "description": "Type: PBYTE* A pointer to the authentication result. When finished using the memory, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Gets information about the genuine state of a Windows computer.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see Common HRESULT Values. This function can return the following values defined in Slerror.h.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetGenuineInformation",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pAppId",
+        "description": "A pointer to an SLID structure that specifies the application to check."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "A pointer to a null-terminated string that contains the name associated with the value to retrieve. The following names are valid.  ValueMeaning  SL_BRT_DATA   Get a value that specifies whether the computer is genuine.   SL_BRT_COMMIT   Get a value that specifies whether the computer is in nongenuine grace period mode.   SL_GENUINE_RESULT   Get the value returned from the last call to the SLAcquireGenuineTicket function.   SL_NONGENUINE_GRACE_FLAG   Gets the cause of the computer being put into nongenuine grace period mode."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "SLDATATYPE",
+        "name": "*peDataType",
+        "description": "A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbValue",
+        "description": "A pointer to the size, in bytes, of the ppbValue buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BYTE",
+        "name": "**ppbValue",
+        "description": "The address of a pointer to an array of BYTE pointers that specifies the value associated with the name specified by the pwszValueName parameter. When you have finished using this array, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Specifies information about the genuine status of a Windows computer.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see Common HRESULT Values. This function can return the following values defined in Winerror.h and Slerror.h.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLSetGenuineInformation",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pAppId",
+        "description": "A pointer to an SLID structure that specifies the application for which to set information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "A pointer to a null-terminated string that contains the name associated with the value to set. The following names are valid.  ValueMeaning  SL_BRT_DATA   Set information about the genuine state of the computer.   SL_BRT_COMMIT   If the SL_BRT_DATA value  is set, setting SL_BRT_COMMIT puts the computer in nongenuine grace period mode."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SLDATATYPE",
+        "name": "eDataType",
+        "description": "A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the pbValue buffer."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "UINT",
+        "name": "cbValue",
+        "description": "A pointer to the size, in bytes, of the pbValue buffer."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const BYTE",
+        "name": "*pbValue",
+        "description": "A pointer to an array of BYTE values that specify the value associated with the name specified by the pwszValueName parameter. Some name-value pairs allow this parameter to be NULL. In this case, the existing value of the name-value pair is deleted. When you have finished using this array, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Specifies information about the genuine status of a Windows computer.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetGenuineInformationEx",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pAppId",
+        "description": "Type: const SLID* A pointer to the application ID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "Type: PCWSTR The name associated with the value of the property to set."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "SLDATATYPE",
+        "name": "*peDataType",
+        "description": "Type: SLDATATYPE* A pointer to a value of the SLDATATYPE enumeration that specifies the data type in the ppbValue buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbValue",
+        "description": "Type: UINT* A pointer to the size, in bytes, of the ppbValue buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BYTE",
+        "name": "**ppbValue",
+        "description": "Type: BYTE** A pointer to the genuine status retrieved.  When finished using the memory, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "This function returns a list of product key IDs associated      \twith the specified Product SKU ID.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetInstalledProductKeyIds",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC session."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to the product SKU ID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pnProductKeyIds",
+        "description": "Type: UINT* A pointer to the number of product Key IDs returned."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SLID",
+        "name": "**ppProductKeyIds",
+        "description": "Type: SLID** A pointer to an array of the product Key IDs."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[SLInstallSAMLicense is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.  ]",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see Common HRESULT Values. ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetInstalledSAMLicenseApplications",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pnReturnedAppIds",
+        "description": "A pointer to the number of elements in the ppReturnedAppIds array."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SLID",
+        "name": "**ppReturnedAppIds",
+        "description": "The address of a pointer to an array of pointers to SLID structures that identify applications."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[SLInstallSAMLicense is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.  ]",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see Common HRESULT Values. This function can return the following values defined in Slerror.h.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLInstallSAMLicense",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pApplicationId",
+        "description": "A pointer to an SLID structure that specifies the application for which to install a SAM license."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cbXmlLicenseData",
+        "description": "The size, in bytes, of the pbXmlLicenseData buffer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const BYTE",
+        "name": "*pbXmlLicenseData",
+        "description": "A pointer to an array of BYTE pointers that specifies data for the SAM license."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Returns the license file BLOB.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetLicense",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pLicenseFileId",
+        "description": "Type: const SLID* A pointer to the license file ID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbLicenseFile",
+        "description": "Type: UINT* A pointer to the size, in bytes, of the license file BLOB."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*ppbLicenseFile",
+        "description": "Type: PBYTE* The license file BLOB."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Checks if the license BLOB has been  \tinstalled already.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If the License has been previously installed, it returns a SLID.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetLicenseFileId",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cbLicenseBlob",
+        "description": "The size, in bytes, of the license BLOB."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const BYTE",
+        "name": "*pbLicenseBlob",
+        "description": "A pointer to the number of licenses in the BLOB."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SLID",
+        "name": "*pLicenseFileId",
+        "description": "A pointer to the license file ID."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Gets the specified license information.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetLicenseInformation",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pSLLicenseId",
+        "description": "Type: const SLID* A pointer to the license ID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "Type: PCWSTR The name associated with the value to retrieve.. The following values are valid.  ValueMeaning  SL_INFO_KEY_DESCRIPTION L\"Description\"   The description of the license.   SL_INFO_KEY_LICENSE_TYPE L\"LicenseType\"   The type of the license.   SL_INFO_KEY_VERSION L\"Version\"   The version of the license."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "SLDATATYPE",
+        "name": "*peDataType",
+        "description": "Type: SLDATATYPE* A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer. Acceptable values are:  ValueMeaning  SL_DATA_SZ    UNICODE string   SL_DATA_DWORD    DWORD   SL_DATA_BINARY    Binary BLOB"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbValue",
+        "description": "Type: UINT* A pointer to the size, in bytes, of the ppbValue buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*ppbValue",
+        "description": "Type: PBYTE* If successful, the data is returned in the buffer allocated by SLC.      \t\tWhen finished using the memory, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Gets the  licensing status of the specified application or SKU.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetLicensingStatusInformation",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC Handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SLID",
+        "name": "*pAppID",
+        "description": "Type: const SLID* A pointer to a SLID that represents the application ID. \t\t  pAppIDpProductSkuIdResults  NULL  NULL  Get previous right consumption result.   NULL  Not NULL  Get licensing status of this SKU.   Not NULL  NULL  Get licensing status of this application.   Not NULL  Not NULL  Get licensing status of this application/SKU."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to a SLID that represents the product ID. \t\t  pAppIDpProductSkuIdResults  NULL  NULL  Get previous right consumption result.   NULL  Not NULL  Get licensing status of this SKU.   Not NULL  NULL  Get licensing status of this application.   Not NULL  Not NULL  Get licensing status of this application/SKU."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCWSTR",
+        "name": "pwszRightName",
+        "description": "Type: PCWSTR Must be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pnStatusCount",
+        "description": "Type: UINT* A pointer to the number of the SKU's status."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SL_LICENSING_STATUS",
+        "name": "**ppLicensingStatus",
+        "description": "Type: SL_LICENSING_STATUS** A pointer to the licensing status of the SKU."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Gets the registered product key ID associated with the product.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetPKeyId",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszPKeyAlgorithm",
+        "description": "The product key algorithm."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszPKeyString",
+        "description": "The product key string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cbPKeySpecificData",
+        "description": "The size, in bytes, of the product key specific data. If there is no PKey specific data, set cbPKeySpecificData to 0."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const BYTE",
+        "name": "*pbPKeySpecificData",
+        "description": "A pointer to the product key specific data. If there is no PKey specific data, set pbPKeySpecificData to NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SLID",
+        "name": "*pPKeyId",
+        "description": "A pointer to the product key ID."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Gets the information of the specified product key.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetPKeyInformation",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pPKeyId",
+        "description": "Type: const SLID* A pointer to the PKey ID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "Type: PCWSTR The name associated with the value to retrieve.  The following names are valid.  ValueMeaning  SL_INFO_KEY_DIGITAL_PID L\"DigitalPID\"    Formatted PID structure for a PID4   SL_INFO_KEY_DIGITAL_PID2 L\"DigitalPID2\"   Formatted PID structure for a PID2   SL_INFO_KEY_PARTIAL_PRODUCT_KEY L\"PartialProductKey\"   First 5 characters of product key   SL_INFO_KEY_PRODUCT_SKU_ID L\"ProductSkuId\"   SKU SLID   SL_INFO_KEY_CHANNEL L\"Channel\"    Channel ID"
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "SLDATATYPE",
+        "name": "*peDataType",
+        "description": "Type: SLDATATYPE* The data type.  ValueMeaning  SL_DATA_SZ    UNICODE string   SL_DATA_DWORD    DWORD   SL_DATA_BINARY    Binary BLOB"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbValue",
+        "description": "Type: UINT* A pointer to the size, in bytes, of the ppbValue buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*ppbValue",
+        "description": "Type: PBYTE* A pointer to the data returned by SLC.           \t\tWhen finished using the memory, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Gets the policy information after right has been consumed successfully.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetPolicyInformation",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "Type: PCWSTR The policy name."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "SLDATATYPE",
+        "name": "*peDataType",
+        "description": "Type: SLDATATYPE* A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer.  ValueMeaning  SL_DATA_SZ    UNICODE string   SL_DATA_DWORD    DWORD   SL_DATA_BINARY    Binary BLOB"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbValue",
+        "description": "Type: UINT* A pointer to the size, in bytes, of the ppbValue buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*ppbValue",
+        "description": "Type: PBYTE* If successful, the data is returned in the buffer allocated by SLC.  \t\tWhen finished using the memory, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Gets the policy information after right has been consumed successfully.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetPolicyInformationDWORD",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "Type: PCWSTR The policy name."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*pdwValue",
+        "description": "Type: DWORD* A pointer to the return value."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Gets information about the specified product SKU.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetProductSkuInformation",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to the SKU ID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "Type: PCWSTR The name associated with the value to retrieve.  The following names are valid.  ValueMeaning  SL_INFO_KEY_NAME L\"Name\"   The product name   SL_INFO_KEY_DESCRIPTION L\"Description\"    Description of the product   SL_INFO_KEY_AUTHOR L\"Author\"   Author of the product"
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "SLDATATYPE",
+        "name": "*peDataType",
+        "description": "Type: SLDATATYPE* A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer.  ValueMeaning  SL_DATA_SZ    UNICODE string   SL_DATA_DWORD    DWORD   SL_DATA_BINARY    Binary BLOB"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbValue",
+        "description": "Type: UINT* A pointer to the size, in bytes,  of the ppbValue buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*ppbValue",
+        "description": "Type: PBYTE* If successful, the data is returned in the buffer allocated by SLC.          \t\tWhen finished using the memory, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Gets referral information for the specified product.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetReferralInformation",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle retrieved by previous call to the SLOpen function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SLREFERRALTYPE",
+        "name": "eReferralType",
+        "description": "Type: SLREFERRALTYPE The referral type."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pSkuOrAppId",
+        "description": "Type: const SLID* A pointer to the SLID of the application or SKU from which to obtain information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "Type: PCWSTR The name associated with the value to retrieve.  The following names are valid.  ValueMeaning  SL_PARTNERID    Partner ID for the license reseller   SL_REFERRALID    Referral ID for the license reseller   SL_MERCHANTCOMMERCEURL    The merchant URL to purchase additional licenses   SL_MERCHANTUPGRADEURL    The merchant URL to purchase additional licenses   SL_DOWNLOADURL    A forward link to download the associated application   SL_INSTALLATIONPARAMETERS    Any parameters that are used when running the associated application's installer   SL_MERCHANTSUPPORTPHONENUMBER    The merchant support phone number(s)   SL_MERCHANTSUPPORTEMAIL    The merchant support email address   SL_MERCHANTSUPPORTURL    The merchant support URL   SL_SERIALIZEDDATA    A generic data BLOB"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWSTR",
+        "name": "*ppwszValue",
+        "description": "Type: PWSTR* The value to store. When finished using the memory, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[SLGetSAMLicense is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.  ]",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see Common HRESULT Values. This function can return the following values defined in Slerror.h.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetSAMLicense",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pApplicationId",
+        "description": "A pointer to an SLID structure that specifies an application."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbXmlLicenseData",
+        "description": "A pointer to the size, in bytes, of the ppbXmlLicenseData array."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*ppbXmlLicenseData",
+        "description": "A pointer to an array of BYTE pointers that specifies license file information about the application identified by the pApplicationId parameter. When you have finished using this array, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Checks the server status according to the specified      \tURL and RequestType.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "Callers can either pass in the URL kept by themselves or get the SKU     \tspecific URL by calling the GetProductSkuInformation function and query each      \tURL. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetServerStatus",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszServerURL",
+        "description": "Type: PCWSTR The URL of the server."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszAcquisitionType",
+        "description": "Type: PCWSTR The acquisition type.  SL_INFO_KEY_SECURE_PROCESSOR_ACTIVATION_URL (L\"SPCURL\") SL_INFO_KEY_RIGHT_ACCOUNT_ACTIVATION_URL (L\"RACURL\") SL_INFO_KEY_PRODUCT_KEY_ACTIVATION_URL (L\"PKCURL\") SL_INFO_KEY_USE_LICENSE_ACTIVATION_URL (L\"EULURL\") SL_INFO_KEY_PRODUCT_ACTIVATION_URL (L\"PAURL\")"
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PCWSTR",
+        "name": "pwszProxyServer",
+        "description": "Type: PCWSTR The proxy server name. Set to NULL for automatic proxy discovery."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "WORD",
+        "name": "wProxyPort",
+        "description": "Type: WORD The proxy server port. Set to 0 to use the default port."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HRESULT",
+        "name": "*phrStatus",
+        "description": "Type: HRESULT* A pointer to the server status."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Gets global data information.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetServiceInformation",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "Type: PCWSTR The name associated with the value to retrieve.  The following names are valid.  ValueMeaning  SL_INFO_KEY_VERSION L\"Version\"   Version of SL service. e.g. \"1.2.3.4\"   SL_INFO_KEY_SYSTEM_STATE L\"SystemState\"   System State   SL_INFO_KEY_ACTIVE_PLUGINS L\"ActivePlugins\"    Fully-qualified DLL paths for all active plugins          \t\t\t\t(NULL delimited and double NULL-terminated)   SL_INFO_KEY_SECURE_STORE_ID L\"SecureStoreId\"   Secure store ID (GUID)   SL_INFO_KEY_SESSION_MACHINE_ID L\"SessionMachineId\"   Session machine ID (Binary BLOB)"
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "SLDATATYPE",
+        "name": "*peDataType",
+        "description": "Type: SLDATATYPE* A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer.  ValueMeaning  SL_DATA_SZ    UNICODE string   SL_DATA_DWORD    DWORD   SL_DATA_BINARY    Binary blob   SL_DATA_MULTI_SZ    Double null-terminated UNICODE string array"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbValue",
+        "description": "Type: UINT* A pointer to the size, in bytes, of the ppbValue buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*ppbValue",
+        "description": "Type: PBYTE* If successful, the data is returned in the buffer allocated by SLC.     \t\tWhen finished using the memory, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Gets a list of SLIDs according to the input query ID type and the ID value.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "The following queries combinations are supported.   ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetSLIDList",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SLIDTYPE",
+        "name": "eQueryIdType",
+        "description": "Type: SLIDTYPE The type of input ID."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SLID",
+        "name": "*pQueryId",
+        "description": "Type: const SLID* A pointer to the input ID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SLIDTYPE",
+        "name": "eReturnIdType",
+        "description": "Type: SLIDTYPE The type of returned IDs."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pnReturnIds",
+        "description": "Type: UINT* A pointer to the number of returned IDs."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SLID",
+        "name": "**ppReturnIds",
+        "description": "Type: SLID** An array of returned IDs."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the value portion of a name-value pair from the licensing policy of a software component.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see Common HRESULT Values. This function can return the following values defined in Slerror.h.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetWindowsInformation",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "A pointer to a null-terminated string that contains the name associated with the value to retrieve."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "SLDATATYPE",
+        "name": "*peDataType",
+        "description": "A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT",
+        "name": "*pcbValue",
+        "description": "A pointer to the size, in bytes, of the ppbValue buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PBYTE",
+        "name": "*ppbValue",
+        "description": "A pointer to an array of BYTE pointers that specifies the value associated with the name specified by the pwszValueName parameter. When you have finished using this array, free it by calling the LocalFree function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the DWORD value portion of a name-value pair from the licensing policy of a software component.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see Common HRESULT Values. This function can return the following values defined in Slerror.h.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLGetWindowsInformationDWORD",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszValueName",
+        "description": "A pointer to a null-terminated string that contains the name associated with the value to retrieve."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*pdwValue",
+        "description": "A pointer to the value associated with the name specified by the pwszValueName parameter."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Stores the specified license and returns a license file ID.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLInstallLicense",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cbLicenseBlob",
+        "description": "Type: UINT Size of license BLOB."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const BYTE",
+        "name": "*pbLicenseBlob",
+        "description": "Type: const BYTE* A pointer to the licenses in the BLOB."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SLID",
+        "name": "*pLicenseFileId",
+        "description": "Type: SLID* A pointer to the license file ID."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Registers the product key with SL.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLInstallProofOfPurchase",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszPKeyAlgorithm",
+        "description": "Type: PCWSTR The product key algorithm."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszPKeyString",
+        "description": "Type: PCWSTR The product key string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cbPKeySpecificData",
+        "description": "Type: UINT The size, in bytes, of product key specific data. If there is no PKey specific data, set cbPKeySpecificData to 0."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PBYTE",
+        "name": "pbPKeySpecificData",
+        "description": "Type: PBYTE A pointer to the product key specific data. If there is no PKey specific data, set pbPKeySpecificData to NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SLID",
+        "name": "*pPKeyId",
+        "description": "Type: SLID* A pointer to an identifier of the registered product key. This SLID can be used to reference PKey information later."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "Register the product key with SL.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLInstallProofOfPurchaseEx",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pApplicationId",
+        "description": "Type: const SLID* A pointer to the application ID."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to the product SKU ID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszPKeyAlgorithm",
+        "description": "Type: PCWSTR The product key algorithm."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszPKeyString",
+        "description": "Type: PCWSTR The product key string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cbPKeySpecificData",
+        "description": "Type: UINT The size, in bytes, of the product key specific data. If no PKey specific data exists, set cbPKeySpecificData to 0."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PBYTE",
+        "name": "pbPKeySpecificData",
+        "description": "Type: PBYTE A pointer to product key specific data. If no PKey specific data exists, set pbPKeySpecificData to NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SLID",
+        "name": "*pPKeyId",
+        "description": "Type: SLID* A pointer to the  identifier of the registered product key. Used to reference PKey information."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Checks whether the specified application is a genuine Windows installation.",
+    "library": "Slwga.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see Common HRESULT Values. ",
+    "remarks": "This function checks the Tampered flag of the license associated with the specified application. If the license is not valid, or if the Tampered flag of the license is set, the installation is not considered valid. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLIsGenuineLocal",
+    "is_callback": 0,
+    "dll": "Slwga.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pAppId",
+        "description": "A pointer to an SLID structure that specifies the application to check."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SL_GENUINE_STATE",
+        "name": "*pGenuineState",
+        "description": "A pointer to a value of the SL_GENUINE_STATE enumeration that specifies the state of the installation."
+      },
+      {
+        "in_out": "_Inout_opt_",
+        "type": "SL_NONGENUINE_UI_OPTIONS",
+        "name": "*pUIOptions",
+        "description": "A pointer to an SL_NONGENUINE_UI_OPTIONS structure that specifies a dialog box to display if the installation is not genuine. If the value of this parameter is NULL, no dialog box is displayed."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Checks whether the specified application installation is genuine.",
+    "library": "Slwga.lib",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see Common HRESULT Values. ",
+    "remarks": "This function checks the Tampered flag of the license associated with the specified application and the SKU, if specified. If the license is not valid, or if the Tampered flag of either license is set, the installation is not considered genuine. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLIsGenuineLocalEx",
+    "is_callback": 0,
+    "dll": "Slwga.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pAppId",
+        "description": "A pointer to an SLID structure that specifies the application to check."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SLID",
+        "name": "pSkuId",
+        "description": "A pointer to an SLID structure that specifies the SKU of the application to check. If this parameter is not NULL, this function uses the value of this parameter instead of the value of the pAppId parameter to check whether the application installation is genuine. If the SKU license contains a ProductUniquenessGroupId  value, that value is also used to check whether the application is genuine."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SL_GENUINE_STATE",
+        "name": "*pGenuineState",
+        "description": "A pointer to a value of the SL_GENUINE_STATE enumeration that specifies the state of the installation.  This function does not change the value of this parameter if the return value is any value other than S_OK. If this parameter is NULL, the function fails with a return value of E_INVALIDARG."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Initializes the Software Licensing Client (SLC) \tand connects SLC to the Software Licensing Service (SLS).  \tIf the function succeeds, a context handle is returned for subsequent calls.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLOpen",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "HSLC",
+        "name": "*phSLC",
+        "description": "Type: HSLC* A pointer to a context handle returned from the Software Licensing Service."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Associates information with the specified product for both online and phone activation.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLPersistRTSPayloadOverride",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC Handle retrieved by previous call to the SLOpen function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pApplicationId",
+        "description": "Type: const SLID* A pointer to the identifier of the application ID to be used for the fast policy queries."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to the identifier of the ACID to be used for the fast policy queries."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "*pbData",
+        "description": "Type: BYTE* A pointer to the byte data that will be sent during activation. This function assumes the data is composed of a 20-bit value stored in the first three bytes:       \t\tByte[0] is the LSB of the HIWORD, Byte[1] is the HSB of the LOWORD, and Byte[2] is the LSB of the LOWORD.    \t\tAny value composed of these three bytes that exceeds 20 bits will be rejected with E_INVALIDARG."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbData",
+        "description": "Type: DWORD The number of bytes that will be stored.  This must be set to 3."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "[This API is not available to all Windows/Windows Phone apps. Unless your developer account is specially provisioned by Microsoft, calls to these APIs will fail at runtime.]",
+    "library": "Api-ms-win-core-slapi-l1-1-0.lib",
+    "min_server": "Windows Server 2016 [desktop apps | Windows Store apps]",
+    "header": "Slpublic.h",
+    "return_value": "If this function succeeds, it return S_OK.  Otherwise, it returns an        HRESULT error code.   ",
+    "remarks": "Your app must have the restricted slapiQueryLicenseValue capability to call the SLQueryLicenseValueFromApp function. ",
+    "return_type": "HRESULT STDAPICALLTYPE",
+    "category": "Software Licensing",
+    "name": "SLQueryLicenseValueFromApp",
+    "is_callback": 0,
+    "dll": "Api-ms-win-core-slapi-l1-1-0.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "valueName",
+        "description": "The name of the policy for which you want to get information."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "ULONG",
+        "name": "*valueType",
+        "description": "The data type of the policy value. The following table describes the values that this parameter can         receive.  ValueDescription REG_DWORDA 32-bit integer.  For this type, the size of the buffer that the dataBuffer           parameter specifies should be at least 4 bytes. REG_BINARYA binary value. REG_SZA wide-character, null-terminated string, including the last null character."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PVOID",
+        "name": "dataBuffer",
+        "description": "A buffer that receives the value of the component policy."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dataSize",
+        "description": "The size of the supplied buffer, in bytes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "ULONG",
+        "name": "*resultDataSize",
+        "description": "The actual size of the data received for the policy value, in bytes."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps | UWP apps]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "This function is rearm application activation.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLReArm",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pApplicationId",
+        "description": "Type: const SLID* A pointer to the application ID."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to the product SKU ID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD Flags for ReArm behavior.  Valid values are 0 or           \t\tSL_REARM_REBOOT_REQUIRED.  Passing SL_REARM_REBOOT_REQUIRED will        \t\trequire a reboot before a function using the security processor can      \t\tsucceed."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Registers an event in the SL service. The caller can receive notifications when the registered event is fired.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLRegisterEvent",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC session."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszEventId",
+        "description": "Type: PCWSTR The predefined SL event identifier."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pApplicationId",
+        "description": "Type: const SLID* A pointer to the  application ID to which the event will be registered."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hEvent",
+        "description": "Type: HANDLE  The event handle used for notification."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets authentication data.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLSetAuthenticationData",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "UINT",
+        "name": "cbValue",
+        "description": "Type: UINT The size, in bytes, of the authentication data in pbValue."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "const BYTE",
+        "name": "pbValue",
+        "description": "Type: const BYTE A pointer to the authentication data."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the current       \tproduct key to the previously installed product key.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLSetCurrentProductKey",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pProductSkuId",
+        "description": "Type: const SLID* A pointer to the product SKU ID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pProductKeyId",
+        "description": "Type: const SLID* A pointer to the product key ID."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Uninstalls the license specified by the license file ID and target       \tuser option.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLUninstallLicense",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pLicenseFileId",
+        "description": "Type: const SLID* A pointer to the license file ID."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Unregisters the product key information.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLUninstallProofOfPurchase",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pPKeyId",
+        "description": "Type: const SLID* A pointer to the identifier of the registered product key."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[SLUninstallSAMLicense is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions.  ]",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see Common HRESULT Values. This function can return the following values defined in Slerror.h.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLUninstallSAMLicense",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pApplicationId",
+        "description": "A pointer to an SLID that specifies the application for which to uninstall a SAM license."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Releases the policy context handle returned by the SLLoadApplicationPolicies function.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise, it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLUnloadApplicationPolicies",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HSLP",
+        "name": "hPolicyContext",
+        "description": "Type: HSLP The context handle returned by the SLLoadApplicationPolicies function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD The additional flags."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Unregisters a registered event in the SL service.",
+    "library": "Slc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Slpublic.h",
+    "return_value": "Type: HRESULT WINAPI If this function succeeds, it return S_OK.  Otherwise,  it returns an HRESULT error code.  ",
+    "remarks": "",
+    "return_type": "HRESULT WINAPI",
+    "category": "Software Licensing",
+    "name": "SLUnregisterEvent",
+    "is_callback": 0,
+    "dll": "Slc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HSLC",
+        "name": "hSLC",
+        "description": "Type: HSLC The handle to the current SLC session."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCWSTR",
+        "name": "pwszEventId",
+        "description": "Type: PCWSTR The predefined SL event identifier that will be unregistered."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const SLID",
+        "name": "*pApplicationId",
+        "description": "Type: const SLID* A pointer to the application ID that the event will be unregistered from."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hEvent",
+        "description": "Type: HANDLE The registered event handle."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  }
+]
+

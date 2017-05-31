@@ -1,0 +1,178 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "[ This function is not supported as of Windows Vista.]",
+    "library": "Qosname.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Qosname.h",
+    "return_value": "If  WPUGetQOSTemplate succeeds, the return value is zero. If the function fails, the return value is SOCKET_ERROR. For extended error information, call  WSAGetLastError.   ",
+    "remarks": "In Windows Vista and later, this function always returns with an error. The  WPUGetQOSTemplate function retrieves a QOS-named template containing the associated  QOS structure. If lpProviderId is NULL,  WPUGetQOSTemplate attempts to find the QOS-named template in the global list of QOS names. Otherwise,  WPUGetQOSTemplate searches the template list specific to the service provider indicated by lpProviderId. The lpQOS parameter can include a  ProviderSpecific buffer for retrieval with the basic  QOS structure. In this case, the ProviderSpecific buffer must be large enough to hold the provider-specific information stored in the template; otherwise  WPUGetQOSTemplate returns WSAENOBUFS. ",
+    "return_type": "INT",
+    "category": "Quality of Service (QOS)",
+    "name": "WPUGetQOSTemplate",
+    "is_callback": 0,
+    "dll": "Qosname.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const LPGUID",
+        "name": "lpProviderId",
+        "description": "Pointer to a provider selected\u2013globally unique identifier (GUID). ..."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSABUF",
+        "name": "lpQOSName",
+        "description": "Specifies the QOS template name."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPQOS",
+        "name": "lpQOS",
+        "description": "Pointer to a  QOS structure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[ This function is not supported as of Windows Vista.]",
+    "library": "Qosname.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Qosname.h",
+    "return_value": "If  WSCInstallQOSTemplate succeeds, the return value is TRUE. If the function fails, the return value is FALSE. For extended error information, call  WSAGetLastError.  ",
+    "remarks": "In Windows Vista and later, this function always returns with an error. The  WSCInstallQOSTemplate function installs a QOS-named template containing the specified and subsequently associated  QOS structure, or replaces settings of an existing template. Values are stored in nonvolatile storage, so subsequent calls to  WSAGetQOSByName, passing the same lpQOSName, return the  QOS structure. If lpProviderId is set to NULL, the installed QOS-named template applies across all service providers; otherwise the QOS-named template applies only to the provider indicated by the lpProviderId parameter. Windows Sockets 2 includes a base set of QOS templates. You can override and replace any of these QOS templates or change an existing QOS template by simply installing a new template with the existing name. You do not need to delete an existing template before replacing or modifying it. You cannot delete the base set of QOS-named templates included in Windows Sockets 2. However, you can delete templates added subsequently, perhaps by other service providers. The lpQOS parameter, which points to a  QOS structure, can include a  ProviderSpecific buffer that will be stored with the basic  QOS structure and returned in subsequent  WSAGetQOSByName calls. You can provide the ProviderSpecific buffer\u00e2\u0080\u0094even if lpProviderId is set to NULL\u00e2\u0080\u0094to install global name templates that include provider-specific information. Note that this practice may lead the service provider to ignore the ProviderSpecific buffer if the service provider does not recognize its contents. The recommended use of  WSCInstallQOSTemplate is to include a ProviderSpecific buffer only if the named template is being installed on a particular service provider, as implemented when lpProviderId is not NULL. ",
+    "return_type": "BOOL",
+    "category": "Quality of Service (QOS)",
+    "name": "WSCInstallQOSTemplate",
+    "is_callback": 0,
+    "dll": "Qosname.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const LPGUID",
+        "name": "lpProviderId",
+        "description": "Pointer to a provider-selected globally unique identifier (GUID)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSABUF",
+        "name": "lpQOSName",
+        "description": "Specifies the QOS template name."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPQOS",
+        "name": "lpQOS",
+        "description": "Pointer to a  QOS structure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "[ This function is not supported as of Windows Vista.]",
+    "library": "Qosname.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Qosname.h",
+    "return_value": "If  WSCRemoveQOSTemplate succeeds, the return value is TRUE. If the function fails, the return value is FALSE. For extended error information, call  WSAGetLastError.  ",
+    "remarks": "In Windows Vista and later, this function always returns with an error. The  WSCRemoveQOSTemplate function deletes a QOS template previously installed with  WSCInstallQOSTemplate. If lpProviderId is NULL,  WSCRemoveQOSTemplate attempts to find and delete a QOS template from the global list of QOS names. Otherwise,  WSCRemoveQOSTemplate attempts to find and delete a QOS template specific to the service provider associated with lpProviderId. You cannot delete the base set of QOS names included with Windows Sockets 2. The WSAEINVAL error code will be returned if such an attempt is made. ",
+    "return_type": "BOOL",
+    "category": "Quality of Service (QOS)",
+    "name": "WSCRemoveQOSTemplate",
+    "is_callback": 0,
+    "dll": "Qosname.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const LPGUID",
+        "name": "lpProviderId",
+        "description": "Pointer to a provider-selected globally unique identifier (GUID)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSABUF",
+        "name": "lpQOSName",
+        "description": "Specifies the QOS template name."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The  WSAGetQOSByName function initializes a  QOS structure based on a named template, or it supplies a buffer to retrieve an enumeration of the available template names.",
+    "library": "Ws2_32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winsock2.h",
+    "return_value": "If  WSAGetQOSByName succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call  WSAGetLastError.  ",
+    "remarks": "The  WSAGetQOSByName function is used by applications to initialize a  QOS structure to a set of known values appropriate for a particular service class or media type. These values are stored in a template that is referenced by a well-known name. The client may retrieve these values by setting the buf parameter of the  WSABUF structure indicated by lpQOSName, which points to a string of nonzero length specifying a template name. In this case, the usage of lpQOSName is IN only, and results are returned through lpQOS. Alternatively, the client may use this function to retrieve an enumeration of available template names. The client may do this by setting the buf parameter of the  WSABUF indicated by lpQOSName to a zero-length null-terminated string. In this case the buffer indicated by buf is overwritten with a sequence of as many available, null-terminated template names up to the number of bytes available in buf as indicated by the len parameter of the  WSABUF indicated by lpQOSName. The list of names itself is terminated by a zero-length name. When the  WSAGetQOSByName function is used to retrieve template names, the lpQOS parameter is ignored. ",
+    "return_type": "BOOL",
+    "category": "Quality of Service (QOS)",
+    "name": "WSAGetQOSByName",
+    "is_callback": 0,
+    "dll": "Ws2_32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SOCKET",
+        "name": "s",
+        "description": "A descriptor identifying a socket."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPWSABUF",
+        "name": "lpQOSName",
+        "description": "A pointer to a specific quality of service template."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPQOS",
+        "name": "lpQOS",
+        "description": "A pointer to the  QOS structure to be filled."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The  WSPGetQOSByName function initializes a  QOS structure based on a named template, or retrieves an enumeration of the available template names.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ws2spi.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE, and a specific error code is available in lpErrno.   ",
+    "remarks": "Clients can use  WSPGetQOSByName to initialize a  QOS structure to a set of known values appropriate for a particular service class or media type. These values are stored in a template that is referenced by a well-known name. The client may retrieve these values by setting the buf member of the  WSABUF indicated by lpQOSName to point to a Unicode string of nonzero length specifying a template name. In this case the usage of lpQOSName is IN only, and results are returned through lpQOS. Alternatively, the client may use  WSPGetQOSByName to retrieve an enumeration of available template names. The client may do this by setting the buf member of the  WSABUF indicated by lpQOSName to a zero-length null-terminated Unicode string. In this case, the buffer indicated by buf is overwritten with a sequence of as many null-terminated Unicode template name strings as are available up to the number of bytes available in buf as indicated by the len member of the  WSABUF indicated by lpQOSName. The list of names itself is terminated by a zero-length Unicode name string. When  WSPGetQOSByName is used to retrieve template names, the lpQOS parameter is ignored. ",
+    "return_type": "BOOL",
+    "category": "Quality of Service (QOS)",
+    "name": "WSPGetQOSByName",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SOCKET",
+        "name": "s",
+        "description": "Descriptor identifying a socket."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPWSABUF",
+        "name": "lpQOSName",
+        "description": "Specifies the QOS template name, or supplies a buffer to retrieve an enumeration of the available template names."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPQOS",
+        "name": "lpQOS",
+        "description": "Pointer to the QOS structure to be filled."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPINT",
+        "name": "lpErrno",
+        "description": "Pointer to the error code."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
+

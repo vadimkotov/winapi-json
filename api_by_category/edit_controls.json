@@ -1,0 +1,44 @@
+[
+  {
+    "n_arguments": 4,
+    "description": "An application-defined callback function used with the EM_SETWORDBREAKPROC message. A multiline edit control or a rich edit control calls an EditWordBreakProc function to break a line of text.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the  \t\t\t\t\t\tcode parameter specifies WB_ISDELIMITER, the return value is nonzero (TRUE) if the character at the specified position is a delimiter, or zero if it is not. If the  \t\t\t\t\t\tcode parameter specifies WB_CLASSIFY, the return value is the character class and word break flags of the character at the specified position. Otherwise, the return value is an index to the beginning of a word in the buffer of text. ",
+    "remarks": "A carriage return followed by a line feed must be treated as a single word by the callback function. Two carriage returns followed by a line feed also must be treated as a single word. An application must install the callback function by specifying the address of the callback function in an EM_SETWORDBREAKPROC message. Rich Edit 1.0:Microsoft Rich Edit 1.0 only passes back ANSI characters to EditWordBreakProc. For rich edit controls, you can alternately use the EM_SETWORDBREAKPROCEX message to replace the default extended word break procedure with an EditWordBreakProcEx callback function. This function provides additional information about the text, such as the character set. Rich Edit 2.0 and later:Microsoft Rich Edit 2.0 and later only pass back Unicode characters to EditWordBreakProc. Thus, an ANSI application would convert the Rich Edit-supplied Unicode string using WideCharToMultiByte, and then translate the indices appropriately. ",
+    "return_type": "int CALLBACK",
+    "category": "Edit Controls",
+    "name": "EditWordBreakProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpch",
+        "description": "Type: LPTSTR A pointer to the text of the edit control."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "ichCurrent",
+        "description": "Type: int An index to a character position in the buffer of text that identifies the point at which the function should begin checking for a word break."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cch",
+        "description": "Type: int The number of  \t\t\t\t\tTCHARs in the edit control text. For the ANSI text, this is the number of bytes; for the Unicode text, this is the number of WCHARs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "code",
+        "description": "Type: int The action to be taken by the callback function. This parameter can be one of the following values.   ValueMeaning  WB_CLASSIFY   Retrieves the character class and word break flags of the character at the specified position. This value is for use with rich edit controls.   WB_ISDELIMITER   Checks whether the character at the specified position is a delimiter.   WB_LEFT   Finds the beginning of a word to the left of the specified position.   WB_LEFTBREAK   Finds the end-of-word delimiter to the left of the specified position. This value is for use with rich edit controls.   WB_MOVEWORDLEFT   Finds the beginning of a word to the left of the specified position. This value is used during CTRL+LEFT key processing. This value is for use with rich edit controls.   WB_MOVEWORDRIGHT   Finds the beginning of a word to the right of the specified position. This value is used during CTRL+RIGHT key processing. This value is for use with rich edit controls.   WB_RIGHT   Finds the beginning of a word to the right of the specified position. This is useful in right-aligned edit controls.   WB_RIGHTBREAK   Finds the end-of-word delimiter to the right of the specified position. This is useful in right-aligned edit controls. This value is for use with rich edit controls."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

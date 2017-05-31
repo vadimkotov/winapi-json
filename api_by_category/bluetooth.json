@@ -1,0 +1,1086 @@
+[
+  {
+    "n_arguments": 5,
+    "description": "The BluetoothAuthenticateDevice function sends an authentication request to a remote Bluetooth device.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon successful completion. Common errors are listed in the following table.  ",
+    "remarks": "Some remote Bluetooth devices can only accept numeric passkeys. There is no way to identify which devices only accept numeric passkeys in advance. The Bluetooth authentication process has two modes: Wizard mode and Transparent mode. Wizard mode is started when pszPasskey is set to NULL, and      the Bluetooth Connection Wizard is  started. The user is prompted to enter a passkey as a step in the wizard, after which the      authentication request is sent. The user interface displays whether the authentication attempt succeeds or fails, and provides the user with an opportunity to reattempt a failed authentication. Transparent mode is started when pszPasskey is not NULL. In Transparent mode the authentication request is sent to the remote Bluetooth device without displaying any user interface. In Transparent mode, the Bluetooth status code is mapped to a Win32 error code; the following table lists this mapping information.  ",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothAuthenticateDevice",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwndParent",
+        "description": "A window to be the parent of the Authentication wizard. If set to NULL, the wizard is removed from the desktop."
+      },
+      {
+        "in_out": "",
+        "type": "HANDLE",
+        "name": "hRadio",
+        "description": "A valid local radio handle, or NULL. If NULL, authentication is attempted on all local radios; if any radio succeeds, the function call succeeds."
+      },
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdi",
+        "description": "A structure of type BLUETOOTH_DEVICE_INFO that contains the record of the Bluetooth device to be authenticated."
+      },
+      {
+        "in_out": "",
+        "type": "PWCHAR",
+        "name": "pszPasskey",
+        "description": "A Personal Identification Number (PIN) to be used for device authentication. If set to NULL, the user interface is displayed and the user must follow the authentication process provided in the user interface. If pszPasskey is not NULL, no user interface is displayed. If the passkey is not  NULL, it must be a NULL-terminated string. For more information, see the Remarks section."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "ulPasskeyLength",
+        "description": "The size, in characters, of pszPasskey. The size of pszPasskey must be less than or equal to BLUETOOTH_MAX_PASSKEY_SIZE."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The BluetoothAuthenticateDeviceEx function sends an authentication request to a remote Bluetooth device. Additionally, this function allows for out-of-band data to be passed into the function call for the device being authenticated.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon successful completion; returns the following error codes upon failure:  ",
+    "remarks": "The BLUETOOTH_DEVICE_INFO structure specified by pbtdilInOut must contain the address of a device to authenticate.  If the value of pbtOobData is not NULL, an attempt  will be made to authenticate the remote device with the provided out-of-band data. For all other types of  authentication, the caller should register an authentication callback using BluetoothRegisterForAuthenticationEx and then respond to the relevant authentication method using BluetoothSendAuthenticationResponseEx. In the following example code a device has been found and an authentication request is  sent using BluetoothAuthenticateDeviceEx. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Bluetooth",
+    "name": "BluetoothAuthenticateDeviceEx",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hwndParentIn",
+        "description": "The window to parent the authentication wizard. If NULL, the  wizard will be parented off the desktop."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "HANDLE",
+        "name": "hRadioIn",
+        "description": "A valid local radio handle or NULL. If NULL, then all radios will           be tried. If any of the radios succeed, then the call will succeed."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdiInout",
+        "description": "A pointer to a BLUETOOTH_DEVICE_INFO structure describing the device          being authenticated."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PBLUETOOTH_OOB_DATA",
+        "name": "pbtOobData",
+        "description": "Pointer to device specific out-of-band data to be provided with this API call.  If NULL, then a UI is           displayed to continue the authentication process. If not NULL, no UI is displayed. Note  If a callback is registered using BluetoothRegisterForAuthenticationEx, then a UI will not be displayed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "AUTHENTICATION_REQUIREMENTS",
+        "name": "authenticationRequirement",
+        "description": "An BLUETOOTH_AUTHENTICATION_REQUIREMENTSvalue that specifies the protection required for authentication."
+      }
+    ],
+    "min_client": "Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The BluetoothAuthenticateMultipleDevices function enables the caller to prompt for multiple devices to be authenticated during a single instance of the Bluetooth Connection wizard.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon successful completion; check the fAuthenticate flag for each device. The following table  lists common errors.  ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothAuthenticateMultipleDevices",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwndParent",
+        "description": "A window to be the parent of the Authentication wizard. If set to NULL, the wizard is parented off the desktop."
+      },
+      {
+        "in_out": "",
+        "type": "HANDLE",
+        "name": "hRadio",
+        "description": "The valid local radio handle, or NULL. If NULL, authentication is attempted on all local radios; if any radio succeeds, the function call succeeds."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "cDevices",
+        "description": "The number of devices in the pbtdi array of BLUETOOTH_DEVICE_INFO structures."
+      },
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdi",
+        "description": "An array of BLUETOOTH_DEVICE_INFO structures that contain records for the Bluetooth devices to be authenticated."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The BluetoothDisplayDeviceProperties function starts Control Panel device information property sheet.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE if the property sheet is successfully displayed. Returns FALSE if the property sheet was not displayed successfully; call the GetLastError function for additional error information. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothDisplayDeviceProperties",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwndParent",
+        "description": "A handle to the parent window of the property sheet."
+      },
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdi",
+        "description": "A pointer to the BLUETOOTH_DEVICE_INFO structure that contains information about the Bluetooth device."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The BluetoothEnableDiscovery function changes the discovery state of a local Bluetooth radio or radios.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE if the discovery state was successfully changed. If hRadio is NULL, a return value of TRUE indicates that at least one local radio state was successfully changed. Returns FALSE if discovery state was not changed; if hRadio was NULL, no radio accepted the state change. ",
+    "remarks": "Use the BluetoothIsDiscoverable function  to determine the current state of a Bluetooth radio. Windows ensures that a discoverable system is connectable, and as such, the radio must allow incoming connections prior to making a radio  discoverable. Failure to allow incoming connections results in the BluetoothEnableDiscovery function call failing. When BluetoothEnableDiscovery changes the discovery state, the new state is valid for the lifetime of the calling application. Additionally, if a Bluetooth radio previously made discoverable with this function is disabled and re-enabled via the application, discoverability will not persist. Once the calling application terminates, the discovery  state of the specified Bluetooth radio reverts to the state it was in before BluetoothEnableDiscovery was called. ",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothEnableDiscovery",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HANDLE",
+        "name": "hRadio",
+        "description": "Valid local radio handle, or NULL. If NULL, discovery is modified on all local radios; if any radio is modified by the call, the function call succeeds."
+      },
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "fEnabled",
+        "description": "Flag specifying whether discovery is to be enabled or disabled. Set to TRUE to enable discovery, set to FALSE to disable discovery."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The BluetoothEnableIncomingConnections function modifies whether a local Bluetooth radio accepts incoming connections.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE if the incoming connection  state was successfully changed. If hRadio is NULL, a return value of TRUE indicates that at least one local radio state was successfully changed. Returns FALSE if incoming connection  state was not changed; if hRadio was NULL, no radio accepted the state change. ",
+    "remarks": "A  radio that is non-connectable is non-discoverable. The radio must be made non-discoverable  prior to making a radio non-connectable. Failure to make a radio non-discoverable prior to making it non-connectable will result in failure of the BluetoothEnableIncomingConnections function call. ",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothEnableIncomingConnections",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HANDLE",
+        "name": "hRadio",
+        "description": "Valid local radio handle for which to change whether incoming connections are enabled, or NULL. If NULL, the attempt to modify incoming connection acceptance iterates through all local radios; if any radio is modified by the call, the function call succeeds."
+      },
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "fEnabled",
+        "description": "Flag specifying whether incoming connection acceptance is to be enabled or disabled. Set to TRUE to enable incoming connections, set to FALSE to disable incoming connections."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The BluetoothEnumerateInstalledServices function enumerates the services GUIDs (Globally Unique Identifiers) enabled on a Bluetooth device.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon successful completion, and the pGuidServices parameter contains a complete list of enabled service GUIDs. The following table  describes a common error:  ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothEnumerateInstalledServices",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HANDLE",
+        "name": "hRadio",
+        "description": "Handle of the local Bluetooth radio device. If NULL,   all local radios are searched for enabled services that match the radio address in pbtdi."
+      },
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdi",
+        "description": "Pointer to a BLUETOOTH_DEVICE_INFO structure."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "*pcServices",
+        "description": "On input, the number of records pointed to by the pGuidServices parameter. On output, the number of valid records returned in the pGuidServices parameter. If pGuidServices is NULL, on output pcServices contains the number of services enabled."
+      },
+      {
+        "in_out": "",
+        "type": "GUID",
+        "name": "*pGuidServices",
+        "description": "Pointer to a buffer in memory to receive GUIDs for installed services. The buffer must be at least *pcServices *sizeof(GUID) bytes."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The BluetoothFindDeviceClose function closes an enumeration handle associated with a device query.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE when the handle is successfully closed. Returns FALSE upon error. Call the GetLastError function for more information on the failure. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothFindDeviceClose",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HBLUETOOTH_DEVICE_FIND",
+        "name": "hFind",
+        "description": "Handle for the query to be closed. Obtained in a previous call to the BluetoothFindFirstDevice function."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The BluetoothFindFirstDevice function begins the enumeration Bluetooth devices.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns a valid handle to the first Bluetooth device upon successful completion, and the pbtdi parameter points to information about the device. When this handle is no longer needed, it must be closed via the BluetoothFindDeviceClose. Returns NULL upon failure. Call the  GetLastError function for more information on the error. The following table  describe common errors:  ",
+    "remarks": "",
+    "return_type": "HBLUETOOTH_DEVICE_FIND",
+    "category": "Bluetooth",
+    "name": "BluetoothFindFirstDevice",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_DEVICE_SEARCH_PARAMS",
+        "name": "*pbtsp",
+        "description": "Pointer to a BLUETOOTH_DEVICE_SEARCH_PARAMS structure. The dwSize member of the BLUETOOTH_DEVICE_SEARCH_PARAMS structure pointed to by pbtsp must match the size of the structure."
+      },
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdi",
+        "description": "Pointer to a BLUETOOTH_DEVICE_INFO structure into which information about the first Bluetooth device found is placed. The dwSize member of the BLUETOOTH_DEVICE_INFO structure pointed to by pbtdi must match the size of the structure, or the call to the BluetoothFindFirstDevice function fails."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The BluetoothFindFirstRadio function begins the enumeration of local Bluetooth radios.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "In addition to the handle indicated by phRadio, calling this function will also create a HBLUETOOTH_RADIO_FIND handle for use with the BluetoothFindNextRadio function. When this handle is no longer needed, it must be closed via the BluetoothFindRadioClose. Returns NULL upon failure. Call the  GetLastError function for more information on the error. The following table  describe common errors:  ",
+    "remarks": "",
+    "return_type": "HBLUETOOTH_RADIO_FIND",
+    "category": "Bluetooth",
+    "name": "BluetoothFindFirstRadio",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_FIND_RADIO_PARAMS",
+        "name": "*pbtfrp",
+        "description": "Pointer to a BLUETOOTH_FIND_RADIO_PARAMS structure. The dwSize member of the BLUETOOTH_FIND_RADIO_PARAMS structure pointed to by pbtfrp must match the size of the structure."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HANDLE",
+        "name": "*phRadio",
+        "description": "Pointer to where the first enumerated radio handle will be returned. When no longer needed, this handle must be closed via CloseHandle."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The BluetoothFindNextDevice function finds the next  Bluetooth device.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE when the next device is successfully found, and the pbtdi parameter points to information about the device. Returns FALSE upon error. Call the  GetLastError function for more information on the error. The following table  describe common errors:  ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothFindNextDevice",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HBLUETOOTH_DEVICE_FIND",
+        "name": "hFind",
+        "description": "Handle for the query obtained in a previous call to the BluetoothFindFirstDevice function."
+      },
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdi",
+        "description": "Pointer to a BLUETOOTH_DEVICE_INFO structure into which information about the next Bluetooth device found is placed. The dwSize member of the BLUETOOTH_DEVICE_INFO structure pointed to by pbtdi must match the size of the structure, or the call to BluetoothFindNextDevice fails."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The BluetoothFindNextRadio function finds the next Bluetooth radio.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE when the next available radio is found. Returns FALSE when no new radios are found.  Call the  GetLastError function for more information on the error. The following table  describe common errors:  ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothFindNextRadio",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HBLUETOOTH_RADIO_FIND",
+        "name": "hFind",
+        "description": "Handle returned by a previous call to the BluetoothFindFirstRadio function. Use BluetoothFindRadioClose to close this handle when it is no longer needed."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HANDLE",
+        "name": "*phRadio",
+        "description": "Pointer to where the next enumerated radio handle will be returned.  When no longer needed, this handle must be released via CloseHandle."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The BluetoothFindRadioClose function closes the enumeration handle associated with finding Bluetooth radios.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE when the handle is successfully closed. Returns FALSE if the attempt fails to close the enumeration handle. For additional information on possible errors associated with closing the handle, call the GetLastError function. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothFindRadioClose",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HBLUETOOTH_RADIO_FIND",
+        "name": "hFind",
+        "description": "Enumeration handle to close, obtained with a previous call to the BluetoothFindFirstRadio function."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The BluetoothGetDeviceInfo function retrieves information about a remote Bluetooth device. The Bluetooth device must have been previously identified through a successful device inquiry function call.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon success, indicating that data about the remote Bluetooth device was retrieved. Returns error codes upon failure. The following table lists common error codes associated with the BluetoothGetDeviceInfo function.  ",
+    "remarks": "The Bluetooth device for which data is obtained must have been previously identified through a successful device inquiry function call. In the BLUETOOTH_DEVICE_INFO structure pointed to by pbtdi, the  dwSize member must be equivalent to the size, in bytes, of the structure. The Address          member of the BLUETOOTH_DEVICE_INFO structure must contain the Bluetooth address of the remote device. ",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothGetDeviceInfo",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HANDLE",
+        "name": "hRadio",
+        "description": "A handle to a local radio, obtained from a call to the BluetoothFindFirstRadio or similar functions, or from a call to the SetupDiEnumerateDeviceInterfaces function."
+      },
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdi",
+        "description": "A pointer to a BLUETOOTH_DEVICE_INFO structure into which data about the first Bluetooth device will be placed. For more information, see Remarks."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The BluetoothGetRadioInfo function obtains information about a Bluetooth radio.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "The following table  lists common return values.  ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothGetRadioInfo",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HANDLE",
+        "name": "hRadio",
+        "description": "A handle to a local Bluetooth radio, obtained by calling the BluetoothFindFirstRadio or similar functions, or the SetupDiEnumerateDeviceInterfances function."
+      },
+      {
+        "in_out": "",
+        "type": "PBLUETOOTH_RADIO_INFO",
+        "name": "pRadioInfo",
+        "description": "A pointer to a BLUETOOTH_RADIO_INFO structure into which information about the radio will be placed. The dwSize member of the BLUETOOTH_RADIO_INFO structure must match the size of the structure."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The BluetoothIsConnectable function determines whether a Bluetooth radio or radios is connectable.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE if at least one Bluetooth radio is accepting incoming connections. Returns FALSE if no radios are accepting incoming connections. ",
+    "remarks": "If multiple Bluetooth radios exist, the first radio to return that it is connectable causes the BluetoothIsConnectable function to succeed. ",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothIsConnectable",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HANDLE",
+        "name": "hRadio",
+        "description": "Valid local radio handle, or NULL. If NULL, all local radios are checked for connectability; if any radio is connectable, the function call succeeds."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The BluetoothIsDiscoverable function determines whether a Bluetooth radio or radios is discoverable.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE if at least one Bluetooth radio is discoverable. Returns FALSE if no Bluetooth radios are discoverable. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothIsDiscoverable",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HANDLE",
+        "name": "hRadio",
+        "description": "Valid local radio handle, or NULL. If NULL, discovery is determined for all local radios; if any radio is discoverable, the function call succeeds."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The BluetoothRegisterForAuthentication function registers a callback function that is called when a particular Bluetooth device requests authentication.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon successful completion, and a valid registration handle was returned in phRegHandle. Any other return value indicates failure. Call the GetLastError function to obtain more information about the error. The following table  describes a common error:  ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothRegisterForAuthentication",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdi",
+        "description": "Pointer to a  BLUETOOTH_DEVICE_INFO structure. The Address member is used for comparison."
+      },
+      {
+        "in_out": "",
+        "type": "HBLUETOOTH_AUTHENTICATION_REGISTRATION",
+        "name": "*phRegHandle",
+        "description": "Pointer to a structure in which the registration HANDLE is stored. Call the BluetoothUnregisterAuthentication to close the handle."
+      },
+      {
+        "in_out": "",
+        "type": "PFN_AUTHENTICATION_CALLBACK",
+        "name": "pfnCallback",
+        "description": "Function to be called when the authentication event occurs. The function should match the prototype described in PFN_AUTHENTICATION_CALLBACK."
+      },
+      {
+        "in_out": "",
+        "type": "PVOID",
+        "name": "pvParam",
+        "description": "Optional parameter to be passed through the callback function."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The BluetoothRegisterForAuthenticationEx function registers an application for a pin request,  numeric comparison and callback function.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon successful completion; returns the following error codes upon failure:  ",
+    "remarks": "The caller must provide a valid callback address and must unregister the callback once notification is no longer required.  The deregistration of an authenticated device can be accomplished by calling BluetoothUnregisterAuthentication. In scenarios where an application registers for authentication more than once, only the first callback function registered via this function will be called in the application while authentication is in progress. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Bluetooth",
+    "name": "BluetoothRegisterForAuthenticationEx",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "const BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdiln",
+        "description": "A pointer to a BLUETOOTH_DEVICE_INFO structure that specifies the bluetooth address to be utilized for comparison."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HBLUETOOTH_AUTHENTICATION_REGISTRATION",
+        "name": "*phRegHandleOut",
+        "description": "A pointer to a HBLUETOOTH_AUTHENTICATION_REGISTRATION handle associated with the registered application. Call BluetoothUnregisterAuthentication to close the handle."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PFN_AUTHENTICATION_CALLBACK_EX",
+        "name": "pfnCallbackIn",
+        "description": "The function that will be called when the authentication event          occurs. This function should match the prototype of PFN_AUTHENTICATION_CALLBACK_EX."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "PVOID",
+        "name": "pvParam",
+        "description": "Optional parameter to be passed through to the callback function specified by pfnCallbackIn.          This parameter  can be anything the application is required to define."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The BluetoothRemoveDevice function removes authentication between a Bluetooth device and the computer and clears cached service information for the device.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon successful removal of the Bluetooth device. Returns ERROR_NOT_FOUND if the device was not found. ",
+    "remarks": "The BluetoothRemoveDevice function fails if the device indicated by pAddress is not a remembered device. ",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothRemoveDevice",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_ADDRESS",
+        "name": "*pAddress",
+        "description": "A pointer to the address of the Bluetooth device to be removed."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The BluetoothSdpEnumAttributes function enumerates through the SDP record stream, and  calls the callback function for each attribute in the record.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE if an enumeration occurred. Returns FALSE upon failure. Call the GetLastError function for more information. The following table describes common error codes associated with the BluetoothSdpEnumAttributes function:  ",
+    "remarks": "If the callback function returns FALSE, the enumeration initiated by the BluetoothSdpEnumAttributes function is stopped. The record stream in pSDPStream must be an SDP stream formatted as an SDP record, a SEQUENCE containing attribute ID (UINT16) plus attribute value (any SDP element type) pairs. ",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothSdpEnumAttributes",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "LPBYTE",
+        "name": "pSDPStream",
+        "description": "Pointer to a valid record stream that is formatted as a single SDP record."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "cbStreamSize",
+        "description": "Size of the stream pointed to by pSDPStream, in bytes."
+      },
+      {
+        "in_out": "",
+        "type": "PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK",
+        "name": "pfnCallback",
+        "description": "Pointer to the callback routine. See PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK for more information about the callback."
+      },
+      {
+        "in_out": "",
+        "type": "LPVOID",
+        "name": "pvParam",
+        "description": "Optional parameter to be passed to the callback routine."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The BluetoothSdpGetAttributeValue function retrieves the attribute value for an attribute identifier.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon successful completion; the pAddributeData parameter contains the attribute value. Any other return value indicates error. The following table describes common error codes associated with the BluetoothSdpGetAttributeValue function:  ",
+    "remarks": "The record stream in pRecordStream must be an SDP stream formatted as an SDP record, a SEQUENCE containing attribute ID (UINT16) plus attribute value (any SDP element type) pairs. The attribute identifier provided in the usAttributeId parameter can be one of the many SDP_ATTRIB_Xxx universal attribute identifiers provided in the bthdef.h file, or a custom attribute value defined by a Bluetooth profile. All values greater than or equal to 0x200 are profile-specific attribute identifiers, and are specific to the profile. See the bthdef.h header file for a list of universal SDP attribute identifiers. ",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothSdpGetAttributeValue",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pRecordStream",
+        "description": "Pointer to a valid record stream that is formatted as a single SDP record."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cbRecordLength",
+        "description": "Length of pRecordStream, in bytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "USHORT",
+        "name": "usAttributeId",
+        "description": "Attribute identifier to search for. See Remarks."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PSDP_ELEMENT_DATA",
+        "name": "pAttributeData",
+        "description": "Pointer to an SDP_ELEMENT_DATA structure into which the attribute's identifier value is placed."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The BluetoothSdpGetContainerElementData function iterates a container stream and returns each element contained within the container element.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon success, indicating that the pData parameter contains the data. Returns error codes upon failure. The following table describes common error codes associated with the BluetoothSdpGetContainerElementData function:  ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothSdpGetContainerElementData",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pContainerStream",
+        "description": "A pointer to valid SDP stream. The first element in the stream must be a sequence or an alternative."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cbContainerLength",
+        "description": "The size, in bytes, of the pContainerStream parameter."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "HBLUETOOTH_CONTAINER_ELEMENT",
+        "name": "*pElement",
+        "description": "A value used to track the  location in the stream.  The first           time the BluetoothSdpGetContainerElementData function is called for a  container, *pElement should be NULL.  For subsequent calls, the value should be unmodified."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PSDP_ELEMENT_DATA",
+        "name": "pData",
+        "description": "A pointer to a buffer filled with data from  the current SDP element of pContainerStream."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The BluetoothSdpGetElementData function retrieves and parses a single element from an SDP stream.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS when the SDP element is parsed correctly. Returns ERROR_INVALID_PARAMETER if one of the required parameters is NULL, or if the SDP stream pointed to by pSdpStream is not valid. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothSdpGetElementData",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pSdpStream",
+        "description": "A pointer to a valid SDP stream."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cbSpdStreamLength",
+        "description": "The length, in bytes, of pSdpStream."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PSDP_ELEMENT_DATA",
+        "name": "pData",
+        "description": "A pointer to a buffer to be filled with the data of the SDP element found at the beginning of the pSdpStream SDP stream."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The BluetoothSdpGetString function converts a raw string embedded in the SDP record into a Unicode string.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon successful completion; the pszString parameter contains the converted string. Returns error codes upon failure. Common errors are listed in the following table.  ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothSdpGetString",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPBYTE",
+        "name": "pRecordStream",
+        "description": "A pointer to a valid record stream formatted as a single SDP record."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cbRecordLength",
+        "description": "The length, in bytes, of pRecordStream."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSDP_STRING_DATA_TYPE",
+        "name": "pStringData",
+        "description": "When set to NULL, the calling thread locale is used to search          for a matching string in the SDP record.  If not NULL, the mibeNum and attributeId members of the  SDP_STRING_TYPE_DATA structure are used to find the string to convert."
+      },
+      {
+        "in_out": "_In_",
+        "type": "USHORT",
+        "name": "usStringOffset",
+        "description": "SDP string type offset to convert.  The usStringOffset is added to the base attribute identifier  of the string.   SDP specification-defined offsets are: STRING_NAME_OFFSET, STRING_DESCRIPTION_OFFSET, and STRING_PROVIDER_NAME_OFFSET. These offsets can be found in the bthdef.h header file."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PWCHAR",
+        "name": "pszString",
+        "description": "If not NULL, contains the converted string on output. When set to NULL, the pcchStringLength parameter is filled with the required number of characters, not bytes, to retrieve the converted string."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "pcchStringLength",
+        "description": "On input, contains the length of pszString if pszString is not NULL, in characters. Upon output, contains the number of required characters including NULL if an error is returned, or the number of characters written to pszString, including NULL."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The  BluetoothSelectDevices function enables Bluetooth device selection.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE if a user selected a device. Returns FALSE if no valid data was returned. Call the GetLastError function to retrieve error information. The following conditions apply to returned error information.  ",
+    "remarks": "The BluetoothSelectDevices function opens a common dialog box for selecting Bluetooth devices. The list of devices displayed to the user is determined by the flags and settings the caller specifies in the pbtsdp parameter. If  BluetoothSelectDevices returns TRUE, the pDevices member of the  BLUETOOTH_SELECT_DEVICE_PARAMS structure points to valid data. The caller should verify that  the fAuthenticated and fRemembered flags in the  BLUETOOTH_SELECT_DEVICE_PARAMS structure to determine which devices were successfully authenticated, and which devices are valid selections for the user. Call the  BluetoothSelectDevicesFree function to free resources only if the  BluetoothSelectDevices function returns TRUE. ",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothSelectDevices",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_SELECT_DEVICE_PARAMS",
+        "name": "*pbtsdp",
+        "description": "A pointer to a  BLUETOOTH_SELECT_DEVICE_PARAMS structure that identifies Bluetooth devices."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The  BluetoothSelectDevicesFree function frees resources associated with a previous call to  BluetoothSelectDevices.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE upon success. Returns FALSE if there are no resources to free. ",
+    "remarks": "Only call the BluetoothSelectDevicesFree function if a previous call to the BluetoothSelectDevices function returned TRUE. ",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothSelectDevicesFree",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_SELECT_DEVICE_PARAMS",
+        "name": "*pbtsdp",
+        "description": "A pointer to a  BLUETOOTH_SELECT_DEVICE_PARAMS structure that identifies the Bluetooth device resources to free."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The BluetoothSendAuthenticationResponse function is called when an authentication request to send the passkey response is received.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS when the device accepts the passkey response; the device is authenticated. Any other return value indicates failure. The following table  describes common errors:  ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothSendAuthenticationResponse",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HANDLE",
+        "name": "hRadio",
+        "description": "Optional handle to the local radio handle, or NULL. If NULL, the function attempts to send an authentication response on all local radios."
+      },
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdi",
+        "description": "Pointer to a BLUETOOTH_DEVICE_INFO structure describing the Bluetooth device being authenticated. This can be the same structure passed to the callback function."
+      },
+      {
+        "in_out": "",
+        "type": "LPWSTR",
+        "name": "pszPasskey",
+        "description": "Pointer to a UNICODE zero-terminated string of the passkey response to be sent back to the authenticating device. the pszPasskey parameter can be no larger than BLUETOOTH_MAX_PASSKEY_SIZE, excluding NULL. If translation to ANSI is performed, the pszPasskey parameter cannot be larger than 16 bytes, excluding NULL."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The BluetoothSendAuthenticationResponseEx function is called when an authentication request to send the passkey or a Numeric Comparison response is made.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon successful completion; returns the following error codes upon failure:  ",
+    "remarks": "Callers can only use this function to respond to a pending authentication request.  Applications should register with BluetoothRegisterForAuthenticationEx in order to be notified of incoming authentication requests. Only the BLUETOOTH_AUTHENTICATION_METHOD_LEGACY, BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON and BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION response types are valid. ",
+    "return_type": "HRESULT WINAPI",
+    "category": "Bluetooth",
+    "name": "BluetoothSendAuthenticationResponseEx",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HANDLE",
+        "name": "hRadioIn",
+        "description": "A handle of the Bluetooth radio device to specify local service information for."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PBLUETOOTH_AUTHENTICATE_RESPONSE",
+        "name": "pauthResponse",
+        "description": "Pointer to a BLUETOOTH_AUTHENTICATE_RESPONSE structure containing the response to the BTH_REMOTE_AUTHENTICATE_REQUEST event."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The BluetoothSetLocalServiceInfo function sets local service information for a specific Bluetooth radio. This function is used to advertise services to which remote devices can connect.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon successful completion. The following table shows some common errors.  ",
+    "remarks": "Applications can call BluetoothSetLocalServiceInfo subsequent times with the same service GUID but with a different instance ID to create multiple instances of the specified server-side profile. It is important that each instance ID associated with a device is unique,  as it will prevent the service driver from being prematurely uninstalled if one, of possibly many, dependent devices is unpaired. The process that calls BluetoothSetLocalServiceInfo must have the SE_LOAD_DRIVER_NAME privilege. A process running in the system or in the  administrator context can elevate its privilege using the LookupPrivilegeValue and AdjustTokenPrivileges functions. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Bluetooth",
+    "name": "BluetoothSetLocalServiceInfo",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HANDLE",
+        "name": "hRadioIn",
+        "description": "A handle of the Bluetooth radio device to which the local service information applies. If this parameter is NULL, BluetoothSetLocalServiceInfo searches for the first available local Bluetooth radio."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const GUID",
+        "name": "*pClassGuid",
+        "description": "The GUID of the service to expose. This should match the GUID in the server-side INF file for the profile driver."
+      },
+      {
+        "in_out": "",
+        "type": "ULONG",
+        "name": "ulInstance",
+        "description": "An instance ID for the device node of the Plug and Play (PnP) ID."
+      },
+      {
+        "in_out": "const",
+        "type": "BLUETOOTH_LOCAL_SERVICE_INFO",
+        "name": "*pServiceInfoIn",
+        "description": "A pointer to a BLUETOOTH_LOCAL_SERVICE_INFO structure that describes the local service to set."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The BluetoothSetServiceState function enables or disables services for a Bluetooth device.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon successful completion. The following table  lists common errors.  ",
+    "remarks": "Windows maintains a mapping of  service Globally Unique Identifiers (GUIDs) to supported drivers for Bluetooth-enabled devices. Enabling a service installs the corresponding device driver and disabling a service removes the corresponding device driver. If a non-supported service is enabled, a driver is not installed. ",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothSetServiceState",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HANDLE",
+        "name": "hRadio",
+        "description": "A handle of the local Bluetooth radio."
+      },
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdi",
+        "description": "A pointer to a BLUETOOTH_DEVICE_INFO structure. Must be a previously found radio address."
+      },
+      {
+        "in_out": "",
+        "type": "GUID",
+        "name": "*pGuidService",
+        "description": "A pointer to the service GUID on the remote device."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwServiceFlags",
+        "description": "The flags that adjust the service. To disable the service, set to BLUETOOTH_SERVICE_DISABLE; to enable the service, set to BLUETOOTH_SERVICE_ENABLE."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The BluetoothUnregisterAuthentication function removes registration for a callback routine that was previously registered with a call to the BluetoothRegisterForAuthentication function.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns TRUE when the authentication registration is successfully removed. Returns FALSE if the specified handle is not successfully closed. Call the GetLastError function to obtain more information about the error. The following table  describes a common error:  ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Bluetooth",
+    "name": "BluetoothUnregisterAuthentication",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HBLUETOOTH_AUTHENTICATION_REGISTRATION",
+        "name": "hRegHandle",
+        "description": "Handle returned by a previous call to the BluetoothRegisterForAuthentication function."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The BluetoothUpdateDeviceRecord function updates the local computer cache about a Bluetooth device.",
+    "library": "Bthprops.lib",
+    "min_server": "None supported",
+    "header": "BluetoothAPIs.h (include Bthsdpdef.h or BluetoothAPIs.h)",
+    "return_value": "Returns ERROR_SUCCESS upon success. The following table  lists common errors.  ",
+    "remarks": "When updating a Bluetooth device record, the requirements for members of the BLUETOOTH_DEVICE_INFO structure, listed in the following table, must be observed.  ",
+    "return_type": "DWORD",
+    "category": "Bluetooth",
+    "name": "BluetoothUpdateDeviceRecord",
+    "is_callback": 0,
+    "dll": "Bthprops.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "BLUETOOTH_DEVICE_INFO",
+        "name": "*pbtdi",
+        "description": "A pointer to the BLUETOOTH_DEVICE_INFO structure to update. For more information, see the Remarks section."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP2 [desktop apps only]"
+  }
+]
+

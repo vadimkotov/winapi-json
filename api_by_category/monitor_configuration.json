@@ -1,0 +1,1389 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Degausses a monitor. Degaussing improves a monitor's image quality and color fidelity by demagnetizing the monitor.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_DEGAUSS flag. Degaussing is supported only by cathode ray tube (CRT) monitors. This function takes about 50 milliseconds to return. This function should not be called frequently, because calling it frequently will not noticeably improve the monitor's image quality or color fidelity. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "DegaussMonitor",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves a monitor's minimum, maximum, and current brightness settings.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_BRIGHTNESS flag. This function takes about 40 milliseconds to return. The brightness setting is a continuous monitor setting. For more information, see Using the High-Level Monitor Configuration Functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetMonitorBrightness",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMinimumBrightness",
+        "description": "Receives the monitor's minimum brightness."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwCurrentBrightness",
+        "description": "Receives the monitor's current brightness."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMaximumBrightness",
+        "description": "Receives the monitor's maximum brightness."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the configuration capabilities of a monitor. Call this function to find out which high-level monitor configuration functions are supported by the monitor.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. The function fails if the monitor does not support DDC/CI. ",
+    "remarks": "The capabilities flags returned in pdwMonitorCapabilities specify which high-level monitor configuration functions are supported by the monitor. They also specify how certain functions behave. The following capabilities flags are defined.  The color temperature flags returned in pdwSupportedColorTemperatures specify which color temperatures are supported by the monitor. The following color temperature flags are defined.  ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetMonitorCapabilities",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMonitorCapabilities",
+        "description": "Receives a bitwise OR of capabilities flags. See Remarks."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwSupportedColorTemperatures",
+        "description": "Receives a bitwise OR of color temperature flags. See Remarks."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves a monitor's current color temperature.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_COLOR_TEMPERATURE flag. This function takes between 0 and 80 milliseconds to return. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetMonitorColorTemperature",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPMC_COLOR_TEMPERATURE",
+        "name": "pctCurrentColorTemperature",
+        "description": "Receives the monitor's current color temperature, specified as a member of the MC_COLOR_TEMPERATURE enumeration."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves a monitor's minimum, maximum, and current contrast settings.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_CONTRAST flag. This function takes about 40 milliseconds to return. The brightness setting is a continuous monitor setting. For more information, see Using the High-Level Monitor Configuration Functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetMonitorContrast",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMinimumContrast",
+        "description": "Receives the monitor's minimum contrast."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwCurrentContrast",
+        "description": "Receives the monitor's current contrast."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMaximumContrast",
+        "description": "Receives the monitor's maximum contrast."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves a monitor's minimum, maximum, and current horizontal or vertical position.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_DISPLAY_AREA_POSITION flag. This function takes about 40 milliseconds to return. The horizontal and vertical position are continuous monitor settings. For more information, see Using the High-Level Monitor Configuration Functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetMonitorDisplayAreaPosition",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MC_POSITION_TYPE",
+        "name": "ptPositionType",
+        "description": "A member of the MC_POSITION_TYPE enumeration, specifying whether to retrieve the horizontal position or the vertical position."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMinimumPosition",
+        "description": "Receives the minimum horizontal or vertical position."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwCurrentPosition",
+        "description": "Receives the current horizontal or vertical position."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMaximumPosition",
+        "description": "Receives the maximum horizontal or vertical position."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves a monitor's minimum, maximum, and current width or height.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_DISPLAY_AREA_SIZE flag. This function takes about 40 milliseconds to return. The width and height settings are continuous monitor settings. For more information, see Using the High-Level Monitor Configuration Functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetMonitorDisplayAreaSize",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MC_SIZE_TYPE",
+        "name": "stSizeType",
+        "description": "A member of the MC_SIZE_TYPE enumeration, specifying whether to retrieve the width or the height."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMinimumWidthOrHeight",
+        "description": "Receives the minimum width or height."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwCurrentWidthOrHeight",
+        "description": "Receives the current width or height."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMaximumWidthOrHeight",
+        "description": "Receives the maximum width or height."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves a monitor's red, green, or blue drive value.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "Drive settings are generally used to adjust the monitor's white point. Drive and black level are different names for the same monitor setting. If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_RED_GREEN_BLUE_DRIVE flag. This function takes about 40 milliseconds to return. The drive settings are continuous monitor settings. For more information, see Using the High-Level Monitor Configuration Functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetMonitorRedGreenOrBlueDrive",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MC_DRIVE_TYPE",
+        "name": "dtDriveType",
+        "description": "A member of the MC_DRIVE_TYPE enumeration, specifying whether to retrieve the red, green, or blue drive value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMinimumDrive",
+        "description": "Receives the minimum red, green, or blue drive value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwCurrentDrive",
+        "description": "Receives the current red, green, or blue drive value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMaximumDrive",
+        "description": "Receives the maximum red, green, or blue drive value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves a monitor's red, green, or blue gain value.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "Gain settings are generally used to adjust the monitor's white point. If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_RED_GREEN_BLUE_GAIN flag. This function takes about 40 milliseconds to return. The gain settings are continuous monitor settings. For more information, see Using the High-Level Monitor Configuration Functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetMonitorRedGreenOrBlueGain",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MC_GAIN_TYPE",
+        "name": "gtGainType",
+        "description": "A member of the MC_GAIN_TYPE enumeration, specifying whether to retrieve the red, green, or blue gain value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMinimumGain",
+        "description": "Receives the minimum red, green, or blue gain value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwCurrentGain",
+        "description": "Receives the current red, green, or blue gain value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMaximumGain",
+        "description": "Receives the maximum red, green, or blue gain value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the type of technology used by a monitor.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "This function does not support every display technology. If a monitor uses a display technology that is supported by this function, the GetMonitorCapabilities function returns the MC_CAPS_DISPLAY_TECHNOLOGY_TYPE flag. If that flag is absent, the GetMonitorTechnologyType function fails. Some monitor technologies do not support certain monitor configuration functions. For example, the DegaussMonitor function is supported only for cathode ray tube (CRT) monitors. To find out whether a specific function is supported, call GetMonitorCapabilities. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetMonitorTechnologyType",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPMC_DISPLAY_TECHNOLOGY_TYPE",
+        "name": "pdtyDisplayTechnologyType",
+        "description": "Receives the technology type, specified as a member of the MC_DISPLAY_TECHNOLOGY_TYPE enumeration."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Restores a monitor's color settings to their factory defaults.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "This function potentially changes the current value of the monitor's brightness, contrast, color temperature, drive, and gain. The current value of each setting is changed to its factory default. The default settings depend on the manufacturer. This function can also change the range of supported values for each of these settings. The function does not enable any monitor settings that were disabled. If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_RESTORE_FACTORY_COLOR_DEFAULTS flag. This function takes about 5 seconds to return. This function might reset monitor settings that are not accessible through the high-level monitor configuration functions. Whether this occurs depends on the specific model of monitor. The following settings are not affected by this function: ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "RestoreMonitorFactoryColorDefaults",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Restores a monitor's settings to their factory defaults.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "This function restores all of the settings that are supported by the high-level monitor configuration functions. It might also restore settings that are available only through the low-level functions and are not supported by the high-level functions. The current value of each setting is changed to its factory default. The exact settings that change, and the default values of those settings, depend on the manufacturer. This function can also change the range of supported values for some settings. If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_RESTORE_FACTORY_DEFAULTS flag. This function takes about 5 seconds to return. If GetMonitorCapabilities returns the MC_RESTORE_FACTORY_DEFAULTS_ENABLES_MONITOR_SETTINGS flag, this function also enables all of the monitor settings that are supported by the high-level functions. It is sometimes possible for an application to disable certain settings by calling the low-level functions. It is also possible for the user to disable certain settings by adjusting settings on the monitor's physical control panel. If that happens, the setting can only be re-enabled through the control panel or by calling RestoreMonitorFactoryDefaults. It is not possible to disable any settings by using the high-level functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "RestoreMonitorFactoryDefaults",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Saves the current monitor settings to the display's nonvolatile storage.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "This function takes about 200 milliseconds to return. This high-level function is identical to the low-level function SaveCurrentSettings. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "SaveCurrentMonitorSettings",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets a monitor's brightness value. Increasing the brightness value makes the display on the monitor brighter, and decreasing it makes the display dimmer.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_BRIGHTNESS flag. This function takes about 50 milliseconds to return. The brightness setting is a continuous monitor setting. For more information, see Using the High-Level Monitor Configuration Functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "SetMonitorBrightness",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNewBrightness",
+        "description": "Brightness value. To get the monitor's minimum and maximum brightness values, call GetMonitorBrightness."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets a monitor's color temperature.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_COLOR_TEMPERATURE flag. The GetMonitorCapabilities function also returns the range of color temperatures that the monitor supports. The ctCurrentColorTemperature parameter must correspond to one of these values. Changing the color temperature changes the monitor's white point. It can also change the current drive and gain settings. To get the new drive and gain settings, call GetMonitorRedGreenOrBlueDrive and GetMonitorRedGreenOrBlueGain, respectively. This function takes from 50 to 90 milliseconds to return. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "SetMonitorColorTemperature",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MC_COLOR_TEMPERATURE",
+        "name": "ctCurrentColorTemperature",
+        "description": "Color temperature, specified as a member of the MC_COLOR_TEMPERATURE enumeration."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets a monitor's contrast value.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_CONTRAST flag. This function takes about 50 milliseconds to return. The brightness setting is a continuous monitor setting. For more information, see Using the High-Level Monitor Configuration Functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "SetMonitorContrast",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNewContrast",
+        "description": "Contrast value. To get the monitor's minimum and maximum contrast values, call, call GetMonitorContrast."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the horizontal or vertical position of a monitor's display area.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_DISPLAY_AREA_POSITION flag. This function takes about 50 milliseconds to return. The horizontal and vertical position are continuous monitor settings. For more information, see Using the High-Level Monitor Configuration Functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "SetMonitorDisplayAreaPosition",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MC_POSITION_TYPE",
+        "name": "ptPositionType",
+        "description": "A member of the MC_POSITION_TYPE enumeration, specifying whether to set the horizontal position or the vertical position."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNewPosition",
+        "description": "Horizontal or vertical position. To get the minimum and maximum position, call GetMonitorDisplayAreaPosition."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the width or height of a monitor's display area.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_DISPLAY_AREA_SIZE flag. This function takes about 50 milliseconds to return. The width and height settings are continuous monitor settings. For more information, see Using the High-Level Monitor Configuration Functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "SetMonitorDisplayAreaSize",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MC_SIZE_TYPE",
+        "name": "stSizeType",
+        "description": "A member of the MC_SIZE_TYPE enumeration, specifying whether to set the width or the height."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNewDisplayAreaWidthOrHeight",
+        "description": "Display area width or height. To get the minimum and maximum width and height, call GetMonitorDisplayAreaSize."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets a monitor's red, green, or blue drive value.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "Drive settings are generally used to adjust the monitor's white point. Drive and black level are different names for the same monitor setting. If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_RED_GREEN_BLUE_DRIVE flag. This function takes about 50 milliseconds to return. Changing the drive settings can change the color temperature. To get the new color temperature, call GetMonitorColorTemperature. The drive settings are continuous monitor settings. For more information, see Using the High-Level Monitor Configuration Functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "SetMonitorRedGreenOrBlueDrive",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MC_DRIVE_TYPE",
+        "name": "dtDriveType",
+        "description": "A member of the MC_DRIVE_TYPE enumeration, specifying whether to set the red, green, or blue drive value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNewDrive",
+        "description": "Red, green, or blue drive value. To get the monitor's minimum and maximum drive values, call GetMonitorRedGreenOrBlueDrive."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets a monitor's red, green, or blue gain value.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "HighLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "Gain settings are generally used to adjust the monitor's white point. If this function is supported, the GetMonitorCapabilities function returns the MC_CAPS_RED_GREEN_BLUE_GAIN flag. This function takes about 50 milliseconds to return. Changing the gain settings can change the color temperature. To get the new color temperature, call GetMonitorColorTemperature. The gain settings are continuous monitor settings. For more information, see Using the High-Level Monitor Configuration Functions. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "SetMonitorRedGreenOrBlueGain",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "MC_GAIN_TYPE",
+        "name": "gtGainType",
+        "description": "A member of the MC_GAIN_TYPE enumeration, specifying whether to set the red, green, or blue gain."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNewGain",
+        "description": "Red, green, or blue gain value. To get the monitor's minimum and maximum gain values, call GetMonitorRedGreenOrBlueGain."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves a string describing a monitor's capabilities.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "LowLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "This function corresponds to the \"Capabilities Request & Capabilities Reply\" command from the Display Data Channel Command Interface (DDC/CI) standard. For more information about the capabilities string, refer to the DDC/CI standard. This function usually returns quickly, but sometimes it can take several seconds to complete. You can update a monitor's capabilities string by adding an AddReg directive to the monitor's INF file. Add a registry key named \"CapabilitiesString\" to the monitor's driver key. The value of the registry key is the capabilities string. The registry data type is REG_SZ. Warning              Do not modify a monitor's INF file unless you are familiar with the layout of INF files and also understand the DDC/CI standard. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "CapabilitiesRequestAndCapabilitiesReply",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSTR",
+        "name": "pszASCIICapabilitiesString",
+        "description": "Pointer to a buffer that receives the monitor's capabilities string. The caller must allocate this buffer. To get the size of the string, call GetCapabilitiesStringLength. The capabilities string is always an ASCII string. The buffer must include space for the terminating null character."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwCapabilitiesStringLengthInCharacters",
+        "description": "Size of pszASCIICapabilitiesString in characters, including the terminating null character."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the length of a monitor's capabilities string.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "LowLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "This function usually returns quickly, but sometimes it can take several seconds to complete. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetCapabilitiesStringLength",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwCapabilitiesStringLengthInCharacters",
+        "description": "Receives the length of the capabilities string, in characters, including the terminating null character."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves a monitor's horizontal and vertical synchronization frequencies.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "LowLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "This function corresponds to the \"Get Timing Report & Timing Message\" command from the Display Data Channel Command Interface (DDC/CI) standard. For more information about the timing information, refer to the DDC/CI standard. This function takes about 50 milliseconds to return. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetTimingReport",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPMC_TIMING_REPORT",
+        "name": "pmtrMonitorTimingReport",
+        "description": "Pointer to an MC_TIMING_REPORT structure that receives the timing information."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the current value, maximum value, and code type of a Virtual Control Panel (VCP) code for a monitor.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "LowLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "This function corresponds to the \"Get VCP Feature & VCP Feature Reply\" command from the Display Data Channel Command Interface (DDC/CI) standard. Vendor-specific VCP codes can be used with this function. This function takes about 40 milliseconds to return. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetVCPFeatureAndVCPFeatureReply",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "bVCPCode",
+        "description": "VCP code to query. The VCP codes are Include the VESA Monitor Control Command Set (MCCS) standard, versions 1.0 and 2.0. This parameter must specify a continuous or non-continuous VCP, or a vendor-specific code. It should not be a table control code."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPMC_VCP_CODE_TYPE",
+        "name": "pvct",
+        "description": "Receives the VCP code type, as a member of the MC_VCP_CODE_TYPE enumeration. This parameter can be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwCurrentValue",
+        "description": "Receives the current value of the VCP code. This parameter can be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwMaximumValue",
+        "description": "If bVCPCode specifies a continuous VCP code, this parameter receives the maximum value of the VCP code. If bVCPCode specifies a non-continuous VCP code, the value received in this parameter is undefined. This parameter can be NULL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Saves the current monitor settings to the display's nonvolatile storage.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "LowLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "This function corresponds to the \"Save Current Settings\" function from the Display Data Channel Command Interface (DDC/CI) standard. This function takes about 200 milliseconds to return. This low-level function is identical to the high-level function SaveCurrentMonitorSettings. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "SaveCurrentSettings",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the value of a Virtual Control Panel (VCP) code for a monitor.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "LowLevelMonitorConfigurationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "This function corresponds to the \"Set VCP Feature\" command from the Display Data Channel Command Interface (DDC/CI) standard. This function takes about 50 milliseconds to return. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "SetVCPFeature",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor. To get the monitor handle, call GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "bVCPCode",
+        "description": "VCP code to set. The VCP codes are defined in the VESA Monitor Control Command Set (MCCS) standard, version 1.0 and 2.0. This parameter must specify a continuous or non-continuous VCP, or a vendor-specific code. It should not be a table control code."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNewValue",
+        "description": "Value of the VCP code."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes a handle to a physical monitor. Call this function to close a monitor handle obtained from the GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9 function.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "PhysicalMonitorEnumerationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "DestroyPhysicalMonitor",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "Handle to a physical monitor."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Closes an array of physical monitor handles. Call this function to close an array of monitor handles obtained from the GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9 function.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "PhysicalMonitorEnumerationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "DestroyPhysicalMonitors",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwPhysicalMonitorArraySize",
+        "description": "Number of elements in the pPhysicalMonitorArray array."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPPHYSICAL_MONITOR",
+        "name": "pPhysicalMonitorArray",
+        "description": "Pointer to an array of PHYSICAL_MONITOR structures."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the number of physical monitors associated with an HMONITOR monitor handle. Call this function before calling GetPhysicalMonitorsFromHMONITOR.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "PhysicalMonitorEnumerationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetNumberOfPhysicalMonitorsFromHMONITOR",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HMONITOR",
+        "name": "hMonitor",
+        "description": "A monitor handle. Monitor handles are returned by several Multiple Display Monitor functions, including EnumDisplayMonitors and MonitorFromWindow, which are part of the graphics device interface (GDI)."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwNumberOfPhysicalMonitors",
+        "description": "Receives the number of physical monitors associated with the monitor handle."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the number of physical monitors associated with a Direct3D device.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "PhysicalMonitorEnumerationAPI.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Monitor Configuration",
+    "name": "GetNumberOfPhysicalMonitorsFromIDirect3DDevice9",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IDirect3DDevice9",
+        "name": "*pDirect3DDevice9",
+        "description": "Pointer to the IDirect3DDevice9 interface of the Direct3D device."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwNumberOfPhysicalMonitors",
+        "description": "Receives the number of physical monitors associated with the Direct3D device."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the physical monitors associated with an HMONITOR monitor handle.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "PhysicalMonitorEnumerationAPI.h",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "A single HMONITOR handle can be associated with more than one physical monitor. This function returns a handle and a text description for each physical monitor. When you are done using the monitor handles, close them by passing the pPhysicalMonitorArray array to the DestroyPhysicalMonitors function. ",
+    "return_type": "BOOL",
+    "category": "Monitor Configuration",
+    "name": "GetPhysicalMonitorsFromHMONITOR",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HMONITOR",
+        "name": "hMonitor",
+        "description": "A monitor handle. Monitor handles are returned by several Multiple Display Monitor functions, including EnumDisplayMonitors and MonitorFromWindow, which are part of the graphics device interface (GDI)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwPhysicalMonitorArraySize",
+        "description": "Number of elements in pPhysicalMonitorArray. To get the required size of the array, call GetNumberOfPhysicalMonitorsFromHMONITOR."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPPHYSICAL_MONITOR",
+        "name": "pPhysicalMonitorArray",
+        "description": "Pointer to an array of PHYSICAL_MONITOR structures. The caller must allocate the array."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the physical monitors associated with a Direct3D device.",
+    "library": "Dxva2.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "PhysicalMonitorEnumerationAPI.h",
+    "return_value": "If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "A single Direct3D device can be associated with more than one physical monitor. This function returns a handle and a text description for each physical monitor. When you are done using the monitor handles, close them by passing the pPhysicalMonitorArray array to the DestroyPhysicalMonitors function. ",
+    "return_type": "HRESULT",
+    "category": "Monitor Configuration",
+    "name": "GetPhysicalMonitorsFromIDirect3DDevice9",
+    "is_callback": 0,
+    "dll": "Dxva2.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IDirect3DDevice9",
+        "name": "*pDirect3DDevice9",
+        "description": "Pointer to the IDirect3DDevice9 interface of the Direct3D device."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwPhysicalMonitorArraySize",
+        "description": "Number of elements in pPhysicalMonitorArray. To get the required size of the array, call GetNumberOfPhysicalMonitorsFromIDirect3DDevice9."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPPHYSICAL_MONITOR",
+        "name": "pPhysicalMonitorArray",
+        "description": "Pointer to an array of PHYSICAL_MONITOR structures. The caller must allocate the array."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Important  This function is used by the monitor configuration API to access functionality in the display driver. Applications should not call this function.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "",
+    "return_value": "If the method succeeds, it returns STATUS_SUCCESS. Otherwise, it returns an NTSTATUS error code. ",
+    "remarks": "Applications should call CapabilitiesRequestAndCapabilitiesReply instead of calling this function. This function has no associated import library. To call this function, you must use the LoadLibrary and GetProcAddress functions to dynamically link to Gdi32.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Monitor Configuration",
+    "name": "DDCCIGetCapabilitiesString",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "A handle to a physical monitor."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSTR",
+        "name": "pszString",
+        "description": "A pointer to a buffer that receives the capabilities string. To get the length of the capabilities string, call DDCCIGetCapabilitiesStringLength."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwLength",
+        "description": "The size of the pszString buffer, in characters, including the terminating null character."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Important  This function is used by the monitor configuration API to access functionality in the display driver. Applications should not call this function.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "",
+    "return_value": "If the method succeeds, it returns STATUS_SUCCESS. Otherwise, it returns an NTSTATUS error code. ",
+    "remarks": "Applications should call GetCapabilitiesStringLength instead of calling this function. This function has no associated import library. To call this function, you must use the LoadLibrary and GetProcAddress functions to dynamically link to Gdi32.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Monitor Configuration",
+    "name": "DDCCIGetCapabilitiesStringLength",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "A handle to a physical monitor."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*pdwLength",
+        "description": "Receives the length of the capabilities string, in characters, including the terminating null character."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Important  This function is used by the monitor configuration API to access functionality in the display driver. Applications should not call this function.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "",
+    "return_value": "If the method succeeds, it returns STATUS_SUCCESS. Otherwise, it returns an NTSTATUS error code. ",
+    "remarks": "Applications should call GetTimingReport instead of calling this function. This function has no associated import library. To call this function, you must use the LoadLibrary and GetProcAddress functions to dynamically link to Gdi32.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Monitor Configuration",
+    "name": "DDCCIGetTimingReport",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "A handle to a physical monitor."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPMC_TIMING_REPORT",
+        "name": "pmtr",
+        "description": "A pointer to an MC_TIMING_REPORT structure that receives the timing information."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Important  This function is used by the monitor configuration API to access functionality in the display driver. Applications should not call this function.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "",
+    "return_value": "If the method succeeds, it returns STATUS_SUCCESS. Otherwise, it returns an NTSTATUS error code. ",
+    "remarks": "Applications should call GetVCPFeatureAndVCPFeatureReply instead of calling this function. This function has no associated import library. To call this function, you must use the LoadLibrary and GetProcAddress functions to dynamically link to Gdi32.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Monitor Configuration",
+    "name": "DDCCIGetVCPFeature",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "A handle to a physical monitor."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwVCPCode",
+        "description": "The VCP code to query."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPMC_VCP_CODE_TYPE",
+        "name": "pvct",
+        "description": "Receives the VCP code type, as a member of the MC_VCP_CODE_TYPE enumeration."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*pdwCurrentValue",
+        "description": "Receives the current value of the VCP code."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "DWORD",
+        "name": "*pdwMaximumValue",
+        "description": "Receives the maximum value of the VCP code."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Important  This function is used by the monitor configuration API to access functionality in the display driver. Applications should not call this function.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "",
+    "return_value": "If the method succeeds, it returns STATUS_SUCCESS. Otherwise, it returns an NTSTATUS error code. ",
+    "remarks": "Applications should call SaveCurrentSettings   instead of calling this function. This function has no associated import library. To call this function, you must use the LoadLibrary and GetProcAddress functions to dynamically link to Gdi32.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Monitor Configuration",
+    "name": "DDCCISaveCurrentSettings",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "A handle to a physical monitor."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Important  This function is used by the monitor configuration API to access functionality in the display driver. Applications should not call this function.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "",
+    "return_value": "If the method succeeds, it returns STATUS_SUCCESS. Otherwise, it returns an NTSTATUS error code. ",
+    "remarks": "Applications should call SetVCPFeature  instead of calling this function. This function has no associated import library. To call this function, you must use the LoadLibrary and GetProcAddress functions to dynamically link to Gdi32.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Monitor Configuration",
+    "name": "DDCCISetVCPFeature",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "A handle to a physical monitor."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwVCPCode",
+        "description": "The VCP code to set."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNewValue",
+        "description": "The value of the VCP code."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Important  This function is used by the monitor configuration API to access functionality in the display driver. Applications should not call this function.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "",
+    "return_value": "If the method succeeds, it returns STATUS_SUCCESS. Otherwise, it returns an NTSTATUS error code. ",
+    "remarks": "Applications should call DestroyPhysicalMonitor instead of calling this function. This function has no associated import library. To call this function, you must use the LoadLibrary and GetProcAddress functions to dynamically link to Gdi32.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Monitor Configuration",
+    "name": "DestroyPhysicalMonitorInternal",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "A handle to a physical monitor."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Important  This function is used by the monitor configuration API to access functionality in the display driver. Applications should not call this function.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "",
+    "return_value": "If the method succeeds, it returns STATUS_SUCCESS. Otherwise, it returns an NTSTATUS error code. ",
+    "remarks": "Instead of using this function, applications should call one of the following functions: This function has no associated import library. To call this function, you must use the LoadLibrary and GetProcAddress functions to dynamically link to Gdi32.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Monitor Configuration",
+    "name": "GetNumberOfPhysicalMonitors",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UNICODE_STRING",
+        "name": "*pstrDeviceName",
+        "description": "A pointer to a UNICODE_STRING structure that contains the name of the display device, as returned by the GetMonitorInfo function."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwNumberOfPhysicalMonitors",
+        "description": "Receives the number of physical monitors."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Important  This function is used by the monitor configuration API to access functionality in the display driver. Applications should not call this function.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "",
+    "return_value": "If the method succeeds, it returns STATUS_SUCCESS. Otherwise, it returns an NTSTATUS error code. ",
+    "remarks": "Instead of using this function, applications should call one of the following functions: This function has no associated import library. To call this function, you must use the LoadLibrary and GetProcAddress functions to dynamically link to Gdi32.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Monitor Configuration",
+    "name": "GetPhysicalMonitorDescription",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hMonitor",
+        "description": "A handle to a physical monitor."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwPhysicalMonitorDescriptionSizeInChars",
+        "description": "The number of characters in the szPhysicalMonitorDescription array."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "szPhysicalMonitorDescription",
+        "description": "A pointer to an array that receives the description. The number of elements in the array should be at least PHYSICAL_MONITOR_DESCRIPTION_SIZE."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Important  This function is used by the monitor configuration API to access functionality in the display driver. Applications should not call this function.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "",
+    "return_value": "If the method succeeds, it returns STATUS_SUCCESS. Otherwise, it returns an NTSTATUS error code. ",
+    "remarks": "Instead of using this function, applications should call one of the following functions: This function has no associated import library. To call this function, you must use the LoadLibrary and GetProcAddress functions to dynamically link to Gdi32.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "Monitor Configuration",
+    "name": "GetPhysicalMonitors",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UNICODE_STRING",
+        "name": "*pstrDeviceName",
+        "description": "A pointer to a UNICODE_STRING structure that contains the name of the display device, as returned by the GetMonitorInfo function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwPhysicalMonitorArraySize",
+        "description": "The number of elements in the pdwNumPhysicalMonitorHandlesInArray array. To get the required size of the array, call GetNumberOfPhysicalMonitors."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD",
+        "name": "*pdwNumPhysicalMonitorHandlesInArray",
+        "description": "Receives the number of items that the function copies to the phPhysicalMonitorArray array."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HANDLE",
+        "name": "*phPhysicalMonitorArray",
+        "description": "An array that receives handles to  the physical monitors. Each handle must be released by calling DestroyPhysicalMonitor."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

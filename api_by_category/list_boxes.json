@@ -1,0 +1,207 @@
+[
+  {
+    "n_arguments": 5,
+    "description": "Replaces the contents of a list box with the names of the subdirectories and files in a specified directory. You can filter the list of names by specifying a set of file attributes. The list can optionally include mapped drives.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: int If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. For example, if the string specified by  \t\t\t\t\t\tlpPathSpec is not a valid path, the function fails. To get extended error information, call . ",
+    "remarks": "If  \t\t\t\tlpPathSpec specifies a directory, DlgDirListComboBox changes the current directory to the specified directory before filling the list box. The text of the static control identified by the  \t\t\t\tnIDStaticPath parameter is set to the name of the new current directory. DlgDirList sends the  \t\t\t\tLB_RESETCONTENT and  \t\t\t\tLB_DIR messages to the list box. If  \t\t\t\tuFileType includes the DDL_DIRECTORY flag and  \t\t\t\tlpPathSpec specifies a first-level directory, such as C:\\TEMP, the list box will always include a \"..\" entry for the root directory. This is true even if the root directory has hidden or system attributes and the DDL_HIDDEN and DDL_SYSTEM flags are not specified. The root directory of an NTFS volume has hidden and system attributes. The directory listing displays long filenames, if any. For examples, see the following topics: Creating a Directory Listing in a Single-selection List Box and Creating a Multiple-selection List Box. ",
+    "return_type": "int",
+    "category": "List Boxes",
+    "name": "DlgDirList",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box that contains the list box."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPTSTR",
+        "name": "lpPathSpec",
+        "description": "Type: LPTSTR A pointer to a buffer containing a null-terminated string that specifies an absolute path, relative path, or filename. An absolute path can begin with a drive letter (for example, d:\\) or a UNC name (for example, \\\\ \t\t\t\t\tmachinename\\ \t\t\t\t\tsharename).  The function splits the string into a directory and a filename. The function searches the directory for names that match the filename. If the string does not specify a directory, the function searches the current directory.  If the string includes a filename, the filename must contain at least one wildcard character (? or *). If the string does not include a filename, the function behaves as if you had specified the asterisk wildcard character (*) as the filename. All names in the specified directory that match the filename and have the attributes specified by the  \t\t\t\t\t\tuFileType parameter are added to the list box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIDListBox",
+        "description": "Type: int The identifier of a list box in the  \t\t\t\t\thDlg dialog box. If this parameter is zero, DlgDirList does not try to fill a list box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIDStaticPath",
+        "description": "Type: int The identifier of a static control in the  \t\t\t\t\thDlg dialog box. DlgDirList sets the text of this control to display the current drive and directory. This parameter can be zero if you do not want to display the current drive and directory."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uFileType",
+        "description": "Type: UINT Specifies the attributes of the files or directories to be added to the list box. This parameter can be one or more of the following values.   ValueMeaning  DDL_ARCHIVE   Includes archived files.   DDL_DIRECTORY   Includes subdirectories. Subdirectory names are enclosed in square brackets ([ ]).   DDL_DRIVES   All mapped drives are added to the list. Drives are listed in the form [- \t\t\t\t\t\tx-], where  \t\t\t\t\t\tx is the drive letter.   DDL_EXCLUSIVE   Includes only files with the specified attributes. By default, read/write files are listed even if DDL_READWRITE is not specified.   DDL_HIDDEN   Includes hidden files.   DDL_READONLY   Includes read-only files.   DDL_READWRITE   Includes read/write files with no additional attributes. This is the default setting.   DDL_SYSTEM   Includes system files.   DDL_POSTMSGS   If set, DlgDirList uses the PostMessage function to send messages to the list box. If not set, DlgDirList uses the SendMessage function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the current selection from a single-selection list box. It assumes that the list box has been filled by the DlgDirList function and that the selection is a drive letter, filename, or directory name.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If the current selection is a directory name, the return value is nonzero. If the current selection is not a directory name, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The DlgDirSelectEx function copies the selection to the buffer pointed to by the  \t\t\t\tlpString parameter. If the current selection is a directory name or drive letter, DlgDirSelectEx removes the enclosing square brackets (and hyphens, for drive letters), so that the name or letter is ready to be inserted into a new path. If there is no selection,  \t\t\t\tlpString does not change. If the string is as long or longer than the buffer, the buffer will contain the truncated string with a terminating null character. DlgDirSelectEx sends LB_GETCURSEL and LB_GETTEXT messages to the list box. The function does not allow more than one filename to be returned from a list box. The list box must not be a multiple-selection list box. If it is, this function does not return a zero value and  \t\t\t\tlpString remains unchanged. Windows 95 or later: DlgDirSelectExW is supported by the Microsoft Layer for Unicode. To use this, you must add certain files to your application, as outlined in Microsoft Layer for Unicode on Windows Me/98/95 Systems. For an example, see Creating a Directory Listing in a Single-selection List Box. ",
+    "return_type": "BOOL",
+    "category": "List Boxes",
+    "name": "DlgDirSelectEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hDlg",
+        "description": "Type: HWND A handle to the dialog box that contains the list box."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpString",
+        "description": "Type: LPTSTR A pointer to a buffer that receives the selected path."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCount",
+        "description": "Type: int The length, in  \t\t\t\t\tTCHARs, of the buffer pointed to by  \t\t\t\t\tlpString."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIDListBox",
+        "description": "Type: int The identifier of a list box in the dialog box."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Draws the insert icon in the parent window of the specified drag list box.",
+    "library": "Comctl32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Commctrl.h",
+    "return_value": "No return value. ",
+    "remarks": "",
+    "return_type": "void",
+    "category": "List Boxes",
+    "name": "DrawInsert",
+    "is_callback": 0,
+    "dll": "Comctl32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "handParent",
+        "description": "Type: HWND A handle to the parent window of the drag list box."
+      },
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hLB",
+        "description": "Type: HWND A handle to the drag list box."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "nItem",
+        "description": "Type: int The identifier of the icon item to be drawn."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the number of items per column in a specified list box.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: DWORD The return value is the number of items per column. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "List Boxes",
+    "name": "GetListBoxInfo",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND A handle to the list box whose number of items per column is to be retrieved."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the index of the item at the specified point in a list box.",
+    "library": "Comctl32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Commctrl.h",
+    "return_value": "Type: int Returns the item identifier if the point is over a list item, or -1 otherwise. ",
+    "remarks": "The LBItemFromPt function only scrolls the list box if a minimum amount of time has passed since it last did so. Timing prevents the list box from scrolling too quickly if the function is called repeatedly in rapid succession\u00e2\u0080\u0094for example, when DL_DRAGGING notification codes or WM_MOUSEMOVE messages are processed. If the specified point is outside the client area of the list box and  \t\t\t\tbAutoScroll is TRUE, the function scrolls the list box instead of returning an item identifier. ",
+    "return_type": "int",
+    "category": "List Boxes",
+    "name": "LBItemFromPt",
+    "is_callback": 0,
+    "dll": "Comctl32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hLB",
+        "description": "Type: HWND A handle to the list box to check."
+      },
+      {
+        "in_out": "",
+        "type": "POINT",
+        "name": "pt",
+        "description": "Type: POINT A POINT structure that contains the screen coordinates to check."
+      },
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "bAutoScroll",
+        "description": "Type: BOOL A scroll flag. If this parameter is TRUE and the point is directly above or below the list box, the function scrolls the list box by one line and returns -1. Otherwise, the function does not scroll the list box."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Changes the specified single-selection list box to a drag list box.",
+    "library": "Comctl32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Commctrl.h",
+    "return_value": "Type: BOOL Returns nonzero if successful, or zero otherwise. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "List Boxes",
+    "name": "MakeDragList",
+    "is_callback": 0,
+    "dll": "Comctl32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hLB",
+        "description": "Type: HWND A handle to the single-selection list box."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]
+

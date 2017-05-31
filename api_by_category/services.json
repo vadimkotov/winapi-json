@@ -1,0 +1,1396 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "An application-defined callback function used with the  RegisterServiceCtrlHandler function. A service program can use it as the control handler function of a particular service.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "When a service is started, its  ServiceMain function should immediately call the  RegisterServiceCtrlHandler function to specify a  Handler function to process control requests. The control dispatcher in the main thread of a service process invokes the control handler function for the specified service whenever it receives a control request from the service control manager. After processing the control request, the control handler must call the  SetServiceStatus function if the service state changes to report its new status to the service control manager. The control handler function is intended to receive notification and return immediately. The callback function should save its parameters and create other threads to perform additional work. (Your application must ensure that such threads have exited before stopping the service.) In particular, a control handler should avoid  operations that might block, such as taking a lock, because this could result  in  a deadlock or cause the system to stop responding. When the service control manager sends a control code to a service, it waits for the handler function to return before sending additional control codes to other services. The control handler should return as quickly as possible; if it does not return within 30 seconds, the SCM  returns an error. If a service must do lengthy processing when the service is executing the control handler, it should create a secondary thread to perform the lengthy processing, and then return from the control handler. This prevents the service from tying up the control dispatcher and blocking other services from receiving control codes. The SERVICE_CONTROL_SHUTDOWN control code should only be processed by services that must absolutely clean up during shutdown, because there is a limited time (about 20 seconds) available for service shutdown. After this time expires, system shutdown proceeds regardless of whether service shutdown is complete. Note that if the system is left in the shutdown state (not restarted or powered down), the service continues to run.   If your service registers to accept SERVICE_CONTROL_SHUTDOWN, it must handle the control code and stop  in a timely fashion. Otherwise, the service can increase the time required to shut down the system, because the system must wait for the full amount of time allowed for service shutdown before system shutdown can proceed. If the service requires more time to clean up, it should send STOP_PENDING status messages, along with a wait hint, so the service controller knows how long to wait before reporting to the system that service shutdown is complete. However, to prevent a service from stopping shutdown, there is a limit to how long the service controller will wait. If the service is being shut down through the Services snap-in, the limit is 125 seconds. If the operating system is rebooting, the time limit is specified in the WaitToKillServiceTimeout value of the following registry key:  HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control Services can also use the SetConsoleCtrlHandler function to receive shutdown notification. This notification is received when the running applications are shutting down, which occurs before services are shut down. For an example, see  Writing a Control Handler Function. ",
+    "return_type": "VOID WINAPI",
+    "category": "Services",
+    "name": "Handler",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "fdwControl",
+        "description": "The control code. This parameter can be one of the following values.     Control codeMeaning  SERVICE_CONTROL_CONTINUE 0x00000003   Notifies a paused service that it should resume.   SERVICE_CONTROL_INTERROGATE 0x00000004   Notifies a service that it should report its current status information to the service control manager. The handler should simply return NO_ERROR; the SCM is aware of the current state of the service.   SERVICE_CONTROL_NETBINDADD 0x00000007    Notifies a network service that there is a new component for binding. The service should bind to the new component.  Applications should use Plug and Play functionality instead.   SERVICE_CONTROL_NETBINDDISABLE 0x0000000A    Notifies a network service that one of its bindings has been disabled. The service should reread its binding information and remove the binding.  Applications should use Plug and Play functionality instead.   SERVICE_CONTROL_NETBINDENABLE 0x00000009    Notifies a network service that a disabled binding has been enabled. The service should reread its binding information and add the new binding.  Applications should use Plug and Play functionality instead.   SERVICE_CONTROL_NETBINDREMOVE 0x00000008    Notifies a network service that a component for binding has been removed. The service should reread its binding information and unbind from the removed component.  Applications should use Plug and Play functionality instead.   SERVICE_CONTROL_PARAMCHANGE 0x00000006    Notifies a service that its startup parameters have changed. The service should reread its startup parameters.   SERVICE_CONTROL_PAUSE 0x00000002   Notifies a service that it should pause.   SERVICE_CONTROL_SHUTDOWN 0x00000005   Notifies a service that the system is shutting down so the service can perform cleanup tasks.     If a service accepts this control code, it must stop after it performs its cleanup tasks and return NO_ERROR. After the SCM sends this control code, it will not send other control codes to the service. For more information, see Remarks.   SERVICE_CONTROL_STOP 0x00000001   Notifies a service that it should stop. If a service accepts this control code, it must stop upon receipt and return NO_ERROR. After the SCM sends this control code, it does not send other control codes.Windows XP:  If the service returns NO_ERROR and continues to run, it   continues to receive control codes. This behavior changed starting with Windows Server 2003 and Windows XP with SP2.     This parameter can also be a user-defined control code, as described in the following table.  Control codeMeaning   Range 128 to 255.   The service defines the action associated with the control code."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Registers a function to handle  service control requests.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a service status handle. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager.  ",
+    "remarks": "The  ServiceMain function of a new service should immediately call the  RegisterServiceCtrlHandler function to register a control handler function with the control dispatcher. This enables the control dispatcher to invoke the specified function when it receives control requests for this service. For a list of possible control codes, see Handler. The threads of the calling process can use the service status handle returned by this function to identify the service in subsequent calls to the  SetServiceStatus function. The  RegisterServiceCtrlHandler function must be called before the first  SetServiceStatus call because  RegisterServiceCtrlHandler returns a service status handle for the caller to use so that no other service can inadvertently set this service status. In addition, the control handler must be in place to receive control requests by the time the service specifies the controls it accepts through the  SetServiceStatus function. When the control handler function is invoked with a control request, the service must call  SetServiceStatus to report status to the service control manager only if the service status has changed, such as when the service is processing stop or shutdown controls. If the service status has not changed, the service should not report status to the service control manager. The service status handle does not have to be closed. For an example, see  Writing a ServiceMain Function. ",
+    "return_type": "SERVICE_STATUS_HANDLE WINAPI",
+    "category": "Services",
+    "name": "RegisterServiceCtrlHandler",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpServiceName",
+        "description": "The name of the service run by the calling thread. This is the service name that the service control program specified in the  CreateService function when creating the service.     If the service type is SERVICE_WIN32_OWN_PROCESS, the function does not verify that the specified name is valid, because there is only one registered service in the process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPHANDLER_FUNCTION",
+        "name": "lpHandlerProc",
+        "description": "A pointer to the handler function to be registered. For more information, see  Handler."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "An application-defined callback function used with the      RegisterServiceCtrlHandlerEx function. A      service program can use it as the control handler function of a particular service.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "WinSvc.h (include Windows.h)",
+    "return_value": "The return value for this function depends on the control code received. The following list identifies the rules for this return value: ",
+    "remarks": "When a service is started, its ServiceMain function      should immediately call the      RegisterServiceCtrlHandlerEx      function to specify a HandlerEx function to process control      requests. To specify the control codes to be accepted, use the      SetServiceStatus and      RegisterDeviceNotification functions. The control dispatcher in the main thread of a service invokes the control handler function for the specified      service whenever it receives a control request from the service control manager. After processing the control      request, the control handler must call      SetServiceStatus if the service state changes to      report its new status to the service control manager. The control handler function is intended to receive notification and return immediately. The      callback function should save its parameters and create other threads to perform additional work. (Your application      must ensure that such threads have exited before stopping the service.) In particular, a control handler should avoid operations that might block, such as taking a lock, because this could result in a deadlock or cause the system to stop responding. When the service control manager sends a control code to a service, it waits for the handler function to      return before sending additional control codes to other services. The control handler should return as quickly as possible; if it does not return within 30      seconds, the SCM returns an error. If a service must do lengthy processing when the service is executing the      control handler, it should create a secondary thread to perform the lengthy processing, and then return from the      control handler. This prevents the service from tying up the control dispatcher and blocking other services from      receiving control codes. The SERVICE_CONTROL_SHUTDOWN control code should only be processed by services that must absolutely clean up      during shutdown, because there is a limited time (about 20 seconds) available for service shutdown. After this      time expires, system shutdown proceeds regardless of whether service shutdown is complete. Note that if the system      is left in the shutdown state (not restarted or powered down), the service continues to run. If your service registers to accept SERVICE_CONTROL_SHUTDOWN, it must handle the control code and return NO_ERROR. Returning an error for this control code and not stopping in a timely fashion can increase the time required to shut down the system, because the system must wait for the full amount of time allowed for service shutdown before system shutdown can proceed. If the service requires more time to clean up, it should send STOP_PENDING status messages, along with a wait      hint, so the service controller knows how long to wait before reporting to the system that service shutdown is      complete. However, to prevent a service from stopping shutdown, there is a limit to how long the service      controller waits. If the service is being shut down through the Services snap-in, the limit is 125 seconds. If the operating system is rebooting, the time limit is specified in the WaitToKillServiceTimeout value of the following registry key:  HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control Be sure to handle Plug and Play device events as quickly as possible; otherwise, the system may become      unresponsive. If your event handler is to perform an operation that may block execution (such as I/O), it is best      to start another thread to perform the operation asynchronously. Services can also use the      SetConsoleCtrlHandler function to receive      shutdown notification. This notification is received when the running applications are shutting down, which occurs      before services are shut down. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Services",
+    "name": "HandlerEx",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwControl",
+        "description": "The control code. This parameter can be one of the following values.  Control codeMeaning  SERVICE_CONTROL_CONTINUE 0x00000003   Notifies a paused service that it should resume.   SERVICE_CONTROL_INTERROGATE 0x00000004   Notifies a service to report its current status information to the service control manager. The handler should simply return NO_ERROR; the SCM is aware of the current state of the service.   SERVICE_CONTROL_NETBINDADD 0x00000007   Notifies a network service that there is a new component for binding. The service should bind to the new          component.           Applications should use Plug and Play functionality instead.   SERVICE_CONTROL_NETBINDDISABLE 0x0000000A   Notifies a network service that one of its bindings has been disabled. The service should reread its          binding information and remove the binding.           Applications should use Plug and Play functionality instead.   SERVICE_CONTROL_NETBINDENABLE 0x00000009   Notifies a network service that a disabled binding has been enabled. The service should reread its          binding information and add the new binding.           Applications should use Plug and Play functionality instead.   SERVICE_CONTROL_NETBINDREMOVE 0x00000008   Notifies a network service that a component for binding has been removed. The service should reread its          binding information and unbind from the removed component.           Applications should use Plug and Play functionality instead.   SERVICE_CONTROL_PARAMCHANGE 0x00000006   Notifies a service that service-specific startup parameters have changed. The service should reread its          startup parameters.   SERVICE_CONTROL_PAUSE 0x00000002   Notifies a service that it should pause.   SERVICE_CONTROL_PRESHUTDOWN 0x0000000F   Notifies a service that the system will be shutting down. Services that need additional time to perform          cleanup tasks beyond the tight time restriction at system shutdown can use this notification. The service         control manager sends this notification to applications that have registered for it before sending a         SERVICE_CONTROL_SHUTDOWN notification to applications that have registered for that notification.          A service that handles this notification blocks system shutdown until the service stops or the preshutdown           time-out interval specified through           SERVICE_PRESHUTDOWN_INFO expires. Because           this affects the user experience, services should use this feature only if it is absolutely necessary to avoid           data loss or significant recovery time at the next system start. Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONTROL_SHUTDOWN 0x00000005   Notifies a service that the system is shutting down so the service can perform cleanup tasks. Note that          services that register for SERVICE_CONTROL_PRESHUTDOWN notifications cannot receive this notification because          they have already stopped.           If a service accepts this control code, it must stop after it performs its cleanup tasks and return           NO_ERROR. After the SCM sends this control code, it will not send other control codes to the service. For more information, see the Remarks section of this topic.   SERVICE_CONTROL_STOP 0x00000001   Notifies a service that it should stop.          If a service accepts this control code, it must stop upon receipt and return NO_ERROR. After the SCM sends           this control code, it will not send other control codes to the service.          Windows XP:  If the service returns NO_ERROR and continues to run, it continues to receive control codes. This             behavior changed starting with Windows Server 2003 and Windows XP with SP2.     This parameter can also be one of the following extended control codes. Note that these control codes are not         supported by the Handler function.  Control CodeMeaning  SERVICE_CONTROL_DEVICEEVENT 0x0000000B   Notifies a service of device events. (The service must have registered to receive these notifications          using the RegisterDeviceNotification          function.) The dwEventType and lpEventData parameters contain additional information.   SERVICE_CONTROL_HARDWAREPROFILECHANGE 0x0000000C   Notifies a service that the computer's hardware profile has changed.  The dwEventType parameter contains additional information.   SERVICE_CONTROL_POWEREVENT 0x0000000D   Notifies a service of system power events.  The dwEventType parameter contains additional information. If dwEventType is PBT_POWERSETTINGCHANGE, the lpEventData parameter also contains additional information.   SERVICE_CONTROL_SESSIONCHANGE 0x0000000E   Notifies a service of session change events.         Note that a service will only be notified of a user logon if it is fully loaded before the logon attempt is made.  The dwEventType and lpEventData parameters contain additional information.          SERVICE_CONTROL_TIMECHANGE 0x00000010   Notifies a service that the system time has changed. The lpEventData parameter contains additional information. The dwEventType parameter is not used. Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This control code is not supported.   SERVICE_CONTROL_TRIGGEREVENT 0x00000020   Notifies a service registered for a service trigger event that the event has occurred.  Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This control code is not supported.   SERVICE_CONTROL_USERMODEREBOOT 0x00000040   Notifies a service that the user has initiated a reboot. Windows Server 2008 R2, Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This control code is not supported.     This parameter can also be a user-defined control code, as described in the following table.  Control codeMeaning   Range 128 to 255.   The service defines the action associated with the control code."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwEventType",
+        "description": "The type of event that has occurred. This parameter is used if dwControl is        SERVICE_CONTROL_DEVICEEVENT, SERVICE_CONTROL_HARDWAREPROFILECHANGE, SERVICE_CONTROL_POWEREVENT, or        SERVICE_CONTROL_SESSIONCHANGE. Otherwise, it is zero.  \t      If dwControl is SERVICE_CONTROL_DEVICEEVENT, this parameter can be one of the          following values:   DBT_DEVICEARRIVAL   DBT_DEVICEREMOVECOMPLETE   DBT_DEVICEQUERYREMOVE   DBT_DEVICEQUERYREMOVEFAILED   DBT_DEVICEREMOVEPENDING   DBT_CUSTOMEVENT   If dwControl is SERVICE_CONTROL_HARDWAREPROFILECHANGE, this parameter can be          one of the following values:   DBT_CONFIGCHANGED   DBT_QUERYCHANGECONFIG   DBT_CONFIGCHANGECANCELED   If dwControl is SERVICE_CONTROL_POWEREVENT, this parameter can be one of the values specified in the wParam parameter of the WM_POWERBROADCAST message. If dwControl is SERVICE_CONTROL_SESSIONCHANGE, this parameter can be one of the         values specified in the wParam parameter of the   \t     WM_WTSSESSION_CHANGE message."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "lpEventData",
+        "description": "Additional device information, if required. The format of this data depends on the value of the        dwControl and dwEventType parameters.  If        dwControl is SERVICE_CONTROL_DEVICEEVENT, this data corresponds to the        lParam parameter that applications receive as part of a        WM_DEVICECHANGE message.  If        dwControl is SERVICE_CONTROL_POWEREVENT and dwEventType is PBT_POWERSETTINGCHANGE, this data is a pointer to a        POWERBROADCAST_SETTING structure.  If        dwControl is SERVICE_CONTROL_SESSIONCHANGE, this parameter is a pointer to a        WTSSESSION_NOTIFICATION        structure. If dwControl is SERVICE_CONTROL_TIMECHANGE, this data is a pointer to a SERVICE_TIMECHANGE_INFO structure."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "lpContext",
+        "description": "User-defined data passed from        RegisterServiceCtrlHandlerEx.       When multiple services share a process, the lpContext parameter can help identify the        service."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Registers a function to handle extended service control requests.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a service status handle. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager.  ",
+    "remarks": "The  ServiceMain function of a new service should immediately call the  RegisterServiceCtrlHandlerEx function to register a control handler function with the control dispatcher. This enables the control dispatcher to invoke the specified function when it receives control requests for this service. For a list of possible control codes, see HandlerEx. The threads of the calling process can use the service status handle returned by this function to identify the service in subsequent calls to the  SetServiceStatus function. The  RegisterServiceCtrlHandlerEx function must be called before the first  SetServiceStatus call because  RegisterServiceCtrlHandlerEx returns a service status handle for the caller to use so that no other service can inadvertently set this service status. In addition, the control handler must be in place to receive control requests by the time the service specifies the controls it accepts through the  SetServiceStatus function. When the control handler function is invoked with a control request, the service must call  SetServiceStatus to report status to the service control manager only if the service status has changed, such as when the service is processing stop or shutdown controls. If the service status has not changed, the service should not report status to the service control manager. The service status handle does not have to be closed. ",
+    "return_type": "SERVICE_STATUS_HANDLE WINAPI",
+    "category": "Services",
+    "name": "RegisterServiceCtrlHandlerEx",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpServiceName",
+        "description": "The name of the service run by the calling thread. This is the service name that the service control program specified in the  CreateService function when creating the service."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPHANDLER_FUNCTION_EX",
+        "name": "lpHandlerProc",
+        "description": "A pointer to the handler function to be registered. For more information, see  HandlerEx."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPVOID",
+        "name": "lpContext",
+        "description": "Any user-defined data. This parameter, which is passed to the handler function, can help identify the service when multiple services share a process."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The entry point for a service.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "A service program can start one or more services. A service process has a  SERVICE_TABLE_ENTRY structure for each service that it can start. The structure specifies the service name and a pointer to the  ServiceMain function for that service. When the service control manager receives a request to start a service, it starts the service process (if it is not already running). The main thread of the service process calls the  StartServiceCtrlDispatcher function with a pointer to an array of  SERVICE_TABLE_ENTRY structures. Then the service control manager sends a start request to the service control dispatcher for this service process. The service control dispatcher creates a new thread to execute the  ServiceMain function of the service being started. The  ServiceMain function should immediately call the  RegisterServiceCtrlHandlerEx function to specify a  HandlerEx function to handle control requests. Next, it should call the  SetServiceStatus function to send status information to the service control manager. After these calls, the function should complete the initialization of the service. Do not attempt to start another service in the  ServiceMain function. The Service Control Manager (SCM) waits until the service reports a status of SERVICE_RUNNING. It is recommended that the service reports this status as quickly as possible, as other components in the system that require interaction with SCM will be blocked during this time. Some functions  may require interaction with the SCM either directly or indirectly. The SCM locks the service control database during initialization, so if a service attempts to call StartService during initialization, the call will block. When the service reports to the SCM that it has successfully started, it can call StartService. If the service requires another service to be running, the service should set the required dependencies. Furthermore, you should not call any  system functions during service initialization. The service code should call system functions only after it reports a status of SERVICE_RUNNING. The  ServiceMain function should create a global event, call the  RegisterWaitForSingleObject function on this event, and exit. This will terminate the thread that is running the  ServiceMain function, but will not terminate the service. When the service is stopping, the service control handler should call SetServiceStatus with SERVICE_STOP_PENDING and signal this event. A thread from the thread pool will execute the wait callback function; this function should perform clean-up tasks, including closing the global event, and call  SetServiceStatus with SERVICE_STOPPED. After the service has stopped, you should not execute any additional service code because  you can introduce a race condition if the service receives a start control and ServiceMain is called again. Note that this problem is more likely to occur when multiple services share a process. For an example, see  Writing a ServiceMain Function. ",
+    "return_type": "VOID WINAPI",
+    "category": "Services",
+    "name": "ServiceMain",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwArgc",
+        "description": "The number of arguments in the lpszArgv array."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "*lpszArgv",
+        "description": "The null-terminated argument strings passed to the service by the call to  the  StartService function that started the service. If there are no arguments, this parameter can be NULL. Otherwise, the first argument (lpszArgv[0]) is the name of the service, followed by any additional arguments (lpszArgv[1] through lpszArgv[dwArgc-1]). If the user starts a manual service using the Services snap-in from the Control Panel, the strings for the lpszArgv parameter come from the properties dialog box for the service (from the Services snap-in, right-click the service entry, click Properties, and enter the parameters in Start parameters.)"
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Registers a service type with the service control manager and the Server service. The Server service can then announce the registered service type as one it currently supports. The  NetServerGetInfo and  NetServerEnum functions obtain a specified machine's supported service types.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Lmserver.h",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "SetServiceBits",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SERVICE_STATUS_HANDLE",
+        "name": "hServiceStatus",
+        "description": "A handle to the status information structure for the service. A service obtains the handle by calling the  RegisterServiceCtrlHandlerEx function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwServiceBits",
+        "description": "The service type.     Certain bit flags (0xC00F3F7B) are reserved for use by Microsoft. The  SetServiceBits function fails with the error ERROR_INVALID_DATA if any of these bit flags are set in dwServiceBits. The following bit flags are reserved for use by Microsoft.  SV_TYPE_WORKSTATION (0x00000001) SV_TYPE_SERVER (0x00000002) SV_TYPE_DOMAIN_CTRL (0x00000008) SV_TYPE_DOMAIN_BAKCTRL (0x00000010) SV_TYPE_TIME_SOURCE (0x00000020) SV_TYPE_AFP (0x00000040) SV_TYPE_DOMAIN_MEMBER (0x00000100) SV_TYPE_PRINTQ_SERVER (0x00000200) SV_TYPE_DIALIN_SERVER (0x00000400) SV_TYPE_XENIX_SERVER (0x00000800) SV_TYPE_SERVER_UNIX (0x00000800) SV_TYPE_NT (0x00001000) SV_TYPE_WFW (0x00002000) SV_TYPE_POTENTIAL_BROWSER (0x00010000) SV_TYPE_BACKUP_BROWSER (0x00020000) SV_TYPE_MASTER_BROWSER (0x00040000) SV_TYPE_DOMAIN_MASTER (0x00080000) SV_TYPE_LOCAL_LIST_ONLY (0x40000000) SV_TYPE_DOMAIN_ENUM (0x80000000)  Certain bit flags (0x00300084) are defined by Microsoft, but are not specifically reserved for systems software. The following are these bit flags.  SV_TYPE_SV_TYPE_SQLSERVER (0x00000004) SV_TYPE_NOVELL (0x00000080) SV_TYPE_DOMAIN_CTRL (0x00100000) SV_TYPE_DOMAIN_BAKCTRL (0x00200000)  Certain bit flags (0x3FC0C000) are not defined by Microsoft, and their use is not coordinated by Microsoft. Developers of applications that use these bits should be aware that other applications can also use them, thus creating a conflict. The following are these bit flags. 0x00004000 0x00008000 0x00400000 0x00800000 0x01000000 0x02000000 0x04000000 0x08000000 0x10000000 0x20000000"
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bSetBitsOn",
+        "description": "If this value is TRUE, the bits in dwServiceBit are to be set. If this value is FALSE, the bits are to be cleared."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bUpdateImmediately",
+        "description": "If this value is TRUE, the Server service is to perform an immediate update. If this value is FALSE, the update is not be performed immediately."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Updates the service control manager's status information for the calling service.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager. Other error codes can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "A  ServiceMain function first calls the  RegisterServiceCtrlHandlerEx function to get the service's SERVICE_STATUS_HANDLE. Then it immediately calls the  SetServiceStatus function to notify the service control manager that its status is SERVICE_START_PENDING. During initialization, the service can provide updated status to indicate that it is making progress but it needs more time. A common bug is for the service to have the main thread perform the initialization while a separate thread continues to call  SetServiceStatus to prevent the service control manager from marking it as hung. However, if the main thread hangs, then the service start ends up in an infinite loop because the worker thread continues to report that the main thread is making progress. After processing a control request, the service's  Handler function must call  SetServiceStatus if the service status changes to report its new status to the service control manager. It is only necessary to do so when the service is changing state, such as when it is processing stop or shutdown controls. A service can also use this function at any time from any thread of the service to notify the service control manager of state changes, such as when the service must stop due to a recoverable error. A service can call this function only after it has called  RegisterServiceCtrlHandlerEx to get a service status handle. If a service calls  SetServiceStatus with the dwCurrentState member set to SERVICE_STOPPED and the dwWin32ExitCode member set to a nonzero value, the following entry is written into the System event log: The following are best practices when calling this function: For an example, see  Writing a ServiceMain Function. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "SetServiceStatus",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SERVICE_STATUS_HANDLE",
+        "name": "hServiceStatus",
+        "description": "A handle to the status information structure for the current service. This handle is returned by the  RegisterServiceCtrlHandlerEx function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSERVICE_STATUS",
+        "name": "lpServiceStatus",
+        "description": "A pointer to the  SERVICE_STATUS structure the contains the latest status information for the calling service."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Connects the main thread of a service process to the service control manager, which causes the thread to be the service control dispatcher thread for the calling process.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error code can be set by the service control manager. Other error codes can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "When the service control manager starts a service process, it waits for the process to call the  StartServiceCtrlDispatcher function. The main thread of a service process should make this call as soon as possible after it starts up (within 30 seconds). If  StartServiceCtrlDispatcher succeeds, it connects the calling thread to the service control manager and does not return until all running services in the process have entered the SERVICE_STOPPED state. The service control manager uses this connection to send control and service start requests to the main thread of the service process. The main thread acts as a dispatcher by invoking the appropriate  HandlerEx function to handle control requests, or by creating a new thread to execute the appropriate  ServiceMain function when a new service is started. The lpServiceTable parameter contains an entry for each service that can run in the calling process. Each entry specifies the  ServiceMain function for that service. For SERVICE_WIN32_SHARE_PROCESS services, each entry must contain the name of a service. This name is the service name that was specified by the  CreateService function when the service was installed. For SERVICE_WIN32_OWN_PROCESS services, the service name in the table entry is ignored. If a service runs in its own process, the main thread of the service process should immediately call  StartServiceCtrlDispatcher. All initialization tasks are done in the service's  ServiceMain function when the service is started. If multiple services share a process and some common process-wide initialization needs to be done before any  ServiceMain function is called, the main thread can do the work before calling  StartServiceCtrlDispatcher, as long as it takes less than 30 seconds. Otherwise, another thread must be created to do the process-wide initialization, while the main thread calls  StartServiceCtrlDispatcher and becomes the service control dispatcher. Any service-specific initialization should still be done in the individual service main functions. Services should not attempt to display a user interface directly. For more information, see Interactive Services. For an example, see  Writing a Service Program's Main Function. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "StartServiceCtrlDispatcher",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SERVICE_TABLE_ENTRY",
+        "name": "*lpServiceTable",
+        "description": "A pointer to an array of  SERVICE_TABLE_ENTRY structures containing one entry for each service that can execute in the calling process. The members of the last entry in the table must have NULL values to designate the end of the table."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 11,
+    "description": "Changes the configuration parameters of a service.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes may be set by the service control manager. Other error codes may be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "The  ChangeServiceConfig function changes the configuration information for the specified service in the service control manager database. You can obtain the current configuration information by using the  QueryServiceConfig function. If the configuration is changed for a service that is running, with the exception of lpDisplayName, the changes do not take effect until the service is stopped. To update the credentials without having to restart the service, use the LsaCallAuthenticationPackage function. Setting the lpServiceStartName parameter changes the logon account of the service. This can cause problems. If you have registered a service principal name (SPN), it would now be registered on the wrong account. Similarly, if you have used an ACE to grant access to a service, it would now grant access to the wrong account. For an example, see  Changing a Service's Configuration. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "ChangeServiceConfig",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service. This handle is returned by the  OpenService or  CreateService function and must have the SERVICE_CHANGE_CONFIG access right. For more information, see  Service Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwServiceType",
+        "description": "The type of service. Specify SERVICE_NO_CHANGE if you are not changing the existing service type; otherwise, specify one of the following service types.  ValueMeaning  SERVICE_FILE_SYSTEM_DRIVER 0x00000002   File system driver service.   SERVICE_KERNEL_DRIVER 0x00000001   Driver service.   SERVICE_WIN32_OWN_PROCESS 0x00000010   Service that runs in its own process.   SERVICE_WIN32_SHARE_PROCESS 0x00000020   Service that shares a process with other services.     If you specify either SERVICE_WIN32_OWN_PROCESS or SERVICE_WIN32_SHARE_PROCESS, and the service is running in the context of the  LocalSystem account, you can also specify the following type.  ValueMeaning  SERVICE_INTERACTIVE_PROCESS 0x00000100   The service can interact with the desktop.     For more information, see  Interactive Services."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwStartType",
+        "description": "The service start options. Specify SERVICE_NO_CHANGE if you are not changing the existing start type; otherwise, specify one of the following values.  ValueMeaning  SERVICE_AUTO_START 0x00000002   A service started automatically by the service control manager during system startup.   SERVICE_BOOT_START 0x00000000   A device driver started by the system loader. This value is valid only for driver services.   SERVICE_DEMAND_START 0x00000003   A service started by the service control manager when a process calls the  StartService function.   SERVICE_DISABLED 0x00000004   A service that cannot be started. Attempts to start the service result in the error code ERROR_SERVICE_DISABLED.   SERVICE_SYSTEM_START 0x00000001   A device driver started by the IoInitSystem function. This value is valid only for driver services."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwErrorControl",
+        "description": "The severity of the error, and action taken, if this service fails to start. Specify SERVICE_NO_CHANGE if you are not changing the existing error control; otherwise, specify one of the following values.  ValueMeaning  SERVICE_ERROR_CRITICAL 0x00000003   The startup program logs the error in the event log, if possible. If the last-known-good configuration is being started, the startup operation fails. Otherwise, the system is restarted with the last-known good configuration.   SERVICE_ERROR_IGNORE 0x00000000   The startup program ignores the error and continues the startup operation.   SERVICE_ERROR_NORMAL 0x00000001   The startup program logs the error in the event log but continues the startup operation.   SERVICE_ERROR_SEVERE 0x00000002   The startup program logs the error in the event log. If the last-known-good configuration is being started, the startup operation continues. Otherwise, the system is restarted with the last-known-good configuration."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpBinaryPathName",
+        "description": "The fully qualified path to the service binary file. Specify NULL if you are not changing the existing path. If the path contains a space, it must be quoted so that it is correctly interpreted. For example, \"d:\\\\my share\\\\myservice.exe\" should be specified as \"\\\"d:\\\\my share\\\\myservice.exe\\\"\".     The path can also include arguments for an auto-start service. For example, \"d:\\\\myshare\\\\myservice.exe arg1 arg2\". These arguments are passed to the service entry point (typically the main function). If you specify a path on another computer, the share must be accessible by the computer account of the local computer because this is the security context used in the remote call. However, this requirement allows any potential vulnerabilities in the remote computer to affect the local computer. Therefore, it is best to use a local file."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpLoadOrderGroup",
+        "description": "The  name of the load ordering group of which this service is a member. Specify NULL if you are not changing the existing group. Specify an empty string if the service does not belong to a group.     The startup program uses load ordering groups to load groups of services in a specified order with respect to the other groups. The list of load ordering groups is contained in the ServiceGroupOrder value of the following registry key: HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control"
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPDWORD",
+        "name": "lpdwTagId",
+        "description": "A pointer to a variable that receives a tag value that is unique in the group specified in the lpLoadOrderGroup parameter. Specify NULL if you are not changing the existing tag.     You can use a tag for ordering service startup within a load ordering group by specifying a tag order vector in the GroupOrderList value of the following registry key: HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control Tags are only evaluated for driver services that have SERVICE_BOOT_START or SERVICE_SYSTEM_START start types."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpDependencies",
+        "description": "A pointer to a double null-terminated array of null-separated names of services or load ordering groups that the system must start before this service can be started. (Dependency on a group means that this service can run if at least one member of the group is running after an attempt to start all members of the group.) Specify NULL if you are not changing the existing dependencies. Specify an empty string if the service has no dependencies.     You must prefix group names with SC_GROUP_IDENTIFIER so that they can be distinguished from a service name, because services and service groups share the same name space."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpServiceStartName",
+        "description": "The name of the account under which the service should run. Specify NULL if you are not changing the existing account name. If the service type is SERVICE_WIN32_OWN_PROCESS, use an account name in the form DomainName\\UserName. The service process will be logged on as this user. If the account belongs to the built-in domain, you can specify .\\UserName (note that the corresponding C/C++ string is \".\\\\UserName\"). For more information, see  Service User Accounts and the warning in the Remarks section.     \t\t\t\t\t\t A shared process can run as any user. If the service type is SERVICE_KERNEL_DRIVER or SERVICE_FILE_SYSTEM_DRIVER, the name is the driver object name that the system uses to load the device driver. Specify NULL if the driver is to use a default object name created by the I/O system. A service can be configured to use a managed account or a virtual  account. If the service is configured to use a managed service account, the name is the managed service account name. If the service is configured to use a virtual  account, specify the name as NT SERVICE\\ServiceName. For more information about managed service accounts and virtual accounts, see the Service Accounts Step-by-Step Guide. Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  Managed service accounts and virtual accounts are not supported until Windows 7 and Windows Server 2008 R2."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpPassword",
+        "description": "The password to the account name specified by the lpServiceStartName parameter. Specify NULL if you are not changing the existing password. Specify an empty string if the account has no password or if the service runs in the LocalService, NetworkService, or LocalSystem account. For more information, see  Service Record List.     If the account name specified by the  lpServiceStartName parameter is the name of  a managed service account or virtual account name, the lpPassword parameter must be NULL.  Passwords are ignored for driver services."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpDisplayName",
+        "description": "The display name to be used by applications to identify the service for its users. Specify NULL if you are not changing the existing display name; otherwise, this string has a maximum length of 256 characters. The name is case-preserved in the service control manager. Display name comparisons are always case-insensitive. This parameter can specify a localized string using the following format: @[path\\]dllname,-strID The string with identifier strID is loaded from dllname; the path is optional. For more information, see RegLoadMUIString. Windows Server 2003 and Windows XP:  Localized strings are not supported until Windows Vista."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Changes the optional configuration parameters of a service.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  ChangeServiceConfig2 function changes the optional configuration information for the specified service in the service control manager database. You can obtain the current optional configuration information by using the  QueryServiceConfig2 function. You cannot set the SERVICE_CONFIG_FAILURE_ACTIONS value for a service that shares the service control manager's process. This includes all services whose executable image is \"Services.exe\". You can change and query additional configuration information using the  ChangeServiceConfig and  QueryServiceConfig functions, respectively. If a service is configured to restart after it finishes with an error, the service control manager queues the restart action to occur after the specified time delay. A queued restart action cannot be canceled. If the service is manually restarted and then stopped before the queued restart action occurs, the service will restart unexpectedly when the time delay elapses. The service must be explicitly disabled to prevent it from restarting. The SERVICE_CONFIG_LAUNCH_PROTECTED value can be used to launch the service as protected. In order to launch the service as protected, the service must be signed with a special certificate. SERVICE_CONFIG_LAUNCH_PROTECTED example: For an example, see  Changing a Service's Configuration. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "ChangeServiceConfig2",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service. This handle is returned by the  OpenService or  CreateService function and must have the SERVICE_CHANGE_CONFIG access right. For more information, see  Service Security and Access Rights.     If the service controller handles the SC_ACTION_RESTART action, hService must have the SERVICE_START access right."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwInfoLevel",
+        "description": "The configuration information to be changed. This parameter can be one of the following values.  ValueMeaning  SERVICE_CONFIG_DELAYED_AUTO_START_INFO 3   The lpInfo parameter is a pointer to a SERVICE_DELAYED_AUTO_START_INFO structure. Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONFIG_DESCRIPTION 1   The lpInfo parameter is a pointer to a  SERVICE_DESCRIPTION structure.   SERVICE_CONFIG_FAILURE_ACTIONS 2   The lpInfo parameter is a pointer to a  SERVICE_FAILURE_ACTIONS structure. If the service controller handles the SC_ACTION_REBOOT action, the caller must have the SE_SHUTDOWN_NAME privilege. For more information, see  Running with Special Privileges.   SERVICE_CONFIG_FAILURE_ACTIONS_FLAG 4   The lpInfo parameter is a pointer to a SERVICE_FAILURE_ACTIONS_FLAG structure. Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONFIG_PREFERRED_NODE 9   The lpInfo parameter is a pointer to a SERVICE_PREFERRED_NODE_INFO structure. Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONFIG_PRESHUTDOWN_INFO 7   The lpInfo parameter is a pointer to a SERVICE_PRESHUTDOWN_INFO structure. Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONFIG_REQUIRED_PRIVILEGES_INFO 6   The lpInfo parameter is a pointer to a SERVICE_REQUIRED_PRIVILEGES_INFO structure. Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONFIG_SERVICE_SID_INFO 5   The lpInfo parameter is a pointer to a SERVICE_SID_INFO structure.   SERVICE_CONFIG_TRIGGER_INFO 8   The lpInfo parameter is a pointer to a SERVICE_TRIGGER_INFO structure. This value is not supported by the ANSI version of ChangeServiceConfig2.  Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This value is not supported until Windows Server 2008 R2.   SERVICE_CONFIG_LAUNCH_PROTECTED 12   The lpInfo parameter is a pointer a SERVICE_LAUNCH_PROTECTED_INFO structure. Note  This value is supported starting with Windows 8.1."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPVOID",
+        "name": "lpInfo",
+        "description": "A pointer to the new value to be set for the configuration information. The format of this data depends on the value of the dwInfoLevel parameter. If this value is NULL, the information remains unchanged."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes a handle to a service control manager or service object.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error code can be set by the service control manager. Other error codes can be set by registry functions that are called by the service control manager.  ",
+    "remarks": "The  CloseServiceHandle function does not destroy the service control manager object referred to by the handle. A service control manager object cannot be destroyed. A service object can be destroyed by calling the  DeleteService function. For an example, see  Deleting a Service. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "CloseServiceHandle",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hSCObject",
+        "description": "A handle to the service control manager object or the service object to close. Handles to service control manager objects are returned by the  OpenSCManager function, and handles to service objects are returned by either the  OpenService or  CreateService function."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sends a control code to a service.",
+    "library": "AdvApi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call         GetLastError. The following error codes can be set by the service control manager. Other error codes can be set by the         registry functions that are called by the service control manager.  ",
+    "remarks": "The ControlService function asks the Service      Control Manager (SCM) to send the requested control code to the service. The SCM sends the code  if the service      has specified that it will accept the code, and is in a state in which a control code can be sent to it. The SCM processes service control notifications in a serial fashion\u00e2\u0080\u0094it will wait for one      service to complete processing a service control notification before sending the next one. Because of this, a call      to ControlService will block for 30 seconds if any      service is busy handling a control code. If the busy service still has not returned from its handler function when      the timeout expires, ControlService fails with      ERROR_SERVICE_REQUEST_TIMEOUT. To stop and start a service requires a security descriptor that allows you to do so. The default security      descriptor allows the LocalSystem account, and members      of the Administrators and Power Users groups to stop and start services. To change the security descriptor of a      service, see      Modifying the DACL for a Service. The QueryServiceStatusEx function returns a      SERVICE_STATUS_PROCESS structure      whose dwCurrentState and dwControlsAccepted members indicate      the current state and controls accepted by a running service. All running services accept the      SERVICE_CONTROL_INTERROGATE control code by default. Drivers do not accept control codes      other than SERVICE_CONTROL_STOP and      SERVICE_CONTROL_INTERROGATE. Each service specifies the other control codes that it      accepts when it calls the SetServiceStatus function      to report its status. A service should always accept these codes when it is running, no matter what it is      doing. The following table shows the action of the SCM  in each of the possible service states.   For an example, see Stopping a Service. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "ControlService",
+    "is_callback": 0,
+    "dll": "AdvApi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service. This handle is returned by the        OpenService or        CreateService function. The        access rights required for this handle        depend on the dwControl code requested."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwControl",
+        "description": "This parameter can be one of the following control codes.  Control codeMeaning  SERVICE_CONTROL_CONTINUE 0x00000003   Notifies a paused service that it should resume. The hService handle must have          the SERVICE_PAUSE_CONTINUE access right.   SERVICE_CONTROL_INTERROGATE 0x00000004   Notifies a service that it should report its current status information to the service control manager.          The hService handle must have the SERVICE_INTERROGATE          access right.          Note that this control is not generally useful as the SCM is aware of the current state of the service.   SERVICE_CONTROL_NETBINDADD 0x00000007   Notifies a network service that there is a new component for binding. The          hService handle must have the SERVICE_PAUSE_CONTINUE          access right. However, this control code has been deprecated; use Plug and Play functionality instead.                    SERVICE_CONTROL_NETBINDDISABLE 0x0000000A   Notifies a network service that one of its bindings has been disabled. The          hService handle must have the SERVICE_PAUSE_CONTINUE          access right. However, this control code has been deprecated; use Plug and Play functionality instead.                    SERVICE_CONTROL_NETBINDENABLE 0x00000009   Notifies a network service that a disabled binding has been enabled. The          hService handle must have the SERVICE_PAUSE_CONTINUE          access right. However, this control code has been deprecated; use Plug and Play functionality instead.                    SERVICE_CONTROL_NETBINDREMOVE 0x00000008    Notifies a network service that a component for binding has been removed. The          hService handle must have the SERVICE_PAUSE_CONTINUE          access right. However, this control code has been deprecated; use Plug and Play functionality instead.                    SERVICE_CONTROL_PARAMCHANGE 0x00000006   Notifies a service that its startup parameters have changed. The hService          handle must have the SERVICE_PAUSE_CONTINUE access right.                    SERVICE_CONTROL_PAUSE 0x00000002   Notifies a service that it should pause. The hService handle must have the          SERVICE_PAUSE_CONTINUE access right.   SERVICE_CONTROL_STOP 0x00000001   Notifies a service that it should stop. The hService handle must have the          SERVICE_STOP access right.          After sending the stop request to a service, you should not send other controls to the service.     This value can also be a user-defined control code, as described in the following table.  Control codeMeaning   Range 128 to 255   The service defines the action associated with the control code. The hService          handle must have the SERVICE_USER_DEFINED_CONTROL access right."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSERVICE_STATUS",
+        "name": "lpServiceStatus",
+        "description": "A pointer to a SERVICE_STATUS structure that        receives the latest service status information. The information returned reflects the most recent status that        the service reported to the service control manager.        The service control manager fills in the structure only when         ControlService returns one of the following error         codes: NO_ERROR, ERROR_INVALID_SERVICE_CONTROL,         ERROR_SERVICE_CANNOT_ACCEPT_CTRL, or         ERROR_SERVICE_NOT_ACTIVE. Otherwise, the structure is not filled in."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Sends a control code to a service.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager. Other error codes can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "The  ControlServiceEx function asks the Service Control Manager (SCM) to send the requested control code to the service. The SCM sends the code  if the service has specified that it will accept the code, and is in a state in which a control code can be sent to it. The SCM processes service control notifications in a serial fashion \u00e2\u0080\u0094 it waits for one service to complete processing a service control notification before sending the next one. Because of this, a call to ControlServiceEx blocks for 30 seconds if any service is busy handling a control code. If the busy service still has not returned from its handler function when the timeout expires, ControlServiceEx fails with ERROR_SERVICE_REQUEST_TIMEOUT. To stop and start a service requires a security descriptor that allows you to do so. The default security descriptor allows the  LocalSystem account, and members of the Administrators and Power Users groups to stop and start services. To change the security descriptor of a service, see  Modifying the DACL for a Service. The  QueryServiceStatusEx function returns a  SERVICE_STATUS_PROCESS structure whose dwCurrentState and dwControlsAccepted members indicate the current state and controls accepted by a running service. All running services accept the SERVICE_CONTROL_INTERROGATE control code by default. Drivers do not accept control codes other than SERVICE_CONTROL_STOP and SERVICE_CONTROL_INTERROGATE. Each service specifies the other control codes that it accepts when it calls the  SetServiceStatus function to report its status. A service should always accept these codes when it is running, no matter what it is doing. The following table shows the action of the SCM  in each of the possible service states.   ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "ControlServiceEx",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service. This handle is returned by the  OpenService or  CreateService function. The  access rights required for this handle depend on the dwControl code requested."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwControl",
+        "description": "This parameter can be one of the following control codes.  Control codeMeaning  SERVICE_CONTROL_CONTINUE 0x00000003   Notifies a paused service that it should resume. The hService handle must have the SERVICE_PAUSE_CONTINUE access right.   SERVICE_CONTROL_INTERROGATE 0x00000004   Notifies a service that it should report its current status information to the service control manager. The hService handle must have the SERVICE_INTERROGATE access right. Note that this control is not generally useful as the SCM is aware of the current state of the service.   SERVICE_CONTROL_NETBINDADD 0x00000007    Notifies a network service that there is a new component for binding. The hService handle must have the SERVICE_PAUSE_CONTINUE access right. However,  this control code has been deprecated; use Plug and Play functionality instead.   SERVICE_CONTROL_NETBINDDISABLE 0x0000000A    Notifies a network service that one of its bindings has been disabled. The hService handle must have the SERVICE_PAUSE_CONTINUE access right. However,  this control code has been deprecated; use Plug and Play functionality instead.   SERVICE_CONTROL_NETBINDENABLE 0x00000009    Notifies a network service that a disabled binding has been enabled. The hService handle must have the SERVICE_PAUSE_CONTINUE access right. However,  this control code has been deprecated; use Plug and Play functionality instead.   SERVICE_CONTROL_NETBINDREMOVE 0x00000008    Notifies a network service that a component for binding has been removed. The hService handle must have the SERVICE_PAUSE_CONTINUE access right. However,  this control code has been deprecated; use Plug and Play functionality instead.   SERVICE_CONTROL_PARAMCHANGE 0x00000006    Notifies a service that its startup parameters have changed. The hService handle must have the SERVICE_PAUSE_CONTINUE access right.   SERVICE_CONTROL_PAUSE 0x00000002   Notifies a service that it should pause. The hService handle must have the SERVICE_PAUSE_CONTINUE access right.   SERVICE_CONTROL_STOP 0x00000001   Notifies a service that it should stop. The hService handle must have the SERVICE_STOP access right. After sending the stop request to a service, you should not send other controls to the service.     This parameter can also be a user-defined control code, as described in the following table.  Control codeMeaning   Range 128 to 255   The service defines the action associated with the control code. The hService handle must have the SERVICE_USER_DEFINED_CONTROL access right."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwInfoLevel",
+        "description": "The information level for the service control parameters. This parameter must be set to SERVICE_CONTROL_STATUS_REASON_INFO (1)."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PVOID",
+        "name": "pControlParams",
+        "description": "A pointer to the service control parameters. If dwInfoLevel is SERVICE_CONTROL_STATUS_REASON_INFO, this member is a pointer to a SERVICE_CONTROL_STATUS_REASON_PARAMS structure."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 13,
+    "description": "Creates a service object and adds it to the specified service control manager database.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the service. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager. Other error codes can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "The  CreateService function creates a service object and installs it in the service control manager database by creating a key with the same name as the service under the following registry key: HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Services Information specified by  CreateService,  ChangeServiceConfig, and  ChangeServiceConfig2 is saved as values under this key. The following are examples of values stored for a service.  Setup programs and the service itself can create additional subkeys for service-specific information. The returned handle is only valid for the process that called  CreateService. It can be closed by calling the  CloseServiceHandle function. If you are creating services that share a process, avoid calling functions with process-wide effects, such as  ExitProcess. In addition, do not unload your service DLL. For an example, see  Installing a Service. ",
+    "return_type": "SC_HANDLE WINAPI",
+    "category": "Services",
+    "name": "CreateService",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hSCManager",
+        "description": "A handle to the service control manager database. This handle is returned by the  OpenSCManager function and must have the SC_MANAGER_CREATE_SERVICE access right. For more information, see  Service Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpServiceName",
+        "description": "The name of the service to install. The maximum string length is 256 characters. The service control manager database preserves the case of the characters, but service name comparisons are always case insensitive. Forward-slash (/) and backslash (\\) are not valid service name characters."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpDisplayName",
+        "description": "The display name to be used by user interface programs to identify the service. This string has a maximum length of 256 characters. The name is case-preserved in the service control manager. Display name comparisons are always case-insensitive."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwDesiredAccess",
+        "description": "The access to the service. Before granting the requested access, the system checks the access token of the calling process. For a list of values, see  Service Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwServiceType",
+        "description": "The service type. This parameter can be one of the following values.     ValueMeaning  SERVICE_ADAPTER 0x00000004   Reserved.   SERVICE_FILE_SYSTEM_DRIVER 0x00000002   File system driver service.   SERVICE_KERNEL_DRIVER 0x00000001   Driver service.   SERVICE_RECOGNIZER_DRIVER 0x00000008   Reserved.   SERVICE_WIN32_OWN_PROCESS 0x00000010   Service that runs in its own process.   SERVICE_WIN32_SHARE_PROCESS 0x00000020   Service that shares a process with one or more other services. For more information, see Service Programs.   SERVICE_USER_OWN_PROCESS 0x00000050   The service runs in its own process under the logged-on user account.   SERVICE_USER_SHARE_PROCESS 0x00000060   The service shares a process with one or more other services that run under the logged-on user account.     If you specify either SERVICE_WIN32_OWN_PROCESS or SERVICE_WIN32_SHARE_PROCESS, and the service is running in the context of the  LocalSystem account, you can also specify the following value.  ValueMeaning  SERVICE_INTERACTIVE_PROCESS 0x00000100   The service can interact with the desktop.     For more information, see  Interactive Services."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwStartType",
+        "description": "The service start options. This parameter can be one of the following values.  ValueMeaning  SERVICE_AUTO_START 0x00000002   A service started automatically by the service control manager during system startup. For more information, see Automatically Starting Services.   SERVICE_BOOT_START 0x00000000   A device driver started by the system loader. This value is valid only for driver services.   SERVICE_DEMAND_START 0x00000003   A service started by the service control manager when a process calls the  StartService function. For more information, see Starting Services on Demand.   SERVICE_DISABLED 0x00000004   A service that cannot be started. Attempts to start the service result in the error code ERROR_SERVICE_DISABLED.   SERVICE_SYSTEM_START 0x00000001   A device driver started by the IoInitSystem function. This value is valid only for driver services."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwErrorControl",
+        "description": "The severity of the error, and action taken, if this service fails to start. This parameter can be one of the following values.  ValueMeaning  SERVICE_ERROR_CRITICAL 0x00000003   The startup program logs the error in the event log, if possible. If the last-known-good configuration is being started, the startup operation fails. Otherwise, the system is restarted with the last-known good configuration.   SERVICE_ERROR_IGNORE 0x00000000   The startup program ignores the error and continues the startup operation.   SERVICE_ERROR_NORMAL 0x00000001   The startup program logs the error in the event log but continues the startup operation.   SERVICE_ERROR_SEVERE 0x00000002   The startup program logs the error in the event log. If the last-known-good configuration is being started, the startup operation continues. Otherwise, the system is restarted with the last-known-good configuration."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpBinaryPathName",
+        "description": "The fully qualified path to the service binary file. If the path contains a space, it must be quoted so that it is correctly interpreted. For example, \"d:\\\\my share\\\\myservice.exe\" should be specified as \"\\\"d:\\\\my share\\\\myservice.exe\\\"\".     The path can also include arguments for an auto-start service. For example, \"d:\\\\myshare\\\\myservice.exe arg1 arg2\". These arguments are passed to the service entry point (typically the main function). If you specify a path on another computer, the share must be accessible by the computer account of the local computer because this is the security context used in the remote call. However, this requirement allows any potential vulnerabilities in the remote computer to affect the local computer. Therefore, it is best to use a local file."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpLoadOrderGroup",
+        "description": "The names of the load ordering group of which this service is a member. Specify NULL or an empty string if the service does not belong to a group.     The startup program uses load ordering groups to load groups of services in a specified order with respect to the other groups. The list of load ordering groups is contained in the following registry value: HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\ServiceGroupOrder"
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPDWORD",
+        "name": "lpdwTagId",
+        "description": "A pointer to a variable that receives a tag value that is unique in the group specified in the lpLoadOrderGroup parameter. Specify NULL if you are not changing the existing tag.     You can use a tag for ordering service startup within a load ordering group by specifying a tag order vector in the following registry value:HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\GroupOrderList Tags are only evaluated for driver services that have SERVICE_BOOT_START or SERVICE_SYSTEM_START start types."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpDependencies",
+        "description": "A pointer to a double null-terminated array of null-separated names of services or load ordering groups that the system must start before this service. Specify NULL or an empty string if the service has no dependencies. Dependency on a group means that this service can run if at least one member of the group is running after an attempt to start all members of the group.     You must prefix group names with SC_GROUP_IDENTIFIER so that they can be distinguished from a service name, because services and service groups share the same name space."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpServiceStartName",
+        "description": "The name of the account under which the service should run. If the service type is SERVICE_WIN32_OWN_PROCESS, use an account name in the form DomainName\\UserName. The service process will be logged on as this user. If the account belongs to the built-in domain, you can specify .\\UserName.     If this parameter is NULL,  CreateService uses the  LocalSystem account. If the service type specifies SERVICE_INTERACTIVE_PROCESS, the service must run in the LocalSystem account. If this parameter is NT AUTHORITY\\LocalService,  CreateService uses the  LocalService account. If the parameter is NT AUTHORITY\\NetworkService,  CreateService uses the  NetworkService account. A shared process can run as any user. If the service type is SERVICE_KERNEL_DRIVER or SERVICE_FILE_SYSTEM_DRIVER, the name is the driver object name that the system uses to load the device driver. Specify NULL if the driver is to use a default object name created by the I/O system. A service can be configured to use a managed account or a virtual  account. If the service is configured to use a managed service account, the name is the managed service account name. If the service is configured to use a virtual  account, specify the name as NT SERVICE\\ServiceName. For more information about managed service accounts and virtual accounts, see the Service Accounts Step-by-Step Guide. Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  Managed service accounts and virtual accounts are not supported until Windows 7 and Windows Server 2008 R2."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpPassword",
+        "description": "The password to the account name specified by the lpServiceStartName parameter. Specify an empty string if the account has no password or if the service runs in the LocalService, NetworkService, or LocalSystem account. For more information, see  Service Record List.     If the account name specified by the  lpServiceStartName parameter is the name of  a managed service account or virtual account name, the lpPassword parameter must be NULL.  Passwords are ignored for driver services."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Marks the specified service for deletion from the service control manager database.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes may be set by the service control manager. Others may be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "The  DeleteService function marks a service for deletion from the service control manager database. The database entry is not removed until all open handles to the service have been closed by calls to the  CloseServiceHandle function, and the service is not running. A running service is stopped by a call to the  ControlService function with the SERVICE_CONTROL_STOP control code. If the service cannot be stopped, the database entry is removed when the system is restarted. The service control manager deletes the service by deleting the service key and its subkeys from the registry. For an example, see  Deleting a Service. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "DeleteService",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service. This handle is returned by the  OpenService or  CreateService function, and it must have the DELETE access right. For more information, see  Service Security and Access Rights."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Retrieves the name and status of each service that depends on the specified service; that is, the specified service must be running before the dependent services can run.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes may be set by the service control manager. Other error codes may be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "The returned services entries are ordered in the reverse order of the start order, with group order taken into account. If you need to stop the dependent services, you can use the order of entries written to the lpServices buffer to stop the dependent services in the proper order. For an example, see  Stopping a Service. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "EnumDependentServices",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service. This handle is returned by the  OpenService or  CreateService function, and it must have the SERVICE_ENUMERATE_DEPENDENTS access right. For more information, see  Service Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwServiceState",
+        "description": "The state of the services to be enumerated. This parameter can be one of the following values.  ValueMeaning  SERVICE_ACTIVE 0x00000001   Enumerates services that are in the following states: SERVICE_START_PENDING, SERVICE_STOP_PENDING, SERVICE_RUNNING, SERVICE_CONTINUE_PENDING, SERVICE_PAUSE_PENDING, and SERVICE_PAUSED.   SERVICE_INACTIVE 0x00000002   Enumerates services that are in the SERVICE_STOPPED state.   SERVICE_STATE_ALL 0x00000003   Combines the following states: SERVICE_ACTIVE and SERVICE_INACTIVE."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPENUM_SERVICE_STATUS",
+        "name": "lpServices",
+        "description": "A pointer to an array of  ENUM_SERVICE_STATUS structures that receives the name and service status information for each dependent service in the database. The buffer must be large enough to hold the structures, plus the strings to which their members point. The order of the services in this array is the reverse of the start order of the services. In other words, the first service in the array is the one that would be started last, and the last service in the array is the one that would be started first. The maximum size of this array is 64,000 bytes. To determine the required size, specify NULL for this parameter and 0 for the cbBufSize parameter. The function will fail and GetLastError will return ERROR_MORE_DATA. The pcbBytesNeeded parameter will receive the required size."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBufSize",
+        "description": "The size of the buffer pointed to by the lpServices parameter, in bytes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbBytesNeeded",
+        "description": "A pointer to a variable that receives the number of bytes needed to store the array of service entries. The variable only receives this value if the buffer pointed to by lpServices is too small, indicated by function failure and the ERROR_MORE_DATA error; otherwise, the contents of pcbBytesNeeded are undefined."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpServicesReturned",
+        "description": "A pointer to a variable that receives the number of service entries returned."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 10,
+    "description": "Enumerates services in the specified service control manager database. The name and status of each service are provided, along with additional data based on the specified information level.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following errors may be returned.  ",
+    "remarks": "If the caller does not have the SERVICE_QUERY_STATUS access right to a service, the service is silently omitted from the list of services returned to the client. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "EnumServicesStatusEx",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hSCManager",
+        "description": "A handle to the service control manager database. This handle is returned by the  OpenSCManager function, and must have the SC_MANAGER_ENUMERATE_SERVICE access right. For more information, see  Service Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SC_ENUM_TYPE",
+        "name": "InfoLevel",
+        "description": "The service attributes that are to be returned. Use SC_ENUM_PROCESS_INFO to retrieve the name and service status information for each service in the database. The lpServices parameter is a pointer to a buffer that receives an array of  ENUM_SERVICE_STATUS_PROCESS structures. The buffer must be large enough to hold the structures as well as the strings to which their members point. Currently, no other information levels are defined."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwServiceType",
+        "description": "The type of services to be enumerated. This parameter can be one or more of the following values.  ValueMeaning  SERVICE_DRIVER 0x0000000B   Services of type SERVICE_KERNEL_DRIVER and SERVICE_FILE_SYSTEM_DRIVER.   SERVICE_FILE_SYSTEM_DRIVER 0x00000002   File system driver services.   SERVICE_KERNEL_DRIVER 0x00000001   Driver services.   SERVICE_WIN32 0x00000030   Services of type SERVICE_WIN32_OWN_PROCESS and SERVICE_WIN32_SHARE_PROCESS.   SERVICE_WIN32_OWN_PROCESS 0x00000010   Services that run in their own processes.   SERVICE_WIN32_SHARE_PROCESS 0x00000020   Services that share a process with one or more other services. For more information, see Service Programs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwServiceState",
+        "description": "The state of the services to be enumerated. This parameter can be one of the following values.  ValueMeaning  SERVICE_ACTIVE 0x00000001   Enumerates services that are in the following states: SERVICE_START_PENDING, SERVICE_STOP_PENDING, SERVICE_RUNNING, SERVICE_CONTINUE_PENDING, SERVICE_PAUSE_PENDING, and SERVICE_PAUSED.   SERVICE_INACTIVE 0x00000002   Enumerates services that are in the SERVICE_STOPPED state.   SERVICE_STATE_ALL 0x00000003   Combines the SERVICE_ACTIVE and SERVICE_INACTIVE states."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPBYTE",
+        "name": "lpServices",
+        "description": "A pointer to the buffer that receives the status information. The format of this data depends on the value of the InfoLevel parameter. The maximum size of this array is 256K bytes. To determine the required size, specify NULL for this parameter and 0 for the cbBufSize parameter. The function will fail and GetLastError will return ERROR_MORE_DATA. The pcbBytesNeeded parameter will receive the required size. Windows Server 2003 and Windows XP:  The maximum size of this array is 64K bytes. This limit was increased as of Windows Server 2003 with SP1 and Windows XP with SP2."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBufSize",
+        "description": "The size of the buffer pointed to by the lpServices parameter, in bytes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbBytesNeeded",
+        "description": "A pointer to a variable that receives the number of bytes needed to return the remaining service entries, if the buffer is too small."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpServicesReturned",
+        "description": "A pointer to a variable that receives the number of service entries returned."
+      },
+      {
+        "in_out": "_Inout_opt_",
+        "type": "LPDWORD",
+        "name": "lpResumeHandle",
+        "description": "A pointer to a variable that, on input, specifies the starting point of enumeration. You must set this value to zero the first time the  EnumServicesStatusEx function is called. On output, this value is zero if the function succeeds. However, if the function returns zero and the  GetLastError function returns ERROR_MORE_DATA, this value indicates the next service entry to be read when the  EnumServicesStatusEx function is called to retrieve the additional data."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "pszGroupName",
+        "description": "The load-order group name. If this parameter is a string, the only services enumerated are those that belong to the group that has the name specified by the string. If this parameter is an empty string, only services that do not belong to any group are enumerated. If this parameter is NULL, group membership is ignored and all services are enumerated."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the display name of the specified service.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the functions succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "There are two names for a service: the service name and the display name. The service name is the name of the service's key in the registry. The display name is a user-friendly name that appears in the Services control panel application, and is used with the NET START command. To map the service name to the display name, use the  GetServiceDisplayName function. To map the display name to the service name, use the  GetServiceKeyName function. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "GetServiceDisplayName",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hSCManager",
+        "description": "A handle to the service control manager database, as returned by the  OpenSCManager function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpServiceName",
+        "description": "The service name. This name is the same as the service's registry key name. It is best to choose a name that is less than 256 characters."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPTSTR",
+        "name": "lpDisplayName",
+        "description": "A pointer to a buffer that receives the service's display name. If the function fails, this buffer will contain an empty string. The maximum size of this array is 4K bytes. To determine the required size, specify NULL for this parameter and 0 for the lpcchBuffer parameter. The function will fail and GetLastError will return ERROR_INSUFFICIENT_BUFFER. The lpcchBuffer parameter will receive the required size. This parameter can specify a localized string using the following format: @[path\\]dllname,-strID The string with identifier strID is loaded from dllname; the path is optional. For more information, see RegLoadMUIString. Windows Server 2003 and Windows XP:  Localized strings are not supported until Windows Vista."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpcchBuffer",
+        "description": "A pointer to a variable that specifies the size of the buffer pointed to by lpDisplayName, in TCHARs.    On output, this variable receives the size of the service's display name, in characters, excluding the null-terminating character. If the buffer pointed to by lpDisplayName is too small to contain the display name, the function does not store it. When the function returns, lpcchBuffer contains the size of the service's display name, excluding the null-terminating character."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the service name of the specified service.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the functions succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "There are two names for a service: the service name and the display name. The service name is the name of the service's key in the registry. The display name is a user-friendly name that appears in the Services control panel application, and is used with the NET START command. Both names are specified with the CreateService function and can be modified with the ChangeServiceConfig function. Information specified for a service is stored in a key with the same name as the service name under the HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Services\\ServiceName registry key. To map the service name to the display name, use the  GetServiceDisplayName function. To map the display name to the service name, use the  GetServiceKeyName function. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "GetServiceKeyName",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hSCManager",
+        "description": "A handle to the computer's service control manager database, as returned by  OpenSCManager."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpDisplayName",
+        "description": "The service display name. This string has a maximum length of 256 characters."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPTSTR",
+        "name": "lpServiceName",
+        "description": "A pointer to a buffer that receives the service name. If the function fails, this buffer will contain an empty string. The maximum size of this array is 4K bytes. To determine the required size, specify NULL for this parameter and 0 for the lpcchBuffer parameter. The function will fail and GetLastError will return ERROR_INSUFFICIENT_BUFFER. The lpcchBuffer parameter will receive the required size."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpcchBuffer",
+        "description": "A pointer to variable that specifies the size of the buffer pointed to by the lpServiceName parameter, in TCHARs. When the function returns, this parameter contains the size of the service name, in TCHARs, excluding the null-terminating character. If the buffer pointed to by lpServiceName is too small to contain the service name, the function stores no data in it. When the function returns, lpcchBuffer contains the size of the service name, excluding the NULL terminator."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Reports the boot status to the service control manager. It is used by boot verification programs. This function can be called only by a process running in the LocalSystem or Administrator's account.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the BootAcceptable parameter is FALSE, the function does not return. If the last-known good configuration was successfully saved, the return value is nonzero. If an error occurs, the return value is zero. To get extended error information, call  GetLastError. The following error codes may be set by the service control manager. Other error codes may be set by the registry functions that are called by the service control manager to set parameters in the configuration registry.  ",
+    "remarks": "Saving the configuration of a running system with this function is an acceptable method for saving the last-known good configuration. If the boot configuration is unacceptable, use this function to reboot the system using the existing last-known good configuration. This function call requires the caller's token to have permission to acquire the SC_MANAGER_MODIFY_BOOT_CONFIG access right. For more information, see  Service Security and Access Rights. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "NotifyBootConfigStatus",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "BootAcceptable",
+        "description": "If the value is TRUE, the system saves the configuration as the last-known good configuration. If the value is FALSE, the system immediately reboots, using the previously saved last-known good configuration."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Enables an application to receive notification when the specified service is created or deleted or when its status changes.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is ERROR_SUCCESS. If the service has been marked for deletion, the return value is ERROR_SERVICE_MARKED_FOR_DELETE and the handle to the service must be closed. If service notification is lagging too far behind the system state, the function returns ERROR_SERVICE_NOTIFY_CLIENT_LAGGING. In this case, the client should close the handle to the SCM, open a new handle,  and call this function again. If the function fails, the return value is one of the system error codes. ",
+    "remarks": "The NotifyServiceStatusChange function can be used to receive notifications about service applications. It cannot be used to receive notifications about driver services. When the service status changes, the system invokes the specified callback function as an asynchronous procedure call (APC) queued to the calling thread. The calling thread must enter an alertable wait (for example, by calling the SleepEx function) to receive notification. For more information, see Asynchronous Procedure Calls. If the service is already in any of the requested states when NotifyServiceStatusChange is called, the callback function is queued immediately. If the service state has not changed by the next time the function is called with the same service and state, the callback function is not queued immediately; the callback function is queued the next time the service enters the requested state. The NotifyServiceStatusChange function calls the OpenThread function on the calling thread with the THREAD_SET_CONTEXT access right. If the calling thread does not have this access right, NotifyServiceStatusChange fails. If the calling thread is impersonating another user, it may not have sufficient permission to set context. It is more efficient to call NotifyServiceStatusChange from a thread that performs a wait than to create an additional thread. After the callback function is invoked, the caller must call NotifyServiceStatusChange to receive additional notifications. Note that certain functions in the Windows API, including NotifyServiceStatusChange and other SCM functions,  use remote procedure calls (RPC); these functions might perform an alertable wait operation, so they are not safe to call from within the callback function. Instead, the callback function should save the notification parameters and perform any additional work outside the callback. To cancel outstanding notifications, close the service handle using the CloseServiceHandle function. After CloseServiceHandle succeeds, no more notification APCs will be queued. If the calling  thread exits without closing the service handle or waiting until the APC  is generated, a memory leak can occur. ",
+    "return_type": "DWORD WINAPI",
+    "category": "Services",
+    "name": "NotifyServiceStatusChange",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service or the service control manager. Handles to services are returned by the  OpenService or CreateService function and must have the SERVICE_QUERY_STATUS access right. Handles to the service control manager are returned by the OpenSCManager function and must have the SC_MANAGER_ENUMERATE_SERVICE access right. For more information, see  Service Security and Access Rights. There can only be one outstanding notification request per service."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNotifyMask",
+        "description": "The type of status changes that should be reported. This parameter can be one or more of the following values.  ValueMeaning  SERVICE_NOTIFY_CREATED 0x00000080   Report when the service has been created.  The hService parameter must be a handle to the SCM.   SERVICE_NOTIFY_CONTINUE_PENDING 0x00000010   Report when the service is about to continue. The hService parameter must be a handle to the service.   SERVICE_NOTIFY_DELETE_PENDING 0x00000200   Report when an application has specified the service in a call to the  DeleteService function. Your application should close any handles to the service so it can be deleted. The hService parameter must be a handle to the service.   SERVICE_NOTIFY_DELETED 0x00000100   Report when the service has been deleted. An application cannot receive this notification if it has an open handle to the service. The hService parameter must be a handle to the SCM.   SERVICE_NOTIFY_PAUSE_PENDING 0x00000020   Report when the service is pausing. The hService parameter must be a handle to the service.   SERVICE_NOTIFY_PAUSED 0x00000040   Report when the service has paused. The hService parameter must be a handle to the service.   SERVICE_NOTIFY_RUNNING 0x00000008   Report when the service is running. The hService parameter must be a handle to the service.   SERVICE_NOTIFY_START_PENDING 0x00000002   Report when the service is starting. The hService parameter must be a handle to the service.   SERVICE_NOTIFY_STOP_PENDING 0x00000004   Report when the service is stopping. The hService parameter must be a handle to the service.   SERVICE_NOTIFY_STOPPED 0x00000001   Report when the service has stopped. The hService parameter must be a handle to the service."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSERVICE_NOTIFY",
+        "name": "pNotifyBuffer",
+        "description": "A pointer to a SERVICE_NOTIFY structure that contains notification information, such as a pointer to the callback function. This structure must remain valid until the callback function is invoked or the calling thread cancels the notification request. Do not make multiple calls to NotifyServiceStatusChange with the same buffer parameter until the callback function from the first call has finished with the buffer or the first notification request has been canceled. Otherwise, there is no guarantee which version of the buffer the callback function will receive. Windows Vista:  The address of the callback function must be within the address range of a loaded module. Therefore, the callback function cannot be code that is generated at run time (such as managed code generated by the JIT compiler) or native code that is decompressed at run time. This restriction was removed in Windows Server 2008 and Windows Vista with SP1."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Establishes a connection to the service control manager on the specified computer and opens the specified service control manager database.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the specified service control manager database. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. The following error codes can be set by the SCM. Other error codes can be set by the registry functions that are called by the SCM.  ",
+    "remarks": "When a process uses the  OpenSCManager function to open a handle to a service control manager database, the system performs a security check before granting the requested access. For more information, see  Service Security and Access Rights. If the current user does not have proper access when connecting to a service on another computer, the  OpenSCManager function call fails. To connect to a service remotely, call the LogonUser function with LOGON32_LOGON_NEW_CREDENTIALS and then call ImpersonateLoggedOnUser before calling OpenSCManager. For more information about connecting to services remotely, see Services and RPC/TCP. Only processes with Administrator privileges are able to open a database handle that can be used by the  CreateService function. The returned handle is only valid for the process that called the  OpenSCManager function. It can be closed by calling the  CloseServiceHandle function. For an example, see  Changing a Service's Configuration. ",
+    "return_type": "SC_HANDLE WINAPI",
+    "category": "Services",
+    "name": "OpenSCManager",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpMachineName",
+        "description": "The name of the target computer. If the pointer is NULL or points to an empty string, the function connects to the service control manager on the local computer."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpDatabaseName",
+        "description": "The name of the service control manager database. This parameter should be set to SERVICES_ACTIVE_DATABASE. If it is NULL, the SERVICES_ACTIVE_DATABASE database is opened by default."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwDesiredAccess",
+        "description": "The access to the service control manager. For a list of access rights, see  Service Security and Access Rights.     Before granting the requested access rights, the system checks the access token of the calling process against the discretionary access-control list of the security descriptor associated with the service control manager. The SC_MANAGER_CONNECT access right is implicitly specified by calling this function."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Opens an existing service.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the service. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager. Others can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "The returned handle is only valid for the process that called  OpenService. It can be closed by calling the  CloseServiceHandle function. To use OpenService, no privileges are required aside from SC_MANAGER_CONNECT. For an example, see  Starting a Service. ",
+    "return_type": "SC_HANDLE WINAPI",
+    "category": "Services",
+    "name": "OpenService",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hSCManager",
+        "description": "A handle to the service control manager database. The  OpenSCManager function returns this handle. For more information, see Service Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpServiceName",
+        "description": "The name of the service to be opened. This is the name specified by the lpServiceName parameter of the CreateService function when the service object was created, not the service display name that is shown by user interface applications to identify the service.  The maximum string length is 256 characters. The service control manager database preserves the case of the characters, but service name comparisons are always case insensitive. Forward-slash (/) and backslash (\\) are invalid service name characters."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwDesiredAccess",
+        "description": "The access to the service. For a list of access rights, see  Service Security and Access Rights.     Before granting the requested access, the system checks the access token of the calling process against the discretionary access-control list of the security descriptor associated with the service object."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the configuration parameters of the specified service. Optional configuration parameters are available using the  QueryServiceConfig2 function.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager. Others can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "The  QueryServiceConfig function returns the service configuration information kept in the registry for a particular service. This configuration information is first set by a service control program using the  CreateService function. This information may have been updated by a service configuration program using the  ChangeServiceConfig function. If the service was running when the configuration information was last changed, the information returned by  QueryServiceConfig will not reflect the current configuration of the service. Instead, it will reflect the configuration of the service when it is next run. The DisplayName key is an exception to this. When the DisplayName key is changed, it takes effect immediately, regardless of whether the service is running. For an example, see  Querying a Service's Configuration. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "QueryServiceConfig",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service. This handle is returned by the  OpenService or  CreateService function, and it must have the SERVICE_QUERY_CONFIG access right. For more information, see  Service Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPQUERY_SERVICE_CONFIG",
+        "name": "lpServiceConfig",
+        "description": "A pointer to a buffer that receives the service configuration information. The format of the data is a  QUERY_SERVICE_CONFIG structure. The maximum size of this array is 8K bytes. To determine the required size, specify NULL for this parameter and 0 for the cbBufSize parameter. The function will fail and GetLastError will return ERROR_INSUFFICIENT_BUFFER. The pcbBytesNeeded parameter will receive the required size."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBufSize",
+        "description": "The size of the buffer pointed to by the lpServiceConfig parameter, in bytes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbBytesNeeded",
+        "description": "A pointer to a variable that receives the number of bytes needed to store all the configuration information, if the function fails with ERROR_INSUFFICIENT_BUFFER."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the optional configuration parameters of the specified service.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager. Others can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "The  QueryServiceConfig2 function returns the optional configuration information stored in the service control manager database for the specified service. You can change this configuration information by using the  ChangeServiceConfig2 function. You can change and query additional configuration information using the  ChangeServiceConfig and  QueryServiceConfig functions, respectively. For an example, see  Querying a Service's Configuration. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "QueryServiceConfig2",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service. This handle is returned by the  OpenService or  CreateService function and must have the SERVICE_QUERY_CONFIG access right. For more information, see  Service Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwInfoLevel",
+        "description": "The configuration information to be queried. This parameter can be one of the following values.  ValueMeaning  SERVICE_CONFIG_DELAYED_AUTO_START_INFO 3   The lpInfo parameter is a pointer to a SERVICE_DELAYED_AUTO_START_INFO structure. Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONFIG_DESCRIPTION 1   The lpBuffer parameter is a pointer to a  SERVICE_DESCRIPTION structure.   SERVICE_CONFIG_FAILURE_ACTIONS 2   The lpBuffer parameter is a pointer to a  SERVICE_FAILURE_ACTIONS structure.   SERVICE_CONFIG_FAILURE_ACTIONS_FLAG 4   The lpInfo parameter is a pointer to a SERVICE_FAILURE_ACTIONS_FLAG structure. Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONFIG_PREFERRED_NODE 9   The lpInfo parameter is a pointer to a SERVICE_PREFERRED_NODE_INFO structure. Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONFIG_PRESHUTDOWN_INFO 7   The lpInfo parameter is a pointer to a SERVICE_PRESHUTDOWN_INFO structure. Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONFIG_REQUIRED_PRIVILEGES_INFO 6   The lpInfo parameter is a pointer to a SERVICE_REQUIRED_PRIVILEGES_INFO structure. Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONFIG_SERVICE_SID_INFO 5   The lpInfo parameter is a pointer to a SERVICE_SID_INFO structure. Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONFIG_TRIGGER_INFO 8   The lpInfo parameter is a pointer to a SERVICE_TRIGGER_INFO structure. Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP:  This value is not supported.   SERVICE_CONFIG_LAUNCH_PROTECTED 12   The lpInfo parameter is a pointer a SERVICE_LAUNCH_PROTECTED_INFO structure. Note  This value is supported starting with Windows 8.1."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPBYTE",
+        "name": "lpBuffer",
+        "description": "A pointer to the buffer that receives the service configuration information. The format of this data depends on the value of the dwInfoLevel parameter. The maximum size of this array is 8K bytes. To determine the required size, specify NULL for this parameter and 0 for the cbBufSize parameter. The function fails and GetLastError returns ERROR_INSUFFICIENT_BUFFER. The pcbBytesNeeded parameter receives the needed size."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBufSize",
+        "description": "The size of the structure pointed to by the lpBuffer parameter, in bytes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbBytesNeeded",
+        "description": "A pointer to a variable that receives the number of bytes required to store the configuration information, if the function fails with  ERROR_INSUFFICIENT_BUFFER."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves dynamic information related to the current service start.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. When this happens the GetLastError function should be called to retrieve the error code. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "QueryServiceDynamicInformation",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SERVICE_STATUS_HANDLE",
+        "name": "hServiceStatus",
+        "description": "A service status handle provided by RegisterServiceCtrlHandlerEx"
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwInfoLevel",
+        "description": "Indicates the information level.  ValueMeaning  SERVICE_DYNAMIC_INFORMATION_LEVEL_START_REASON   Indicates a request for dynamic information related to the current service start."
+      },
+      {
+        "in_out": "_Outptr_",
+        "type": "PVOID",
+        "name": "*ppDynamicInfo",
+        "description": "A dynamic information buffer. If this parameter is valid, the callback function must free the          buffer after use with the LocalFree function."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The QueryServiceObjectSecurity function retrieves a copy of the security descriptor associated with a service object. You can also use the GetNamedSecurityInfo function to retrieve a security descriptor.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes may be set by the service control manager. Other error codes may be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "When a service is created, the service control manager assigns a default security descriptor to the service object. To retrieve a copy of the security descriptor for a service object, call the QueryServiceObjectSecurity function. To change the security descriptor, call the  SetServiceObjectSecurity function. For a description of the default security descriptor for a service object, see  Service Security and Access Rights. To read the owner, group, or DACL from the security descriptor of the service object, the calling process must have been granted READ_CONTROL access when the handle was opened. To get READ_CONTROL access, the caller must be the owner of the object or the DACL of the object must grant the access. To read the SACL from the security descriptor, the calling process must have been granted ACCESS_SYSTEM_SECURITY access when the handle was opened. The correct way to get this access is to enable the SE_SECURITY_NAME privilege in the caller's current token, open the handle for ACCESS_SYSTEM_SECURITY access, and then disable the privilege. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "QueryServiceObjectSecurity",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service control manager or the service. Handles to the service control manager are returned by the  OpenSCManager function, and handles to a service are returned by either the  OpenService or  CreateService function. The handle must have the READ_CONTROL access right."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SECURITY_INFORMATION",
+        "name": "dwSecurityInformation",
+        "description": "A set of  bit flags that indicate the type of security information to retrieve. This parameter can be a combination of the  SECURITY_INFORMATION bit flags, with the exception that this function does not support the LABEL_SECURITY_INFORMATION value."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PSECURITY_DESCRIPTOR",
+        "name": "lpSecurityDescriptor",
+        "description": "A pointer to a buffer that receives a copy of the security descriptor of the specified service object. The calling process must have the appropriate access to view the specified aspects of the  security descriptor of the object. The  SECURITY_DESCRIPTOR structure is returned in self-relative format."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBufSize",
+        "description": "The size of the buffer pointed to by the lpSecurityDescriptor parameter, in bytes. The largest size allowed is 8 kilobytes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbBytesNeeded",
+        "description": "A pointer to a variable that receives the number of bytes needed to return the requested security descriptor information, if the function fails."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the current status of the specified service based on the specified information level.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following errors can be returned.  ",
+    "remarks": "The  QueryServiceStatusEx function returns the most recent service status information reported to the service control manager. If the service just changed its status, it may not have updated the service control manager yet. The process identifier returned in the SERVICE_STATUS_PROCESS structure is valid provided that the state of the service is one of SERVICE_RUNNING, SERVICE_PAUSE_PENDING, SERVICE_PAUSED, or SERVICE_CONTINUE_PENDING. If the service is in a SERVICE_START_PENDING or SERVICE_STOP_PENDING state, however, the process identifier may not be valid, and if the service is in the SERVICE_STOPPED state, it is never valid. For an example, see  Starting a Service or Stopping a Service. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "QueryServiceStatusEx",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service. This handle is returned by the  CreateService or  OpenService function, and it must have the SERVICE_QUERY_STATUS access right. For more information, see  Service Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SC_STATUS_TYPE",
+        "name": "InfoLevel",
+        "description": "The service attributes to be returned. Use SC_STATUS_PROCESS_INFO to retrieve the service status information. The lpBuffer parameter is a pointer to a  SERVICE_STATUS_PROCESS structure.     Currently, no other information levels are defined."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPBYTE",
+        "name": "lpBuffer",
+        "description": "A pointer to the buffer that receives the status information. The format of this data depends on the value of the InfoLevel parameter. The maximum size of this array is 8K bytes. To determine the required size, specify NULL for this parameter and 0 for the cbBufSize parameter. The function will fail and GetLastError will return ERROR_INSUFFICIENT_BUFFER. The pcbBytesNeeded parameter will receive the required size."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBufSize",
+        "description": "The size of the buffer pointed to by the lpBuffer parameter, in bytes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbBytesNeeded",
+        "description": "A pointer to a variable that receives the number of bytes needed to store all status information, if the function fails with ERROR_INSUFFICIENT_BUFFER."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "[SetServiceObjectSecurity is available for use in the operating systems specified in the Requirements section. It may be altered or unavailable in subsequent versions. Instead, use the SetNamedSecurityInfo function.]",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the function returns nonzero. If the function fails, it  returns zero. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager. Other error codes can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "The SetServiceObjectSecurity function sets the specified portions of the security descriptor of the service object based on the information specified in the lpSecurityDescriptor buffer. This function replaces any or all of the security information associated with the service object, according to the flags set in the dwSecurityInformation parameter and subject to the access rights of the calling process. When a service is created, the service control manager assigns a default security descriptor to the service object. To retrieve a copy of the security descriptor for a service object, call the  QueryServiceObjectSecurity function. For a description of the default security descriptor for a service object, see  Service Security and Access Rights. Note that granting certain access to untrusted users (such as SERVICE_CHANGE_CONFIG or SERVICE_STOP) can allow them to interfere with the execution of your service and possibly allow them to run applications under the LocalSystem account. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "SetServiceObjectSecurity",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service. This handle is returned by the  OpenService or  CreateService function. The access required for this handle depends on the security information specified in the dwSecurityInformation parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "SECURITY_INFORMATION",
+        "name": "dwSecurityInformation",
+        "description": "Specifies the components of the security descriptor to set. This parameter can be a combination of the following values. Note that flags not handled by SetServiceObjectSecurity will be silently ignored.      \t\t\t\t\t  ValueMeaning  DACL_SECURITY_INFORMATION   Sets the discretionary access control list (DACL) of the object. The handle specified by hService  must have WRITE_DAC access, or the calling process must be the owner of the object.   GROUP_SECURITY_INFORMATION   Sets the primary group security identifier (SID) of the object. The handle specified by hService must have WRITE_OWNER access, or the calling process must be the owner of the object.   OWNER_SECURITY_INFORMATION   Sets the SID of the owner of the object. The handle specified by hService must have WRITE_OWNER access, or the calling process must be the owner of the object or have the SE_TAKE_OWNERSHIP_NAME privilege enabled.   SACL_SECURITY_INFORMATION   Sets the system access control list (SACL) of the object. The handle specified by hService must have ACCESS_SYSTEM_SECURITY access.  To obtain ACCESS_SYSTEM_SECURITY access  Enable the SE_SECURITY_NAME  privilege in the current access token of the caller. Open the handle for ACCESS_SYSTEM_SECURITY access. Disable the privilege."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PSECURITY_DESCRIPTOR",
+        "name": "lpSecurityDescriptor",
+        "description": "A pointer to a  SECURITY_DESCRIPTOR structure that contains the new security information."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Starts a service.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager. Others can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "When a driver service is started, the  StartService function does not return until the device driver has finished initializing. When a service is started, the Service Control Manager (SCM) spawns the service process, if necessary. If the specified service shares a process with other services, the required process may already exist. The  StartService function does not wait for the first status update from the new service, because it can take a while. Instead, it returns when the SCM receives notification from the service control dispatcher that the  ServiceMain thread for this service was created successfully. The SCM sets the following default status values before returning from  StartService: The calling process can determine if the new service has finished its initialization by calling the  QueryServiceStatus function periodically to query the service's status. A service cannot call  StartService during initialization. The reason is that the SCM  locks the service control database during initialization, so a call to  StartService will block. After the service reports to the SCM that it has successfully started, it can call  StartService. As with   ControlService, StartService will block for 30 seconds if any service is busy handling a control code. If the busy service still has not returned from its handler function when the timeout expires,  StartService fails with ERROR_SERVICE_REQUEST_TIMEOUT. This is because the SCM processes only one service control notification at a time. For an example, see  Starting a Service. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "StartService",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service. This handle is returned by the  OpenService or  CreateService function, and it must have the SERVICE_START access right. For more information, see  Service Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwNumServiceArgs",
+        "description": "The number of strings in the lpServiceArgVectors array. If lpServiceArgVectors is NULL, this parameter can be zero."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "*lpServiceArgVectors",
+        "description": "The null-terminated strings to be passed to the ServiceMain function for the service as arguments. If there are no arguments, this parameter can be NULL. Otherwise, the first argument (lpServiceArgVectors[0]) is the name of the service, followed by any additional arguments (lpServiceArgVectors[1] through lpServiceArgVectors[dwNumServiceArgs-1]). Driver services do not receive these arguments."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "Enumerates services in the specified service control manager database. The name and status of each service are provided.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager. Other error codes can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "EnumServicesStatus",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hSCManager",
+        "description": "A handle to the service control manager database. This handle is returned by the  OpenSCManager function, and must have the SC_MANAGER_ENUMERATE_SERVICE access right. For more information, see  Service Security and Access Rights."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwServiceType",
+        "description": "The type of services to be enumerated. This parameter can be one or more of the following values.  ValueMeaning  SERVICE_DRIVER 0x0000000B   Services of type SERVICE_KERNEL_DRIVER and SERVICE_FILE_SYSTEM_DRIVER.   SERVICE_FILE_SYSTEM_DRIVER  0x00000002   File system driver services.   SERVICE_KERNEL_DRIVER 0x00000001    Driver services.   SERVICE_WIN32 0x00000030   Services of type SERVICE_WIN32_OWN_PROCESS and SERVICE_WIN32_SHARE_PROCESS.   SERVICE_WIN32_OWN_PROCESS  0x00000010   Services that run in their own processes.    SERVICE_WIN32_SHARE_PROCESS 0x00000020   Services that share a process with one or more other services. For more information, see Service Programs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwServiceState",
+        "description": "The state of the services to be enumerated. This parameter can be one of the following values.  ValueMeaning  SERVICE_ACTIVE 0x00000001   Enumerates services that are in the following states: SERVICE_START_PENDING, SERVICE_STOP_PENDING, SERVICE_RUNNING, SERVICE_CONTINUE_PENDING, SERVICE_PAUSE_PENDING, and SERVICE_PAUSED.   SERVICE_INACTIVE 0x00000002   Enumerates services that are in the SERVICE_STOPPED state.   SERVICE_STATE_ALL 0x00000003   Combines the following states: SERVICE_ACTIVE and SERVICE_INACTIVE."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPENUM_SERVICE_STATUS",
+        "name": "lpServices",
+        "description": "A pointer to a buffer that contains an array of  ENUM_SERVICE_STATUS structures that receive the name and service status information for each service in the database. The buffer must be large enough to hold the structures, plus the strings to which their members point. The maximum size of this array is 256K bytes. To determine the required size, specify NULL for this parameter and 0 for the cbBufSize parameter. The function will fail and GetLastError will return ERROR_INSUFFICIENT_BUFFER. The pcbBytesNeeded parameter will receive the required size. Windows Server 2003 and Windows XP:  The maximum size of this array is 64K bytes. This limit was increased as of Windows Server 2003 with SP1 and Windows XP with SP2."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBufSize",
+        "description": "The size of the buffer pointed to by the lpServices parameter, in bytes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbBytesNeeded",
+        "description": "A pointer to a variable that receives the number of bytes needed to return the remaining service entries, if the buffer is too small."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "lpServicesReturned",
+        "description": "A pointer to a variable that receives the number of service entries returned."
+      },
+      {
+        "in_out": "_Inout_opt_",
+        "type": "LPDWORD",
+        "name": "lpResumeHandle",
+        "description": "A pointer to a variable that, on input, specifies the starting point of enumeration. You must set this value to zero the first time this function is called. On output, this value is zero if the function succeeds. However, if the function returns zero and the  GetLastError function returns ERROR_MORE_DATA, this value is used to indicate the next service entry to be read when the function is called to retrieve the additional data."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[As of Windows Vista, this function is provided  for application compatibility and has no effect on the database.]",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a lock to the specified SCM database. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. The following error codes can be set by the SCM. Other error codes can be set by registry functions that are called by the SCM.  ",
+    "remarks": "A lock is a protocol used by setup and configuration programs and the SCM to serialize access to the service tree in the registry. The only time the SCM requests ownership of the lock is when it is starting a service. A program that acquires the SCM database lock and fails to release it prevents the SCM from starting other services. Because of the severity of this issue, processes are no longer allowed to lock the database. For compatibility with older applications, the LockServiceDatabase function returns a lock but has no other effect. Windows Server 2003 and Windows XP: Acquiring the SCM database lock prevents the SCM from starting a service until the lock is released. For example, a program that must configure several related services before any of them starts could call  LockServiceDatabase before configuring the first service. Alternatively, it could ensure that none of the services are started until the configuration has been completed. A call to the  StartService function to start a service in a locked database fails. No other SCM functions are affected by a lock. The lock is held until the SC_LOCK handle is specified in a subsequent call to the  UnlockServiceDatabase function. If a process that owns a lock terminates, the SCM automatically cleans up and releases ownership of the lock. Failing to release the lock can cause system problems. A process that acquires  the lock should release it as soon as possible. ",
+    "return_type": "SC_LOCK WINAPI",
+    "category": "Services",
+    "name": "LockServiceDatabase",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hSCManager",
+        "description": "A handle to the SCM database. This handle is returned by the  OpenSCManager function, and must have the SC_MANAGER_LOCK access right. For more information, see  Service Security and Access Rights."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "[This function has  no effect as of Windows Vista.]",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager. Other error codes can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "The  QueryServiceLockStatus function returns a  QUERY_SERVICE_LOCK_STATUS structure that indicates whether the specified database is locked. If the database is locked, the structure provides the account name of the user that owns the lock and the length of time that the lock has been held. A process calls the  LockServiceDatabase function to acquire ownership of a service control manager database lock and the  UnlockServiceDatabase function to release the lock. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "QueryServiceLockStatus",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hSCManager",
+        "description": "A handle to the service control manager database. The  OpenSCManager function returns this handle, which must have the SC_MANAGER_QUERY_LOCK_STATUS access right. For more information, see  Service Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPQUERY_SERVICE_LOCK_STATUS",
+        "name": "lpLockStatus",
+        "description": "A pointer to a  QUERY_SERVICE_LOCK_STATUS structure that receives the lock status of the specified database is returned, plus the strings to which its members point."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbBufSize",
+        "description": "The size of the buffer pointed to by the lpLockStatus parameter, in bytes."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pcbBytesNeeded",
+        "description": "A pointer to a variable that receives the number of bytes needed to return all the lock status information, if the function fails."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the current status of the specified service.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager. Other error codes can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "The  QueryServiceStatus function returns the most recent service status information reported to the service control manager. If the service just changed its status, it may not have updated the service control manager yet. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "QueryServiceStatus",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_HANDLE",
+        "name": "hService",
+        "description": "A handle to the service. This handle is returned by the  OpenService or the  CreateService function, and it must have the SERVICE_QUERY_STATUS access right. For more information, see  Service Security and Access Rights."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSERVICE_STATUS",
+        "name": "lpServiceStatus",
+        "description": "A pointer to a  SERVICE_STATUS structure that receives the status information."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[This function has no effect as of Windows Vista.]",
+    "library": "Advapi32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winsvc.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The following error codes can be set by the service control manager. Other error codes can be set by the registry functions that are called by the service control manager.  ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Services",
+    "name": "UnlockServiceDatabase",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SC_LOCK",
+        "name": "ScLock",
+        "description": "The lock, which is obtained from a previous call to the  LockServiceDatabase function."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  }
+]
+
