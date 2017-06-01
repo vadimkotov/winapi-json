@@ -38,8 +38,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*lpImageBase",
+        "type": "LPVOID*",
+        "name": "lpImageBase",
         "description": "An array that receives the list of load addresses for the device drivers."
       },
       {
@@ -102,8 +102,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pProcessIds",
+        "type": "DWORD*",
+        "name": "pProcessIds",
         "description": "A pointer to an array that receives the list of process identifiers."
       },
       {
@@ -114,8 +114,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pBytesReturned",
+        "type": "DWORD*",
+        "name": "pBytesReturned",
         "description": "The number of bytes returned in the pProcessIds array."
       }
     ],
@@ -143,8 +143,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HMODULE",
-        "name": "*lphModule",
+        "type": "HMODULE*",
+        "name": "lphModule",
         "description": "An array that receives the list of module handles."
       },
       {
@@ -184,8 +184,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HMODULE",
-        "name": "*lphModule",
+        "type": "HMODULE*",
+        "name": "lphModule",
         "description": "An array that receives the list of module handles."
       },
       {

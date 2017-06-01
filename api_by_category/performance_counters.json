@@ -56,8 +56,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PDH_HCOUNTER",
-        "name": "*phCounter",
+        "type": "PDH_HCOUNTER*",
+        "name": "phCounter",
         "description": "Handle to the counter that was added to the query. You may need to reference this handle in subsequent calls."
       }
     ],
@@ -97,8 +97,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PDH_HCOUNTER",
-        "name": "*phCounter",
+        "type": "PDH_HCOUNTER*",
+        "name": "phCounter",
         "description": "Handle to the counter that was added to the query. You may need to reference this handle in subsequent calls."
       }
     ],
@@ -120,8 +120,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PDH_HLOG",
-        "name": "*phDataSource",
+        "type": "PDH_HLOG*",
+        "name": "phDataSource",
         "description": "Handle to the bound data sources."
       },
       {
@@ -358,8 +358,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LONGLONG",
-        "name": "*pllTimeStamp",
+        "type": "LONGLONG*",
+        "name": "pllTimeStamp",
         "description": "Time stamp when the first counter value in the query was retrieved. The time is specified as FILETIME."
       }
     ],
@@ -951,8 +951,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "LONGLONG",
-        "name": "*pTimeBase",
+        "type": "LONGLONG*",
+        "name": "pTimeBase",
         "description": "Pointer to the time base, if necessary for the format conversion. If time base information is not necessary for the format conversion, the value of this parameter is ignored. To retrieve the time base of the counter, call PdhGetCounterTimeBase."
       },
       {
@@ -1039,8 +1039,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LONGLONG",
-        "name": "*pTimeBase",
+        "type": "LONGLONG*",
+        "name": "pTimeBase",
         "description": "Time base that specifies the number of performance values a counter samples per second."
       }
     ],
@@ -1437,8 +1437,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LONGLONG",
-        "name": "*llSize",
+        "type": "LONGLONG*",
+        "name": "llSize",
         "description": "Size of the log file, in bytes."
       }
     ],
@@ -1635,8 +1635,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "PDH_COUNTER_PATH_ELEMENTS",
-        "name": "*pCounterPathElements",
+        "type": "PDH_COUNTER_PATH_ELEMENTS*",
+        "name": "pCounterPathElements",
         "description": "A  PDH_COUNTER_PATH_ELEMENTS structure that contains the members used to make up the path. Only the szObjectName and szCounterName members are required, the others are optional.    If the instance name member is NULL, the path will not contain an instance reference and the szParentInstance and dwInstanceIndex members will be ignored."
       },
       {
@@ -1712,8 +1712,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PDH_HLOG",
-        "name": "*phLog",
+        "type": "PDH_HLOG*",
+        "name": "phLog",
         "description": "Handle to the opened log file."
       }
     ],
@@ -1747,8 +1747,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PDH_HQUERY",
-        "name": "*phQuery",
+        "type": "PDH_HQUERY*",
+        "name": "phQuery",
         "description": "Handle to the query. You use this handle in subsequent calls."
       }
     ],
@@ -1782,8 +1782,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PDH_HQUERY",
-        "name": "*phQuery",
+        "type": "PDH_HQUERY*",
+        "name": "phQuery",
         "description": "Handle to the query. You use this handle in subsequent calls."
       }
     ],
@@ -1811,8 +1811,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PDH_COUNTER_PATH_ELEMENTS",
-        "name": "*pCounterPathElements",
+        "type": "PDH_COUNTER_PATH_ELEMENTS*",
+        "name": "pCounterPathElements",
         "description": "Caller-allocated buffer that receives a  PDH_COUNTER_PATH_ELEMENTS structure. The structure contains pointers to the individual string elements of the path referenced by the szFullPathBuffer parameter. The function appends the strings to the end of the PDH_COUNTER_PATH_ELEMENTS structure. The allocated buffer should be large enough for the structure and the strings. Set to NULL if pdwBufferSize is zero."
       },
       {
@@ -3075,8 +3075,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*phProvider",
+        "type": "HANDLE*",
+        "name": "phProvider",
         "description": "Handle to the provider. You must call PerfStopProvider to release resources associated with the handle."
       }
     ],
@@ -3110,8 +3110,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*phProvider",
+        "type": "HANDLE*",
+        "name": "phProvider",
         "description": "Handle to the provider. You must call PerfStopProvider to release resources associated with the handle."
       }
     ],
@@ -3178,8 +3178,8 @@
       },
       {
         "in_out": "",
-        "type": "LPVOID",
-        "name": "*pData",
+        "type": "LPVOID*",
+        "name": "pData",
         "description": "Consumer-allocated buffer that will contain the performance data.  On output, set pData to one byte past the end of your data. The data must conform to the  PERF_OBJECT_TYPE structure. If this function fails, leave the pData pointer value unchanged."
       },
       {

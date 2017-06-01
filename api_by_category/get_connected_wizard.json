@@ -243,14 +243,14 @@
     "arguments": [
       {
         "in_out": "const",
-        "type": "GUID",
-        "name": "*pguidParentPage",
+        "type": "GUID*",
+        "name": "pguidParentPage",
         "description": "Pointer to a GUID that uniquely identifies the parent page within the wizard."
       },
       {
         "in_out": "const",
-        "type": "GUID",
-        "name": "*pguidChildPage",
+        "type": "GUID*",
+        "name": "pguidChildPage",
         "description": "Pointer to a GUID that uniquely identifies the child page to register with the parent page."
       },
       {
@@ -302,8 +302,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pguidPage",
+        "type": "const GUID*",
+        "name": "pguidPage",
         "description": "Pointer to a GUID that uniquely identifies the page to be removed from the Get Connected wizard."
       },
       {
@@ -331,14 +331,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pguidParentPage",
+        "type": "const GUID*",
+        "name": "pguidParentPage",
         "description": "Pointer to a GUID that uniquely identifies the parent page whose link to a child page will be removed."
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pguidChildPage",
+        "type": "const GUID*",
+        "name": "pguidChildPage",
         "description": "Pointer to a GUID that uniquely identifies the child page whose link will be removed."
       }
     ],

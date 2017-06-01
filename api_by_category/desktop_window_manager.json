@@ -62,8 +62,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LRESULT",
-        "name": "*plResult",
+        "type": "LRESULT*",
+        "name": "plResult",
         "description": "A pointer to an LRESULT value that, when this method returns successfully,receives the result of the hit test."
       }
     ],
@@ -114,8 +114,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "DWM_BLURBEHIND",
-        "name": "*pBlurBehind",
+        "type": "const DWM_BLURBEHIND*",
+        "name": "pBlurBehind",
         "description": "A pointer to a DWM_BLURBEHIND structure that provides blur behind data."
       }
     ],
@@ -189,8 +189,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "MARGINS",
-        "name": "*pMarInset",
+        "type": "const MARGINS*",
+        "name": "pMarInset",
         "description": "A pointer to a MARGINS structure that describes the margins to use when extending the frame into the client area."
       }
     ],
@@ -228,14 +228,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pcrColorization",
+        "type": "DWORD*",
+        "name": "pcrColorization",
         "description": "A pointer to a value that, when this function returns successfully, receives the current color used for glass composition. The color format of the value is 0xAARRGGBB."
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pfOpaqueBlend",
+        "type": "BOOL*",
+        "name": "pfOpaqueBlend",
         "description": "A pointer to a value that, when this function returns successfully, indicates whether the color is an opaque blend. TRUE if the color is an opaque blend; otherwise, FALSE."
       }
     ],
@@ -263,8 +263,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWM_TIMING_INFO",
-        "name": "*pTimingInfo",
+        "type": "DWM_TIMING_INFO*",
+        "name": "pTimingInfo",
         "description": "A pointer to a DWM_TIMING_INFO structure that, when this function returns successfully, receives the current composition timing information for the window. The cbSize member of this structure must be set before this function is called."
       }
     ],
@@ -292,8 +292,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "UUID",
-        "name": "*pClientUuid",
+        "type": "UUID*",
+        "name": "pClientUuid",
         "description": ""
       }
     ],
@@ -321,8 +321,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "MilMatrix3x2D",
-        "name": "*pTransform",
+        "type": "MilMatrix3x2D*",
+        "name": "pTransform",
         "description": ""
       }
     ],
@@ -344,20 +344,20 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pfIsRemoting",
+        "type": "BOOL*",
+        "name": "pfIsRemoting",
         "description": "A pointer to a BOOL value that indicates whether the transport supports remoting. TRUE if the transport supports remoting; otherwise, FALSE."
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pfIsConnected",
+        "type": "BOOL*",
+        "name": "pfIsConnected",
         "description": "A pointer to a BOOL value that indicates whether the transport is connected. TRUE if the transport is connected; otherwise, FALSE."
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pDwGeneration",
+        "type": "DWORD*",
+        "name": "pDwGeneration",
         "description": "A pointer to a DWORD that receives a generation value for the transport."
       }
     ],
@@ -443,9 +443,9 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pfEnabled",
-        "description": "A pointer to a value that, when this function returns successfully, receives TRUE if DWM composition is enabled; otherwise, FALSE.                           Note  As of Windows 8, DWM composition is always enabled. If an app declares Windows 8 compatibility in their manifest, this function will receive a value of TRUE through pfEnabled. If no such manifest entry is found, Windows 8 compatibility is not assumed and this function receives a value of FALSE through pfEnabled. This is done so that older programs that interpret a value of TRUE to imply that high contrast mode is off can continue to make the correct decisions about rendering their images. (Note that this is a bad practice\u2014you should use the SystemParametersInfo function with the SPI_GETHIGHCONTRAST flag to determine the state of high contrast mode.)   For more information, see Supporting High Contrast Themes."
+        "type": "BOOL*",
+        "name": "pfEnabled",
+        "description": "A pointer to a value that, when this function returns successfully, receives TRUE if DWM composition is enabled; otherwise, FALSE. ..."
       }
     ],
     "min_client": "Windows Vista [desktop apps only]"
@@ -577,14 +577,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "DWORD",
-        "name": "*pdwPointerID",
+        "type": "DWORD*",
+        "name": "pdwPointerID",
         "description": "The pointer ID."
       },
       {
         "in_out": "_In_",
-        "type": "POINT",
-        "name": "*pPoints",
+        "type": "POINT*",
+        "name": "pPoints",
         "description": "The points."
       }
     ],
@@ -647,8 +647,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "POINT",
-        "name": "*pptClient",
+        "type": "POINT*",
+        "name": "pptClient",
         "description": "The offset of a tab window's client region (the content area inside the client window frame) from the host window's frame. This offset enables the tab window's contents to be drawn correctly in a live preview  when it is drawn without its frame."
       },
       {
@@ -717,8 +717,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWM_PRESENT_PARAMETERS",
-        "name": "*pPresentParams",
+        "type": "DWM_PRESENT_PARAMETERS*",
+        "name": "pPresentParams",
         "description": "A pointer to a DWM_PRESENT_PARAMETERS structure that contains DWM video frame parameters for frame composition."
       }
     ],
@@ -903,8 +903,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "DWM_THUMBNAIL_PROPERTIES",
-        "name": "*ptnProperties",
+        "type": "const DWM_THUMBNAIL_PROPERTIES*",
+        "name": "ptnProperties",
         "description": "A pointer to a DWM_THUMBNAIL_PROPERTIES structure that contains the new thumbnail properties."
       }
     ],

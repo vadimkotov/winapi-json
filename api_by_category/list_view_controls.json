@@ -27,8 +27,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "VOID",
-        "name": "*pvData",
+        "type": "VOID*",
+        "name": "pvData",
         "description": "Type: VOID* A pointer to the application-defined information. This comes from the message that was called; for LVM_INSERTGROUPSORTED it is LVINSERTGROUPSORTED.pvData, and for LVM_SORTGROUPS it is the plv parameter."
       }
     ],

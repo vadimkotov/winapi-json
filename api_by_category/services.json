@@ -149,8 +149,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "LPTSTR",
-        "name": "*lpszArgv",
+        "type": "LPTSTR*",
+        "name": "lpszArgv",
         "description": "The null-terminated argument strings passed to the service by the call to  the  StartService function that started the service. If there are no arguments, this parameter can be NULL. Otherwise, the first argument (lpszArgv[0]) is the name of the service, followed by any additional arguments (lpszArgv[1] through lpszArgv[dwArgc-1]). If the user starts a manual service using the Services snap-in from the Control Panel, the strings for the lpszArgv parameter come from the properties dialog box for the service (from the Services snap-in, right-click the service entry, click Properties, and enter the parameters in Start parameters.)"
       }
     ],
@@ -242,8 +242,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "SERVICE_TABLE_ENTRY",
-        "name": "*lpServiceTable",
+        "type": "const SERVICE_TABLE_ENTRY*",
+        "name": "lpServiceTable",
         "description": "A pointer to an array of  SERVICE_TABLE_ENTRY structures containing one entry for each service that can execute in the calling process. The members of the last entry in the table must have NULL values to designate the end of the table."
       }
     ],
@@ -1040,8 +1040,8 @@
       },
       {
         "in_out": "_Outptr_",
-        "type": "PVOID",
-        "name": "*ppDynamicInfo",
+        "type": "PVOID*",
+        "name": "ppDynamicInfo",
         "description": "A dynamic information buffer. If this parameter is valid, the callback function must free the          buffer after use with the LocalFree function."
       }
     ],
@@ -1204,8 +1204,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "LPCTSTR",
-        "name": "*lpServiceArgVectors",
+        "type": "LPCTSTR*",
+        "name": "lpServiceArgVectors",
         "description": "The null-terminated strings to be passed to the ServiceMain function for the service as arguments. If there are no arguments, this parameter can be NULL. Otherwise, the first argument (lpServiceArgVectors[0]) is the name of the service, followed by any additional arguments (lpServiceArgVectors[1] through lpServiceArgVectors[dwNumServiceArgs-1]). Driver services do not receive these arguments."
       }
     ],

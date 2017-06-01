@@ -27,8 +27,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppszPathOut",
+        "type": "PWSTR*",
+        "name": "ppszPathOut",
         "description": "The address of a pointer to a buffer that, when this function returns successfully, receives the canonicalized path string. It is the responsibility of the caller to free this resource, when it is no longer needed, by calling the LocalFree function. This value cannot be NULL."
       }
     ],
@@ -173,8 +173,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppszPathOut",
+        "type": "PWSTR*",
+        "name": "ppszPathOut",
         "description": "The address of a pointer to a buffer that, when this function returns successfully, receives the combined path string. It is the responsibility of the caller to free this resource, when it is no longer needed, by calling the LocalFree function. This value cannot be NULL."
       }
     ],
@@ -383,14 +383,14 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PWSTR",
-        "name": "*ppszEnd",
+        "type": "PWSTR*",
+        "name": "ppszEnd",
         "description": "A value that, when this function returns successfully, receives the address of a pointer to the terminating null character at the end of the string."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "size_t",
-        "name": "*pcchRemaining",
+        "type": "size_t*",
+        "name": "pcchRemaining",
         "description": "A pointer to a value that, when this function returns successfully, is set to the number of unused characters in the destination buffer, including the terminating null character."
       }
     ],
@@ -593,8 +593,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PCWSTR",
-        "name": "*ppszExt",
+        "type": "PCWSTR*",
+        "name": "ppszExt",
         "description": "The address of a pointer that, when this function returns successfully, points to the \".\" character that precedes the extension within pszPath. If no extension is found, it points to the string's terminating null character."
       }
     ],
@@ -749,14 +749,14 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PWSTR",
-        "name": "*ppszEnd",
+        "type": "PWSTR*",
+        "name": "ppszEnd",
         "description": "A value that, when this function returns successfully, receives the address of a pointer to end of the new string. If the string is a root path such as \"C:\\\", the pointer points to the backslash; otherwise the pointer points to the string's terminating null character."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "size_t",
-        "name": "*pcchRemaining",
+        "type": "size_t*",
+        "name": "pcchRemaining",
         "description": "A pointer to a value that, when this function returns successfully, receives the number of unused characters in the destination buffer, including the terminating null character. If the string is a root path such as \"C:\\\", this count includes the backslash in that string."
       }
     ],
@@ -952,8 +952,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PCWSTR",
-        "name": "*ppszRootEnd",
+        "type": "PCWSTR*",
+        "name": "ppszRootEnd",
         "description": "The address of a pointer that, when this function returns successfully, points to the first character in a path following the drive letter or UNC server/share path elements. If the path consists of only a root, this value will point to the string's terminating null character."
       }
     ],
@@ -1085,8 +1085,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PCWSTR",
-        "name": "*ppszServer",
+        "type": "PCWSTR*",
+        "name": "ppszServer",
         "description": "A pointer to a string that, when this function returns successfully, receives the server portion of the UNC path. This value can be NULL if you don't need this information."
       }
     ],
@@ -1131,8 +1131,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "ASSOCIATIONELEMENT",
-        "name": "*rgClasses",
+        "type": "const ASSOCIATIONELEMENT*",
+        "name": "rgClasses",
         "description": "Type: const ASSOCIATIONELEMENT* A pointer to an array of ASSOCIATIONELEMENT structures."
       },
       {
@@ -1149,8 +1149,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns, contains the interface pointer requested in riid. This is normally IQueryAssociations."
       }
     ],
@@ -1172,8 +1172,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IShellFolder",
-        "name": "*psf",
+        "type": "IShellFolder*",
+        "name": "psf",
         "description": "Type: IShellFolder* A pointer to the shell folder for which the details of the property key of the file association are being retrieved."
       },
       {
@@ -1184,20 +1184,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "PROPERTYKEY",
-        "name": "*pkey",
+        "type": "PROPERTYKEY*",
+        "name": "pkey",
         "description": "Type: PROPERTYKEY* A pointer to the property key that is being retrieved."
       },
       {
         "in_out": "_Out_",
-        "type": "VARIANT",
-        "name": "*pv",
+        "type": "VARIANT*",
+        "name": "pv",
         "description": "Type: VARIANT* When this function returns, contains the details of the given property key."
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pfFoundPropKey",
+        "type": "BOOL*",
+        "name": "pfFoundPropKey",
         "description": "Type: BOOL* When this function returns, contains a flag that is TRUE if the property key was found, otherwise FALSE."
       }
     ],
@@ -1237,14 +1237,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "PCUITEMID_CHILD_ARRAY",
-        "name": "*apidl",
+        "type": "PCUITEMID_CHILD_ARRAY*",
+        "name": "apidl",
         "description": "Type: PCUITEMID_CHILD_ARRAY* A pointer to an array of ITEMIDLIST structures, one for each item that is selected."
       },
       {
         "in_out": "_In_opt_",
-        "type": "IShellFolder",
-        "name": "*psf",
+        "type": "IShellFolder*",
+        "name": "psf",
         "description": "Type: IShellFolder* A pointer to the parent folder's IShellFolder interface. This IShellFolder must support the IDataObject interface. If it does not, CDefFolderMenu_Create2 fails and returns E_NOINTERFACE. This value can be NULL."
       },
       {
@@ -1261,14 +1261,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "HKEY",
-        "name": "*ahkeys",
+        "type": "const HKEY*",
+        "name": "ahkeys",
         "description": "Type: const HKEY* A pointer to an array of registry keys that specify the context menu handlers used with the menu's entries. For more information on context menu handlers, see Creating Context Menu Handlers. This array can contain a maximum of 16 registry keys."
       },
       {
         "in_out": "_Out_",
-        "type": "IContextMenu",
-        "name": "**ppcm",
+        "type": "IContextMenu**",
+        "name": "ppcm",
         "description": "Type: IContextMenu** The address of an IContextMenu interface pointer that, when this function returns successfully, points to the IContextMenu object that represents the context menu."
       }
     ],
@@ -1312,8 +1312,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "int",
-        "name": "*pNumArgs",
+        "type": "int*",
+        "name": "pNumArgs",
         "description": "Type: int* Pointer to an int that receives the number of array elements returned, similar to argc."
       }
     ],
@@ -1365,8 +1365,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSID",
-        "name": "*ppSidAppContainerSid",
+        "type": "PSID*",
+        "name": "ppSidAppContainerSid",
         "description": "The SID for the profile. This buffer must be freed using the FreeSid function."
       }
     ],
@@ -1388,8 +1388,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*lpEnvironment",
+        "type": "LPVOID*",
+        "name": "lpEnvironment",
         "description": "Type: LPVOID* When this function returns, receives a pointer to the new environment block. The environment block is an array of null-terminated Unicode strings. The list ends with two nulls (\\0\\0)."
       },
       {
@@ -1739,8 +1739,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSID",
-        "name": "*ppsidAppContainerSid",
+        "type": "PSID*",
+        "name": "ppsidAppContainerSid",
         "description": "The SID for the profile. This buffer must be freed using the FreeSid function."
       }
     ],
@@ -1774,8 +1774,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSID",
-        "name": "*ppsidRestrictedAppContainerSid",
+        "type": "PSID*",
+        "name": "ppsidRestrictedAppContainerSid",
         "description": "Reserved."
       }
     ],
@@ -1797,8 +1797,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "DLLVERSIONINFO",
-        "name": "*pdvi",
+        "type": "DLLVERSIONINFO*",
+        "name": "pdvi",
         "description": "Type: DLLVERSIONINFO* A pointer to a DLLVERSIONINFO structure that receives the version information. The cbSize member must be filled in before you call this function.  Version 5.0. DLLs that are shipped with Windows 2000 or later systems may return a DLLVERSIONINFO2 structure. To maintain backward compatibility, the first member of a DLLVERSIONINFO2 structure is a DLLVERSIONINFO structure."
       }
     ],
@@ -1919,8 +1919,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "POINT",
-        "name": "*lppt",
+        "type": "POINT*",
+        "name": "lppt",
         "description": "Type: POINT* Pointer to a POINT structure that, when this function returns successfully, receives the coordinates of the mouse pointer at the time the file was dropped."
       }
     ],
@@ -2041,8 +2041,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "CONFIRM_CONFLICT_ITEM",
-        "name": "*pcci",
+        "type": "CONFIRM_CONFLICT_ITEM*",
+        "name": "pcci",
         "description": "Type: CONFIRM_CONFLICT_ITEM* A pointer to a CONFIRM_CONFLICT_ITEM structure that stores pointers to the items for which memory is to be freed."
       }
     ],
@@ -2064,8 +2064,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "PIDLIST_RELATIVE",
-        "name": "*ppidls",
+        "type": "PIDLIST_RELATIVE*",
+        "name": "ppidls",
         "description": "Type: PIDLIST_RELATIVE* A pointer to the list of cItems PIDLs, stored as an array."
       },
       {
@@ -2093,8 +2093,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "PITEMID_CHILD",
-        "name": "*ppidls",
+        "type": "PITEMID_CHILD*",
+        "name": "ppidls",
         "description": "Type: PITEMID_CHILD* A pointer to the PIDL list, stored as an array of cItems elements."
       },
       {
@@ -2122,8 +2122,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "PIDLIST_ABSOLUTE",
-        "name": "*ppidls",
+        "type": "PIDLIST_ABSOLUTE*",
+        "name": "ppidls",
         "description": "Type: PIDLIST_ABSOLUTE* A pointer to the PIDL list, stored as an array of cItems elements."
       },
       {
@@ -2151,8 +2151,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "KNOWNFOLDER_DEFINITION",
-        "name": "*pKFD",
+        "type": "KNOWNFOLDER_DEFINITION*",
+        "name": "pKFD",
         "description": "Type: KNOWNFOLDER_DEFINITION* A pointer to a KNOWNFOLDER_DEFINITION structure that contains information about the given known folder."
       }
     ],
@@ -2232,8 +2232,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppszPath",
+        "type": "PWSTR*",
+        "name": "ppszPath",
         "description": "The address of a pointer to a string that, when this function returns successfully, receives the path of the local folder. It is the responsibility of the caller to free this string when it is no longer needed by calling the CoTaskMemFree function."
       }
     ],
@@ -2307,8 +2307,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*AppID",
+        "type": "PWSTR*",
+        "name": "AppID",
         "description": "Type: PWSTR* A pointer that receives the address of the AppUserModelID assigned to the process. The caller is responsible for freeing this string with CoTaskMemFree when it is no longer needed."
       }
     ],
@@ -2434,8 +2434,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwFlags",
+        "type": "DWORD*",
+        "name": "pdwFlags",
         "description": "Type: DWORD* Pointer to a variable that receives the profile type. If the function succeeds, it sets one or more of the following values:  PT_MANDATORY   The user has a Mandatory User Profiles.  PT_ROAMING   The user has a Roaming User Profiles.  PT_ROAMING_PREEXISTING    \t\t\t\t\t\tThe user has a Roaming User Profile that was created on another PC and is being downloaded. \t\t\t\t\t\tThis profile type implies PT_ROAMING. \t\t\t\t\t  PT_TEMPORARY   The user has a Temporary User Profiles; it will be deleted at logoff."
       }
     ],
@@ -2486,8 +2486,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DEVICE_SCALE_FACTOR",
-        "name": "*pScale",
+        "type": "DEVICE_SCALE_FACTOR*",
+        "name": "pScale",
         "description": "When this function returns successfully, this value points to one of the DEVICE_SCALE_FACTOR values that specify the scale factor of the specified monitor.                          If the function call fails, this value points to a valid scale factor so that apps can opt to continue on with incorrectly sized resources."
       }
     ],
@@ -2585,8 +2585,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD_PTR",
-        "name": "*pdwRefData",
+        "type": "DWORD_PTR*",
+        "name": "pdwRefData",
         "description": "Type: DWORD_PTR* A pointer to a DWORD which will return the reference data. Note: On 64-bit versions of Windows, pointers are 64-bit values."
       }
     ],
@@ -3447,8 +3447,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PAPPSTATE_REGISTRATION",
-        "name": "*Registration",
+        "type": "PAPPSTATE_REGISTRATION*",
+        "name": "Registration",
         "description": "When this function returns successfully, this parameter receives the address of a pointer to a value that can be used to identify the registration. Store this value to use with UnregisterAppStateChangeNotification."
       }
     ],
@@ -3499,8 +3499,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD_PTR",
-        "name": "*pdwCookie",
+        "type": "DWORD_PTR*",
+        "name": "pdwCookie",
         "description": "When this function returns successfully, this value receives the address of a pointer to a cookie that can be used later to unregister for the scale change notifications through UnregisterScaleChangeEvent."
       }
     ],
@@ -3540,8 +3540,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwCookie",
+        "type": "DWORD*",
+        "name": "pdwCookie",
         "description": "Type: DWORD* Pointer to a value that, when this function returns successfully, receives a registration token. This token is used to revoke notifications by calling RevokeScaleChangeNotifications."
       }
     ],
@@ -3953,8 +3953,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IEnumAssocHandlers",
-        "name": "**ppEnumHandler",
+        "type": "IEnumAssocHandlers**",
+        "name": "ppEnumHandler",
         "description": "Type: IEnumAssocHandlers** When this method returns, contains the address of a pointer to an IEnumAssocHandlers object."
       }
     ],
@@ -3988,8 +3988,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**enumHandlers",
+        "type": "void**",
+        "name": "enumHandlers",
         "description": "Type: void** When this method returns, contains the interface pointer requested in riid. This is typically IEnumAssocHandlers."
       }
     ],
@@ -4011,8 +4011,8 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "IShellFolder",
-        "name": "*psfRoot",
+        "type": "IShellFolder*",
+        "name": "psfRoot",
         "description": "Type: IShellFolder* A pointer to a Shell folder object. If psfRoot is NULL, indicates that the IDList passed is relative to the desktop."
       },
       {
@@ -4029,14 +4029,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IShellFolder or IShellFolder2, but can be anything supported by the target folder."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PCUITEMID_CHILD",
-        "name": "*ppidlLast",
+        "type": "PCUITEMID_CHILD*",
+        "name": "ppidlLast",
         "description": "Type: PCUITEMID_CHILD* A pointer to the last ID of the pidl parameter, and is a child ID relative to the parent folder returned in ppv. This value can be NULL."
       }
     ],
@@ -4058,8 +4058,8 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "IShellFolder",
-        "name": "*psfRoot",
+        "type": "IShellFolder*",
+        "name": "psfRoot",
         "description": "Type: IShellFolder* A pointer to a Shell folder object. If psfRoot is NULL, indicates that the IDList passed is relative to the desktop."
       },
       {
@@ -4070,8 +4070,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "IBindCtx",
-        "name": "*ppbc",
+        "type": "IBindCtx*",
+        "name": "ppbc",
         "description": "Type: IBindCtx* A pointer to IBindCtx interface on a bind context object to be used during this operation. If this parameter is not used, set it to NULL, which is equivalent to calling the SHBindToFolderIDListParent function. Because support for pbc is optional for folder object implementations, some folders may not support the use of bind contexts."
       },
       {
@@ -4082,14 +4082,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IShellFolder or IShellFolder2, but can be anything supported by the target folder."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PCUITEMID_CHILD",
-        "name": "*ppidlLast",
+        "type": "PCUITEMID_CHILD*",
+        "name": "ppidlLast",
         "description": "Type: PCUITEMID_CHILD* A pointer to the last ID of the pidl parameter, and is a child ID relative to the parent folder returned in ppv. This value can be NULL."
       }
     ],
@@ -4111,8 +4111,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IShellFolder",
-        "name": "*psf",
+        "type": "IShellFolder*",
+        "name": "psf",
         "description": "Type: IShellFolder* A pointer to IShellFolder. This parameter can be NULL.   If psf is NULL,  this indicates  parameter pidl is relative to the desktop. In this case, pidl must specify an absolute ITEMIDLIST."
       },
       {
@@ -4123,8 +4123,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IBindCtx",
-        "name": "*pbc",
+        "type": "IBindCtx*",
+        "name": "pbc",
         "description": "Type: IBindCtx* A pointer to IBindCtx interface on a bind context object to be used during this operation. If this parameter is not used, set it to NULL. Because support for pbc is optional for folder object implementations, some folders may not support the use of bind contexts."
       },
       {
@@ -4135,8 +4135,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns, contains the interface pointer as specified in riid to the bound object. If an error occurs, contains a NULL pointer."
       }
     ],
@@ -4170,14 +4170,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "VOID",
-        "name": "**ppv",
+        "type": "VOID**",
+        "name": "ppv",
         "description": "Type: VOID** A pointer to the interface specified by riid. You must release the object when you are finished."
       },
       {
         "in_out": "_Out_",
-        "type": "PCUITEMID_CHILD",
-        "name": "*ppidlLast",
+        "type": "PCUITEMID_CHILD*",
+        "name": "ppidlLast",
         "description": "Type: PCUITEMID_CHILD* The item's PIDL relative to the parent folder. This PIDL can be used with many of the methods supported by the parent folder's interfaces. If you set ppidlLast to NULL, the PIDL is not returned.  Note  SHBindToParent does not allocate a new PIDL; it simply receives a pointer through this parameter. Therefore, you are not responsible for freeing this resource."
       }
     ],
@@ -4234,14 +4234,14 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PIDLIST_ABSOLUTE",
-        "name": "**pppidl",
+        "type": "PIDLIST_ABSOLUTE**",
+        "name": "pppidl",
         "description": "Type: PIDLIST_ABSOLUTE** The address of a pointer to a PIDLIST_ABSOLUTE that, when this function returns successfully, receives the list of affected PIDLs."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "LONG",
-        "name": "*plEvent",
+        "type": "LONG*",
+        "name": "plEvent",
         "description": "Type: LONG* A pointer to a LONG value that, when this function returns successfully, receives the Shell change notification ID of the event that took place."
       }
     ],
@@ -4380,8 +4380,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "SHChangeNotifyEntry",
-        "name": "*pshcne",
+        "type": "const SHChangeNotifyEntry*",
+        "name": "pshcne",
         "description": "Type: const SHChangeNotifyEntry* Array of SHChangeNotifyEntry structures that contain the notifications. This array should always be set to one when calling SHChangeNotifyRegister or SHChangeNotifyDeregister will not work properly."
       }
     ],
@@ -4432,8 +4432,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the address of a pointer to the IApplicationAssociationRegistration object."
       }
     ],
@@ -4473,8 +4473,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "IDataObject",
-        "name": "*pdtInner",
+        "type": "IDataObject*",
+        "name": "pdtInner",
         "description": "Type: IDataObject* A pointer to interface IDataObject. This parameter can be NULL. Specify pdtInner only if the data object created needs to support additional FORMATETC  clipboard formats beyond the default formats it is assigned at creation.  Alternatively, provide support for populating the created data object using non-default clipboard formats by calling method IDataObject::SetData and specifying the format in the FORMATETC structure passed in parameter pFormatetc."
       },
       {
@@ -4485,8 +4485,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns successfully, contains the IDataObject interface pointer requested in riid."
       }
     ],
@@ -4508,8 +4508,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "DEFCONTEXTMENU",
-        "name": "*pdcm",
+        "type": "const DEFCONTEXTMENU*",
+        "name": "pdcm",
         "description": "Type: const DEFCONTEXTMENU* A pointer to a constant DEFCONTEXTMENU structure."
       },
       {
@@ -4520,8 +4520,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns, contains the interface pointer requested in riid."
       }
     ],
@@ -4549,8 +4549,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** The address of IDefaultExtractIconInit interface pointer."
       }
     ],
@@ -4572,14 +4572,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IShellItem",
-        "name": "*psi",
+        "type": "IShellItem*",
+        "name": "psi",
         "description": "Type: IShellItem* A pointer to the source shell item. See IShellItem."
       },
       {
         "in_out": "_Out_",
-        "type": "IFileOperation",
-        "name": "**ppFileOp",
+        "type": "IFileOperation**",
+        "name": "ppFileOp",
         "description": "Type: IFileOperation** The address of the IFileOperation interface pointer."
       }
     ],
@@ -4613,8 +4613,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid.  This will typically be IShellItem or          IShellItem2."
       }
     ],
@@ -4642,8 +4642,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "IBindCtx",
-        "name": "*pbc",
+        "type": "IBindCtx*",
+        "name": "pbc",
         "description": "Type: IBindCtx* Optional. A pointer to a bind context used to pass parameters as inputs and outputs to the parsing function. These passed parameters are often specific to the data source and are documented by the data source owners. For example, the file system data source accepts the name being parsed (as a WIN32_FIND_DATA structure), using the STR_FILE_SYS_BIND_DATA bind context parameter.  STR_PARSE_PREFER_FOLDER_BROWSING can be passed to indicate that URLs are parsed using the file system data source when possible. Construct a bind context object using CreateBindCtx and populate the values using IBindCtx::RegisterObjectParam. See Bind Context String Keys for a complete list of these. See the Parsing With Parameters Sample for an example of the use of this parameter.  If no data is being passed to or received from the parsing function, this value can be NULL."
       },
       {
@@ -4654,8 +4654,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns successfully, contains the interface pointer requested in riid. This is typically IShellItem or IShellItem2."
       }
     ],
@@ -4677,8 +4677,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IShellItem",
-        "name": "*psiParent",
+        "type": "IShellItem*",
+        "name": "psiParent",
         "description": "Type: IShellItem* A pointer to the parent Shell item."
       },
       {
@@ -4689,8 +4689,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IBindCtx",
-        "name": "*pbc",
+        "type": "IBindCtx*",
+        "name": "pbc",
         "description": "Type: IBindCtx* A pointer to a bind context that controls the parsing operation. This parameter can be NULL."
       },
       {
@@ -4701,8 +4701,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid.  This will usually be IShellItem or          IShellItem2."
       }
     ],
@@ -4748,8 +4748,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns successfully, contains the interface pointer requested in riid. This is typically IShellItem or IShellItem2."
       }
     ],
@@ -4777,8 +4777,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IShellFolder",
-        "name": "*psfParent",
+        "type": "IShellFolder*",
+        "name": "psfParent",
         "description": "Type: IShellFolder* A pointer to IShellFolder interface that specifies the shell data source of the child item specified by the pidl.This parameter can be NULL, if pidlParent is specified."
       },
       {
@@ -4795,8 +4795,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppvItem",
+        "type": "void**",
+        "name": "ppvItem",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid.  This will typically be IShellItem or          IShellItem2."
       }
     ],
@@ -4818,14 +4818,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "SFV_CREATE",
-        "name": "*pcsfv",
+        "type": "const SFV_CREATE*",
+        "name": "pcsfv",
         "description": "Type: const SFV_CREATE* Pointer to a SFV_CREATE structure that describes the particulars used in creating this instance of the Shell folder view object."
       },
       {
         "in_out": "_Out_",
-        "type": "IShellView",
-        "name": "**ppsv",
+        "type": "IShellView**",
+        "name": "ppsv",
         "description": "Type: IShellView** When this function returns successfully, contains an interface pointer to the new IShellView object. On failure, this value is NULL."
       }
     ],
@@ -4847,14 +4847,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "CSFV",
-        "name": "*pcsfv",
+        "type": "CSFV*",
+        "name": "pcsfv",
         "description": "Type: CSFV* Pointer to a structure that describes the details used in creating this instance of the Shell folder view object."
       },
       {
         "in_out": "_Out_",
-        "type": "IShellView",
-        "name": "**ppsv",
+        "type": "IShellView**",
+        "name": "ppsv",
         "description": "Type: IShellView** The address of an IShellView interface pointer that, when this function returns successfully, points to the new view object. On failure, this value is NULL."
       }
     ],
@@ -4882,8 +4882,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "IShellFolder",
-        "name": "*psfParent",
+        "type": "IShellFolder*",
+        "name": "psfParent",
         "description": "Type: IShellFolder* A pointer to the parent IShellFolder. This value can be NULL."
       },
       {
@@ -4894,8 +4894,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IShellItem",
-        "name": "**ppsi",
+        "type": "IShellItem**",
+        "name": "ppsi",
         "description": "Type: IShellItem** When this method returns, contains the interface pointer to the new IShellItem."
       }
     ],
@@ -4923,8 +4923,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IShellFolder",
-        "name": "*psf",
+        "type": "IShellFolder*",
+        "name": "psf",
         "description": "Type: IShellFolder* The Shell data source object that is the parent of the child items specified in ppidl. If pidlParent is specified, this parameter can be NULL."
       },
       {
@@ -4941,8 +4941,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IShellItemArray",
-        "name": "**ppsiItemArray",
+        "type": "IShellItemArray**",
+        "name": "ppsiItemArray",
         "description": "Type: IShellItemArray** When this function returns, contains the address of an IShellItemArray interface pointer."
       }
     ],
@@ -4964,8 +4964,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IDataObject",
-        "name": "*pdo",
+        "type": "IDataObject*",
+        "name": "pdo",
         "description": "Type: IDataObject* A pointer to IDataObject interface."
       },
       {
@@ -4976,8 +4976,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns, contains the interface pointer requested in riid. This is typically IShellItemArray."
       }
     ],
@@ -5011,8 +5011,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IShellItemArray",
-        "name": "**ppsiItemArray",
+        "type": "IShellItemArray**",
+        "name": "ppsiItemArray",
         "description": "Type: IShellItemArray** When this function returns, contains an IShellItemArray interface pointer."
       }
     ],
@@ -5034,8 +5034,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IShellItem",
-        "name": "*psi",
+        "type": "IShellItem*",
+        "name": "psi",
         "description": "Type: IShellItem* Pointer to IShellItem object that represents the item."
       },
       {
@@ -5046,8 +5046,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns, contains the interface pointer requested in riid. This is typically a pointer to an IShellItemArray."
       }
     ],
@@ -5087,14 +5087,14 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "HICON",
-        "name": "*phiconLarge",
+        "type": "HICON*",
+        "name": "phiconLarge",
         "description": "Type: HICON* A pointer to an HICON that, when this function returns successfully, receives the handle of the large version of the icon specified in the LOWORD of nIconSize. This value can be NULL."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "HICON",
-        "name": "*phiconSmall",
+        "type": "HICON*",
+        "name": "phiconSmall",
         "description": "Type: HICON* A pointer to an HICON that, when this function returns successfully, receives the handle of the small version of the icon specified in the HIWORD of nIconSize."
       },
       {
@@ -5128,14 +5128,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IDataObject",
-        "name": "*pdtobj",
+        "type": "IDataObject*",
+        "name": "pdtobj",
         "description": "Type: IDataObject* A pointer to the IDataObject interface on a data object that contains the data being dragged."
       },
       {
         "in_out": "_In_",
-        "type": "IDropSource",
-        "name": "*pdsrc",
+        "type": "IDropSource*",
+        "name": "pdsrc",
         "description": "Type: IDropSource* A pointer to an implementation of the IDropSource interface, which is used to communicate with the source during the drag operation.                                   As of Windows Vista, if this value is NULL, the Shell creates a drop source object for you."
       },
       {
@@ -5146,8 +5146,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwEffect",
+        "type": "DWORD*",
+        "name": "pdwEffect",
         "description": "Type: DWORD* A pointer to a value that indicates how the drag-and-drop operation affected the source data. The pdwEffect parameter is set only if the operation is not canceled. For a list of possible values, see DROPEFFECT."
       }
     ],
@@ -5198,14 +5198,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "NOTIFYICONIDENTIFIER",
-        "name": "*identifier",
+        "type": "const NOTIFYICONIDENTIFIER*",
+        "name": "identifier",
         "description": "Type: const NOTIFYICONIDENTIFIER* Pointer to a NOTIFYICONIDENTIFIER structure that identifies the icon."
       },
       {
         "in_out": "_Out_",
-        "type": "RECT",
-        "name": "*iconLocation",
+        "type": "RECT*",
+        "name": "iconLocation",
         "description": "Type: RECT* Pointer to a RECT structure that, when this function returns successfully, receives the coordinates of the icon."
       }
     ],
@@ -5344,8 +5344,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SHELLEXECUTEINFO",
-        "name": "*pExecInfo",
+        "type": "SHELLEXECUTEINFO*",
+        "name": "pExecInfo",
         "description": "Type: SHELLEXECUTEINFO* A pointer to a SHELLEXECUTEINFO structure that contains and receives information about the application being executed."
       }
     ],
@@ -5449,20 +5449,20 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppszApplication",
+        "type": "PWSTR*",
+        "name": "ppszApplication",
         "description": "Type: PWSTR* A pointer to the verified path to the application. This value should be passed as the lpApplication parameter in a call to CreateProcess or as the lpFile parameter in a call to ShellExecute. This resource is allocated using CoTaskMemAlloc, and it is the responsibility of the caller to free the resource when it is no longer needed by calling CoTaskMemFree."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PWSTR",
-        "name": "*ppszCommandLine",
+        "type": "PWSTR*",
+        "name": "ppszCommandLine",
         "description": "Type: PWSTR* A pointer to a command-line string template to be used in a call to CreateProcess. Command-line parameters should be specified based on this template, and then passed as the lpCommandLine parameter to CreateProcess. It is guaranteed to be of a form that PathGetArgs can always read correctly. This resource is allocated using CoTaskMemAlloc, and it is the responsibility of the caller to free the resource when it is no longer needed by calling CoTaskMemFree.                        This parameter can be NULL if this function is not being used in association with a call to CreateProcess."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PWSTR",
-        "name": "*ppszParameters",
+        "type": "PWSTR*",
+        "name": "ppszParameters",
         "description": "Type: PWSTR* A pointer to a command-line string template to be used in a call to ShellExecute. Command-line parameters should be specified based on this template, and then passed as the lpParameters parameter to ShellExecute. This parameter is identical to calling PathGetArgs. This resource is allocated using CoTaskMemAlloc, and it is the responsibility of the caller to free the resource when it is no longer needed by calling CoTaskMemFree.                        This parameter can be NULL if this function is not being used in association with a call to CreateProcess."
       }
     ],
@@ -5607,8 +5607,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IShellFolder",
-        "name": "*psf",
+        "type": "IShellFolder*",
+        "name": "psf",
         "description": "Type: IShellFolder* The address of the parent IShellFolder interface. This must be the immediate parent of the ITEMIDLIST structure referenced by the pidl parameter."
       },
       {
@@ -5625,8 +5625,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "*pv",
+        "type": "void*",
+        "name": "pv",
         "description": "Type: void* A pointer to a buffer that, when this function returns successfully, receives the requested data. The format of this buffer is determined by nFormat. If nFormat is SHGDFIL_NETRESOURCE, there are two possible cases. If the buffer is large enough, the net resource's string information (fields for the network name, local name, provider, and comments) will be placed into the buffer. If the buffer is not large enough, only the net resource structure will be placed into the buffer and the string information pointers will be NULL."
       },
       {
@@ -5654,8 +5654,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IShellFolder",
-        "name": "**ppshf",
+        "type": "IShellFolder**",
+        "name": "ppshf",
         "description": "Type: IShellFolder** When this method returns, receives an IShellFolder interface pointer for the desktop folder. The calling application is responsible for eventually freeing the interface by calling its IUnknown::Release method."
       }
     ],
@@ -5683,20 +5683,20 @@
       },
       {
         "in_out": "",
-        "type": "ULARGE_INTEGER",
-        "name": "*pqwFreeCaller",
+        "type": "ULARGE_INTEGER*",
+        "name": "pqwFreeCaller",
         "description": "Type: ULARGE_INTEGER* The address of a ULARGE_INTEGER value that receives the number of bytes on the volume available to the calling application. If the operating system implements per-user quotas, this value may be less than the total number of free bytes on the volume."
       },
       {
         "in_out": "",
-        "type": "ULARGE_INTEGER",
-        "name": "*pqwTot",
+        "type": "ULARGE_INTEGER*",
+        "name": "pqwTot",
         "description": "Type: ULARGE_INTEGER* The address of a ULARGE_INTEGER value that receives the total size of the volume, in bytes."
       },
       {
         "in_out": "",
-        "type": "ULARGE_INTEGER",
-        "name": "*pqwFree",
+        "type": "ULARGE_INTEGER*",
+        "name": "pqwFree",
         "description": "Type: ULARGE_INTEGER* The address of a ULARGE_INTEGER value that receives the number of bytes of free space on the volume."
       }
     ],
@@ -5724,20 +5724,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "ULARGE_INTEGER",
-        "name": "*pulFreeBytesAvailableToCaller",
+        "type": "ULARGE_INTEGER*",
+        "name": "pulFreeBytesAvailableToCaller",
         "description": "Type: ULARGE_INTEGER* Pointer to a value that receives the number of bytes on the volume available to the calling application. If the operating system implements per-user quotas, this value may be less than the total number of free bytes on the volume."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "ULARGE_INTEGER",
-        "name": "*pulTotalNumberOfBytes",
+        "type": "ULARGE_INTEGER*",
+        "name": "pulTotalNumberOfBytes",
         "description": "Type: ULARGE_INTEGER* Pointer to a value that receives the total size of the volume, in bytes."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "ULARGE_INTEGER",
-        "name": "*pulTotalNumberOfFreeBytes",
+        "type": "ULARGE_INTEGER*",
+        "name": "pulTotalNumberOfFreeBytes",
         "description": "Type: ULARGE_INTEGER* Pointer to a value that receives the number of bytes of free space on the volume."
       }
     ],
@@ -5765,8 +5765,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwMediaContent",
+        "type": "DWORD*",
+        "name": "pdwMediaContent",
         "description": "Type: DWORD* A pointer to the type of media in the given drive. A combination of ARCONTENT flags."
       }
     ],
@@ -5800,8 +5800,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "SHFILEINFO",
-        "name": "*psfi",
+        "type": "SHFILEINFO*",
+        "name": "psfi",
         "description": "Type: SHFILEINFO* Pointer to a SHFILEINFO structure to receive the file information."
       },
       {
@@ -5900,8 +5900,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppszPath",
+        "type": "PWSTR*",
+        "name": "ppszPath",
         "description": "Type: PWSTR* When this method returns, contains the address of a pointer to a null-terminated Unicode string that specifies the path of the known folder. The calling process is responsible for freeing this resource once it is no longer needed by calling CoTaskMemFree. The returned path does not include a trailing backslash. For example, \"C:\\Users\" is returned rather than \"C:\\Users\\\"."
       }
     ],
@@ -5952,14 +5952,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punk",
+        "type": "IUnknown*",
+        "name": "punk",
         "description": "Type: IUnknown* A pointer to the IUnknown of the object from which to get the PIDL."
       },
       {
         "in_out": "_Out_",
-        "type": "PIDLIST_ABSOLUTE",
-        "name": "*ppidl",
+        "type": "PIDLIST_ABSOLUTE*",
+        "name": "ppidl",
         "description": "Type: PIDLIST_ABSOLUTE* When this function returns, contains a pointer to the PIDL of the given object."
       }
     ],
@@ -5993,8 +5993,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns, contains the interface pointer requested in riid. This is typically IImageList."
       }
     ],
@@ -6016,8 +6016,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IUnknown",
-        "name": "**ppunk",
+        "type": "IUnknown**",
+        "name": "ppunk",
         "description": "Type: IUnknown** When this function returns successfully, contains the address of the host process' IUnknown interface pointer. This is a free-threaded interface used to prevent the host process from terminating. If the function call fails, this value is set to NULL."
       }
     ],
@@ -6039,8 +6039,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IDataObject",
-        "name": "*pdtobj",
+        "type": "IDataObject*",
+        "name": "pdtobj",
         "description": "Type: IDataObject* A pointer to the source IDataObject instance."
       },
       {
@@ -6057,8 +6057,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns, contains the interface pointer requested in riid. This is typically IShellItem."
       }
     ],
@@ -6080,8 +6080,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punk",
+        "type": "IUnknown*",
+        "name": "punk",
         "description": "Type: IUnknown* A pointer to the IUnknown of the object."
       },
       {
@@ -6092,8 +6092,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns, contains the interface pointer requested in riid. This is typically IShellItem or a related interface."
       }
     ],
@@ -6133,8 +6133,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PIDLIST_ABSOLUTE",
-        "name": "*ppidl",
+        "type": "PIDLIST_ABSOLUTE*",
+        "name": "ppidl",
         "description": "Type: PIDLIST_ABSOLUTE* When this method returns, contains a pointer to the PIDL of the folder. This parameter is passed uninitialized. The caller is responsible for freeing the returned PIDL when it is no longer needed by calling ILFree."
       }
     ],
@@ -6180,8 +6180,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns, contains the interface pointer requested in riid."
       }
     ],
@@ -6221,8 +6221,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "int",
-        "name": "*pidsRes",
+        "type": "int*",
+        "name": "pidsRes",
         "description": "Type: int* When this function returns, contains a pointer to the ID of the localized file name in the resource file."
       }
     ],
@@ -6256,8 +6256,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppszName",
+        "type": "PWSTR*",
+        "name": "ppszName",
         "description": "Type: PWSTR* A value that, when this function returns successfully, receives the address of a pointer to the retrieved display name."
       }
     ],
@@ -6285,8 +6285,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppszCanonicalName",
+        "type": "PWSTR*",
+        "name": "ppszCanonicalName",
         "description": "Type: PWSTR* The address of a pointer to a buffer that receives the property name as a null-terminated Unicode string. It is the responsibility of the caller to release this string through a call to CoTaskMemFree once it is no longer needed."
       }
     ],
@@ -6326,8 +6326,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pfMustCopy",
+        "type": "BOOL*",
+        "name": "pfMustCopy",
         "description": "Type: BOOL* The address of a BOOL value that receives a flag indicating whether the shortcut would be copied. When a shortcut to another shortcut is created, the Shell simply copies the target shortcut and modifies that copied shortcut appropriately. This parameter receives a nonzero value if the target specified in pszLinkTo specifies a shortcut that will cause the target shortcut to be copied. This parameter receives zero if the target does not specify a shortcut that would be copied."
       },
       {
@@ -6466,8 +6466,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "SHSTOCKICONINFO",
-        "name": "*psii",
+        "type": "SHSTOCKICONINFO*",
+        "name": "psii",
         "description": "Type: SHSTOCKICONINFO* A pointer to a SHSTOCKICONINFO structure. When this function is called, the cbSize member of this structure needs to be set to the size of the SHSTOCKICONINFO structure. When this function returns, contains a pointer to a SHSTOCKICONINFO structure that contains the requested information."
       }
     ],
@@ -6489,8 +6489,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IShellItem",
-        "name": "*psi",
+        "type": "IShellItem*",
+        "name": "psi",
         "description": "Type: IShellItem* A pointer to the item for which the temporary property is to be retrieved."
       },
       {
@@ -6501,8 +6501,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PROPVARIANT",
-        "name": "*ppropvarInk",
+        "type": "PROPVARIANT*",
+        "name": "ppropvarInk",
         "description": "Type: PROPVARIANT* A pointer to the temporary property for the item."
       }
     ],
@@ -6536,14 +6536,14 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pdwCount",
+        "type": "DWORD*",
+        "name": "pdwCount",
         "description": "Type: DWORD* Pointer to a DWORD value which receives the unread message count."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "FILETIME",
-        "name": "*pFileTime",
+        "type": "FILETIME*",
+        "name": "pFileTime",
         "description": "Type: FILETIME* A pointer to a FILETIME structure.  The use of this parameter is determined by whether pszMailAddress is NULL. If pszMailAddress is NULL, then this parameter is treated as an [in] parameter, which specifies a filter, so that only unread mail newer than the specified time appears. If pszMailAddress is not NULL, then this parameter is treated as an [out] parameter, which points to a FILETIME structure into which the function places the timestamp of the last SHSetUnreadMailCount call for the specified user and email account."
       },
       {
@@ -6651,8 +6651,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PTSTR",
-        "name": "*ppsz",
+        "type": "PTSTR*",
+        "name": "ppsz",
         "description": "Type: PTSTR* The address of a pointer to an allocated string that, when this function returns successfully, receives the result. SHLocalStrDup allocates memory for this string with LocalAlloc. You should free the string with LocalFree when it is no longer needed."
       }
     ],
@@ -6674,8 +6674,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IDataObject",
-        "name": "*pdtobj",
+        "type": "IDataObject*",
+        "name": "pdtobj",
         "description": "Type: IDataObject* A pointer to a data object that supplies the PIDLs of all of the files for which to display the merged property sheet. The data object must use the CFSTR_SHELLIDLIST clipboard format. The parent folder's implementation of IShellFolder::GetDisplayNameOf must return a fully qualified file system path for each item in response to the SHGDN_FORPARSING flag."
       },
       {
@@ -6750,8 +6750,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "OPENASINFO",
-        "name": "*poainfo",
+        "type": "const OPENASINFO*",
+        "name": "poainfo",
         "description": "Type: const OPENASINFO* A pointer to an OPENASINFO structure, which specifies the contents of the resulting dialog."
       }
     ],
@@ -6808,14 +6808,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "IBindCtx",
-        "name": "*pbc",
+        "type": "IBindCtx*",
+        "name": "pbc",
         "description": "Type: IBindCtx* A bind context that controls the parsing operation. This parameter is normally set to NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "PIDLIST_ABSOLUTE",
-        "name": "*ppidl",
+        "type": "PIDLIST_ABSOLUTE*",
+        "name": "ppidl",
         "description": "Type: PIDLIST_ABSOLUTE* The address of a pointer to a variable of type ITEMIDLIST that receives the item identifier list for the object. If an error occurs, then this parameter is set to NULL."
       },
       {
@@ -6826,8 +6826,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "SFGAOF",
-        "name": "*psfgaoOut",
+        "type": "SFGAOF*",
+        "name": "psfgaoOut",
         "description": "Type: SFGAOF* A pointer to a ULONG. On return, those attributes that are true for the object and were requested in sfgaoIn are set. An object's attribute flags can be zero or a combination of SFGAO flags. For a list of available SFGAO flags, see IShellFolder::GetAttributesOf."
       }
     ],
@@ -6855,8 +6855,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "IUnknown",
-        "name": "*punkEnableModless",
+        "type": "IUnknown*",
+        "name": "punkEnableModless",
         "description": "Type: IUnknown* A pointer to an IUnknown interface that specifies the IOleInPlaceActiveObject object that implements the EnableModeless method."
       },
       {
@@ -6919,8 +6919,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "QUERY_USER_NOTIFICATION_STATE",
-        "name": "*pquns",
+        "type": "QUERY_USER_NOTIFICATION_STATE*",
+        "name": "pquns",
         "description": "Type: QUERY_USER_NOTIFICATION_STATE* When this function returns, contains a pointer to one of the values of the QUERY_USER_NOTIFICATION_STATE enumeration."
       }
     ],
@@ -7000,8 +7000,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IShellItem",
-        "name": "*psi",
+        "type": "IShellItem*",
+        "name": "psi",
         "description": "Type: IShellItem* A pointer to the IShellItem object that represents the item."
       },
       {
@@ -7012,8 +7012,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "IFileOperationProgressSink",
-        "name": "*pfops",
+        "type": "IFileOperationProgressSink*",
+        "name": "pfops",
         "description": "Type: IFileOperationProgressSink* A pointer to an IFileOperationProgressSink object used to follow the progress of the operation. See IFileOperation::Advise for details. This value can be NULL."
       }
     ],
@@ -7035,8 +7035,8 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "IUnknown",
-        "name": "*punk",
+        "type": "IUnknown*",
+        "name": "punk",
         "description": "Type: IUnknown* A pointer to a free-threaded IUnknown. Components can use this interface (through SHGetInstanceExplorer) to prevent the host process from terminating. This value can be NULL, in which case the process reference is no longer made available to components."
       }
     ],
@@ -7134,8 +7134,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IShellItem",
-        "name": "*psi",
+        "type": "IShellItem*",
+        "name": "psi",
         "description": "Type: IShellItem* A pointer to the item on which the temporary property is to be set."
       },
       {
@@ -7350,8 +7350,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IStorage",
-        "name": "*pstgParent",
+        "type": "IStorage*",
+        "name": "pstgParent",
         "description": "Type: IStorage* A pointer to an IStorage object."
       },
       {
@@ -7374,8 +7374,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns, contains the interface pointer requested in riid. This is typically IStorage or IStream."
       }
     ],
@@ -7479,8 +7479,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PTSTR",
-        "name": "*ppszTranslatedURL",
+        "type": "PTSTR*",
+        "name": "ppszTranslatedURL",
         "description": "Type: PTSTR* A pointer variable that receives the pointer to the newly created, translated URL string, if any. The ppszTranslatedURL parameter is valid only if the function returns S_OK."
       }
     ],

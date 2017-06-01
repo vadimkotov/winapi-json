@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "Connections",
-        "name": "**connections",
+        "type": "Connections**",
+        "name": "connections",
         "description": "A pointer to an array of newly allocated  Connections  structures."
       },
       {
@@ -44,14 +44,14 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "CountedString",
-        "name": "**countedString",
+        "type": "CountedString**",
+        "name": "countedString",
         "description": "A pointer to the address of  a  newly allocated CountedString structure."
       },
       {
         "in_out": "_In_",
-        "type": "const WCHAR",
-        "name": "*string",
+        "type": "const WCHAR*",
+        "name": "string",
         "description": "A pointer to the null-terminated string that is to be returned in  countedString."
       }
     ],
@@ -73,8 +73,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "FixupInfo",
-        "name": "**fixupInfo",
+        "type": "FixupInfo**",
+        "name": "fixupInfo",
         "description": "A pointer to the address of a newly allocated FixupInfo structure."
       },
       {
@@ -102,8 +102,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "Connections",
-        "name": "*connections",
+        "type": "Connections*",
+        "name": "connections",
         "description": "A pointer to the Connections structure to free."
       }
     ],
@@ -125,8 +125,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "CountedString",
-        "name": "*countedString",
+        "type": "CountedString*",
+        "name": "countedString",
         "description": "A pointer to the CountedString data structure to free."
       }
     ],
@@ -148,8 +148,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "FixupInfo",
-        "name": "*fixupInfo",
+        "type": "FixupInfo*",
+        "name": "fixupInfo",
         "description": "A pointer to the FixupInfo data structure to free."
       }
     ],
@@ -171,8 +171,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IsolationInfo",
-        "name": "*isolationInfo",
+        "type": "IsolationInfo*",
+        "name": "isolationInfo",
         "description": "A pointer to the IsolationInfo data structure to free."
       }
     ],
@@ -194,8 +194,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IsolationInfoEx",
-        "name": "*isolationInfo",
+        "type": "IsolationInfoEx*",
+        "name": "isolationInfo",
         "description": "A pointer to the IsolationInfoEx data structure to free."
       }
     ],
@@ -223,8 +223,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "NapComponentRegistrationInfo",
-        "name": "**info",
+        "type": "NapComponentRegistrationInfo**",
+        "name": "info",
         "description": "A pointer to an array of NapComponentRegistrationInfo data structures to be freed."
       }
     ],
@@ -246,8 +246,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "NetworkSoH",
-        "name": "*networkSoh",
+        "type": "NetworkSoH*",
+        "name": "networkSoh",
         "description": "A pointer to the NetworkSoH data structure to free."
       }
     ],
@@ -269,8 +269,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "PrivateData",
-        "name": "*privateData",
+        "type": "PrivateData*",
+        "name": "privateData",
         "description": "A pointer to the PrivateData data structure to free."
       }
     ],
@@ -292,8 +292,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "SoH",
-        "name": "*soh",
+        "type": "SoH*",
+        "name": "soh",
         "description": "A pointer to the SoH data structure to free."
       }
     ],
@@ -321,8 +321,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "SoHAttributeValue",
-        "name": "*value",
+        "type": "SoHAttributeValue*",
+        "name": "value",
         "description": "A pointer to the SoHAttributeValue to free."
       }
     ],
@@ -344,8 +344,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "SystemHealthAgentState",
-        "name": "*state",
+        "type": "SystemHealthAgentState*",
+        "name": "state",
         "description": "A pointer to the SystemHealthAgentState data structure to free."
       }
     ],

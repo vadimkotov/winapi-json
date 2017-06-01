@@ -283,8 +283,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*DeviceCount",
+        "type": "ULONG*",
+        "name": "DeviceCount",
         "description": "A pointer to a location that, on input, contains the number of elements of type ISCSI_DEVICE_ON_SESSION that can fit in the buffer that Devices points to. If the operation succeeds, the location receives the number of elements retrieved. If GetDevicesForIscsiSession returns ERROR_INSUFFICIENT_BUFFER, the location still receives the number of elements the buffer is capable of containing."
       },
       {
@@ -330,8 +330,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "PIKE_AUTHENTICATION_INFORMATION",
-        "name": "*AuthInfo",
+        "type": "PIKE_AUTHENTICATION_INFORMATION*",
+        "name": "AuthInfo",
         "description": "A pointer to an IKE_AUTHENTICATION_INFORMATION structure that contains data specifying the authentication method. Currently, only the IKE_AUTHENTICATION_PRESHARED_KEY_METHOD is supported."
       }
     ],
@@ -376,14 +376,14 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*BufferSize",
+        "type": "ULONG*",
+        "name": "BufferSize",
         "description": "A pointer to a location that, on input, contains the size, in bytes, of the caller-allocated buffer that SessionInfo points to. If the operation succeeds, the location receives the size, in bytes, of the session information data that was retrieved.  If the operation fails because the output buffer size was insufficient, the location receives the size, in bytes, of the buffer size required to contain the output data."
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*SessionCount",
+        "type": "ULONG*",
+        "name": "SessionCount",
         "description": "A pointer to a location that, on input, contains the number of ISCSI_SESSION_INFO structures that the buffer that SessionInfo points to can contain. If the operation succeeds, the location receives the number of ISCSI_SESSION_INFO structures that were retrieved."
       },
       {
@@ -918,8 +918,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*BufferSize",
+        "type": "ULONG*",
+        "name": "BufferSize",
         "description": "A ULONG value that specifies the number of list elements contained by the Buffer parameter.  If the operation succeeds, this location receives the size, represented by a number of elements, that corresponds to the retreived data."
       },
       {
@@ -947,8 +947,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*Count",
+        "type": "ULONG*",
+        "name": "Count",
         "description": "A pointer to the location that receives a count of the elements specified by  PersistentLoginInfo."
       },
       {
@@ -1186,8 +1186,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "PISCSI_UNIQUE_SESSION_ID",
-        "name": "*UniqueSessionId",
+        "type": "PISCSI_UNIQUE_SESSION_ID*",
+        "name": "UniqueSessionId",
         "description": "A pointer to a ISCSI_UNIQUE_SESSION_ID structure containing the session identifier for the login session specific to the target to which the READ CAPACITY command is sent."
       },
       {
@@ -1210,14 +1210,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PUCHAR",
-        "name": "*ScsiStatus",
+        "type": "PUCHAR*",
+        "name": "ScsiStatus",
         "description": "A pointer to a location that reports the execution status of the CDB."
       },
       {
         "in_out": "_Inout_",
-        "type": "PULONG",
-        "name": "*ReponseSize",
+        "type": "PULONG*",
+        "name": "ReponseSize",
         "description": "A pointer to the location that, on input, specifies the byte-size of  ResponseBuffer. On output, this location specifies the number of bytes required to contain the response data for the READ CAPACITY command in the ResponseBuffer."
       },
       {
@@ -1228,8 +1228,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "PULONG",
-        "name": "*SenseSize",
+        "type": "PULONG*",
+        "name": "SenseSize",
         "description": "A pointer to a location that, on input, contains the byte-size of SenseBuffer. On output, the location pointed to receives the byte-size required for  SenseBuffer  to contain the sense data. This value will always be greater than or equal to 18 bytes."
       },
       {
@@ -1269,14 +1269,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PUCHAR",
-        "name": "*ScsiStatus",
+        "type": "PUCHAR*",
+        "name": "ScsiStatus",
         "description": "A pointer to a location that contains the execution status of the CDB."
       },
       {
         "in_out": "_Inout_",
-        "type": "PULONG",
-        "name": "*ResponseSize",
+        "type": "PULONG*",
+        "name": "ResponseSize",
         "description": "A pointer to the location that, on input, specifies the byte-size of  ResponseBuffer. On output, this location specifies the number of bytes required to contain the response data for the READ CAPACITY command in the ResponseBuffer."
       },
       {
@@ -1287,8 +1287,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "PULONG",
-        "name": "*SenseSize",
+        "type": "PULONG*",
+        "name": "SenseSize",
         "description": "A pointer to a location that, on input, contains the byte-size of SenseBuffer. On output, the location pointed to receives the byte-size required for  SenseBuffer  to contain the sense data. This value will always be greater than or equal to 18 bytes."
       },
       {
@@ -1322,14 +1322,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PUCHAR",
-        "name": "*ScsiStatus",
+        "type": "PUCHAR*",
+        "name": "ScsiStatus",
         "description": "A pointer to the location that receives the execution status of the CDB."
       },
       {
         "in_out": "_Inout_",
-        "type": "PULONG",
-        "name": "*ResponseSize",
+        "type": "PULONG*",
+        "name": "ResponseSize",
         "description": "A pointer to the location that, on input, specifies the byte-size of  ResponseBuffer. On output, this location specifies the number of bytes required to contain the response data for the READ CAPACITY command in the ResponseBuffer."
       },
       {
@@ -1340,8 +1340,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "PULONG",
-        "name": "*SenseSize",
+        "type": "PULONG*",
+        "name": "SenseSize",
         "description": "A pointer to a location that, on input, contains the byte-size of SenseBuffer. On output, the location pointed to receives the byte-size required for  SenseBuffer  to contain the sense data. This value will always be greater than or equal to 18 bytes."
       },
       {

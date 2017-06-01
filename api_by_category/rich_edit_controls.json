@@ -20,15 +20,15 @@
         "description": "Type: LANGID Language ID that identifies the autocorrect file to use for automatic correcting."
       },
       {
-        "in_out": "",
-        "type": "WCHAR",
-        "name": "*pszBefore",
+        "in_out": "const",
+        "type": "WCHAR*",
+        "name": "pszBefore",
         "description": "Type: const WCHAR* Autocorrect candidate string."
       },
       {
         "in_out": "",
-        "type": "WCHAR",
-        "name": "*pszAfter",
+        "type": "WCHAR*",
+        "name": "pszAfter",
         "description": "Type: WCHAR* Resulting autocorrect string, if the return value is not ATP_NOCHANGE."
       },
       {
@@ -39,8 +39,8 @@
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*pcchReplaced",
+        "type": "LONG*",
+        "name": "pcchReplaced",
         "description": "Type: LONG* Count of trailing characters in pszBefore to replace with pszAfter."
       }
     ],
@@ -80,8 +80,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "LONG",
-        "name": "*pcb",
+        "type": "LONG*",
+        "name": "pcb",
         "description": "Type: LONG* Pointer to a variable that the callback function sets to the number of bytes actually read or written."
       }
     ],
@@ -103,8 +103,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "char",
-        "name": "*pchText",
+        "type": "char*",
+        "name": "pchText",
         "description": "Type: char* Pointer to the text at the current position. ..."
       },
       {
@@ -179,8 +179,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "WCHAR",
-        "name": "*pch",
+        "type": "WCHAR*",
+        "name": "pch",
         "description": "Type: WCHAR* A buffer that receives the upright BMP character code. If no such character exists, pch receives 0."
       }
     ],
@@ -202,8 +202,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "WCHAR",
-        "name": "*pszWord",
+        "type": "WCHAR*",
+        "name": "pszWord",
         "description": "Type: WCHAR* Pointer to the word to hyphenate."
       },
       {
@@ -220,8 +220,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HYPHRESULT",
-        "name": "*phyphresult",
+        "type": "HYPHRESULT*",
+        "name": "phyphresult",
         "description": "Type: HYPHRESULT* Pointer to a HYPHRESULT structure that HyphenateProc fills in with the result of the hyphenation."
       }
     ],
@@ -243,14 +243,14 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "ITextRange2",
-        "name": "*prg",
+        "type": "ITextRange2*",
+        "name": "prg",
         "description": "Type: ITextRange2* On input, a text range object that contains the built-up math objects to convert to linear form. On output, the object contains the linear form."
       },
       {
         "in_out": "_In_",
-        "type": "ITextStrings",
-        "name": "*pstrs",
+        "type": "ITextStrings*",
+        "name": "pstrs",
         "description": "Type: ITextStrings* Strings collection used for manipulations."
       },
       {
@@ -278,14 +278,14 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "ITextRange2",
-        "name": "*prg",
+        "type": "ITextRange2*",
+        "name": "prg",
         "description": "Type: ITextRange2* On input, a text range object that contains the linearly formatted math expressions to be converted into built-up math. On output, the object contains the built-up math."
       },
       {
         "in_out": "_In_",
-        "type": "ITextStrings",
-        "name": "*pstrs",
+        "type": "ITextStrings*",
+        "name": "pstrs",
         "description": "Type: ITextStrings* Strings collection used for manipulations."
       },
       {
@@ -313,8 +313,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "ITextRange2",
-        "name": "*prg",
+        "type": "ITextRange2*",
+        "name": "prg",
         "description": "Type: ITextRange2* On entry, this parameter specifies the text range that contains the math characters to translate. On successful exit, the characters in the range have been translated as specified"
       },
       {

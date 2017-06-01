@@ -1326,8 +1326,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*bIsReflectionDisabled",
+        "type": "BOOL*",
+        "name": "bIsReflectionDisabled",
         "description": "A value that indicates whether reflection has been disabled through RegDisableReflectionKey or enabled through RegEnableReflectionKey."
       }
     ],
@@ -1666,8 +1666,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const BYTE",
-        "name": "*lpData",
+        "type": "const BYTE*",
+        "name": "lpData",
         "description": "The data to be stored.  For string-based types, such as REG_SZ, the string must be null-terminated. With the REG_MULTI_SZ data type, the string must be terminated with two null characters. String-literal values must be formatted using a backslash preceded by another backslash as an escape character. For example, specify \"C:\\\\mydir\\\\myfile\" to store the string \"C:\\mydir\\myfile\". Note  lpData indicating a  null value is valid, however, if this is the case, cbData must be set to '0'."
       },
       {
@@ -1736,8 +1736,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "*ppv",
+        "type": "void*",
+        "name": "ppv",
         "description": "Type: void* When this method returns, contains the IQueryAssociations interface pointer requested in riid."
       }
     ],
@@ -1783,8 +1783,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HKEY",
-        "name": "*phkeyOut",
+        "type": "HKEY*",
+        "name": "phkeyOut",
         "description": "Type: HKEY* A pointer to the key's HKEY value."
       }
     ],
@@ -1836,8 +1836,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pcchOut",
+        "type": "DWORD*",
+        "name": "pcchOut",
         "description": "Type: DWORD* A pointer to a value that, when calling the function, is set to the number of characters in the pszOut buffer. When the function returns successfully, the value is set to the number of characters actually placed in the buffer. If the ASSOCF_NOTRUNCATE flag is set in flags and the buffer specified in pszOut is too small, the function returns E_POINTER and the value is set to the required size of the buffer. If pszOut is NULL, the function returns S_FALSE and pcchOut points to the required size, in characters, of the buffer."
       }
     ],
@@ -1889,8 +1889,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pcchOut",
+        "type": "DWORD*",
+        "name": "pcchOut",
         "description": "Type: DWORD* A pointer to a value that, on entry, specifies the number of characters in the pszOut buffer. When the function returns, it points to the number of characters placed in the buffer.                        If the ASSOCF_NOTRUNCATE flag is set in flags and the buffer specified in pszOut is too small, the function returns E_POINTER and the value is set to the required size of the buffer. If pszOut is NULL, the function returns S_FALSE and pcchOut points to the required size of the buffer."
       }
     ],
@@ -2539,8 +2539,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "void",
-        "name": "*pvData",
+        "type": "void*",
+        "name": "pvData",
         "description": "Type: void* A pointer to a buffer that receives the data for the value entry. The size of this buffer is specified in pcbData. This parameter can be NULL if the data is not required."
       },
       {
@@ -2709,20 +2709,20 @@
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "DWORD",
-        "name": "*pdwType",
+        "type": "DWORD*",
+        "name": "pdwType",
         "description": "Type: DWORD* A pointer to a DWORD that receives the type of data stored in the retrieved value. When using default values, the input pdwType is the type of the default value. For possible values, see Registry Data Types. If type information is not required, this parameter can be NULL."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "void",
-        "name": "*pvData",
+        "type": "void*",
+        "name": "pvData",
         "description": "Type: void* A pointer to a buffer that receives the value's data."
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "DWORD",
-        "name": "*pcbData",
+        "type": "DWORD*",
+        "name": "pcbData",
         "description": "Type: DWORD* A pointer to a variable that specifies the size, in bytes, of the buffer pointed to by pvData. When SHRegGetUSValue returns, pcbData contains the size of the data copied to pvData."
       },
       {
@@ -2733,8 +2733,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "void",
-        "name": "*pvDefaultData",
+        "type": "void*",
+        "name": "pvDefaultData",
         "description": "Type: void* A pointer to a buffer that receives the value's default data."
       },
       {
@@ -2874,20 +2874,20 @@
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "LPDWORD",
-        "name": "*pdwType",
+        "type": "LPDWORD*",
+        "name": "pdwType",
         "description": "Type: LPDWORD* A pointer to the variable that sets or receives the key's value type. For more information, see Registry Data Types. This parameter can be NULL."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "LPVOID",
-        "name": "*pvData",
+        "type": "LPVOID*",
+        "name": "pvData",
         "description": "Type: LPVOID* A pointer to the buffer that receives the value's data. This parameter can be NULL if the data is not required."
       },
       {
         "in_out": "_Inout_",
-        "type": "LPDWORD",
-        "name": "*pcbData",
+        "type": "LPDWORD*",
+        "name": "pcbData",
         "description": "Type: LPDWORD* A pointer to  the variable that specifies the size, in bytes, of the buffer pointed to by the pvData parameter. When the function returns, this variable contains the size of the data copied to pvData."
       },
       {
@@ -2898,8 +2898,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "LPVOID",
-        "name": "*pvDefaultData",
+        "type": "LPVOID*",
+        "name": "pvDefaultData",
         "description": "Type: LPVOID* A pointer to the default data."
       },
       {
@@ -2992,8 +2992,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "LPVOID",
-        "name": "*pvData",
+        "type": "LPVOID*",
+        "name": "pvData",
         "description": "Type: LPVOID*  Apointer to a null-terminated string that contains the value to be set for the specified key."
       },
       {
@@ -3045,8 +3045,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const void",
-        "name": "*pvData",
+        "type": "const void*",
+        "name": "pvData",
         "description": "Type: const void* A pointer to the data to be set for the value specified by pszValue. For string-based types, such as REG_SZ, the string must be null-terminated. With the REG_MULTI_SZ data type, the string must be terminated with two null characters. A backslash in a path must be preceded by another backslash as an escape character. For example, specify \"C:\\\\mydir\\\\myfile\" to store the string \"C:\\mydir\\myfile\"."
       },
       {

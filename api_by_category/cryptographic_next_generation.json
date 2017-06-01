@@ -214,14 +214,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*pAlgCount",
+        "type": "ULONG*",
+        "name": "pAlgCount",
         "description": "A pointer to a ULONG variable to receive the number of elements in the ppAlgList array."
       },
       {
         "in_out": "_Out_",
-        "type": "BCRYPT_ALGORITHM_IDENTIFIER",
-        "name": "**ppAlgList",
+        "type": "BCRYPT_ALGORITHM_IDENTIFIER**",
+        "name": "ppAlgList",
         "description": "The address of a BCRYPT_ALGORITHM_IDENTIFIER structure pointer to receive the array of registered algorithm identifiers. This pointer must be passed to the BCryptFreeBuffer function when it is no longer needed."
       },
       {
@@ -273,14 +273,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pcbBuffer",
+        "type": "ULONG*",
+        "name": "pcbBuffer",
         "description": "The address of a ULONG variable that, on entry, contains the size, in bytes, of the buffer pointed to by ppBuffer. If this size is not large enough to hold the set of context identifiers, this function will fail with STATUS_BUFFER_TOO_SMALL. After this function returns, this value contains the number of bytes that were copied to the ppBuffer buffer."
       },
       {
         "in_out": "_Inout_",
-        "type": "PCRYPT_CONTEXT_FUNCTION_PROVIDERS",
-        "name": "*ppBuffer",
+        "type": "PCRYPT_CONTEXT_FUNCTION_PROVIDERS*",
+        "name": "ppBuffer",
         "description": "The address of a pointer to a CRYPT_CONTEXT_FUNCTION_PROVIDERS structure that receives the set of context function providers retrieved by this function. The value pointed to by the pcbBuffer parameter contains the size of this buffer. If the value pointed to by this parameter is NULL, this function will allocate the required memory. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function. If this parameter is NULL, this function will place the required size, in bytes, in the variable pointed to by the pcbBuffer parameter and return STATUS_BUFFER_TOO_SMALL."
       }
     ],
@@ -320,14 +320,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pcbBuffer",
+        "type": "ULONG*",
+        "name": "pcbBuffer",
         "description": "The address of a ULONG variable that, on entry, contains the size, in bytes, of the buffer pointed to by ppBuffer. If this size is not large enough to hold the set of context identifiers, this function will fail with STATUS_BUFFER_TOO_SMALL. After this function returns, this value contains the number of bytes that were copied to the ppBuffer buffer."
       },
       {
         "in_out": "_Inout_",
-        "type": "PCRYPT_CONTEXT_FUNCTIONS",
-        "name": "*ppBuffer",
+        "type": "PCRYPT_CONTEXT_FUNCTIONS*",
+        "name": "ppBuffer",
         "description": "The address of a pointer to a CRYPT_CONTEXT_FUNCTIONS structure that receives the set of context functions retrieved by this function. The value pointed to by the pcbBuffer parameter contains the size of this buffer. If the value pointed to by this parameter is NULL, this function will allocate the required memory. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function. If this parameter is NULL, this function will place the required size, in bytes, in the variable pointed to by the pcbBuffer parameter and return STATUS_BUFFER_TOO_SMALL."
       }
     ],
@@ -355,14 +355,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pcbBuffer",
+        "type": "ULONG*",
+        "name": "pcbBuffer",
         "description": "The address of a ULONG variable that, on entry, contains the size, in bytes, of the buffer pointed to by ppBuffer. If this size is not large enough to hold the set of context identifiers, this function will fail with STATUS_BUFFER_TOO_SMALL. After this function returns, this value contains the number of bytes that were copied to the ppBuffer buffer."
       },
       {
         "in_out": "_Inout_",
-        "type": "PCRYPT_CONTEXTS",
-        "name": "*ppBuffer",
+        "type": "PCRYPT_CONTEXTS*",
+        "name": "ppBuffer",
         "description": "The address of a pointer to a CRYPT_CONTEXTS structure that receives the set of contexts retrieved by this function. The value pointed to by the pcbBuffer parameter contains the size of this buffer. If the value pointed to by this parameter is NULL, this function will allocate the required memory. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function. If this parameter is NULL, this function will place the required size, in bytes, in the variable pointed to by the pcbBuffer parameter and return STATUS_BUFFER_TOO_SMALL."
       }
     ],
@@ -390,14 +390,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*pImplCount",
+        "type": "ULONG*",
+        "name": "pImplCount",
         "description": "A pointer to a ULONG variable to receive the number of elements in the ppImplList array."
       },
       {
         "in_out": "_Out_",
-        "type": "BCRYPT_PROVIDER_NAME",
-        "name": "**ppImplList",
+        "type": "BCRYPT_PROVIDER_NAME**",
+        "name": "ppImplList",
         "description": "The address of an array of BCRYPT_PROVIDER_NAME structures to receive the collection of providers that support the specified algorithm. The pImplCount parameter receives the number of elements in this array. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function."
       },
       {
@@ -425,14 +425,14 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pcbBuffer",
+        "type": "ULONG*",
+        "name": "pcbBuffer",
         "description": "A pointer to a ULONG value that, on entry, contains the size, in bytes, of the buffer pointed to by the ppBuffer parameter. On exit, this value receives either the number of bytes copied to the buffer or the required size, in bytes, of the buffer. Note  This is the total size, in bytes, of the entire buffer, not just the size of the CRYPT_PROVIDERS structure. The buffer must be able to hold other data for the providers in addition to the CRYPT_PROVIDERS structure."
       },
       {
         "in_out": "_Inout_",
-        "type": "PCRYPT_PROVIDERS",
-        "name": "*ppBuffer",
+        "type": "PCRYPT_PROVIDERS*",
+        "name": "ppBuffer",
         "description": "A pointer to a buffer pointer that receives a CRYPT_PROVIDERS structure and other data that describes the collection of registered providers. If this parameter is NULL, this function will return STATUS_BUFFER_TOO_SMALL and place in the value pointed to by the pcbBuffer parameter, the required size, in bytes, of all the data. If this parameter is the address of a NULL pointer, this function will allocate the required memory, fill the memory with the information about the providers, and place the pointer to this memory in this parameter. When you have finished using this memory,  free it by passing this pointer to the BCryptFreeBuffer function. If this parameter is the address of a non-NULL pointer, this function will copy the provider information into this buffer. The pcbBuffer parameter must contain the size, in bytes, of the entire buffer. If the buffer is not large enough to hold all of the provider information, this function will return STATUS_BUFFER_TOO_SMALL."
       }
     ],
@@ -454,8 +454,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "BOOLEAN",
-        "name": "*pfEnabled",
+        "type": "BOOLEAN*",
+        "name": "pfEnabled",
         "description": "The address of a BOOLEAN variable that receives zero if FIPS compliance is not enabled, or a nonzero value if FIPS compliance is enabled."
       }
     ],
@@ -489,14 +489,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pcbBuffer",
+        "type": "ULONG*",
+        "name": "pcbBuffer",
         "description": "The address of a ULONG variable that, on entry, contains the size, in bytes, of the buffer pointed to by ppBuffer. If this size is not large enough to hold the context information, this function will fail with STATUS_BUFFER_TOO_SMALL. After this function returns, this variable contains the number of bytes that were copied to the ppBuffer buffer."
       },
       {
         "in_out": "_Inout_",
-        "type": "PCRYPT_CONTEXT_CONFIG",
-        "name": "*ppBuffer",
+        "type": "PCRYPT_CONTEXT_CONFIG*",
+        "name": "ppBuffer",
         "description": "The address of a pointer to a CRYPT_CONTEXT_CONFIG structure that receives the context configuration information retrieved by this function. The value pointed to by the pcbBuffer parameter contains the size of this buffer. If the value pointed to by this parameter is NULL, this function will allocate the required memory. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function. If this parameter is NULL, this function will place the required size, in bytes, in the variable pointed to by the pcbBuffer parameter and return STATUS_BUFFER_TOO_SMALL. For more information on the usage of this parameter, see Remarks."
       }
     ],
@@ -542,14 +542,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pcbBuffer",
+        "type": "ULONG*",
+        "name": "pcbBuffer",
         "description": "The address of a ULONG variable that, on entry, contains the size, in bytes, of the buffer pointed to by ppBuffer. If this size is not large enough to hold the context information, this function will fail with STATUS_BUFFER_TOO_SMALL. After this function returns, this variable contains the number of bytes that were copied to the ppBuffer buffer."
       },
       {
         "in_out": "_Inout_",
-        "type": "PCRYPT_CONTEXT_FUNCTION_CONFIG",
-        "name": "*ppBuffer",
+        "type": "PCRYPT_CONTEXT_FUNCTION_CONFIG*",
+        "name": "ppBuffer",
         "description": "The address of a pointer to a CRYPT_CONTEXT_FUNCTION_CONFIG structure that receives the function configuration information retrieved by this function. The value pointed to by the pcbBuffer parameter contains the size of this buffer. If the value pointed to by this parameter is NULL, this function will allocate the required memory. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function. If this parameter is NULL, this function will place the required size, in bytes, in the variable pointed to by the pcbBuffer parameter and return STATUS_BUFFER_TOO_SMALL. For more information about the usage of this parameter, see Remarks."
       }
     ],
@@ -601,14 +601,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pcbValue",
+        "type": "ULONG*",
+        "name": "pcbValue",
         "description": "The address of a ULONG variable that, on entry, contains the size, in bytes, of the buffer pointed to by ppbValue. If this size is not large enough to hold the property value, this function will fail with STATUS_BUFFER_TOO_SMALL. After this function returns, this variable contains the number of bytes that were copied to the ppbValue buffer."
       },
       {
         "in_out": "_Inout_",
-        "type": "PUCHAR",
-        "name": "*ppbValue",
+        "type": "PUCHAR*",
+        "name": "ppbValue",
         "description": "The address of a pointer to a buffer that receives the property data. The size and format of this buffer depends on the format of the property being retrieved. The value pointed to by the pcbValue parameter contains the size of this buffer. If the value pointed to by this parameter is NULL, this function will allocate the required memory. This memory must be freed when it is no longer needed by passing this pointer to the BCryptFreeBuffer function. If this parameter is NULL, this function will place the required size, in bytes, in the variable pointed to by the pcbValue parameter and return STATUS_BUFFER_TOO_SMALL."
       }
     ],
@@ -648,14 +648,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pcbBuffer",
+        "type": "ULONG*",
+        "name": "pcbBuffer",
         "description": "A pointer to a ULONG value that, on entry, contains the size, in bytes, of the buffer pointed to by the ppBuffer parameter. On exit, this value receives either the number of bytes copied to the buffer or the required size, in bytes, of the buffer.  Note  This is the total size, in bytes, of the entire buffer, not just the size of the CRYPT_PROVIDER_REG structure. The buffer must be able to hold other data for the providers in addition to the CRYPT_PROVIDER_REG structure."
       },
       {
         "in_out": "_Inout_",
-        "type": "PCRYPT_PROVIDER_REG",
-        "name": "*ppBuffer",
+        "type": "PCRYPT_PROVIDER_REG*",
+        "name": "ppBuffer",
         "description": "A pointer to a buffer pointer that receives a CRYPT_PROVIDER_REG structure and other data that describes the provider. If this parameter is NULL, this function will return STATUS_BUFFER_TOO_SMALL and place in the value pointed to by the pcbBuffer parameter, the required size, in bytes, of all data. If this parameter is the address of a NULL pointer, this function will allocate the required memory, fill it in with the provider information, and place a pointer to this memory in this parameter. When you have finished using this memory, free it by passing this pointer to the BCryptFreeBuffer function. If this parameter is the address of a non-NULL pointer, this function will copy the provider information into this buffer. The pcbBuffer parameter must contain the size, in bytes, of the entire buffer. If the buffer is not large enough to hold all of the provider information, this function will return STATUS_BUFFER_TOO_SMALL."
       }
     ],
@@ -677,8 +677,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*phEvent",
+        "type": "HANDLE*",
+        "name": "phEvent",
         "description": "The address of a HANDLE variable that receives the event handle. Use one of the Wait Functions, such as WaitForSingleObject, to determine when the event has been signaled. The event is unnamed and must be a manual-reset event. The event is signaled when any CNG configuration data has changed. This handle must be passed to the BCryptUnregisterConfigChangeNotify(HANDLE) function to remove the event notification."
       }
     ],
@@ -806,8 +806,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "PCRYPT_PROVIDER_REFS",
-        "name": "*ppBuffer",
+        "type": "PCRYPT_PROVIDER_REFS*",
+        "name": "ppBuffer",
         "description": "The address of a CRYPT_PROVIDER_REFS pointer that receives the collection of providers that meet the specified criteria. If this parameter is NULL, this function will return STATUS_SUCCESS and place in the value pointed to by the pcbBuffer parameter, the required size, in bytes, of all the data. If this parameter is the address of a NULL pointer, this function will allocate the required memory, fill the memory with the information about the providers, and place the pointer to this memory in this parameter. When you have finished using this memory,  free it by passing this pointer to the BCryptFreeBuffer function. If this parameter is the address of a non-NULL pointer, this function will copy the provider information into this buffer. The pcbBuffer parameter must contain the size, in bytes, of the entire buffer. If the buffer is not large enough to hold all of the provider information, this function will return STATUS_BUFFER_TOO_SMALL."
       }
     ],

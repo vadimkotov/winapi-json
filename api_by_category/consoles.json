@@ -101,8 +101,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SECURITY_ATTRIBUTES",
-        "name": "*lpSecurityAttributes",
+        "type": "const SECURITY_ATTRIBUTES*",
+        "name": "lpSecurityAttributes",
         "description": "A pointer to a  SECURITY_ATTRIBUTES structure that determines whether the returned handle can be inherited by child processes. If lpSecurityAttributes is NULL, the handle cannot be inherited.    The lpSecurityDescriptor member of the structure specifies a security descriptor for the new console screen buffer. If lpSecurityAttributes is NULL, the console screen buffer gets a default security descriptor. The ACLs in the default security descriptor for a console screen buffer come from the primary or impersonation token of the creator."
       },
       {
@@ -1287,14 +1287,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "SMALL_RECT",
-        "name": "*lpScrollRectangle",
+        "type": "const SMALL_RECT*",
+        "name": "lpScrollRectangle",
         "description": "A pointer to a  SMALL_RECT structure whose members specify the upper-left and lower-right coordinates of the console screen buffer rectangle to be moved."
       },
       {
         "in_out": "_In_opt_",
-        "type": "SMALL_RECT",
-        "name": "*lpClipRectangle",
+        "type": "const SMALL_RECT*",
+        "name": "lpClipRectangle",
         "description": "A pointer to a  SMALL_RECT structure whose members specify the upper-left and lower-right coordinates of the console screen buffer rectangle that is affected by the scrolling. This pointer can be NULL."
       },
       {
@@ -1305,8 +1305,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "CHAR_INFO",
-        "name": "*lpFill",
+        "type": "const CHAR_INFO*",
+        "name": "lpFill",
         "description": "A pointer to a  CHAR_INFO structure that specifies the character and color attributes to be used in filling the cells within the intersection of lpScrollRectangle and lpClipRectangle that were left empty as a result of the move."
       }
     ],
@@ -1380,8 +1380,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "CONSOLE_CURSOR_INFO",
-        "name": "*lpConsoleCursorInfo",
+        "type": "const CONSOLE_CURSOR_INFO*",
+        "name": "lpConsoleCursorInfo",
         "description": "A pointer to a  CONSOLE_CURSOR_INFO structure that provides the new specifications for the console screen buffer's cursor."
       }
     ],
@@ -1664,8 +1664,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "SMALL_RECT",
-        "name": "*lpConsoleWindow",
+        "type": "const SMALL_RECT*",
+        "name": "lpConsoleWindow",
         "description": "A pointer to a  SMALL_RECT structure that specifies the new upper-left and lower-right corners of the window."
       }
     ],
@@ -1757,8 +1757,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "VOID",
-        "name": "*lpBuffer",
+        "type": "const VOID*",
+        "name": "lpBuffer",
         "description": "A pointer to a buffer that contains characters to be written to the console screen buffer. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
       },
       {
@@ -1804,8 +1804,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "INPUT_RECORD",
-        "name": "*lpBuffer",
+        "type": "const INPUT_RECORD*",
+        "name": "lpBuffer",
         "description": "A pointer to an array of  INPUT_RECORD structures that contain data to be written to the input buffer. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
       },
       {
@@ -1845,8 +1845,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "CHAR_INFO",
-        "name": "*lpBuffer",
+        "type": "const CHAR_INFO*",
+        "name": "lpBuffer",
         "description": "The data to be written to the console screen buffer. This pointer is treated as the origin of a two-dimensional array of  CHAR_INFO structures whose size is specified by the dwBufferSize parameter. The storage for this buffer is allocated from a shared heap for the process that is 64 KB in size. The maximum size of the buffer will depend on heap usage."
       },
       {
@@ -1892,8 +1892,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "WORD",
-        "name": "*lpAttribute",
+        "type": "const WORD*",
+        "name": "lpAttribute",
         "description": "The attributes to be used when writing to the console screen buffer. For more information, see  Character Attributes."
       },
       {

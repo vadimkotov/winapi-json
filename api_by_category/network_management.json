@@ -97,8 +97,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*Buffer",
+        "type": "LPVOID*",
+        "name": "Buffer",
         "description": "Receives a pointer to the allocated buffer."
       }
     ],
@@ -155,8 +155,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*NewBuffer",
+        "type": "LPVOID*",
+        "name": "NewBuffer",
         "description": "Receives the pointer to the reallocated buffer."
       }
     ],
@@ -236,8 +236,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PDSREG_JOIN_INFO",
-        "name": "*ppJoinInfo",
+        "type": "PDSREG_JOIN_INFO*",
+        "name": "ppJoinInfo",
         "description": "The join information for the tenant that the pcszTenantId parameter specifies. If this parameter is NULL,  the device is not joined to Azure AD and the current user added no Azure AD work accounts. You must call                      the NetFreeAadJoinInformation function to free the memory allocated for                      this structure."
       }
     ],
@@ -336,20 +336,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PBYTE",
-        "name": "*pProvisionBinData",
+        "type": "PBYTE*",
+        "name": "pProvisionBinData",
         "description": "An optional pointer that will receive the opaque binary blob of serialized metadata required by NetRequestOfflineDomainJoin function to complete an offline domain join, if the NetProvisionComputerAccount function completes successfully.  The data is returned as an opaque binary buffer which may be passed to NetRequestOfflineDomainJoin function.   If this parameter is NULL, then pProvisionTextData parameter must not be NULL. If this parameter is not NULL, then the  pProvisionTextData parameter must be NULL."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pdwProvisionBinDataSize",
+        "type": "DWORD*",
+        "name": "pdwProvisionBinDataSize",
         "description": "A pointer to a value that receives the size, in bytes, of the buffer returned in the pProvisionBinData parameter.  This parameter must not be NULL if the pProvisionBinData parameter is not NULL. This parameter must be NULL when the pProvisionBinData parameter is NULL."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "LPWSTR",
-        "name": "*pProvisionTextData",
+        "type": "LPWSTR*",
+        "name": "pProvisionTextData",
         "description": "An optional pointer that will receive the opaque binary blob of serialized metadata required by NetRequestOfflineDomainJoin function to complete an offline domain join, if the NetProvisionComputerAccount function completes successfully.  The data is returned in string form for embedding in an unattended setup answer file.   If this parameter is NULL, then the pProvisionBinData parameter must not be NULL. If this parameter is not NULL, then the  the pProvisionBinData parameter must be NULL."
       }
     ],
@@ -395,8 +395,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "**ComputerNames",
+        "type": "LPWSTR**",
+        "name": "ComputerNames",
         "description": "A pointer to an array of pointers to names.  If the function call is successful, this parameter will return the computer names that match the computer type name specified in the NameType parameter.  When the application no longer needs this array, this buffer should be freed by         calling NetApiBufferFree function."
       }
     ],
@@ -442,14 +442,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*OUCount",
+        "type": "DWORD*",
+        "name": "OUCount",
         "description": "Receives the count of OUs returned in the list of joinable OUs."
       },
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "**OUs",
+        "type": "LPWSTR**",
+        "name": "OUs",
         "description": "Pointer to an array that receives the list of joinable OUs. This array is allocated by the system and must be freed using a single call to the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -477,8 +477,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*lpNameBuffer",
+        "type": "LPWSTR*",
+        "name": "lpNameBuffer",
         "description": "Pointer to the buffer that receives the NetBIOS name of the domain or workgroup to which the computer is joined. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       },
       {
@@ -688,8 +688,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*pProvisionBinData",
+        "type": "BYTE*",
+        "name": "pProvisionBinData",
         "description": "A pointer to a buffer required to initialize the registry of a Windows operating system image to process the final local state change during the completion phase of the offline domain join operation.  The opaque binary blob of serialized metadata passed in the pProvisionBinData parameter is returned by the NetProvisionComputerAccount function."
       },
       {
@@ -729,8 +729,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*pPackageBinData",
+        "type": "BYTE*",
+        "name": "pPackageBinData",
         "description": "A pointer to a buffer required to initialize the registry of a Windows operating system image to process the final local state change during the completion phase of the offline domain join operation.  The opaque binary blob of serialized metadata passed in the pPackageBinData parameter is returned by the NetCreateProvisioningPackage function."
       },
       {
@@ -923,8 +923,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to an allocated buffer that receives a string that specifies the server name of a domain controller for the domain. The server name is prefixed by \\\\. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -958,8 +958,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "A pointer to an allocated buffer that receives a string that specifies the server name of the PDC of the domain. The server name is returned as Unicode string prefixed by \\\\. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -1058,8 +1058,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*SortedBuffer",
+        "type": "PVOID*",
+        "name": "SortedBuffer",
         "description": "Pointer to a buffer that receives a pointer to a system-allocated buffer that specifies a sorted list of the requested information. The format of this data depends on the value of the Level parameter. Because this buffer is allocated by the system, it must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA. For more information, see the following Return Values section, and the topics  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -1233,8 +1233,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the buffer to receive the global group information structure. The format of this data depends on the value of the level parameter.     The system allocates the memory for this buffer. You must call the  NetApiBufferFree function to deallocate the memory. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -1298,8 +1298,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the address of the buffer that receives the global group information structure. The format of this data depends on the value of the level parameter. The system allocates the memory for this buffer. You must call the  NetApiBufferFree function to deallocate the memory. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -1339,8 +1339,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "A pointer to the address of the buffer that receives the information structure. The system allocates the memory for this buffer. You must call the  NetApiBufferFree function to deallocate the memory. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -1656,8 +1656,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the address of the buffer that receives the information structure. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -1721,8 +1721,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the address of the buffer that receives the return information structure. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -1762,8 +1762,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the address that receives the return information structure. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -2020,8 +2020,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -2085,8 +2085,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -2161,8 +2161,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the address of the buffer that receives the information. The format of this data depends on the value of the level parameter.     This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -2226,8 +2226,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the address of the buffer that receives the information. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -2290,8 +2290,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*BufferPtr",
+        "type": "LPBYTE*",
+        "name": "BufferPtr",
         "description": "Pointer to the address that receives the  TIME_OF_DAY_INFO information structure. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function."
       }
     ],
@@ -2389,8 +2389,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*PointerToBuffer",
+        "type": "LPBYTE*",
+        "name": "PointerToBuffer",
         "description": "A pointer to the buffer that receives the data. The return information is an array of  AT_ENUM structures. The buffer is allocated by the system and must be freed using a single call to the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -2448,8 +2448,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*PointerToBuffer",
+        "type": "LPBYTE*",
+        "name": "PointerToBuffer",
         "description": "A pointer to the buffer that receives the  AT_INFO structure describing the specified job. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -2553,8 +2553,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "A pointer to the buffer that receives the data. The data is an array of three-character strings (a drive letter, a colon, and a terminating null character). This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -2612,8 +2612,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "A pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -2683,8 +2683,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter.     This buffer is allocated by the system and must be freed using the  NetApiBufferFree function."
       }
     ],
@@ -2794,8 +2794,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -2987,8 +2987,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "A pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA or NERR_BufTooSmall."
       },
       {
@@ -3122,8 +3122,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*BufPtr",
+        "type": "LPBYTE*",
+        "name": "BufPtr",
         "description": "A pointer to the buffer that receives the information structures. The format of this data depends on the value of the Level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function when the information is no longer needed. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -3187,8 +3187,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*BufPtr",
+        "type": "LPBYTE*",
+        "name": "BufPtr",
         "description": "A pointer to the buffer that receives the data. The format of this data depends on the value of the Level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -3339,8 +3339,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "A pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter.  The buffer for this data is allocated by the system and the application must call the NetApiBufferFree function to free the allocated memory when the data returned is no longer needed. Note that you must free the buffer even if the NetUserEnum function fails with ERROR_MORE_DATA."
       },
       {
@@ -3404,8 +3404,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "A pointer to the buffer that receives the data. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -3463,8 +3463,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "A pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -3510,8 +3510,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "A pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -3657,8 +3657,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "A pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter.  The buffer for this data is allocated by the system and the application must call the NetApiBufferFree function to free the allocated memory when the data returned is no longer needed. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -3721,8 +3721,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "LPVOID",
-        "name": "*OutputArg",
+        "type": "LPVOID*",
+        "name": "OutputArg",
         "description": "Pointer to the memory allocated for the OutputArg parameter by a call to the NetValidatePasswordPolicy function."
       }
     ],
@@ -3803,8 +3803,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],
@@ -3879,8 +3879,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. Note that you must free the buffer even if the function fails with ERROR_MORE_DATA."
       },
       {
@@ -3938,8 +3938,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the buffer that receives the data. The format of this data depends on the value of the bufptr parameter. This buffer is allocated by the system and must be freed using the  NetApiBufferFree function. For more information, see  Network Management Function Buffers and  Network Management Function Buffer Lengths."
       }
     ],

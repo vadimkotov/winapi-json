@@ -44,8 +44,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWCM_PROFILE_INFO_LIST",
-        "name": "*ppProfileList",
+        "type": "PWCM_PROFILE_INFO_LIST*",
+        "name": "ppProfileList",
         "description": "Type: PWCM_PROFILE_INFO_LIST* The list of profiles."
       }
     ],
@@ -67,8 +67,8 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "const GUID",
-        "name": "*pInterface",
+        "type": "const GUID*",
+        "name": "pInterface",
         "description": "Type: const GUID* The interface to query. For global properties, this parameter is NULL."
       },
       {
@@ -97,8 +97,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppData",
+        "type": "PBYTE*",
+        "name": "ppData",
         "description": "Type: PBYTE* The returned property value."
       }
     ],
@@ -120,8 +120,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "WCM_PROFILE_INFO_LIST",
-        "name": "*pProfileList",
+        "type": "WCM_PROFILE_INFO_LIST*",
+        "name": "pProfileList",
         "description": "Type: WCM_PROFILE_INFO_LIST* The list of profiles to be reordered, provided in the preferred order (descending from the most preferred to the least preferred)."
       },
       {
@@ -161,8 +161,8 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "const GUID",
-        "name": "*pInterface",
+        "type": "const GUID*",
+        "name": "pInterface",
         "description": "Type: const GUID* The interface to set. For global properties, this parameter is NULL."
       },
       {
@@ -191,8 +191,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const BYTE",
-        "name": "*pbData",
+        "type": "const BYTE*",
+        "name": "pbData",
         "description": "Type: const BYTE* The new property value."
       }
     ],

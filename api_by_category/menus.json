@@ -901,8 +901,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "MENUTEMPLATE",
-        "name": "*lpMenuTemplate",
+        "type": "const MENUTEMPLATE*",
+        "name": "lpMenuTemplate",
         "description": "Type: const MENUTEMPLATE* A pointer to a menu template or an extended menu template. A menu template consists of a MENUITEMTEMPLATEHEADER structure followed by one or more contiguous MENUITEMTEMPLATE structures. An extended menu template consists of a MENUEX_TEMPLATE_HEADER structure followed by one or more contiguous MENUEX_TEMPLATE_ITEM structures."
       }
     ],
@@ -1258,8 +1258,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "RECT",
-        "name": "*prcRect",
+        "type": "const RECT*",
+        "name": "prcRect",
         "description": "Type: const RECT* Ignored."
       }
     ],

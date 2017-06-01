@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "HANDLE",
-        "name": "*ConnectionHandle",
+        "type": "HANDLE*",
+        "name": "ConnectionHandle",
         "description": "A pointer to a variable that receives the connection handle."
       },
       {
@@ -98,14 +98,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "AUTHNEXTSTEP",
-        "name": "*NextStep",
+        "type": "AUTHNEXTSTEP*",
+        "name": "NextStep",
         "description": "A pointer to an  AUTHNEXTSTEP enumeration value that specifies the next action that the WebDAV client should take after  a successful call to the DavAuthCallback callback function."
       },
       {
         "in_out": "_Out_",
-        "type": "PFNDAVAUTHCALLBACK_FREECRED",
-        "name": "*pFreeCred",
+        "type": "PFNDAVAUTHCALLBACK_FREECRED*",
+        "name": "pFreeCred",
         "description": "A pointer to a DavFreeCredCallback callback function."
       }
     ],
@@ -231,8 +231,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*ExtError",
+        "type": "DWORD*",
+        "name": "ExtError",
         "description": "Pointer to a variable that receives the extended error code."
       },
       {
@@ -243,8 +243,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*cChSize",
+        "type": "DWORD*",
+        "name": "cChSize",
         "description": "A pointer to a variable that on input specifies the size, in Unicode characters, of the buffer that the ExtErrorString parameter points to. This value must be at least 1024 characters.  If the function succeeds, on output the variable receives the number of characters that are actually copied into the buffer. If the function fails with ERROR_INSUFFICIENT_BUFFER, the variable receives 1024, but no characters are copied into the ExtErrorString buffer."
       }
     ],

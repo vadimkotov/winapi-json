@@ -221,14 +221,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "LPCALDATETIME",
+        "type": "const LPCALDATETIME",
         "name": "lpCalDateTime",
         "description": "Pointer to the CALDATETIME structure to convert."
       },
       {
         "in_out": "_Out_",
-        "type": "SYSTEMTIME",
-        "name": "*lpSysTime",
+        "type": "SYSTEMTIME*",
+        "name": "lpSysTime",
         "description": "Pointer to the equivalent SYSTEMTIME structure."
       }
     ],
@@ -273,7 +273,7 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "SYSTEMTIME",
+        "type": "const SYSTEMTIME",
         "name": "lpSysTime",
         "description": "Pointer to the SYSTEMTIME structure to convert."
       },
@@ -1785,7 +1785,7 @@
       },
       {
         "in_out": "_In_",
-        "type": "LPCALDATETIME",
+        "type": "const LPCALDATETIME",
         "name": "lpCalDateTime",
         "description": "Pointer to a CALDATETIME structure that contains the date and calendar information to format."
       },
@@ -2055,8 +2055,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "CURRENCYFMT",
-        "name": "*lpFormat",
+        "type": "const CURRENCYFMT*",
+        "name": "lpFormat",
         "description": "Pointer to a CURRENCYFMT structure that contains currency formatting information. All members of the structure must contain appropriate values. The application can set this parameter to NULL if function is to use the currency format of the specified locale. If this parameter is not set to NULL, the function uses the specified locale only for formatting information not specified in the CURRENCYFMT structure, for example, the string value for the negative sign used by the locale."
       },
       {
@@ -2108,8 +2108,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "CURRENCYFMT",
-        "name": "*lpFormat",
+        "type": "const CURRENCYFMT*",
+        "name": "lpFormat",
         "description": "Pointer to a CURRENCYFMT structure that contains currency formatting information. All members of the structure must contain appropriate values. The application can set this parameter to NULL if function is to use the currency format of the specified locale. If this parameter is not set to NULL, the function uses the specified locale only for formatting information not specified in the CURRENCYFMT structure, for example, the string value for the negative sign used by the locale."
       },
       {
@@ -2155,8 +2155,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SYSTEMTIME",
-        "name": "*lpDate",
+        "type": "const SYSTEMTIME*",
+        "name": "lpDate",
         "description": "Pointer to a SYSTEMTIME structure that contains the date information to format. The application sets this parameter to NULL if the function is to use the current local system date."
       },
       {
@@ -2208,8 +2208,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SYSTEMTIME",
-        "name": "*lpDate",
+        "type": "const SYSTEMTIME*",
+        "name": "lpDate",
         "description": "Pointer to a SYSTEMTIME structure that contains the date information to format. The application can set this parameter to NULL if the function is to use the current local system date."
       },
       {
@@ -2267,8 +2267,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SYSTEMTIME",
-        "name": "*lpDuration",
+        "type": "const SYSTEMTIME*",
+        "name": "lpDuration",
         "description": "Pointer to a SYSTEMTIME structure that contains the time duration information to format. If this pointer is NULL, the function ignores this parameter and uses ullDuration."
       },
       {
@@ -2326,8 +2326,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SYSTEMTIME",
-        "name": "*lpDuration",
+        "type": "const SYSTEMTIME*",
+        "name": "lpDuration",
         "description": "Pointer to a SYSTEMTIME structure that contains the time duration information to format. The application sets this parameter to NULL if the function is to ignore it and use ullDuration."
       },
       {
@@ -2590,8 +2590,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "NUMBERFMT",
-        "name": "*lpFormat",
+        "type": "const NUMBERFMT*",
+        "name": "lpFormat",
         "description": "Pointer to a NUMBERFMT structure that contains number formatting information, with all members set to appropriate values. If this parameter does is not set to NULL, the function uses the locale only for formatting information not specified in the structure, for example, the locale-specific string value for the negative sign."
       },
       {
@@ -2643,8 +2643,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "NUMBERFMT",
-        "name": "*lpFormat",
+        "type": "const NUMBERFMT*",
+        "name": "lpFormat",
         "description": "Pointer to a NUMBERFMT structure that contains number formatting information, with all members set to appropriate values. If the application does not set this parameter to NULL, the function uses the locale only for formatting information not specified in the structure, for example, the locale string value for the negative sign."
       },
       {
@@ -2965,8 +2965,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SYSTEMTIME",
-        "name": "*lpTime",
+        "type": "const SYSTEMTIME*",
+        "name": "lpTime",
         "description": "Pointer to a SYSTEMTIME structure that contains the time information to format. The application can set this parameter to NULL if the function is to use the current local system time."
       },
       {
@@ -3018,8 +3018,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SYSTEMTIME",
-        "name": "*lpTime",
+        "type": "const SYSTEMTIME*",
+        "name": "lpTime",
         "description": "Pointer to a SYSTEMTIME structure that contains the time information to format. The application can set this parameter to NULL if the function is to use the current local system time."
       },
       {
@@ -3782,8 +3782,8 @@
       },
       {
         "in_out": "_Reserved_",
-        "type": "void",
-        "name": "**ppvReserved",
+        "type": "void**",
+        "name": "ppvReserved",
         "description": "Type: void** Not used; set to NULL."
       }
     ],

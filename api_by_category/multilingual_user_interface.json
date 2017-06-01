@@ -155,8 +155,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pcbFileMUIInfo",
+        "type": "DWORD*",
+        "name": "pcbFileMUIInfo",
         "description": "Pointer to the buffer size, in bytes, for the file information indicated by pFileMUIInfo. On successful return from the function, this parameter contains the size of the retrieved file information buffer and the FILEMUIINFO structure that contains it. Alternatively, the application can set this parameter to 0 if it sets NULL in pFileMUIInfo. In this case, the function retrieves the required file information buffer size in pcbFileMUIInfo. To allocate the correct amount of memory, this value should be added to the size of the FILEMUIINFO structure itself. Note  The value of this parameter must match the value of the dwSize member of FILEMUIINFO if the value of pFileMUIInfo is not NULL."
       }
     ],

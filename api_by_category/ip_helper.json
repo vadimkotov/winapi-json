@@ -422,8 +422,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const WCHAR",
-        "name": "*InterfaceAlias",
+        "type": "const WCHAR*",
+        "name": "InterfaceAlias",
         "description": "A pointer to a NULL-terminated Unicode string containing the alias name of the network interface."
       },
       {
@@ -451,8 +451,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*InterfaceGuid",
+        "type": "const GUID*",
+        "name": "InterfaceGuid",
         "description": "A pointer to a GUID for a network interface."
       },
       {
@@ -509,8 +509,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const NET_LUID",
-        "name": "*InterfaceLuid",
+        "type": "const NET_LUID*",
+        "name": "InterfaceLuid",
         "description": "A pointer to a NET_LUID for a network interface."
       },
       {
@@ -544,14 +544,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const NET_LUID",
-        "name": "*InterfaceLuid",
+        "type": "const NET_LUID*",
+        "name": "InterfaceLuid",
         "description": "A pointer to a NET_LUID for a network interface."
       },
       {
         "in_out": "_Out_",
-        "type": "GUID",
-        "name": "*InterfaceGuid",
+        "type": "GUID*",
+        "name": "InterfaceGuid",
         "description": "A pointer to the GUID for this interface."
       }
     ],
@@ -573,8 +573,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const NET_LUID",
-        "name": "*InterfaceLuid",
+        "type": "const NET_LUID*",
+        "name": "InterfaceLuid",
         "description": "A pointer to a NET_LUID for a network interface."
       },
       {
@@ -602,8 +602,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const NET_LUID",
-        "name": "*InterfaceLuid",
+        "type": "const NET_LUID*",
+        "name": "InterfaceLuid",
         "description": "A pointer to a NET_LUID for a network interface."
       },
       {
@@ -637,8 +637,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const NET_LUID",
-        "name": "*InterfaceLuid",
+        "type": "const NET_LUID*",
+        "name": "InterfaceLuid",
         "description": "A pointer to a NET_LUID for a network interface."
       },
       {
@@ -672,8 +672,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const CHAR",
-        "name": "*InterfaceName",
+        "type": "const CHAR*",
+        "name": "InterfaceName",
         "description": "A pointer to a NULL-terminated ANSI string containing the network interface name."
       },
       {
@@ -701,8 +701,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const WCHAR",
-        "name": "*InterfaceName",
+        "type": "const WCHAR*",
+        "name": "InterfaceName",
         "description": "A pointer to a NULL-terminated Unicode string containing the network interface name."
       },
       {
@@ -880,8 +880,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PMIB_IFSTACK_TABLE",
-        "name": "*Table",
+        "type": "PMIB_IFSTACK_TABLE*",
+        "name": "Table",
         "description": "A pointer to a buffer that receives the table of interface stack row entries in a MIB_IFSTACK_TABLE structure."
       }
     ],
@@ -938,8 +938,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PMIB_IF_TABLE2",
-        "name": "*Table",
+        "type": "PMIB_IF_TABLE2*",
+        "name": "Table",
         "description": "A pointer to a buffer that receives the table of interfaces in a MIB_IF_TABLE2 structure."
       }
     ],
@@ -967,8 +967,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PMIB_IF_TABLE2",
-        "name": "*Table",
+        "type": "PMIB_IF_TABLE2*",
+        "name": "Table",
         "description": "A pointer to a buffer that receives the table of interfaces in a MIB_IF_TABLE2 structure."
       }
     ],
@@ -1019,8 +1019,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PMIB_INVERTEDIFSTACK_TABLE",
-        "name": "*Table",
+        "type": "PMIB_INVERTEDIFSTACK_TABLE*",
+        "name": "Table",
         "description": "A pointer to a buffer that receives the table of inverted interface stack row entries in a MIB_INVERTEDIFSTACK_TABLE structure."
       }
     ],
@@ -1071,8 +1071,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PMIB_IPINTERFACE_TABLE",
-        "name": "*Table",
+        "type": "PMIB_IPINTERFACE_TABLE*",
+        "name": "Table",
         "description": "A pointer to a buffer that receives the table of IP interface entries in a MIB_IPINTERFACE_TABLE structure."
       }
     ],
@@ -1301,14 +1301,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "struct sockaddr_in6",
-        "name": "*SourceAddress",
+        "type": "struct sockaddr_in6*",
+        "name": "SourceAddress",
         "description": "The IPv6 source address on which to issue the echo request, in the form of a sockaddr structure."
       },
       {
         "in_out": "_In_",
-        "type": "struct sockaddr_in6",
-        "name": "*DestinationAddress",
+        "type": "struct sockaddr_in6*",
+        "name": "DestinationAddress",
         "description": "The IPv6 destination address of the echo request, in the form of a sockaddr structure."
       },
       {
@@ -1741,8 +1741,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const MIB_ANYCASTIPADDRESS_ROW",
-        "name": "*Row",
+        "type": "const MIB_ANYCASTIPADDRESS_ROW*",
+        "name": "Row",
         "description": "A pointer to a  MIB_ANYCASTIPADDRESS_ROW structure entry for an anycast IP address entry."
       }
     ],
@@ -1764,8 +1764,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const MIB_UNICASTIPADDRESS_ROW",
-        "name": "*Row",
+        "type": "const MIB_UNICASTIPADDRESS_ROW*",
+        "name": "Row",
         "description": "A pointer to a  MIB_UNICASTIPADDRESS_ROW structure entry for a unicast IP address entry."
       }
     ],
@@ -1810,8 +1810,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const MIB_ANYCASTIPADDRESS_ROW",
-        "name": "*Row",
+        "type": "const MIB_ANYCASTIPADDRESS_ROW*",
+        "name": "Row",
         "description": "A pointer to a  MIB_ANYCASTIPADDRESS_ROW  structure entry for an existing anycast IP address entry to delete from the local computer."
       }
     ],
@@ -1833,8 +1833,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const MIB_UNICASTIPADDRESS_ROW",
-        "name": "*Row",
+        "type": "const MIB_UNICASTIPADDRESS_ROW*",
+        "name": "Row",
         "description": "A pointer to a  MIB_UNICASTIPADDRESS_ROW structure entry for an existing unicast IP address entry to delete from the local computer."
       }
     ],
@@ -1885,8 +1885,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PMIB_ANYCASTIPADDRESS_TABLE",
-        "name": "*Table",
+        "type": "PMIB_ANYCASTIPADDRESS_TABLE*",
+        "name": "Table",
         "description": "A pointer to a  MIB_ANYCASTIPADDRESS_TABLE structure that contains a table of anycast IP address entries on the local computer."
       }
     ],
@@ -1972,8 +1972,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PMIB_MULTICASTIPADDRESS_TABLE",
-        "name": "*Table",
+        "type": "PMIB_MULTICASTIPADDRESS_TABLE*",
+        "name": "Table",
         "description": "A pointer to a  MIB_MULTICASTIPADDRESS_TABLE structure that contains a table of anycast IP address entries on the local computer."
       }
     ],
@@ -2024,8 +2024,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PMIB_UNICASTIPADDRESS_TABLE",
-        "name": "*Table",
+        "type": "PMIB_UNICASTIPADDRESS_TABLE*",
+        "name": "Table",
         "description": "A pointer to a  MIB_UNICASTIPADDRESS_TABLE structure that contains a table of unicast IP address entries on the local computer."
       }
     ],
@@ -2122,8 +2122,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "PMIB_UNICASTIPADDRESS_TABLE",
-        "name": "*Table",
+        "type": "PMIB_UNICASTIPADDRESS_TABLE*",
+        "name": "Table",
         "description": "A pointer to a  MIB_UNICASTIPADDRESS_TABLE structure. When NotifyStableUnicastIpAddressTable is successful, this parameter returns the stable unicast IP address table on the local computer.   When NotifyStableUnicastIpAddressTable returns ERROR_IO_PENDING indicating that the I/O request is pending, then the  stable unicast IP address table is returned to the function in the CallerCallback  parameter."
       },
       {
@@ -2140,8 +2140,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "HANDLE",
-        "name": "*NotificationHandle",
+        "type": "HANDLE*",
+        "name": "NotificationHandle",
         "description": "A pointer used to return a handle that can be used to         cancel the request to retrieve the stable unicast IP address table. This parameter is returned if  the return value from NotifyStableUnicastIpAddressTable is ERROR_IO_PENDING indicating that the I/O request is pending."
       }
     ],
@@ -2163,8 +2163,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const MIB_UNICASTIPADDRESS_ROW",
-        "name": "*Row",
+        "type": "const MIB_UNICASTIPADDRESS_ROW*",
+        "name": "Row",
         "description": "A pointer to a  MIB_UNICASTIPADDRESS_ROW structure entry for an existing unicast IP address entry."
       }
     ],
@@ -2186,8 +2186,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const IN_ADDR",
-        "name": "*Addr",
+        "type": "const IN_ADDR*",
+        "name": "Addr",
         "description": "The IPv4 address in network byte order."
       },
       {
@@ -2215,8 +2215,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const IN_ADDR",
-        "name": "*Address",
+        "type": "const IN_ADDR*",
+        "name": "Address",
         "description": "The IPv4 address in network byte order."
       },
       {
@@ -2268,14 +2268,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPCTSTR",
-        "name": "*Terminator",
+        "type": "LPCTSTR*",
+        "name": "Terminator",
         "description": "A parameter that receives a pointer to the character that terminated         the converted string. This can be used by the caller to extract more information from the string."
       },
       {
         "in_out": "_Out_",
-        "type": "IN_ADDR",
-        "name": "*Addr",
+        "type": "IN_ADDR*",
+        "name": "Addr",
         "description": "A pointer where the binary representation of the IPv4 address is to be stored."
       }
     ],
@@ -2309,8 +2309,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IN_ADDR",
-        "name": "*Address",
+        "type": "IN_ADDR*",
+        "name": "Address",
         "description": "A pointer where the binary representation of the IPv4 address is to be stored. The IPv4 address is stored in network byte order."
       },
       {
@@ -2338,8 +2338,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const IN6_ADDR",
-        "name": "*Addr",
+        "type": "const IN6_ADDR*",
+        "name": "Addr",
         "description": "The IPv6 address in network byte order."
       },
       {
@@ -2367,8 +2367,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const IN6_ADDR",
-        "name": "*Address",
+        "type": "const IN6_ADDR*",
+        "name": "Address",
         "description": "The IPv6 address in network byte order."
       },
       {
@@ -2420,14 +2420,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PCTSTR",
-        "name": "*Terminator",
+        "type": "PCTSTR*",
+        "name": "Terminator",
         "description": "A parameter that receives a pointer to the character that terminated         the converted string. This can be used by the caller to extract more information from the string."
       },
       {
         "in_out": "_Out_",
-        "type": "IN6_ADDR",
-        "name": "*Addr",
+        "type": "IN6_ADDR*",
+        "name": "Addr",
         "description": "A pointer where the binary representation of the IPv6 address is to be stored."
       }
     ],
@@ -2455,8 +2455,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IN6_ADDR",
-        "name": "*Address",
+        "type": "IN6_ADDR*",
+        "name": "Address",
         "description": "A pointer where the binary representation of the IPv6 address is to be stored."
       },
       {
@@ -2490,8 +2490,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const MIB_IPNET_ROW2",
-        "name": "*Row",
+        "type": "const MIB_IPNET_ROW2*",
+        "name": "Row",
         "description": "A pointer to a  MIB_IPNET_ROW2 structure entry for a neighbor IP address entry."
       }
     ],
@@ -2513,8 +2513,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const MIB_IPNET_ROW2",
-        "name": "*Row",
+        "type": "const MIB_IPNET_ROW2*",
+        "name": "Row",
         "description": "A pointer to a  MIB_IPNET_ROW2 structure entry for a neighbor IP address entry. On successful return, this entry will be deleted."
       }
     ],
@@ -2594,8 +2594,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PMIB_IPNET_TABLE2",
-        "name": "*Table",
+        "type": "PMIB_IPNET_TABLE2*",
+        "name": "Table",
         "description": "A pointer to a  MIB_IPNET_TABLE2 structure that contains a table of neighbor IP address entries on the local computer."
       }
     ],
@@ -2623,8 +2623,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SOCKADDR_INET",
-        "name": "*SourceAddress",
+        "type": "const SOCKADDR_INET*",
+        "name": "SourceAddress",
         "description": "A pointer to a  an optional source IP address used to select the interface to send the requests on for the neighbor IP address entry."
       }
     ],
@@ -2646,8 +2646,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "SOCKADDR",
-        "name": "*NetworkAddress",
+        "type": "SOCKADDR*",
+        "name": "NetworkAddress",
         "description": "A pointer to a   SOCKADDR structure that contains the neighbor IP address entry and address family."
       },
       {
@@ -2756,8 +2756,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PMIB_IPPATH_TABLE",
-        "name": "*Table",
+        "type": "PMIB_IPPATH_TABLE*",
+        "name": "Table",
         "description": "A pointer to a  MIB_IPPATH_TABLE structure that contains a table of IP path entries on the local computer."
       }
     ],
@@ -2802,8 +2802,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const MIB_IPFORWARD_ROW2",
-        "name": "*Row",
+        "type": "const MIB_IPFORWARD_ROW2*",
+        "name": "Row",
         "description": "A pointer to a  MIB_IPFORWARD_ROW2 structure entry for an IP route entry."
       }
     ],
@@ -2848,8 +2848,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const MIB_IPFORWARD_ROW2",
-        "name": "*Row",
+        "type": "const MIB_IPFORWARD_ROW2*",
+        "name": "Row",
         "description": "A pointer to a  MIB_IPFORWARD_ROW2 structure entry for an IP route entry. On successful return, this entry will be deleted."
       }
     ],
@@ -2871,14 +2871,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "HANDLE",
-        "name": "*pHandle",
+        "type": "HANDLE*",
+        "name": "pHandle",
         "description": "A pointer to a handle. This parameter is currently unused."
       },
       {
         "in_out": "",
-        "type": "OVERLAPPED",
-        "name": "*pOverlapped",
+        "type": "OVERLAPPED*",
+        "name": "pOverlapped",
         "description": "A pointer to an  OVERLAPPED structure. Except for the hEvent member, all members of this structure should be set to zero. The hEvent member should contain a handle to a valid event object. Use the  CreateEvent function to create this event object."
       }
     ],
@@ -2929,8 +2929,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "struct sockaddr",
-        "name": "*pDestAddr",
+        "type": "struct sockaddr*",
+        "name": "pDestAddr",
         "description": "The destination IPv6 or IPv4 address for which to retrieve the interface with the best route, in the form of a sockaddr structure."
       },
       {
@@ -2993,8 +2993,8 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "NET_LUID",
-        "name": "*InterfaceLuid",
+        "type": "NET_LUID*",
+        "name": "InterfaceLuid",
         "description": "The locally unique identifier (LUID) to specify the network interface associated with an IP route entry."
       },
       {
@@ -3005,14 +3005,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SOCKADDR_INET",
-        "name": "*SourceAddress",
+        "type": "const SOCKADDR_INET*",
+        "name": "SourceAddress",
         "description": "The source IP address. This parameter may be omitted and passed as a NULL pointer."
       },
       {
         "in_out": "_In_",
-        "type": "const SOCKADDR_INET",
-        "name": "*DestinationAddress",
+        "type": "const SOCKADDR_INET*",
+        "name": "DestinationAddress",
         "description": "The destination IP address."
       },
       {
@@ -3029,8 +3029,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "SOCKADDR_INET",
-        "name": "*BestSourceAddress",
+        "type": "SOCKADDR_INET*",
+        "name": "BestSourceAddress",
         "description": "A pointer to the best source IP address."
       }
     ],
@@ -3116,8 +3116,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PMIB_IPFORWARD_TABLE2",
-        "name": "*Table",
+        "type": "PMIB_IPFORWARD_TABLE2*",
+        "name": "Table",
         "description": "A pointer to a  MIB_IPFORWARD_TABLE2 structure that contains a table of IP route entries on the local computer."
       }
     ],
@@ -3226,8 +3226,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const MIB_IPFORWARD_ROW2",
-        "name": "*Route",
+        "type": "const MIB_IPFORWARD_ROW2*",
+        "name": "Route",
         "description": "A pointer to a  MIB_IPFORWARD_ROW2 structure entry for an IP route entry. The DestinationPrefix member of the MIB_IPFORWARD_ROW2 must be set to a valid IP destination prefix, the NextHop member of the MIB_IPFORWARD_ROW2 must be set to a valid IP address family and IP address,   and the InterfaceLuid or the  InterfaceIndex member of the MIB_IPFORWARD_ROW2 must be specified."
       }
     ],
@@ -3301,8 +3301,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "OVERLAPPED",
-        "name": "*pOverlapped",
+        "type": "OVERLAPPED*",
+        "name": "pOverlapped",
         "description": "A pointer to an OVERLAPPED structure. This structure should be the same as the one used in the call to  the EnableRouter function."
       },
       {
@@ -3441,14 +3441,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSOCKADDR_IN6_PAIR",
-        "name": "*SortedAddressPairList",
+        "type": "PSOCKADDR_IN6_PAIR*",
+        "name": "SortedAddressPairList",
         "description": "A pointer to store an array of SOCKADDR_IN6_PAIR structures that contain a list of pairs of IPv6 addresses         sorted in the preferred order of communication, if the function call is successful."
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*SortedAddressPairCount",
+        "type": "ULONG*",
+        "name": "SortedAddressPairCount",
         "description": "A pointer to store the number of address pairs pointed to by the SortedAddressPairList parameter, if the function call is successful."
       }
     ],
@@ -3470,8 +3470,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const WCHAR",
-        "name": "*NetworkString",
+        "type": "const WCHAR*",
+        "name": "NetworkString",
         "description": "A pointer to the NULL-terminated network string to parse."
       },
       {
@@ -3488,14 +3488,14 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "USHORT",
-        "name": "*PortNumber",
+        "type": "USHORT*",
+        "name": "PortNumber",
         "description": "On success, the function returns a pointer to the parsed network port in host order if a NULL pointer was not passed in this parameter. If a network port was not present in the NetworkString parameter, then a pointer to a value of zero is returned."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "BYTE",
-        "name": "*PrefixLength",
+        "type": "BYTE*",
+        "name": "PrefixLength",
         "description": "On success, the function returns a pointer to the parsed prefix length if a NULL pointer was not passed in this parameter. If a prefix was not present in the NetworkString parameter, then a pointer to a value of -1 is returned."
       }
     ],
@@ -3622,8 +3622,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "HANDLE",
-        "name": "*NotificationHandle",
+        "type": "HANDLE*",
+        "name": "NotificationHandle",
         "description": "A pointer used to return a handle that can be later used to         deregister the change notification. On success, a notification handle is returned in this parameter. If an error occurs, NULL is returned."
       }
     ],
@@ -3698,8 +3698,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "HANDLE",
-        "name": "*NotificationHandle",
+        "type": "HANDLE*",
+        "name": "NotificationHandle",
         "description": "A pointer used to return a handle that can be later used to         deregister the change notification. On success, a notification handle is returned in this parameter. If an error occurs, NULL is returned."
       }
     ],
@@ -3745,8 +3745,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "HANDLE",
-        "name": "*NotificationHandle",
+        "type": "HANDLE*",
+        "name": "NotificationHandle",
         "description": "A pointer used to return a handle that can be later used to         deregister the change notification. On success, a notification handle is returned in this parameter. If an error occurs, NULL is returned."
       }
     ],
@@ -4024,8 +4024,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "USHORT",
-        "name": "*Port",
+        "type": "USHORT*",
+        "name": "Port",
         "description": "A pointer to the  UDP port number. On successful return, this parameter will be filled with the port number used by the Teredo client."
       }
     ],
@@ -4065,8 +4065,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "HANDLE",
-        "name": "*NotificationHandle",
+        "type": "HANDLE*",
+        "name": "NotificationHandle",
         "description": "A pointer used to return a handle that can be later used to         deregister the change notification. On success, a notification handle is returned in this parameter. If an error occurs, NULL is returned."
       }
     ],
@@ -4967,8 +4967,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ppTcpTable",
+        "type": "PVOID*",
+        "name": "ppTcpTable",
         "description": "Pointer to the address of the opaque data that contains the TCP connection table after the function returns."
       },
       {
@@ -5014,8 +5014,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ppUDPTable",
+        "type": "PVOID*",
+        "name": "ppUDPTable",
         "description": "Pointer to the address of the opaque data that contains the UDP connection table after the function returns."
       },
       {

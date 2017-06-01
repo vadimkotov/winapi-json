@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "D2D1_MATRIX_3X2_F",
-        "name": "*matrix",
+        "type": "const D2D1_MATRIX_3X2_F*",
+        "name": "matrix",
         "description": "The input transform matrix."
       }
     ],
@@ -38,20 +38,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IDXGIDevice",
-        "name": "*dxgiDevice",
+        "type": "IDXGIDevice*",
+        "name": "dxgiDevice",
         "description": "The DXGI device the Direct2D device is associated with."
       },
       {
         "in_out": "_In_opt_",
-        "type": "D2D1_CREATION_PROPERTIES",
-        "name": "*creationProperties",
+        "type": "const D2D1_CREATION_PROPERTIES*",
+        "name": "creationProperties",
         "description": "The properties to apply to the Direct2D device."
       },
       {
         "in_out": "_Out_",
-        "type": "ID2D1Device",
-        "name": "**d2dDevice",
+        "type": "ID2D1Device**",
+        "name": "d2dDevice",
         "description": "When this function returns, contains the address of a pointer to a Direct2D device."
       }
     ],
@@ -73,20 +73,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IDXGISurface",
-        "name": "*dxgiSurface",
+        "type": "IDXGISurface*",
+        "name": "dxgiSurface",
         "description": "The DXGI surface the Direct2D device context is associated with."
       },
       {
         "in_out": "_In_opt_",
-        "type": "D2D1_CREATION_PROPERTIES",
-        "name": "*creationProperties",
+        "type": "const D2D1_CREATION_PROPERTIES*",
+        "name": "creationProperties",
         "description": "The properties to apply to the Direct2D device context."
       },
       {
         "in_out": "_Out_",
-        "type": "ID2D1DeviceContext",
-        "name": "**d2dDeviceContext",
+        "type": "ID2D1DeviceContext**",
+        "name": "d2dDeviceContext",
         "description": "When this function returns, contains the address of a pointer to a Direct2D device context."
       }
     ],
@@ -120,8 +120,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppIFactory",
+        "type": "void**",
+        "name": "ppIFactory",
         "description": "Type: void** When this method returns, contains the address to a pointer to the new factory."
       }
     ],
@@ -155,14 +155,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "D2D1_FACTORY_OPTIONS",
-        "name": "*pFactoryOptions",
+        "type": "const D2D1_FACTORY_OPTIONS*",
+        "name": "pFactoryOptions",
         "description": "Type: const D2D1_FACTORY_OPTIONS* The level of detail provided to the debugging layer."
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppIFactory",
+        "type": "void**",
+        "name": "ppIFactory",
         "description": "Type: void** When this method returns, contains the address to a pointer to the new factory."
       }
     ],
@@ -184,98 +184,98 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "D2D1_POINT_2F",
-        "name": "*point0",
+        "type": "D2D1_POINT_2F*",
+        "name": "point0",
         "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 0."
       },
       {
         "in_out": "_In_",
-        "type": "D2D1_POINT_2F",
-        "name": "*point1",
+        "type": "D2D1_POINT_2F*",
+        "name": "point1",
         "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 1."
       },
       {
         "in_out": "_In_",
-        "type": "D2D1_POINT_2F",
-        "name": "*point2",
+        "type": "D2D1_POINT_2F*",
+        "name": "point2",
         "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 2."
       },
       {
         "in_out": "_In_",
-        "type": "D2D1_POINT_2F",
-        "name": "*point3",
+        "type": "D2D1_POINT_2F*",
+        "name": "point3",
         "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 3."
       },
       {
         "in_out": "_In_",
-        "type": "D2D1_POINT_2F",
-        "name": "*point4",
+        "type": "D2D1_POINT_2F*",
+        "name": "point4",
         "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 4."
       },
       {
         "in_out": "_In_",
-        "type": "D2D1_POINT_2F",
-        "name": "*point5",
+        "type": "D2D1_POINT_2F*",
+        "name": "point5",
         "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 5."
       },
       {
         "in_out": "_In_",
-        "type": "D2D1_POINT_2F",
-        "name": "*point6",
+        "type": "D2D1_POINT_2F*",
+        "name": "point6",
         "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 6."
       },
       {
         "in_out": "_In_",
-        "type": "D2D1_POINT_2F",
-        "name": "*point7",
+        "type": "D2D1_POINT_2F*",
+        "name": "point7",
         "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 7."
       },
       {
         "in_out": "_In_",
-        "type": "D2D1_POINT_2F",
-        "name": "*point8",
+        "type": "D2D1_POINT_2F*",
+        "name": "point8",
         "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 8."
       },
       {
         "in_out": "_In_",
-        "type": "D2D1_POINT_2F",
-        "name": "*point9",
+        "type": "D2D1_POINT_2F*",
+        "name": "point9",
         "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 9."
       },
       {
         "in_out": "_In_",
-        "type": "D2D1_POINT_2F",
-        "name": "*point10",
+        "type": "D2D1_POINT_2F*",
+        "name": "point10",
         "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 10."
       },
       {
         "in_out": "_In_",
-        "type": "D2D1_POINT_2F",
-        "name": "*point11",
+        "type": "D2D1_POINT_2F*",
+        "name": "point11",
         "description": "Type: D2D1_POINT_2F* The coordinate-space location of the control point at position 11."
       },
       {
         "in_out": "_Out_",
-        "type": "D2D1_POINT_2F",
-        "name": "*pTensorPoint11",
+        "type": "D2D1_POINT_2F*",
+        "name": "pTensorPoint11",
         "description": "Type: D2D1_POINT_2F* Returns the interior point for the gradient mesh corresponding to point11 in the D2D1_GRADIENT_MESH_PATCH structure."
       },
       {
         "in_out": "_Out_",
-        "type": "D2D1_POINT_2F",
-        "name": "*pTensorPoint12",
+        "type": "D2D1_POINT_2F*",
+        "name": "pTensorPoint12",
         "description": "Type: D2D1_POINT_2F* Returns the interior point for the gradient mesh corresponding to point12 in the D2D1_GRADIENT_MESH_PATCH structure."
       },
       {
         "in_out": "_Out_",
-        "type": "D2D1_POINT_2F",
-        "name": "*pTensorPoint21",
+        "type": "D2D1_POINT_2F*",
+        "name": "pTensorPoint21",
         "description": "Type: D2D1_POINT_2F* Returns the interior point for the gradient mesh corresponding to point21 in the D2D1_GRADIENT_MESH_PATCH structure."
       },
       {
         "in_out": "_Out_",
-        "type": "D2D1_POINT_2F",
-        "name": "*pTensorPoint22",
+        "type": "D2D1_POINT_2F*",
+        "name": "pTensorPoint22",
         "description": "Type: D2D1_POINT_2F* Returns the interior point for the gradient mesh corresponding to point22 in the D2D1_GRADIENT_MESH_PATCH structure."
       }
     ],
@@ -297,8 +297,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "D2D1_MATRIX_3X2_F",
-        "name": "*matrix",
+        "type": "D2D1_MATRIX_3X2_F*",
+        "name": "matrix",
         "description": "Type: D2D1_MATRIX_3X2_F* The matrix to invert."
       }
     ],
@@ -320,8 +320,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "D2D1_MATRIX_3X2_F",
-        "name": "*matrix",
+        "type": "const D2D1_MATRIX_3X2_F*",
+        "name": "matrix",
         "description": "Type: const D2D1_MATRIX_3X2_F* The matrix to test."
       }
     ],
@@ -355,8 +355,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "D2D1_MATRIX_3X2_F",
-        "name": "*matrix",
+        "type": "D2D1_MATRIX_3X2_F*",
+        "name": "matrix",
         "description": "Type: D2D1_MATRIX_3X2_F* When this method returns, contains the new rotation transformation. You must allocate storage for this parameter."
       }
     ],
@@ -396,8 +396,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "D2D1_MATRIX_3X2_F",
-        "name": "*matrix",
+        "type": "D2D1_MATRIX_3X2_F*",
+        "name": "matrix",
         "description": "Type: D2D1_MATRIX_3X2_F* When this method returns, contains the rotation transformation. You must allocate storate for this parameter."
       }
     ],
@@ -418,13 +418,13 @@
     "dll": "D2d1.dll",
     "arguments": [
       {
-        "in_out": "",
+        "in_out": "const",
         "type": "D2D1_MATRIX_3X2_F",
         "name": "&matrix1",
         "description": "Type: const D2D1_MATRIX_3X2_F The first matrix to multiply."
       },
       {
-        "in_out": "",
+        "in_out": "const",
         "type": "D2D1_MATRIX_3X2_F",
         "name": "&matrix2",
         "description": "Type: const D2D1_MATRIX_3X2_F The second matrix to multiply."
@@ -471,14 +471,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*effect",
+        "type": "const IUnknown*",
+        "name": "effect",
         "description": "Type: const IUnknown* The effect with the property."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "BYTE",
-        "name": "*data",
+        "type": "BYTE*",
+        "name": "data",
         "description": "Type: BYTE* When this method returns, contains a pointer to the data requested."
       },
       {
@@ -489,8 +489,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "UINT32",
-        "name": "*actualSize",
+        "type": "UINT32*",
+        "name": "actualSize",
         "description": "Type: UINT32* The actual size of the data, if the data is not measured in bytes."
       }
     ],
@@ -512,14 +512,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*effect",
+        "type": "IUnknown*",
+        "name": "effect",
         "description": "Type: IUnknown* The effect with the property."
       },
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*data",
+        "type": "const BYTE*",
+        "name": "data",
         "description": "Type: const BYTE* When this method returns, contains a pointer to the data requested."
       },
       {
@@ -547,14 +547,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*effect",
+        "type": "const IUnknown*",
+        "name": "effect",
         "description": "The effect with the property."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "BYTE",
-        "name": "*data",
+        "type": "BYTE*",
+        "name": "data",
         "description": "When this method returns, contains a pointer to the data requested."
       },
       {
@@ -565,8 +565,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "UINT32",
-        "name": "*actualSize",
+        "type": "UINT32*",
+        "name": "actualSize",
         "description": "The actual size of the data, if the data is not measured in bytes."
       }
     ],
@@ -588,14 +588,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*effect",
+        "type": "IUnknown*",
+        "name": "effect",
         "description": "The effect with the property."
       },
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*data",
+        "type": "const BYTE*",
+        "name": "data",
         "description": "When this method returns, contains a pointer to the data requested."
       },
       {
@@ -635,8 +635,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "D2D1_COLOR_F",
-        "name": "*color",
+        "type": "const D2D1_COLOR_F*",
+        "name": "color",
         "description": "Type: const D2D1_COLOR_F* The source color."
       }
     ],
@@ -664,14 +664,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "FLOAT",
-        "name": "*s",
+        "type": "FLOAT*",
+        "name": "s",
         "description": "Type: FLOAT* The sine of the angle."
       },
       {
         "in_out": "_Out_",
-        "type": "FLOAT",
-        "name": "*c",
+        "type": "FLOAT*",
+        "name": "c",
         "description": "Type: FLOAT* The cosine of the angle."
       }
     ],
@@ -751,14 +751,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*effect",
+        "type": "const IUnknown*",
+        "name": "effect",
         "description": "A pointer to the IUnknown interface for the effect on which the property will be retrieved."
       },
       {
         "in_out": "_Out_",
-        "type": "BYTE",
-        "name": "*data",
+        "type": "BYTE*",
+        "name": "data",
         "description": "A pointer to a variable that stores the data that this function retrieves on the property."
       },
       {
@@ -769,8 +769,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "UINT32",
-        "name": "*actualSize",
+        "type": "UINT32*",
+        "name": "actualSize",
         "description": "A optional pointer to a variable that stores the actual number of bytes retrieved on the property. If not used, set to NULL."
       }
     ],
@@ -792,14 +792,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*effect",
+        "type": "IUnknown*",
+        "name": "effect",
         "description": "A pointer to the IUnknown interface for the effect on which the property will be set."
       },
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*data",
+        "type": "const BYTE*",
+        "name": "data",
         "description": "A pointer to the data to be set on the property."
       },
       {

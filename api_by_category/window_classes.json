@@ -265,8 +265,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "WNDCLASS",
-        "name": "*lpWndClass",
+        "type": "const WNDCLASS*",
+        "name": "lpWndClass",
         "description": "Type: const WNDCLASS* A pointer to a WNDCLASS structure. You must fill the structure with the appropriate class attributes before passing it to the function."
       }
     ],
@@ -288,8 +288,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "WNDCLASSEX",
-        "name": "*lpwcx",
+        "type": "const WNDCLASSEX*",
+        "name": "lpwcx",
         "description": "Type: const WNDCLASSEX* A pointer to a WNDCLASSEX structure. You must fill the structure with the appropriate class attributes before passing it to the function."
       }
     ],

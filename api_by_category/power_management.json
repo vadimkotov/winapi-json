@@ -218,8 +218,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pfOn",
+        "type": "BOOL*",
+        "name": "pfOn",
         "description": "A pointer to the variable that receives the  power state. This value is TRUE if the device is in the working state. Otherwise, it is FALSE."
       }
     ],
@@ -303,8 +303,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       }
     ],
@@ -361,14 +361,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting that is being created."
       },
       {
@@ -425,14 +425,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting that is being created."
       }
     ],
@@ -460,8 +460,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       }
     ],
@@ -505,14 +505,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SourceSchemeGuid",
+        "type": "const GUID*",
+        "name": "SourceSchemeGuid",
         "description": "The identifier of the power scheme that is to be duplicated."
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "**DestinationSchemeGuid",
+        "type": "GUID**",
+        "name": "DestinationSchemeGuid",
         "description": "The address of a pointer to a GUID. If the pointer contains        NULL, the function allocates memory for a new        GUID and puts the address of this memory in the pointer. The caller can free this        memory using LocalFree."
       }
     ],
@@ -540,14 +540,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme. If this parameter is NULL,        an enumeration of the power policies is returned."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings.  If this parameter is NULL, an        enumeration of settings under the PolicyGuid key is returned.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup will be part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
@@ -564,14 +564,14 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "UCHAR",
-        "name": "*Buffer",
+        "type": "UCHAR*",
+        "name": "Buffer",
         "description": "A pointer to a variable to receive the elements. If this parameter is NULL, the function retrieves the size of the buffer required."
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*BufferSize",
+        "type": "DWORD*",
+        "name": "BufferSize",
         "description": "A pointer to a variable that on input contains the size of the buffer pointed to by        the Buffer parameter. If the  Buffer parameter is        NULL or if the BufferSize is not large enough, the function        will return ERROR_MORE_DATA and the variable receives the required buffer size."
       }
     ],
@@ -599,8 +599,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "GUID",
-        "name": "**ActivePolicyGuid",
+        "type": "GUID**",
+        "name": "ActivePolicyGuid",
         "description": "A pointer that receives a pointer to a GUID structure.        Use the LocalFree function to free this memory."
       }
     ],
@@ -634,8 +634,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "GUID",
-        "name": "**DestinationSchemeGuid",
+        "type": "GUID**",
+        "name": "DestinationSchemeGuid",
         "description": "A pointer to a pointer to a GUID. If the pointer contains        NULL, the function allocates memory for a new        GUID and puts the address of this memory in the pointer. The caller can free this        memory using LocalFree."
       }
     ],
@@ -657,14 +657,14 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubKeyGuid",
+        "type": "const GUID*",
+        "name": "SubKeyGuid",
         "description": "The identifier of the subkey to search."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SettingGuid",
+        "type": "const GUID*",
+        "name": "SettingGuid",
         "description": "The identifier of the power setting to query."
       }
     ],
@@ -692,20 +692,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemePersonalityGuid",
+        "type": "const GUID*",
+        "name": "SchemePersonalityGuid",
         "description": "The identifier for the scheme personality for this power setting. A power setting can have different default        values depending on the power scheme personality."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use        NO_SUBGROUP_GUID to retrieve the setting for the default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier for the single power setting."
       },
       {
@@ -739,20 +739,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use       NO_SUBGROUP_GUID to retrieve the setting for the default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -798,20 +798,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -845,20 +845,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemePersonalityGuid",
+        "type": "const GUID*",
+        "name": "SchemePersonalityGuid",
         "description": "The identifier of the scheme personality for this power setting. A power setting can have different default       values depending on the power scheme personality."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use       NO_SUBGROUP_GUID to retrieve the setting for the default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -892,20 +892,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use       NO_SUBGROUP_GUID to retrieve the setting for the default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -951,20 +951,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The identifier of the subgroup of power settings. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  These values are the subgroup values included with Windows.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -998,20 +998,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the       default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting that is being used."
       },
       {
@@ -1051,20 +1051,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting that is being used."
       },
       {
@@ -1104,20 +1104,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the  \t      default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -1157,14 +1157,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the          default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting that is being used."
       },
       {
@@ -1210,14 +1210,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -1263,14 +1263,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -1316,14 +1316,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SubGroupGuid",
+        "type": "const GUID*",
+        "name": "SubGroupGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  These values are the subgroup values included with Windows.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting that is being used."
       }
     ],
@@ -1351,14 +1351,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting that is being used."
       },
       {
@@ -1392,14 +1392,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting that is being used."
       },
       {
@@ -1433,14 +1433,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting that is being used."
       },
       {
@@ -1474,20 +1474,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting that is being used."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "UCHAR",
-        "name": "*Buffer",
+        "type": "UCHAR*",
+        "name": "Buffer",
         "description": "A pointer to a buffer that receives the string. If this parameter is NULL,       the BufferSize       parameter receives the required buffer size. The strings returned are all wide (Unicode) strings."
       },
       {
@@ -1550,14 +1550,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*PowerSettingSubKeyGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingSubKeyGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting to be deleted."
       }
     ],
@@ -1611,8 +1611,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       }
     ],
@@ -1640,8 +1640,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       }
     ],
@@ -1698,8 +1698,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerGuid",
+        "type": "const GUID*",
+        "name": "PowerGuid",
         "description": "The identifier of the power setting."
       }
     ],
@@ -1727,8 +1727,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerGuid",
+        "type": "const GUID*",
+        "name": "PowerGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -1849,20 +1849,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemePersonalityGuid",
+        "type": "const GUID*",
+        "name": "SchemePersonalityGuid",
         "description": "The identifier of the scheme personality for this power setting. A power setting can have different default       values depending on the power scheme personality."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -1896,20 +1896,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -1943,20 +1943,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemePersonalityGuid",
+        "type": "const GUID*",
+        "name": "SchemePersonalityGuid",
         "description": "The identifier of the scheme personality for this power setting. A power setting can have different default  \t     values depending on the power scheme personality."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -1990,20 +1990,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -2037,26 +2037,26 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
         "in_out": "_In_",
-        "type": "UCHAR",
-        "name": "*Buffer",
+        "type": "UCHAR*",
+        "name": "Buffer",
         "description": "The description, in wide (Unicode) characters."
       },
       {
@@ -2090,26 +2090,26 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
         "in_out": "_In_",
-        "type": "UCHAR",
-        "name": "*Buffer",
+        "type": "UCHAR*",
+        "name": "Buffer",
         "description": "The friendly name, in wide (Unicode) characters."
       },
       {
@@ -2143,26 +2143,26 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SchemeGuid",
+        "type": "const GUID*",
+        "name": "SchemeGuid",
         "description": "The identifier of the power scheme."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
         "in_out": "_In_",
-        "type": "UCHAR",
-        "name": "*Buffer",
+        "type": "UCHAR*",
+        "name": "Buffer",
         "description": "The icon resource."
       },
       {
@@ -2196,14 +2196,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting that is being used."
       },
       {
@@ -2214,8 +2214,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "UCHAR",
-        "name": "*Buffer",
+        "type": "UCHAR*",
+        "name": "Buffer",
         "description": "The description, in wide (Unicode) characters."
       },
       {
@@ -2249,14 +2249,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -2267,8 +2267,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "UCHAR",
-        "name": "*Buffer",
+        "type": "UCHAR*",
+        "name": "Buffer",
         "description": "The friendly name, in wide (Unicode) characters."
       },
       {
@@ -2302,14 +2302,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -2326,8 +2326,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "UCHAR",
-        "name": "*Buffer",
+        "type": "UCHAR*",
+        "name": "Buffer",
         "description": "The value for the possible setting."
       },
       {
@@ -2355,14 +2355,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*SubGroupGuid",
+        "type": "const GUID*",
+        "name": "SubGroupGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -2396,14 +2396,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -2437,14 +2437,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -2478,14 +2478,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the         default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
@@ -2519,20 +2519,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*SubGroupOfPowerSettingsGuid",
+        "type": "const GUID*",
+        "name": "SubGroupOfPowerSettingsGuid",
         "description": "The subgroup of power settings. This parameter can be one of the following values defined in WinNT.h. Use NO_SUBGROUP_GUID to refer to the        default power scheme.  ValueMeaning  NO_SUBGROUP_GUID fea3413e-7e05-4911-9a71-700331f1c294   Settings in this subgroup are part of the default power scheme.   GUID_DISK_SUBGROUP 0012ee47-9041-4b5d-9b77-535fba8b1442   Settings in this subgroup control power management configuration of the system's hard disk drives.   GUID_SYSTEM_BUTTON_SUBGROUP 4f971e89-eebd-4455-a8de-9e59040e7347   Settings in this subgroup control configuration of the system power buttons.   GUID_PROCESSOR_SETTINGS_SUBGROUP 54533251-82be-4824-96c1-47b60b740d00   Settings in this subgroup control configuration of processor power management features.   GUID_VIDEO_SUBGROUP 7516b95f-f776-4464-8c53-06167f40cc99   Settings in this subgroup control configuration of the video power management features.   GUID_BATTERY_SUBGROUP e73a048d-bf27-4f12-9731-8b2076e8891f   Settings in this subgroup control battery alarm trip points and actions.   GUID_SLEEP_SUBGROUP 238C9FA8-0AAD-41ED-83F4-97BE242C8F20   Settings in this subgroup control system sleep settings.   GUID_PCIEXPRESS_SETTINGS_SUBGROUP 501a4d13-42af-4429-9fd1-a8218c268e20   Settings in this subgroup control PCI Express settings."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*PowerSettingGuid",
+        "type": "const GUID*",
+        "name": "PowerSettingGuid",
         "description": "The identifier of the power setting."
       },
       {
         "in_out": "_In_",
-        "type": "UCHAR",
-        "name": "*Buffer",
+        "type": "UCHAR*",
+        "name": "Buffer",
         "description": "The units specifier, in wide (Unicode) characters."
       },
       {

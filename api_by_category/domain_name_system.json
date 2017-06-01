@@ -85,8 +85,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PDNS_RECORD",
-        "name": "*ppRecord",
+        "type": "PDNS_RECORD*",
+        "name": "ppRecord",
         "description": "A pointer to a DNS_RECORD structure that contains the list of extracted RRs. To free these records, use the  DnsRecordListFree function."
       }
     ],
@@ -166,14 +166,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DNS_PROXY_INFORMATION",
-        "name": "*proxyInformation",
+        "type": "DNS_PROXY_INFORMATION*",
+        "name": "proxyInformation",
         "description": "A pointer to a DNS_PROXY_INFORMATION structure that contains the proxy information for hostName."
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "DNS_PROXY_INFORMATION",
-        "name": "*defaultProxyInformation",
+        "type": "DNS_PROXY_INFORMATION*",
+        "name": "defaultProxyInformation",
         "description": "A pointer to a DNS_PROXY_INFORMATION structure that contains the default proxy information for hostName. This proxy information is for the wildcard DNS policy."
       },
       {
@@ -184,8 +184,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "void",
-        "name": "*completionContext",
+        "type": "void*",
+        "name": "completionContext",
         "description": "Reserved. Do not use."
       }
     ],
@@ -313,14 +313,14 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PDNS_RECORD",
-        "name": "*ppQueryResultsSet",
+        "type": "PDNS_RECORD*",
+        "name": "ppQueryResultsSet",
         "description": "Optional. A pointer to a pointer that points to the list of RRs that comprise the response. For more information, see the Remarks section."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PVOID",
-        "name": "*pReserved",
+        "type": "PVOID*",
+        "name": "pReserved",
         "description": "This parameter is reserved for future use and must be set to NULL."
       }
     ],
@@ -535,14 +535,14 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PDNS_RECORD",
-        "name": "*ppDiff1",
+        "type": "PDNS_RECORD*",
+        "name": "ppDiff1",
         "description": "A pointer to a DNS_RECORD pointer that contains the list of resource records built as a result of the arithmetic performed on them: pRRSet1 minus pRRSet2."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PDNS_RECORD",
-        "name": "*ppDiff2",
+        "type": "PDNS_RECORD*",
+        "name": "ppDiff2",
         "description": "A pointer to a DNS_RECORD pointer that contains the list of resource records built as a result of the arithmetic performed on them: pRRSet2 minus pRRSet1."
       }
     ],

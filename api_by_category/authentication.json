@@ -21,8 +21,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "PSecPkgInfo",
-        "name": "*ppPackageInfo",
+        "type": "PSecPkgInfo*",
+        "name": "ppPackageInfo",
         "description": "A pointer to a variable that receives a pointer to an array of  SecPkgInfo structures. Each structure contains information from the security support provider (SSP) that describes the capabilities of the security package available within that SSP. When you have finished using the array, free the memory by calling the FreeContextBuffer function."
       }
     ],
@@ -60,14 +60,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "SEC_CHAR",
-        "name": "*pszPackageName",
+        "type": "SEC_CHAR*",
+        "name": "pszPackageName",
         "description": "Pointer to a null-terminated string that specifies the name of the security package."
       },
       {
         "in_out": "_Out_",
-        "type": "PSecPkgInfo",
-        "name": "*ppPackageInfo",
+        "type": "PSecPkgInfo*",
+        "name": "ppPackageInfo",
         "description": "Pointer to a variable that receives a pointer to a  SecPkgInfo structure containing information about the specified security package."
       }
     ],
@@ -89,14 +89,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "SEC_CHAR",
-        "name": "*pszPrincipal",
+        "type": "SEC_CHAR*",
+        "name": "pszPrincipal",
         "description": "A pointer to a null-terminated string that specifies the name of the principal whose credentials the handle will reference. When using the Digest SSP, this parameter is optional. When using the Schannel SSP, this parameter is not used and should be set to NULL. Note  If the process that requests the handle does not have access to the credentials, the function returns an error. A null string indicates that the process requires a handle to the credentials of the user under whose security context it is executing."
       },
       {
         "in_out": "_In_",
-        "type": "SEC_CHAR",
-        "name": "*pszPackage",
+        "type": "SEC_CHAR*",
+        "name": "pszPackage",
         "description": "A pointer to a null-terminated string that specifies the name of the security package with which these credentials will be used. This is a security package name returned in the Name member of a  SecPkgInfo structure returned by the  EnumerateSecurityPackages function. After a context is established,  QueryContextAttributes (General) can be called with ulAttribute set to SECPKG_ATTR_PACKAGE_INFO to return information on the security package in use. When using the Digest SSP, set this parameter to WDIGEST_SP_NAME. When using the Schannel SSP, set this parameter to UNISP_NAME."
       },
       {
@@ -178,8 +178,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "HANDLE",
-        "name": "*pToken",
+        "type": "HANDLE*",
+        "name": "pToken",
         "description": "A pointer to receive the handle of the context's token. When you have finished using the user token, release the handle by calling the CloseHandle function."
       }
     ],
@@ -224,8 +224,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "PSECURITY_STRING",
-        "name": "*pszPackage",
+        "type": "PSECURITY_STRING*",
+        "name": "pszPackage",
         "description": "A string that contains the name of the security package to which the security context was exported."
       },
       {
@@ -510,8 +510,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SEC_CHAR",
-        "name": "*pszTargetName",
+        "type": "SEC_CHAR*",
+        "name": "pszTargetName",
         "description": "A pointer to a null-terminated string that indicates the target of the context. The string contents are security-package specific, as described in the following table. This list is not exhaustive. Additional system SSPs and third party SSPs can be added to a system.  SSP in useMeaning  Digest    Null-terminated string that uniquely identifies the URI of the requested resource. The string must be composed of characters that are allowed in a URI and must be representable by  the US ASCII code set.  Percent encoding can be used to represent characters outside the US ASCII code set.   Kerberos or Negotiate    Service principal name (SPN) or the security context of the destination server.   NTLM    Service principal name (SPN) or the security context of the destination server.   Schannel/SSL    Null-terminated string that uniquely identifies the target server. Schannel uses this value to verify the server certificate. Schannel also uses this value to locate the session in the session cache when reestablishing a connection. The cached session is used only if all of the following conditions are met: The target name is the same. The cache entry has not expired. The application process that calls the function is the same. The logon session is the same. The credential handle is the same."
       },
       {
@@ -628,8 +628,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*phToken",
+        "type": "HANDLE*",
+        "name": "phToken",
         "description": "Returned handle to the access token."
       }
     ],
@@ -663,8 +663,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*pBuffer",
+        "type": "void*",
+        "name": "pBuffer",
         "description": "A pointer to a structure that contains  values to set  the attributes to. The type of structure pointed to depends on the value specified in the ulAttribute parameter."
       },
       {
@@ -891,8 +891,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECPKG_FUNCTION_TABLE",
-        "name": "*ppTables",
+        "type": "PSECPKG_FUNCTION_TABLE*",
+        "name": "ppTables",
         "description": "Pointer to an array of  SECPKG_FUNCTION_TABLE structures. Each structure is a table of pointers to the functions implemented by a security package deployed in the SSP/AP DLL."
       },
       {
@@ -944,8 +944,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ProtocolReturnBuffer",
+        "type": "PVOID*",
+        "name": "ProtocolReturnBuffer",
         "description": "Returns the address of the output buffer within the client process. The authentication package is responsible for calling the  AllocateClientBuffer function to allocate the buffer within the client process. The contents of this buffer are specific to the authentication package."
       },
       {
@@ -1003,14 +1003,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ProtocolReturnBuffer",
+        "type": "PVOID*",
+        "name": "ProtocolReturnBuffer",
         "description": "A pointer that receives the address of the buffer returned by the authentication package. For information about the format and content of this buffer, see the documentation for the individual authentication package. This buffer is allocated by this function. When you have finished using this buffer, free the memory by calling the LsaFreeReturnBuffer function."
       },
       {
         "in_out": "_Out_",
-        "type": "PULONG",
-        "name": "*ReturnBufferLength",
+        "type": "PULONG*",
+        "name": "ReturnBufferLength",
         "description": "A pointer to a ULONG that receives the length of the returned buffer, in bytes."
       },
       {
@@ -1062,8 +1062,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ProtocolReturnBuffer",
+        "type": "PVOID*",
+        "name": "ProtocolReturnBuffer",
         "description": "Returns the address of the output buffer in the client process. The authentication package is responsible for calling the  AllocateClientBuffer function to allocate the buffer in the client process. The contents of this buffer are specific to the authentication package."
       },
       {
@@ -1121,8 +1121,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ProtocolReturnBuffer",
+        "type": "PVOID*",
+        "name": "ProtocolReturnBuffer",
         "description": "Returns the address of the output buffer within the client process. The authentication package is responsible for calling the  AllocateClientBuffer function to allocate the buffer within the client process. The contents of this buffer are specific to the authentication package."
       },
       {
@@ -1180,8 +1180,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PLSA_STRING",
-        "name": "*AuthenticationPackageName",
+        "type": "PLSA_STRING*",
+        "name": "AuthenticationPackageName",
         "description": "Pointer to a pointer to an LSA_STRING structure that receives the name of the authentication package. The authentication package is responsible for allocating the structure and the buffer that contains this string (using the  AllocateLsaHeap function) and returning the address of the structure in this parameter. The buffer will be freed by the LSA when it is no longer needed."
       }
     ],
@@ -1256,8 +1256,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ProfileBuffer",
+        "type": "PVOID*",
+        "name": "ProfileBuffer",
         "description": "Pointer that receives the address of the profile buffer in the client process. The authentication package is responsible for allocating the ProfileBuffer buffer within the client process by calling the  AllocateClientBuffer function. However, if the LSA subsequently encounters an error that prevents a successful logon, the LSA will free this buffer.     The contents of this buffer are determined by the authentication package. The LSA does not alter this buffer; it simply returns the value to the  LsaLogonUser function."
       },
       {
@@ -1286,20 +1286,20 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*TokenInformation",
+        "type": "PVOID*",
+        "name": "TokenInformation",
         "description": "Pointer that receives information to be included in the token. The format and content of the TokenInformation buffer are indicated by the TokenInformationType parameter. Your authentication package is responsible for allocating the memory used by TokenInformation; however, this memory will be freed by the LSA."
       },
       {
         "in_out": "_Out_",
-        "type": "PLSA_UNICODE_STRING",
-        "name": "*AccountName",
+        "type": "PLSA_UNICODE_STRING*",
+        "name": "AccountName",
         "description": "Pointer to an  LSA_UNICODE_STRING structure that receives the name of the user account. AccountName must always be returned regardless of the success or failure of the call; its string is included in the audit record for an authentication attempt. Your authentication package is responsible for allocating the memory used by AccountName; however, this memory will be freed by the LSA."
       },
       {
         "in_out": "_Out_",
-        "type": "PLSA_UNICODE_STRING",
-        "name": "*AuthenticatingAuthority",
+        "type": "PLSA_UNICODE_STRING*",
+        "name": "AuthenticatingAuthority",
         "description": "Optional. Pointer to an  LSA_UNICODE_STRING structure that receives the description of the authenticating authority for the logon. This parameter may be NULL. This string is included in the audit record for an authentication attempt. Your authentication package is responsible for allocating the memory used by AuthenticatingAuthority; however, this memory will be freed by the LSA.     The MSV1_0 authentication package returns the domain name of the domain validating the account. The Kerberos authentication package returns the NetBIOS domain name."
       }
     ],
@@ -1351,8 +1351,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ProfileBuffer",
+        "type": "PVOID*",
+        "name": "ProfileBuffer",
         "description": "Pointer that receives the address of the profile buffer in the client process. The authentication package is responsible for allocating the ProfileBuffer buffer within the client process by calling the  AllocateClientBuffer function. However, if the LSA subsequently encounters an error which prevents a successful logon, then the LSA will take care of freeing this buffer.     The contents of this buffer are determined by the authentication package. The LSA does not alter this buffer; it simply returns the value to the  LsaLogonUser function."
       },
       {
@@ -1381,26 +1381,26 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*TokenInformation",
+        "type": "PVOID*",
+        "name": "TokenInformation",
         "description": "Pointer that receives the address of information to be included in the token. The format and content of TokenInformation are indicated by the TokenInformationType parameter. Your authentication package is responsible for allocating the memory used by TokenInformation; however, this memory will be freed by the LSA."
       },
       {
         "in_out": "_Out_",
-        "type": "PUNICODE_STRING",
-        "name": "*AccountName",
+        "type": "PUNICODE_STRING*",
+        "name": "AccountName",
         "description": "Pointer to an  LSA_UNICODE_STRING structure that receives the name of the user account. AccountName must always be returned regardless of the success or failure of the call; its string is included in the audit record for an authentication attempt. Your authentication package is responsible for allocating the memory used by AccountName It will be freed by the LSA."
       },
       {
         "in_out": "_Out_",
-        "type": "PUNICODE_STRING",
-        "name": "*AuthenticatingAuthority",
+        "type": "PUNICODE_STRING*",
+        "name": "AuthenticatingAuthority",
         "description": "Optional. Pointer to an LSA_UNICODE_STRING structure that receives the description of the authenticating authority for the logon. This parameter may be NULL. This string is included in the audit record for an authentication attempt. Your authentication package is responsible for allocating the memory used by AuthenticatingAuthority; however, this memory will be freed by the LSA.     The MSV1_0 authentication package returns the domain name of the domain validating the account. The Kerberos authentication package returns the NetBIOS domain name."
       },
       {
         "in_out": "_Out_",
-        "type": "PUNICODE_STRING",
-        "name": "*MachineName",
+        "type": "PUNICODE_STRING*",
+        "name": "MachineName",
         "description": "Optional. Pointer that receives the address of an LSA_UNICODE_STRING structure containing the name of the client's workstation. This information is included in the audit record for an authentication attempt. Your authentication package is responsible for allocating the memory used by MachineName; however, this memory will be freed by the LSA.     The MSV1_0 authentication package returns the NetBIOS name of the client's workstation."
       }
     ],
@@ -1452,8 +1452,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ProfileBuffer",
+        "type": "PVOID*",
+        "name": "ProfileBuffer",
         "description": "Pointer that receives the address of the profile buffer in the client process. The authentication package is responsible for allocating ProfileBuffer within the client process by calling the  AllocateClientBuffer function. However, if the LSA subsequently encounters an error which prevents a successful logon, then the LSA will take care of freeing this buffer.     The contents of this buffer are determined by the authentication package. The LSA does not alter this buffer; it simply returns the value to the  LsaLogonUser function."
       },
       {
@@ -1482,26 +1482,26 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*TokenInformation",
+        "type": "PVOID*",
+        "name": "TokenInformation",
         "description": "Pointer that receives the address of information to be included in the token. The format and content of TokenInformation are indicated by the TokenInformationType parameter. Your authentication package is responsible for allocating the memory used by TokenInformation; however, this memory will be freed by the LSA."
       },
       {
         "in_out": "_Out_",
-        "type": "PUNICODE_STRING",
-        "name": "*AccountName",
+        "type": "PUNICODE_STRING*",
+        "name": "AccountName",
         "description": "Pointer to an  LSA_UNICODE_STRING structure that receives the name of the user account. AccountName must always be returned regardless of the success or failure of the call; its string is included in the audit record for an authentication attempt. Your authentication package is responsible for allocating the memory used by AccountName; however, this memory will be freed by the LSA."
       },
       {
         "in_out": "_Out_",
-        "type": "PUNICODE_STRING",
-        "name": "*AuthenticatingAuthority",
+        "type": "PUNICODE_STRING*",
+        "name": "AuthenticatingAuthority",
         "description": "Optional. Pointer to an  LSA_UNICODE_STRING structure that receives the description of the authenticating authority for the logon. This parameter may be NULL. This string is included in the audit record for an authentication attempt. Your authentication package is responsible for allocating the memory used by AuthenticatingAuthority; however, this memory will be freed by the LSA.     The MSV1_0 authentication package returns the domain name of the domain validating the account. The Kerberos authentication package returns the NetBIOS domain name."
       },
       {
         "in_out": "_Out_",
-        "type": "PUNICODE_STRING",
-        "name": "*MachineName",
+        "type": "PUNICODE_STRING*",
+        "name": "MachineName",
         "description": "Optional. Pointer that receives the address of a UNICODE_STRING structure containing the name of the client's computer. This string may optionally be omitted. This string is included in the audit record for this authentication attempt. Your authentication package is responsible for allocating the memory used by MachineName; however, this memory will be freed by the LSA.     The MSV1_0 authentication package returns the NetBIOS name of the client's workstation."
       },
       {
@@ -1512,8 +1512,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECPKG_SUPPLEMENTAL_CRED_ARRAY",
-        "name": "*SupplementalCredentials",
+        "type": "PSECPKG_SUPPLEMENTAL_CRED_ARRAY*",
+        "name": "SupplementalCredentials",
         "description": "Pointer to a  SECPKG_SUPPLEMENTAL_CRED_ARRAY array of supplemental credentials for other packages."
       }
     ],
@@ -1928,8 +1928,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECPKG_EXTENDED_INFORMATION",
-        "name": "*ppInformation",
+        "type": "PSECPKG_EXTENDED_INFORMATION*",
+        "name": "ppInformation",
         "description": "Pointer to a pointer to a  SECPKG_EXTENDED_INFORMATION structure allocated by the security package. If the function call succeeds, the returned structure contains the requested information."
       }
     ],
@@ -1986,8 +1986,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSecurityUserData",
-        "name": "*UserData",
+        "type": "PSecurityUserData*",
+        "name": "UserData",
         "description": "Pointer to a pointer to a  SecurityUserData structure. If the function call succeeds, the user information is returned in this structure. The security package should allocate the memory for this structure in the caller's address space. The caller is responsible for freeing the buffer by calling the  FreeContextBuffer function."
       }
     ],
@@ -2295,8 +2295,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PX509Certificate",
-        "name": "*ppCertificate",
+        "type": "PX509Certificate*",
+        "name": "ppCertificate",
         "description": "On return, receives the address of a pointer to the X509Certificate structure that this function creates. When you have finished using the X509Certificate structure, free it by calling SslFreeCertificate."
       }
     ],
@@ -2382,8 +2382,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECPKG_USER_FUNCTION_TABLE",
-        "name": "*ppTables",
+        "type": "PSECPKG_USER_FUNCTION_TABLE*",
+        "name": "ppTables",
         "description": "Pointer that returns an array of  SECPKG_USER_FUNCTION_TABLE structures. Each structure is a table of pointers to the user-mode functions implemented by a security package deployed in the SSP/AP DLL."
       },
       {
@@ -2615,8 +2615,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*UserFunctions",
+        "type": "PVOID*",
+        "name": "UserFunctions",
         "description": "This parameter is not used."
       }
     ],
@@ -2697,8 +2697,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*MarshalledCreds",
+        "type": "PVOID*",
+        "name": "MarshalledCreds",
         "description": "Pointer that receives the address of the buffer containing the serialized credentials. Allocate the memory for this buffer by calling the  AllocateHeap function."
       }
     ],
@@ -2896,8 +2896,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ClientBaseAddress",
+        "type": "PVOID*",
+        "name": "ClientBaseAddress",
         "description": "Pointer that receives the address of the buffer. This address is the virtual address of the buffer within the client process, not in the current process."
       }
     ],
@@ -3387,8 +3387,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ProtocolReturnBuffer",
+        "type": "PVOID*",
+        "name": "ProtocolReturnBuffer",
         "description": "Pointer that receives the address of the output buffer. The content of this buffer is package-specific."
       },
       {
@@ -3446,8 +3446,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ProtocolReturnBuffer",
+        "type": "PVOID*",
+        "name": "ProtocolReturnBuffer",
         "description": "Pointer that receives the address of the output buffer."
       },
       {
@@ -3505,8 +3505,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ProtocolReturnBuffer",
+        "type": "PVOID*",
+        "name": "ProtocolReturnBuffer",
         "description": "Pointer to the output buffer."
       },
       {
@@ -4033,8 +4033,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PUCHAR",
-        "name": "*UserAuthData",
+        "type": "PUCHAR*",
+        "name": "UserAuthData",
         "description": "Pointer that receives the address of the retrieved data."
       },
       {
@@ -4120,8 +4120,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PUCHAR",
-        "name": "*UserAuthData",
+        "type": "PUCHAR*",
+        "name": "UserAuthData",
         "description": "Pointer that receives the consolidated authorization data. When you have finished using the authorization data, free the memory by calling the FreeLsaHeap function."
       },
       {
@@ -4224,8 +4224,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*UserHandle",
+        "type": "PVOID*",
+        "name": "UserHandle",
         "description": "Pointer to a pointer that receives a handle to the user account."
       }
     ],
@@ -4595,8 +4595,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwOptions",
+        "type": "DWORD*",
+        "name": "pdwOptions",
         "description": "Pointer to a DWORD that will hold the display options for the current status message."
       },
       {
@@ -4654,8 +4654,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*pWlxContext",
+        "type": "PVOID*",
+        "name": "pWlxContext",
         "description": "A pointer to a pointer to a VOID that will contain the address of the GINA context for this window station. This context is passed in all subsequent calls to the GINA from Winlogon. The GINA DLL manages any memory used by the context. The context pointer can be changed later by calling the WlxSetOption function with WLX_OPTION_CONTEXT_POINTER."
       }
     ],
@@ -4800,8 +4800,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*pProfile",
+        "type": "PVOID*",
+        "name": "pProfile",
         "description": "On return from a successful authentication, the pProfile parameter points to either a  WLX_PROFILE_V1_0 or a  WLX_PROFILE_V2_0 structure. The first DWORD in the structure indicates which structure it is. Winlogon uses this structure to load the profile of the logged-on user, and frees the memory associated with the structure when it no longer needs it."
       }
     ],
@@ -4933,8 +4933,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "BOOL",
-        "name": "*pSecure",
+        "type": "BOOL*",
+        "name": "pSecure",
         "description": "A pointer to a Boolean value that, on input, specifies whether the current screen saver is secure and,     on output, indicates whether the workstation should be locked."
       }
     ],
@@ -5144,14 +5144,14 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PSID",
-        "name": "*ppLogonSid",
+        "type": "PSID*",
+        "name": "ppLogonSid",
         "description": "A pointer to a pointer to a security identifier (SID) that receives the SID of the user logged on. When you have finished using the SID, free it by calling the LocalFree function."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PVOID",
-        "name": "*ppProfileBuffer",
+        "type": "PVOID*",
+        "name": "ppProfileBuffer",
         "description": "A pointer to a pointer that receives the address of a buffer that contains the logged on user's profile."
       },
       {
@@ -5227,14 +5227,14 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PSID",
-        "name": "*ppLogonSid",
+        "type": "PSID*",
+        "name": "ppLogonSid",
         "description": "A pointer to a pointer to a SID that receives the SID of the user logged on. When you have finished using the SID, free it by calling the LocalFree function."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PVOID",
-        "name": "*ppProfileBuffer",
+        "type": "PVOID*",
+        "name": "ppProfileBuffer",
         "description": "A pointer to a pointer that receives the address of a buffer that contains the logged on user's profile."
       },
       {
@@ -5450,8 +5450,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWLX_DESKTOP",
-        "name": "*ppDesktop",
+        "type": "PWLX_DESKTOP*",
+        "name": "ppDesktop",
         "description": "If the desktop is created, returns a pointer to a  WLX_DESKTOP structure for the new desktop. This pointer can be used in a call to  WlxSetReturnDesktop to make this the current desktop after a SAS event is processed."
       }
     ],
@@ -5701,8 +5701,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG_PTR",
-        "name": "*Value",
+        "type": "ULONG_PTR*",
+        "name": "Value",
         "description": "Returns the current value of the option."
       }
     ],
@@ -5730,8 +5730,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWLX_DESKTOP",
-        "name": "*ppDesktop",
+        "type": "PWLX_DESKTOP*",
+        "name": "ppDesktop",
         "description": "Receives a pointer to a  WLX_DESKTOP structure containing necessary information describing the desktop. This pointer can be freed with  LocalFree."
       }
     ],
@@ -5881,14 +5881,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "WCHAR",
-        "name": "*UserName",
+        "type": "WCHAR*",
+        "name": "UserName",
         "description": "Pointer to a null-terminated wide character string that specifies the name of the newly logged-on user."
       },
       {
         "in_out": "_In_",
-        "type": "WCHAR",
-        "name": "*Domain",
+        "type": "WCHAR*",
+        "name": "Domain",
         "description": "Pointer to a null-terminated wide character string that specifies the newly logged-on user's domain."
       }
     ],
@@ -5986,8 +5986,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG_PTR",
-        "name": "*OldValue",
+        "type": "ULONG_PTR*",
+        "name": "OldValue",
         "description": "On return, pointer to the old value the option was set to."
       }
     ],
@@ -6720,8 +6720,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPTSTR",
-        "name": "*lplpSystem",
+        "type": "LPTSTR*",
+        "name": "lplpSystem",
         "description": "On a successful return, a pointer to a null-terminated string in the output buffer specifying that part of the resource that is accessed through system APIs specific to the resource type, rather than through the WNet API. If there is no such part, lplpSystem is set to NULL. For example, if the input remote resource name was \"\\\\server\\share\\dir\", lpRemoteName is returned pointing to \"\\\\server\\share\" and lplpSystem points to \"\\dir\", both strings being stored in the buffer pointed to by lpBuffer."
       }
     ],
@@ -7280,8 +7280,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PLUID",
-        "name": "*LogonSessionList",
+        "type": "PLUID*",
+        "name": "LogonSessionList",
         "description": "Address of a pointer to a LUID. The pointer receives the first element of an array of logon session identifiers. The memory used by the array is allocated by the LSA. When the array is no longer needed, call the  LSAFreeReturnBuffer function to free it."
       }
     ],
@@ -7332,8 +7332,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECURITY_LOGON_SESSION_DATA",
-        "name": "*ppLogonSessionData",
+        "type": "PSECURITY_LOGON_SESSION_DATA*",
+        "name": "ppLogonSessionData",
         "description": "Address of a pointer to a  SECURITY_LOGON_SESSION_DATA structure containing information on the logon session specified by LogonId. This structure is allocated by the LSA. When the information is no longer needed, call the  LSAFreeReturnBuffer function to free the memory used by this structure."
       }
     ],
@@ -7403,8 +7403,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ProfileBuffer",
+        "type": "PVOID*",
+        "name": "ProfileBuffer",
         "description": "A pointer to a void pointer that receives the address of an output buffer that contains authentication information, such as the logon shell and home directory. This parameter can be one of the following output buffer structures for the MSV1_0 and Kerberos authentication packages.  ValueMeaning  MSV1_0_INTERACTIVE_PROFILE MSV1_0   An interactive user's logon profile.   KERB_TICKET_PROFILE Kerberos   Logon, disconnect, and ticket refresh authentication output.   MSV1_0_LM20_LOGON MSV1_0   Output when processing the second half of a NTLM 2.0 protocol logon.   MSV1_0_LM20_LOGON_PROFILE MSV1_0   Output when using authentication with subauthentication.     For more information about the buffer used by other authentication packages, see the documentation for that authentication package. When this buffer is no longer needed, the calling application must free this buffer by calling  the LsaFreeReturnBuffer function."
       },
       {
@@ -7503,8 +7503,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*Buffer",
+        "type": "PVOID*",
+        "name": "Buffer",
         "description": "Pointer to a buffer that receives the requested information."
       }
     ],
@@ -7538,8 +7538,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PLSA_FOREST_TRUST_INFORMATION",
-        "name": "*ForestTrustInfo",
+        "type": "PLSA_FOREST_TRUST_INFORMATION*",
+        "name": "ForestTrustInfo",
         "description": "Pointer to an LSA_FOREST_TRUST_INFORMATION structure that returns the forest trust information for the TrustedDomain object specified by the TrustedDomainName parameter."
       }
     ],
@@ -7655,8 +7655,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PLSA_FOREST_TRUST_COLLISION_INFORMATION",
-        "name": "*CollisionInfo",
+        "type": "PLSA_FOREST_TRUST_COLLISION_INFORMATION*",
+        "name": "CollisionInfo",
         "description": "Pointer to a pointer to an LSA_FOREST_TRUST_COLLISION_INFORMATION structure that returns information about any collisions that occurred."
       }
     ],
@@ -8056,8 +8056,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pulAuthPackage",
+        "type": "ULONG*",
+        "name": "pulAuthPackage",
         "description": "On input, the value of this parameter is used to specify the authentication package for which the credentials in the pvInAuthBuffer buffer are serialized. If the value of pvInAuthBuffer is NULL and the CREDUIWIN_AUTHPACKAGE_ONLY flag is set in the dwFlags parameter, only credential providers capable of serializing credentials for the specified authentication package are to be enumerated.    To get the appropriate value to use for this parameter on input, call the LsaLookupAuthenticationPackage function and use the value of the AuthenticationPackage parameter  of that function. On output, this parameter specifies the authentication package for which the credentials in the ppvOutAuthBuffer buffer are serialized."
       },
       {
@@ -8074,20 +8074,20 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*ppvOutAuthBuffer",
+        "type": "LPVOID*",
+        "name": "ppvOutAuthBuffer",
         "description": "The address of a pointer that, on output, specifies the credential BLOB. For Kerberos, NTLM, or Negotiate credentials, call the CredUnPackAuthenticationBuffer function to convert this BLOB to string representations of the credentials.   When you have finished using the credential BLOB, clear it from memory by calling the SecureZeroMemory function, and free it by calling the CoTaskMemFree function."
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*pulOutAuthBufferSize",
+        "type": "ULONG*",
+        "name": "pulOutAuthBufferSize",
         "description": "The size, in bytes, of the ppvOutAuthBuffer buffer."
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "BOOL",
-        "name": "*pfSave",
+        "type": "BOOL*",
+        "name": "pfSave",
         "description": "A pointer to a Boolean value that, on input, specifies whether the Save check box is selected in the dialog box that this function displays. On output, the value of this parameter specifies whether the Save check box was selected when the user clicks the Submit button in the dialog box. Set this parameter to NULL to ignore the Save check box. This parameter is ignored if the CREDUIWIN_CHECKBOX flag is not set in the dwFlags parameter."
       },
       {
@@ -8121,8 +8121,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppszUsername",
+        "type": "PWSTR*",
+        "name": "ppszUsername",
         "description": "Pointer to a pointer to a null-terminated string. When you have finished using the string, free ppszUsername by calling the  LocalFree function."
       }
     ],
@@ -8232,14 +8232,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*Count",
+        "type": "DWORD*",
+        "name": "Count",
         "description": "Count of the credentials returned in the Credentials array."
       },
       {
         "in_out": "_Out_",
-        "type": "PCREDENTIAL",
-        "name": "**Credentials",
+        "type": "PCREDENTIAL**",
+        "name": "Credentials",
         "description": "Pointer to an array of pointers to credentials. The returned credential is a single allocated block. Any pointers contained within the buffer are pointers to locations within this single allocated block. The single returned buffer must be freed by calling CredFree."
       }
     ],
@@ -8279,8 +8279,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PCREDENTIAL",
-        "name": "*Credential",
+        "type": "PCREDENTIAL*",
+        "name": "Credential",
         "description": "The address of a pointer to a CREDENTIAL structure that specifies the set of credentials this function finds. When you have finished using this structure, free it by calling the CredFree function."
       }
     ],
@@ -8366,8 +8366,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PCREDENTIAL_TARGET_INFORMATION",
-        "name": "*TargetInfo",
+        "type": "PCREDENTIAL_TARGET_INFORMATION*",
+        "name": "TargetInfo",
         "description": "Pointer to a single allocated block buffer to contain the target information. At least one of the returned members of TargetInfo will be non-NULL. Any pointers contained within the buffer are pointers to locations within this single allocated block. The single returned buffer must be freed by calling CredFree."
       }
     ],
@@ -8424,8 +8424,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPTSTR",
-        "name": "*MarshaledCredential",
+        "type": "LPTSTR*",
+        "name": "MarshaledCredential",
         "description": "Pointer to a null-terminated  \t\t\t\t\t\tstring that contains the marshaled credential. The caller should free the returned buffer using CredFree."
       }
     ],
@@ -8453,8 +8453,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "CRED_PROTECTION_TYPE",
-        "name": "*pProtectionType",
+        "type": "CRED_PROTECTION_TYPE*",
+        "name": "pProtectionType",
         "description": "A pointer to a value from the CRED_PROTECTION_TYPE enumeration that specifies whether the credentials specified in the pszProtectedCredentials parameter are protected."
       }
     ],
@@ -8500,14 +8500,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pcchMaxChars",
+        "type": "DWORD*",
+        "name": "pcchMaxChars",
         "description": "The size, in characters of the pszProtectedCredentials buffer. On output, if the pszProtectedCredentials is not of sufficient size to receive the encrypted credentials, this parameter specifies the required size, in characters, of the pszProtectedCredentials buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "CRED_PROTECTION_TYPE",
-        "name": "*ProtectionType",
+        "type": "CRED_PROTECTION_TYPE*",
+        "name": "ProtectionType",
         "description": "A pointer to a CRED_PROTECTION_TYPE enumeration type that, on output, specifies the type of protection provided."
       }
     ],
@@ -8553,8 +8553,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pcbPackedCredentials",
+        "type": "DWORD*",
+        "name": "pcbPackedCredentials",
         "description": "A pointer to a DWORD value that specifies the size, in bytes, of the pPackedCredentials buffer. On output, if the buffer is not of sufficient size, specifies the required size, in bytes, of the  pPackedCredentials buffer."
       }
     ],
@@ -8594,8 +8594,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PCREDENTIAL",
-        "name": "*Credential",
+        "type": "PCREDENTIAL*",
+        "name": "Credential",
         "description": "Pointer to a single allocated block buffer to return the credential. Any pointers contained within the buffer are pointers to locations within this single allocated block. The single returned buffer must be freed by calling CredFree."
       }
     ],
@@ -8629,14 +8629,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*Count",
+        "type": "DWORD*",
+        "name": "Count",
         "description": "Count of the credentials returned in the Credentials array."
       },
       {
         "in_out": "_Out_",
-        "type": "PCREDENTIAL",
-        "name": "**Credentials",
+        "type": "PCREDENTIAL**",
+        "name": "Credentials",
         "description": "Pointer to an array of pointers to credentials. The most specific existing credential matching the TargetInfo is returned. If credentials of various types (for example, CRED_TYPE_DOMAIN_PASSWORD and CRED_TYPE_DOMAIN_CERTIFICATE credentials) exist, one of each type is returned. If a connection were to be made to the named target, this most-specific credential would be used.     Only those credential types specified by the TargetInfo.CredTypes array are returned. The returned Credentials array is sorted in the same order as the TargetInfo.CredTypes array. That is, authentication packages specify a preferred credential type by specifying it earlier in the TargetInfo.CredTypes array.If TargetInfo.CredTypeCount is zero, the Credentials array is returned in the following sorted order:  CRED_TYPE_DOMAIN_CERTIFICATE CRED_TYPE_DOMAIN_PASSWORD  The returned buffer is a single allocated block. Any pointers contained within the buffer are pointers to locations within this single allocated block. The single returned buffer must be freed by calling CredFree."
       }
     ],
@@ -8711,8 +8711,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*Credential",
+        "type": "PVOID*",
+        "name": "Credential",
         "description": "Pointer to the unmarshaled credential. If CredType returns CertCredential, the returned pointer is to a CERT_CREDENTIAL_INFO structure. If CredType returns UsernameTargetCredential, the returned pointer is to a USERNAME_TARGET_CREDENTIAL_INFO structure. The caller should free the returned buffer using CredFree."
       }
     ],
@@ -8758,8 +8758,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pcchMaxUserName",
+        "type": "DWORD*",
+        "name": "pcchMaxUserName",
         "description": "A pointer to a DWORD value that specifies the size, in characters, of the pszUserName buffer. On output, if the buffer is not of sufficient size, specifies the required size, in characters, of the  pszUserName buffer. The size includes terminating null character."
       },
       {
@@ -8770,8 +8770,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pcchMaxDomainname",
+        "type": "DWORD*",
+        "name": "pcchMaxDomainname",
         "description": "A pointer to a DWORD value that specifies the size, in characters, of the pszDomainName buffer. On output, if the buffer is not of sufficient size, specifies the required size, in characters, of the  pszDomainName buffer. The size includes the terminating null character. The required size can be zero if there is no domain name."
       },
       {
@@ -8782,8 +8782,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pcchMaxPassword",
+        "type": "DWORD*",
+        "name": "pcchMaxPassword",
         "description": "A pointer to a DWORD value that specifies the size, in characters, of the pszPassword buffer. On output, if the buffer is not of sufficient size, specifies the required size, in characters, of the  pszPassword buffer. The size includes the terminating null character.   This string can be a marshaled credential. See Remarks."
       }
     ],
@@ -8829,8 +8829,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pcchMaxChars",
+        "type": "DWORD*",
+        "name": "pcchMaxChars",
         "description": "The size, in characters of the pszCredentials buffer. On output, if the pszCredentials is not of sufficient size to receive the encrypted credentials, this parameter specifies the required size, in characters, of the pszCredentials buffer."
       }
     ],
@@ -8958,8 +8958,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*lpLogonScript",
+        "type": "LPWSTR*",
+        "name": "lpLogonScript",
         "description": "Pointer to a location where a pointer to a null-terminated string may be returned.     After the function completes, this value may point to a null-terminated string that contains the name of a program to execute plus any parameters the program requires.  LocalAlloc should be used to allocate the memory for the returned string. This memory will be freed by MPR when it is no longer needed."
       }
     ],
@@ -10306,8 +10306,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "UUID",
-        "name": "*CardIdentifier",
+        "type": "UUID*",
+        "name": "CardIdentifier",
         "description": "A pointer to a value that uniquely identifies a smart card. The name-value pair that this function reads from the global cache is associated with this smart card."
       },
       {
@@ -10330,8 +10330,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*DataLen",
+        "type": "DWORD*",
+        "name": "DataLen",
         "description": "A pointer to the size, in bytes, of the Data buffer."
       }
     ],
@@ -10680,8 +10680,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "UUID",
-        "name": "*CardIdentifier",
+        "type": "UUID*",
+        "name": "CardIdentifier",
         "description": "A pointer to a value that uniquely identifies the smart card from which the name-value pair was read."
       },
       {
@@ -10769,8 +10769,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "unsigned long SEC_FAR",
-        "name": "*pfContextAttr",
+        "type": "unsigned long SEC_FAR*",
+        "name": "pfContextAttr",
         "description": "Pointer to a variable that receives a set of bit flags indicating the attributes of the established context. For a description of the various attributes, see  Context Requirements. Flags used for this parameter are prefixed with ASC_RET, such as ASC_RET_DELEGATE. Do not check for security-related attributes until the final function call returns successfully. Attribute flags not related to security, such as the ASC_RET_ALLOCATED_MEMORY flag, can be checked before the final return."
       },
       {
@@ -10798,14 +10798,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "LPTSTR",
-        "name": "*ProfileList",
+        "type": "LPTSTR*",
+        "name": "ProfileList",
         "description": "Pointer to a list of Unicode or ANSI strings that contain the names of the packages with SASL wrapper support."
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*ProfileCount",
+        "type": "ULONG*",
+        "name": "ProfileCount",
         "description": "Pointer to an unsigned LONG value that contains the number of packages with SASL wrapper support."
       }
     ],
@@ -10880,8 +10880,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSecPkgInfo",
-        "name": "*PackageInfo",
+        "type": "PSecPkgInfo*",
+        "name": "PackageInfo",
         "description": "Pointer to a pointer to a SecPkgInfo structure that returns the package information for the package specified by the ProfileName parameter."
       }
     ],
@@ -10909,8 +10909,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSecPkgInfo",
-        "name": "*PackageInfo",
+        "type": "PSecPkgInfo*",
+        "name": "PackageInfo",
         "description": "Pointer to a pointer to a SecPkgInfo structure that returns the negotiate prefix for the negotiation buffer specified by the pInput parameter."
       }
     ],
@@ -10992,8 +10992,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "unsigned long SEC_FAR",
-        "name": "*pfContextAttr",
+        "type": "unsigned long SEC_FAR*",
+        "name": "pfContextAttr",
         "description": "Pointer to a variable to receive a set of bit flags that indicate the attributes of the established context. For a description of the various attributes, see  Context Requirements.  Flags used for this parameter are prefixed with ISC_RET_, such as ISC_RET_DELEGATE.     For a list of valid values, see the fContextReq parameter. Do not check for security-related attributes until the final function call returns successfully. Attribute flags not related to security, such as the ASC_RET_ALLOCATED_MEMORY flag, can be checked before the final return. Note  Particular context attributes can change during a negotiation with a remote peer."
       },
       {
@@ -11091,32 +11091,32 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "SEC_WCHAR",
-        "name": "*pszPackageName",
+        "type": "SEC_WCHAR*",
+        "name": "pszPackageName",
         "description": "The name of the provider to use. The value of this parameter must be either \"Kerberos\", \"Negotiate\", or \"NTLM\"."
       },
       {
         "in_out": "_In_",
-        "type": "SEC_WCHAR",
-        "name": "*pszDomainName",
+        "type": "SEC_WCHAR*",
+        "name": "pszDomainName",
         "description": "The domain of the account for which to change the password."
       },
       {
         "in_out": "_In_",
-        "type": "SEC_WCHAR",
-        "name": "*pszAccountName",
+        "type": "SEC_WCHAR*",
+        "name": "pszAccountName",
         "description": "The user name of the account for which to change the password."
       },
       {
         "in_out": "_In_",
-        "type": "SEC_WCHAR",
-        "name": "*pszOldPassword",
+        "type": "SEC_WCHAR*",
+        "name": "pszOldPassword",
         "description": "The old password to be changed."
       },
       {
         "in_out": "_In_",
-        "type": "SEC_WCHAR",
-        "name": "*pszNewPassword",
+        "type": "SEC_WCHAR*",
+        "name": "pszNewPassword",
         "description": "The new password for the specified account."
       },
       {
@@ -11162,8 +11162,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PUSHORT",
-        "name": "*Buffer",
+        "type": "PUSHORT*",
+        "name": "Buffer",
         "description": "The serialized array of byte values that represents the target specified by the InTargetInfo parameter."
       },
       {
@@ -11226,8 +11226,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PLSA_SID_NAME_MAPPING_OPERATION_OUTPUT",
-        "name": "*OpOutput",
+        "type": "PLSA_SID_NAME_MAPPING_OPERATION_OUTPUT*",
+        "name": "OpOutput",
         "description": "Contains a value of   LSA_SID_NAME_MAPPING_OPERATION_ERROR that indicates operation success or failure.  ValueMeaning  Success   Operation is complete without error.   NonMappingError   An error unrelated to SID-name mapping has occurred.   NameCollision   Operation failure due to name collision.   SidCollision   Operation failure due to SID collision.   DomainNotFound   Corresponding domain not found.   DomainSidPrefixMismatch   Provided SID doesn't have the correct domain prefix.   MappingNotFound   Mapping not found in the cache."
       }
     ],
@@ -11302,8 +11302,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*Buffer",
+        "type": "PVOID*",
+        "name": "Buffer",
         "description": "Pointer to a variable that receives a pointer to a structure containing the requested information. The type of structure depends on the value of the InformationClass parameter.     When you no longer need the information, pass the returned pointer to  LsaFreeMemory."
       }
     ],
@@ -11477,8 +11477,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*CredType",
+        "type": "GUID*",
+        "name": "CredType",
         "description": "The type of credential specified by the ContextHandle parameter. This can be one of the following values.  ValueMeaning  SEC_WINNT_AUTH_DATA_TYPE_PASSWORD 0x28bfc32f, 0x10f6, 0x4738,  0x98, 0xd1, 0x1a, 0xc0, 0x61, 0xdf, 0x71, 0x6a   The credential is a password.   SEC_WINNT_AUTH_DATA_TYPE_CERT 0x235f69ad, 0x73fb, 0x4dbc,  0x82, 0x3, 0x6, 0x29, 0xe7, 0x39, 0x33, 0x9b   The credential is a certificate.   SEC_WINNT_AUTH_DATA_TYPE_CSP_DATA 0x68fd9879, 0x79c, 0x4dfe,  0x82, 0x81, 0x57, 0x8a, 0xad, 0xc1, 0xc1, 0x0   The credential is authentication data from a cryptographic service provider (CSP)."
       },
       {
@@ -11489,8 +11489,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PUCHAR",
-        "name": "*FlatCredUIContext",
+        "type": "PUCHAR*",
+        "name": "FlatCredUIContext",
         "description": "A pointer to an array of characters that specifies information about the context specified by the ContextHandle parameter."
       }
     ],
@@ -11571,8 +11571,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*CredType",
+        "type": "GUID*",
+        "name": "CredType",
         "description": "The type of credential specified by the ContextHandle parameter. This can be one of the following values.  ValueMeaning  SEC_WINNT_AUTH_DATA_TYPE_PASSWORD 0x28bfc32f, 0x10f6, 0x4738,  0x98, 0xd1, 0x1a, 0xc0, 0x61, 0xdf, 0x71, 0x6a   The credential is a password.   SEC_WINNT_AUTH_DATA_TYPE_CERT 0x235f69ad, 0x73fb, 0x4dbc,  0x82, 0x3, 0x6, 0x29, 0xe7, 0x39, 0x33, 0x9b   The credential is a certificate.   SEC_WINNT_AUTH_DATA_TYPE_CSP_DATA 0x68fd9879, 0x79c, 0x4dfe,  0x82, 0x81, 0x57, 0x8a, 0xad, 0xc1, 0xc1, 0x0   The credential is authentication data from a cryptographic service provider (CSP)."
       },
       {
@@ -11653,8 +11653,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSEC_WINNT_AUTH_IDENTITY_OPAQUE",
-        "name": "*AuthDataCopy",
+        "type": "PSEC_WINNT_AUTH_IDENTITY_OPAQUE*",
+        "name": "AuthDataCopy",
         "description": "The structure that receives the copy of the structure specified by the AuthData parameter."
       }
     ],
@@ -11705,20 +11705,20 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PCWSTR",
-        "name": "*ppszUserName",
+        "type": "PCWSTR*",
+        "name": "ppszUserName",
         "description": "The marshaled user name of the identity specified by the pAuthIdentity parameter. When you have finished using this string, free it by calling the SspiFreeAuthIdentity function."
       },
       {
         "in_out": "_Out_",
-        "type": "PCWSTR",
-        "name": "*ppszDomainName",
+        "type": "PCWSTR*",
+        "name": "ppszDomainName",
         "description": "The marshaled domain name of the identity specified by the pAuthIdentity parameter. When you have finished using this string, free it by calling the SspiFreeAuthIdentity function."
       },
       {
         "in_out": "_Out_",
-        "type": "PCWSTR",
-        "name": "*ppszPackedCredentialsString",
+        "type": "PCWSTR*",
+        "name": "ppszPackedCredentialsString",
         "description": "An encoded string version of a SEC_WINNT_AUTH_IDENTITY_EX2 structure that specifies the users credentials. When you have finished using this string, free it by calling the SspiFreeAuthIdentity function."
       }
     ],
@@ -11758,8 +11758,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSEC_WINNT_AUTH_IDENTITY_OPAQUE",
-        "name": "*ppAuthIdentity",
+        "type": "PSEC_WINNT_AUTH_IDENTITY_OPAQUE*",
+        "name": "ppAuthIdentity",
         "description": "A pointer to the encoded identity structure. When you have finished using this structure, free it by calling the SspiFreeAuthIdentity function."
       }
     ],
@@ -11816,8 +11816,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSEC_WINNT_AUTH_IDENTITY_OPAQUE",
-        "name": "*ppNewAuthIdentity",
+        "type": "PSEC_WINNT_AUTH_IDENTITY_OPAQUE*",
+        "name": "ppNewAuthIdentity",
         "description": "The modified identity structure."
       }
     ],
@@ -11868,26 +11868,26 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*CredType",
+        "type": "GUID*",
+        "name": "CredType",
         "description": "The type of credential specified by the ContextHandle parameter. This can be one of the following values.  ValueMeaning  SEC_WINNT_AUTH_DATA_TYPE_PASSWORD 0x28bfc32f, 0x10f6, 0x4738,  0x98, 0xd1, 0x1a, 0xc0, 0x61, 0xdf, 0x71, 0x6a   The credential is a password.   SEC_WINNT_AUTH_DATA_TYPE_CERT 0x235f69ad, 0x73fb, 0x4dbc,  0x82, 0x3, 0x6, 0x29, 0xe7, 0x39, 0x33, 0x9b   The credential is a certificate.   SEC_WINNT_AUTH_DATA_TYPE_CSP_DATA 0x68fd9879, 0x79c, 0x4dfe,  0x82, 0x81, 0x57, 0x8a, 0xad, 0xc1, 0xc1, 0x0   The credential is authentication data from a cryptographic service provider (CSP)."
       },
       {
         "in_out": "_In_",
-        "type": "LUID",
-        "name": "*LogonId",
+        "type": "LUID*",
+        "name": "LogonId",
         "description": "The logon ID associated with the credential specified by the ContextHandle parameter. The caller must be running as LocalSystem to specify a logon ID."
       },
       {
         "in_out": "_Out_",
-        "type": "PSEC_WINNT_CREDUI_CONTEXT_VECTOR",
-        "name": "*CredUIContexts",
+        "type": "PSEC_WINNT_CREDUI_CONTEXT_VECTOR*",
+        "name": "CredUIContexts",
         "description": "A pointer to a SEC_WINNT_CREDUI_CONTEXT_VECTOR structure that specifies the offset and size of the data in the structure specified by the ContextHandle parameter."
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*TokenHandle",
+        "type": "HANDLE*",
+        "name": "TokenHandle",
         "description": "A handle to the specified user's token."
       }
     ],
@@ -11915,8 +11915,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*pszHostName",
+        "type": "PWSTR*",
+        "name": "pszHostName",
         "description": "The name of the host associated with the target specified by the pszTargetName parameter."
       }
     ],
@@ -12014,14 +12014,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSEC_WINNT_AUTH_IDENTITY_OPAQUE",
-        "name": "*ppAuthIdentity",
+        "type": "PSEC_WINNT_AUTH_IDENTITY_OPAQUE*",
+        "name": "ppAuthIdentity",
         "description": "An identity structure that represents the  credentials this function collects. When you have finished using this structure, free it by calling the SspiFreeAuthIdentity function."
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "BOOL",
-        "name": "*pfSave",
+        "type": "BOOL*",
+        "name": "pfSave",
         "description": "A pointer to a Boolean value that, on input, specifies whether the Save check box is selected in the dialog box that this function displays. On output, the value of this parameter specifies whether the Save check box was selected when the user clicked the Submit button in the dialog box. Set this parameter to NULL to ignore the Save check box. This parameter is ignored if the CREDUIWIN_CHECKBOX flag is not set in the dwFlags parameter."
       },
       {
@@ -12078,14 +12078,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "unsigned long",
-        "name": "*AuthIdentityLength",
+        "type": "unsigned long*",
+        "name": "AuthIdentityLength",
         "description": "The length, in bytes, of the AuthIdentityByteArray array."
       },
       {
         "in_out": "_Out_",
-        "type": "unsigned long",
-        "name": "*AuthIdentityByteArray",
+        "type": "unsigned long*",
+        "name": "AuthIdentityByteArray",
         "description": "A pointer to an array of byte values that represents the identity specified by the AuthIdentity parameter."
       }
     ],
@@ -12125,8 +12125,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PCWSTR",
-        "name": "*ppszCredmanTargetName",
+        "type": "PCWSTR*",
+        "name": "ppszCredmanTargetName",
         "description": "The target name to pass to the CredRead function."
       }
     ],
@@ -12166,20 +12166,20 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PCWSTR",
-        "name": "*ppszCredmanTargetName",
+        "type": "PCWSTR*",
+        "name": "ppszCredmanTargetName",
         "description": "The target name to pass to the CredWrite function."
       },
       {
         "in_out": "_Out_",
-        "type": "PCWSTR",
-        "name": "*ppszCredmanUserName",
+        "type": "PCWSTR*",
+        "name": "ppszCredmanUserName",
         "description": "The user name to pass to the CredWrite function."
       },
       {
         "in_out": "_Out_",
-        "type": "PUCHAR",
-        "name": "*ppCredentialBlob",
+        "type": "PUCHAR*",
+        "name": "ppCredentialBlob",
         "description": "The credential BLOB to send to the CredWrite function."
       },
       {
@@ -12213,14 +12213,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "char",
-        "name": "*AuthIdentityByteArray",
+        "type": "char*",
+        "name": "AuthIdentityByteArray",
         "description": "The array of byte values to deserialize."
       },
       {
         "in_out": "_Out_",
-        "type": "PSEC_WINNT_AUTH_IDENTITY_OPAQUE",
-        "name": "*ppAuthIdentity",
+        "type": "PSEC_WINNT_AUTH_IDENTITY_OPAQUE*",
+        "name": "ppAuthIdentity",
         "description": "The deserialized identity structure."
       }
     ],
@@ -12254,8 +12254,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSEC_WINNT_CREDUI_CONTEXT",
-        "name": "*CredUIContext",
+        "type": "PSEC_WINNT_CREDUI_CONTEXT*",
+        "name": "CredUIContext",
         "description": "A pointer to a SEC_WINNT_CREDUI_CONTEXT structure that specifies the deserialized credential information."
       }
     ],
@@ -12283,8 +12283,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*CredType",
+        "type": "GUID*",
+        "name": "CredType",
         "description": "The type of credential specified by the ContextHandle parameter. This can be one of the following values.  ValueMeaning  SEC_WINNT_AUTH_DATA_TYPE_PASSWORD 0x28bfc32f, 0x10f6, 0x4738,  0x98, 0xd1, 0x1a, 0xc0, 0x61, 0xdf, 0x71, 0x6a   The credential is a password.   SEC_WINNT_AUTH_DATA_TYPE_CERT 0x235f69ad, 0x73fb, 0x4dbc,  0x82, 0x3, 0x6, 0x29, 0xe7, 0x39, 0x33, 0x9b   The credential is a certificate.   SEC_WINNT_AUTH_DATA_TYPE_CSP_DATA 0x68fd9879, 0x79c, 0x4dfe,  0x82, 0x81, 0x57, 0x8a, 0xad, 0xc1, 0xc1, 0x0   The credential is authentication data from a cryptographic service provider (CSP)."
       },
       {

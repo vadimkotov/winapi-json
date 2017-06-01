@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "PRAWINPUT",
-        "name": "*paRawInput",
+        "type": "PRAWINPUT*",
+        "name": "paRawInput",
         "description": "Type: PRAWINPUT* An array of RAWINPUT structures."
       },
       {

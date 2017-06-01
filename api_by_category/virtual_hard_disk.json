@@ -21,7 +21,7 @@
       },
       {
         "in_out": "_In_",
-        "type": "PAPPLY_SNAPSHOT_VHDSET_PARAMETERS",
+        "type": "const PAPPLY_SNAPSHOT_VHDSET_PARAMETERS",
         "name": "Parameters",
         "description": "A pointer to a valid APPLY_SNAPSHOT_VHDSET_PARAMETERS structure that contains snapshot data."
       },
@@ -273,7 +273,7 @@
       },
       {
         "in_out": "_In_",
-        "type": "PDELETE_SNAPSHOT_VHDSET_PARAMETERS",
+        "type": "const PDELETE_SNAPSHOT_VHDSET_PARAMETERS",
         "name": "Parameters",
         "description": "A pointer to a valid DELETE_SNAPSHOT_VHDSET_PARAMETERS structure that contains snapshot deletion data."
       },
@@ -378,8 +378,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "GUID",
-        "name": "*Items",
+        "type": "GUID*",
+        "name": "Items",
         "description": "Address of a buffer to be filled with the GUIDs representing the metadata. The        GetVirtualDiskMetadata function can be used        to retrieve the data represented by each GUID."
       }
     ],
@@ -729,7 +729,7 @@
       },
       {
         "in_out": "_In_",
-        "type": "PMODIFY_VHDSET_PARAMETERS",
+        "type": "const PMODIFY_VHDSET_PARAMETERS",
         "name": "Parameters",
         "description": "A pointer to a valid MODIFY_VHDSET_PARAMETERS structure that contains modification data."
       },
@@ -882,7 +882,7 @@
       },
       {
         "in_out": "_In_",
-        "type": "PRAW_SCSI_VIRTUAL_DISK_PARAMETERS",
+        "type": "const PRAW_SCSI_VIRTUAL_DISK_PARAMETERS",
         "name": "Parameters",
         "description": "A pointer to a valid RAW_SCSI_VIRTUAL_DISK_PARAMETERS structure that contains snapshot deletion data."
       },
@@ -1034,7 +1034,7 @@
       },
       {
         "in_out": "_In_",
-        "type": "PTAKE_SNAPSHOT_VHDSET_PARAMETERS",
+        "type": "const PTAKE_SNAPSHOT_VHDSET_PARAMETERS",
         "name": "Parameters",
         "description": "A pointer to a valid TAKE_SNAPSHOT_VHDSET_PARAMETERS structure that contains snapshot data."
       },

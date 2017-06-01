@@ -21,14 +21,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "struct sockaddr",
-        "name": "*addr",
+        "type": "struct sockaddr*",
+        "name": "addr",
         "description": "An optional pointer to a buffer that receives the address of the connecting entity, as known to the communications layer. The exact format of the addr parameter is determined by the address family that was established when the socket from the  sockaddr structure was created."
       },
       {
         "in_out": "_Inout_",
-        "type": "int",
-        "name": "*addrlen",
+        "type": "int*",
+        "name": "addrlen",
         "description": "An optional pointer to an integer that contains the length of structure pointed to by the addr parameter."
       }
     ],
@@ -121,8 +121,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const struct sockaddr",
-        "name": "*name",
+        "type": "const struct sockaddr*",
+        "name": "name",
         "description": "A pointer to a sockaddr structure of the local address to assign to the bound socket ."
       },
       {
@@ -179,8 +179,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const struct sockaddr",
-        "name": "*name",
+        "type": "const struct sockaddr*",
+        "name": "name",
         "description": "A pointer to the  sockaddr structure to which the connection should be established."
       },
       {
@@ -214,8 +214,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const struct sockaddr",
-        "name": "*name",
+        "type": "const struct sockaddr*",
+        "name": "name",
         "description": "A pointer to   a sockaddr structure that specifies the address to which to connect. For  IPv4, the sockaddr contains AF_INET for the address family, the destination IPv4 address, and the destination port. For  IPv6, the sockaddr structure contains AF_INET6 for the address family, the destination IPv6 address, the destination port, and may contain additional IPv6 flow and scope-id information."
       },
       {
@@ -343,8 +343,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "struct addrinfo",
-        "name": "*ai",
+        "type": "struct addrinfo*",
+        "name": "ai",
         "description": "A pointer to the  addrinfo structure or linked list of  addrinfo structures to be freed. All dynamic storage pointed to within the  addrinfo structure or structures is also freed."
       }
     ],
@@ -378,14 +378,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const ADDRINFOA",
-        "name": "*pHints",
+        "type": "const ADDRINFOA*",
+        "name": "pHints",
         "description": "A pointer to an  addrinfo structure that provides hints about the type of socket the caller supports.  The ai_addrlen, ai_canonname, ai_addr, and ai_next members of the addrinfo structure pointed to by the pHints parameter must be zero or NULL. Otherwise the GetAddrInfoEx function will fail with WSANO_RECOVERY. See the Remarks for more details."
       },
       {
         "in_out": "_Out_",
-        "type": "PADDRINFOA",
-        "name": "*ppResult",
+        "type": "PADDRINFOA*",
+        "name": "ppResult",
         "description": "A pointer to a linked list of one or more  addrinfo structures that contains response information about the host."
       }
     ],
@@ -454,20 +454,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const ADDRINFOEX",
-        "name": "*pHints",
+        "type": "const ADDRINFOEX*",
+        "name": "pHints",
         "description": "A pointer to an  addrinfoex structure that provides hints about the type of socket the caller supports.  The ai_addrlen, ai_canonname, ai_addr, and ai_next members of the addrinfoex structure pointed to by the pHints parameter must be zero or NULL. Otherwise the GetAddrInfoEx function will fail with WSANO_RECOVERY. See the Remarks for more details."
       },
       {
         "in_out": "_Out_",
-        "type": "PADDRINFOEX",
-        "name": "*ppResult",
+        "type": "PADDRINFOEX*",
+        "name": "ppResult",
         "description": "A pointer to a linked list of one or more  addrinfoex structures that contains response information about the host."
       },
       {
         "in_out": "_In_opt_",
-        "type": "struct timeval",
-        "name": "*timeout",
+        "type": "struct timeval*",
+        "name": "timeout",
         "description": "An optional parameter indicating the time, in milliseconds, to wait for a response from the namespace provider before aborting the call.  This parameter is only supported when the UNICODE or _UNICODE macro has been defined in the sources before calling the GetAddrInfoEx function. Otherwise, this parameter is currently reserved and must be set to NULL since a timeout option is not supported."
       },
       {
@@ -542,14 +542,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const ADDRINFOW",
-        "name": "*pHints",
+        "type": "const ADDRINFOW*",
+        "name": "pHints",
         "description": "A pointer to an  addrinfoW structure that provides hints about the type of socket the caller supports.  The ai_addrlen, ai_canonname, ai_addr, and ai_next members of the addrinfoW structure pointed to by the pHints parameter must be zero or NULL. Otherwise the GetAddrInfoEx function will fail with WSANO_RECOVERY. See the Remarks for more details."
       },
       {
         "in_out": "_Out_",
-        "type": "PADDRINFOW",
-        "name": "*ppResult",
+        "type": "PADDRINFOW*",
+        "name": "ppResult",
         "description": "A pointer to a linked list of one or more  addrinfoW structures that contains response information about the host."
       }
     ],
@@ -618,8 +618,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPSOCKADDR",
-        "name": "*LocalSockaddr",
+        "type": "LPSOCKADDR*",
+        "name": "LocalSockaddr",
         "description": "A pointer to the  sockaddr structure that receives the local address of the connection (the same information that would be returned by the  getsockname function). This parameter must be specified."
       },
       {
@@ -630,8 +630,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPSOCKADDR",
-        "name": "*RemoteSockaddr",
+        "type": "LPSOCKADDR*",
+        "name": "RemoteSockaddr",
         "description": "A pointer to the sockaddr structure that receives the remote address of the connection (the same information that would be returned by the  getpeername function). This parameter must be specified."
       },
       {
@@ -782,8 +782,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*addr",
+        "type": "const char*",
+        "name": "addr",
         "description": "A pointer to an address in network byte order."
       },
       {
@@ -817,8 +817,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*name",
+        "type": "const char*",
+        "name": "name",
         "description": "A pointer to the null-terminated name of the host to resolve."
       }
     ],
@@ -840,8 +840,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "char",
-        "name": "*name",
+        "type": "char*",
+        "name": "name",
         "description": "A pointer to a buffer that receives the local host name."
       },
       {
@@ -916,20 +916,20 @@
       },
       {
         "in_out": "_Out_",
-        "type": "MULTICAST_MODE_TYPE",
-        "name": "*FilterMode",
+        "type": "MULTICAST_MODE_TYPE*",
+        "name": "FilterMode",
         "description": "A pointer to a value to receive the multicast filter mode for multicast group address when the function returns."
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*SourceCount",
+        "type": "ULONG*",
+        "name": "SourceCount",
         "description": "On input, a pointer to a value that indicates the maximum number of source addresses that will fit in the buffer pointed to by the SourceList parameter. On output, a pointer to a value that indicates the total number of source addresses associated with the multicast filter."
       },
       {
         "in_out": "_Out_",
-        "type": "IN_ADDR",
-        "name": "*SourceList",
+        "type": "IN_ADDR*",
+        "name": "SourceList",
         "description": "A pointer to a buffer to receive the list of IP addresses associated with the multicast filter. If SourceCount is zero on input, a NULL pointer    may be supplied."
       }
     ],
@@ -986,8 +986,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const struct sockaddr FAR",
-        "name": "*sa",
+        "type": "const struct sockaddr FAR*",
+        "name": "sa",
         "description": "A pointer to a socket address structure that contains the address and port number of the socket. For IPv4, the sa parameter points to a  sockaddr_in structure. For IPv6, the sa parameter points to a sockaddr_in6 structure."
       },
       {
@@ -998,8 +998,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "char FAR",
-        "name": "*host",
+        "type": "char FAR*",
+        "name": "host",
         "description": "A pointer to  an ANSI string used to hold the host name. On success, the host name is returned as a Fully Qualified Domain Name (FQDN) by default. If the host parameter is NULL, this indicates the caller does not want to receive a host name string."
       },
       {
@@ -1010,8 +1010,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "char FAR",
-        "name": "*serv",
+        "type": "char FAR*",
+        "name": "serv",
         "description": "A pointer to  an ANSI string to hold the service name. On success, an ANSI string that represents the service name associated with the port number is returned. If the serv parameter is NULL, this indicates the caller does not want to receive a service name string."
       },
       {
@@ -1045,8 +1045,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const SOCKADDR",
-        "name": "*pSockaddr",
+        "type": "const SOCKADDR*",
+        "name": "pSockaddr",
         "description": "A pointer to a socket address structure containing the IP address and port number of the socket. For IPv4, the pSockaddr parameter points to a  sockaddr_in structure. For IPv6, the pSockaddr parameter points to a sockaddr_in6 structure."
       },
       {
@@ -1110,14 +1110,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "struct sockaddr",
-        "name": "*name",
+        "type": "struct sockaddr*",
+        "name": "name",
         "description": "The  SOCKADDR structure that receives the address of the peer."
       },
       {
         "in_out": "_Inout_",
-        "type": "int",
-        "name": "*namelen",
+        "type": "int*",
+        "name": "namelen",
         "description": "A pointer to the size, in bytes, of the name parameter."
       }
     ],
@@ -1139,8 +1139,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*name",
+        "type": "const char*",
+        "name": "name",
         "description": "Pointer to a null-terminated protocol name."
       }
     ],
@@ -1185,14 +1185,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*name",
+        "type": "const char*",
+        "name": "name",
         "description": "A pointer to a null-terminated service name."
       },
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*proto",
+        "type": "const char*",
+        "name": "proto",
         "description": "A pointer to a null-terminated protocol name. If this pointer is NULL,  the getservbyname function returns the first service entry where name matches the s_name member of the  servent structure or the s_aliases member of the  servent structure. Otherwise,  getservbyname matches both the name and the proto."
       }
     ],
@@ -1220,8 +1220,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*proto",
+        "type": "const char*",
+        "name": "proto",
         "description": "Optional pointer to a protocol name. If this is null,  getservbyport returns the first service entry for which the port matches the s_port of the  servent structure. Otherwise,  getservbyport matches both the port and the proto parameters."
       }
     ],
@@ -1308,14 +1308,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "struct sockaddr",
-        "name": "*name",
+        "type": "struct sockaddr*",
+        "name": "name",
         "description": "Pointer to a  SOCKADDR structure that receives the address (name) of the socket."
       },
       {
         "in_out": "_Inout_",
-        "type": "int",
-        "name": "*namelen",
+        "type": "int*",
+        "name": "namelen",
         "description": "Size of the name buffer, in bytes."
       }
     ],
@@ -1355,14 +1355,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "char",
-        "name": "*optval",
+        "type": "char*",
+        "name": "optval",
         "description": "A pointer to the buffer in which the value for the requested option is to be returned."
       },
       {
         "in_out": "_Inout_",
-        "type": "int",
-        "name": "*optlen",
+        "type": "int*",
+        "name": "optlen",
         "description": "A pointer to the size, in bytes, of the optval buffer."
       }
     ],
@@ -1396,8 +1396,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SOCKADDR",
-        "name": "*Group",
+        "type": "const SOCKADDR*",
+        "name": "Group",
         "description": "A pointer to the socket address of the multicast group."
       },
       {
@@ -1408,20 +1408,20 @@
       },
       {
         "in_out": "_Out_",
-        "type": "MULTICAST_MODE_TYPE",
-        "name": "*FilterMode",
+        "type": "MULTICAST_MODE_TYPE*",
+        "name": "FilterMode",
         "description": "A pointer to a value to receive the multicast filter mode for the multicast group address when the function returns."
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*SourceCount",
+        "type": "ULONG*",
+        "name": "SourceCount",
         "description": "On input, a pointer to a value that indicates the maximum number of source addresses that will fit in the buffer pointed to by the SourceList parameter. On output, a pointer to a value that indicates the total number of source addresses associated with the multicast filter."
       },
       {
         "in_out": "_Out_",
-        "type": "SOCKADDR_STORAGE",
-        "name": "*SourceList",
+        "type": "SOCKADDR_STORAGE*",
+        "name": "SourceList",
         "description": "A pointer to a buffer to receive the list of IP addresses associated with the multicast filter. If SourceCount is zero on input, a NULL pointer    may be supplied."
       }
     ],
@@ -1587,8 +1587,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*cp",
+        "type": "const char*",
+        "name": "cp",
         "description": "A NULL-terminated character string representing a number expressed in the Internet standard \".'' (dotted) notation."
       }
     ],
@@ -1721,8 +1721,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "u_long",
-        "name": "*argp",
+        "type": "u_long*",
+        "name": "argp",
         "description": "A pointer to a parameter for cmd."
       }
     ],
@@ -1894,8 +1894,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "char",
-        "name": "*buf",
+        "type": "char*",
+        "name": "buf",
         "description": "A pointer to the buffer to receive the incoming data."
       },
       {
@@ -1935,8 +1935,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "char",
-        "name": "*buf",
+        "type": "char*",
+        "name": "buf",
         "description": "A buffer for the incoming data."
       },
       {
@@ -1953,14 +1953,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "struct sockaddr",
-        "name": "*from",
+        "type": "struct sockaddr*",
+        "name": "from",
         "description": "An optional pointer to a buffer in a  sockaddr structure that will hold the source address upon return."
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "int",
-        "name": "*fromlen",
+        "type": "int*",
+        "name": "fromlen",
         "description": "An optional pointer to the size, in bytes, of the buffer pointed to by the from parameter."
       }
     ],
@@ -2515,26 +2515,26 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "fd_set",
-        "name": "*readfds",
+        "type": "fd_set*",
+        "name": "readfds",
         "description": "An optional pointer to a set of sockets to be checked for readability."
       },
       {
         "in_out": "_Inout_",
-        "type": "fd_set",
-        "name": "*writefds",
+        "type": "fd_set*",
+        "name": "writefds",
         "description": "An optional pointer to a set of sockets to be checked for writability."
       },
       {
         "in_out": "_Inout_",
-        "type": "fd_set",
-        "name": "*exceptfds",
+        "type": "fd_set*",
+        "name": "exceptfds",
         "description": "An optional pointer to a set of sockets to be checked for errors."
       },
       {
         "in_out": "_In_",
-        "type": "const struct timeval",
-        "name": "*timeout",
+        "type": "const struct timeval*",
+        "name": "timeout",
         "description": "The maximum time for  select to wait, provided in the form of a  TIMEVAL structure. Set the timeout parameter to null for blocking operations."
       }
     ],
@@ -2562,8 +2562,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*buf",
+        "type": "const char*",
+        "name": "buf",
         "description": "A pointer to a buffer containing the data to be transmitted."
       },
       {
@@ -2603,8 +2603,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*buf",
+        "type": "const char*",
+        "name": "buf",
         "description": "A pointer to a buffer containing the data to be transmitted."
       },
       {
@@ -2621,8 +2621,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const struct sockaddr",
-        "name": "*to",
+        "type": "const struct sockaddr*",
+        "name": "to",
         "description": "An optional pointer to a  sockaddr structure that contains the address of the target socket."
       },
       {
@@ -2662,8 +2662,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "SOCKET_ADDRESS",
-        "name": "*pAddresses",
+        "type": "SOCKET_ADDRESS*",
+        "name": "pAddresses",
         "description": "A pointer to an optional list of addresses to register with the namespace provider."
       },
       {
@@ -2698,8 +2698,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "struct timeval",
-        "name": "*timeout",
+        "type": "struct timeval*",
+        "name": "timeout",
         "description": "An optional parameter indicating the time, in milliseconds, to wait for a response from the namespace provider before aborting the call. This parameter is currently reserved and must be set to NULL since a timeout option is not supported."
       },
       {
@@ -2769,8 +2769,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const IN_ADDR",
-        "name": "*SourceList",
+        "type": "const IN_ADDR*",
+        "name": "SourceList",
         "description": "A pointer to a buffer with the  IP addresses to associate with the multicast filter."
       }
     ],
@@ -2886,8 +2886,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*optval",
+        "type": "const char*",
+        "name": "optval",
         "description": "A pointer to the buffer in which the value for the requested option is specified."
       },
       {
@@ -2927,8 +2927,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SOCKADDR",
-        "name": "*Group",
+        "type": "const SOCKADDR*",
+        "name": "Group",
         "description": "A pointer to the socket address of the multicast group."
       },
       {
@@ -2951,8 +2951,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SOCKADDR_STORAGE",
-        "name": "*SourceList",
+        "type": "const SOCKADDR_STORAGE*",
+        "name": "SourceList",
         "description": "A pointer to a buffer with the  IP addresses to associate with the multicast filter."
       }
     ],
@@ -3156,8 +3156,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "struct sockaddr",
-        "name": "*addr",
+        "type": "struct sockaddr*",
+        "name": "addr",
         "description": "An optional pointer to an sockaddr structure that receives the address of the connecting entity, as known to the communications layer. The exact format of the addr parameter is determined by the address family established when the socket was created."
       },
       {
@@ -3256,8 +3256,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*addr",
+        "type": "const char*",
+        "name": "addr",
         "description": "Pointer to the network address for the host. Host addresses are stored in network byte order."
       },
       {
@@ -3274,8 +3274,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "char",
-        "name": "*buf",
+        "type": "char*",
+        "name": "buf",
         "description": "Pointer to the data area to receive the  hostent data. The data area must be larger than the size of a  hostent structure because the data area is used by Windows Sockets to contain a  hostent structure and all of the data referenced by members of the  hostent structure. A buffer of MAXGETHOSTSTRUCT bytes is recommended."
       },
       {
@@ -3315,14 +3315,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*name",
+        "type": "const char*",
+        "name": "name",
         "description": "Pointer to the null-terminated name of the host."
       },
       {
         "in_out": "_Out_",
-        "type": "char",
-        "name": "*buf",
+        "type": "char*",
+        "name": "buf",
         "description": "Pointer to the data area to receive the  hostent data. The data area must be larger than the size of a  hostent structure because the specified data area is used by Windows Sockets to contain a  hostent structure and all of the data referenced by members of the  hostent structure. A buffer of MAXGETHOSTSTRUCT bytes is recommended."
       },
       {
@@ -3362,14 +3362,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*name",
+        "type": "const char*",
+        "name": "name",
         "description": "Pointer to the null-terminated protocol name to be resolved."
       },
       {
         "in_out": "_Out_",
-        "type": "char",
-        "name": "*buf",
+        "type": "char*",
+        "name": "buf",
         "description": "Pointer to the data area to receive the  protoent data. The data area must be larger than the size of a  protoent structure because the data area is used by Windows Sockets to contain a  protoent structure and all of the data that is referenced by members of the  protoent structure. A buffer of MAXGETHOSTSTRUCT bytes is recommended."
       },
       {
@@ -3415,8 +3415,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "char",
-        "name": "*buf",
+        "type": "char*",
+        "name": "buf",
         "description": "Pointer to the data area to receive the  protoent data. The data area must be larger than the size of a  protoent structure because the data area is used by Windows Sockets to contain a  protoent structure and all of the data that is referenced by members of the  protoent structure. A buffer of MAXGETHOSTSTRUCT bytes is recommended."
       },
       {
@@ -3456,20 +3456,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*name",
+        "type": "const char*",
+        "name": "name",
         "description": "Pointer to a null-terminated service name."
       },
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*proto",
+        "type": "const char*",
+        "name": "proto",
         "description": "Pointer to a protocol name. This can be NULL, in which case  WSAAsyncGetServByName will search for the first service entry for which s_name or one of the s_aliases matches the given name. Otherwise,  WSAAsyncGetServByName matches both name and proto."
       },
       {
         "in_out": "_Out_",
-        "type": "char",
-        "name": "*buf",
+        "type": "char*",
+        "name": "buf",
         "description": "Pointer to the data area to receive the  servent data. The data area must be larger than the size of a  servent structure because the data area is used by Windows Sockets to contain a  servent structure and all of the data that is referenced by members of the  servent structure. A buffer of MAXGETHOSTSTRUCT bytes is recommended."
       },
       {
@@ -3515,14 +3515,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const char",
-        "name": "*proto",
+        "type": "const char*",
+        "name": "proto",
         "description": "Pointer to a protocol name. This can be NULL, in which case  WSAAsyncGetServByPort will search for the first service entry for which s_port match the given port. Otherwise,  WSAAsyncGetServByPort matches both port and proto."
       },
       {
         "in_out": "_Out_",
-        "type": "char",
-        "name": "*buf",
+        "type": "char*",
+        "name": "buf",
         "description": "Pointer to the data area to receive the  servent data. The data area must be larger than the size of a  servent structure because the data area is used by Windows Sockets to contain a  servent structure and all of the data that is referenced by members of the  servent structure. A buffer of MAXGETHOSTSTRUCT bytes is recommended."
       },
       {
@@ -3659,8 +3659,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const struct sockaddr",
-        "name": "*name",
+        "type": "const struct sockaddr*",
+        "name": "name",
         "description": "A pointer to a sockaddr structure  that specifies the address to which to connect. For  IPv4, the sockaddr contains AF_INET for the address family, the destination IPv4 address, and the destination port. For  IPv6, the sockaddr structure contains AF_INET6 for the address family, the destination IPv6 address, the destination port, and may contain additional flow and scope-id information."
       },
       {
@@ -3748,8 +3748,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const struct timeval",
-        "name": "*timeout",
+        "type": "const struct timeval*",
+        "name": "timeout",
         "description": "The time, in milliseconds, to wait for a response from the remote application before aborting the call.        This parameter can be NULL in which case        WSAConnectByList will complete after either the        connection is successfully established or after a connection was attempted and failed on all possible        local-remote address pairs."
       },
       {
@@ -3819,8 +3819,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const struct timeval",
-        "name": "*timeout",
+        "type": "const struct timeval*",
+        "name": "timeout",
         "description": "The time, in milliseconds, to wait for a response from the remote application before aborting the call."
       },
       {
@@ -3870,8 +3870,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const struct sockaddr",
-        "name": "*PeerAddr",
+        "type": "const struct sockaddr*",
+        "name": "PeerAddr",
         "description": "The IP address of the peer for which the target name is being deleted."
       },
       {
@@ -4115,8 +4115,8 @@
       },
       {
         "in_out": "",
-        "type": "fd_set",
-        "name": "*set",
+        "type": "fd_set*",
+        "name": "set",
         "description": "Pointer to an fd_set structure containing the set of socket descriptors. The __WSAFDIsSet function determines whether the socket specified in the fd parameter is a member of that set."
       }
     ],
@@ -4289,8 +4289,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "u_long",
-        "name": "*lpnetlong",
+        "type": "u_long*",
+        "name": "lpnetlong",
         "description": "A pointer to a 32-bit number to receive the number in network byte order."
       }
     ],
@@ -4324,8 +4324,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "u_short",
-        "name": "*lpnetshort",
+        "type": "u_short*",
+        "name": "lpnetshort",
         "description": "A pointer to a 16-bit buffer to receive the number in network byte order."
       }
     ],
@@ -4482,8 +4482,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const struct sockaddr",
-        "name": "*name",
+        "type": "const struct sockaddr*",
+        "name": "name",
         "description": "Name of the peer to which the socket is to be joined."
       },
       {
@@ -4717,8 +4717,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "u_long",
-        "name": "*lphostlong",
+        "type": "u_long*",
+        "name": "lphostlong",
         "description": "A pointer to a 32-bit number to receive the number in host byte order."
       }
     ],
@@ -4752,8 +4752,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "u_short",
-        "name": "*lphostshort",
+        "type": "u_short*",
+        "name": "lphostshort",
         "description": "A pointer to a 16-bit number to receive the number in host byte order."
       }
     ],
@@ -4851,8 +4851,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SOCKET_SECURITY_QUERY_TEMPLATE",
-        "name": "*SecurityQueryTemplate",
+        "type": "const SOCKET_SECURITY_QUERY_TEMPLATE*",
+        "name": "SecurityQueryTemplate",
         "description": "A pointer to a SOCKET_SECURITY_QUERY_TEMPLATE structure that specifies the type of query information to return.  A SOCKET_SECURITY_QUERY_TEMPLATE structure pointed to by this parameter may contain zeroes for all members to request default security information. On successful return, only the Flags member in the SOCKET_SECURITY_QUERY_INFO will be set in the returned  SecurityQueryInfo parameter.  This parameter may be a NULL pointer if the Socket parameter was created with a protocol of IPPROTO_TCP. In this case, the information returned is the same as if a SOCKET_SECURITY_QUERY_TEMPLATE structure with all values set to zero was passed. This parameter should be specified for a socket with protocol of IPPROTO_TCP if more than the default security information is required.  If the SOCKET_SECURITY_QUERY_TEMPLATE structure  is specified with the PeerTokenAccessMask member not specified (set to zero), then the WSAQuerySocketSecurity function will not return the PeerApplicationAccessTokenHandle and PeerMachineAccessTokenHandle members in the SOCKET_SECURITY_QUERY_INFO structure. If a Socket parameter was created with a protocol not equal to IPPROTO_TCP, the SecurityQueryTemplate parameter must be specified. In these cases, the PeerAddress member of the SOCKET_SECURITY_QUERY_TEMPLATE structure must specify an address family of AF_INET or AF_INET6 along with peer IP address and port number."
       },
       {
@@ -4863,14 +4863,14 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "SOCKET_SECURITY_QUERY_INFO",
-        "name": "*SecurityQueryInfo",
+        "type": "SOCKET_SECURITY_QUERY_INFO*",
+        "name": "SecurityQueryInfo",
         "description": "A pointer to a buffer that will receive a SOCKET_SECURITY_QUERY_INFO structure containing the information queried.  This value can be set to NULL to query the size of the output buffer."
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*SecurityQueryInfoLen",
+        "type": "ULONG*",
+        "name": "SecurityQueryInfoLen",
         "description": "On input, a pointer to the size, in bytes, of the SecurityQueryInfo parameter.   If the buffer is too small to receive the queried information, the call will return SOCKET_ERROR, and the number of bytes needed to return the queried information will be set in the value pointed to by this parameter.  On a successful call, the number of bytes copied is returned."
       },
       {
@@ -4998,8 +4998,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "char",
-        "name": "*buf",
+        "type": "char*",
+        "name": "buf",
         "description": "A pointer to the buffer to receive the incoming data."
       },
       {
@@ -5010,8 +5010,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "int",
-        "name": "*flags",
+        "type": "int*",
+        "name": "flags",
         "description": "An indicator specifying whether the message is fully or partially received for datagram sockets."
       }
     ],
@@ -5063,8 +5063,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "struct sockaddr",
-        "name": "*lpFrom",
+        "type": "struct sockaddr*",
+        "name": "lpFrom",
         "description": "An optional pointer to a buffer that will hold the source address upon the completion of the overlapped operation."
       },
       {
@@ -5384,8 +5384,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const struct sockaddr",
-        "name": "*lpTo",
+        "type": "const struct sockaddr*",
+        "name": "lpTo",
         "description": "An optional pointer to the address of the target socket in the  SOCKADDR structure."
       },
       {
@@ -5512,8 +5512,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SOCKET_PEER_TARGET_NAME",
-        "name": "*PeerTargetName",
+        "type": "const SOCKET_PEER_TARGET_NAME*",
+        "name": "PeerTargetName",
         "description": "A pointer to a SOCKET_PEER_TARGET_NAME structure that defines the peer target name."
       },
       {
@@ -5559,8 +5559,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SOCKET_SECURITY_SETTINGS",
-        "name": "*SecuritySettings",
+        "type": "const SOCKET_SECURITY_SETTINGS*",
+        "name": "SecuritySettings",
         "description": "A pointer to a SOCKET_SECURITY_SETTINGS structure that specifies the security settings to be applied to the socket's traffic. If this parameter is NULL, default settings will be applied to the socket."
       },
       {
@@ -5735,8 +5735,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const WSAEVENT",
-        "name": "*lphEvents",
+        "type": "const WSAEVENT*",
+        "name": "lphEvents",
         "description": "A pointer to an array of event object handles. The array can contain handles of objects of different types. It may not contain multiple copies of the same handle if the fWaitAll parameter is set to TRUE.  If one of these handles is closed while the wait is still pending, the behavior of WSAWaitForMultipleEvents is undefined.  The handles must have the SYNCHRONIZE access right.  For more information, see Standard Access Rights."
       },
       {

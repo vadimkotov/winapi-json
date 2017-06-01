@@ -239,8 +239,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "PTRACE_GUID_PROPERTIES",
-        "name": "*GuidPropertiesArray",
+        "type": "PTRACE_GUID_PROPERTIES*",
+        "name": "GuidPropertiesArray",
         "description": "An array of pointers to  TRACE_GUID_PROPERTIES structures."
       },
       {
@@ -362,8 +362,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PEVENT_TRACE_PROPERTIES",
-        "name": "*PropertyArray",
+        "type": "PEVENT_TRACE_PROPERTIES*",
+        "name": "PropertyArray",
         "description": "An array of pointers to         EVENT_TRACE_PROPERTIES structures that receive         session properties and statistics for the event tracing sessions. You only need to set the Wnode.BufferSize,         LoggerNameOffset , and LogFileNameOffset  members of the         EVENT_TRACE_PROPERTIES structure. The other         members should all be set to zero."
       },
       {
@@ -637,8 +637,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "ULONG",
-        "name": "*Reserved",
+        "type": "ULONG*",
+        "name": "Reserved",
         "description": "Reserved for internal use."
       },
       {
@@ -1775,8 +1775,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*PayloadFilter",
+        "type": "PVOID*",
+        "name": "PayloadFilter",
         "description": "On success, this parameter returns a pointer to a single payload filter that is properly sized and built for the specified conditions. When the caller is finished using the returned payload filter with the EnableTraceEx2 function,  the TdhDeletePayloadFilter function should be called to free the allocated memory."
       }
     ],
@@ -1798,8 +1798,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "PVOID",
-        "name": "*PayloadFilterDescriptor",
+        "type": "PVOID*",
+        "name": "PayloadFilterDescriptor",
         "description": "A pointer to a single payload filter allocated by the TdhCreatePayloadFilter function."
       }
     ],
@@ -1833,8 +1833,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*BufferSize",
+        "type": "ULONG*",
+        "name": "BufferSize",
         "description": "The size, in bytes, of the buffer pointed to by the ProviderInfo parameter. If the function succeeds, this parameter receives the size of the buffer used. If the buffer is too small, the function returns ERROR_INSUFFICIENT_BUFFER and sets this parameter to the required buffer size. If the buffer size is zero on input, no data is returned in the buffer and this parameter receives the required buffer size."
       }
     ],
@@ -1874,8 +1874,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pBufferSize",
+        "type": "ULONG*",
+        "name": "pBufferSize",
         "description": "Size, in bytes, of the pBuffer buffer. If the function succeeds, this parameter receives the size of the buffer used. If the buffer is too small, the function returns ERROR_INSUFFICIENT_BUFFER and sets this parameter to the required buffer size. If the buffer size is zero on input, no data is returned in the buffer and this parameter receives the required buffer size."
       }
     ],
@@ -1915,20 +1915,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "ULONG",
-        "name": "*FilterCount",
+        "type": "ULONG*",
+        "name": "FilterCount",
         "description": "The number of filter structures that the pBuffer buffer contains. Is zero if the pBuffer buffer is insufficient."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PPROVIDER_FILTER_INFO",
-        "name": "*pBuffer",
+        "type": "PPROVIDER_FILTER_INFO*",
+        "name": "pBuffer",
         "description": "User-allocated buffer to receive the filter information. For details, see the PROVIDER_FILTER_INFO structure."
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pBufferSize",
+        "type": "ULONG*",
+        "name": "pBufferSize",
         "description": "Size, in bytes, of the pBuffer buffer. If the function succeeds, this parameter receives the size of the buffer used. If the buffer is too small, the function returns ERROR_INSUFFICIENT_BUFFER and sets this parameter to the required buffer size. If the buffer size is zero on input, no data is returned in the buffer and this parameter receives the required buffer size."
       }
     ],
@@ -1956,8 +1956,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pBufferSize",
+        "type": "ULONG*",
+        "name": "pBufferSize",
         "description": "Size, in bytes, of the pBuffer buffer. If the function succeeds, this parameter receives the size of the buffer used. If the buffer is too small, the function returns ERROR_INSUFFICIENT_BUFFER and sets this parameter to the required buffer size. If the buffer size is zero on input, no data is returned in the buffer and this parameter receives the required buffer size."
       }
     ],
@@ -2115,8 +2115,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pBufferSize",
+        "type": "ULONG*",
+        "name": "pBufferSize",
         "description": "Size, in bytes, of the pBuffer buffer. If the function succeeds, this parameter receives the size of the buffer used. If the buffer is too small, the function returns ERROR_INSUFFICIENT_BUFFER and sets this parameter to the required buffer size. If the buffer size is zero on input, no data is returned in the buffer and this parameter receives the required buffer size."
       }
     ],
@@ -2156,8 +2156,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pBufferSize",
+        "type": "ULONG*",
+        "name": "pBufferSize",
         "description": "Size, in bytes, of the pBuffer buffer. If the function succeeds, this parameter receives the size of the buffer used. If the buffer is too small, the function returns ERROR_INSUFFICIENT_BUFFER and sets this parameter to the required buffer size. If the buffer size is zero on input, no data is returned in the buffer and this parameter receives the required buffer size."
       }
     ],
@@ -2197,8 +2197,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*BufferSize",
+        "type": "ULONG*",
+        "name": "BufferSize",
         "description": "The size, in bytes, of the buffer pointed to by the Buffer parameter. If the function succeeds, this parameter receives the size of the buffer used. If the buffer is too small, the function returns ERROR_INSUFFICIENT_BUFFER and sets this parameter to the required buffer size. If the buffer size is zero on input, no data is returned in the buffer and this parameter receives the required buffer size."
       }
     ],
@@ -2309,8 +2309,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*pPropertySize",
+        "type": "ULONG*",
+        "name": "pPropertySize",
         "description": "Size of the property, in bytes. Use this value to allocate the buffer passed in the pBuffer parameter of the TdhGetProperty function."
       }
     ],
@@ -2513,8 +2513,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pBufferSize",
+        "type": "ULONG*",
+        "name": "pBufferSize",
         "description": "Size, in bytes, of the pBuffer buffer. If the function succeeds, this parameter receives the size of the buffer used. If the buffer is too small, the function returns ERROR_INSUFFICIENT_BUFFER and sets this parameter to the required buffer size. If the buffer size is zero on input, no data is returned in the buffer and this parameter receives the required buffer size."
       }
     ],

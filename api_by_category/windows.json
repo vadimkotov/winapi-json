@@ -234,14 +234,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "POINT",
-        "name": "*anchorPoint",
+        "type": "const POINT*",
+        "name": "anchorPoint",
         "description": "Type: const POINT* The specified anchor point."
       },
       {
         "in_out": "_In_",
-        "type": "SIZE",
-        "name": "*windowSize",
+        "type": "const SIZE*",
+        "name": "windowSize",
         "description": "Type: const SIZE* The specified window size."
       },
       {
@@ -252,14 +252,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "RECT",
-        "name": "*excludeRect",
+        "type": "RECT*",
+        "name": "excludeRect",
         "description": "Type: RECT* A pointer to a structure that specifies the exclude rectangle.  \t\t\t\tIt can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "RECT",
-        "name": "*popupWindowPosition",
+        "type": "RECT*",
+        "name": "popupWindowPosition",
         "description": "Type: RECT*  \t\t\t\tA pointer to a structure that specifies the pop-up window position."
       }
     ],
@@ -293,8 +293,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "RECT",
-        "name": "*lpRect",
+        "type": "const RECT*",
+        "name": "lpRect",
         "description": "Type: const RECT* A pointer to a structure that specifies the rectangular area, in client coordinates, within which the windows are arranged. This parameter can be NULL, in which case the client area of the parent window is used."
       },
       {
@@ -305,8 +305,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "HWND",
-        "name": "*lpKids",
+        "type": "const HWND*",
+        "name": "lpKids",
         "description": "Type: const HWND* An array of handles to the child windows to arrange. If a specified child window is a top-level window with the style WS_EX_TOPMOST or WS_EX_TOOLWINDOW, the child window is not arranged. If this parameter is NULL, all child windows of the specified parent window (or of the desktop window) are arranged."
       }
     ],
@@ -1277,20 +1277,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "COLORREF",
-        "name": "*pcrKey",
+        "type": "COLORREF*",
+        "name": "pcrKey",
         "description": "Type: COLORREF* A pointer to a COLORREF value that receives the transparency color key to be used when composing the layered window. All pixels painted by the window in this color will be transparent. This can be NULL if the argument is not needed."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "BYTE",
-        "name": "*pbAlpha",
+        "type": "BYTE*",
+        "name": "pbAlpha",
         "description": "Type: BYTE* The Alpha value used to describe the opacity of the layered window. Similar to the SourceConstantAlpha member of the BLENDFUNCTION structure. When the variable referred to by pbAlpha is 0, the window is completely transparent. When the variable referred to by pbAlpha is 255, the window is opaque. This can be NULL if the argument is not needed."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pdwFlags",
+        "type": "DWORD*",
+        "name": "pdwFlags",
         "description": "Type: DWORD* A layering flag. This parameter can be NULL if the value is not needed. The layering flag can be one or more of the following values.  ValueMeaning  LWA_ALPHA 0x00000002   Use pbAlpha to determine the opacity of the layered window.   LWA_COLORKEY 0x00000001   Use pcrKey as the transparency color."
       }
     ],
@@ -1364,8 +1364,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwDefaultLayout",
+        "type": "DWORD*",
+        "name": "pdwDefaultLayout",
         "description": "Type: DWORD* The current default process layout. For a list of values, see SetProcessDefaultLayout."
       }
     ],
@@ -1513,8 +1513,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*dwAffinity",
+        "type": "DWORD*",
+        "name": "dwAffinity",
         "description": "Type: DWORD* The display affinity setting."
       }
     ],
@@ -1606,8 +1606,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "WINDOWPLACEMENT",
-        "name": "*lpwndpl",
+        "type": "WINDOWPLACEMENT*",
+        "name": "lpwndpl",
         "description": "Type: WINDOWPLACEMENT* A pointer to the WINDOWPLACEMENT structure that receives the show state and position information. Before calling GetWindowPlacement, set the length member to sizeof(WINDOWPLACEMENT). GetWindowPlacement fails if lpwndpl-> length is not set correctly."
       }
     ],
@@ -2368,14 +2368,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "INT",
-        "name": "*lpaElements",
+        "type": "const INT*",
+        "name": "lpaElements",
         "description": "Type: const INT* An array of integers that specify the display elements to be changed. For a list of display elements, see  GetSysColor."
       },
       {
         "in_out": "_In_",
-        "type": "COLORREF",
-        "name": "*lpaRgbValues",
+        "type": "const COLORREF*",
+        "name": "lpaRgbValues",
         "description": "Type: const COLORREF* An array of  COLORREF values that contain the new red, green, blue (RGB) color values for the display elements in the array pointed to by the lpaElements parameter. To generate a  COLORREF, use the  RGB macro."
       }
     ],
@@ -2450,8 +2450,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "VOID",
-        "name": "*configuration",
+        "type": "const VOID*",
+        "name": "configuration",
         "description": "The value of the setting for the feedback."
       }
     ],
@@ -2479,8 +2479,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "WINDOWPLACEMENT",
-        "name": "*lpwndpl",
+        "type": "const WINDOWPLACEMENT*",
+        "name": "lpwndpl",
         "description": "Type: const WINDOWPLACEMENT* A pointer to a WINDOWPLACEMENT structure that specifies the new show state and window positions.  Before calling SetWindowPlacement, set the length member of the WINDOWPLACEMENT structure to sizeof(WINDOWPLACEMENT). SetWindowPlacement fails if the length member is not set correctly."
       }
     ],
@@ -2734,8 +2734,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "RECT",
-        "name": "*lpRect",
+        "type": "const RECT*",
+        "name": "lpRect",
         "description": "Type: const RECT* A pointer to a structure that specifies the rectangular area, in client coordinates, within which the windows are arranged. If this parameter is NULL, the client area of the parent window is used."
       },
       {
@@ -2746,8 +2746,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "HWND",
-        "name": "*lpKids",
+        "type": "const HWND*",
+        "name": "lpKids",
         "description": "Type: const HWND* An array of handles to the child windows to arrange. If a specified child window is a top-level window with the style WS_EX_TOPMOST or WS_EX_TOOLWINDOW, the child window is not arranged. If this parameter is NULL, all child windows of the specified parent window (or of the desktop window) are arranged."
       }
     ],
@@ -2781,14 +2781,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "POINT",
-        "name": "*pptDst",
+        "type": "POINT*",
+        "name": "pptDst",
         "description": "Type: POINT* A pointer to a structure that specifies the new screen position of the layered window. If the current position is not changing, pptDst can be NULL."
       },
       {
         "in_out": "_In_opt_",
-        "type": "SIZE",
-        "name": "*psize",
+        "type": "SIZE*",
+        "name": "psize",
         "description": "Type: SIZE* A pointer to a structure that specifies the new size of the layered window. If the size of the window is not changing, psize can be NULL. If hdcSrc is NULL, psize must be NULL."
       },
       {
@@ -2799,8 +2799,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "POINT",
-        "name": "*pptSrc",
+        "type": "POINT*",
+        "name": "pptSrc",
         "description": "Type: POINT* A pointer to a structure that specifies the location of the layer in the device context. If hdcSrc is NULL, pptSrc should be NULL."
       },
       {
@@ -2811,8 +2811,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "BLENDFUNCTION",
-        "name": "*pblend",
+        "type": "BLENDFUNCTION*",
+        "name": "pblend",
         "description": "Type: BLENDFUNCTION* A pointer to a structure that specifies the transparency value to be used when composing the layered window."
       },
       {
@@ -2846,8 +2846,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "UPDATELAYEREDWINDOWINFO",
-        "name": "*pULWInfo",
+        "type": "const UPDATELAYEREDWINDOWINFO*",
+        "name": "pULWInfo",
         "description": "Type: const UPDATELAYEREDWINDOWINFO* A pointer to a structure that contains the information for the window."
       }
     ],

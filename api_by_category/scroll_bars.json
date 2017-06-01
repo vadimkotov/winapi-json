@@ -208,14 +208,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "RECT",
-        "name": "*lprcScroll",
+        "type": "const RECT*",
+        "name": "lprcScroll",
         "description": "Type: const RECT* Pointer to a RECT structure containing the coordinates of the bits to be scrolled. The only bits affected by the scroll operation are bits in the intersection of this rectangle and the rectangle specified by  \t\t\t\t\tlprcClip. If  \t\t\t\t\tlprcScroll is NULL, the entire client area is used."
       },
       {
         "in_out": "_In_",
-        "type": "RECT",
-        "name": "*lprcClip",
+        "type": "const RECT*",
+        "name": "lprcClip",
         "description": "Type: const RECT* Pointer to a  \t\t\t\t\tRECT structure containing the coordinates of the clipping rectangle. The only bits that will be painted are the bits that remain inside this rectangle after the scroll operation has been completed. If  \t\t\t\t\tlprcClip is NULL, the entire client area is used."
       },
       {
@@ -267,14 +267,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "RECT",
-        "name": "*lpRect",
+        "type": "const RECT*",
+        "name": "lpRect",
         "description": "Type: const RECT* Pointer to the RECT structure specifying the portion of the client area to be scrolled. If this parameter is NULL, the entire client area is scrolled."
       },
       {
         "in_out": "_In_",
-        "type": "RECT",
-        "name": "*lpClipRect",
+        "type": "const RECT*",
+        "name": "lpClipRect",
         "description": "Type: const RECT* Pointer to the  \t\t\t\t\tRECT structure containing the coordinates of the clipping rectangle. Only device bits within the clipping rectangle are affected. Bits scrolled from the outside of the rectangle to the inside are painted; bits scrolled from the inside of the rectangle to the outside are not painted."
       }
     ],
@@ -314,14 +314,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "RECT",
-        "name": "*prcScroll",
+        "type": "const RECT*",
+        "name": "prcScroll",
         "description": "Type: const RECT* Pointer to a RECT structure that specifies the portion of the client area to be scrolled. If this parameter is NULL, the entire client area is scrolled."
       },
       {
         "in_out": "_In_",
-        "type": "RECT",
-        "name": "*prcClip",
+        "type": "const RECT*",
+        "name": "prcClip",
         "description": "Type: const RECT* Pointer to a  \t\t\t\t\tRECT structure that contains the coordinates of the clipping rectangle. Only device bits within the clipping rectangle are affected. Bits scrolled from the outside of the rectangle to the inside are painted; bits scrolled from the inside of the rectangle to the outside are not painted. This parameter may be NULL."
       },
       {

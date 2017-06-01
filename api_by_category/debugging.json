@@ -372,8 +372,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "SIZE_T",
-        "name": "*lpNumberOfBytesRead",
+        "type": "SIZE_T*",
+        "name": "lpNumberOfBytesRead",
         "description": "A pointer to a variable that receives the number of bytes transferred into the specified buffer. If lpNumberOfBytesRead is NULL, the parameter is ignored."
       }
     ],
@@ -401,8 +401,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "CONTEXT",
-        "name": "*lpContext",
+        "type": "const CONTEXT*",
+        "name": "lpContext",
         "description": "A pointer to a CONTEXT structure that contains the        context to be set in the specified thread. The value of the ContextFlags member of        this structure specifies which portions of a thread's context to set. Some values in the        CONTEXT structure that cannot be specified are silently        set to the correct value. This includes bits in the CPU status register that specify the privileged processor        mode, global enabling bits in the debugging register, and other states that must be controlled by the operating        system."
       }
     ],
@@ -523,8 +523,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "WOW64_CONTEXT",
-        "name": "*lpContext",
+        "type": "const WOW64_CONTEXT*",
+        "name": "lpContext",
         "description": "A WOW64_CONTEXT structure. The caller must        initialize the ContextFlags member of this structure."
       }
     ],
@@ -570,8 +570,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "SIZE_T",
-        "name": "*lpNumberOfBytesWritten",
+        "type": "SIZE_T*",
+        "name": "lpNumberOfBytesWritten",
         "description": "A pointer to a variable that receives the number of bytes transferred into the specified process. This parameter is optional. If lpNumberOfBytesWritten is NULL, the parameter is ignored."
       }
     ],

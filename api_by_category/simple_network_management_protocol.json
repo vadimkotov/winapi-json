@@ -37,14 +37,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*phSubagentTrapEvent",
+        "type": "HANDLE*",
+        "name": "phSubagentTrapEvent",
         "description": "Pointer to an event handle the extension agent passes back to the SNMP service. This handle is used to notify the service that the extension agent has one or more traps to send. For additional information about allocating and deallocating the event handle, see the following Remarks section."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnObjectIdentifier",
-        "name": "*pFirstSupportedRegion",
+        "type": "AsnObjectIdentifier*",
+        "name": "pFirstSupportedRegion",
         "description": "Pointer to an  AsnObjectIdentifier structure to receive the first MIB subtree that the extension agent supports. For additional information about allocating and deallocating resources for this structure, see the following Remarks section.     The extension agent can register additional MIB subtrees by implementing the  SnmpExtensionInitEx entry point function."
       }
     ],
@@ -66,8 +66,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "AsnObjectIdentifier",
-        "name": "*pNextSupportedRegion",
+        "type": "AsnObjectIdentifier*",
+        "name": "pNextSupportedRegion",
         "description": "Pointer to an  AsnObjectIdentifier structure to receive the next MIB subtree that the extension agent supports."
       }
     ],
@@ -118,20 +118,20 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "SnmpVarBindList",
-        "name": "*pVarBindList",
+        "type": "SnmpVarBindList*",
+        "name": "pVarBindList",
         "description": "Pointer to the variable bindings list."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnInteger32",
-        "name": "*pErrorStatus",
+        "type": "AsnInteger32*",
+        "name": "pErrorStatus",
         "description": "Pointer to a variable in which the error status result will be returned. This parameter can be one of the following values defined by SNMPv1.     ValueMeaning  SNMP_ERRORSTATUS_NOERROR   The agent reports that no errors occurred during transmission.   SNMP_ERRORSTATUS_TOOBIG   The agent could not place the results of the requested operation into a single SNMP message.   SNMP_ERRORSTATUS_NOSUCHNAME   The requested operation identified an unknown variable.   SNMP_ERRORSTATUS_BADVALUE   The requested operation tried to change a variable but it specified either a syntax or value error.   SNMP_ERRORSTATUS_READONLY   The requested operation tried to change a variable that was not allowed to change according to the community profile of the variable.   SNMP_ERRORSTATUS_GENERR   An error other than one of those listed here occurred during the requested operation."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnInteger32",
-        "name": "*pErrorIndex",
+        "type": "AsnInteger32*",
+        "name": "pErrorIndex",
         "description": "Pointer to a variable in which the error index result will be returned."
       }
     ],
@@ -165,26 +165,26 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "SnmpVarBindList",
-        "name": "*pVarBindList",
+        "type": "SnmpVarBindList*",
+        "name": "pVarBindList",
         "description": "Pointer to the variable binding list containing the variables of interest."
       },
       {
         "in_out": "_Inout_",
-        "type": "AsnOctetString",
-        "name": "*pContextInfo",
+        "type": "AsnOctetString*",
+        "name": "pContextInfo",
         "description": "Pointer to an octet string that contains user-defined context information.     The extension agent can use this parameter to store context information used during multiphase SNMP SET operations. The extension agent must release resources associated with this parameter during the  CLEANUP request. The SNMP service does not release any resources associated with this parameter. For additional information, see the following Remarks section."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnInteger32",
-        "name": "*pErrorStatus",
+        "type": "AsnInteger32*",
+        "name": "pErrorStatus",
         "description": "Pointer to a variable to receive the error status result. This parameter can be one of the following values defined by SNMPv2C.     Error codeMeaning  SNMP_ERRORSTATUS_NOERROR   The agent reports that no errors occurred during transmission.   SNMP_ERRORSTATUS_TOOBIG   The agent could not place the results of the requested SNMP operation into a single SNMP message.   SNMP_ERRORSTATUS_NOSUCHNAME   The requested SNMP operation identified an unknown variable.   SNMP_ERRORSTATUS_BADVALUE   The requested SNMP operation tried to change a variable but it specified either a syntax or value error.   SNMP_ERRORSTATUS_READONLY   The requested SNMP operation tried to change a variable that was not allowed to change, according to the community profile of the variable.   SNMP_ERRORSTATUS_GENERR   An error other than one of those listed here occurred during the requested SNMP operation.   SNMP_ERRORSTATUS_NOACCESS   The specified SNMP variable is not accessible.   SNMP_ERRORSTATUS_WRONGTYPE   The value specifies a type that is inconsistent with the type required for the variable.   SNMP_ERRORSTATUS_WRONGLENGTH   The value specifies a length that is inconsistent with the length required for the variable.   SNMP_ERRORSTATUS_WRONGENCODING   The value contains an Abstract Syntax Notation One (ASN.1) encoding that is inconsistent with the ASN.1 tag of the field.   SNMP_ERRORSTATUS_WRONGVALUE   The value cannot be assigned to the variable.   SNMP_ERRORSTATUS_NOCREATION   The variable does not exist, and the agent cannot create it.   SNMP_ERRORSTATUS_INCONSISTENTVALUE   The value is inconsistent with values of other managed objects.   SNMP_ERRORSTATUS_RESOURCEUNAVAILABLE   Assigning the value to the variable requires allocation of resources that are currently unavailable.   SNMP_ERRORSTATUS_COMMITFAILED   No validation errors occurred, but no variables were updated.   SNMP_ERRORSTATUS_UNDOFAILED   No validation errors occurred. Some variables were updated because it was not possible to undo their assignment.   SNMP_ERRORSTATUS_AUTHORIZATIONERROR   An authorization error occurred.   SNMP_ERRORSTATUS_NOTWRITABLE   The variable exists but the agent cannot modify it.   SNMP_ERRORSTATUS_INCONSISTENTNAME   The variable does not exist; the agent cannot create it because the named object instance is inconsistent with the values of other managed objects."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnInteger32",
-        "name": "*pErrorIndex",
+        "type": "AsnInteger32*",
+        "name": "pErrorIndex",
         "description": "Pointer to a variable to receive the error index result."
       }
     ],
@@ -206,32 +206,32 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "AsnObjectIdentifier",
-        "name": "*pEnterpriseOid",
+        "type": "AsnObjectIdentifier*",
+        "name": "pEnterpriseOid",
         "description": "Pointer to an  AsnObjectIdentifier structure to receive the object identifier of the enterprise that generated the trap. The SNMP service does not free the memory for this variable."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnInteger32",
-        "name": "*pGenericTrapId",
+        "type": "AsnInteger32*",
+        "name": "pGenericTrapId",
         "description": "Pointer to a variable to receive an indication of the generic trap. This parameter can be one of the following values.     ValueMeaning  SNMP_GENERICTRAP_COLDSTART   The agent is initializing protocol entities on the managed mode. It may alter objects in its view.   SNMP_GENERICTRAP_WARMSTART   The agent is reinitializing itself but will not alter objects within its view.   SNMP_GENERICTRAP_LINKDOWN   An attached interface has changed from the \"up\" state to the \"down\" state. The first variable identifies the interface.   SNMP_GENERICTRAP_LINKUP   An attached interface has changed from the \"down\" state to the \"up\" state. The first variable identifies the interface.   SNMP_GENERICTRAP_AUTHFAILURE   An SNMP entity has sent an SNMP message, but has falsely claimed to belong to a known community.   SNMP_GENERICTRAP_EGPNEIGHLOSS   An EGP peer has changed to the down state. The first variable identifies the IP address of the EGP peer.   SNMP_GENERICTRAP_ENTERSPECIFIC   Signals an extraordinary event that is identified in the pSpecificTrapId parameter."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnInteger32",
-        "name": "*pSpecificTrapId",
+        "type": "AsnInteger32*",
+        "name": "pSpecificTrapId",
         "description": "Pointer to a variable to receive an indication of the specific trap generated."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnTimeticks",
-        "name": "*pTimeStamp",
+        "type": "AsnTimeticks*",
+        "name": "pTimeStamp",
         "description": "Pointer to a variable to receive the time stamp. It is recommended that you initialize this parameter with the value returned by a call to the  SnmpSvcGetUptime function."
       },
       {
         "in_out": "_Out_",
-        "type": "SnmpVarBindList",
-        "name": "*pVarBindList",
+        "type": "SnmpVarBindList*",
+        "name": "pVarBindList",
         "description": "Pointer to the variable bindings list. The extension agent must allocate the memory for this parameter. The SNMP service frees the memory with a call to the  SnmpUtilVarBindListFree function."
       }
     ],
@@ -335,38 +335,38 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "AsnObjectIdentifier",
-        "name": "*enterprise",
+        "type": "AsnObjectIdentifier*",
+        "name": "enterprise",
         "description": "Pointer to an  AsnObjectIdentifier structure to receive the enterprise that generated the SNMP trap."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnNetworkAddress",
-        "name": "*IPAddress",
+        "type": "AsnNetworkAddress*",
+        "name": "IPAddress",
         "description": "Pointer to a variable to receive the address of the agent that generated the SNMP trap."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnInteger",
-        "name": "*genericTrap",
+        "type": "AsnInteger*",
+        "name": "genericTrap",
         "description": "Pointer to a variable to receive an indicator of the generic trap. This parameter can be one of the following values.     ValueMeaning  SNMP_GENERICTRAP_COLDSTART   The agent is initializing protocol entities on the managed mode. It may alter objects in its view.   SNMP_GENERICTRAP_WARMSTART   The agent is reinitializing itself but it will not alter objects in its view.   SNMP_GENERICTRAP_LINKDOWN   An attached interface has changed from the \"up\" state to the \"down\" state. The first variable in the variable bindings list identifies the interface.   SNMP_GENERICTRAP_LINKUP   An attached interface has changed from the \"down\" state to the \"up\" state. The first variable in the variable bindings list identifies the interface.   SNMP_GENERICTRAP_AUTHFAILURE   An SNMP entity has sent an SNMP message, but it has falsely claimed to belong to a known community.   SNMP_GENERICTRAP_EGPNEIGHLOSS   An EGP peer has changed to the \"down\" state. The first variable in the variable bindings list identifies the IP address of the EGP peer.   SNMP_GENERICTRAP_ENTERSPECIFIC   An extraordinary event has occurred and it is identified in the specificTrap parameter with an enterprise-specific value."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnInteger",
-        "name": "*specificTrap",
+        "type": "AsnInteger*",
+        "name": "specificTrap",
         "description": "Pointer to a variable to receive an indication of the specific trap generated."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnTimeticks",
-        "name": "*timeStamp",
+        "type": "AsnTimeticks*",
+        "name": "timeStamp",
         "description": "Pointer to a variable to receive the time stamp."
       },
       {
         "in_out": "_Out_",
-        "type": "SnmpVarBindList",
-        "name": "*variableBindings",
+        "type": "SnmpVarBindList*",
+        "name": "variableBindings",
         "description": "Pointer to an  SnmpVarBindList structure to receive the variable bindings list."
       }
     ],
@@ -388,50 +388,50 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "AsnObjectIdentifier",
-        "name": "*enterprise",
+        "type": "AsnObjectIdentifier*",
+        "name": "enterprise",
         "description": "Pointer to an  AsnObjectIdentifier structure to receive the enterprise that generated the SNMP trap."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnNetworkAddress",
-        "name": "*agentAddress",
+        "type": "AsnNetworkAddress*",
+        "name": "agentAddress",
         "description": "Pointer to a variable to receive the address of the agent that generated the SNMP trap; this information is retrieved from the SNMP protocol data unit (PDU)."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnNetworkAddress",
-        "name": "*sourceAddress",
+        "type": "AsnNetworkAddress*",
+        "name": "sourceAddress",
         "description": "Pointer to a variable to receive the address of the agent that generated the SNMP trap; this information is retrieved from the network transport."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnInteger",
-        "name": "*genericTrap",
+        "type": "AsnInteger*",
+        "name": "genericTrap",
         "description": "Pointer to a variable to receive an indicator of the generic trap. This parameter can be one of the following values.     ValueMeaning  SNMP_GENERICTRAP_COLDSTART   The agent is initializing protocol entities on the managed mode. It may alter objects in its view.   SNMP_GENERICTRAP_WARMSTART   The agent is reinitializing itself but it will not alter objects in its view.   SNMP_GENERICTRAP_LINKDOWN   An attached interface has changed from the up state to the down state. The first variable in the variable bindings list identifies the interface.   SNMP_GENERICTRAP_LINKUP   An attached interface has changed from the down state to the up state. The first variable in the variable bindings list identifies the interface.   SNMP_GENERICTRAP_AUTHFAILURE   An SNMP entity has sent an SNMP message, but it has falsely claimed to belong to a known community.   SNMP_GENERICTRAP_EGPNEIGHLOSS   An EGP peer has changed to the down state. The first variable in the variable bindings list identifies the IP address of the EGP peer.   SNMP_GENERICTRAP_ENTERSPECIFIC   An extraordinary event has occurred. It is identified in the specificTrap parameter with an enterprise-specific value."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnInteger",
-        "name": "*specificTrap",
+        "type": "AsnInteger*",
+        "name": "specificTrap",
         "description": "Pointer to a variable to receive an indicator of the specific trap generated."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnOctetString",
-        "name": "*community",
+        "type": "AsnOctetString*",
+        "name": "community",
         "description": "Pointer to an  AsnOctetString structure to receive the community string of the generated SNMP trap."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnTimeticks",
-        "name": "*timeStamp",
+        "type": "AsnTimeticks*",
+        "name": "timeStamp",
         "description": "Pointer to a variable to receive the time stamp."
       },
       {
         "in_out": "_Out_",
-        "type": "SnmpVarBindList",
-        "name": "*variableBindings",
+        "type": "SnmpVarBindList*",
+        "name": "variableBindings",
         "description": "Pointer to an  SnmpVarBindList structure to receive the variable bindings list."
       }
     ],
@@ -453,14 +453,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "AsnObjectIdentifier",
-        "name": "*oid",
+        "type": "AsnObjectIdentifier*",
+        "name": "oid",
         "description": "Pointer to an object identifier variable to convert."
       },
       {
         "in_out": "_Out_",
-        "type": "LPSTR",
-        "name": "*string",
+        "type": "LPSTR*",
+        "name": "string",
         "description": "Pointer to a null-terminated string to receive the converted value."
       }
     ],
@@ -535,20 +535,20 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "SnmpVarBindList",
-        "name": "*variableBindings",
+        "type": "SnmpVarBindList*",
+        "name": "variableBindings",
         "description": "Pointer to the variable bindings list.  Note  The SnmpVarBind array pointed to by the SnmpVarBindList structure must be allocated using the SnmpUtilMemAlloc function."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnInteger",
-        "name": "*errorStatus",
+        "type": "AsnInteger*",
+        "name": "errorStatus",
         "description": "Pointer to a variable in which the error status result will be returned. This parameter can be one of the following values defined by SNMPv1.     ValueMeaning  SNMP_ERRORSTATUS_NOERROR   The agent reports that no errors occurred during transmission.   SNMP_ERRORSTATUS_TOOBIG   The agent could not place the results of the requested operation into a single SNMP message.   SNMP_ERRORSTATUS_NOSUCHNAME   The requested operation identified an unknown variable.   SNMP_ERRORSTATUS_BADVALUE   The requested operation tried to change a variable but it specified either a syntax or value error.   SNMP_ERRORSTATUS_READONLY   The requested operation tried to change a variable that was not allowed to change according to the community profile of the variable.   SNMP_ERRORSTATUS_GENERR   An error other than one of those listed here occurred during the requested operation."
       },
       {
         "in_out": "_Out_",
-        "type": "AsnInteger",
-        "name": "*errorIndex",
+        "type": "AsnInteger*",
+        "name": "errorIndex",
         "description": "Pointer to a variable in which the error index result will be returned."
       }
     ],
@@ -576,8 +576,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "AsnObjectIdentifier",
-        "name": "*oid",
+        "type": "AsnObjectIdentifier*",
+        "name": "oid",
         "description": "Pointer to an object identifier variable to receive the converted value."
       }
     ],
@@ -599,8 +599,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*phTrapAvailable",
+        "type": "HANDLE*",
+        "name": "phTrapAvailable",
         "description": "Pointer to an event handle to receive an indication that there are traps available, and that the application should call the  SnmpMgrGetTrap function."
       }
     ],
@@ -684,14 +684,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "AsnAny",
-        "name": "*pAnyDst",
+        "type": "AsnAny*",
+        "name": "pAnyDst",
         "description": "Pointer to an  AsnAny structure to receive the copy."
       },
       {
         "in_out": "_In_",
-        "type": "AsnAny",
-        "name": "*pAnySrc",
+        "type": "AsnAny*",
+        "name": "pAnySrc",
         "description": "Pointer to an  AsnAny structure to copy."
       }
     ],
@@ -713,8 +713,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "AsnAny",
-        "name": "*pAny",
+        "type": "AsnAny*",
+        "name": "pAny",
         "description": "Pointer to an  AsnAny structure whose memory should be freed."
       }
     ],
@@ -765,8 +765,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "UINT",
-        "name": "*Ids",
+        "type": "UINT*",
+        "name": "Ids",
         "description": "Pointer to an array of unsigned integers. The array contains the sequence of numbers that the OID contains. The IdLength parameter specifies the array's length.     For more information, see the following Return Values and Remarks sections."
       },
       {
@@ -869,14 +869,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "AsnOctetString",
-        "name": "*pOctets1",
+        "type": "AsnOctetString*",
+        "name": "pOctets1",
         "description": "Pointer to an  AsnOctetString structure to compare."
       },
       {
         "in_out": "_In_",
-        "type": "AsnOctetString",
-        "name": "*pOctets2",
+        "type": "AsnOctetString*",
+        "name": "pOctets2",
         "description": "Pointer to a second  AsnOctetString structure to compare."
       }
     ],
@@ -898,14 +898,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "AsnOctetString",
-        "name": "*pOctetsDst",
+        "type": "AsnOctetString*",
+        "name": "pOctetsDst",
         "description": "Pointer to an  AsnOctetString structure to receive the copy."
       },
       {
         "in_out": "_In_",
-        "type": "AsnOctetString",
-        "name": "*pOctetsSrc",
+        "type": "AsnOctetString*",
+        "name": "pOctetsSrc",
         "description": "Pointer to an  AsnOctetString structure to copy."
       }
     ],
@@ -927,8 +927,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "AsnOctetString",
-        "name": "*pOctets",
+        "type": "AsnOctetString*",
+        "name": "pOctets",
         "description": "Pointer to an  AsnOctetString structure whose memory should be freed."
       }
     ],
@@ -950,14 +950,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "AsnOctetString",
-        "name": "*pOctets1",
+        "type": "AsnOctetString*",
+        "name": "pOctets1",
         "description": "Pointer to an  AsnOctetString structure to compare."
       },
       {
         "in_out": "_In_",
-        "type": "AsnOctetString",
-        "name": "*pOctets2",
+        "type": "AsnOctetString*",
+        "name": "pOctets2",
         "description": "Pointer to a second  AsnOctetString structure to compare."
       },
       {
@@ -985,14 +985,14 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "AsnObjectIdentifier",
-        "name": "*pOidDst",
+        "type": "AsnObjectIdentifier*",
+        "name": "pOidDst",
         "description": "Pointer to an  AsnObjectIdentifier structure to receive the source structure."
       },
       {
         "in_out": "_In_",
-        "type": "AsnObjectIdentifier",
-        "name": "*pOidSrc",
+        "type": "AsnObjectIdentifier*",
+        "name": "pOidSrc",
         "description": "Pointer to an  AsnObjectIdentifier structure to append."
       }
     ],
@@ -1014,14 +1014,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "AsnObjectIdentifier",
-        "name": "*pOid1",
+        "type": "AsnObjectIdentifier*",
+        "name": "pOid1",
         "description": "Pointer to an  AsnObjectIdentifier structure to compare."
       },
       {
         "in_out": "_In_",
-        "type": "AsnObjectIdentifier",
-        "name": "*pOid2",
+        "type": "AsnObjectIdentifier*",
+        "name": "pOid2",
         "description": "Pointer to a second  AsnObjectIdentifier structure to compare."
       }
     ],
@@ -1043,14 +1043,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "AsnObjectIdentifier",
-        "name": "*pOidDst",
+        "type": "AsnObjectIdentifier*",
+        "name": "pOidDst",
         "description": "Pointer to an  AsnObjectIdentifier structure to receive the copy."
       },
       {
         "in_out": "_In_",
-        "type": "AsnObjectIdentifier",
-        "name": "*pOidSrc",
+        "type": "AsnObjectIdentifier*",
+        "name": "pOidSrc",
         "description": "Pointer to an  AsnObjectIdentifier structure to copy."
       }
     ],
@@ -1072,8 +1072,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "AsnObjectIdentifier",
-        "name": "*pOid",
+        "type": "AsnObjectIdentifier*",
+        "name": "pOid",
         "description": "Pointer to an  AsnObjectIdentifier structure whose memory should be freed."
       }
     ],
@@ -1095,14 +1095,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "AsnObjectIdentifier",
-        "name": "*pOid1",
+        "type": "AsnObjectIdentifier*",
+        "name": "pOid1",
         "description": "Pointer to an  AsnObjectIdentifier structure to compare."
       },
       {
         "in_out": "_In_",
-        "type": "AsnObjectIdentifier",
-        "name": "*pOid2",
+        "type": "AsnObjectIdentifier*",
+        "name": "pOid2",
         "description": "Pointer to a second  AsnObjectIdentifier structure to compare."
       },
       {
@@ -1130,8 +1130,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "AsnObjectIdentifier",
-        "name": "*Oid",
+        "type": "AsnObjectIdentifier*",
+        "name": "Oid",
         "description": "Pointer to an  AsnObjectIdentifier structure to convert."
       }
     ],
@@ -1153,8 +1153,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "AsnAny",
-        "name": "*pAny",
+        "type": "AsnAny*",
+        "name": "pAny",
         "description": "Pointer to an  AsnAny structure for a value to print."
       }
     ],
@@ -1176,8 +1176,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "AsnObjectIdentifier",
-        "name": "*Oid",
+        "type": "AsnObjectIdentifier*",
+        "name": "Oid",
         "description": "Pointer to an  AsnObjectIdentifier structure to print."
       }
     ],
@@ -1199,14 +1199,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "SnmpVarBind",
-        "name": "*pVbDst",
+        "type": "SnmpVarBind*",
+        "name": "pVbDst",
         "description": "Pointer to an  SnmpVarBind structure to receive the copy."
       },
       {
         "in_out": "_In_",
-        "type": "SnmpVarBind",
-        "name": "*pVbSrc",
+        "type": "SnmpVarBind*",
+        "name": "pVbSrc",
         "description": "Pointer to an  SnmpVarBind structure to copy."
       }
     ],
@@ -1228,14 +1228,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "SnmpVarBindList",
-        "name": "*pVblDst",
+        "type": "SnmpVarBindList*",
+        "name": "pVblDst",
         "description": "Pointer to an  SnmpVarBindList structure to receive the copy."
       },
       {
         "in_out": "_In_",
-        "type": "SnmpVarBindList",
-        "name": "*pVblSrc",
+        "type": "SnmpVarBindList*",
+        "name": "pVblSrc",
         "description": "Pointer to an  SnmpVarBindList structure to copy."
       }
     ],
@@ -1257,8 +1257,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SnmpVarBind",
-        "name": "*pVb",
+        "type": "SnmpVarBind*",
+        "name": "pVb",
         "description": "Pointer to an  SnmpVarBind structure whose memory should be freed."
       }
     ],
@@ -1280,8 +1280,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SnmpVarBindList",
-        "name": "*pVbl",
+        "type": "SnmpVarBindList*",
+        "name": "pVbl",
         "description": "Pointer to an  SnmpVarBindList structure whose allocated memory should be freed."
       }
     ],

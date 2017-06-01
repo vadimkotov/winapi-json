@@ -21,8 +21,8 @@
       },
       {
         "in_out": "_Reserved_",
-        "type": "VOID",
-        "name": "*pReserved",
+        "type": "VOID*",
+        "name": "pReserved",
         "description": "Reserved"
       }
     ],
@@ -50,14 +50,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "DWORD",
-        "name": "*pdwReserved",
+        "type": "DWORD*",
+        "name": "pdwReserved",
         "description": "Reserved for future use. This pointer must be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "WWAN_INTERFACE_INFO_LIST",
-        "name": "**ppInterfaceList",
+        "type": "WWAN_INTERFACE_INFO_LIST**",
+        "name": "ppInterfaceList",
         "description": "A pointer to a memory block that receives an array of mobile broadband interfaces in a  WWAN_INTERFACE_INFO_LIST structure.  The memory block for the WWAN_INTERFACE_INFO_LIST returned is allocated by WwanEnumerateInterfaces if the call succeeds."
       }
     ],
@@ -108,20 +108,20 @@
       },
       {
         "in_out": "_Reserved_",
-        "type": "VOID",
-        "name": "*pReserved",
+        "type": "VOID*",
+        "name": "pReserved",
         "description": "Reserved"
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwNegotiatedVersion",
+        "type": "DWORD*",
+        "name": "pdwNegotiatedVersion",
         "description": "A pointer to a variable that receives a 32-bit value that specifies the negotiated version of the WWAN API."
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*phClientHandle",
+        "type": "HANDLE*",
+        "name": "phClientHandle",
         "description": "A pointer to a variable that receives a handle for the client to use in this session. This handle is used by other functions throughout the session."
       }
     ],
@@ -149,8 +149,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "A pointer to the GUID of the interface to be queried."
       },
       {
@@ -161,32 +161,32 @@
       },
       {
         "in_out": "_Reserved_",
-        "type": "VOID",
-        "name": "*pReserved",
+        "type": "VOID*",
+        "name": "pReserved",
         "description": "Reserved for future use. This pointer must be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwDataSize",
+        "type": "DWORD*",
+        "name": "pdwDataSize",
         "description": "A pointer to a variable that receives a 32-bit value that specifies the size of the data returned."
       },
       {
         "in_out": "_Out_",
-        "type": "BYTE",
-        "name": "**ppData",
+        "type": "BYTE**",
+        "name": "ppData",
         "description": "A pointer to a memory block that receives a pointer to the data returned."
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*pRequestId",
+        "type": "ULONG*",
+        "name": "pRequestId",
         "description": "A pointer to a variable that receives a request ID for the query."
       },
       {
         "in_out": "_Out_",
-        "type": "WWAN_STATUS",
-        "name": "*pStatus",
+        "type": "WWAN_STATUS*",
+        "name": "pStatus",
         "description": "A pointer to a variable that receives a status value for the query operation. Here are possible values.  WWAN_STATUS_SUCCESS (STATUS_SUCCESS) WWAN_STATUS_BUSY (0xC0040002) WWAN_STATUS_FAILURE (0xC0040003) WWAN_STATUS_SIM_NOT_INSERTED (0xC0040004) WWAN_STATUS_BAD_SIM (0xC0040005) WWAN_STATUS_PIN_REQUIRED (0xC0040006) WWAN_STATUS_PIN_DISABLED (0xC0040007) WWAN_STATUS_NOT_REGISTERED (0xC0040008) WWAN_STATUS_PROVIDERS_NOT_FOUND (0xC0040009) WWAN_STATUS_NO_DEVICE_SUPPORT (0xC004000a) WWAN_STATUS_PROVIDER_NOT_VISIBLE (0xC004000b) WWAN_STATUS_DATA_CLASS_NOT_AVAILABLE (0xC004000c) WWAN_STATUS_PACKET_SVC_DETACHED (0xC004000d) WWAN_STATUS_MAX_ACTIVATED_CONTEXTS (0xC004000e) WWAN_STATUS_NOT_INITIALIZED (0xC004000f) WWAN_STATUS_VOICE_CALL_IN_PROGRESS (0xC0040010) WWAN_STATUS_CONTEXT_NOT_ACTIVATED (0xC0040011) WWAN_STATUS_SERVICE_NOT_ACTIVATED (0xC0040012) WWAN_STATUS_INVALID_ACCESS_STRING (0xC0040013) WWAN_STATUS_INVALID_USER_NAME_PWD (0xC0040014) WWAN_STATUS_RADIO_POWER_OFF (0xC0040015) WWAN_STATUS_INVALID_PARAMETERS (0xC0040016) WWAN_STATUS_READ_FAILURE (0xC0040017) WWAN_STATUS_WRITE_FAILURE (0xC0040018) WWAN_STATUS_DENIED_POLICY (0xC0040019) WWAN_STATUS_INVALID_DEVICE_SERVICE_OPERATION (0xC004001a) WWAN_STATUS_MORE_DATA (0xC004001b)"
       }
     ],

@@ -15,14 +15,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IADsContainer",
-        "name": "*pADsContainer",
+        "type": "IADsContainer*",
+        "name": "pADsContainer",
         "description": "Type: IADsContainer* Pointer to the  IADsContainer interface for the object to enumerate."
       },
       {
         "in_out": "_Out_",
-        "type": "IEnumVARIANT",
-        "name": "**ppEnumVariant",
+        "type": "IEnumVARIANT**",
+        "name": "ppEnumVariant",
         "description": "Type: IEnumVARIANT** Pointer to an IEnumVARIANT interface pointer that receives the enumerator object created for the specified container object."
       }
     ],
@@ -56,8 +56,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "VARIANT",
-        "name": "*pVar",
+        "type": "VARIANT*",
+        "name": "pVar",
         "description": "Type: VARIANT* Pointer to the resulting variant array of integers."
       }
     ],
@@ -79,8 +79,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "LPWSTR",
-        "name": "*lppPathNames",
+        "type": "LPWSTR*",
+        "name": "lppPathNames",
         "description": "Type: LPWSTR* Array of null-terminated Unicode strings."
       },
       {
@@ -91,8 +91,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "VARIANT",
-        "name": "*pVar",
+        "type": "VARIANT*",
+        "name": "pVar",
         "description": "Type: VARIANT* Pointer to the resulting variant array."
       }
     ],
@@ -126,8 +126,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*ppszDestData",
+        "type": "LPWSTR*",
+        "name": "ppszDestData",
         "description": "Type: LPWSTR* Pointer to a null-terminated Unicode string that receives the converted data."
       }
     ],
@@ -149,8 +149,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IEnumVARIANT",
-        "name": "*pEnumVariant",
+        "type": "IEnumVARIANT*",
+        "name": "pEnumVariant",
         "description": "Type: IEnumVARIANT* Pointer to the  IEnumVARIANT interface on the enumerator object."
       },
       {
@@ -161,14 +161,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "VARIANT",
-        "name": "*pvar",
+        "type": "VARIANT*",
+        "name": "pvar",
         "description": "Type: VARIANT* Pointer to the array of elements retrieved."
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*pcElementsFetched",
+        "type": "ULONG*",
+        "name": "pcElementsFetched",
         "description": "Type: ULONG* Actual number of elements retrieved, which can be smaller than the number of elements requested."
       }
     ],
@@ -190,8 +190,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IEnumVARIANT",
-        "name": "*pEnumVariant",
+        "type": "IEnumVARIANT*",
+        "name": "pEnumVariant",
         "description": "Type: IEnumVARIANT* Pointer to the  IEnumVARIANT interface on the enumerator object to be freed."
       }
     ],
@@ -272,8 +272,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "VOID",
-        "name": "**ppObject",
+        "type": "VOID**",
+        "name": "ppObject",
         "description": "Type: VOID** Pointer to a pointer to the requested Interface."
       }
     ],
@@ -325,8 +325,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "VOID",
-        "name": "**ppObject",
+        "type": "VOID**",
+        "name": "ppObject",
         "description": "Type: VOID** Pointer to a  pointer to the requested interface."
       }
     ],
@@ -510,8 +510,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*ppStr",
+        "type": "LPWSTR*",
+        "name": "ppStr",
         "description": "Type: LPWSTR* Pointer to null-terminated Unicode string pointer that receives the allocated string. ReallocADsStr will attempt to free this memory with FreeADsStr before reallocating the string, so this parameter should be initialized to NULL if the memory should not be freed or was not allocated with the AllocADsMem, AllocADsStr, ReallocADsMem or ReallocADsStr function. The caller must free this memory when it is no longer required by passing this pointer to FreeADsStr."
       },
       {

@@ -50,8 +50,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "WEB_SOCKET_HANDLE",
-        "name": "*phWebSocket",
+        "type": "WEB_SOCKET_HANDLE*",
+        "name": "phWebSocket",
         "description": "Type: WEB_SOCKET_HANDLE* On successful output, pointer to a  newly allocated client-side WebSocket session handle."
       }
     ],
@@ -85,8 +85,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "WEB_SOCKET_HANDLE",
-        "name": "*phWebSocket",
+        "type": "WEB_SOCKET_HANDLE*",
+        "name": "phWebSocket",
         "description": "Type: WEB_SOCKET_HANDLE* On successful output, pointer to a newly allocated server-side WebSocket session handle."
       }
     ],
@@ -114,8 +114,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "PCSTR",
-        "name": "*pszSubprotocols",
+        "type": "PCSTR*",
+        "name": "pszSubprotocols",
         "description": "Type: PCSTR* Pointer to an array of sub-protocols chosen by the application. Once the client-server handshake is complete, the application must use the sub-protocol returned by WebSocketEndClientHandshake. Must contain one subprotocol per entry."
       },
       {
@@ -126,8 +126,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "PCSTR",
-        "name": "*pszExtensions",
+        "type": "PCSTR*",
+        "name": "pszExtensions",
         "description": "Type: PCSTR* Pointer to an array of extensions chosen by the application. Once the client-server handshake is complete, the application must use the extension returned by WebSocketEndClientHandshake. Must contain one extension per entry."
       },
       {
@@ -156,8 +156,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*pulAdditionalHeaderCount",
+        "type": "ULONG*",
+        "name": "pulAdditionalHeaderCount",
         "description": "Type: ULONG* On successful output, number of response headers in pAdditionalHeaders."
       }
     ],
@@ -191,8 +191,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "PCSTR",
-        "name": "*pszExtensionSelected",
+        "type": "PCSTR*",
+        "name": "pszExtensionSelected",
         "description": "Type: PCSTR* A pointer to a list of extensions chosen by the application. Must contain one extension per entry."
       },
       {
@@ -215,14 +215,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWEB_SOCKET_HTTP_HEADER",
-        "name": "*pResponseHeaders",
+        "type": "PWEB_SOCKET_HTTP_HEADER*",
+        "name": "pResponseHeaders",
         "description": "Type: PWEB_SOCKET_HTTP_HEADER* On successful output, a pointer to an array or WEB_SOCKET_HTTP_HEADER structures that contain the response headers to be sent by the application."
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*pulResponseHeaderCount",
+        "type": "ULONG*",
+        "name": "pulResponseHeaderCount",
         "description": "Type: ULONG* On successful output, number of response headers in pResponseHeaders."
       }
     ],
@@ -291,38 +291,38 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "WEB_SOCKET_BUFFER",
-        "name": "*pDataBuffers",
+        "type": "WEB_SOCKET_BUFFER*",
+        "name": "pDataBuffers",
         "description": "Type: WEB_SOCKET_BUFFER* Pointer to an array of WEB_SOCKET_BUFFER structures that contain WebSocket buffer data. Note  Do not allocate or deallocate memory for WEB_SOCKET_BUFFER structures, because they will be overwritten by WebSocketGetAction. The memory for buffers returned by WebSocketGetAction are managed by the library."
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*pulDataBufferCount",
+        "type": "ULONG*",
+        "name": "pulDataBufferCount",
         "description": "Type: ULONG* On input, pointer to a value that specifies the number of elements in pDataBuffers. On successful output, number of elements that were actually returned in pDataBuffers."
       },
       {
         "in_out": "_Out_",
-        "type": "WEB_SOCKET_ACTION",
-        "name": "*pAction",
+        "type": "WEB_SOCKET_ACTION*",
+        "name": "pAction",
         "description": "Type: WEB_SOCKET_ACTION* On successful output, pointer to a WEB_SOCKET_ACTION enumeration that specifies the action returned from the query to the queue defines in eActionQueue."
       },
       {
         "in_out": "_Out_",
-        "type": "WEB_SOCKET_BUFFER_TYPE",
-        "name": "*pBufferType",
+        "type": "WEB_SOCKET_BUFFER_TYPE*",
+        "name": "pBufferType",
         "description": "Type: WEB_SOCKET_BUFFER_TYPE* On successful output, pointer to a WEB_SOCKET_BUFFER_TYPE enumeration that specifies the type of Web Socket buffer data returned in pDataBuffers."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PVOID",
-        "name": "*pvApplicationContext",
+        "type": "PVOID*",
+        "name": "pvApplicationContext",
         "description": "Type: PVOID* On successful output, pointer to an application context handle. The context returned here was initially passed to WebSocketSend or WebSocketReceive. pvApplicationContext is not set if pAction is WEB_SOCKET_NO_ACTION or WEB_SOCKET_SEND_TO_NETWORK_ACTION when sending a pong in response to receiving a ping."
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*pvActionContext",
+        "type": "PVOID*",
+        "name": "pvActionContext",
         "description": "Type: PVOID* On successful output, pointer to an action context handle. This handle is passed into a subsequent call WebSocketCompleteAction."
       }
     ],
@@ -385,20 +385,20 @@
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "ULONG",
-        "name": "*pulSelectedExtensions",
+        "type": "ULONG*",
+        "name": "pulSelectedExtensions",
         "description": "Type: ULONG* On input, pointer to an array allocated by the application. On successful output, pointer to an array of numbers that represent the extensions chosen by the server during the client-server handshake. These number are the zero-based indices into the extensions array passed to  pszExtensions in WebSocketBeginClientHandshake."
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "ULONG",
-        "name": "*pulSelectedExtensionCount",
+        "type": "ULONG*",
+        "name": "pulSelectedExtensionCount",
         "description": "Type: ULONG* On input, number of extensions allocated in pulSelectedExtensions. This must be at least equal to the number passed to ulExtensionCount in WebSocketEndClientHandshake. On successful output, number of extensions returned in pulSelectedExtensions."
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "ULONG",
-        "name": "*pulSelectedSubprotocol",
+        "type": "ULONG*",
+        "name": "pulSelectedSubprotocol",
         "description": "Type: ULONG* On successful output, pointer to a number that represents the sub-protocol chosen by the server during the client-server handshake. This number is the zero-based index into the sub-protocols array passed to  pszSubprotocols in WebSocketBeginClientHandshake."
       }
     ],
@@ -455,8 +455,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "WEB_SOCKET_BUFFER",
-        "name": "*pBuffer",
+        "type": "WEB_SOCKET_BUFFER*",
+        "name": "pBuffer",
         "description": "Type: WEB_SOCKET_BUFFER* A pointer to an array of WEB_SOCKET_BUFFER structures that contains WebSocket buffer data to send. If BufferType is WEB_SOCKET_PING_PONG_BUFFER_TYPE or WEB_SOCKET_UNSOLICITED_PONG_BUFFER_TYPE, pBuffer must be NULL. Note  Once WEB_SOCKET_INDICATE_SEND_COMPLETE is returned by WebSocketGetAction for this action, the memory pointer to by pBuffer can be reclaimed."
       },
       {
@@ -490,8 +490,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "WEB_SOCKET_BUFFER",
-        "name": "*pBuffer",
+        "type": "WEB_SOCKET_BUFFER*",
+        "name": "pBuffer",
         "description": "Type: WEB_SOCKET_BUFFER* A pointer to an array of WEB_SOCKET_BUFFER structures that WebSocket data will be written to when it is returned by WebSocketGetAction. If NULL, WebSocketGetAction will return an internal buffer that enables zero-copy scenarios. Note  Once WEB_SOCKET_INDICATE_RECEIVE_COMPLETE is returned by WebSocketGetAction for this action, the memory pointer to by pBuffer can be reclaimed."
       },
       {
@@ -531,8 +531,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "ULONG",
-        "name": "*ulSize",
+        "type": "ULONG*",
+        "name": "ulSize",
         "description": "Type: ULONG* The size, in bytes, of the property pointed to by pvValue."
       }
     ],

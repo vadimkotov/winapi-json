@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "void",
-        "name": "**p",
+        "type": "void**",
+        "name": "p",
         "description": "Type: void** Address of the pointer to be freed."
       }
     ],

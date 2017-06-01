@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IVssBackupComponents",
-        "name": "**ppBackup",
+        "type": "IVssBackupComponents**",
+        "name": "ppBackup",
         "description": "Doubly indirect pointer to the created        IVssBackupComponents interface object."
       }
     ],
@@ -44,8 +44,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IVssExamineWriterMetadata",
-        "name": "**ppMetadata",
+        "type": "IVssExamineWriterMetadata**",
+        "name": "ppMetadata",
         "description": "A variable that receives an        IVssExamineWriterMetadata        interface pointer to the object."
       }
     ],
@@ -67,8 +67,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IVssExpressWriter",
-        "name": "**ppWriter",
+        "type": "IVssExpressWriter**",
+        "name": "ppWriter",
         "description": "Doubly indirect pointer to the newly created IVssExpressWriter object."
       }
     ],
@@ -90,14 +90,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "CVssWriterEx",
-        "name": "*pWriter",
+        "type": "CVssWriterEx*",
+        "name": "pWriter",
         "description": "Reserved."
       },
       {
         "in_out": "_Out_",
-        "type": "IVssWriterImpl",
-        "name": "**pWriterImpl",
+        "type": "IVssWriterImpl**",
+        "name": "pWriterImpl",
         "description": "Reserved."
       }
     ],
@@ -125,14 +125,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pbSnapshotsPresent",
+        "type": "BOOL*",
+        "name": "pbSnapshotsPresent",
         "description": "The value of this parameter is TRUE if the volume has a shadow copy, and        FALSE if the volume does not have a shadow copy."
       },
       {
         "in_out": "_Out_",
-        "type": "LONG",
-        "name": "*plSnapshotCapability",
+        "type": "LONG*",
+        "name": "plSnapshotCapability",
         "description": "A bit mask (or bitwise OR) of        VSS_SNAPSHOT_COMPATIBILITY values that        indicates whether certain volume control or file I/O operations are disabled for the given volume if a shadow        copy of it exists."
       }
     ],
@@ -160,8 +160,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "bool",
-        "name": "*pbBlock",
+        "type": "bool*",
+        "name": "pbBlock",
         "description": "A pointer to a variable that receives true if the volume  contains components from any writers that are listed in the registry as writers that should block revert operations, or false otherwise."
       }
     ],
@@ -183,8 +183,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "VSS_SNAPSHOT_PROP",
-        "name": "*pProp",
+        "type": "VSS_SNAPSHOT_PROP*",
+        "name": "pProp",
         "description": "Pointer to a valid VSS_SNAPSHOT_PROP        object."
       }
     ],

@@ -91,8 +91,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "ULONG_PTR",
-        "name": "*lpArguments",
+        "type": "const ULONG_PTR*",
+        "name": "lpArguments",
         "description": "An array of arguments. This parameter can be NULL. These arguments can contain any application-defined data that needs to be passed to the filter expression of the exception handler."
       }
     ],
@@ -160,8 +160,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*DynamicTable",
+        "type": "PVOID*",
+        "name": "DynamicTable",
         "description": "A pointer to a variable that receives an opaque reference to the newly-added table on success."
       },
       {
@@ -288,8 +288,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "struct _EXCEPTION_POINTERS",
-        "name": "*ExceptionInfo",
+        "type": "struct _EXCEPTION_POINTERS*",
+        "name": "ExceptionInfo",
         "description": "A pointer to an  EXCEPTION_POINTERS structure that specifies a description of the exception and the processor context at the time of the exception. This pointer is the return value of a call to the  GetExceptionInformation function."
       }
     ],

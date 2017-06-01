@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "NETCON_PROPERTIES",
-        "name": "*pProps",
+        "type": "NETCON_PROPERTIES*",
+        "name": "pProps",
         "description": "Pointer to a  NETCON_PROPERTIES structure to be freed."
       }
     ],

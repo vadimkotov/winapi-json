@@ -39,8 +39,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*TxfLogContext",
+        "type": "PVOID*",
+        "name": "TxfLogContext",
         "description": "A pointer to the context created."
       }
     ],

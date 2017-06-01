@@ -21,8 +21,8 @@
       },
       {
         "in_out": "",
-        "type": "TCHAR",
-        "name": "*pBuffer",
+        "type": "TCHAR*",
+        "name": "pBuffer",
         "description": "Pointer to a character buffer that receives the error message."
       },
       {

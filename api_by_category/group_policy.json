@@ -206,14 +206,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "BOOL",
-        "name": "*pbAbort",
+        "type": "BOOL*",
+        "name": "pbAbort",
         "description": "A value that specifies whether to continue processing GPOs. If this parameter is TRUE, GPO processing stops and the extension must deallocate its resources and return promptly. If this parameter is FALSE, GPO processing continues."
       },
       {
         "in_out": "_In_",
-        "type": "WCHAR",
-        "name": "*pwszSite",
+        "type": "WCHAR*",
+        "name": "pwszSite",
         "description": "A pointer to the site name of the target computer. This parameter can be NULL."
       },
       {
@@ -265,14 +265,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*pGuidExtension",
+        "type": "GUID*",
+        "name": "pGuidExtension",
         "description": "A value that specifies the GUID of the extension."
       },
       {
         "in_out": "_Out_",
-        "type": "PGROUP_POLICY_OBJECT",
-        "name": "*ppGPOList",
+        "type": "PGROUP_POLICY_OBJECT*",
+        "name": "ppGPOList",
         "description": "A pointer that receives the list of GPO structures. For more information, see  GROUP_POLICY_OBJECT."
       }
     ],
@@ -324,8 +324,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PGROUP_POLICY_OBJECT",
-        "name": "*pGPOList",
+        "type": "PGROUP_POLICY_OBJECT*",
+        "name": "pGPOList",
         "description": "A pointer that receives the list of GPO structures. For more information, see  GROUP_POLICY_OBJECT."
       }
     ],
@@ -359,8 +359,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PLOCALMANAGEDAPPLICATION",
-        "name": "*prgLocalApps",
+        "type": "PLOCALMANAGEDAPPLICATION*",
+        "name": "prgLocalApps",
         "description": "The address of an array that contains the list of managed applications. You must call LocalFree to free this array when its contents are no longer required. This parameter cannot be null. The list is returned as a LOCALMANAGEDAPPLICATION structure."
       }
     ],
@@ -382,8 +382,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*pCategory",
+        "type": "GUID*",
+        "name": "pCategory",
         "description": "A pointer to a GUID that specifies the  category    of applications to be listed. If pCategory is not null, dwQueryFlags must   contain MANAGED_APPS_FROMCATEGORY. If pCategory is null, dwQueryFlags cannot contain MANAGED_APPS_FROMCATEGORY."
       },
       {
@@ -406,8 +406,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PMANAGEDAPPLICATION",
-        "name": "*prgManagedApps",
+        "type": "PMANAGEDAPPLICATION*",
+        "name": "prgManagedApps",
         "description": "This parameter is a pointer to an array of MANAGEDAPPLICATION structures. This array contains the list of applications listed in the Add pane of  Add/Remove Programs (ARP). You must call LocalFree to free the array when they array is no longer required."
       }
     ],
@@ -435,8 +435,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "APPCATEGORYINFOLIST",
-        "name": "*pAppCategory",
+        "type": "APPCATEGORYINFOLIST*",
+        "name": "pAppCategory",
         "description": "A APPCATEGORYINFOLIST structure that contains a list of application categories. This structure must be freed by calling LocalFree  when the list is no longer required."
       }
     ],
@@ -487,8 +487,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "PINSTALLDATA",
-        "name": "*pInstallInfo",
+        "type": "PINSTALLDATA*",
+        "name": "pInstallInfo",
         "description": "A pointer to a INSTALLDATA structure that specifies the application to install."
       }
     ],
@@ -645,8 +645,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "BOOL",
-        "name": "*pbAbort",
+        "type": "BOOL*",
+        "name": "pbAbort",
         "description": "Specifies whether to continue processing GPOs. If this parameter is TRUE, GPO processing will cease. If this parameter is FALSE, GPO processing will continue."
       },
       {
@@ -710,8 +710,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "BOOL",
-        "name": "*pbAbort",
+        "type": "BOOL*",
+        "name": "pbAbort",
         "description": "Specifies whether to continue processing GPOs. If this parameter is TRUE, GPO processing will cease. If this parameter is FALSE, GPO processing will continue."
       },
       {
@@ -722,14 +722,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IWbemServices",
-        "name": "*pWbemServices",
+        "type": "IWbemServices*",
+        "name": "pWbemServices",
         "description": "Specifies a WMI services pointer to the RSoP namespace to which the policy data should be written. This parameter is NULL when RSoP logging is disabled, indicating that the extension should not log RSoP data."
       },
       {
         "in_out": "_Out_",
-        "type": "HRESULT",
-        "name": "*pRsopStatus",
+        "type": "HRESULT*",
+        "name": "pRsopStatus",
         "description": "Pointer to an HRESULT return code that indicates whether RSoP logging was successful."
       }
     ],
@@ -968,14 +968,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IWbemServices",
-        "name": "*pServices",
+        "type": "IWbemServices*",
+        "name": "pServices",
         "description": "Specifies a WMI services pointer to the RSoP namespace to which the policy data is to be written. This parameter is required."
       },
       {
         "in_out": "_In_",
-        "type": "IWbemClassObject",
-        "name": "*pSettingInstance",
+        "type": "IWbemClassObject*",
+        "name": "pSettingInstance",
         "description": "Pointer to an instance of  RSOP_PolicySetting containing the policy setting. This parameter is required and can also point to the instance's children."
       }
     ],
@@ -1003,14 +1003,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IWbemServices",
-        "name": "*pServices",
+        "type": "IWbemServices*",
+        "name": "pServices",
         "description": "Specifies a WMI services pointer to the RSoP namespace to which the policy data is to be written. This parameter is required."
       },
       {
         "in_out": "_In_",
-        "type": "IWbemClassObject",
-        "name": "*pSettingInstance",
+        "type": "IWbemClassObject*",
+        "name": "pSettingInstance",
         "description": "Pointer to an instance of  RSOP_PolicySetting containing the policy setting. This parameter is required and can point to the instance's children."
       },
       {
@@ -1021,8 +1021,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "POLICYSETTINGSTATUSINFO",
-        "name": "*pStatus",
+        "type": "POLICYSETTINGSTATUSINFO*",
+        "name": "pStatus",
         "description": "Pointer to an array of  POLICYSETTINGSTATUSINFO structures."
       }
     ],
@@ -1073,8 +1073,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "WCHAR",
-        "name": "*ProductCode",
+        "type": "WCHAR*",
+        "name": "ProductCode",
         "description": "The Windows Installer product code of the product being uninstalled. The product code of the application should be provided in the form of  a Windows Installer GUID as a string with braces."
       },
       {

@@ -260,8 +260,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "UINT",
-        "name": "*paFormatPriorityList",
+        "type": "UINT*",
+        "name": "paFormatPriorityList",
         "description": "Type: UINT* The clipboard formats, in priority order. For a description of the standard clipboard formats, see Standard Clipboard Formats ."
       },
       {

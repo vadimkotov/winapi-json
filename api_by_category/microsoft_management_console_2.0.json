@@ -90,8 +90,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "void",
-        "name": "*vpsp",
+        "type": "void*",
+        "name": "vpsp",
         "description": "A pointer to the Microsoft Windows  PROPSHEETPAGE structure. Be aware that by default, MFC installs its own callback in the pfnCallback member of the structure."
       }
     ],

@@ -341,14 +341,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pnBytesRead",
+        "type": "DWORD*",
+        "name": "pnBytesRead",
         "description": "A pointer to a variable that receives the number of bytes read by the function."
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pnMinNumberOfBytesNeeded",
+        "type": "DWORD*",
+        "name": "pnMinNumberOfBytesNeeded",
         "description": "A pointer to a variable that receives the required size of the lpBuffer buffer. This value is valid only this function returns zero and  GetLastError returns ERROR_INSUFFICIENT_BUFFER."
       }
     ],
@@ -441,8 +441,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "LPCTSTR",
-        "name": "*lpStrings",
+        "type": "LPCTSTR*",
+        "name": "lpStrings",
         "description": "A pointer to a buffer containing an array of null-terminated strings that are merged into the message before Event Viewer displays the string to the user. This parameter must be a valid pointer (or NULL), even if wNumStrings is zero. Each string is limited to 31,839  characters. Prior to Windows Vista:  Each string is limited to 32K characters."
       },
       {

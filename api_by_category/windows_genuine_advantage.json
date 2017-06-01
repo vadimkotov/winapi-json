@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "WCHAR",
-        "name": "**ppwszTrace",
+        "type": "WCHAR**",
+        "name": "ppwszTrace",
         "description": "A buffer that, on output, receives the trace output of the most recent validation session. The buffer is        allocated by this function. When you have finished using the  buffer, free it by calling the        LocalFree function."
       }
     ],

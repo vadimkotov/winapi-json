@@ -115,8 +115,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "MSG",
-        "name": "*lpmsg",
+        "type": "const MSG*",
+        "name": "lpmsg",
         "description": "Type: const MSG* A pointer to a structure that contains the message."
       }
     ],

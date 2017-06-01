@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "INamedPropertyStore",
-        "name": "**ppStore",
+        "type": "INamedPropertyStore**",
+        "name": "ppStore",
         "description": "Receives a pointer to the INamedPropertyStore interface. The caller must release the interface."
       }
     ],
@@ -38,8 +38,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IPropertyStore",
-        "name": "**ppStore",
+        "type": "IPropertyStore**",
+        "name": "ppStore",
         "description": "Receives a pointer to the IPropertyStore interface. The caller must release the interface."
       }
     ],
@@ -93,14 +93,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pResetToken",
+        "type": "UINT*",
+        "name": "pResetToken",
         "description": "Receives a token that identifies this instance of the Direct3D device manager. Use this token when calling IDirect3DDeviceManager9::ResetDevice."
       },
       {
         "in_out": "_Out_",
-        "type": "IDirect3DDeviceManager9",
-        "name": "**ppDXVAManager",
+        "type": "IDirect3DDeviceManager9**",
+        "name": "ppDXVAManager",
         "description": "Receives a pointer to the IDirect3DDeviceManager9 interface. The caller must release the interface."
       }
     ],
@@ -122,8 +122,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IDirect3DDevice9",
-        "name": "*pDD",
+        "type": "IDirect3DDevice9*",
+        "name": "pDD",
         "description": "A pointer to the IDirect3DDevice9 interface of a Direct3D device."
       },
       {
@@ -134,8 +134,8 @@
       },
       {
         "in_out": "",
-        "type": "void",
-        "name": "**ppService",
+        "type": "void**",
+        "name": "ppService",
         "description": "Receives a pointer to the interface. The caller must release the interface."
       }
     ],
@@ -157,7 +157,7 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "DXVA2_Fixed32",
+        "type": "const DXVA2_Fixed32",
         "name": "_fixed_",
         "description": "DXVA2_Fixed32 structure that contains a fixed-point value."
       }
@@ -180,7 +180,7 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "float",
+        "type": "const float",
         "name": "_float_",
         "description": "Floating-point number to convert to a fixed-point value."
       }
@@ -203,14 +203,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IDirect3DDevice9Ex",
-        "name": "*pD3DDevice",
+        "type": "IDirect3DDevice9Ex*",
+        "name": "pD3DDevice",
         "description": "A pointer to the IDirect3DDevice9Ex interface of a Direct3D 9 device."
       },
       {
         "in_out": "_In_",
-        "type": "DXVAHD_CONTENT_DESC",
-        "name": "*pContentDesc",
+        "type": "const DXVAHD_CONTENT_DESC*",
+        "name": "pContentDesc",
         "description": "A pointer to a DXVAHD_CONTENT_DESC structure that describes the video content. The driver uses this information as a hint when it creates the device."
       },
       {
@@ -227,8 +227,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IDXVAHD_Device",
-        "name": "**ppDevice",
+        "type": "IDXVAHD_Device**",
+        "name": "ppDevice",
         "description": "Receives a pointer to the IDXVAHD_Device interface. The caller must release the interface."
       }
     ],
@@ -256,14 +256,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pContext",
+        "type": "IUnknown*",
+        "name": "pContext",
         "description": "Pointer to a caller-provided object that implements IUnknown, or NULL. This parameter is passed to the callback function."
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwKey",
+        "type": "DWORD*",
+        "name": "pdwKey",
         "description": "Receives a key that can be used to cancel the callback. To cancel the callback, call MFRemovePeriodicCallback and pass this key as the dwKey parameter."
       }
     ],
@@ -291,8 +291,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwWorkQueue",
+        "type": "DWORD*",
+        "name": "pdwWorkQueue",
         "description": "Receives an identifier for the new serial work queue. Use this identifier when queuing work items."
       }
     ],
@@ -314,8 +314,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwWorkQueue",
+        "type": "DWORD*",
+        "name": "pdwWorkQueue",
         "description": "Receives an identifier for the work queue."
       }
     ],
@@ -343,8 +343,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwWorkQueue",
+        "type": "DWORD*",
+        "name": "pdwWorkQueue",
         "description": "Receives an identifier for the work queue that was created."
       }
     ],
@@ -372,14 +372,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*punNumerator",
+        "type": "UINT32*",
+        "name": "punNumerator",
         "description": "Receives the numerator of the frame rate."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*punDenominator",
+        "type": "UINT32*",
+        "name": "punDenominator",
         "description": "Receives the denominator of the frame rate."
       }
     ],
@@ -425,20 +425,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFAsyncCallback",
-        "name": "*pCallback",
+        "type": "IMFAsyncCallback*",
+        "name": "pCallback",
         "description": "Pointer to the IMFAsyncCallback interface of a callback object. The caller must implement this interface"
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pState",
+        "type": "IUnknown*",
+        "name": "pState",
         "description": "Pointer to the IUnknown interface of a state object, defined by the caller. This parameter can be NULL. You can use this object to hold state information. The object is returned to the caller when the callback is invoked."
       },
       {
         "in_out": "_Out_",
-        "type": "IUnknown",
-        "name": "**ppCancelCookie",
+        "type": "IUnknown**",
+        "name": "ppCancelCookie",
         "description": "Receives an IUnknown pointer or the value NULL. If the value is not NULL, you can cancel the asynchronous operation by passing this pointer to the MFCancelCreateFile function. The caller must release the interface. This parameter is optional and can be NULL."
       }
     ],
@@ -478,14 +478,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFAsyncCallback",
-        "name": "*pDoneCallback",
+        "type": "IMFAsyncCallback*",
+        "name": "pDoneCallback",
         "description": "A pointer to the IMFAsyncCallback interface of a callback object. The caller must implement this interface."
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pDoneState",
+        "type": "IUnknown*",
+        "name": "pDoneState",
         "description": "A pointer to the IUnknown interface of a state object, defined by the caller. This parameter can be NULL. You can use this object to hold state information. The object is returned to the caller when the callback is invoked."
       }
     ],
@@ -531,14 +531,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFAsyncCallback",
-        "name": "*pDoneCallback",
+        "type": "IMFAsyncCallback*",
+        "name": "pDoneCallback",
         "description": "A pointer to the IMFAsyncCallback interface of a callback object. The caller must implement this interface."
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pDoneState",
+        "type": "IUnknown*",
+        "name": "pDoneState",
         "description": "A pointer to the IUnknown interface of a state object, defined by the caller. This parameter can be NULL. You can use this object to hold state information. The object is returned to the caller when the callback is invoked."
       }
     ],
@@ -566,14 +566,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFAsyncCallback",
-        "name": "*pDoneCallback",
+        "type": "IMFAsyncCallback*",
+        "name": "pDoneCallback",
         "description": "Pointer to the IMFAsyncCallback interface of a callback object. The caller must implement this interface."
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pDoneState",
+        "type": "IUnknown*",
+        "name": "pDoneState",
         "description": "Pointer to the IUnknown interface of a state object, defined by the caller. This parameter can be NULL. You can use this object to hold state information. The object is returned to the caller when the callback is invoked."
       }
     ],
@@ -595,8 +595,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "BITMAPINFOHEADER",
-        "name": "*pBMIH",
+        "type": "const BITMAPINFOHEADER*",
+        "name": "pBMIH",
         "description": "Pointer to a BITMAPINFOHEADER structure that describes the format."
       },
       {
@@ -607,14 +607,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*pcbImageSize",
+        "type": "UINT32*",
+        "name": "pcbImageSize",
         "description": "Receives the image size, in bytes."
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pbKnown",
+        "type": "BOOL*",
+        "name": "pbKnown",
         "description": "Receives the value TRUE if the function recognizes the video format. Otherwise, receives the value FALSE. This parameter can be NULL."
       }
     ],
@@ -654,8 +654,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*pcbImageSize",
+        "type": "UINT32*",
+        "name": "pcbImageSize",
         "description": "Receives the size of each frame, in bytes. If the format is compressed or is not recognized, the value is zero."
       }
     ],
@@ -677,8 +677,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pCancelCookie",
+        "type": "IUnknown*",
+        "name": "pCancelCookie",
         "description": "A pointer to the IUnknown interface of the cancellation object. This pointer is received in the ppCancelCookie parameter of the MFBeginCreateFile function."
       }
     ],
@@ -723,14 +723,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAsyncCallback",
-        "name": "*pCallback",
+        "type": "IMFAsyncCallback*",
+        "name": "pCallback",
         "description": "Pointer to the IMFAsyncCallback interface. The caller must implement this interface."
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pState",
+        "type": "IUnknown*",
+        "name": "pState",
         "description": "Pointer to the IUnknown interface of a state object, defined by the caller. This parameter can be NULL. You can use this object to hold state information. The object is returned to the caller when the callback is invoked."
       },
       {
@@ -741,8 +741,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "MFWORKITEM_KEY",
-        "name": "*pKey",
+        "type": "MFWORKITEM_KEY*",
+        "name": "pKey",
         "description": "Receives a key that can be used to cancel the timer. To cancel the timer, call MFCancelWorkItem and pass this key in the Key parameter."
       }
     ],
@@ -764,8 +764,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAsyncResult",
-        "name": "*pResult",
+        "type": "IMFAsyncResult*",
+        "name": "pResult",
         "description": "Pointer to the IMFAsyncResult interface of an asynchronous result object. To create the result object, call MFCreateAsyncResult."
       },
       {
@@ -776,8 +776,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "MFWORKITEM_KEY",
-        "name": "*pKey",
+        "type": "MFWORKITEM_KEY*",
+        "name": "pKey",
         "description": "Receives a key that can be used to cancel the timer. To cancel the timer, call MFCancelWorkItem and pass this key in the Key parameter."
       }
     ],
@@ -822,14 +822,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMFTypeFull",
+        "type": "IMFMediaType*",
+        "name": "pMFTypeFull",
         "description": "Pointer to the IMFMediaType interface of the full media type."
       },
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMFTypePartial",
+        "type": "IMFMediaType*",
+        "name": "pMFTypePartial",
         "description": "Pointer to the IMFMediaType interface of the partial media type."
       }
     ],
@@ -851,8 +851,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "MFVIDEOFORMAT",
-        "name": "*pToFormat",
+        "type": "MFVIDEOFORMAT*",
+        "name": "pToFormat",
         "description": "Pointer to an MFVIDEOFORMAT structure. The function fills in the structure members that correspond to the DXVA color information in the dwFromDXVA parameter. The function does not modify the other structure members."
       },
       {
@@ -880,14 +880,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwToDXVA",
+        "type": "DWORD*",
+        "name": "pdwToDXVA",
         "description": "Receives the DXVA extended color information. The bitfields in the DWORD are defined in the DXVA2_ExtendedFormat structure."
       },
       {
         "in_out": "_In_",
-        "type": "MFVIDEOFORMAT",
-        "name": "*pFromFormat",
+        "type": "const MFVIDEOFORMAT*",
+        "name": "pFromFormat",
         "description": "Pointer to an MFVIDEOFORMAT structure that describes the video format."
       }
     ],
@@ -909,14 +909,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "float",
-        "name": "*pDest",
+        "type": "float*",
+        "name": "pDest",
         "description": "Pointer to an array of float values. The array must contain at least dwCount elements."
       },
       {
         "in_out": "_In_",
-        "type": "WORD",
-        "name": "*pSrc",
+        "type": "const WORD*",
+        "name": "pSrc",
         "description": "Pointer to an array of 16-bit floating-point values, typed as WORD values. The array must contain at least dwCount elements."
       },
       {
@@ -944,14 +944,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "WORD",
-        "name": "*pDest",
+        "type": "WORD*",
+        "name": "pDest",
         "description": "Pointer to an array of 16-bit floating-point values, typed as WORD values. The array must contain at least dwCount elements."
       },
       {
         "in_out": "_In_",
-        "type": "float",
-        "name": "*pSrc",
+        "type": "const float*",
+        "name": "pSrc",
         "description": "Pointer to an array of float values. The array must contain at least dwCount elements."
       },
       {
@@ -979,8 +979,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*pDest",
+        "type": "BYTE*",
+        "name": "pDest",
         "description": "Pointer to the start of the first row of pixels in the destination buffer."
       },
       {
@@ -991,8 +991,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*pSrc",
+        "type": "const BYTE*",
+        "name": "pSrc",
         "description": "Pointer to the start of the first row of pixels in the source image."
       },
       {
@@ -1056,8 +1056,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaBuffer",
-        "name": "**ppBuffer",
+        "type": "IMFMediaBuffer**",
+        "name": "ppBuffer",
         "description": "Receives a pointer to the IMFMediaBuffer interface."
       }
     ],
@@ -1079,26 +1079,26 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pIByteStream",
+        "type": "IMFByteStream*",
+        "name": "pIByteStream",
         "description": "A pointer to the IMFByteStream interface of a byte stream.  The media sink writes the 3GP file to this byte stream. The byte stream must be writable and support seeking."
       },
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pVideoMediaType",
+        "type": "IMFMediaType*",
+        "name": "pVideoMediaType",
         "description": "A pointer to the IMFMediaType interface of a video media type. This type specifies the format of the video stream. This parameter can be NULL, but not if pAudioMediaType is NULL."
       },
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pAudioMediaType",
+        "type": "IMFMediaType*",
+        "name": "pAudioMediaType",
         "description": "A pointer to the IMFMediaType interface of an audio media type. This type specifies the format of the audio stream. This parameter can be NULL, but not if pVideoMediaType is NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaSink",
-        "name": "**ppIMediaSink",
+        "type": "IMFMediaSink**",
+        "name": "ppIMediaSink",
         "description": "Receives a pointer to the 3GP media sink's IMFMediaSink interface. The caller must release the interface."
       }
     ],
@@ -1120,20 +1120,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pTargetByteStream",
+        "type": "IMFByteStream*",
+        "name": "pTargetByteStream",
         "description": "A pointer to the IMFByteStream interface of a byte stream. The media sink writes the AC-3 file to this byte stream. The byte stream must be writable."
       },
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pAudioMediaType",
+        "type": "IMFMediaType*",
+        "name": "pAudioMediaType",
         "description": "A pointer to the IMFMediaType interface. This parameter specifies the media type for the AC-3 audio stream. The media type must contain the following attributes.  AttributeValue  MF_MT_MAJOR_TYPE MFMediaType_Audio  MF_MT_SUBTYPE MFAudioFormat_Dolby_AC3 or MFAudioFormat_Dolby_DDPlus"
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaSink",
-        "name": "**ppMediaSink",
+        "type": "IMFMediaSink**",
+        "name": "ppMediaSink",
         "description": "Receives a pointer to the IMFMediaSink interface. The caller must release the interface."
       }
     ],
@@ -1155,20 +1155,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pTargetByteStream",
+        "type": "IMFByteStream*",
+        "name": "pTargetByteStream",
         "description": "A pointer to the IMFByteStream interface of a byte stream. The media sink writes the ADTS stream to this byte stream. The byte stream must be writable."
       },
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pAudioMediaType",
+        "type": "IMFMediaType*",
+        "name": "pAudioMediaType",
         "description": "A pointer to the IMFMediaType interface. This parameter specifies the media type for the ADTS stream. The media type must contain the following attributes.  AttributeValue  MF_MT_MAJOR_TYPE MFMediaType_Audio  MF_MT_SUBTYPE MFAudioFormat_AAC  MF_MT_AAC_PAYLOAD_TYPE 0 (raw AAC) or 1 (ADTS)"
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaSink",
-        "name": "**ppMediaSink",
+        "type": "IMFMediaSink**",
+        "name": "ppMediaSink",
         "description": "Receives a pointer to the IMFMediaSink interface. The caller must release the interface."
       }
     ],
@@ -1190,14 +1190,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFCollection",
-        "name": "*pSourceCollection",
+        "type": "IMFCollection*",
+        "name": "pSourceCollection",
         "description": "A pointer to the IMFCollection interface of the collection object that contains a list of media sources."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaSource",
-        "name": "**ppAggSource",
+        "type": "IMFMediaSource**",
+        "name": "ppAggSource",
         "description": "Receives a pointer to the IMFMediaSource interface of the aggregated media source. The caller must release the interface."
       }
     ],
@@ -1231,8 +1231,8 @@
       },
       {
         "in_out": "",
-        "type": "IMFMediaBuffer",
-        "name": "**ppBuffer",
+        "type": "IMFMediaBuffer**",
+        "name": "ppBuffer",
         "description": "Receives a pointer to the IMFMediaBuffer interface of the media buffer. The caller must release the interface."
       }
     ],
@@ -1254,8 +1254,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMFType",
+        "type": "IMFMediaType*",
+        "name": "pMFType",
         "description": "Pointer to the IMFMediaType interface of the media type to convert."
       },
       {
@@ -1266,8 +1266,8 @@
       },
       {
         "in_out": "",
-        "type": "AM_MEDIA_TYPE",
-        "name": "**ppAMType",
+        "type": "AM_MEDIA_TYPE**",
+        "name": "ppAMType",
         "description": "Receives a pointer to an AM_MEDIA_TYPE structure. The caller must release the memory allocated for the structure by calling CoTaskMemFree. The function also allocates memory for the format block, which the caller must release by calling CoTaskMemFree on the pbFormat member."
       }
     ],
@@ -1289,8 +1289,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFASFContentInfo",
-        "name": "**ppIContentInfo",
+        "type": "IMFASFContentInfo**",
+        "name": "ppIContentInfo",
         "description": "Receives a pointer to the IMFASFContentInfo interface. The caller must release the interface."
       }
     ],
@@ -1312,8 +1312,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFASFIndexer",
-        "name": "**ppIIndexer",
+        "type": "IMFASFIndexer**",
+        "name": "ppIIndexer",
         "description": "Receives a pointer to the IMFASFIndexer interface. The caller must release the interface."
       }
     ],
@@ -1335,8 +1335,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pIContentByteStream",
+        "type": "IMFByteStream*",
+        "name": "pIContentByteStream",
         "description": "Pointer to the IMFByteStream interface of a byte stream that contains the ASF stream."
       },
       {
@@ -1347,8 +1347,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFByteStream",
-        "name": "**pIIndexByteStream",
+        "type": "IMFByteStream**",
+        "name": "pIIndexByteStream",
         "description": "Receives a pointer to the IMFByteStream interface. Use this interface to read from the index or write to the index. The caller must release the interface."
       }
     ],
@@ -1370,14 +1370,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFByteStream",
-        "name": "*pIByteStream",
+        "type": "IMFByteStream*",
+        "name": "pIByteStream",
         "description": "Pointer to a byte stream that will be used to write the ASF stream."
       },
       {
         "in_out": "",
-        "type": "IMFMediaSink",
-        "name": "**ppIMediaSink",
+        "type": "IMFMediaSink**",
+        "name": "ppIMediaSink",
         "description": "Receives a pointer to the IMFMediaSink interface. The caller must release the interface."
       }
     ],
@@ -1405,14 +1405,14 @@
       },
       {
         "in_out": "",
-        "type": "IMFASFContentInfo",
-        "name": "*pContentInfo",
+        "type": "IMFASFContentInfo*",
+        "name": "pContentInfo",
         "description": "A pointer to the IMFASFContentInfo interface of an initialized ASF Header Object object. Use this interface to configure the ASF media sink."
       },
       {
         "in_out": "",
-        "type": "IMFActivate",
-        "name": "**ppIActivate",
+        "type": "IMFActivate**",
+        "name": "ppIActivate",
         "description": "Receives a pointer to the IMFActivate interface. The caller must release the interface."
       }
     ],
@@ -1434,8 +1434,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFASFMultiplexer",
-        "name": "**ppIMultiplexer",
+        "type": "IMFASFMultiplexer**",
+        "name": "ppIMultiplexer",
         "description": "Receives a pointer to the IMFASFMultiplexer interface. The caller must release the interface."
       }
     ],
@@ -1457,8 +1457,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFASFProfile",
-        "name": "**ppIProfile",
+        "type": "IMFASFProfile**",
+        "name": "ppIProfile",
         "description": "Receives a pointer to the IMFASFProfile interface. The caller must release the interface."
       }
     ],
@@ -1480,14 +1480,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFPresentationDescriptor",
-        "name": "*pIPD",
+        "type": "IMFPresentationDescriptor*",
+        "name": "pIPD",
         "description": "Pointer to the IMFPresentationDescriptor interface of the presentation descriptor that contains the profile information."
       },
       {
         "in_out": "",
-        "type": "IMFASFProfile",
-        "name": "**ppIProfile",
+        "type": "IMFASFProfile**",
+        "name": "ppIProfile",
         "description": "Receives a pointer to the IMFASFProfile interface. The caller must release the interface."
       }
     ],
@@ -1509,8 +1509,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFASFSplitter",
-        "name": "**ppISplitter",
+        "type": "IMFASFSplitter**",
+        "name": "ppISplitter",
         "description": "Receives a pointer to the IMFASFSplitter interface. The caller must release the interface."
       }
     ],
@@ -1532,14 +1532,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFByteStream",
-        "name": "*pIByteStream",
+        "type": "IMFByteStream*",
+        "name": "pIByteStream",
         "description": "A pointer to a byte stream object in which the ASF media sink writes the streamed content."
       },
       {
         "in_out": "",
-        "type": "IMFMediaSink",
-        "name": "**ppIMediaSink",
+        "type": "IMFMediaSink**",
+        "name": "ppIMediaSink",
         "description": "Receives a pointer to the IMFMediaSink interface of the ASF streaming-media sink object. To create the media sink, the application must call IMFActivate::ActivateObject on the received pointer. The caller must release the interface pointer."
       }
     ],
@@ -1561,20 +1561,20 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFActivate",
-        "name": "*pByteStreamActivate",
+        "type": "IMFActivate*",
+        "name": "pByteStreamActivate",
         "description": "A pointer to the  IMFActivate interface of an activation object. The caller  implements this interface.  The IMFActivate::ActivateObject method of the activation object must create a byte-stream object. The byte stream exposes the IMFByteStream interface. The ASF streaming sink will write data to this byte stream."
       },
       {
         "in_out": "",
-        "type": "IMFASFContentInfo",
-        "name": "*pContentInfo",
+        "type": "IMFASFContentInfo*",
+        "name": "pContentInfo",
         "description": "A pointer to an ASF ContentInfo Object that contains the properties that describe the ASF content. These  settings can contain  stream settings, encoding properties, and metadata. For more information about these properties, see Setting Properties in the ContentInfo Object."
       },
       {
         "in_out": "",
-        "type": "IMFActivate",
-        "name": "**ppIActivate",
+        "type": "IMFActivate**",
+        "name": "ppIActivate",
         "description": "Receives a pointer to the IMFActivate interface of the activation object that is used to create the ASF streaming-media sink. To create the media sink, the application must call IMFActivate::ActivateObject by using the received pointer. The ActivateObject method also calls   IMFActivate::Activate on the byte stream activate object specified by  pByteStreamActivate, to create it so that the media sink can write streamed content in the byte stream. The caller must release the IMFActivate interface pointer of the media sink activation object received in ppIActivate."
       }
     ],
@@ -1596,14 +1596,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFASFProfile",
-        "name": "*pIASFProfile",
+        "type": "IMFASFProfile*",
+        "name": "pIASFProfile",
         "description": "Pointer to the IMFASFProfile interface."
       },
       {
         "in_out": "",
-        "type": "IMFASFStreamSelector",
-        "name": "**ppSelector",
+        "type": "IMFASFStreamSelector**",
+        "name": "ppSelector",
         "description": "Receives a pointer to the IMFASFStreamSelector interface. The caller must release the interface."
       }
     ],
@@ -1625,26 +1625,26 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IUnknown",
-        "name": "*punkObject",
+        "type": "IUnknown*",
+        "name": "punkObject",
         "description": "Pointer to the object stored in the asynchronous result. This pointer is returned by the IMFAsyncResult::GetObject method. This parameter can be NULL."
       },
       {
         "in_out": "",
-        "type": "IMFAsyncCallback",
-        "name": "*pCallback",
+        "type": "IMFAsyncCallback*",
+        "name": "pCallback",
         "description": "Pointer to the IMFAsyncCallback interface. This interface is implemented by the caller of the asynchronous method."
       },
       {
         "in_out": "",
-        "type": "IUnknown",
-        "name": "*punkState",
+        "type": "IUnknown*",
+        "name": "punkState",
         "description": "Pointer to the IUnknown interface of a state object. This value is provided by the caller of the asynchronous method. This parameter can be NULL."
       },
       {
         "in_out": "",
-        "type": "IMFAsyncResult",
-        "name": "**ppAsyncResult",
+        "type": "IMFAsyncResult**",
+        "name": "ppAsyncResult",
         "description": "Receives a pointer to the IMFAsyncResult interface. The caller must release the interface."
       }
     ],
@@ -1666,8 +1666,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFAttributes",
-        "name": "**ppMFAttributes",
+        "type": "IMFAttributes**",
+        "name": "ppMFAttributes",
         "description": "Receives a pointer to the IMFAttributes interface. The caller must release the interface."
       },
       {
@@ -1695,14 +1695,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "WAVEFORMATEX",
-        "name": "*pAudioFormat",
+        "type": "const WAVEFORMATEX*",
+        "name": "pAudioFormat",
         "description": "Pointer to a WAVEFORMATEX structure that describes the audio format."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFAudioMediaType",
-        "name": "**ppIAudioMediaType",
+        "type": "IMFAudioMediaType**",
+        "name": "ppIAudioMediaType",
         "description": "Receives a pointer to the IMFAudioMediaType interface. The caller must release the interface."
       }
     ],
@@ -1724,14 +1724,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAudioAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAudioAttributes",
         "description": "A pointer to the IMFAttributes interface, which is used to configure the audio renderer. This parameter can be NULL. See Remarks."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaSink",
-        "name": "**ppSink",
+        "type": "IMFMediaSink**",
+        "name": "ppSink",
         "description": "Receives a pointer to the audio renderer's IMFMediaSink interface. The caller must release the interface."
       }
     ],
@@ -1753,8 +1753,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFActivate",
-        "name": "**ppActivate",
+        "type": "IMFActivate**",
+        "name": "ppActivate",
         "description": "Receives a pointer to the IMFActivate interface. Use this interface to create the audio renderer. The caller must release the interface."
       }
     ],
@@ -1776,26 +1776,26 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pIByteStream",
+        "type": "IMFByteStream*",
+        "name": "pIByteStream",
         "description": "Pointer to the byte stream that will be used to write the AVI file."
       },
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pVideoMediaType",
+        "type": "IMFMediaType*",
+        "name": "pVideoMediaType",
         "description": "Pointer to the media type of the video input stream"
       },
       {
         "in_out": "_In_opt_",
-        "type": "IMFMediaType",
-        "name": "*pAudioMediaType",
+        "type": "IMFMediaType*",
+        "name": "pAudioMediaType",
         "description": "Pointer to the media type of the audio input stream"
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaSink",
-        "name": "**ppIMediaSink",
+        "type": "IMFMediaSink**",
+        "name": "ppIMediaSink",
         "description": "Receives a pointer to the IMFMediaSink Interface.  The caller must release this interface."
       }
     ],
@@ -1817,8 +1817,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFCaptureEngine",
-        "name": "**ppCaptureEngine",
+        "type": "IMFCaptureEngine**",
+        "name": "ppCaptureEngine",
         "description": "Receives a pointer to the IMFCaptureEngine interface. The caller must release the interface."
       }
     ],
@@ -1840,8 +1840,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFCollection",
-        "name": "**ppIMFCollection",
+        "type": "IMFCollection**",
+        "name": "ppIMFCollection",
         "description": "Receives a pointer to the collection object's IMFCollection interface. The caller must release the interface."
       }
     ],
@@ -1869,20 +1869,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "IMFDXGIDeviceManager",
-        "name": "*pD3DManager",
+        "type": "IMFDXGIDeviceManager*",
+        "name": "pD3DManager",
         "description": "Pointer to the IMFDXGIDeviceManager interface that you want to use for sharing the Direct3D 11 device."
       },
       {
         "in_out": "_In_",
-        "type": "IMFContentProtectionDevice",
-        "name": "*pContentProtectionDevice",
+        "type": "IMFContentProtectionDevice*",
+        "name": "pContentProtectionDevice",
         "description": "The IMFContentProtectionDevice interface for the specified media protection system."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFContentDecryptorContext",
-        "name": "**ppContentDecryptorContext",
+        "type": "IMFContentDecryptorContext**",
+        "name": "ppContentDecryptorContext",
         "description": "Pointer to the created IMFContentDecryptorContext interface."
       }
     ],
@@ -1910,8 +1910,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFContentProtectionDevice",
-        "name": "**ContentProtectionDevice",
+        "type": "IMFContentProtectionDevice**",
+        "name": "ContentProtectionDevice",
         "description": "Pointer to the created IMFContentProtectionDevice interface."
       }
     ],
@@ -1933,8 +1933,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFNetCredentialCache",
-        "name": "**ppCache",
+        "type": "IMFNetCredentialCache**",
+        "name": "ppCache",
         "description": "Receives a pointer to the IMFNetCredentialCache interface of the new credential cache object. The caller must release the interface."
       }
     ],
@@ -1956,14 +1956,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface of an attribute store, which is used to select the device. See Remarks."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaSource",
-        "name": "**ppSource",
+        "type": "IMFMediaSource**",
+        "name": "ppSource",
         "description": "Receives a pointer to the media source's IMFMediaSource interface. The caller must release the interface."
       }
     ],
@@ -1985,14 +1985,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface of an attribute store, which is used to select the device. See Remarks."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFActivate",
-        "name": "**ppActivate",
+        "type": "IMFActivate**",
+        "name": "ppActivate",
         "description": "Receives a pointer to the IMFActivate interface. The caller must release the interface."
       }
     ],
@@ -2014,14 +2014,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pResetToken",
+        "type": "UINT*",
+        "name": "pResetToken",
         "description": "Receives a token that identifies this instance of the DXGI Device Manager. Use this token when calling IMFDXGIDeviceManager::ResetDevice."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFDXGIDeviceManager",
-        "name": "**ppDXVAManager",
+        "type": "IMFDXGIDeviceManager**",
+        "name": "ppDXVAManager",
         "description": "Receives a pointer to the IMFDXGIDeviceManager interface. The caller must release the interface."
       }
     ],
@@ -2049,8 +2049,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punkSurface",
+        "type": "IUnknown*",
+        "name": "punkSurface",
         "description": "A pointer to the IUnknown interface of the DXGI surface."
       },
       {
@@ -2067,8 +2067,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaBuffer",
-        "name": "**ppBuffer",
+        "type": "IMFMediaBuffer**",
+        "name": "ppBuffer",
         "description": "Receives a pointer to the IMFMediaBuffer interface. The caller must release the buffer."
       }
     ],
@@ -2096,8 +2096,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punkSurface",
+        "type": "IUnknown*",
+        "name": "punkSurface",
         "description": "A pointer to the IUnknown interface of the DirectX surface."
       },
       {
@@ -2108,8 +2108,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaBuffer",
-        "name": "**ppBuffer",
+        "type": "IMFMediaBuffer**",
+        "name": "ppBuffer",
         "description": "Receives a pointer to the IMFMediaBuffer interface. The caller must release the buffer."
       }
     ],
@@ -2131,8 +2131,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaEventQueue",
-        "name": "**ppMediaEventQueue",
+        "type": "IMFMediaEventQueue**",
+        "name": "ppMediaEventQueue",
         "description": "Receives a pointer to the IMFMediaEventQueue interface of the event queue. The caller must release the interface."
       }
     ],
@@ -2178,8 +2178,8 @@
       },
       {
         "in_out": "",
-        "type": "IMFByteStream",
-        "name": "**ppIByteStream",
+        "type": "IMFByteStream**",
+        "name": "ppIByteStream",
         "description": "Receives a pointer to the IMFByteStream interface of the byte stream. The caller must release the interface."
       }
     ],
@@ -2201,26 +2201,26 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pIByteStream",
+        "type": "IMFByteStream*",
+        "name": "pIByteStream",
         "description": "A pointer to the IMFByteStream interface of a byte stream.  The media sink writes the MP4 file to this byte stream. The byte stream must be writable and support seeking."
       },
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pVideoMediaType",
+        "type": "IMFMediaType*",
+        "name": "pVideoMediaType",
         "description": "A pointer to the IMFMediaType interface of a video media type. This type specifies the format of the video stream. This parameter can be NULL, but not if pAudioMediaType is NULL."
       },
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pAudioMediaType",
+        "type": "IMFMediaType*",
+        "name": "pAudioMediaType",
         "description": "A pointer to the IMFMediaType interface of an audio media type. This type specifies the format of the audio stream. This parameter can be NULL, but not if pVideoMediaType is NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaSink",
-        "name": "**ppIMediaSink",
+        "type": "IMFMediaSink**",
+        "name": "ppIMediaSink",
         "description": "Receives a pointer to the MP4 media sink's IMFMediaSink interface. The caller must release the interface."
       }
     ],
@@ -2242,14 +2242,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFSample",
-        "name": "*pIMFSample",
+        "type": "IMFSample*",
+        "name": "pIMFSample",
         "description": "Pointer to the IMFSample interface of the sample that contains the Media Foundation buffer. This parameter can be NULL."
       },
       {
         "in_out": "",
-        "type": "IMFMediaBuffer",
-        "name": "*pIMFMediaBuffer",
+        "type": "IMFMediaBuffer*",
+        "name": "pIMFMediaBuffer",
         "description": "Pointer to the IMFMediaBuffer interface of the Media Foundation buffer."
       },
       {
@@ -2260,8 +2260,8 @@
       },
       {
         "in_out": "",
-        "type": "IMediaBuffer",
-        "name": "**ppIMediaBuffer",
+        "type": "IMediaBuffer**",
+        "name": "ppIMediaBuffer",
         "description": "Receives a pointer to the IMediaBuffer interface. This interface is documented in the DirectShow SDK documentation. The caller must release the interface."
       }
     ],
@@ -2283,8 +2283,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pMediaType",
+        "type": "IMFMediaType*",
+        "name": "pMediaType",
         "description": "A pointer to the IMFMediaType interface of the media type."
       },
       {
@@ -2307,8 +2307,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaBuffer",
-        "name": "**ppBuffer",
+        "type": "IMFMediaBuffer**",
+        "name": "ppBuffer",
         "description": "Receives a pointer to the IMFMediaBuffer interface. The caller must release the interface."
       }
     ],
@@ -2330,8 +2330,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFMediaBuffer",
-        "name": "*pBuffer",
+        "type": "IMFMediaBuffer*",
+        "name": "pBuffer",
         "description": "A pointer to the IMFMediaBuffer interface of the original media buffer."
       },
       {
@@ -2348,8 +2348,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaBuffer",
-        "name": "**ppBuffer",
+        "type": "IMFMediaBuffer**",
+        "name": "ppBuffer",
         "description": "Receives a pointer to the IMFMediaBuffer interface. The caller must release the interface."
       }
     ],
@@ -2388,15 +2388,15 @@
         "description": "The event status. See IMFMediaEvent::GetStatus"
       },
       {
-        "in_out": "",
-        "type": "PROPVARIANT",
-        "name": "*pvValue",
+        "in_out": "const",
+        "type": "PROPVARIANT*",
+        "name": "pvValue",
         "description": "The value associated with the event, if any. See IMFMediaEvent::GetValue. This parameter can be NULL."
       },
       {
         "in_out": "",
-        "type": "IMFMediaEvent",
-        "name": "**ppEvent",
+        "type": "IMFMediaEvent**",
+        "name": "ppEvent",
         "description": "Receives a pointer to the IMFMediaEvent interface. The caller must release the interface."
       }
     ],
@@ -2424,8 +2424,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pConfiguration",
+        "type": "IUnknown*",
+        "name": "pConfiguration",
         "description": "A pointer to an optional IPropertySet object, which is used to configure the Windows Runtime class. This parameter can be NULL."
       },
       {
@@ -2436,8 +2436,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*ppvObject",
+        "type": "LPVOID*",
+        "name": "ppvObject",
         "description": "Receives a pointer to the requested interface. The caller must release the interface."
       }
     ],
@@ -2459,14 +2459,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFAttributes",
-        "name": "*pConfiguration",
+        "type": "IMFAttributes*",
+        "name": "pConfiguration",
         "description": "Pointer to the IMFAttributes interface. This parameter can be NULL. See Remarks."
       },
       {
         "in_out": "",
-        "type": "IMFMediaSession",
-        "name": "**ppMS",
+        "type": "IMFMediaSession**",
+        "name": "ppMS",
         "description": "Receives a pointer to the Media Session's IMFMediaSession interface. The caller must release the interface. Before releasing the last reference to the IMFMediaSession pointer, the application must call the IMFMediaSession::Shutdown method."
       }
     ],
@@ -2488,8 +2488,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "**ppMFType",
+        "type": "IMFMediaType**",
+        "name": "ppMFType",
         "description": "Receives a pointer to the IMFMediaType interface. The caller must release the interface."
       }
     ],
@@ -2511,14 +2511,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punkStream",
+        "type": "IUnknown*",
+        "name": "punkStream",
         "description": "A pointer to properties."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaType",
-        "name": "**ppMediaType",
+        "type": "IMFMediaType**",
+        "name": "ppMediaType",
         "description": "Receives a pointer to the IMFMediaType. The caller must release the interface."
       }
     ],
@@ -2552,8 +2552,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaType",
-        "name": "**ppIMediaType",
+        "type": "IMFMediaType**",
+        "name": "ppIMediaType",
         "description": "Receives a pointer to the IMFMediaType interface. The caller must release the interface."
       }
     ],
@@ -2581,8 +2581,8 @@
       },
       {
         "in_out": "",
-        "type": "IMFMediaBuffer",
-        "name": "**ppBuffer",
+        "type": "IMFMediaBuffer**",
+        "name": "ppBuffer",
         "description": "Receives a pointer to the IMFMediaBuffer interface of the media buffer. The caller must release the interface."
       }
     ],
@@ -2604,14 +2604,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IStream",
-        "name": "*pStream",
+        "type": "IStream*",
+        "name": "pStream",
         "description": "A pointer to the IStream interface."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFByteStream",
-        "name": "**ppByteStream",
+        "type": "IMFByteStream**",
+        "name": "ppByteStream",
         "description": "Receives a pointer to the IMFByteStream interface. The caller must release the interface."
       }
     ],
@@ -2639,8 +2639,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFByteStream",
-        "name": "**ppByteStream",
+        "type": "IMFByteStream**",
+        "name": "ppByteStream",
         "description": "Receives a pointer to the IMFByteStream interface. The caller must release the interface."
       }
     ],
@@ -2662,14 +2662,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pStream",
+        "type": "IMFByteStream*",
+        "name": "pStream",
         "description": "A pointer to the IMFByteStream interface of the original byte stream."
       },
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "**ppStreamWrapper",
+        "type": "IMFByteStream**",
+        "name": "ppStreamWrapper",
         "description": "Receives a pointer to the IMFByteStream interface of the wrapper. The caller must release the interface."
       }
     ],
@@ -2691,20 +2691,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pMFType",
+        "type": "IMFMediaType*",
+        "name": "pMFType",
         "description": "Pointer to the IMFMediaType interface of a video media type."
       },
       {
         "in_out": "_Out_",
-        "type": "MFVIDEOFORMAT",
-        "name": "**ppMFVF",
+        "type": "MFVIDEOFORMAT**",
+        "name": "ppMFVF",
         "description": "Receives a pointer to an MFVIDEOFORMAT structure. The caller must release the memory allocated for the structure by calling CoTaskMemFree."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*pcbSize",
+        "type": "UINT32*",
+        "name": "pcbSize",
         "description": "Receives the size of the MFVIDEOFORMAT structure."
       }
     ],
@@ -2732,8 +2732,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*ppvHandler",
+        "type": "LPVOID*",
+        "name": "ppvHandler",
         "description": "Receives a pointer to the interface. The caller must release the interface."
       }
     ],
@@ -2755,14 +2755,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pTargetByteStream",
+        "type": "IMFByteStream*",
+        "name": "pTargetByteStream",
         "description": "A pointer to the IMFByteStream interface of a byte stream.  The media sink writes the MP3 file to this byte stream. The byte stream must be writable."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaSink",
-        "name": "**ppMediaSink",
+        "type": "IMFMediaSink**",
+        "name": "ppMediaSink",
         "description": "Receives a pointer to the IMFMediaSink interface of the MP3 media sink.. The caller must release the interface."
       }
     ],
@@ -2784,26 +2784,26 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pIByteStream",
+        "type": "IMFByteStream*",
+        "name": "pIByteStream",
         "description": "A pointer to the IMFByteStream interface of a byte stream.  The media sink writes the MP4 file to this byte stream. The byte stream must be writable and support seeking."
       },
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pVideoMediaType",
+        "type": "IMFMediaType*",
+        "name": "pVideoMediaType",
         "description": "A pointer to the IMFMediaType interface of a video media type. This type specifies the format of the video stream. This parameter can be NULL, but not if pAudioMediaType is NULL."
       },
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pAudioMediaType",
+        "type": "IMFMediaType*",
+        "name": "pAudioMediaType",
         "description": "A pointer to the IMFMediaType interface of an audio media type. This type specifies the format of the audio stream. This parameter can be NULL, but not if pVideoMediaType is NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaSink",
-        "name": "**ppIMediaSink",
+        "type": "IMFMediaSink**",
+        "name": "ppIMediaSink",
         "description": "Receives a pointer to the MP4 media sink's IMFMediaSink interface. The caller must release the interface."
       }
     ],
@@ -2831,20 +2831,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pOutputAttributes",
+        "type": "IMFAttributes*",
+        "name": "pOutputAttributes",
         "description": "A list of format attributes for the MFT output type. This parameter is optional and can be NULL."
       },
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pOutputByteStream",
+        "type": "IMFByteStream*",
+        "name": "pOutputByteStream",
         "description": "A pointer to the IMFByteStream interface of a byte stream. The output from the MFT is written to this byte stream. This parameter can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaSink",
-        "name": "**ppMuxSink",
+        "type": "IMFMediaSink**",
+        "name": "ppMuxSink",
         "description": "Receives a pointer to the IMFMediaSink interface of the media sink. The caller must release the interface."
       }
     ],
@@ -2872,8 +2872,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*ppvHandler",
+        "type": "LPVOID*",
+        "name": "ppvHandler",
         "description": "Receives a pointer to the requested interface. The caller must release the interface. The scheme handler exposes the IMFSchemeHandler interface."
       }
     ],
@@ -2901,8 +2901,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*ppwszFilePath",
+        "type": "LPWSTR*",
+        "name": "ppwszFilePath",
         "description": "Receives a null-terminated string that contains the URL. The caller must free the string by calling CoTaskMemFree."
       }
     ],
@@ -2930,20 +2930,20 @@
       },
       {
         "in_out": "",
-        "type": "IMFAttributes",
-        "name": "*pConfiguration",
+        "type": "IMFAttributes*",
+        "name": "pConfiguration",
         "description": "A pointer to the IMFAttributes interface. This parameter can be NULL. See Remarks."
       },
       {
         "in_out": "",
-        "type": "IMFMediaSession",
-        "name": "**ppMediaSession",
+        "type": "IMFMediaSession**",
+        "name": "ppMediaSession",
         "description": "Receives a pointer to the PMP Media Session's IMFMediaSession interface. The caller must release the interface. Before releasing the last reference to the IMFMediaSession pointer, the application must call the IMFMediaSession::Shutdown method."
       },
       {
         "in_out": "",
-        "type": "IMFActivate",
-        "name": "**ppEnablerActivate",
+        "type": "IMFActivate**",
+        "name": "ppEnablerActivate",
         "description": "Receives a pointer to the IMFActivate interface or the value NULL. If non-NULL, the caller must release the interface. See Remarks."
       }
     ],
@@ -2971,8 +2971,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFPMPServer",
-        "name": "**ppPMPServer",
+        "type": "IMFPMPServer**",
+        "name": "ppPMPServer",
         "description": "Receives a pointer to the IMFPMPServer interface. The caller must release the interface."
       }
     ],
@@ -2994,8 +2994,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFPresentationClock",
-        "name": "**ppPresentationClock",
+        "type": "IMFPresentationClock**",
+        "name": "ppPresentationClock",
         "description": "Receives a pointer to the clock's IMFPresentationClock interface. The caller must release the interface."
       }
     ],
@@ -3023,14 +3023,14 @@
       },
       {
         "in_out": "",
-        "type": "IMFStreamDescriptor",
-        "name": "**apStreamDescriptors",
+        "type": "IMFStreamDescriptor**",
+        "name": "apStreamDescriptors",
         "description": "Array of IMFStreamDescriptor interface pointers. Each pointer represents a stream descriptor for one stream in the presentation."
       },
       {
         "in_out": "",
-        "type": "IMFPresentationDescriptor",
-        "name": "**ppPresentationDescriptor",
+        "type": "IMFPresentationDescriptor**",
+        "name": "ppPresentationDescriptor",
         "description": "Receives a pointer to an IMFPresentationDescriptor interface of the presentation descriptor. The caller must release the interface."
       }
     ],
@@ -3052,14 +3052,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFASFProfile",
-        "name": "*pIProfile",
+        "type": "IMFASFProfile*",
+        "name": "pIProfile",
         "description": "Pointer to the IMFASFProfile interface of the ASF profile object."
       },
       {
         "in_out": "",
-        "type": "IMFPresentationDescriptor",
-        "name": "**ppIPD",
+        "type": "IMFPresentationDescriptor**",
+        "name": "ppIPD",
         "description": "Receives a pointer to the IMFPresentationDescriptor interface. The caller must release the interface."
       }
     ],
@@ -3081,8 +3081,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pMediaType",
+        "type": "IMFMediaType*",
+        "name": "pMediaType",
         "description": "A pointer to the IMFMediaType interface."
       },
       {
@@ -3093,8 +3093,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Receives a pointer to the requested interface. The caller must release the interface."
       }
     ],
@@ -3116,8 +3116,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFProtectedEnvironmentAccess",
-        "name": "**ppAccess",
+        "type": "IMFProtectedEnvironmentAccess**",
+        "name": "ppAccess",
         "description": "Receives a pointer to the IMFProtectedEnvironmentAccess interface."
       }
     ],
@@ -3145,14 +3145,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IPropertyStore",
-        "name": "*pProxyConfig",
+        "type": "IPropertyStore*",
+        "name": "pProxyConfig",
         "description": "Pointer to the IPropertyStore interface of a property store that contains the proxy configuration in the MFNETSOURCE_PROXYSETTINGS property."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFNetProxyLocator",
-        "name": "**ppProxyLocator",
+        "type": "IMFNetProxyLocator**",
+        "name": "ppProxyLocator",
         "description": "Receives a pointer to the IMFNetProxyLocator interface. The caller must release the interface."
       }
     ],
@@ -3174,8 +3174,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFRemoteDesktopPlugin",
-        "name": "**ppPlugin",
+        "type": "IMFRemoteDesktopPlugin**",
+        "name": "ppPlugin",
         "description": "Receives a pointer to the IMFRemoteDesktopPlugin interface of the plug-in object. The caller must release the interface."
       }
     ],
@@ -3197,8 +3197,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFSample",
-        "name": "**ppIMFSample",
+        "type": "IMFSample**",
+        "name": "ppIMFSample",
         "description": "Receives a pointer to the IMFSample interface of the media sample. The caller must release the interface."
       }
     ],
@@ -3220,8 +3220,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFTransform",
-        "name": "**ppCopierMFT",
+        "type": "IMFTransform**",
+        "name": "ppCopierMFT",
         "description": "Receives a pointer to the IMFTransform interface. The caller must release the interface."
       }
     ],
@@ -3243,20 +3243,20 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pIMFMediaType",
+        "type": "IMFMediaType*",
+        "name": "pIMFMediaType",
         "description": "Pointer to the IMFMediaType interface, defining the media type for the sample grabber's input stream."
       },
       {
         "in_out": "",
-        "type": "IMFSampleGrabberSinkCallback",
-        "name": "*pIMFSampleGrabberSinkCallback",
+        "type": "IMFSampleGrabberSinkCallback*",
+        "name": "pIMFSampleGrabberSinkCallback",
         "description": "Pointer to the IMFSampleGrabberSinkCallback interface of a callback object. The caller must implement this interface."
       },
       {
         "in_out": "",
-        "type": "IMFActivate",
-        "name": "**ppIActivate",
+        "type": "IMFActivate**",
+        "name": "ppIActivate",
         "description": "Receives a pointer to the IMFActivate interface. Use this interface to complete the creation of the sample grabber. The caller must release the interface."
       }
     ],
@@ -3284,8 +3284,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFSensorGroup",
-        "name": "**ppSensorGroup",
+        "type": "IMFSensorGroup**",
+        "name": "ppSensorGroup",
         "description": "The symbolic link for the new IMFSensorGroup."
       }
     ],
@@ -3313,20 +3313,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "The attribute store for the created stream."
       },
       {
         "in_out": "_In_",
-        "type": "IMFCollection",
-        "name": "*pMediaTypeCollection",
+        "type": "IMFCollection*",
+        "name": "pMediaTypeCollection",
         "description": "The collection of IMFMediaType objects specifying the media types supported by the stream."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFSensorStream",
-        "name": "**ppStream",
+        "type": "IMFSensorStream**",
+        "name": "ppStream",
         "description": "The created stream interface."
       }
     ],
@@ -3360,8 +3360,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PROPVARIANT",
-        "name": "*pvarSegmentOffset",
+        "type": "PROPVARIANT*",
+        "name": "pvarSegmentOffset",
         "description": "Pointer to a PROPVARIANT. The method fills in the PROPVARIANT with the information needed for performing a seek operation. The caller must free the PROPVARIANT by calling PropVariantClear."
       }
     ],
@@ -3383,14 +3383,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IUnknown",
-        "name": "*pReserved",
+        "type": "IUnknown*",
+        "name": "pReserved",
         "description": "Reserved. Must be NULL."
       },
       {
         "in_out": "",
-        "type": "IMFSequencerSource",
-        "name": "**ppSequencerSource",
+        "type": "IMFSequencerSource**",
+        "name": "ppSequencerSource",
         "description": "Receives a pointer to the IMFSequencerSource interface of the sequencer source. The caller must release the interface."
       }
     ],
@@ -3412,8 +3412,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFMediaTypeHandler",
-        "name": "**ppHandler",
+        "type": "IMFMediaTypeHandler**",
+        "name": "ppHandler",
         "description": "Receives a pointer to the IMFMediaTypeHandler interface of the media-type handler. The caller must release the interface."
       }
     ],
@@ -3435,20 +3435,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFMediaSink",
-        "name": "*pMediaSink",
+        "type": "IMFMediaSink*",
+        "name": "pMediaSink",
         "description": "Pointer to the IMFMediaSink interface of a media sink."
       },
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface. You can use this parameter to configure the sink writer. For more information, see Sink Writer Attributes. This parameter can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFSinkWriter",
-        "name": "**ppSinkWriter",
+        "type": "IMFSinkWriter**",
+        "name": "ppSinkWriter",
         "description": "Receives a pointer to the IMFSinkWriter interface. The caller must release the interface."
       }
     ],
@@ -3476,20 +3476,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pByteStream",
+        "type": "IMFByteStream*",
+        "name": "pByteStream",
         "description": "Pointer to the IMFByteStream interface of a byte stream. This parameter can be NULL. If this parameter is a valid pointer, the sink writer writes to the provided byte stream. (The byte stream must be writable.) Otherwise, if pByteStream is NULL, the sink writer creates a new file named pwszOutputURL."
       },
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface. You can use this parameter to configure the sink writer. For more information, see Sink Writer Attributes. This parameter can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFSinkWriter",
-        "name": "**ppSinkWriter",
+        "type": "IMFSinkWriter**",
+        "name": "ppSinkWriter",
         "description": "Receives a pointer to the IMFSinkWriter interface. The caller must release the interface."
       }
     ],
@@ -3511,20 +3511,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pByteStream",
+        "type": "IMFByteStream*",
+        "name": "pByteStream",
         "description": "A pointer to the IMFByteStream interface of a byte stream. This byte stream will provide the source data for the source reader."
       },
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface. You can use this parameter to configure the source reader. For more information, see Source Reader Attributes. This parameter can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFSourceReader",
-        "name": "**ppSourceReader",
+        "type": "IMFSourceReader**",
+        "name": "ppSourceReader",
         "description": "Receives a pointer to the IMFSourceReader interface. The caller must release the interface."
       }
     ],
@@ -3546,20 +3546,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFMediaSource",
-        "name": "*pMediaSource",
+        "type": "IMFMediaSource*",
+        "name": "pMediaSource",
         "description": "A pointer to the IMFMediaSource interface of a media source."
       },
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface. You can use this parameter to configure the source reader. For more information, see Source Reader Attributes. This parameter can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFSourceReader",
-        "name": "**ppSourceReader",
+        "type": "IMFSourceReader**",
+        "name": "ppSourceReader",
         "description": "Receives a pointer to the IMFSourceReader interface. The caller must release the interface."
       }
     ],
@@ -3587,14 +3587,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface. You can use this parameter to configure the source reader. For more information, see Source Reader Attributes. This parameter can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFSourceReader",
-        "name": "**ppSourceReader",
+        "type": "IMFSourceReader**",
+        "name": "ppSourceReader",
         "description": "Receives a pointer to the IMFSourceReader interface. The caller must release the interface."
       }
     ],
@@ -3616,8 +3616,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFSourceResolver",
-        "name": "**ppISourceResolver",
+        "type": "IMFSourceResolver**",
+        "name": "ppISourceResolver",
         "description": "Receives a pointer to the source resolver's IMFSourceResolver interface. The caller must release the interface."
       }
     ],
@@ -3639,8 +3639,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFQualityManager",
-        "name": "**ppQualityManager",
+        "type": "IMFQualityManager**",
+        "name": "ppQualityManager",
         "description": "Receives a pointer to the quality manager's IMFQualityManager interface. The caller must release the interface."
       }
     ],
@@ -3674,14 +3674,14 @@
       },
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "**apMediaTypes",
+        "type": "IMFMediaType**",
+        "name": "apMediaTypes",
         "description": "Pointer to an array of IMFMediaType interface pointers. These pointers are used to initialize the media type handler for the stream descriptor."
       },
       {
         "in_out": "",
-        "type": "IMFStreamDescriptor",
-        "name": "**ppDescriptor",
+        "type": "IMFStreamDescriptor**",
+        "name": "ppDescriptor",
         "description": "Receives a pointer to the IMFStreamDescriptor interface of the new stream descriptor. The caller must release the interface."
       }
     ],
@@ -3703,14 +3703,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pByteStream",
+        "type": "IMFByteStream*",
+        "name": "pByteStream",
         "description": "A pointer to the IMFByteStream interface of the Media Foundation byte stream."
       },
       {
         "in_out": "_Out_",
-        "type": "IStream",
-        "name": "**ppStream",
+        "type": "IStream**",
+        "name": "ppStream",
         "description": "Receives a pointer to the IStream interface. The caller must release the interface."
       }
     ],
@@ -3732,8 +3732,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pByteStream",
+        "type": "IMFByteStream*",
+        "name": "pByteStream",
         "description": "A pointer to the IMFByteStream interface of the Media Foundation byte stream."
       },
       {
@@ -3744,8 +3744,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Receives a pointer to the requested interface. The caller must release the interface."
       }
     ],
@@ -3767,8 +3767,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFPresentationTimeSource",
-        "name": "**ppSystemTimeSource",
+        "type": "IMFPresentationTimeSource**",
+        "name": "ppSystemTimeSource",
         "description": "Receives a pointer to the object's IMFPresentationTimeSource interface. The caller must release the interface."
       }
     ],
@@ -3808,8 +3808,8 @@
       },
       {
         "in_out": "",
-        "type": "IMFByteStream",
-        "name": "**ppIByteStream",
+        "type": "IMFByteStream**",
+        "name": "ppIByteStream",
         "description": "Receives a pointer to the IMFByteStream interface of the byte stream. The caller must release the interface."
       }
     ],
@@ -3831,8 +3831,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFTopoLoader",
-        "name": "**ppObj",
+        "type": "IMFTopoLoader**",
+        "name": "ppObj",
         "description": "Receives a pointer to the IMFTopoLoader interface of the topology loader. The caller must release the interface."
       }
     ],
@@ -3854,8 +3854,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFTopology",
-        "name": "**ppTopo",
+        "type": "IMFTopology**",
+        "name": "ppTopo",
         "description": "Receives a pointer to the IMFTopology interface of the topology object. The caller must release the interface."
       }
     ],
@@ -3883,8 +3883,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFTopologyNode",
-        "name": "**ppNode",
+        "type": "IMFTopologyNode**",
+        "name": "ppNode",
         "description": "Receives a pointer to the node's IMFTopologyNode interface. The caller must release the interface."
       }
     ],
@@ -3906,8 +3906,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFTrackedSample",
-        "name": "**ppMFSample",
+        "type": "IMFTrackedSample**",
+        "name": "ppMFSample",
         "description": "Receives a pointer to the IMFTrackedSample interface."
       }
     ],
@@ -3929,8 +3929,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFTranscodeProfile",
-        "name": "**ppTranscodeProfile",
+        "type": "IMFTranscodeProfile**",
+        "name": "ppTranscodeProfile",
         "description": "Receives a pointer to the IMFTranscodeProfile interface of the transcode profile object. Caller must release the interface."
       }
     ],
@@ -3952,8 +3952,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "_Out_",
-        "name": "**ppActivate",
+        "type": "_Out_**",
+        "name": "ppActivate",
         "description": "Receives a pointer to the IMFActivate interface. This interface is used to create the file sink instance from the activation object. Before doing so, query the returned pointer for the IMFTranscodeSinkInfoProvider interface and use that interface to initialize the object."
       }
     ],
@@ -3975,8 +3975,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFMediaSource",
-        "name": "*pSrc",
+        "type": "IMFMediaSource*",
+        "name": "pSrc",
         "description": "A pointer to a media source that encapsulates the source file to be transcoded. The media source object exposes the IMFMediaSource interface and can be created by using the source resolver. For more information, see Using the Source Resolver."
       },
       {
@@ -3987,14 +3987,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFTranscodeProfile",
-        "name": "*pProfile",
+        "type": "IMFTranscodeProfile*",
+        "name": "pProfile",
         "description": "A pointer to the transcode profile that contains the configuration settings for the audio stream, the video stream, and the container to which the file is written. The transcode profile object exposes the IMFTranscodeProfile interface and must be created by calling the MFCreateTranscodeProfile function. After the object has been created the caller must provide the configuration settings by calling appropriate the IMFTranscodeProfile methods."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFTopology",
-        "name": "**ppTranscodeTopo",
+        "type": "IMFTopology**",
+        "name": "ppTranscodeTopo",
         "description": "Receives a pointer to the IMFTopology interface of the transcode topology object. The caller must release the interface."
       }
     ],
@@ -4016,26 +4016,26 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFMediaSource",
-        "name": "*pSrc",
+        "type": "IMFMediaSource*",
+        "name": "pSrc",
         "description": "A pointer to the IMFMediaSource interface of a media source. The media source provides that source content for transcoding."
       },
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pOutputStream",
+        "type": "IMFByteStream*",
+        "name": "pOutputStream",
         "description": "A pointer to the IMFByteStream interface of a byte stream. The transcoded output will be written to this byte stream."
       },
       {
         "in_out": "_In_",
-        "type": "IMFTranscodeProfile",
-        "name": "*pProfile",
+        "type": "IMFTranscodeProfile*",
+        "name": "pProfile",
         "description": "A pointer to the IMFTranscodeProfile interface of a transcoding profile."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFTopology",
-        "name": "**ppTranscodeTopo",
+        "type": "IMFTopology**",
+        "name": "ppTranscodeTopo",
         "description": "Receives a pointer to the IMFTopology interface. The caller must release the interface."
       }
     ],
@@ -4057,8 +4057,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFActivate",
-        "name": "**ppActivate",
+        "type": "IMFActivate**",
+        "name": "ppActivate",
         "description": "Receives a pointer to the IMFActivate interface.           The caller must release the interface."
       }
     ],
@@ -4086,8 +4086,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*ppwszFileURL",
+        "type": "LPWSTR*",
+        "name": "ppwszFileURL",
         "description": "Receives a null-terminated string that contains the URL. The caller must free the string by calling CoTaskMemFree."
       }
     ],
@@ -4109,14 +4109,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "MFVIDEOFORMAT",
-        "name": "*pVideoFormat",
+        "type": "const MFVIDEOFORMAT*",
+        "name": "pVideoFormat",
         "description": "Pointer to an MFVIDEOFORMAT structure that describes the video format."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFVideoMediaType",
-        "name": "**ppIVideoMediaType",
+        "type": "IMFVideoMediaType**",
+        "name": "ppIVideoMediaType",
         "description": "Receives a pointer to the IMFVideoMediaType interface. The caller must release the interface."
       }
     ],
@@ -4137,9 +4137,9 @@
     "dll": "Mfplat.dll",
     "arguments": [
       {
-        "in_out": "",
-        "type": "BITMAPINFOHEADER",
-        "name": "*pbmihBitMapInfoHeader",
+        "in_out": "const",
+        "type": "BITMAPINFOHEADER*",
+        "name": "pbmihBitMapInfoHeader",
         "description": "Reserved."
       },
       {
@@ -4186,8 +4186,8 @@
       },
       {
         "in_out": "",
-        "type": "IMFVideoMediaType",
-        "name": "**ppIVideoMediaType",
+        "type": "IMFVideoMediaType**",
+        "name": "ppIVideoMediaType",
         "description": "Reserved."
       }
     ],
@@ -4209,8 +4209,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "BITMAPINFOHEADER",
-        "name": "*pbmihBitMapInfoHeader",
+        "type": "const BITMAPINFOHEADER*",
+        "name": "pbmihBitMapInfoHeader",
         "description": "A pointer to the BITMAPINFOHEADER structure to convert."
       },
       {
@@ -4263,8 +4263,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFVideoMediaType",
-        "name": "**ppIVideoMediaType",
+        "type": "IMFVideoMediaType**",
+        "name": "ppIVideoMediaType",
         "description": "Receives a pointer to the            IMFVideoMediaType interface. The caller must release the interface."
       }
     ],
@@ -4286,14 +4286,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*pAMSubtype",
+        "type": "const GUID*",
+        "name": "pAMSubtype",
         "description": "Pointer to a GUID that specifies the subtype. See Video Subtype GUIDs."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFVideoMediaType",
-        "name": "**ppIVideoMediaType",
+        "type": "IMFVideoMediaType**",
+        "name": "ppIVideoMediaType",
         "description": "Receives a pointer to the IMFVideoMediaType interface. The caller must release the interface."
       }
     ],
@@ -4314,9 +4314,9 @@
     "dll": "Mfplat.dll",
     "arguments": [
       {
-        "in_out": "",
-        "type": "KS_VIDEOINFOHEADER",
-        "name": "*pVideoInfoHeader",
+        "in_out": "const",
+        "type": "KS_VIDEOINFOHEADER*",
+        "name": "pVideoInfoHeader",
         "description": "Pointer to the KS_VIDEOINFOHEADER structure to convert. (This structure is identical to the DirectShow VIDEOINFOHEADER structure.)"
       },
       {
@@ -4350,15 +4350,15 @@
         "description": "Bitwise OR of flags from the MFVideoFlags enumeration."
       },
       {
-        "in_out": "",
-        "type": "GUID",
-        "name": "*pSubtype",
+        "in_out": "const",
+        "type": "GUID*",
+        "name": "pSubtype",
         "description": "Pointer to a subtype GUID. This parameter can be NULL. If the subtype GUID is specified, the function uses it to set the media subtype. Otherwise, the function attempts to deduce the subtype from the biCompression field contained in the KS_VIDEOINFOHEADER structure."
       },
       {
         "in_out": "",
-        "type": "IMFVideoMediaType",
-        "name": "**ppIVideoMediaType",
+        "type": "IMFVideoMediaType**",
+        "name": "ppIVideoMediaType",
         "description": "Receives a pointer to the IMFVideoMediaType interface. The caller must release the interface."
       }
     ],
@@ -4379,9 +4379,9 @@
     "dll": "Mfplat.dll",
     "arguments": [
       {
-        "in_out": "",
-        "type": "KS_VIDEOINFOHEADER2",
-        "name": "*pVideoInfoHeader",
+        "in_out": "const",
+        "type": "KS_VIDEOINFOHEADER2*",
+        "name": "pVideoInfoHeader",
         "description": "Pointer to the KS_VIDEOINFOHEADER2 structure to convert. (This structure is identical to the DirectShow VIDEOINFOHEADER2 structure.)"
       },
       {
@@ -4397,15 +4397,15 @@
         "description": "Bitwise OR of flags from the MFVideoFlags enumeration. Use this parameter for format information that is not contained in the KS_VIDEOINFOHEADER2 structure."
       },
       {
-        "in_out": "",
-        "type": "GUID",
-        "name": "*pSubtype",
+        "in_out": "const",
+        "type": "GUID*",
+        "name": "pSubtype",
         "description": "Pointer to a subtype GUID. This parameter can be NULL. If the subtype GUID is specified, the function uses it to set the media subtype. Otherwise, the function attempts to deduce the subtype from the biCompression field contained in the KS_VIDEOINFOHEADER2 structure."
       },
       {
         "in_out": "",
-        "type": "IMFVideoMediaType",
-        "name": "**ppIVideoMediaType",
+        "type": "IMFVideoMediaType**",
+        "name": "ppIVideoMediaType",
         "description": "Receives a pointer to the IMFVideoMediaType interface. The caller must release the interface."
       }
     ],
@@ -4427,8 +4427,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IUnknown",
-        "name": "*pOwner",
+        "type": "IUnknown*",
+        "name": "pOwner",
         "description": "Pointer to the owner of this object. If the object is aggregated, pass a pointer to the aggregating object's IUnknown interface. Otherwise, set this parameter to NULL."
       },
       {
@@ -4445,8 +4445,8 @@
       },
       {
         "in_out": "",
-        "type": "void",
-        "name": "**ppVideoMixer",
+        "type": "void**",
+        "name": "ppVideoMixer",
         "description": "Receives a pointer to the requested interface. The caller must release the interface."
       }
     ],
@@ -4468,14 +4468,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pMixerOwner",
+        "type": "IUnknown*",
+        "name": "pMixerOwner",
         "description": "Pointer to the owner of the video mixer. If the mixer is aggregated, pass a pointer to the aggregating object's IUnknown interface. Otherwise, set this parameter to NULL."
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pPresenterOwner",
+        "type": "IUnknown*",
+        "name": "pPresenterOwner",
         "description": "Pointer to the owner of the video presenter. If the presenter is aggregated, pass a pointer to the aggregating object's IUnknown interface. Otherwise, set this parameter to NULL."
       },
       {
@@ -4486,8 +4486,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppvVideoMixer",
+        "type": "void**",
+        "name": "ppvVideoMixer",
         "description": "Receives a pointer to the requested interface on the video mixer. The caller must release the interface."
       },
       {
@@ -4498,8 +4498,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppvVideoPresenter",
+        "type": "void**",
+        "name": "ppvVideoPresenter",
         "description": "Receives a pointer to the requested interface on the video presenter. The caller must release the interface."
       }
     ],
@@ -4521,8 +4521,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pOwner",
+        "type": "IUnknown*",
+        "name": "pOwner",
         "description": "Pointer to the owner of the object. If the object is aggregated, pass a pointer to the aggregating object's IUnknown interface. Otherwise, set this parameter to NULL."
       },
       {
@@ -4539,8 +4539,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppvVideoPresenter",
+        "type": "void**",
+        "name": "ppvVideoPresenter",
         "description": "Receives a pointer to the requested interface on the video presenter. The caller must release the interface."
       }
     ],
@@ -4568,8 +4568,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppVideoRenderer",
+        "type": "void**",
+        "name": "ppVideoRenderer",
         "description": "Receives a pointer to the requested interface. The caller must release the interface."
       }
     ],
@@ -4597,8 +4597,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFActivate",
-        "name": "**ppActivate",
+        "type": "IMFActivate**",
+        "name": "ppActivate",
         "description": "Receives a pointer to the IMFActivate interface. Use this interface to create the EVR. The caller must release the interface."
       }
     ],
@@ -4678,14 +4678,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pUnkSurface",
+        "type": "IUnknown*",
+        "name": "pUnkSurface",
         "description": "A pointer to the IUnknown interface of the Direct3D surface. This parameter can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFSample",
-        "name": "**ppSample",
+        "type": "IMFSample**",
+        "name": "ppSample",
         "description": "Receives a pointer to the sample's IMFSample interface.           The caller must release the interface."
       }
     ],
@@ -4707,20 +4707,20 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMFType",
+        "type": "IMFMediaType*",
+        "name": "pMFType",
         "description": "Pointer to the IMFMediaType interface of the media type."
       },
       {
         "in_out": "",
-        "type": "WAVEFORMATEX",
-        "name": "**ppWF",
+        "type": "WAVEFORMATEX**",
+        "name": "ppWF",
         "description": "Receives a pointer to the WAVEFORMATEX structure. The caller must release the memory allocated for the structure by calling CoTaskMemFree."
       },
       {
         "in_out": "",
-        "type": "UINT32",
-        "name": "*pcbSize",
+        "type": "UINT32*",
+        "name": "pcbSize",
         "description": "Receives the size of the WAVEFORMATEX structure."
       },
       {
@@ -4748,20 +4748,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFByteStream",
-        "name": "*pTargetByteStream",
+        "type": "IMFByteStream*",
+        "name": "pTargetByteStream",
         "description": "Pointer to the byte stream that will be used to write the .wav file."
       },
       {
         "in_out": "_In_",
-        "type": "IMFMediaType",
-        "name": "*pAudioMediaType",
+        "type": "IMFMediaType*",
+        "name": "pAudioMediaType",
         "description": "Pointer to the audio media type."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaSink",
-        "name": "**ppMediaSink",
+        "type": "IMFMediaSink**",
+        "name": "ppMediaSink",
         "description": "Receives a pointer to the IMFMediaSink interface.  The caller must release this interface."
       }
     ],
@@ -4789,14 +4789,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punkSurface",
+        "type": "IUnknown*",
+        "name": "punkSurface",
         "description": "A pointer to the IUnknown interface of the bitmap surface. The bitmap surface must be a WIC bitmap that exposes the IWICBitmap interface."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaBuffer",
-        "name": "**ppBuffer",
+        "type": "IMFMediaBuffer**",
+        "name": "ppBuffer",
         "description": "Receives a pointer to the IMFMediaBuffer interface. The caller must release the interface."
       }
     ],
@@ -4818,20 +4818,20 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMediaType",
+        "type": "IMFMediaType*",
+        "name": "pMediaType",
         "description": "A pointer to the IMFMediaType interface. This parameter specifies the encoded output format."
       },
       {
         "in_out": "",
-        "type": "IPropertyStore",
-        "name": "*pEncodingConfigurationProperties",
+        "type": "IPropertyStore*",
+        "name": "pEncodingConfigurationProperties",
         "description": "A pointer to the IPropertyStore interface of a property store that contains encoding parameters. Encoding parameters for the WMV encoder are defined in the header file wmcodecdsp.h. If you have an ASF ContentInfo object that contains an ASF profile object with all the streams for the output file, you can get the property store by calling IMFASFContentInfo::GetEncodingConfigurationPropertyStore."
       },
       {
         "in_out": "",
-        "type": "IMFActivate",
-        "name": "**ppActivate",
+        "type": "IMFActivate**",
+        "name": "ppActivate",
         "description": "Receives a pointer to the IMFActivate interface. Use this interface to create the encoder. The caller must release the interface."
       }
     ],
@@ -4853,20 +4853,20 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMediaType",
+        "type": "IMFMediaType*",
+        "name": "pMediaType",
         "description": "A pointer to the IMFMediaType interface. This parameter specifies the encoded output format."
       },
       {
         "in_out": "",
-        "type": "IPropertyStore",
-        "name": "*pEncodingConfigurationProperties",
+        "type": "IPropertyStore*",
+        "name": "pEncodingConfigurationProperties",
         "description": "A pointer to the IPropertyStore interface of a property store that contains encoding parameters. Encoding parameters for the WMV encoder are defined in the header file wmcodecdsp.h. If you have an ASF ContentInfo object that contains an ASF profile object with all the streams for the output file, you can get the property store by calling IMFASFContentInfo::GetEncodingConfigurationPropertyStore."
       },
       {
         "in_out": "",
-        "type": "IMFActivate",
-        "name": "**ppActivate",
+        "type": "IMFActivate**",
+        "name": "ppActivate",
         "description": "Receives a pointer to the IMFActivate interface. Use this interface to create the encoder. The caller must release the interface."
       }
     ],
@@ -4888,8 +4888,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFAttributes",
-        "name": "*pAttr",
+        "type": "IMFAttributes*",
+        "name": "pAttr",
         "description": "Pointer to the IMFAttributes interface of the attribute store."
       },
       {
@@ -4900,8 +4900,8 @@
       },
       {
         "in_out": "",
-        "type": "IStream",
-        "name": "*pStm",
+        "type": "IStream*",
+        "name": "pStm",
         "description": "Pointer to the IStream interface of the stream from which to read the attributes."
       }
     ],
@@ -4929,14 +4929,14 @@
       },
       {
         "in_out": "",
-        "type": "BYTE",
-        "name": "*pbData",
+        "type": "BYTE*",
+        "name": "pbData",
         "description": "Pointer to an array of bytes that contains the serialized presentation descriptor."
       },
       {
         "in_out": "",
-        "type": "IMFPresentationDescriptor",
-        "name": "**ppPD",
+        "type": "IMFPresentationDescriptor**",
+        "name": "ppPD",
         "description": "Receives a pointer to the IMFPresentationDescriptor interface of the presentation descriptor. The caller must release the interface."
       }
     ],
@@ -4958,14 +4958,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAsyncResult",
-        "name": "*pResult",
+        "type": "IMFAsyncResult*",
+        "name": "pResult",
         "description": "Pointer to the IMFAsyncResult interface. Pass in the same pointer that your callback object received in the Invoke method."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFByteStream",
-        "name": "**ppFile",
+        "type": "IMFByteStream**",
+        "name": "ppFile",
         "description": "Receives a pointer to the IMFByteStream interface of the byte stream. The caller must release the interface."
       }
     ],
@@ -4987,14 +4987,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAsyncResult",
-        "name": "*pResult",
+        "type": "IMFAsyncResult*",
+        "name": "pResult",
         "description": "Pointer to the IMFAsyncResult interface. Pass in the same pointer that your callback object received in the IMFAsyncCallback::Invoke method."
       },
       {
         "in_out": "_In_",
-        "type": "DWORD",
-        "name": "*pdwTaskId",
+        "type": "DWORD*",
+        "name": "pdwTaskId",
         "description": "The unique task identifier."
       }
     ],
@@ -5016,8 +5016,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAsyncResult",
-        "name": "*pResult",
+        "type": "IMFAsyncResult*",
+        "name": "pResult",
         "description": "Pointer to the IMFAsyncResult interface. Pass in the same pointer that your callback object received in the IMFAsyncCallback::Invoke method."
       }
     ],
@@ -5039,20 +5039,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to an attribute store that contains search criteria. To create the attribute store, call MFCreateAttributes. Set one or more of the following attributes on the attribute store:  ValueMeaning  MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE   Specifies whether to enumerate audio or video devices. (Required.)   MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_AUDCAP_ROLE   For audio capture devices, specifies the device role. (Optional.)   MF_DEVSOURCE_ATTRIBUTE_SOURCE_TYPE_VIDCAP_CATEGORY   For video capture devices, specifies the device category. (Optional.)"
       },
       {
         "in_out": "_Out_",
-        "type": "IMFActivate",
-        "name": "***pppSourceActivate",
+        "type": "IMFActivate***",
+        "name": "pppSourceActivate",
         "description": "Receives an array of IMFActivate interface pointers. Each pointer represents an activation object for a media source. The function allocates the memory for the array. The caller must release the pointers in the array and call CoTaskMemFree to free the memory for the array."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*pcSourceActivate",
+        "type": "UINT32*",
+        "name": "pcSourceActivate",
         "description": "Receives the number of elements in the pppSourceActivate array. If no capture devices match the search criteria, this parameter receives the value 0."
       }
     ],
@@ -5086,8 +5086,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "UINT64",
-        "name": "*punAverageTimePerFrame",
+        "type": "UINT64*",
+        "name": "punAverageTimePerFrame",
         "description": "Receives the average duration of a video frame, in 100-nanosecond units."
       }
     ],
@@ -5109,8 +5109,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "A pointer to the IMFAttributes interface of the attribute store."
       },
       {
@@ -5121,14 +5121,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*punHigh32",
+        "type": "UINT32*",
+        "name": "punHigh32",
         "description": "Receives the high-order 32 bits."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*punLow32",
+        "type": "UINT32*",
+        "name": "punLow32",
         "description": "Receives the low-order 32 bits."
       }
     ],
@@ -5150,8 +5150,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface of the attribute store."
       },
       {
@@ -5185,8 +5185,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface of the attribute store."
       },
       {
@@ -5197,14 +5197,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*pnNumerator",
+        "type": "UINT32*",
+        "name": "pnNumerator",
         "description": "Receives the numerator of the ratio."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*punDenominator",
+        "type": "UINT32*",
+        "name": "punDenominator",
         "description": "Receives the denominator of the ratio."
       }
     ],
@@ -5226,14 +5226,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface of the attribute store."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT8",
-        "name": "*pBuf",
+        "type": "UINT8*",
+        "name": "pBuf",
         "description": "Pointer to an array that receives the attribute data."
       },
       {
@@ -5261,14 +5261,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface of the attribute store."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*pcbBufSize",
+        "type": "UINT32*",
+        "name": "pcbBufSize",
         "description": "Receives the required size of the array, in bytes."
       }
     ],
@@ -5290,8 +5290,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface of the attribute store."
       },
       {
@@ -5302,14 +5302,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*punWidth",
+        "type": "UINT32*",
+        "name": "punWidth",
         "description": "Receives the width."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*punHeight",
+        "type": "UINT32*",
+        "name": "punHeight",
         "description": "Receives the height."
       }
     ],
@@ -5331,8 +5331,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "A pointer to the IMFAttributes interface."
       },
       {
@@ -5343,8 +5343,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppsz",
+        "type": "PWSTR*",
+        "name": "ppsz",
         "description": "If the key is found and the value is a string type, this parameter receives a copy of the string. The caller must free the memory for the string by calling CoTaskMemFree."
       }
     ],
@@ -5366,8 +5366,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface of the attribute store."
       },
       {
@@ -5401,8 +5401,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface of the attribute store."
       },
       {
@@ -5442,8 +5442,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "CLSID",
-        "name": "*pclsid",
+        "type": "CLSID*",
+        "name": "pclsid",
         "description": "Receives the class identifier to the content protection system."
       }
     ],
@@ -5465,8 +5465,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*verifier",
+        "type": "const BYTE*",
+        "name": "verifier",
         "description": "Application-specific verifier value."
       },
       {
@@ -5477,8 +5477,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "LPWSTR",
-        "name": "*id",
+        "type": "LPWSTR*",
+        "name": "id",
         "description": "Returned ID string.  This value must be freed by the caller by calling CoTaskMemFree."
       }
     ],
@@ -5500,8 +5500,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "IUnknown",
-        "name": "*pMFT",
+        "type": "IUnknown*",
+        "name": "pMFT",
         "description": "A pointer to the IUnknown interface of the Media Foundation transform (MFT) that represents the codec."
       },
       {
@@ -5512,14 +5512,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*verifier",
+        "type": "const BYTE*",
+        "name": "verifier",
         "description": "The address of a buffer that contains one of the following:  The class identifier (CLSID) of the MFT. A null-terminated wide-character string that contains the symbol link for the underlying hardware device. Include the size of the terminating null in the value of cbVerifier."
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*merit",
+        "type": "DWORD*",
+        "name": "merit",
         "description": "Receives the merit value."
       }
     ],
@@ -5559,8 +5559,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwPlaneSize",
+        "type": "DWORD*",
+        "name": "pdwPlaneSize",
         "description": "Receives the size of one frame, in bytes. If the format is compressed or is not recognized, this value is zero."
       }
     ],
@@ -5582,8 +5582,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFPluginControl",
-        "name": "**ppPluginControl",
+        "type": "IMFPluginControl**",
+        "name": "ppPluginControl",
         "description": "Receives a pointer to the IMFPluginControl interface. The caller must release the interface."
       }
     ],
@@ -5605,8 +5605,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IUnknown",
-        "name": "*punkObject",
+        "type": "IUnknown*",
+        "name": "punkObject",
         "description": "A pointer to the IUnknown interface of the object to query."
       },
       {
@@ -5623,8 +5623,8 @@
       },
       {
         "in_out": "",
-        "type": "LPVOID",
-        "name": "*ppvObject",
+        "type": "LPVOID*",
+        "name": "ppvObject",
         "description": "Receives the interface pointer. The caller must release the interface."
       }
     ],
@@ -5658,8 +5658,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LONG",
-        "name": "*pStride",
+        "type": "LONG*",
+        "name": "pStride",
         "description": "Receives the minimum surface stride, in pixels."
       }
     ],
@@ -5681,8 +5681,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PROPVARIANT",
-        "name": "*pPropVarMimeTypeArray",
+        "type": "PROPVARIANT*",
+        "name": "pPropVarMimeTypeArray",
         "description": "Pointer to a PROPVARIANT that receives the MIME types. Before calling this method, call PropVariantInit to initialize the PROPVARIANT. If the method succeeds, the PROPVARIANT contains an array of wide-character strings. The PROPVARIANT data type is VT_VECTOR | VT_LPWSTR. The caller must release the PROPVARIANT by calling PropVariantClear."
       }
     ],
@@ -5704,8 +5704,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PROPVARIANT",
-        "name": "*pPropVarSchemeArray",
+        "type": "PROPVARIANT*",
+        "name": "pPropVarSchemeArray",
         "description": "Pointer to a PROPVARIANT that receives the URL schemes. Before calling this method, call PropVariantInit to initialize the PROPVARIANT. If the method succeeds, the PROPVARIANT contains an array of wide-character strings. The PROPVARIANT data type is VT_VECTOR | VT_LPWSTR. The caller must release the PROPVARIANT by calling PropVariantClear."
       }
     ],
@@ -5727,8 +5727,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IMFSystemId",
-        "name": "**ppId",
+        "type": "IMFSystemId**",
+        "name": "ppId",
         "description": "Receives a pointer to the IMFSystemId interface."
       }
     ],
@@ -5766,8 +5766,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*Periodicity",
+        "type": "DWORD*",
+        "name": "Periodicity",
         "description": "Receives the timer interval, in milliseconds."
       }
     ],
@@ -5789,8 +5789,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFTopologyNode",
-        "name": "*pNode",
+        "type": "IMFTopologyNode*",
+        "name": "pNode",
         "description": "A pointer to the IMFTopologyNode interface."
       },
       {
@@ -5807,8 +5807,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFMediaType",
-        "name": "**ppType",
+        "type": "IMFMediaType**",
+        "name": "ppType",
         "description": "Receives a pointer to the IMFMediaType interface. The caller must release the interface."
       }
     ],
@@ -5830,8 +5830,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "MFVIDEOFORMAT",
-        "name": "*pVideoFormat",
+        "type": "const MFVIDEOFORMAT*",
+        "name": "pVideoFormat",
         "description": "Pointer to an MFVIDEOFORMAT structure."
       }
     ],
@@ -5865,8 +5865,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pcchClass",
+        "type": "DWORD*",
+        "name": "pcchClass",
         "description": "On input, specifies the size of the pwszClass buffer, in characters. On output, receives the required size of the buffer, in characters. The size includes the terminating null character."
       }
     ],
@@ -5894,8 +5894,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LONG",
-        "name": "*lPriority",
+        "type": "LONG*",
+        "name": "lPriority",
         "description": "Receives the relative thread priority."
       }
     ],
@@ -5958,8 +5958,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "char",
-        "name": "*pszFile",
+        "type": "char*",
+        "name": "pszFile",
         "description": "Reserved. Set to NULL."
       },
       {
@@ -5993,8 +5993,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*pv",
+        "type": "void*",
+        "name": "pv",
         "description": "Pointer to the memory to free."
       }
     ],
@@ -6016,8 +6016,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMFType",
+        "type": "IMFMediaType*",
+        "name": "pMFType",
         "description": "Pointer to the IMFMediaType interface of the media type to convert."
       },
       {
@@ -6028,8 +6028,8 @@
       },
       {
         "in_out": "",
-        "type": "AM_MEDIA_TYPE",
-        "name": "*pAMType",
+        "type": "AM_MEDIA_TYPE*",
+        "name": "pAMType",
         "description": "Pointer to an AM_MEDIA_TYPE structure. The function allocates memory for the format block. The caller must release the format block by calling CoTaskMemFree on the pbFormat member."
       }
     ],
@@ -6051,14 +6051,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface of the attribute store."
       },
       {
         "in_out": "_In_",
-        "type": "UINT8",
-        "name": "*pBuf",
+        "type": "const UINT8*",
+        "name": "pBuf",
         "description": "Pointer to the array that contains the initialization data."
       },
       {
@@ -6086,14 +6086,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMFType",
+        "type": "IMFMediaType*",
+        "name": "pMFType",
         "description": "Pointer to the IMFMediaType interface of the media type to initialize. To create the uninitialized media type object, call MFCreateMediaType."
       },
       {
-        "in_out": "",
-        "type": "AM_MEDIA_TYPE",
-        "name": "*pAMType",
+        "in_out": "const",
+        "type": "AM_MEDIA_TYPE*",
+        "name": "pAMType",
         "description": "Pointer to an AM_MEDIA_TYPE structure that describes the media type. The caller must fill in the structure members before calling this function."
       }
     ],
@@ -6115,14 +6115,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMFType",
+        "type": "IMFMediaType*",
+        "name": "pMFType",
         "description": "Pointer to the IMFMediaType interface of the media type to initialize. To create the uninitialized media type object, call MFCreateMediaType."
       },
       {
-        "in_out": "",
-        "type": "MFVIDEOFORMAT",
-        "name": "*pMFVF",
+        "in_out": "const",
+        "type": "MFVIDEOFORMAT*",
+        "name": "pMFVF",
         "description": "Pointer to an MFVIDEOFORMAT structure that describes the media type. The caller must fill in the structure members before calling this function."
       },
       {
@@ -6150,14 +6150,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMFType",
+        "type": "IMFMediaType*",
+        "name": "pMFType",
         "description": "Pointer to the IMFMediaType interface of the media type to initialize. To create the uninitialized media type object, call MFCreateMediaType."
       },
       {
-        "in_out": "",
-        "type": "MPEG1VIDEOINFO",
-        "name": "*pMP1VI",
+        "in_out": "const",
+        "type": "MPEG1VIDEOINFO*",
+        "name": "pMP1VI",
         "description": "Pointer to a MPEG1VIDEOINFO structure that describes the media type. The caller must fill in the structure members before calling this function."
       },
       {
@@ -6167,9 +6167,9 @@
         "description": "Size of the MPEG1VIDEOINFO structure, in bytes."
       },
       {
-        "in_out": "",
-        "type": "GUID",
-        "name": "*pSubtype",
+        "in_out": "const",
+        "type": "GUID*",
+        "name": "pSubtype",
         "description": "Pointer to a subtype GUID. This parameter can be NULL. If the subtype GUID is specified, the function uses it to set the media subtype. Otherwise, the function attempts to deduce the subtype from the biCompression field contained in the MPEG1VIDEOINFO structure."
       }
     ],
@@ -6191,14 +6191,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMFType",
+        "type": "IMFMediaType*",
+        "name": "pMFType",
         "description": "Pointer to the IMFMediaType interface of the media type to initialize. To create the uninitialized media type object, call MFCreateMediaType."
       },
       {
-        "in_out": "",
-        "type": "MPEG2VIDEOINFO",
-        "name": "*pMP2VI",
+        "in_out": "const",
+        "type": "MPEG2VIDEOINFO*",
+        "name": "pMP2VI",
         "description": "Pointer to a MPEG2VIDEOINFO structure that describes the media type. The caller must fill in the structure members before calling this function."
       },
       {
@@ -6208,9 +6208,9 @@
         "description": "Size of the MPEG2VIDEOINFO structure, in bytes."
       },
       {
-        "in_out": "",
-        "type": "GUID",
-        "name": "*pSubtype",
+        "in_out": "const",
+        "type": "GUID*",
+        "name": "pSubtype",
         "description": "Pointer to a subtype GUID. This parameter can be NULL. If the subtype GUID is specified, the function uses it to set the media subtype. Otherwise, the function attempts to deduce the subtype from the biCompression field contained in the MPEG2VIDEOINFO structure."
       }
     ],
@@ -6232,14 +6232,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMFType",
+        "type": "IMFMediaType*",
+        "name": "pMFType",
         "description": "Pointer to the IMFMediaType interface of the media type to initialize. To create the uninitialized media type object, call MFCreateMediaType."
       },
       {
-        "in_out": "",
-        "type": "VIDEOINFOHEADER",
-        "name": "*pVIH",
+        "in_out": "const",
+        "type": "VIDEOINFOHEADER*",
+        "name": "pVIH",
         "description": "Pointer to a VIDEOINFOHEADER structure that describes the media type. The caller must fill in the structure members before calling this function."
       },
       {
@@ -6249,9 +6249,9 @@
         "description": "Size of the VIDEOINFOHEADER structure, in bytes."
       },
       {
-        "in_out": "",
-        "type": "GUID",
-        "name": "*pSubtype",
+        "in_out": "const",
+        "type": "GUID*",
+        "name": "pSubtype",
         "description": "Pointer to a subtype GUID. This parameter can be NULL. If the subtype GUID is specified, the function uses it to set the media subtype. Otherwise, the function attempts to deduce the subtype from the biCompression field contained in the VIDEOINFOHEADER structure."
       }
     ],
@@ -6273,14 +6273,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMFType",
+        "type": "IMFMediaType*",
+        "name": "pMFType",
         "description": "Pointer to the IMFMediaType interface of the media type to initialize. To create the uninitialized media type object, call MFCreateMediaType."
       },
       {
-        "in_out": "",
-        "type": "VIDEOINFOHEADER2",
-        "name": "*pVIH2",
+        "in_out": "const",
+        "type": "VIDEOINFOHEADER2*",
+        "name": "pVIH2",
         "description": "Pointer to a VIDEOINFOHEADER2 structure that describes the media type. The caller must fill in the structure members before calling this function."
       },
       {
@@ -6290,9 +6290,9 @@
         "description": "Size of the VIDEOINFOHEADER2 structure, in bytes."
       },
       {
-        "in_out": "",
-        "type": "GUID",
-        "name": "*pSubtype",
+        "in_out": "const",
+        "type": "GUID*",
+        "name": "pSubtype",
         "description": "Pointer to a subtype GUID. This parameter can be NULL. If the subtype GUID is specified, the function uses it to set the media subtype. Otherwise, the function attempts to deduce the subtype from the biCompression field contained in the VIDEOINFOHEADER2 structure."
       }
     ],
@@ -6314,14 +6314,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pMFType",
+        "type": "IMFMediaType*",
+        "name": "pMFType",
         "description": "Pointer to the IMFMediaType interface of the media type to initialize. To create the uninitialized media type object, call MFCreateMediaType."
       },
       {
-        "in_out": "",
-        "type": "WAVEFORMATEX",
-        "name": "*pWaveFormat",
+        "in_out": "const",
+        "type": "WAVEFORMATEX*",
+        "name": "pWaveFormat",
         "description": "Pointer to a WAVEFORMATEX structure that describes the media type. The caller must fill in the structure members before calling this function."
       },
       {
@@ -6349,8 +6349,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "MFVIDEOFORMAT",
-        "name": "*pVideoFormat",
+        "type": "MFVIDEOFORMAT*",
+        "name": "pVideoFormat",
         "description": "A pointer to an MFVIDEOFORMAT structure. The function fills in the structure members based on the video format specified in the type parameter."
       },
       {
@@ -6378,8 +6378,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "MFVIDEOFORMAT",
-        "name": "*pVideoFormat",
+        "type": "MFVIDEOFORMAT*",
+        "name": "pVideoFormat",
         "description": "A pointer to an MFVIDEOFORMAT structure. The functions fills in the structure members with the format information."
       },
       {
@@ -6419,8 +6419,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFAsyncResult",
-        "name": "*pAsyncResult",
+        "type": "IMFAsyncResult*",
+        "name": "pAsyncResult",
         "description": "Pointer to the IMFAsyncResult interface. To create this object, call MFCreateAsyncResult."
       }
     ],
@@ -6448,8 +6448,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*isSupported",
+        "type": "BOOL*",
+        "name": "isSupported",
         "description": "TRUE if the hardware security processor is supported for the specified protection system; otherwise FALSE."
       }
     ],
@@ -6541,8 +6541,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFSignedLibrary",
-        "name": "**ppLib",
+        "type": "IMFSignedLibrary**",
+        "name": "ppLib",
         "description": "Receives a pointer to the IMFSignedLibrary interface for the library."
       }
     ],
@@ -6564,14 +6564,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pResetToken",
+        "type": "UINT*",
+        "name": "pResetToken",
         "description": "Receives a token that identifies this instance of the DXGI Device Manager. Use this token when calling IMFDXGIDeviceManager::ResetDevice.           This parameter can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFDXGIDeviceManager",
-        "name": "**ppManager",
+        "type": "IMFDXGIDeviceManager**",
+        "name": "ppManager",
         "description": "Receives a pointer to the IMFDXGIDeviceManager interface. The caller must release the interface."
       }
     ],
@@ -6637,14 +6637,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pdwTaskId",
+        "type": "DWORD*",
+        "name": "pdwTaskId",
         "description": "The MMCSS task identifier. On input, specify an existing MCCSS task group ID , or use the value zero to create a new task group. If the regular priority queue is being used (wszClass=\"\"), then NULL must be passed in. On output, receives the actual task group ID."
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pID",
+        "type": "DWORD*",
+        "name": "pID",
         "description": "Receives an identifier for the new work queue. Use this identifier when queuing work items."
       }
     ],
@@ -6753,8 +6753,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFPMediaPlayerCallback",
-        "name": "*pCallback",
+        "type": "IMFPMediaPlayerCallback*",
+        "name": "pCallback",
         "description": "Pointer to the IMFPMediaPlayerCallback interface of a callback object, implemented by the application. Use this interface to get event notifications from the MFPlay player object. This parameter can be NULL. If  the parameter is NULL, the application will not receive  event notifications from the player object."
       },
       {
@@ -6765,8 +6765,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IMFPMediaPlayer",
-        "name": "**ppMediaPlayer",
+        "type": "IMFPMediaPlayer**",
+        "name": "ppMediaPlayer",
         "description": "Receives a pointer to the IMFPMediaPlayer interface. The caller must release the interface. This parameter can be NULL. If this parameter is NULL, fStartPlayback must be TRUE and pwszURL cannot be NULL."
       }
     ],
@@ -6788,8 +6788,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pContext",
+        "type": "IUnknown*",
+        "name": "pContext",
         "description": "Pointer to the IUnknown interface, or NULL. This pointer is specified by the caller in the MFAddPeriodicCallback function."
       }
     ],
@@ -6823,14 +6823,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFAsyncResult",
-        "name": "*pResult",
+        "type": "IMFAsyncResult*",
+        "name": "pResult",
         "description": "A pointer to the IMFAsyncResult interface of an asynchronous result object. To create the result object, call MFCreateAsyncResult."
       },
       {
         "in_out": "_Out_",
-        "type": "MFWORKITEM_KEY",
-        "name": "*pKey",
+        "type": "MFWORKITEM_KEY*",
+        "name": "pKey",
         "description": "Receives a key that can be used to cancel the wait. To cancel the wait, call MFCancelWorkItem and pass this key in the Key parameter.  This parameter can be NULL."
       }
     ],
@@ -6858,14 +6858,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFAsyncCallback",
-        "name": "*pCallback",
+        "type": "IMFAsyncCallback*",
+        "name": "pCallback",
         "description": "A pointer to the IMFAsyncCallback interface. The caller must implement this interface."
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pState",
+        "type": "IUnknown*",
+        "name": "pState",
         "description": "A pointer to the IUnknown interface of a state object, defined by the caller. This parameter can be NULL. You can use this object to hold state information. The object is returned to the caller when the callback is invoked."
       }
     ],
@@ -6899,14 +6899,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFAsyncCallback",
-        "name": "*pCallback",
+        "type": "IMFAsyncCallback*",
+        "name": "pCallback",
         "description": "A pointer to the IMFAsyncCallback interface. The caller must implement this interface."
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pState",
+        "type": "IUnknown*",
+        "name": "pState",
         "description": "A pointer to the IUnknown interface of a state object, defined by the caller. This parameter can be NULL. You can use this object to hold state information. The object is returned to the caller when the callback is invoked."
       }
     ],
@@ -6934,8 +6934,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFAsyncResult",
-        "name": "*pResult",
+        "type": "IMFAsyncResult*",
+        "name": "pResult",
         "description": "A pointer to the IMFAsyncResult interface of an asynchronous result object. To create the result object, call MFCreateAsyncResult."
       }
     ],
@@ -6969,8 +6969,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFAsyncResult",
-        "name": "*pResult",
+        "type": "IMFAsyncResult*",
+        "name": "pResult",
         "description": "A pointer to the IMFAsyncResult interface of an asynchronous result object. To create the result object, call MFCreateAsyncResult."
       }
     ],
@@ -7004,8 +7004,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFActivate",
-        "name": "*pActivate",
+        "type": "IMFActivate*",
+        "name": "pActivate",
         "description": "A pointer to the IMFActivate interface of an activation object. The caller implements this interface. The IMFActivate::ActivateObject method of the activation object must create a byte-stream handler. The byte-stream handler exposes the IMFByteStreamHandler interface."
       }
     ],
@@ -7033,8 +7033,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFActivate",
-        "name": "*pActivate",
+        "type": "IMFActivate*",
+        "name": "pActivate",
         "description": "A pointer to the IMFActivate interface of an activation        object. The caller implements this interface. The        IMFActivate::ActivateObject        method of the activation object must create a scheme handler object. The scheme handler exposes the        IMFSchemeHandler interface."
       }
     ],
@@ -7062,8 +7062,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pdwTaskId",
+        "type": "DWORD*",
+        "name": "pdwTaskId",
         "description": "The MMCSS task identifier. On input, specify an existing  MCCSS task group ID, or use the value zero to create a new task group. On output, receives the actual task group ID."
       },
       {
@@ -7114,8 +7114,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFPresentationDescriptor",
-        "name": "*pPresentationDescriptor",
+        "type": "IMFPresentationDescriptor*",
+        "name": "pPresentationDescriptor",
         "description": "Pointer to the IMFPresentationDescriptor interface of a presentation descriptor. The presentation descriptor is created by the media source, and describes the presentation."
       }
     ],
@@ -7137,8 +7137,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFAttributes",
-        "name": "*pAttr",
+        "type": "IMFAttributes*",
+        "name": "pAttr",
         "description": "Pointer to the IMFAttributes interface of the attribute store."
       },
       {
@@ -7149,8 +7149,8 @@
       },
       {
         "in_out": "",
-        "type": "IStream",
-        "name": "*pStm",
+        "type": "IStream*",
+        "name": "pStm",
         "description": "Pointer to the IStream interface of the stream where the attributes are saved."
       }
     ],
@@ -7172,20 +7172,20 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFPresentationDescriptor",
-        "name": "*pPD",
+        "type": "IMFPresentationDescriptor*",
+        "name": "pPD",
         "description": "Pointer to the IMFPresentationDescriptor interface of the presentation descriptor to serialize."
       },
       {
         "in_out": "",
-        "type": "DWORD",
-        "name": "*pcbData",
+        "type": "DWORD*",
+        "name": "pcbData",
         "description": "Receives the size of the ppbData array, in bytes."
       },
       {
         "in_out": "",
-        "type": "BYTE",
-        "name": "**ppbData",
+        "type": "BYTE**",
+        "name": "ppbData",
         "description": "Receives a pointer to an array of bytes containing the serialized presentation descriptor. The caller must free the memory for the array by calling CoTaskMemFree."
       }
     ],
@@ -7207,8 +7207,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "A pointer to the IMFAttributes interface of the attribute store."
       },
       {
@@ -7248,8 +7248,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "A pointer to the IMFAttributes interface of the attribute store."
       },
       {
@@ -7289,8 +7289,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "A pointer to the IMFAttributes interface of the attribute store."
       },
       {
@@ -7330,8 +7330,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IUnknown",
-        "name": "*pUnk",
+        "type": "IUnknown*",
+        "name": "pUnk",
         "description": "Pointer to the IUnknown interface of the object."
       }
     ],
@@ -7394,32 +7394,32 @@
       },
       {
         "in_out": "_In_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "*pInputType",
+        "type": "MFT_REGISTER_TYPE_INFO*",
+        "name": "pInputType",
         "description": "Pointer to an MFT_REGISTER_TYPE_INFO structure that specifies an input media type to match.  This parameter can be NULL. If NULL, all input types are matched."
       },
       {
         "in_out": "_In_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "*pOutputType",
+        "type": "MFT_REGISTER_TYPE_INFO*",
+        "name": "pOutputType",
         "description": "Pointer to an MFT_REGISTER_TYPE_INFO structure that specifies an output media type to match. This parameter can be NULL.           If NULL, all output types are matched."
       },
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Reserved. Set to NULL. Note  Windows Vista and Windows Server 2008: This parameter can specify a pointer to the IMFAttributes interface of an attribute store. The MFTEnum function matches the attributes in this object against the attributes stored in the registry. (Registry attributes are specified in the pAttributes parameter of the MFTRegister function.) Only MFTs with matching attributes are returned in the enumeration results.   Note  Windows 7 and later: This parameter is ignored."
       },
       {
         "in_out": "_Out_",
-        "type": "CLSID",
-        "name": "**ppclsidMFT",
+        "type": "CLSID**",
+        "name": "ppclsidMFT",
         "description": "Receives a pointer to an array of CLSIDs. To create an MFT from this list, call CoCreateInstance with one of the CLSIDs. To get information about a particular MFT from its CLSID, call MFTGetInfo. The caller must free the memory for the array by calling CoTaskMemFree."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*pcMFTs",
+        "type": "UINT32*",
+        "name": "pcMFTs",
         "description": "Receives the number of elements in the ppclsidMFT array. The value can be zero."
       }
     ],
@@ -7453,32 +7453,32 @@
       },
       {
         "in_out": "_In_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "*pInputType",
+        "type": "const MFT_REGISTER_TYPE_INFO*",
+        "name": "pInputType",
         "description": "A pointer to an MFT_REGISTER_TYPE_INFO structure that specifies an input media type to match.  This parameter can be NULL. If NULL, all input types are matched."
       },
       {
         "in_out": "_In_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "*pOutputType",
+        "type": "const MFT_REGISTER_TYPE_INFO*",
+        "name": "pOutputType",
         "description": "A pointer to an MFT_REGISTER_TYPE_INFO structure that specifies an output media type to match. This parameter can be NULL. If NULL, all output types are matched."
       },
       {
         "in_out": "_In_opt_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "A pointer to an IMFAttributes interface that enables access to the standard attribute store."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFActivate",
-        "name": "***pppMFTActivate",
+        "type": "IMFActivate***",
+        "name": "pppMFTActivate",
         "description": "Receives an array of IMFActivate interface pointers. Each pointer represents an activation object for an MFT that matches the search criteria. The function allocates the memory for the array. The caller must release the pointers and call the CoTaskMemFree function to free the memory for the array."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*pnumMFTActivate",
+        "type": "UINT32*",
+        "name": "pnumMFTActivate",
         "description": "Receives the number of elements in the pppMFTActivate array. If no MFTs match the search criteria, this parameter receives the value zero."
       }
     ],
@@ -7512,26 +7512,26 @@
       },
       {
         "in_out": "_In_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "*pInputType",
+        "type": "const MFT_REGISTER_TYPE_INFO*",
+        "name": "pInputType",
         "description": "A pointer to an MFT_REGISTER_TYPE_INFO structure that specifies an input media type to match.  This parameter can be NULL. If NULL, all input types are matched."
       },
       {
         "in_out": "_In_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "*pOutputType",
+        "type": "const MFT_REGISTER_TYPE_INFO*",
+        "name": "pOutputType",
         "description": "A pointer to an MFT_REGISTER_TYPE_INFO structure that specifies an output media type to match. This parameter can be NULL. If NULL, all output types are matched."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFActivate",
-        "name": "***pppMFTActivate",
+        "type": "IMFActivate***",
+        "name": "pppMFTActivate",
         "description": "Receives an array of IMFActivate interface pointers. Each pointer represents an activation object for an MFT that matches the search criteria. The function allocates the memory for the array. The caller must release the pointers and call the CoTaskMemFree function to free the memory for the array."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*pcMFTActivate",
+        "type": "UINT32*",
+        "name": "pcMFTActivate",
         "description": "Receives the number of elements in the pppMFTActivate array. If no MFTs match the search criteria, this parameter receives the value zero."
       }
     ],
@@ -7559,38 +7559,38 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*pszName",
+        "type": "LPWSTR*",
+        "name": "pszName",
         "description": "Receives a pointer to a wide-character string containing the friendly name of the MFT. The caller must free the string by calling CoTaskMemFree. This parameter can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "**ppInputTypes",
+        "type": "MFT_REGISTER_TYPE_INFO**",
+        "name": "ppInputTypes",
         "description": "Receives a pointer to an array of MFT_REGISTER_TYPE_INFO structures. Each member of the array describes an input format that the MFT supports. The caller must free the array by calling CoTaskMemFree. This parameter can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*pcInputTypes",
+        "type": "UINT32*",
+        "name": "pcInputTypes",
         "description": "Receives the number of elements in the ppInputTypes array. If ppInputTypes is NULL, this parameter is ignored and can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "**ppOutputTypes",
+        "type": "MFT_REGISTER_TYPE_INFO**",
+        "name": "ppOutputTypes",
         "description": "Receives a pointer to an array of MFT_REGISTER_TYPE_INFO structures. Each member of the array describes an output format that the MFT supports. The caller must free the array by calling CoTaskMemFree. This parameter can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT32",
-        "name": "*pcOutputTypes",
+        "type": "UINT32*",
+        "name": "pcOutputTypes",
         "description": "Receives the number of elements in the ppOutputType array. If ppOutputTypes is NULL, this parameter is ignored and can be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFAttributes",
-        "name": "**ppAttributes",
+        "type": "IMFAttributes**",
+        "name": "ppAttributes",
         "description": "Receives a pointer to the IMFAttributes interface of an attribute store. The caller must release the interface. The attribute store might contain attributes that are stored in the registry for the specified MFT. (For more information, see MFTRegister.)  If no attributes are stored in the registry for this MFT, the attribute store is empty.  This parameter can be NULL."
       }
     ],
@@ -7624,14 +7624,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pCodecConfig",
+        "type": "IMFAttributes*",
+        "name": "pCodecConfig",
         "description": "A pointer to the IMFAttributes interface of an attribute store. The attribute store specifies the encoder configuration settings. This parameter can be NULL. The attribute store can hold any of the following attributes.  ValueMeaning  MFT_FIELDOFUSE_UNLOCK_Attribute   Set this attribute to unlock an encoder that has field-of-use descriptions.   MF_TRANSCODE_ENCODINGPROFILE   Specifies a device conformance profile for a Windows Media encoder.   MF_TRANSCODE_QUALITYVSSPEED   Sets the tradeoff between encoding quality and encoding speed."
       },
       {
         "in_out": "_Out_",
-        "type": "IMFCollection",
-        "name": "**ppAvailableTypes",
+        "type": "IMFCollection**",
+        "name": "ppAvailableTypes",
         "description": "Receives a pointer to the IMFCollection interface of a collection object that contains a list of preferred audio media types. The collection contains IMFMediaType pointers. The caller must release the interface pointer."
       }
     ],
@@ -7683,8 +7683,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "*pInputTypes",
+        "type": "MFT_REGISTER_TYPE_INFO*",
+        "name": "pInputTypes",
         "description": "Pointer to an array of MFT_REGISTER_TYPE_INFO structures. Each member of the array specifies an input format that the MFT supports.  This parameter can be NULL. This parameter can be NULL. However, if the parameter is NULL, the MFT will be enumerated only when an application specifies NULL for the desired input type."
       },
       {
@@ -7695,14 +7695,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "*pOutputTypes",
+        "type": "MFT_REGISTER_TYPE_INFO*",
+        "name": "pOutputTypes",
         "description": "Pointer to an array of MFT_REGISTER_TYPE_INFO structures. Each member of the array defines an output format that the MFT supports.  This parameter can be NULL. However, if the parameter is NULL, the MFT will be enumerated only when an application specifies NULL for the desired output type."
       },
       {
         "in_out": "_In_",
-        "type": "IMFAttributes",
-        "name": "*pAttributes",
+        "type": "IMFAttributes*",
+        "name": "pAttributes",
         "description": "Pointer to the IMFAttributes interface of an attribute store that contains additional registry information. This parameter can be NULL. If the parameter is non-NULL, the attributes are written to the registery as a byte array.       You can use the MFTGetInfo function to retrieve the attributes. The following attribute is defined for this parameter:  ValueMeaning  MFT_CODEC_MERIT_Attribute   Contains the merit value of a hardware codec. See Codec Merit."
       }
     ],
@@ -7724,8 +7724,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IClassFactory",
-        "name": "*pClassFactory",
+        "type": "IClassFactory*",
+        "name": "pClassFactory",
         "description": "A pointer to the IClassFactory interface of a class factory object. The class factory creates the MFT."
       },
       {
@@ -7754,8 +7754,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "*pInputTypes",
+        "type": "const MFT_REGISTER_TYPE_INFO*",
+        "name": "pInputTypes",
         "description": "A pointer to an array of MFT_REGISTER_TYPE_INFO structures. Each member of the array specifies an input format that the MFT supports. This parameter can be NULL if cInputTypes is zero."
       },
       {
@@ -7766,8 +7766,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "*pOutputTypes",
+        "type": "const MFT_REGISTER_TYPE_INFO*",
+        "name": "pOutputTypes",
         "description": "A pointer to an array of MFT_REGISTER_TYPE_INFO structures. Each member of the array defines an output format that the MFT supports. This parameter can be NULL if cOutputTypes is zero."
       }
     ],
@@ -7819,8 +7819,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "*pInputTypes",
+        "type": "const MFT_REGISTER_TYPE_INFO*",
+        "name": "pInputTypes",
         "description": "A pointer to an array of MFT_REGISTER_TYPE_INFO structures. Each member of the array specifies an input format that the MFT supports. This parameter can be NULL if cInputTypes is zero."
       },
       {
@@ -7831,8 +7831,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "MFT_REGISTER_TYPE_INFO",
-        "name": "*pOutputTypes",
+        "type": "const MFT_REGISTER_TYPE_INFO*",
+        "name": "pOutputTypes",
         "description": "A pointer to an array of MFT_REGISTER_TYPE_INFO structures. Each member of the array defines an output format that the MFT supports. This parameter can be NULL if cOutputTypes is zero."
       }
     ],
@@ -7877,8 +7877,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IClassFactory",
-        "name": "*pClassFactory",
+        "type": "IClassFactory*",
+        "name": "pClassFactory",
         "description": "A pointer to the IClassFactory interface of a class factory object. This parameter can be NULL."
       }
     ],
@@ -7994,14 +7994,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pWrap",
+        "type": "IMFMediaType*",
+        "name": "pWrap",
         "description": "Pointer to the IMFMediaType interface of the media type that was retrieved by MFWrapMediaType."
       },
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "**ppOrig",
+        "type": "IMFMediaType**",
+        "name": "ppOrig",
         "description": "Receives a pointer to the IMFMediaType interface of the original media type. The caller must release the interface."
       }
     ],
@@ -8023,8 +8023,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "*pOrig",
+        "type": "IMFMediaType*",
+        "name": "pOrig",
         "description": "A pointer to the IMFMediaType interface of the media type to wrap in a new media type."
       },
       {
@@ -8041,8 +8041,8 @@
       },
       {
         "in_out": "",
-        "type": "IMFMediaType",
-        "name": "**ppWrap",
+        "type": "IMFMediaType**",
+        "name": "ppWrap",
         "description": "Receives a pointer to the IMFMediaType interface of the new media type that wraps the original media type. The caller must release the interface."
       }
     ],
@@ -8070,8 +8070,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "UINT8",
-        "name": "*pBlock",
+        "type": "UINT8*",
+        "name": "pBlock",
         "description": "Pointer to a buffer that contains the format block."
       },
       {
@@ -8128,14 +8128,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IDirect3DDevice9Ex",
-        "name": "*pD3DDevice",
+        "type": "IDirect3DDevice9Ex*",
+        "name": "pD3DDevice",
         "description": "A pointer to the IDirect3DDevice9Ex interface of the Direct3D device."
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*phDevice",
+        "type": "HANDLE*",
+        "name": "phDevice",
         "description": "Receives a handle to the plug-in DXVA-HD device."
       }
     ],
@@ -8163,14 +8163,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*pVPGuid",
+        "type": "const GUID*",
+        "name": "pVPGuid",
         "description": "A GUID that identifies the video processor to create."
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*phVideoProcessor",
+        "type": "HANDLE*",
+        "name": "phVideoProcessor",
         "description": "Receives a handle to the software video processor."
       }
     ],
@@ -8244,8 +8244,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DXVAHD_BLT_STATE_PRIVATE_DATA",
-        "name": "*pData",
+        "type": "DXVAHD_BLT_STATE_PRIVATE_DATA*",
+        "name": "pData",
         "description": "A pointer to a DXVAHD_BLT_STATE_PRIVATE_DATA structure. On input, the Guid member specifies the private state to query. On output, the structure contains the state information."
       }
     ],
@@ -8273,8 +8273,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "DXVAHD_CONTENT_DESC",
-        "name": "*pContentDesc",
+        "type": "const DXVAHD_CONTENT_DESC*",
+        "name": "pContentDesc",
         "description": "A pointer to a DXVAHD_CONTENT_DESC structure that describes the video content."
       },
       {
@@ -8291,8 +8291,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DXVAHD_VPCAPS",
-        "name": "*pCaps",
+        "type": "DXVAHD_VPCAPS*",
+        "name": "pCaps",
         "description": "A pointer to an array of DXVAHD_VPCAPS structures. The function fills the structures with the capabilities of the plug-in video processors."
       }
     ],
@@ -8320,8 +8320,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*pVPGuid",
+        "type": "const GUID*",
+        "name": "pVPGuid",
         "description": "A GUID that identifies the video processor to query."
       },
       {
@@ -8332,8 +8332,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DXVAHD_CUSTOM_RATE_DATA",
-        "name": "*pRates",
+        "type": "DXVAHD_CUSTOM_RATE_DATA*",
+        "name": "pRates",
         "description": "A pointer to an array of DXVAHD_CUSTOM_RATE_DATA structures. The Count parameter specifies the number of elements in the array. The function fills the array with a list of custom rates."
       }
     ],
@@ -8361,8 +8361,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "DXVAHD_CONTENT_DESC",
-        "name": "*pContentDesc",
+        "type": "const DXVAHD_CONTENT_DESC*",
+        "name": "pContentDesc",
         "description": "A pointer to a DXVAHD_CONTENT_DESC structure that describes the video content."
       },
       {
@@ -8373,8 +8373,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DXVAHD_VPDEVCAPS",
-        "name": "*pCaps",
+        "type": "DXVAHD_VPDEVCAPS*",
+        "name": "pCaps",
         "description": "A pointer to a DXVAHD_VPDEVCAPS structure that receives the device capabilities."
       }
     ],
@@ -8408,8 +8408,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DXVAHD_FILTER_RANGE_DATA",
-        "name": "*pRange",
+        "type": "DXVAHD_FILTER_RANGE_DATA*",
+        "name": "pRange",
         "description": "A pointer to a DXVAHD_FILTER_RANGE_DATA structure. The function fills the structure with the range of values for the specified filter."
       }
     ],
@@ -8437,8 +8437,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "DXVAHD_CONTENT_DESC",
-        "name": "*pContentDesc",
+        "type": "const DXVAHD_CONTENT_DESC*",
+        "name": "pContentDesc",
         "description": "A pointer to a DXVAHD_CONTENT_DESC structure that describes the video content."
       },
       {
@@ -8455,8 +8455,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "D3DFORMAT",
-        "name": "*pFormats",
+        "type": "D3DFORMAT*",
+        "name": "pFormats",
         "description": "A pointer to an array of D3DFORMAT values. The Count parameter specifies the number of elements in the array. The method fills the array with a list of input formats."
       }
     ],
@@ -8484,8 +8484,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "DXVAHD_CONTENT_DESC",
-        "name": "*pContentDesc",
+        "type": "const DXVAHD_CONTENT_DESC*",
+        "name": "pContentDesc",
         "description": "A pointer to a DXVAHD_CONTENT_DESC structure that describes the video content."
       },
       {
@@ -8502,8 +8502,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "D3DFORMAT",
-        "name": "*pFormats",
+        "type": "D3DFORMAT*",
+        "name": "pFormats",
         "description": "A pointer to an array of D3DFORMAT values. The Count parameter specifies the number of elements in the array. The function fills the array with a list of output formats."
       }
     ],
@@ -8537,8 +8537,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DXVAHD_STREAM_STATE_PRIVATE_DATA",
-        "name": "*pData",
+        "type": "DXVAHD_STREAM_STATE_PRIVATE_DATA*",
+        "name": "pData",
         "description": "A pointer to a DXVAHD_STREAM_STATE_PRIVATE_DATA structure. On input, the Guid member specifies the private state to query. On output, the structure contains the state information."
       }
     ],
@@ -8566,8 +8566,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "*pCallbacks",
+        "type": "void*",
+        "name": "pCallbacks",
         "description": "A pointer to an uninitialized DXVAHDSW_CALLBACKS structure. The function fills this structure with pointers to the plug-in device's callback functions."
       }
     ],
@@ -8595,8 +8595,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "D3DFORMAT",
-        "name": "*pFormat",
+        "type": "D3DFORMAT*",
+        "name": "pFormat",
         "description": "A pointer to a D3DFORMAT value. On input, specifies the surface format that is requested by the application. On output, specifies the private surface format that the plug-in device proposes."
       }
     ],
@@ -8636,8 +8636,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*pData",
+        "type": "const void*",
+        "name": "pData",
         "description": "A pointer to a buffer that contains the state data."
       }
     ],
@@ -8683,8 +8683,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*pData",
+        "type": "const void*",
+        "name": "pData",
         "description": "A pointer to a buffer that contains the state data."
       }
     ],
@@ -8712,8 +8712,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IDirect3DSurface9",
-        "name": "*pOutputSurface",
+        "type": "IDirect3DSurface9*",
+        "name": "pOutputSurface",
         "description": "A pointer to the IDirect3DSurface9 interface of a Direct3D surface that receives the blit."
       },
       {
@@ -8730,8 +8730,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "DXVAHD_STREAM_DATA",
-        "name": "*pStreams",
+        "type": "const DXVAHD_STREAM_DATA*",
+        "name": "pStreams",
         "description": "A pointer to an array of DXVAHD_STREAM_DATA structures that contain information about the input streams. The number of elements in the array is given in the StreamCount parameter."
       }
     ],

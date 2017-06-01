@@ -68,4 +68,4 @@ Because it's more manageable
 
 * Why are JSON files pretty printed?
 
-Convenient for search
+Convenient for search and diffing

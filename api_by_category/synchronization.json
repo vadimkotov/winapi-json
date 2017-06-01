@@ -879,8 +879,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "LPVOID",
-        "name": "*lpContext",
+        "type": "LPVOID*",
+        "name": "lpContext",
         "description": "An optional parameter that receives the data stored with the one-time initialization structure upon success. The low-order INIT_ONCE_CTX_RESERVED_BITS bits of the data are always zero."
       }
     ],
@@ -955,8 +955,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "LPVOID",
-        "name": "*Context",
+        "type": "LPVOID*",
+        "name": "Context",
         "description": "A parameter that receives data stored with the one-time initialization structure upon success. The low-order INIT_ONCE_CTX_RESERVED_BITS bits of the data are always zero."
       }
     ],
@@ -1001,8 +1001,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1030,8 +1030,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1059,8 +1059,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1088,8 +1088,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1117,8 +1117,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1146,8 +1146,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1175,8 +1175,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1204,8 +1204,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1233,8 +1233,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1262,8 +1262,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1291,8 +1291,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1320,8 +1320,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Value",
+        "type": "LONG volatile*",
+        "name": "Value",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1349,8 +1349,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Destination",
+        "type": "char volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1378,8 +1378,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Destination",
+        "type": "char volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1407,8 +1407,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Destination",
+        "type": "char volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1436,8 +1436,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Value",
+        "type": "char volatile*",
+        "name": "Value",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1465,8 +1465,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SHORT volatile",
-        "name": "*Destination",
+        "type": "SHORT volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1494,8 +1494,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SHORT volatile",
-        "name": "*Destination",
+        "type": "SHORT volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1523,8 +1523,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SHORT volatile",
-        "name": "*Destination",
+        "type": "SHORT volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1552,8 +1552,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Value",
+        "type": "short volatile*",
+        "name": "Value",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1581,8 +1581,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1610,8 +1610,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1639,8 +1639,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1668,8 +1668,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Value",
+        "type": "LONGLONG volatile*",
+        "name": "Value",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -1697,8 +1697,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Base",
+        "type": "LONG volatile*",
+        "name": "Base",
         "description": "A pointer to a variable."
       },
       {
@@ -1726,8 +1726,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG64 volatile",
-        "name": "*Base",
+        "type": "LONG64 volatile*",
+        "name": "Base",
         "description": "A pointer to a variable."
       },
       {
@@ -1871,8 +1871,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "LONG volatile",
-        "name": "*Base",
+        "type": "LONG volatile*",
+        "name": "Base",
         "description": "A pointer to a variable."
       },
       {
@@ -1900,8 +1900,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "LONG64 volatile",
-        "name": "*Base",
+        "type": "LONG64 volatile*",
+        "name": "Base",
         "description": "A pointer to a variable."
       },
       {
@@ -1929,8 +1929,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "LONG volatile",
-        "name": "*Base",
+        "type": "LONG volatile*",
+        "name": "Base",
         "description": "A pointer to a variable."
       },
       {
@@ -1958,8 +1958,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG64 volatile",
-        "name": "*Destination",
+        "type": "LONG64 volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -1999,8 +1999,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG64 volatile",
-        "name": "*Destination",
+        "type": "LONG64 volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2040,8 +2040,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG64 volatile",
-        "name": "*Destination",
+        "type": "LONG64 volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2081,8 +2081,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2116,8 +2116,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2151,8 +2151,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2186,8 +2186,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2221,8 +2221,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2256,8 +2256,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2291,8 +2291,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2326,8 +2326,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2361,8 +2361,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Destination",
+        "type": "short volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2396,8 +2396,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Destination",
+        "type": "short volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2431,8 +2431,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Destination",
+        "type": "short volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2466,8 +2466,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Destination",
+        "type": "short volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value."
       },
       {
@@ -2501,8 +2501,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the destination value.  This parameter is an array of two 64-bit integers considered as a 128-bit field."
       },
       {
@@ -2519,8 +2519,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG",
-        "name": "*ComparandResult",
+        "type": "LONGLONG*",
+        "name": "ComparandResult",
         "description": "The value to compare to. This parameter is an array of two 64-bit integers considered as a 128-bit field."
       }
     ],
@@ -2542,8 +2542,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "PVOID volatile",
-        "name": "*Destination",
+        "type": "PVOID volatile*",
+        "name": "Destination",
         "description": "A pointer to a pointer to the destination value."
       },
       {
@@ -2577,8 +2577,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "PVOID volatile",
-        "name": "*Destination",
+        "type": "PVOID volatile*",
+        "name": "Destination",
         "description": "A pointer to a pointer to the destination value."
       },
       {
@@ -2612,8 +2612,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "PVOID volatile",
-        "name": "*Destination",
+        "type": "PVOID volatile*",
+        "name": "Destination",
         "description": "A pointer to a pointer to the destination value."
       },
       {
@@ -2647,20 +2647,20 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "void volatile",
-        "name": "*Destination",
+        "type": "void volatile*",
+        "name": "Destination",
         "description": "A pointer to a pointer to the destination value."
       },
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*Exchange",
+        "type": "void*",
+        "name": "Exchange",
         "description": "The exchange value."
       },
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*Comparand",
+        "type": "void*",
+        "name": "Comparand",
         "description": "The value to compare to Destination."
       }
     ],
@@ -2682,8 +2682,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be decremented."
       }
     ],
@@ -2705,8 +2705,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be decremented."
       }
     ],
@@ -2728,8 +2728,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be decremented."
       }
     ],
@@ -2751,8 +2751,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be decremented."
       }
     ],
@@ -2774,8 +2774,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Addend",
+        "type": "short volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be decremented."
       }
     ],
@@ -2797,8 +2797,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Addend",
+        "type": "short volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be decremented."
       }
     ],
@@ -2820,8 +2820,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Addend",
+        "type": "short volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be decremented."
       }
     ],
@@ -2843,8 +2843,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Addend",
+        "type": "short volatile*",
+        "name": "Addend",
         "description": ""
       }
     ],
@@ -2866,8 +2866,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be decremented."
       }
     ],
@@ -2889,8 +2889,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be decremented."
       }
     ],
@@ -2912,8 +2912,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be decremented."
       }
     ],
@@ -2935,8 +2935,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be decremented."
       }
     ],
@@ -2958,8 +2958,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Target",
+        "type": "LONG volatile*",
+        "name": "Target",
         "description": "A pointer to the value to be exchanged. The function sets this variable to Value, and returns its prior value."
       },
       {
@@ -2987,8 +2987,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Target",
+        "type": "LONG volatile*",
+        "name": "Target",
         "description": "A pointer to the value to be exchanged. The function sets this variable to Value, and returns its prior value."
       },
       {
@@ -3016,8 +3016,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Target",
+        "type": "LONG volatile*",
+        "name": "Target",
         "description": "A pointer to the value to be exchanged. The function sets this variable to Value, and returns its prior value."
       },
       {
@@ -3045,8 +3045,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Target",
+        "type": "char volatile*",
+        "name": "Target",
         "description": "A pointer to the value to be exchanged. The function sets this variable to Value, and returns its prior value."
       },
       {
@@ -3074,8 +3074,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SHORT volatile",
-        "name": "*Destination",
+        "type": "SHORT volatile*",
+        "name": "Destination",
         "description": "A pointer to the value to be exchanged. The function sets this variable to ExChange, and returns its prior value."
       },
       {
@@ -3103,8 +3103,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Target",
+        "type": "short volatile*",
+        "name": "Target",
         "description": "A pointer to the value to be exchanged. The function sets this variable to Value, and returns its prior value."
       },
       {
@@ -3132,8 +3132,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Target",
+        "type": "short volatile*",
+        "name": "Target",
         "description": "A pointer to the value to be exchanged. The function sets this variable to ExChange, and returns its prior value."
       },
       {
@@ -3161,8 +3161,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Target",
+        "type": "LONGLONG volatile*",
+        "name": "Target",
         "description": "A pointer to the value to be exchanged. The function sets this variable to Value, and returns its prior value."
       },
       {
@@ -3219,8 +3219,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Target",
+        "type": "LONGLONG volatile*",
+        "name": "Target",
         "description": "A pointer to the value to be exchanged. The function sets this variable to Value, and returns its prior value."
       },
       {
@@ -3248,8 +3248,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "PVOID volatile",
-        "name": "*Target",
+        "type": "PVOID volatile*",
+        "name": "Target",
         "description": "A pointer to the address to exchange. The function sets the  address pointed to by the Target parameter (*Target) to the address that is the value of the Value parameter, and returns the prior value of the Target parameter."
       },
       {
@@ -3277,8 +3277,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "PVOID volatile",
-        "name": "*Target",
+        "type": "PVOID volatile*",
+        "name": "Target",
         "description": "A pointer to the address to exchange. The function sets the address pointed to by the Target parameter (*Target) to the address that is the value of the Value parameter, and returns the prior value of the Target parameter."
       },
       {
@@ -3306,14 +3306,14 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "void volatile",
-        "name": "*Target",
+        "type": "void volatile*",
+        "name": "Target",
         "description": "A pointer to the address to exchange. The function sets the  address pointed to by the Target parameter (*Target) to the address that is the value of the Value parameter, and returns the prior value of the Target parameter."
       },
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*Value",
+        "type": "void*",
+        "name": "Value",
         "description": "The address to be exchanged with the address pointed to by the Target parameter (*Target)."
       }
     ],
@@ -3335,8 +3335,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "unsigned long volatile",
-        "name": "*Addend",
+        "type": "unsigned long volatile*",
+        "name": "Addend",
         "description": "A pointer to a variable. The value of this variable is replaced with the result of the operation."
       },
       {
@@ -3364,8 +3364,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to a variable. The value of this variable will be replaced with the result of the operation."
       },
       {
@@ -3393,8 +3393,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to a variable. The value of this variable will be replaced with the result of the operation."
       },
       {
@@ -3422,8 +3422,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to a variable. The value of this variable will be replaced with the result of the operation."
       },
       {
@@ -3451,8 +3451,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to a variable. The value of this variable will be replaced with the result of the operation."
       },
       {
@@ -3480,8 +3480,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to a variable. The value of this variable will be replaced with the result of the operation."
       },
       {
@@ -3509,8 +3509,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to a variable. The value of this variable will be replaced with the result of the operation."
       },
       {
@@ -3538,8 +3538,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to a variable. The value of this variable will be replaced with the result of the operation."
       },
       {
@@ -3567,8 +3567,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to a variable. The value of this variable will be replaced with the result of the operation."
       },
       {
@@ -3596,8 +3596,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be incremented."
       }
     ],
@@ -3619,8 +3619,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be incremented."
       }
     ],
@@ -3642,8 +3642,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be incremented."
       }
     ],
@@ -3665,8 +3665,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Addend",
+        "type": "LONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be incremented."
       }
     ],
@@ -3688,8 +3688,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Addend",
+        "type": "short volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be incremented."
       }
     ],
@@ -3711,8 +3711,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Addend",
+        "type": "short volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be incremented."
       }
     ],
@@ -3734,8 +3734,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Addend",
+        "type": "short volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be incremented."
       }
     ],
@@ -3757,8 +3757,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Addend",
+        "type": "short volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be incremented."
       }
     ],
@@ -3780,8 +3780,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be incremented."
       }
     ],
@@ -3803,8 +3803,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be incremented."
       }
     ],
@@ -3826,8 +3826,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be incremented."
       }
     ],
@@ -3849,8 +3849,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Addend",
+        "type": "LONGLONG volatile*",
+        "name": "Addend",
         "description": "A pointer to the variable to be incremented."
       }
     ],
@@ -3872,8 +3872,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -3901,8 +3901,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -3930,8 +3930,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -3959,8 +3959,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Value",
+        "type": "LONG volatile*",
+        "name": "Value",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -3988,8 +3988,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Destination",
+        "type": "char volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4017,8 +4017,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Destination",
+        "type": "char volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4046,8 +4046,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Destination",
+        "type": "char volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4075,8 +4075,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Value",
+        "type": "char volatile*",
+        "name": "Value",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4104,8 +4104,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SHORT volatile",
-        "name": "*Destination",
+        "type": "SHORT volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4133,8 +4133,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SHORT volatile",
-        "name": "*Destination",
+        "type": "SHORT volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4162,8 +4162,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SHORT volatile",
-        "name": "*Destination",
+        "type": "SHORT volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4191,8 +4191,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Value",
+        "type": "short volatile*",
+        "name": "Value",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4220,8 +4220,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4249,8 +4249,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4278,8 +4278,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4307,8 +4307,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Value",
+        "type": "LONGLONG volatile*",
+        "name": "Value",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4336,8 +4336,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4365,8 +4365,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4394,8 +4394,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Destination",
+        "type": "LONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4423,8 +4423,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONG volatile",
-        "name": "*Value",
+        "type": "LONG volatile*",
+        "name": "Value",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4452,8 +4452,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Destination",
+        "type": "char volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4481,8 +4481,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Destination",
+        "type": "char volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4510,8 +4510,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Destination",
+        "type": "char volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4539,8 +4539,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "char volatile",
-        "name": "*Value",
+        "type": "char volatile*",
+        "name": "Value",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4568,8 +4568,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SHORT volatile",
-        "name": "*Destination",
+        "type": "SHORT volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4597,8 +4597,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SHORT volatile",
-        "name": "*Destination",
+        "type": "SHORT volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4626,8 +4626,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "SHORT volatile",
-        "name": "*Destination",
+        "type": "SHORT volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4655,8 +4655,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "short volatile",
-        "name": "*Value",
+        "type": "short volatile*",
+        "name": "Value",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4684,8 +4684,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4713,8 +4713,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4742,8 +4742,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Destination",
+        "type": "LONGLONG volatile*",
+        "name": "Destination",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4771,8 +4771,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "LONGLONG volatile",
-        "name": "*Value",
+        "type": "LONGLONG volatile*",
+        "name": "Value",
         "description": "A pointer to the first operand. This value will be replaced with the result of the operation."
       },
       {
@@ -4934,8 +4934,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "HANDLE",
-        "name": "*BoundaryDescriptor",
+        "type": "HANDLE*",
+        "name": "BoundaryDescriptor",
         "description": "A handle to the boundary descriptor. The CreateBoundaryDescriptor function returns this handle."
       },
       {
@@ -4963,8 +4963,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "HANDLE",
-        "name": "*BoundaryDescriptor",
+        "type": "HANDLE*",
+        "name": "BoundaryDescriptor",
         "description": "A handle to the boundary descriptor. The CreateBoundaryDescriptor function returns this handle."
       },
       {
@@ -5944,8 +5944,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const HANDLE",
-        "name": "*pHandles",
+        "type": "const HANDLE*",
+        "name": "pHandles",
         "description": "An array of object handles. For a list of the object types whose handles can be specified, see the following Remarks section. The array can contain handles of objects of different types. It may not contain multiple copies of the same handle.     If one of these handles is closed while the wait is still pending, the function's behavior is undefined. The handles must have the SYNCHRONIZE access right. For more information, see  Standard Access Rights."
       },
       {
@@ -5991,8 +5991,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const HANDLE",
-        "name": "*pHandles",
+        "type": "const HANDLE*",
+        "name": "pHandles",
         "description": "An array of object handles. For a list of the object types whose handles you can specify, see the Remarks section later in this topic. The array can contain handles to multiple types of objects. It may not contain multiple copies of the same handle.     If one of these handles is closed while the wait is still pending, the function's behavior is undefined. The handles must have the SYNCHRONIZE access right. For more information, see  Standard Access Rights."
       },
       {
@@ -6102,8 +6102,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const HANDLE",
-        "name": "*lpHandles",
+        "type": "const HANDLE*",
+        "name": "lpHandles",
         "description": "An array of object handles. For a list of the object types whose handles can be specified, see the following Remarks section. The array can contain handles to objects of different types. It may not contain multiple copies of the same handle. If one of these handles is closed while the wait is still pending, the function's behavior is undefined. The handles must have the SYNCHRONIZE access right. For more information, see  Standard Access Rights."
       },
       {
@@ -6143,8 +6143,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const HANDLE",
-        "name": "*lpHandles",
+        "type": "const HANDLE*",
+        "name": "lpHandles",
         "description": "An array of object handles. For a list of the object types whose handles can be specified, see the following Remarks section. The array can contain handles of objects of different types. It may not contain multiple copies of the same handle.     If one of these handles is closed while the wait is still pending, the function's behavior is undefined. The handles must have the SYNCHRONIZE access right. For more information, see  Standard Access Rights."
       },
       {
@@ -6248,8 +6248,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "VOID volatile",
-        "name": "*Address",
+        "type": "VOID volatile*",
+        "name": "Address",
         "description": "The address on which to wait. If the value at Address differs from the value at CompareAddress, the function returns immediately. If the values are the same, the function does not return until another thread signals that the value at Address has changed by calling WakeByAddressSingle or WakeByAddressAll or the timeout elapses, whichever comes first."
       },
       {
@@ -6504,8 +6504,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const LARGE_INTEGER",
-        "name": "*pDueTime",
+        "type": "const LARGE_INTEGER*",
+        "name": "pDueTime",
         "description": "The time after which the state of the timer is to be set to signaled, in 100 nanosecond intervals. Use the format described by the  FILETIME structure. Positive values indicate absolute time. Be sure to use a UTC-based absolute time, as the system uses UTC-based time internally. Negative values indicate relative time. The actual timer accuracy depends on the capability of your hardware. For more information about UTC-based time, see  System Time."
       },
       {
@@ -6557,8 +6557,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const LARGE_INTEGER",
-        "name": "*lpDueTime",
+        "type": "const LARGE_INTEGER*",
+        "name": "lpDueTime",
         "description": "The time after which the state of the timer is to be set to signaled, in 100 nanosecond intervals. Use the format described by the  FILETIME structure. Positive values indicate absolute time. Be sure to use a UTC-based absolute time, as the system uses UTC-based time internally. Negative values indicate relative time. The actual timer accuracy depends on the capability of your hardware. For more information about UTC-based time, see  System Time."
       },
       {

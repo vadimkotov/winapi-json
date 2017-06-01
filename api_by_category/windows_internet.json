@@ -536,8 +536,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "GROUPID",
-        "name": "*lpGroupId",
+        "type": "GROUPID*",
+        "name": "lpGroupId",
         "description": "Pointer to the ID of the first cache group that matches the search criteria."
       },
       {
@@ -659,8 +659,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "GROUPID",
-        "name": "*lpGroupId",
+        "type": "GROUPID*",
+        "name": "lpGroupId",
         "description": "Pointer to a variable that receives the cache group identifier."
       },
       {
@@ -718,8 +718,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HINTERNET",
-        "name": "*phFtpCommand",
+        "type": "HINTERNET*",
+        "name": "phFtpCommand",
         "description": "A pointer to a handle that is created if a valid data socket is opened. The  fExpectResponse parameter must be set to TRUE for  phFtpCommand to be filled."
       }
     ],
@@ -1697,8 +1697,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "LPCTSTR",
-        "name": "*lplpszAcceptTypes",
+        "type": "LPCTSTR*",
+        "name": "lplpszAcceptTypes",
         "description": "A pointer to a null-terminated array of strings that indicates media types accepted by the client. ..."
       },
       {
@@ -2329,8 +2329,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD_PTR",
-        "name": "*lpdwConnection",
+        "type": "DWORD_PTR*",
+        "name": "lpdwConnection",
         "description": "Pointer to a variable that specifies the connection number. This number is a unique indentifier for the connection that can be used in other functions, such as InternetHangUp."
       },
       {
@@ -2382,8 +2382,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "LPVOID",
-        "name": "*lppvData",
+        "type": "LPVOID*",
+        "name": "lppvData",
         "description": "Pointer  to the address of a data structure. The structure can be different for each error that needs to be handled."
       }
     ],
@@ -2657,8 +2657,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPSTR",
-        "name": "*lplpszProxyHostName",
+        "type": "LPSTR*",
+        "name": "lplpszProxyHostName",
         "description": "A pointer to the address of a buffer that receives the URL of the proxy to use in an HTTP request for the specified resource. The application is responsible for freeing this string."
       },
       {
@@ -2779,8 +2779,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*lphLockReqHandle",
+        "type": "HANDLE*",
+        "name": "lphLockReqHandle",
         "description": "Pointer to a handle that receives the lock request handle."
       }
     ],
@@ -3312,8 +3312,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const SYSTEMTIME",
-        "name": "*pst",
+        "type": "const SYSTEMTIME*",
+        "name": "pst",
         "description": "Pointer to a  SYSTEMTIME structure that contains the date and time to format."
       },
       {
@@ -3359,8 +3359,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "SYSTEMTIME",
-        "name": "*pst",
+        "type": "SYSTEMTIME*",
+        "name": "pst",
         "description": "Pointer to a  SYSTEMTIME structure that receives the converted time."
       },
       {
@@ -3831,14 +3831,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "unsigned long",
-        "name": "*pcSiteNameSize",
+        "type": "unsigned long*",
+        "name": "pcSiteNameSize",
         "description": "A pointer to an unsigned long that specifies the size of the pcSiteNameSize parameter provided to the InternetEnumPerSiteCookieDecision function when it is called. When InternetEnumPerSiteCookieDecision returns, pcSiteNameSize receives the actual length of the domain string returned in pszSiteName."
       },
       {
         "in_out": "_Out_",
-        "type": "unsigned long",
-        "name": "*pdwDecision",
+        "type": "unsigned long*",
+        "name": "pdwDecision",
         "description": "Pointer to an unsigned long that receives the InternetCookieState enumeration value corresponding to pszSiteName."
       },
       {
@@ -3872,8 +3872,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "unsigned long",
-        "name": "*pResult",
+        "type": "unsigned long*",
+        "name": "pResult",
         "description": "A pointer to an unsigned long that contains one of the InternetCookieState enumeration values."
       }
     ],
@@ -3942,8 +3942,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "LPWSTR",
-        "name": "*pszBuffer",
+        "type": "LPWSTR*",
+        "name": "pszBuffer",
         "description": "An  LPWSTR that points to a buffer containing a LPCWSTR representing a string version of the pdwTemplate or a customized string if the pdwTemplate is set to PRIVACY_TEMPLATE_CUSTOM. See PrivacySetZonePreferenceW for a description of a customized privacy preferences string."
       },
       {

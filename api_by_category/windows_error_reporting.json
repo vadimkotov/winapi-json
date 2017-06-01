@@ -44,14 +44,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "PWER_RUNTIME_EXCEPTION_INFORMATION",
+        "type": "const PWER_RUNTIME_EXCEPTION_INFORMATION",
         "name": "pExceptionInformation",
         "description": "A WER_RUNTIME_EXCEPTION_INFORMATION structure that contains the exception information. Use the information to determine whether you want to claim the crash."
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pbOwnershipClaimed",
+        "type": "BOOL*",
+        "name": "pbOwnershipClaimed",
         "description": "Set to TRUE if the exception handler is claiming this crash; otherwise, FALSE. If you set this parameter to FALSE, do not set the rest of the out parameters."
       },
       {
@@ -97,7 +97,7 @@
       },
       {
         "in_out": "_In_",
-        "type": "PWER_RUNTIME_EXCEPTION_INFORMATION",
+        "type": "const PWER_RUNTIME_EXCEPTION_INFORMATION",
         "name": "pExceptionInformation",
         "description": "A WER_RUNTIME_EXCEPTION_INFORMATION structure that contains the exception information."
       },
@@ -150,7 +150,7 @@
       },
       {
         "in_out": "_In_",
-        "type": "PWER_RUNTIME_EXCEPTION_INFORMATION",
+        "type": "const PWER_RUNTIME_EXCEPTION_INFORMATION",
         "name": "pExceptionInformation",
         "description": "A WER_RUNTIME_EXCEPTION_INFORMATION structure that contains the exception information."
       },
@@ -721,8 +721,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HREPORT",
-        "name": "*phReportHandle",
+        "type": "HREPORT*",
+        "name": "phReportHandle",
         "description": "A handle to the report. If the function fails, this handle is NULL."
       }
     ],

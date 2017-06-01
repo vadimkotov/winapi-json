@@ -180,8 +180,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HKL",
-        "name": "*lpList",
+        "type": "HKL*",
+        "name": "lpList",
         "description": "Type: HKL* A pointer to the buffer that receives the array of input locale identifiers."
       }
     ],
@@ -626,8 +626,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "BYTE",
-        "name": "*lpKeyState",
+        "type": "const BYTE*",
+        "name": "lpKeyState",
         "description": "Type: const BYTE* A pointer to a 256-byte array that contains the current keyboard state. Each element (byte) in the array contains the state of one key. If the high-order bit of a byte is set, the key is down (pressed).  The low bit, if set, indicates that the key is toggled on. In this function, only the toggle bit of the CAPS LOCK key is relevant. The toggle state of the NUM LOCK and SCROLL LOCK keys is ignored."
       },
       {
@@ -673,8 +673,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "BYTE",
-        "name": "*lpKeyState",
+        "type": "const BYTE*",
+        "name": "lpKeyState",
         "description": "Type: const BYTE* A pointer to a 256-byte array that contains the current keyboard state. Each element (byte) in the array contains the state of one key. If the high-order bit of a byte is set, the key is down (pressed). The low bit, if set, indicates that the key is toggled on. In this function, only the toggle bit of the CAPS LOCK key is relevant. The toggle state of the NUM LOCK and SCOLL LOCK keys is ignored."
       },
       {
@@ -726,8 +726,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "BYTE",
-        "name": "*lpKeyState",
+        "type": "const BYTE*",
+        "name": "lpKeyState",
         "description": "Type: const BYTE* A pointer to a 256-byte array that contains the current keyboard state. Each element (byte) in the array contains the state of one key. If the high-order bit of a byte is set, the key is down."
       },
       {
@@ -779,8 +779,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*lpKeyState",
+        "type": "const BYTE*",
+        "name": "lpKeyState",
         "description": "Type: const BYTE* A pointer to a 256-byte array that contains the current keyboard state. Each element (byte) in the array contains the state of one key. If the high-order bit of a byte is set, the key is down."
       },
       {
@@ -987,8 +987,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "MSG",
-        "name": "*lpMsg",
+        "type": "const MSG*",
+        "name": "lpMsg",
         "description": "Type: const MSG* A pointer to an MSG structure that contains message information retrieved from the calling thread's message queue by using the GetMessage or PeekMessage function."
       }
     ],

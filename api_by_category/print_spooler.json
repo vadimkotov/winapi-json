@@ -775,8 +775,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "LPTSTR",
-        "name": "*pName",
+        "type": "LPTSTR*",
+        "name": "pName",
         "description": "A pointer to a null-terminated string that specifies the name of the server on which the printer should be installed. If this string is NULL, the printer is installed locally."
       },
       {
@@ -1905,8 +1905,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "LPVOID",
-        "name": "*ppPrinterNotifyInfo",
+        "type": "LPVOID*",
+        "name": "ppPrinterNotifyInfo",
         "description": "A pointer to a pointer variable that receives a pointer to a system-allocated, read-only buffer. Call the FreePrinterNotifyInfo function to free the buffer when you are finished with it. This parameter can be NULL if no information is required. The buffer contains a PRINTER_NOTIFY_INFO structure, which contains an array of PRINTER_NOTIFY_INFO_DATA structures. Each element of the array contains information about one of the fields specified in the pPrinterNotifyOptions parameter of the FindFirstPrinterChangeNotification call. Typically, the function provides data only for the fields that changed to cause the most recent notification. However, if the structure pointed to by the pPrinterNotifyOptions parameter specifies PRINTER_NOTIFY_OPTIONS_REFRESH, the function provides data for all monitored fields. If the PRINTER_NOTIFY_INFO_DISCARDED bit is set in the Flags member of the PRINTER_NOTIFY_INFO structure, an overflow or error occurred, and notifications may have been lost. In this case, no additional notifications will be sent until you make a second FindNextPrinterChangeNotification call that specifies PRINTER_NOTIFY_OPTIONS_REFRESH."
       }
     ],
@@ -2226,8 +2226,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PRINT_EXECUTION_DATA",
-        "name": "*pData",
+        "type": "PRINT_EXECUTION_DATA*",
+        "name": "pData",
         "description": "A pointer to a variable that receives the address of the PRINT_EXECUTION_DATA structure."
       }
     ],

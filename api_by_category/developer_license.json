@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "FILETIME",
-        "name": "*pExpiration",
+        "type": "FILETIME*",
+        "name": "pExpiration",
         "description": "Indicates when the developer license expires."
       }
     ],
@@ -44,8 +44,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "FILETIME",
-        "name": "*pExpiration",
+        "type": "FILETIME*",
+        "name": "pExpiration",
         "description": "Indicates when the developer license expires."
       }
     ],

@@ -33,8 +33,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*ppvResult",
+        "type": "LPVOID*",
+        "name": "ppvResult",
         "description": "The address of pointer variable that receives the interface pointer requested in iidResult. Upon successful return, *ppvResult contains the requested interface pointer. If an error occurs, *ppvResult is NULL. If the call is successful, the caller is responsible for releasing the pointer with a call to the object's IUnknown::Release method."
       }
     ],
@@ -149,8 +149,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPOLESTR",
-        "name": "*lplpsz",
+        "type": "LPOLESTR*",
+        "name": "lplpsz",
         "description": "The address of a pointer variable that receives a pointer to the resulting string. The string that represents rclsid includes enclosing braces."
       }
     ],
@@ -188,8 +188,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pUnk",
+        "type": "IUnknown*",
+        "name": "pUnk",
         "description": "A pointer to the IUnknown interface on the proxy of the        target COM server."
       },
       {
@@ -269,14 +269,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pProxy",
+        "type": "IUnknown*",
+        "name": "pProxy",
         "description": "A pointer to the IUnknown interface on the proxy to be copied. This parameter cannot be NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IUnknown",
-        "name": "**ppCopy",
+        "type": "IUnknown**",
+        "name": "ppCopy",
         "description": "Address of the pointer variable that receives the interface pointer to the copy of the proxy. This parameter cannot be NULL."
       }
     ],
@@ -304,8 +304,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPUNKNOWN",
-        "name": "*ppunkMarshal",
+        "type": "LPUNKNOWN*",
+        "name": "ppunkMarshal",
         "description": "Address of the pointer variable that receives the interface pointer to the aggregatable marshaler."
       }
     ],
@@ -327,8 +327,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "GUID",
-        "name": "*pguid",
+        "type": "GUID*",
+        "name": "pguid",
         "description": "A pointer to the requested GUID."
       }
     ],
@@ -374,8 +374,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*ppv",
+        "type": "LPVOID*",
+        "name": "ppv",
         "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppv contains the requested interface pointer. Upon failure, *ppv contains NULL."
       }
     ],
@@ -403,8 +403,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punkOuter",
+        "type": "IUnknown*",
+        "name": "punkOuter",
         "description": "If this parameter non-NULL, indicates the instance is being created as part of an aggregate, and punkOuter is to be used as the new instance's controlling IUnknown. Aggregation is currently not supported cross-process or cross-computer. When instantiating an object out of process, CLASS_E_NOAGGREGATION will be returned if punkOuter is non-NULL."
       },
       {
@@ -415,8 +415,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "COSERVERINFO",
-        "name": "*pServerInfo",
+        "type": "COSERVERINFO*",
+        "name": "pServerInfo",
         "description": "Information about the computer on which to instantiate the object. See COSERVERINFO. This parameter can be NULL, in which case the object is instantiated on the local computer or at the computer specified in the registry under the class's RemoteServerName value, according to the interpretation of the dwClsCtx parameter."
       },
       {
@@ -427,8 +427,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "MULTI_QI",
-        "name": "*pResults",
+        "type": "MULTI_QI*",
+        "name": "pResults",
         "description": "An array of MULTI_QI structures. Each structure has three members: the identifier for a requested interface (pIID), the location to return the interface pointer (pItf) and the return value of the call to QueryInterface (hr)."
       }
     ],
@@ -456,8 +456,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "IUnknown",
-        "name": "*punkOuter",
+        "type": "IUnknown*",
+        "name": "punkOuter",
         "description": "If this parameter non-NULL, indicates the instance is being created as part of an aggregate, and punkOuter is to be used as the new instance's controlling IUnknown. Aggregation is currently not supported cross-process or cross-computer. When instantiating an object out of process, CLASS_E_NOAGGREGATION will be returned if punkOuter is non-NULL."
       },
       {
@@ -468,8 +468,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "void",
-        "name": "*reserved",
+        "type": "void*",
+        "name": "reserved",
         "description": "Reserved for future use."
       },
       {
@@ -480,8 +480,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "MULTI_QI",
-        "name": "*pResults",
+        "type": "MULTI_QI*",
+        "name": "pResults",
         "description": "An array of MULTI_QI structures. Each structure has three members: the identifier for a requested interface (pIID), the location to return the interface pointer (pItf) and the return value of the call to QueryInterface (hr)."
       }
     ],
@@ -613,8 +613,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "FILETIME",
-        "name": "*lpFileTime",
+        "type": "FILETIME*",
+        "name": "lpFileTime",
         "description": "A pointer to the FILETIME structure."
       }
     ],
@@ -652,8 +652,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "FILETIME",
-        "name": "*lpFileTime",
+        "type": "FILETIME*",
+        "name": "lpFileTime",
         "description": "A pointer to the FILETIME structure that receives the current time."
       }
     ],
@@ -675,8 +675,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "FILETIME",
-        "name": "*lpFileTime",
+        "type": "FILETIME*",
+        "name": "lpFileTime",
         "description": "A pointer to the FILETIME structure."
       },
       {
@@ -767,8 +767,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "COSERVERINFO",
-        "name": "*pServerInfo",
+        "type": "COSERVERINFO*",
+        "name": "pServerInfo",
         "description": "A pointer to computer on which to instantiate the class object. If this parameter is NULL, the class object is instantiated on the current computer or at the computer specified under the class's RemoteServerName key, according to the interpretation of the dwClsCtx parameter. See COSERVERINFO."
       },
       {
@@ -779,8 +779,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*ppv",
+        "type": "LPVOID*",
+        "name": "ppv",
         "description": "The address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppv contains the requested interface pointer."
       }
     ],
@@ -870,14 +870,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "APTTYPE",
-        "name": "*pAptType",
+        "type": "APTTYPE*",
+        "name": "pAptType",
         "description": "APTTYPE enumeration value that specifies the type of the current apartment."
       },
       {
         "in_out": "_Out_",
-        "type": "APTTYPEQUALIFIER",
-        "name": "*pAptQualifier",
+        "type": "APTTYPEQUALIFIER*",
+        "name": "pAptQualifier",
         "description": "APTTYPEQUALIFIER enumeration value that specifies the type qualifier of the current apartment."
       }
     ],
@@ -899,8 +899,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IUnknown",
-        "name": "**ppThreadReference",
+        "type": "IUnknown**",
+        "name": "ppThreadReference",
         "description": "Receives the IUnknown interface for the thread lifetime object."
       }
     ],
@@ -928,8 +928,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppInterface",
+        "type": "void**",
+        "name": "ppInterface",
         "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppInterface contains the requested interface pointer."
       }
     ],
@@ -986,8 +986,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppUnk",
+        "type": "void**",
+        "name": "ppUnk",
         "description": "Receives the address of a pointer to the interface specified by riid."
       }
     ],
@@ -1009,8 +1009,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "ULONG_PTR",
-        "name": "*pToken",
+        "type": "ULONG_PTR*",
+        "name": "pToken",
         "description": "A pointer to an implementation of IObjContext for the current context."
       }
     ],
@@ -1032,8 +1032,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "GUID",
-        "name": "*pguid",
+        "type": "GUID*",
+        "name": "pguid",
         "description": "A pointer to a GUID that contains the logical thread ID on return."
       }
     ],
@@ -1071,20 +1071,20 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "COSERVERINFO",
-        "name": "*pServerInfo",
+        "type": "COSERVERINFO*",
+        "name": "pServerInfo",
         "description": "A pointer to a COSERVERINFO structure that specifies the computer on which to instantiate the object and the authentication setting to be used. This parameter can be NULL, in which case the object is instantiated on the current computer, at the computer specified under the RemoteServerName registry value for the class, or at the computer where the pwszName file resides if the ActivateAtStorage value is specified for the class or there is no local registry information."
       },
       {
         "in_out": "_In_opt_",
-        "type": "CLSID",
-        "name": "*pClsid",
+        "type": "CLSID*",
+        "name": "pClsid",
         "description": "A pointer to the class identifier of the object to be created. This parameter can be NULL, in which case there is a call to GetClassFile, using pwszName as its parameter to get the class of the object to be instantiated."
       },
       {
         "in_out": "_In_opt_",
-        "type": "IUnknown",
-        "name": "*punkOuter",
+        "type": "IUnknown*",
+        "name": "punkOuter",
         "description": "When non-NULL, indicates the instance is being created as part of an aggregate, and punkOuter is to be used as the pointer to the new instance's controlling IUnknown. Aggregation is not supported cross-process or cross-computer. When instantiating an object out of process, CLASS_E_NOAGGREGATION will be returned if punkOuter is non-NULL."
       },
       {
@@ -1101,8 +1101,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "OLECHAR",
-        "name": "*pwszName",
+        "type": "OLECHAR*",
+        "name": "pwszName",
         "description": "The file used to initialize the object with IPersistFile::Load. This parameter cannot be NULL."
       },
       {
@@ -1113,8 +1113,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "MULTI_QI",
-        "name": "*pResults",
+        "type": "MULTI_QI*",
+        "name": "pResults",
         "description": "An array of MULTI_QI structures. Each structure has three members: the identifier for a requested interface (pIID), the location to return the interface pointer (pItf) and the return value of the call to QueryInterface (hr)."
       }
     ],
@@ -1136,20 +1136,20 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "COSERVERINFO",
-        "name": "*pServerInfo",
+        "type": "COSERVERINFO*",
+        "name": "pServerInfo",
         "description": "A pointer to a COSERVERINFO structure that specifies the computer on which to instantiate the object and the authentication setting to be used. This parameter can be NULL, in which case the object is instantiated on the current computer, at the computer specified under the RemoteServerName registry value for the class, or at the computer where the pstg storage object resides if the ActivateAtStorage value is specified for the class or there is no local registry information."
       },
       {
         "in_out": "_In_opt_",
-        "type": "CLSID",
-        "name": "*pClsid",
+        "type": "CLSID*",
+        "name": "pClsid",
         "description": "A pointer to the class identifier of the object to be created. This parameter can be NULL, in which case there is a call to IStorage::Stat to find the class of the object."
       },
       {
         "in_out": "_In_opt_",
-        "type": "IUnknown",
-        "name": "*punkOuter",
+        "type": "IUnknown*",
+        "name": "punkOuter",
         "description": "When non-NULL, indicates the instance is being created as part of an aggregate, and punkOuter is to be used as the pointer to the new instance's controlling IUnknown. Aggregation is not supported cross-process or cross-computer. When instantiating an object out of process, CLASS_E_NOAGGREGATION will be returned if punkOuter is non-NULL."
       },
       {
@@ -1160,8 +1160,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "struct IStorage",
-        "name": "*pstg",
+        "type": "struct IStorage*",
+        "name": "pstg",
         "description": "A pointer to the storage object used to initialize the object with IPersistFile::Load. This parameter cannot be NULL."
       },
       {
@@ -1172,8 +1172,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "MULTI_QI",
-        "name": "*pResults",
+        "type": "MULTI_QI*",
+        "name": "pResults",
         "description": "An array of MULTI_QI structures. Each structure has three members: the identifier for a requested interface (pIID), the location to return the interface pointer (pItf) and the return value of the call to QueryInterface (hr)."
       }
     ],
@@ -1201,8 +1201,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punkOuter",
+        "type": "IUnknown*",
+        "name": "punkOuter",
         "description": "If this parameter is NULL, the object is not being created as part of an aggregate. Otherwise, this parameter is a pointer to the aggregate object's IUnknown interface (the controlling IUnknown)."
       },
       {
@@ -1213,8 +1213,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "The address of a pointer variable that receives the interface pointer requested in iid. Upon successful return, **ppv contains the requested interceptor pointer."
       }
     ],
@@ -1248,8 +1248,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*ppv",
+        "type": "LPVOID*",
+        "name": "ppv",
         "description": "The address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppv contains the requested interface pointer to the unmarshaled interface."
       }
     ],
@@ -1277,8 +1277,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPMALLOC",
-        "name": "*ppMalloc",
+        "type": "LPMALLOC*",
+        "name": "ppMalloc",
         "description": "The address of an IMalloc* pointer variable that receives the interface pointer to the memory allocator."
       }
     ],
@@ -1300,8 +1300,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*pulSize",
+        "type": "ULONG*",
+        "name": "pulSize",
         "description": "A pointer to the upper-bound value on the size, in bytes, of the data packet to be written to the marshaling stream. If this parameter is 0, the size of the packet is unknown."
       },
       {
@@ -1359,8 +1359,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "BIND_OPTS",
-        "name": "*pBindOptions",
+        "type": "BIND_OPTS*",
+        "name": "pBindOptions",
         "description": "The binding options used to create a moniker that creates the actual object. For details, see BIND_OPTS. This parameter can be NULL."
       },
       {
@@ -1371,8 +1371,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "The address of a pointer to the interface specified by riid on the object that is created."
       }
     ],
@@ -1400,8 +1400,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*ppv",
+        "type": "LPVOID*",
+        "name": "ppv",
         "description": "The address of a pointer to the interface specified by riid on the context object."
       }
     ],
@@ -1429,8 +1429,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "CLSID",
-        "name": "*pClsid",
+        "type": "CLSID*",
+        "name": "pClsid",
         "description": "Specifies where to store the proxy/stub CLSID for the interface specified by riid."
       }
     ],
@@ -1482,8 +1482,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPMARSHAL",
-        "name": "*ppMarshal",
+        "type": "LPMARSHAL*",
+        "name": "ppMarshal",
         "description": "The address of IMarshal* pointer variable that receives the interface pointer to the standard marshaler."
       }
     ],
@@ -1517,8 +1517,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPUNKNOWN",
-        "name": "*ppUnkInner",
+        "type": "LPUNKNOWN*",
+        "name": "ppUnkInner",
         "description": "On successful return, address of pointer to the IUnknown interface on the newly-created aggregated standard marshaler. If an error occurs, this value is NULL."
       }
     ],
@@ -1546,8 +1546,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*ppSD",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "ppSD",
         "description": "Pointer to a caller-supplied variable that this routine sets to the address of a buffer containing the SECURITY_DESCRIPTOR for the system security permissions. Memory will be allocated by CoGetSystemSecurityPermissions and should be freed by caller with LocalFree."
       }
     ],
@@ -1694,14 +1694,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SOLE_AUTHENTICATION_SERVICE",
-        "name": "*asAuthSvc",
+        "type": "SOLE_AUTHENTICATION_SERVICE*",
+        "name": "asAuthSvc",
         "description": "An array of authentication services that a server is willing to use to receive a call. This parameter is used by COM only when a server calls CoInitializeSecurity. For more information, see SOLE_AUTHENTICATION_SERVICE."
       },
       {
         "in_out": "_In_opt_",
-        "type": "void",
-        "name": "*pReserved1",
+        "type": "void*",
+        "name": "pReserved1",
         "description": "This parameter is reserved and must be NULL."
       },
       {
@@ -1718,8 +1718,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "void",
-        "name": "*pAuthList",
+        "type": "void*",
+        "name": "pAuthList",
         "description": "A pointer to SOLE_AUTHENTICATION_LIST, which is an array of SOLE_AUTHENTICATION_INFO structures. This list indicates the information for each authentication service that a client can use to call a server. This parameter is used by COM only when a client calls CoInitializeSecurity."
       },
       {
@@ -1730,8 +1730,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "void",
-        "name": "*pReserved3",
+        "type": "void*",
+        "name": "pReserved3",
         "description": "This parameter is reserved and must be NULL."
       }
     ],
@@ -1753,8 +1753,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IBindCtx",
-        "name": "*pbc",
+        "type": "IBindCtx*",
+        "name": "pbc",
         "description": "This parameter is reserved and must be NULL."
       },
       {
@@ -1765,14 +1765,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "uCLSSPEC",
-        "name": "*pClassSpec",
+        "type": "uCLSSPEC*",
+        "name": "pClassSpec",
         "description": "A pointer to a uCLSSPEC structure. The tyspec member must be set to TYSPEC_CLSID and the clsid member must be set to the CLSID to be installed. For more information see TYSPEC."
       },
       {
         "in_out": "_In_",
-        "type": "QUERYCONTEXT",
-        "name": "*pQuery",
+        "type": "QUERYCONTEXT*",
+        "name": "pQuery",
         "description": "A pointer to a QUERYCONTEXT structure. The dwContext member must be set to the desired CLSCTX value."
       },
       {
@@ -1939,8 +1939,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HRESULT",
-        "name": "*phresult",
+        "type": "HRESULT*",
+        "name": "phresult",
         "description": "A pointer to the unmarshaled HRESULT."
       }
     ],
@@ -2027,8 +2027,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPSTREAM",
-        "name": "*ppStm",
+        "type": "LPSTREAM*",
+        "name": "ppStm",
         "description": "The address of the IStream* pointer variable that receives the interface pointer to the stream that contains the marshaled interface."
       }
     ],
@@ -2050,14 +2050,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pcAuthSvc",
+        "type": "DWORD*",
+        "name": "pcAuthSvc",
         "description": "A pointer to a variable that receives the number of entries returned in the asAuthSvc array."
       },
       {
         "in_out": "_Out_",
-        "type": "SOLE_AUTHENTICATION_SERVICE",
-        "name": "**asAuthSvc",
+        "type": "SOLE_AUTHENTICATION_SERVICE**",
+        "name": "asAuthSvc",
         "description": "A pointer to an array of SOLE_AUTHENTICATION_SERVICE structures. The list is allocated through a call to the CoTaskMemAlloc function. The caller must free the list when finished with it by calling the CoTaskMemFree function."
       }
     ],
@@ -2079,44 +2079,44 @@
     "arguments": [
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pAuthnSvc",
+        "type": "DWORD*",
+        "name": "pAuthnSvc",
         "description": "A pointer to a variable that receives the current authentication service. This will be a single value taken from the authentication service constants. If the caller specifies NULL, the current authentication service is not retrieved."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pAuthzSvc",
+        "type": "DWORD*",
+        "name": "pAuthzSvc",
         "description": "A pointer to a variable that receives the current authorization service. This will be a single value taken from the authorization constants. If the caller specifies NULL, the current authorization service is not retrieved."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "OLECHAR",
-        "name": "**pServerPrincName",
+        "type": "OLECHAR**",
+        "name": "pServerPrincName",
         "description": "The current principal name. The string will be allocated by the callee using CoTaskMemAlloc, and must be freed by the caller using CoTaskMemFree. By default, Schannel principal names will be in the msstd form. The fullsic form will be returned if EOAC_MAKE_FULLSIC is specified in the pCapabilities parameter. For more information about the msstd and fullsic forms, see Principal Names. If the caller specifies NULL, the current principal name is not retrieved."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pAuthnLevel",
+        "type": "DWORD*",
+        "name": "pAuthnLevel",
         "description": "A pointer to a variable that receives the current authentication level. This will be a single value taken from the authentication level constants. If the caller specifies NULL, the current authentication level is not retrieved."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pImpLevel",
+        "type": "DWORD*",
+        "name": "pImpLevel",
         "description": "This parameter must be NULL."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "RPC_AUTHZ_HANDLE",
-        "name": "*pPrivs",
+        "type": "RPC_AUTHZ_HANDLE*",
+        "name": "pPrivs",
         "description": "A pointer to a handle that receives the privilege information for the client application. The format of the structure that the handle refers to depends on the authentication service. The application should not write or free the memory. The information is valid only for the duration of the current call. For NTLMSSP and Kerberos, this is a string identifying the client principal. For Schannel, this is a CERT_CONTEXT structure that represents the client's certificate. If the client has no certificate, NULL is returned. If the caller specifies NULL, the current privilege information is not retrieved. See RPC_AUTHZ_HANDLE."
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "DWORD",
-        "name": "*pCapabilities",
+        "type": "DWORD*",
+        "name": "pCapabilities",
         "description": "A pointer to return flags indicating capabilities of the call. To request that the principal name be returned in fullsic form if Schannel is the authentication service, the caller can set the EOAC_MAKE_FULLSIC flag in this parameter. If the caller specifies NULL, the current capabilities are not retrieved."
       }
     ],
@@ -2138,8 +2138,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IActivationFilter",
-        "name": "*pActivationFilter",
+        "type": "IActivationFilter*",
+        "name": "pActivationFilter",
         "description": "Pointer to the filter to register."
       }
     ],
@@ -2167,8 +2167,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IChannelHook",
-        "name": "*pChannelHook",
+        "type": "IChannelHook*",
+        "name": "pChannelHook",
         "description": "The channel hook to register."
       }
     ],
@@ -2190,50 +2190,50 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pProxy",
+        "type": "IUnknown*",
+        "name": "pProxy",
         "description": "A pointer indicating the proxy to query. This parameter cannot be NULL. For more information, see the Remarks section."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pwAuthnSvc",
+        "type": "DWORD*",
+        "name": "pwAuthnSvc",
         "description": "A pointer to a variable that receives the current authentication service. This will be a single value taken from the authentication service constants. This parameter cannot be NULL."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pAuthzSvc",
+        "type": "DWORD*",
+        "name": "pAuthzSvc",
         "description": "A pointer to a variable that receives the current authorization service. This will be a single value taken from the authorization constants. If the caller specifies NULL, the current authorization service is not retrieved."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "OLECHAR",
-        "name": "**pServerPrincName",
+        "type": "OLECHAR**",
+        "name": "pServerPrincName",
         "description": "The current principal name. The string will be allocated by the callee using CoTaskMemAlloc, and must be freed by the caller using CoTaskMemFree. The EOAC_MAKE_FULLSIC flag is not accepted in the pCapabilities parameter. For more information about the msstd and fullsic forms, see Principal Names. If the caller specifies NULL, the current principal name is not retrieved."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pAuthnLevel",
+        "type": "DWORD*",
+        "name": "pAuthnLevel",
         "description": "A pointer to a variable that receives the current authentication level. This will be a single value taken from the authentication level constants. If the caller specifies NULL, the current authentication level is not retrieved."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pImpLevel",
+        "type": "DWORD*",
+        "name": "pImpLevel",
         "description": "A pointer to a variable that receives the current impersonation level. This will be a single value taken from the impersonation level constants. If the caller specifies NULL, the current impersonation level is not retrieved."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "RPC_AUTH_IDENTITY_HANDLE",
-        "name": "*pAuthInfo",
+        "type": "RPC_AUTH_IDENTITY_HANDLE*",
+        "name": "pAuthInfo",
         "description": "A pointer to a handle that receives the identity of the client that was passed to the last IClientSecurity::SetBlanket call (or the default value). Default values are only valid until the proxy is released. If the caller specifies NULL, the client identity is not retrieved. The format of the structure that the handle refers to depends on the authentication service. The application should not write or free the memory. For NTLMSSP and Kerberos, if the client specified a structure in the pAuthInfo parameter to CoInitializeSecurity, that value is returned. For Schannel, if a certificate for the client could be retrieved from the certificate manager, that value is returned here. Otherwise, NULL is returned. See RPC_AUTH_IDENTITY_HANDLE."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pCapabilites",
+        "type": "DWORD*",
+        "name": "pCapabilites",
         "description": "A pointer to a variable that receives the capabilities of the proxy. If the caller specifies NULL, the current capability flags are not retrieved."
       }
     ],
@@ -2308,8 +2308,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULARGE_INTEGER",
-        "name": "*puliCookie",
+        "type": "ULARGE_INTEGER*",
+        "name": "puliCookie",
         "description": "The address at which to store a cookie that identifies this registration."
       }
     ],
@@ -2360,8 +2360,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "LPMESSAGEFILTER",
-        "name": "*lplpMessageFilter",
+        "type": "LPMESSAGEFILTER*",
+        "name": "lplpMessageFilter",
         "description": "Address of the IMessageFilter* pointer variable that receives the interface pointer to the previously registered message filter. If there was no previously registered message filter for the current thread, the value of *lplpMessageFilter is NULL."
       }
     ],
@@ -2568,8 +2568,8 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "IUnknown",
-        "name": "*pUnk",
+        "type": "IUnknown*",
+        "name": "pUnk",
         "description": "Pointer to the IUnknown interface on the cancel object to be set or reset on the current thread. If this parameter is NULL, the topmost cancel object is reset."
       }
     ],
@@ -2591,8 +2591,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "_In_opt_",
-        "name": "*pMessageDispatcher",
+        "type": "_In_opt_*",
+        "name": "pMessageDispatcher",
         "description": "If non-null, message dispatcher object to register. This object must also implement IWeakReferenceSource. If null, unregisters the current message dispatcher."
       }
     ],
@@ -2614,8 +2614,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pProxy",
+        "type": "IUnknown*",
+        "name": "pProxy",
         "description": "The proxy to be set."
       },
       {
@@ -2632,8 +2632,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "OLECHAR",
-        "name": "*pServerPrincName",
+        "type": "OLECHAR*",
+        "name": "pServerPrincName",
         "description": "The server principal name to be used with the authentication service. If COLE_DEFAULT_PRINCIPAL is specified, DCOM will pick a principal name using its security blanket negotiation algorithm. If Kerberos is used as the authentication service, this value must not be NULL. It must be the correct principal name of the server or the call will fail. If Schannel is used as the authentication service, this value must be one of the msstd or fullsic forms described in Principal Names, or NULL if you do not want mutual authentication. Generally, specifying NULL will not reset the server principal name on the proxy; rather, the previous setting will be retained. You must be careful when using NULL as pServerPrincName when selecting a different authentication service for the proxy, because there is no guarantee that the previously set principal name would be valid for the newly selected authentication service."
       },
       {
@@ -2695,14 +2695,14 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "IUnknown",
-        "name": "*pNewObject",
+        "type": "IUnknown*",
+        "name": "pNewObject",
         "description": "A pointer to an interface on the new call context object. COM stores this pointer without adding a reference to the pointer until CoSwitchCallContext is called with another object. This parameter may be NULL if you are calling CoSwitchCallContext to switch back to the original call context but there was no original call context."
       },
       {
         "in_out": "_Out_",
-        "type": "IUnknown",
-        "name": "**ppOldObject",
+        "type": "IUnknown**",
+        "name": "ppOldObject",
         "description": "The address of pointer variable that receives a pointer to the call context object of the call currently in progress. This value is returned so that the original call context can be restored by the custom marshaller. The returned pointer will be NULL if there was no call in progress."
       }
     ],
@@ -2872,8 +2872,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*ppv",
+        "type": "LPVOID*",
+        "name": "ppv",
         "description": "The address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppv contains the requested interface pointer for the unmarshaled interface."
       }
     ],
@@ -2989,8 +2989,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "LPMONIKER",
-        "name": "*ppmk",
+        "type": "LPMONIKER*",
+        "name": "ppmk",
         "description": "The address of an IMoniker* pointer variable that receives the interface pointer to the new anti-moniker. When successful, the function has called AddRef on the anti-moniker and the caller is responsible for calling Release. When an error occurs, the anti-moniker pointer is NULL."
       }
     ],
@@ -3018,20 +3018,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "IBindStatusCallback",
-        "name": "*pBSCb",
+        "type": "IBindStatusCallback*",
+        "name": "pBSCb",
         "description": "A pointer to the IBindStatusCallback interface used for receiving data availability and progress notification."
       },
       {
         "in_out": "_In_",
-        "type": "IEnumFORMATETC",
-        "name": "*pEFetc",
+        "type": "IEnumFORMATETC*",
+        "name": "pEFetc",
         "description": "A pointer to the IEnumFORMATETC interface that can be used to enumerate formats for format negotiation during binding. This parameter can be NULL, in which case the caller is not interested in format negotiation during binding, and the default format of the object will be bound to."
       },
       {
         "in_out": "_Out_",
-        "type": "IBindCtx",
-        "name": "**ppBC",
+        "type": "IBindCtx**",
+        "name": "ppBC",
         "description": "Address of an IBindCtx* pointer variable that receives the interface pointer to the new bind context."
       }
     ],
@@ -3059,8 +3059,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBC",
-        "name": "*ppbc",
+        "type": "LPBC*",
+        "name": "ppbc",
         "description": "Address of an IBindCtx* pointer variable that receives the interface pointer to the new bind context object. When the function is successful, the caller is responsible for calling Release on the bind context. A NULL value for the bind context indicates that an error occurred."
       }
     ],
@@ -3088,8 +3088,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPMONIKER",
-        "name": "*ppmk",
+        "type": "LPMONIKER*",
+        "name": "ppmk",
         "description": "The address of an IMoniker* pointer variable that receives the interface pointer to the new class moniker. On successful return, the function has called AddRef on the moniker and the caller is responsible for calling Release. When an error occurs, the value of the moniker pointer is NULL."
       }
     ],
@@ -3117,8 +3117,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPMONIKER",
-        "name": "*ppmk",
+        "type": "LPMONIKER*",
+        "name": "ppmk",
         "description": "The address of an IMoniker* pointer variable that receives the interface pointer to the new file moniker. When successful, the function has called AddRef on the file moniker and the caller is responsible for calling Release. When an error occurs, the value of the interface pointer is NULL."
       }
     ],
@@ -3152,8 +3152,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPMONIKER",
-        "name": "*ppmkComposite",
+        "type": "LPMONIKER*",
+        "name": "ppmkComposite",
         "description": "The address of an IMoniker* pointer variable that receives the interface pointer to the composite moniker object that is the result of composing pmkFirst and pmkRest. This object supports the OLE composite moniker implementation of IMoniker. When successful, the function has called AddRef on the moniker and the caller is responsible for calling Release. If either pmkFirst or pmkRest are NULL, the supplied pointer is the one that is non-NULL. If both pmkFirst and pmkRest are NULL, or if an error occurs, the returned pointer is NULL."
       }
     ],
@@ -3187,8 +3187,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPMONIKER",
-        "name": "*ppmk",
+        "type": "LPMONIKER*",
+        "name": "ppmk",
         "description": "The address of an IMoniker* pointer variable that receives the interface pointer to the item moniker. When successful, the function has called AddRef on the item moniker and the caller is responsible for calling Release. If an error occurs, the supplied interface pointer has a NULL value."
       }
     ],
@@ -3216,8 +3216,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPMONIKER",
-        "name": "*ppmk",
+        "type": "LPMONIKER*",
+        "name": "ppmk",
         "description": "Address of a pointer to the IMoniker interface on the OBJREF moniker that was created."
       }
     ],
@@ -3245,8 +3245,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPMONIKER",
-        "name": "*ppmk",
+        "type": "LPMONIKER*",
+        "name": "ppmk",
         "description": "The address of an IMoniker* pointer variable that receives the interface pointer to the new pointer moniker. When successful, the function has called AddRef on the moniker and the caller is responsible for calling Release. When an error occurs, the returned interface pointer has a NULL value."
       }
     ],
@@ -3303,8 +3303,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "CLSID",
-        "name": "*pclsid",
+        "type": "CLSID*",
+        "name": "pclsid",
         "description": "A pointer to the location where the associated CLSID is written on return."
       }
     ],
@@ -3332,8 +3332,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPRUNNINGOBJECTTABLE",
-        "name": "*pprot",
+        "type": "LPRUNNINGOBJECTTABLE*",
+        "name": "pprot",
         "description": "The address of an IRunningObjectTable* pointer variable that receives the interface pointer to the local ROT. When the function is successful, the caller is responsible for calling Release on the interface pointer. If an error occurs, *pprot is undefined."
       }
     ],
@@ -3425,8 +3425,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "WORD",
-        "name": "*lpwCmd",
+        "type": "WORD*",
+        "name": "lpwCmd",
         "description": "A pointer to a variable  to receive the corresponding command identifier if there is an accelerator for the keystroke. This parameter may be NULL."
       }
     ],
@@ -3547,14 +3547,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*pchEaten",
+        "type": "ULONG*",
+        "name": "pchEaten",
         "description": "A pointer to the number of characters of szUserName that were consumed. If the function is successful, *pchEaten is the length of szUserName; otherwise, it is the number of characters successfully parsed."
       },
       {
         "in_out": "_Out_",
-        "type": "LPMONIKER",
-        "name": "*ppmk",
+        "type": "LPMONIKER*",
+        "name": "ppmk",
         "description": "The address of the IMoniker* pointer variable that receives the interface pointer to the moniker that was built from szUserName. When successful, the function has called AddRef on the moniker and the caller is responsible for calling Release. If an error occurs, the specified interface pointer will contain as much of the moniker that the method was able to create before the error occurred."
       }
     ],
@@ -3588,8 +3588,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPMONIKER",
-        "name": "*ppmkCommon",
+        "type": "LPMONIKER*",
+        "name": "ppmkCommon",
         "description": "The address of an IMoniker* pointer variable that receives the interface pointer to the moniker based on the common prefix of pmkThis and pmkOther. When successful, the function has called AddRef on the moniker and the caller is responsible for calling Release. If an error occurs, the supplied interface pointer value is NULL."
       }
     ],
@@ -3623,8 +3623,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPMONIKER",
-        "name": "*ppmkRelPath",
+        "type": "LPMONIKER*",
+        "name": "ppmkRelPath",
         "description": "The address of an IMoniker* pointer variable that receives the interface pointer to the new relative moniker. When successful, the function has called AddRef on the moniker and the caller is responsible for calling Release. If an error occurs, the interface pointer value is NULL."
       },
       {
@@ -3815,8 +3815,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwStatus",
+        "type": "DWORD*",
+        "name": "pdwStatus",
         "description": "A pointer to the variable that receives the status information."
       }
     ],
@@ -3850,8 +3850,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPOLESTR",
-        "name": "*pszUserType",
+        "type": "LPOLESTR*",
+        "name": "pszUserType",
         "description": "A pointer to a string that receives the user type."
       }
     ],
@@ -3908,8 +3908,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPOLESTR",
-        "name": "*lplpszProgID",
+        "type": "LPOLESTR*",
+        "name": "lplpszProgID",
         "description": "The address of a pointer variable that receives the ProgID string. The string that represents clsid includes enclosing braces."
       }
     ],
@@ -3972,8 +3972,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPOLESTR",
-        "name": "*lplpsz",
+        "type": "LPOLESTR*",
+        "name": "lplpsz",
         "description": "The address of a pointer variable that receives a pointer to the resulting string. The string that represents rclsid includes enclosing braces."
       }
     ],

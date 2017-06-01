@@ -56,8 +56,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*BackTrace",
+        "type": "PVOID*",
+        "name": "BackTrace",
         "description": "An array of pointers captured from the current stack trace."
       },
       {
@@ -202,8 +202,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "va_list",
-        "name": "*Arguments",
+        "type": "va_list*",
+        "name": "Arguments",
         "description": "An array of values that are used as insert values in the formatted message. A %1 in the format string         indicates the first value in the Arguments array; a %2 indicates the second argument;         and so on. The interpretation of each value depends on the formatting information associated with the insert in the         message definition. The default is to treat each value as a pointer to a null-terminated string. By default, the Arguments parameter is of type         va_list*, which is a language- and implementation-specific data type for         describing a variable number of arguments. The state of the va_list argument is         undefined upon return from the function. To use the va_list again, destroy the         variable argument list pointer using va_end and reinitialize it with         va_start. If you do not have a pointer of type         va_list*, then specify the FORMAT_MESSAGE_ARGUMENT_ARRAY         flag and pass a pointer to an array of DWORD_PTR values; those values are input to         the message formatted as the insert values. Each insert must have a corresponding element in the array."
       }
     ],
@@ -360,8 +360,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*BaseOfImage",
+        "type": "PVOID*",
+        "name": "BaseOfImage",
         "description": "The base address of the image containing the PC value. This value must be added to any relative addresses in the headers to locate the image."
       }
     ],

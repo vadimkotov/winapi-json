@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IDCompositionVisual",
-        "name": "*visual",
+        "type": "IDCompositionVisual*",
+        "name": "visual",
         "description": "Type: IDCompositionVisual* The visual to route messages from."
       },
       {
@@ -50,8 +50,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IDCompositionVisual",
-        "name": "*visual",
+        "type": "IDCompositionVisual*",
+        "name": "visual",
         "description": "Type: IDCompositionVisual* The visual to route messages from."
       },
       {
@@ -85,8 +85,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IDXGIDevice",
-        "name": "*dxgiDevice",
+        "type": "IDXGIDevice*",
+        "name": "dxgiDevice",
         "description": "Type: IDXGIDevice* The DXGI device to use to create DirectComposition surface objects."
       },
       {
@@ -97,8 +97,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**dcompositionDevice",
+        "type": "void**",
+        "name": "dcompositionDevice",
         "description": "Type: void** Receives an interface pointer to the newly created device object. The pointer is of the type specified by the iid parameter. This parameter must not be NULL."
       }
     ],
@@ -120,8 +120,8 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "IUnknown",
-        "name": "*renderingDevice",
+        "type": "IUnknown*",
+        "name": "renderingDevice",
         "description": "An optional pointer to a DirectX device to be used to create DirectComposition surface objects. Must be a pointer to an object implementing the IDXGIDevice or ID2D1Device interfaces."
       },
       {
@@ -132,8 +132,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**dcompositionDevice",
+        "type": "void**",
+        "name": "dcompositionDevice",
         "description": "Receives an interface pointer to the newly created device object. The pointer is of the type specified by the iid parameter. This parameter must not be NULL."
       }
     ],
@@ -155,8 +155,8 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "IUnknown",
-        "name": "*renderingDevice",
+        "type": "IUnknown*",
+        "name": "renderingDevice",
         "description": "Type: IUnknown* An optional pointer to a DirectX device to be used to create DirectComposition surface objects. Must be a pointer to an object implementing the IDXGIDevice or ID2D1Device interfaces."
       },
       {
@@ -167,8 +167,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**dcompositionDevice",
+        "type": "void**",
+        "name": "dcompositionDevice",
         "description": "Type: void** Receives an interface pointer to the newly created device object. The pointer is of the type specified by the iid parameter. This parameter must not be NULL."
       }
     ],
@@ -196,14 +196,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SECURITY_ATTRIBUTES",
-        "name": "*securityAttributes",
+        "type": "SECURITY_ATTRIBUTES*",
+        "name": "securityAttributes",
         "description": "Type: SECURITY_ATTRIBUTES* Contains the security descriptor for the composition surface object, and specifies whether the handle of the composition surface object is inheritable when a child process is created. If this parameter is NULL, the composition surface object is created with default security attributes  that grant read and write access to the current process,  but do not enable child processes to  inherit the handle."
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*surfaceHandle",
+        "type": "HANDLE*",
+        "name": "surfaceHandle",
         "description": "Type: HANDLE* The handle of the new composition surface object. This parameter must not be NULL."
       }
     ],
@@ -225,20 +225,20 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "DCOMPOSITION_FRAME_STATISTICS",
-        "name": "*statistics",
+        "type": "DCOMPOSITION_FRAME_STATISTICS*",
+        "name": "statistics",
         "description": "Type: DCOMPOSITION_FRAME_STATISTICS* On return, contains the collected composition statistics."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "D3D_FEATURE_LEVEL",
-        "name": "*minSafeFeaturelLevel",
+        "type": "D3D_FEATURE_LEVEL*",
+        "name": "minSafeFeaturelLevel",
         "description": "Type: D3D_FEATURE_LEVEL* On return, contains the minimum safe feature level."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "D3D_FEATURE_LEVEL",
-        "name": "*maxHardwareFeaturelLevel",
+        "type": "D3D_FEATURE_LEVEL*",
+        "name": "maxHardwareFeaturelLevel",
         "description": "Type: D3D_FEATURE_LEVEL* On return, contains the maximum hardware feature level."
       }
     ],

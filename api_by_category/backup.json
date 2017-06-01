@@ -51,8 +51,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*lpContext",
+        "type": "LPVOID*",
+        "name": "lpContext",
         "description": "Pointer to a variable that receives a pointer to an internal data structure used by        BackupRead to maintain context information during a        backup operation.       You must set the variable pointed to by lpContext to NULL        before the first call to BackupRead for the specified        file or directory. The function allocates memory for the data structure, and then sets the variable to point to        that structure. You must not change lpContext or the variable that it points to        between calls to BackupRead. To release the memory used by the data structure, call        BackupRead with the        bAbort parameter set to TRUE when the backup operation is complete."
       }
     ],
@@ -104,8 +104,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "LPVOID",
-        "name": "*lpContext",
+        "type": "LPVOID*",
+        "name": "lpContext",
         "description": "Pointer to an internal data structure used by the function. This structure must be the same structure that was initialized by the  BackupRead or BackupWrite function. An application must not touch the contents of this structure."
       }
     ],
@@ -163,8 +163,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*lpContext",
+        "type": "LPVOID*",
+        "name": "lpContext",
         "description": "Pointer to a variable that receives a pointer to an internal data structure used by        BackupWrite to maintain context information during a restore operation.        You must set the variable pointed to by lpContext to NULL        before the first call to BackupWrite for the specified file or directory. The        function allocates memory for the data structure, and then sets the variable to point to that structure. You        must not change lpContext or the variable that it points to between calls to        BackupWrite. To release the memory used by the data structure, call BackupWrite with the        bAbort parameter set to TRUE when the restore operation is        complete."
       }
     ],
@@ -543,14 +543,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*sisBackupStructure",
+        "type": "PVOID*",
+        "name": "sisBackupStructure",
         "description": "Returned SIS backup structure."
       },
       {
         "in_out": "_Out_",
-        "type": "PWCHAR",
-        "name": "*commonStoreRootPathname",
+        "type": "PWCHAR*",
+        "name": "commonStoreRootPathname",
         "description": "Fully qualified path name of the specified volume's common store. For example, \"c:\\SIS Common Store\"."
       },
       {
@@ -561,8 +561,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWCHAR",
-        "name": "**commonStoreFilesToBackUp",
+        "type": "PWCHAR**",
+        "name": "commonStoreFilesToBackUp",
         "description": "Pointer to an array of file names that specifies a list of internal files used by SIS to manage the specified volume. These files should be backed up at the same time and in the same manner as the common-store files requested by  SisCSFilesToBackupForLink"
       }
     ],
@@ -590,14 +590,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*sisRestoreStructure",
+        "type": "PVOID*",
+        "name": "sisRestoreStructure",
         "description": "Returned SIS restore structure. This structure should be treated as opaque by the caller."
       },
       {
         "in_out": "_Out_",
-        "type": "PWCHAR",
-        "name": "*commonStoreRootPathname",
+        "type": "PWCHAR*",
+        "name": "commonStoreRootPathname",
         "description": "Fully qualified path name of the specified volume's common store. For example, \"c:\\SIS Common Store\"."
       },
       {
@@ -608,8 +608,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWCHAR",
-        "name": "**commonStoreFilesToRestore",
+        "type": "PWCHAR**",
+        "name": "commonStoreFilesToRestore",
         "description": "Pointer to an array of file names that specifies the list of internal files used by SIS to manage the specified volume. These files should be restored at the same time and in the same manner as the common-store files requested by  SisCSFilesToBackupForLink."
       }
     ],
@@ -655,8 +655,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*matchingFileContext",
+        "type": "PVOID*",
+        "name": "matchingFileContext",
         "description": "Doubly-indirect pointer to the context string of the SIS link identified by the information passed in the first four parameters of this function. This parameter is optional; if a context string is not provided as the value of the thisFileContext parameter, set the value of this parameter to NULL. The value of this parameter will not be processed in this case."
       },
       {
@@ -667,8 +667,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWCHAR",
-        "name": "**commonStoreFilesToBackUp",
+        "type": "PWCHAR**",
+        "name": "commonStoreFilesToBackUp",
         "description": "Pointer to an array of file names. These files should be backed up at the same time and in the same manner as the common-store files requested by  SisCreateBackupStructure."
       }
     ],
@@ -818,8 +818,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWCHAR",
-        "name": "**commonStoreFilesToRestore",
+        "type": "PWCHAR**",
+        "name": "commonStoreFilesToRestore",
         "description": "Pointer to an array of common-store file names. These files should be restored at the same time and in the same manner as the common-store files requested by  SisCSFilesToBackupForLink.     If the value of the countOfCommonStoreFilesToRestore parameter is not 0, the value of the commonStoreFilesToRestore parameter will contain the names of the common-store files to be restored as a result of restoring the SIS link. If the value is 0, then either the common-store files have been returned once, or they are already present on the volume."
       }
     ],
@@ -876,8 +876,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*pvContext",
+        "type": "PVOID*",
+        "name": "pvContext",
         "description": "The address of a  context          block that must be presented in subsequent calls to           ReadEncryptedFileRaw, WriteEncryptedFileRaw, or           CloseEncryptedFileRaw.  Do not modify it."
       }
     ],

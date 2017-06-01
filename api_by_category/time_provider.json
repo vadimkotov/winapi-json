@@ -66,14 +66,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "WCHAR",
-        "name": "*wszProvName",
+        "type": "WCHAR*",
+        "name": "wszProvName",
         "description": "The provider name."
       },
       {
         "in_out": "_In_",
-        "type": "WCHAR",
-        "name": "*wszMessage",
+        "type": "WCHAR*",
+        "name": "wszMessage",
         "description": "The event description."
       }
     ],
@@ -95,8 +95,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "SetProviderStatusInfo",
-        "name": "*pspsi",
+        "type": "SetProviderStatusInfo*",
+        "name": "pspsi",
         "description": "A pointer to a  SetProviderStatusInfo structure that provides the status information."
       }
     ],
@@ -118,8 +118,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "struct SetProviderStatusInfo",
-        "name": "*pspsi",
+        "type": "struct SetProviderStatusInfo*",
+        "name": "pspsi",
         "description": "A pointer to the  SetProviderStatusInfo structure to be freed."
       }
     ],
@@ -199,20 +199,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "WCHAR",
-        "name": "*wszName",
+        "type": "WCHAR*",
+        "name": "wszName",
         "description": "The provider name."
       },
       {
         "in_out": "_In_",
-        "type": "TimeProvSysCallbacks",
-        "name": "*pSysCallbacks",
+        "type": "TimeProvSysCallbacks*",
+        "name": "pSysCallbacks",
         "description": "A pointer to a  TimeProvSysCallbacks structure that specifies pointers to the functions provided by the time service to the time provider. The system allocates this structure, and it is destroyed when the function returns. Therefore, you must copy the information to another buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "TimeProvHandle",
-        "name": "*phTimeProv",
+        "type": "TimeProvHandle*",
+        "name": "phTimeProv",
         "description": "A pointer to a buffer that contains a handle to the provider. The time provider manager uses this handle to communicate with the time provider."
       }
     ],

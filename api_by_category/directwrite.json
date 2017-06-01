@@ -27,8 +27,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IUnknown",
-        "name": "**factory",
+        "type": "IUnknown**",
+        "name": "factory",
         "description": "Type: IUnknown** An address of a pointer to the newly created DirectWrite factory object."
       }
     ],

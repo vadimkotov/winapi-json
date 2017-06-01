@@ -235,8 +235,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HMODULE",
-        "name": "*phModule",
+        "type": "HMODULE*",
+        "name": "phModule",
         "description": "A handle to the specified module. If the function fails, this parameter is NULL. The GetModuleHandleEx function does not retrieve handles for modules that were loaded using the LOAD_LIBRARY_AS_DATAFILE flag. For more information, see LoadLibraryEx."
       }
     ],

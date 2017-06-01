@@ -27,8 +27,8 @@
       },
       {
         "in_out": "",
-        "type": "BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdi",
+        "type": "BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdi",
         "description": "A structure of type BLUETOOTH_DEVICE_INFO that contains the record of the Bluetooth device to be authenticated."
       },
       {
@@ -74,8 +74,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdiInout",
+        "type": "BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdiInout",
         "description": "A pointer to a BLUETOOTH_DEVICE_INFO structure describing the device          being authenticated."
       },
       {
@@ -127,8 +127,8 @@
       },
       {
         "in_out": "",
-        "type": "BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdi",
+        "type": "BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdi",
         "description": "An array of BLUETOOTH_DEVICE_INFO structures that contain records for the Bluetooth devices to be authenticated."
       }
     ],
@@ -156,8 +156,8 @@
       },
       {
         "in_out": "",
-        "type": "BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdi",
+        "type": "BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdi",
         "description": "A pointer to the BLUETOOTH_DEVICE_INFO structure that contains information about the Bluetooth device."
       }
     ],
@@ -243,20 +243,20 @@
       },
       {
         "in_out": "",
-        "type": "BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdi",
+        "type": "BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdi",
         "description": "Pointer to a BLUETOOTH_DEVICE_INFO structure."
       },
       {
         "in_out": "",
-        "type": "DWORD",
-        "name": "*pcServices",
+        "type": "DWORD*",
+        "name": "pcServices",
         "description": "On input, the number of records pointed to by the pGuidServices parameter. On output, the number of valid records returned in the pGuidServices parameter. If pGuidServices is NULL, on output pcServices contains the number of services enabled."
       },
       {
         "in_out": "",
-        "type": "GUID",
-        "name": "*pGuidServices",
+        "type": "GUID*",
+        "name": "pGuidServices",
         "description": "Pointer to a buffer in memory to receive GUIDs for installed services. The buffer must be at least *pcServices *sizeof(GUID) bytes."
       }
     ],
@@ -301,14 +301,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "BLUETOOTH_DEVICE_SEARCH_PARAMS",
-        "name": "*pbtsp",
+        "type": "BLUETOOTH_DEVICE_SEARCH_PARAMS*",
+        "name": "pbtsp",
         "description": "Pointer to a BLUETOOTH_DEVICE_SEARCH_PARAMS structure. The dwSize member of the BLUETOOTH_DEVICE_SEARCH_PARAMS structure pointed to by pbtsp must match the size of the structure."
       },
       {
         "in_out": "",
-        "type": "BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdi",
+        "type": "BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdi",
         "description": "Pointer to a BLUETOOTH_DEVICE_INFO structure into which information about the first Bluetooth device found is placed. The dwSize member of the BLUETOOTH_DEVICE_INFO structure pointed to by pbtdi must match the size of the structure, or the call to the BluetoothFindFirstDevice function fails."
       }
     ],
@@ -330,14 +330,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "BLUETOOTH_FIND_RADIO_PARAMS",
-        "name": "*pbtfrp",
+        "type": "BLUETOOTH_FIND_RADIO_PARAMS*",
+        "name": "pbtfrp",
         "description": "Pointer to a BLUETOOTH_FIND_RADIO_PARAMS structure. The dwSize member of the BLUETOOTH_FIND_RADIO_PARAMS structure pointed to by pbtfrp must match the size of the structure."
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*phRadio",
+        "type": "HANDLE*",
+        "name": "phRadio",
         "description": "Pointer to where the first enumerated radio handle will be returned. When no longer needed, this handle must be closed via CloseHandle."
       }
     ],
@@ -365,8 +365,8 @@
       },
       {
         "in_out": "",
-        "type": "BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdi",
+        "type": "BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdi",
         "description": "Pointer to a BLUETOOTH_DEVICE_INFO structure into which information about the next Bluetooth device found is placed. The dwSize member of the BLUETOOTH_DEVICE_INFO structure pointed to by pbtdi must match the size of the structure, or the call to BluetoothFindNextDevice fails."
       }
     ],
@@ -394,8 +394,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*phRadio",
+        "type": "HANDLE*",
+        "name": "phRadio",
         "description": "Pointer to where the next enumerated radio handle will be returned.  When no longer needed, this handle must be released via CloseHandle."
       }
     ],
@@ -446,8 +446,8 @@
       },
       {
         "in_out": "",
-        "type": "BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdi",
+        "type": "BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdi",
         "description": "A pointer to a BLUETOOTH_DEVICE_INFO structure into which data about the first Bluetooth device will be placed. For more information, see Remarks."
       }
     ],
@@ -544,14 +544,14 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdi",
+        "type": "BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdi",
         "description": "Pointer to a  BLUETOOTH_DEVICE_INFO structure. The Address member is used for comparison."
       },
       {
         "in_out": "",
-        "type": "HBLUETOOTH_AUTHENTICATION_REGISTRATION",
-        "name": "*phRegHandle",
+        "type": "HBLUETOOTH_AUTHENTICATION_REGISTRATION*",
+        "name": "phRegHandle",
         "description": "Pointer to a structure in which the registration HANDLE is stored. Call the BluetoothUnregisterAuthentication to close the handle."
       },
       {
@@ -585,14 +585,14 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "const BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdiln",
+        "type": "const BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdiln",
         "description": "A pointer to a BLUETOOTH_DEVICE_INFO structure that specifies the bluetooth address to be utilized for comparison."
       },
       {
         "in_out": "_Out_",
-        "type": "HBLUETOOTH_AUTHENTICATION_REGISTRATION",
-        "name": "*phRegHandleOut",
+        "type": "HBLUETOOTH_AUTHENTICATION_REGISTRATION*",
+        "name": "phRegHandleOut",
         "description": "A pointer to a HBLUETOOTH_AUTHENTICATION_REGISTRATION handle associated with the registered application. Call BluetoothUnregisterAuthentication to close the handle."
       },
       {
@@ -626,8 +626,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "BLUETOOTH_ADDRESS",
-        "name": "*pAddress",
+        "type": "BLUETOOTH_ADDRESS*",
+        "name": "pAddress",
         "description": "A pointer to the address of the Bluetooth device to be removed."
       }
     ],
@@ -743,8 +743,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "HBLUETOOTH_CONTAINER_ELEMENT",
-        "name": "*pElement",
+        "type": "HBLUETOOTH_CONTAINER_ELEMENT*",
+        "name": "pElement",
         "description": "A value used to track the  location in the stream.  The first           time the BluetoothSdpGetContainerElementData function is called for a  container, *pElement should be NULL.  For subsequent calls, the value should be unmodified."
       },
       {
@@ -860,8 +860,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "BLUETOOTH_SELECT_DEVICE_PARAMS",
-        "name": "*pbtsdp",
+        "type": "BLUETOOTH_SELECT_DEVICE_PARAMS*",
+        "name": "pbtsdp",
         "description": "A pointer to a  BLUETOOTH_SELECT_DEVICE_PARAMS structure that identifies Bluetooth devices."
       }
     ],
@@ -883,8 +883,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "BLUETOOTH_SELECT_DEVICE_PARAMS",
-        "name": "*pbtsdp",
+        "type": "BLUETOOTH_SELECT_DEVICE_PARAMS*",
+        "name": "pbtsdp",
         "description": "A pointer to a  BLUETOOTH_SELECT_DEVICE_PARAMS structure that identifies the Bluetooth device resources to free."
       }
     ],
@@ -912,8 +912,8 @@
       },
       {
         "in_out": "",
-        "type": "BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdi",
+        "type": "BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdi",
         "description": "Pointer to a BLUETOOTH_DEVICE_INFO structure describing the Bluetooth device being authenticated. This can be the same structure passed to the callback function."
       },
       {
@@ -976,8 +976,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pClassGuid",
+        "type": "const GUID*",
+        "name": "pClassGuid",
         "description": "The GUID of the service to expose. This should match the GUID in the server-side INF file for the profile driver."
       },
       {
@@ -988,8 +988,8 @@
       },
       {
         "in_out": "const",
-        "type": "BLUETOOTH_LOCAL_SERVICE_INFO",
-        "name": "*pServiceInfoIn",
+        "type": "BLUETOOTH_LOCAL_SERVICE_INFO*",
+        "name": "pServiceInfoIn",
         "description": "A pointer to a BLUETOOTH_LOCAL_SERVICE_INFO structure that describes the local service to set."
       }
     ],
@@ -1017,14 +1017,14 @@
       },
       {
         "in_out": "",
-        "type": "BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdi",
+        "type": "BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdi",
         "description": "A pointer to a BLUETOOTH_DEVICE_INFO structure. Must be a previously found radio address."
       },
       {
         "in_out": "",
-        "type": "GUID",
-        "name": "*pGuidService",
+        "type": "GUID*",
+        "name": "pGuidService",
         "description": "A pointer to the service GUID on the remote device."
       },
       {
@@ -1075,8 +1075,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "BLUETOOTH_DEVICE_INFO",
-        "name": "*pbtdi",
+        "type": "BLUETOOTH_DEVICE_INFO*",
+        "name": "pbtdi",
         "description": "A pointer to the BLUETOOTH_DEVICE_INFO structure to update. For more information, see the Remarks section."
       }
     ],

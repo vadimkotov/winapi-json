@@ -1723,14 +1723,14 @@
       },
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*ppavi",
+        "type": "PAVISTREAM*",
+        "name": "ppavi",
         "description": "Pointer to the new stream interface."
       },
       {
         "in_out": "",
-        "type": "AVISTREAMINFO",
-        "name": "*psi",
+        "type": "AVISTREAMINFO*",
+        "name": "psi",
         "description": "Pointer to a structure containing information about the new stream, including the stream type and its sample rate."
       }
     ],
@@ -1797,8 +1797,8 @@
       },
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*ppavi",
+        "type": "PAVISTREAM*",
+        "name": "ppavi",
         "description": "Pointer to the new stream interface."
       },
       {
@@ -1838,8 +1838,8 @@
       },
       {
         "in_out": "",
-        "type": "AVIFILEINFO",
-        "name": "*pfi",
+        "type": "AVIFILEINFO*",
+        "name": "pfi",
         "description": "Pointer to the structure used to return file information. Typically, this parameter points to an AVIFILEINFO structure."
       },
       {
@@ -1883,8 +1883,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "PAVIFILE",
-        "name": "*ppfile",
+        "type": "PAVIFILE*",
+        "name": "ppfile",
         "description": "Pointer to a buffer that receives the new IAVIFile interface pointer."
       },
       {
@@ -1942,8 +1942,8 @@
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*lpcbData",
+        "type": "LONG*",
+        "name": "lpcbData",
         "description": "Pointer to a location indicating the size of the memory block referenced by lpData. If the data is read successfully, the value is changed to indicate the amount of data read."
       }
     ],
@@ -2029,8 +2029,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "PAVIFILE",
-        "name": "*lppf",
+        "type": "PAVIFILE*",
+        "name": "lppf",
         "description": "Pointer to the location used to return the handle created for the AVI file."
       }
     ],
@@ -2052,8 +2052,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*ppsCompressed",
+        "type": "PAVISTREAM*",
+        "name": "ppsCompressed",
         "description": "Pointer to a buffer that receives the compressed stream pointer."
       },
       {
@@ -2064,14 +2064,14 @@
       },
       {
         "in_out": "",
-        "type": "AVICOMPRESSOPTIONS",
-        "name": "*lpOptions",
+        "type": "AVICOMPRESSOPTIONS*",
+        "name": "lpOptions",
         "description": "Pointer to a structure that identifies the type of compression to use and the options to apply. You can specify video compression by identifying an appropriate handler in the AVICOMPRESSOPTIONS structure. For audio compression, specify the compressed data format."
       },
       {
         "in_out": "",
-        "type": "CLSID",
-        "name": "*pclsidHandler",
+        "type": "CLSID*",
+        "name": "pclsidHandler",
         "description": "Pointer to a class identifier used to create the stream."
       }
     ],
@@ -2093,8 +2093,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "PAVIFILE",
-        "name": "*ppfile",
+        "type": "PAVIFILE*",
+        "name": "ppfile",
         "description": "Pointer to a buffer that receives the new file interface pointer."
       },
       {
@@ -2105,8 +2105,8 @@
       },
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*papStreams",
+        "type": "PAVISTREAM*",
+        "name": "papStreams",
         "description": "Pointer to an array of stream interface pointers."
       }
     ],
@@ -2140,8 +2140,8 @@
       },
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*ppstream",
+        "type": "PAVISTREAM*",
+        "name": "ppstream",
         "description": "Handle to the created stream."
       }
     ],
@@ -2192,8 +2192,8 @@
       },
       {
         "in_out": "",
-        "type": "CLSID",
-        "name": "*pclsidHandler",
+        "type": "CLSID*",
+        "name": "pclsidHandler",
         "description": "Pointer to the file handler used to write the file. The file is created by calling the AVIFileOpen function using this handler. If a handler is not specified, a default is selected from the registry based on the file extension."
       },
       {
@@ -2263,14 +2263,14 @@
       },
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*ppavi",
+        "type": "PAVISTREAM*",
+        "name": "ppavi",
         "description": "Pointer to an array of stream interface pointers. The nStreams parameter indicates the number of pointers in the array."
       },
       {
         "in_out": "",
-        "type": "LPAVICOMPRESSOPTIONS",
-        "name": "*plpOptions",
+        "type": "LPAVICOMPRESSOPTIONS*",
+        "name": "plpOptions",
         "description": "Pointer to an array of pointers to AVICOMPRESSOPTIONS structures. These structures hold the compression options set by the dialog box. The nStreams parameter indicates the number of pointers in the array."
       }
     ],
@@ -2298,8 +2298,8 @@
       },
       {
         "in_out": "",
-        "type": "LPAVICOMPRESSOPTIONS",
-        "name": "*plpOptions",
+        "type": "LPAVICOMPRESSOPTIONS*",
+        "name": "plpOptions",
         "description": "Pointer to an array of pointers to AVICOMPRESSOPTIONS structures. These structures hold the compression options set by the dialog box. The resources allocated by AVISaveOptions for each of these structures will be freed."
       }
     ],
@@ -2327,8 +2327,8 @@
       },
       {
         "in_out": "",
-        "type": "CLSID",
-        "name": "*pclsidHandler",
+        "type": "CLSID*",
+        "name": "pclsidHandler",
         "description": "Pointer to the file handler used to write the file. The file is created by calling the AVIFileOpen function using this handler. If a handler is not specified, a default is selected from the registry based on the file extension."
       },
       {
@@ -2345,14 +2345,14 @@
       },
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*ppavi",
+        "type": "PAVISTREAM*",
+        "name": "ppavi",
         "description": "Pointer to an array of pointers to the AVISTREAM function structures. The array uses one pointer for each stream."
       },
       {
         "in_out": "",
-        "type": "LPAVICOMPRESSOPTIONS",
-        "name": "*plpOptions",
+        "type": "LPAVICOMPRESSOPTIONS*",
+        "name": "plpOptions",
         "description": "Pointer to an array of pointers to AVICOMPRESSOPTIONS structures. The array uses one pointer for each stream."
       }
     ],
@@ -2438,8 +2438,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*ppavi",
+        "type": "PAVISTREAM*",
+        "name": "ppavi",
         "description": "Pointer to a buffer that receives the new stream interface."
       },
       {
@@ -2456,8 +2456,8 @@
       },
       {
         "in_out": "",
-        "type": "CLSID",
-        "name": "*pclsidHandler",
+        "type": "CLSID*",
+        "name": "pclsidHandler",
         "description": "Pointer to the class identifier used for the stream."
       }
     ],
@@ -2624,8 +2624,8 @@
       },
       {
         "in_out": "",
-        "type": "AVISTREAMINFO",
-        "name": "*psi",
+        "type": "AVISTREAMINFO*",
+        "name": "psi",
         "description": "Pointer to a structure to contain the stream information."
       },
       {
@@ -2676,8 +2676,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*ppavi",
+        "type": "PAVISTREAM*",
+        "name": "ppavi",
         "description": "Pointer to a buffer that receives the new stream handle."
       },
       {
@@ -2706,8 +2706,8 @@
       },
       {
         "in_out": "",
-        "type": "CLSID",
-        "name": "*pclsidHandler",
+        "type": "CLSID*",
+        "name": "pclsidHandler",
         "description": "Pointer to a class identifier of the handler you want to use. If the value is NULL, the system chooses one from the registry based on the file extension or the file RIFF type."
       }
     ],
@@ -2759,14 +2759,14 @@
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*plBytes",
+        "type": "LONG*",
+        "name": "plBytes",
         "description": "Pointer to a buffer that receives the number of bytes of data written in the buffer referenced by lpBuffer. This value can be NULL."
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*plSamples",
+        "type": "LONG*",
+        "name": "plSamples",
         "description": "Pointer to a buffer that receives the number of samples written in the buffer referenced by lpBuffer. This value can be NULL."
       }
     ],
@@ -2806,8 +2806,8 @@
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*lpcbData",
+        "type": "LONG*",
+        "name": "lpcbData",
         "description": "Pointer to the location that specifies the buffer size used for lpData. If the read is successful, AVIFile changes this value to indicate the amount of data written into the buffer for lpData."
       }
     ],
@@ -2847,8 +2847,8 @@
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*lpcbFormat",
+        "type": "LONG*",
+        "name": "lpcbFormat",
         "description": "Pointer to a location indicating the size of the memory block referenced by lpFormat. On return, the value is changed to indicate the amount of data read. If lpFormat is NULL, this parameter can be used to obtain the amount of memory needed to return the format."
       }
     ],
@@ -3051,14 +3051,14 @@
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*plSampWritten",
+        "type": "LONG*",
+        "name": "plSampWritten",
         "description": "Pointer to a buffer that receives the number of samples written. This can be set to NULL."
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*plBytesWritten",
+        "type": "LONG*",
+        "name": "plBytesWritten",
         "description": "Pointer to a buffer that receives the number of bytes written. This can be set to NULL."
       }
     ],
@@ -3413,8 +3413,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*ppsEditable",
+        "type": "PAVISTREAM*",
+        "name": "ppsEditable",
         "description": "Pointer to a buffer that receives the new stream handle."
       },
       {
@@ -3454,8 +3454,8 @@
       },
       {
         "in_out": "",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Pointer to a buffer that receives the object of the interface query. If the interface specified in riid is not supported by the object, S_FALSE is returned and the ppvObj parameter used in the IUnknown interface must be set to NULL."
       }
     ],
@@ -3978,8 +3978,8 @@
       },
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*ppResult",
+        "type": "PAVISTREAM*",
+        "name": "ppResult",
         "description": "Pointer to a buffer that receives the new stream handle."
       }
     ],
@@ -4007,20 +4007,20 @@
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*plStart",
+        "type": "LONG*",
+        "name": "plStart",
         "description": "Starting position within the stream being copied. The starting position is returned."
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*plLength",
+        "type": "LONG*",
+        "name": "plLength",
         "description": "Amount of data to copy from the stream referenced by pavi. The length of the copied data is returned."
       },
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*ppResult",
+        "type": "PAVISTREAM*",
+        "name": "ppResult",
         "description": "Pointer to a buffer that receives the handle created for the new stream."
       }
     ],
@@ -4048,20 +4048,20 @@
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*plStart",
+        "type": "LONG*",
+        "name": "plStart",
         "description": "Starting position of the data to cut from the stream referenced by pavi."
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*plLength",
+        "type": "LONG*",
+        "name": "plLength",
         "description": "Amount of data to cut from the stream referenced by pavi."
       },
       {
         "in_out": "",
-        "type": "PAVISTREAM",
-        "name": "*ppResult",
+        "type": "PAVISTREAM*",
+        "name": "ppResult",
         "description": "Pointer to the handle created for the new stream."
       }
     ],
@@ -4089,14 +4089,14 @@
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*plPos",
+        "type": "LONG*",
+        "name": "plPos",
         "description": "Starting position to paste the data within the destination stream (referenced by pavi)."
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*plLength",
+        "type": "LONG*",
+        "name": "plLength",
         "description": "Pointer to a buffer that receives the amount of data pasted in the stream."
       },
       {
@@ -4142,8 +4142,8 @@
       },
       {
         "in_out": "",
-        "type": "AVISTREAMINFO",
-        "name": "*lpInfo",
+        "type": "AVISTREAMINFO*",
+        "name": "lpInfo",
         "description": "Pointer to an AVISTREAMINFO structure containing new information."
       },
       {
@@ -5086,8 +5086,8 @@
       },
       {
         "in_out": "",
-        "type": "ICINFO",
-        "name": "*lpicinfo",
+        "type": "ICINFO*",
+        "name": "lpicinfo",
         "description": "Pointer to the ICINFO structure to return information about the compressor."
       },
       {
@@ -5151,8 +5151,8 @@
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*plSize",
+        "type": "LONG*",
+        "name": "plSize",
         "description": "Maximum size desired for the compressed image. The compressor might not be able to compress the data to fit within this size. When the function returns, this parameter points to the size of the compressed image. Image sizes are specified in bytes."
       }
     ],
@@ -5233,8 +5233,8 @@
       },
       {
         "in_out": "",
-        "type": "ICINFO",
-        "name": "*lpicinfo",
+        "type": "ICINFO*",
+        "name": "lpicinfo",
         "description": "Pointer to a ICINFO structure to return information about the compressor."
       }
     ],
@@ -5520,14 +5520,14 @@
       },
       {
         "in_out": "",
-        "type": "BOOL",
-        "name": "*pfKey",
+        "type": "BOOL*",
+        "name": "pfKey",
         "description": "Returns whether or not the frame was compressed into a key frame."
       },
       {
         "in_out": "",
-        "type": "LONG",
-        "name": "*plSize",
+        "type": "LONG*",
+        "name": "plSize",
         "description": "Maximum size desired for the compressed image. The compressor might not be able to compress the data to fit within this size. When the function returns, the parameter points to the size of the compressed image. Images sizes are specified in bytes."
       }
     ],
@@ -6809,8 +6809,8 @@
       },
       {
         "in_out": "",
-        "type": "WORD",
-        "name": "*lpKeyArray",
+        "type": "WORD*",
+        "name": "lpKeyArray",
         "description": "Pointer to a KEYARRAY array indicating the key numbers of the specified percussion patches to be cached or uncached."
       },
       {
@@ -6850,8 +6850,8 @@
       },
       {
         "in_out": "",
-        "type": "WORD",
-        "name": "*lpPatchArray",
+        "type": "WORD*",
+        "name": "lpPatchArray",
         "description": "Pointer to a PATCHARRAY array indicating the patches to be cached or uncached."
       },
       {
@@ -7716,8 +7716,8 @@
       },
       {
         "in_out": "UINT",
-        "type": "FAR",
-        "name": "*puMxId",
+        "type": "FAR*",
+        "name": "puMxId",
         "description": "Pointer to a variable that receives the mixer device identifier. If no mixer device is available for the hmxobj object, the value -1 is placed in this location and the MMSYSERR_NODRIVER error value is returned."
       },
       {
@@ -8583,8 +8583,8 @@
       },
       {
         "in_out": "char",
-        "type": "_huge",
-        "name": "*pch",
+        "type": "_huge*",
+        "name": "pch",
         "description": "Pointer to the buffer to be written to the file."
       },
       {
@@ -8657,8 +8657,8 @@
       },
       {
         "in_out": "HANDLE",
-        "type": "FAR",
-        "name": "*lph",
+        "type": "FAR*",
+        "name": "lph",
         "description": "Reserved."
       },
       {

@@ -38,20 +38,20 @@
     "arguments": [
       {
         "in_out": "__out",
-        "type": "ULONG_PTR token",
-        "name": "*token",
+        "type": "ULONG_PTR token*",
+        "name": "token",
         "description": "Type: ULONG_PTR token* Pointer to a  \t\t\t\t\tULONG_PTR that receives a token. Pass the token to GdiplusShutdown when you have finished using GDI+."
       },
       {
         "in_out": "__in",
-        "type": "const GdiplusStartupInput",
-        "name": "*input",
+        "type": "const GdiplusStartupInput*",
+        "name": "input",
         "description": "Type: const GdiplusStartupInput* Pointer to a GdiplusStartupInput structure that contains the GDI+ version, a pointer to a debug callback function, a Boolean value that specifies whether to suppress the background thread, and a Boolean value that specifies whether to suppress external image codecs."
       },
       {
         "in_out": "__out",
-        "type": "GdiplusStartupOutput",
-        "name": "*output",
+        "type": "GdiplusStartupOutput*",
+        "name": "output",
         "description": "Type: GdiplusStartupOutput* Pointer to a GdiplusStartupOutput structure that receives a pointer to a notification hook function and a pointer to a notification unhook function. If the  \t\t\t\t\tSuppressBackgroundThread data member of the  \t\t\t\t\tinput parameter is FALSE, then this parameter can be NULL."
       }
     ],
@@ -85,8 +85,8 @@
       },
       {
         "in_out": "__out",
-        "type": "ImageCodecInfo",
-        "name": "*decoders",
+        "type": "ImageCodecInfo*",
+        "name": "decoders",
         "description": "Type: ImageCodecInfo* Pointer to a buffer that receives the array of  \t\t\t\t\tImageCodecInfo objects. You must allocate memory for this buffer. Call GetImageDecodersSize to determine the size of the required buffer."
       }
     ],
@@ -108,14 +108,14 @@
     "arguments": [
       {
         "in_out": "__out",
-        "type": "UINT",
-        "name": "*numDecoders",
+        "type": "UINT*",
+        "name": "numDecoders",
         "description": "Type: UINT* Pointer to a UINT that receives the number of available image decoders."
       },
       {
         "in_out": "__out",
-        "type": "UINT",
-        "name": "*size",
+        "type": "UINT*",
+        "name": "size",
         "description": "Type: UINT* Pointer to a  \t\t\t\t\tUINT that receives the total size, in bytes, of the array of  \t\t\t\t\tImageCodecInfo objects that is returned by the GetImageDecoders function."
       }
     ],
@@ -149,8 +149,8 @@
       },
       {
         "in_out": "__out",
-        "type": "ImageCodecInfo",
-        "name": "*encoders",
+        "type": "ImageCodecInfo*",
+        "name": "encoders",
         "description": "Type: ImageCodecInfo* Pointer to a buffer that receives the array of  \t\t\t\t\tImageCodecInfo objects. You must allocate memory for this buffer. Call GetImageEncodersSize to determine the size of the required buffer."
       }
     ],
@@ -172,14 +172,14 @@
     "arguments": [
       {
         "in_out": "__out",
-        "type": "UINT",
-        "name": "*numEncoders",
+        "type": "UINT*",
+        "name": "numEncoders",
         "description": "Type: UINT* Pointer to a  \t\t\t\t\tUINT that receives the number of available image encoders."
       },
       {
         "in_out": "__out",
-        "type": "UINT",
-        "name": "*size",
+        "type": "UINT*",
+        "name": "size",
         "description": "Type: UINT* Pointer to a  \t\t\t\t\tUINT that receives the total size, in bytes, of the array of  \t\t\t\t\tImageCodecInfo objects that is returned by GetImageEncoders."
       }
     ],

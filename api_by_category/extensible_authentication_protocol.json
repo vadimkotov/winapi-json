@@ -15,14 +15,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "VOID",
-        "name": "**ppWorkBuffer",
+        "type": "VOID**",
+        "name": "ppWorkBuffer",
         "description": "Pointer to a pointer that, on successful return, points to a work buffer. This buffer is opaque to RAS; the contents of the buffer are used only by the authentication protocol. The RAS connection manager passes a pointer to this buffer to the authentication protocol in subsequent calls to  RasEapMakeMessage."
       },
       {
         "in_out": "_In_",
-        "type": "PPP_EAP_INPUT",
-        "name": "*pPppEapInput",
+        "type": "PPP_EAP_INPUT*",
+        "name": "pPppEapInput",
         "description": "Pointer to a  PPP_EAP_INPUT structure that specifies initialization information for the authentication session."
       }
     ],
@@ -44,8 +44,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "VOID",
-        "name": "*pWorkBuffer",
+        "type": "VOID*",
+        "name": "pWorkBuffer",
         "description": "Pointer to the work buffer to free."
       }
     ],
@@ -67,8 +67,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*pMemory",
+        "type": "BYTE*",
+        "name": "pMemory",
         "description": "Pointer to the memory to free."
       }
     ],
@@ -108,20 +108,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "const WCHAR",
-        "name": "*pwszPhonebook",
+        "type": "const WCHAR*",
+        "name": "pwszPhonebook",
         "description": "Pointer to a null-terminated Unicode string that specifies the full path of the phone-book (PBK) file. If this parameter is NULL, the function uses the system phone book."
       },
       {
         "in_out": "_In_",
-        "type": "const WCHAR",
-        "name": "*pwszEntry",
+        "type": "const WCHAR*",
+        "name": "pwszEntry",
         "description": "Pointer to a null-terminated Unicode string that specifies an existing entry name."
       },
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*pConnectionDataIn",
+        "type": "BYTE*",
+        "name": "pConnectionDataIn",
         "description": "Pointer to the connection-specific data currently stored in the phone-book entry."
       },
       {
@@ -132,8 +132,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*pUserDataIn",
+        "type": "BYTE*",
+        "name": "pUserDataIn",
         "description": "Pointer to the user-specific data currently stored for this user in the registry."
       },
       {
@@ -144,20 +144,20 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BYTE",
-        "name": "**ppUserDataOut",
+        "type": "BYTE**",
+        "name": "ppUserDataOut",
         "description": "Pointer to a pointer that, on successful return, points to the identity data for the user. This data will be passed to the authentication protocol in the pUserData member of  PPP_EAP_INPUT during the call to  RasEapBegin.     The authentication protocol should allocate the memory buffer for the identity data. RAS will free this memory by calling  RasEapFreeMemory."
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwSizeOfUserDataOut",
+        "type": "DWORD*",
+        "name": "pdwSizeOfUserDataOut",
         "description": "Pointer to a DWORD variable that receives the size of the data pointed to by the ppUserDataOut parameter."
       },
       {
         "in_out": "_Out_",
-        "type": "WCHAR",
-        "name": "**ppwszIdentity",
+        "type": "WCHAR**",
+        "name": "ppwszIdentity",
         "description": "Pointer to a pointer that, on successful return, points to a null-terminated Unicode string that identifies the user requesting authentication. This string is passed to the authentication protocol in the pszIdentity member of  PPP_EAP_INPUT during the call to  RasEapBegin."
       }
     ],
@@ -185,8 +185,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PPP_EAP_INFO",
-        "name": "*pEapInfo",
+        "type": "PPP_EAP_INFO*",
+        "name": "pEapInfo",
         "description": "Pointer to a  PPP_EAP_INFO structure. The structure receives members that RAS sets to identify the structure version and the authentication protocol for which function pointers are requested. For more information, see  PPP_EAP_INFO."
       }
     ],
@@ -249,8 +249,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*pConnectionDataIn",
+        "type": "BYTE*",
+        "name": "pConnectionDataIn",
         "description": "Pointer to the connection data currently stored in the phone-book entry. If the phone-book entry does not contain any data, this parameter is NULL."
       },
       {
@@ -261,14 +261,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BYTE",
-        "name": "**ppConnectionDataOut",
+        "type": "BYTE**",
+        "name": "ppConnectionDataOut",
         "description": "Pointer to a pointer that, on successful return, points to the new connection data to store in the phone-book entry. None of this data should be specific to the current machine; phone-book entries should be portable from machine to machine."
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwSizeOfConnectionDataOut",
+        "type": "DWORD*",
+        "name": "pdwSizeOfConnectionDataOut",
         "description": "Pointer to a DWORD that receives the size of the new connection data to store in the phone-book entry."
       }
     ],
@@ -302,8 +302,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*pUIContextData",
+        "type": "BYTE*",
+        "name": "pUIContextData",
         "description": "Pointer to context data for the interactive UI. The authentication protocol provides a pointer to this data as a member of the  PPP_EAP_OUTPUT structure. The RAS Connection Manager receives the  PPP_EAP_OUTPUT structure as an output parameter from the  RasEapMakeMessage function."
       },
       {
@@ -314,14 +314,14 @@
       },
       {
         "in_out": "",
-        "type": "BYTE",
-        "name": "**ppDataFromInteractiveUI",
+        "type": "BYTE**",
+        "name": "ppDataFromInteractiveUI",
         "description": "[out[ Pointer to a pointer variable. On successful return, this pointer variable  points to a memory buffer that contains the data obtained by the interactive UI. The interactive UI allocates this memory. RAS passes this data back to the authentication protocol in the  PPP_EAP_INPUT structure, then RAS frees this memory by calling  RasEapFreeMemory.     If the interactive UI does not obtain any user-specific data, the pointer that ppUserData points to should be set to NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwSizeOfDataFromInteractiveUI",
+        "type": "DWORD*",
+        "name": "pdwSizeOfDataFromInteractiveUI",
         "description": "Pointer to a DWORD variable that receives the size of the data returned from the interactive UI. If the interactive UI does not obtain any user-specific data, the DWORD variable should be set to zero."
       }
     ],
@@ -343,20 +343,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "VOID",
-        "name": "*pWorkBuf",
+        "type": "VOID*",
+        "name": "pWorkBuf",
         "description": "Pointer to the work buffer. The authentication protocol provides RAS with a pointer to this buffer via the  RasEapBegin function."
       },
       {
         "in_out": "_In_",
-        "type": "PPP_EAP_PACKET",
-        "name": "*pReceivePacket",
+        "type": "PPP_EAP_PACKET*",
+        "name": "pReceivePacket",
         "description": "Pointer to a  PPP_EAP_PACKET structure that contains a received packet. A pReceivePacket value of NULL indicates either that RAS is initiating the dialog with the authentication protocol, or that a time out has occurred and the authentication protocol should resend the last packet. The authentication protocol must determine, based on context, which of these two cases is true."
       },
       {
         "in_out": "_Out_",
-        "type": "PPP_EAP_PACKET",
-        "name": "*pSendPacket",
+        "type": "PPP_EAP_PACKET*",
+        "name": "pSendPacket",
         "description": "Pointer to a  PPP_EAP_PACKET structure. The authentication protocol can use this structure to specify a packet to send."
       },
       {
@@ -367,14 +367,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PPP_EAP_OUTPUT",
-        "name": "*pEapOutput",
+        "type": "PPP_EAP_OUTPUT*",
+        "name": "pEapOutput",
         "description": "Pointer to a  PPP_EAP_OUTPUT structure."
       },
       {
         "in_out": "_In_",
-        "type": "PPP_EAP_INPUT",
-        "name": "*pEapInput",
+        "type": "PPP_EAP_INPUT*",
+        "name": "pEapInput",
         "description": "Pointer to a  PPP_EAP_INPUT structure. This parameter may be NULL."
       }
     ],

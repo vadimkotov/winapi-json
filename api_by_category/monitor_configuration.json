@@ -976,8 +976,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IDirect3DDevice9",
-        "name": "*pDirect3DDevice9",
+        "type": "IDirect3DDevice9*",
+        "name": "pDirect3DDevice9",
         "description": "Pointer to the IDirect3DDevice9 interface of the Direct3D device."
       },
       {
@@ -1040,8 +1040,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IDirect3DDevice9",
-        "name": "*pDirect3DDevice9",
+        "type": "IDirect3DDevice9*",
+        "name": "pDirect3DDevice9",
         "description": "Pointer to the IDirect3DDevice9 interface of the Direct3D device."
       },
       {
@@ -1116,8 +1116,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwLength",
+        "type": "DWORD*",
+        "name": "pdwLength",
         "description": "Receives the length of the capabilities string, in characters, including the terminating null character."
       }
     ],
@@ -1186,14 +1186,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwCurrentValue",
+        "type": "DWORD*",
+        "name": "pdwCurrentValue",
         "description": "Receives the current value of the VCP code."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "DWORD",
-        "name": "*pdwMaximumValue",
+        "type": "DWORD*",
+        "name": "pdwMaximumValue",
         "description": "Receives the maximum value of the VCP code."
       }
     ],
@@ -1296,8 +1296,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "UNICODE_STRING",
-        "name": "*pstrDeviceName",
+        "type": "UNICODE_STRING*",
+        "name": "pstrDeviceName",
         "description": "A pointer to a UNICODE_STRING structure that contains the name of the display device, as returned by the GetMonitorInfo function."
       },
       {
@@ -1360,8 +1360,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "UNICODE_STRING",
-        "name": "*pstrDeviceName",
+        "type": "UNICODE_STRING*",
+        "name": "pstrDeviceName",
         "description": "A pointer to a UNICODE_STRING structure that contains the name of the display device, as returned by the GetMonitorInfo function."
       },
       {
@@ -1372,14 +1372,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwNumPhysicalMonitorHandlesInArray",
+        "type": "DWORD*",
+        "name": "pdwNumPhysicalMonitorHandlesInArray",
         "description": "Receives the number of items that the function copies to the phPhysicalMonitorArray array."
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*phPhysicalMonitorArray",
+        "type": "HANDLE*",
+        "name": "phPhysicalMonitorArray",
         "description": "An array that receives handles to  the physical monitors. Each handle must be released by calling DestroyPhysicalMonitor."
       }
     ],

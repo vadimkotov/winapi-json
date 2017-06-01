@@ -248,8 +248,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "DOT11_WFD_GROUP_ID",
-        "name": "*pGroupIDList",
+        "type": "DOT11_WFD_GROUP_ID*",
+        "name": "pGroupIDList",
         "description": "Pointer to an array of cGroupIDList  group ids."
       }
     ],
@@ -289,8 +289,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "WFD_DISPLAY_SINK_NOTIFICATION_CALLBACK",
-        "name": "*pfnCallback",
+        "type": "WFD_DISPLAY_SINK_NOTIFICATION_CALLBACK*",
+        "name": "pfnCallback",
         "description": "A pointer to the callback function to be called whenever there is a notification for the app. Notifications that can be sent are described in WFD_DISPLAY_SINK_NOTIFICATION_CALLBACK."
       }
     ],
@@ -485,8 +485,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface to use for the connection."
       },
       {
@@ -526,8 +526,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface from which to delete the profile."
       },
       {
@@ -567,8 +567,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface to be disconnected."
       },
       {
@@ -608,8 +608,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWLAN_INTERFACE_INFO_LIST",
-        "name": "*ppInterfaceList",
+        "type": "PWLAN_INTERFACE_INFO_LIST*",
+        "name": "ppInterfaceList",
         "description": "A pointer to storage for a pointer to receive the returned list of wireless LAN interfaces in a WLAN_INTERFACE_INFO_LIST structure. The buffer for the WLAN_INTERFACE_INFO_LIST returned is allocated by the WlanEnumInterfaces function if the call succeeds."
       }
     ],
@@ -661,8 +661,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWLAN_RAW_DATA_LIST",
-        "name": "*ppPsdIEDataList",
+        "type": "PWLAN_RAW_DATA_LIST*",
+        "name": "ppPsdIEDataList",
         "description": "A pointer to a PWLAN_RAW_DATA_LIST structure that contains the formatted data list."
       }
     ],
@@ -713,8 +713,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "A pointer to the GUID of the wireless LAN interface to be queried.  The GUID of each wireless LAN interface enabled on a local computer can be determined using the WlanEnumInterfaces function."
       },
       {
@@ -731,8 +731,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWLAN_AVAILABLE_NETWORK_LIST",
-        "name": "*ppAvailableNetworkList",
+        "type": "PWLAN_AVAILABLE_NETWORK_LIST*",
+        "name": "ppAvailableNetworkList",
         "description": "A pointer to storage for a pointer to receive the returned list of visible networks in a WLAN_AVAILABLE_NETWORK_LIST structure. The buffer for the WLAN_AVAILABLE_NETWORK_LIST returned is allocated by the WlanGetAvailableNetworkList function if the call succeeds."
       }
     ],
@@ -772,8 +772,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PDOT11_NETWORK_LIST",
-        "name": "*ppNetworkList",
+        "type": "PDOT11_NETWORK_LIST*",
+        "name": "ppNetworkList",
         "description": "Pointer to a DOT11_NETWORK_LIST structure that contains the list of permitted or denied networks."
       }
     ],
@@ -801,8 +801,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of this interface."
       },
       {
@@ -813,8 +813,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWLAN_INTERFACE_CAPABILITY",
-        "name": "*ppCapability",
+        "type": "PWLAN_INTERFACE_CAPABILITY*",
+        "name": "ppCapability",
         "description": "A WLAN_INTERFACE_CAPABILITY structure that contains information about the capabilities of the specified interface."
       }
     ],
@@ -842,8 +842,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "A pointer to the GUID of the wireless LAN interface to be queried.  The GUID of each wireless LAN interface enabled on a local computer can be determined using the WlanEnumInterfaces function."
       },
       {
@@ -872,8 +872,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWLAN_BSS_LIST",
-        "name": "*ppWlanBssList",
+        "type": "PWLAN_BSS_LIST*",
+        "name": "ppWlanBssList",
         "description": "A pointer to storage for a pointer to receive the returned list of of BSS entries in a WLAN_BSS_LIST structure.  The buffer for the WLAN_BSS_LIST returned is allocated by the WlanGetNetworkBssList function if the call succeeds."
       }
     ],
@@ -901,8 +901,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the wireless interface.  A list of the GUIDs for wireless interfaces on the local computer can be retrieved using the WlanEnumInterfaces function."
       },
       {
@@ -919,14 +919,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*pstrProfileXml",
+        "type": "LPWSTR*",
+        "name": "pstrProfileXml",
         "description": "A string that is the XML representation of the queried profile. There is no predefined maximum string length."
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "DWORD",
-        "name": "*pdwFlags",
+        "type": "DWORD*",
+        "name": "pdwFlags",
         "description": "On input, a pointer to the address location used to provide additional information about the request. If this parameter is NULL on input, then no information on profile flags will be returned. On output,  a pointer to the address location used to receive profile flags. Windows XP with SP3 and Wireless LAN API for Windows XP with SP2:  Per-user profiles are not supported. Set this parameter to NULL.   The pdwFlags parameter can point to an address location that contains the following values:  ValueMeaning  WLAN_PROFILE_GET_PLAINTEXT_KEY   On input, this flag indicates that the caller wants to retrieve the plain text key from a wireless profile. If the calling thread has the required permissions, the  WlanGetProfile function returns the plain text key in the keyMaterial element of the profile returned in the buffer pointed to by the   pstrProfileXml parameter. For the WlanGetProfile call to return the plain text key, the wlan_secure_get_plaintext_key permissions from the WLAN_SECURABLE_OBJECT enumerated type must be set on the calling thread. The DACL must also contain an ACE that grants WLAN_READ_ACCESS permission to the access token of the calling thread. By default,  the permissions for retrieving the plain text key is allowed only to the members of the Administrators group on a local machine.   If the calling thread lacks the required permissions, the WlanGetProfile function returns the encrypted key in the keyMaterial element of the profile returned in the buffer pointed to by the   pstrProfileXml parameter. No error is returned if the calling thread lacks the required permissions.  Windows 7:  This flag passed on input is an extension to native wireless APIs added on Windows 7 and  later.  The pdwFlags parameter is an __inout_opt parameter on Windows 7 and  later.     WLAN_PROFILE_GROUP_POLICY   On output when the WlanGetProfile call is successful, this flag indicates that this profile was created by group policy.  A group policy profile is read-only. Neither the content nor the preference order of the profile can be changed.   WLAN_PROFILE_USER   On output when the WlanGetProfile call is successful, this flag indicates that the profile is a user profile for the specific user in whose context the calling thread resides. If not set, this profile is an all-user profile."
       },
       {
@@ -960,8 +960,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "A pointer to the GUID of the wireless LAN interface."
       },
       {
@@ -978,14 +978,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwDataSize",
+        "type": "DWORD*",
+        "name": "pdwDataSize",
         "description": "The size, in bytes,  of the user data buffer pointed to by the ppDataparameter."
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppData",
+        "type": "PBYTE*",
+        "name": "ppData",
         "description": "A pointer to the user data."
       }
     ],
@@ -1013,8 +1013,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the wireless interface.  A list of the GUIDs for wireless interfaces on the local computer can be retrieved using the WlanEnumInterfaces function."
       },
       {
@@ -1025,8 +1025,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWLAN_PROFILE_INFO_LIST",
-        "name": "*ppProfileList",
+        "type": "PWLAN_PROFILE_INFO_LIST*",
+        "name": "ppProfileList",
         "description": "A PWLAN_PROFILE_INFO_LIST structure that contains the list of profile information."
       }
     ],
@@ -1066,8 +1066,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*pstrCurrentSDDL",
+        "type": "LPWSTR*",
+        "name": "pstrCurrentSDDL",
         "description": "On input, this parameter must be NULL.  On output, this parameter receives a pointer to the security descriptor string that specifies the security settings for the object if the function call succeeds. For more information about this string, see WlanSetSecuritySettings function."
       },
       {
@@ -1218,14 +1218,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ppvData",
+        "type": "PVOID*",
+        "name": "ppvData",
         "description": "On input, this parameter must be NULL.  On output, this parameter receives a pointer to a buffer returned with the static property requested,  if the call to the WlanHostedNetworkQueryProperty function succeeds.  The data type associated with this buffer depends upon the value of OpCode parameter."
       },
       {
         "in_out": "_Out_",
-        "type": "PWLAN_OPCODE_VALUE_TYPE",
-        "name": "*pWlanOpcodeValueType",
+        "type": "PWLAN_OPCODE_VALUE_TYPE*",
+        "name": "pWlanOpcodeValueType",
         "description": "A pointer to a value that receives the value type of the wireless Hosted Network property,  if the call to the WlanHostedNetworkQueryProperty function succeeds. The returned value is an enumerated type in the WLAN_OPCODE_VALUE_TYPE enumeration defined in the Wlanapi.h header file."
       },
       {
@@ -1265,8 +1265,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PUCHAR",
-        "name": "*ppucKeyData",
+        "type": "PUCHAR*",
+        "name": "ppucKeyData",
         "description": "A pointer to a value that receives a pointer to the buffer returned with the secondary security key data,  if the call to the WlanHostedNetworkQuerySecondaryKey function succeeds."
       },
       {
@@ -1318,8 +1318,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWLAN_HOSTED_NETWORK_STATUS",
-        "name": "*ppWlanHostedNetworkStatus",
+        "type": "PWLAN_HOSTED_NETWORK_STATUS*",
+        "name": "ppWlanHostedNetworkStatus",
         "description": "On input, this parameter must be NULL.  On output, this parameter receives a pointer to the current status of the wireless Hosted Network,  if the call to the WlanHostedNetworkQueryStatus function succeeds. The current status is returned in a WLAN_HOSTED_NETWORK_STATUS structure."
       },
       {
@@ -1570,8 +1570,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface."
       },
       {
@@ -1729,8 +1729,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface to be queried."
       },
       {
@@ -1753,8 +1753,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ppData",
+        "type": "PVOID*",
+        "name": "ppData",
         "description": "Pointer to the memory location that contains the queried value of the parameter specified by the OpCode parameter. Note  If OpCode is set to wlan_intf_opcode_autoconf_enabled, wlan_intf_opcode_background_scan_enabled, or wlan_intf_opcode_media_streaming_mode, then the pointer referenced by ppData may point to an integer value. If the pointer referenced by ppData points to 0, then the integer value should be converted  to the boolean value FALSE. If the pointer referenced by ppData points to a nonzero integer, then the integer value should be converted  to the boolean value TRUE."
       },
       {
@@ -1923,8 +1923,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface."
       },
       {
@@ -1970,8 +1970,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface."
       },
       {
@@ -2029,8 +2029,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface to be queried.  The GUID of each wireless LAN interface enabled on a local computer can be determined using the WlanEnumInterfaces function."
       },
       {
@@ -2164,8 +2164,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface to be configured."
       },
       {
@@ -2217,8 +2217,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface."
       },
       {
@@ -2253,8 +2253,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwReasonCode",
+        "type": "DWORD*",
+        "name": "pdwReasonCode",
         "description": "A WLAN_REASON_CODE value that indicates why the profile is not valid."
       }
     ],
@@ -2282,8 +2282,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface."
       },
       {
@@ -2335,8 +2335,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface."
       },
       {
@@ -2400,8 +2400,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface."
       },
       {
@@ -2453,8 +2453,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface."
       },
       {
@@ -2465,8 +2465,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "LPCWSTR",
-        "name": "*strProfileNames",
+        "type": "LPCWSTR*",
+        "name": "strProfileNames",
         "description": "The names of the profiles in the desired order. Profile names are case-sensitive. This string must be NULL-terminated. Windows XP with SP3 and Wireless LAN API for Windows XP with SP2:  The supplied names must match the profile names derived automatically from the SSID of the network. For infrastructure network profiles, the SSID must be supplied for the profile name. For ad hoc network profiles, the supplied name must be the SSID of the ad hoc network followed by -adhoc."
       },
       {
@@ -2500,8 +2500,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pInterfaceGuid",
+        "type": "const GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface."
       },
       {
@@ -2629,8 +2629,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*pInterfaceGuid",
+        "type": "GUID*",
+        "name": "pInterfaceGuid",
         "description": "The GUID of the interface."
       },
       {
@@ -2653,8 +2653,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWLAN_REASON_CODE",
-        "name": "*pWlanReasonCode",
+        "type": "PWLAN_REASON_CODE*",
+        "name": "pWlanReasonCode",
         "description": "A pointer to a WLAN_REASON_CODE value that indicates why the UI display failed."
       }
     ],

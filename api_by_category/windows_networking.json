@@ -376,8 +376,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPTSTR",
-        "name": "*lplpSystem",
+        "type": "LPTSTR*",
+        "name": "lplpSystem",
         "description": "If the function returns successfully, this parameter points to a string in the output buffer that specifies the part of the resource that is accessed through system functions. (This applies only to functions specific to the resource type rather than the WNet functions.)     For example, if the input remote resource name is \\\\server\\share\\dir1\\dir2, the lpRemoteName member of the output  NETRESOURCE structure points to \\\\server\\share. Also, the lplpSystem parameter points to \\dir1\\dir2. Both strings are stored in the buffer pointed to by the lpBuffer parameter."
       }
     ],

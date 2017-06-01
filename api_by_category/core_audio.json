@@ -27,20 +27,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "PROPVARIANT",
-        "name": "*activationParams",
+        "type": "PROPVARIANT*",
+        "name": "activationParams",
         "description": "Interface-specific activation parameters. For more information, see the pActivationParams parameter in IMMDevice::Activate."
       },
       {
         "in_out": "_In_",
-        "type": "IActivateAudioInterfaceCompletionHandler",
-        "name": "*completionHandler",
+        "type": "IActivateAudioInterfaceCompletionHandler*",
+        "name": "completionHandler",
         "description": "An interface implemented by the caller that is called by Windows when the result of the activation procedure is available."
       },
       {
         "in_out": "_COM_Outptr_",
-        "type": "IActivateAudioInterfaceAsyncOperation",
-        "name": "**createAsync",
+        "type": "IActivateAudioInterfaceAsyncOperation**",
+        "name": "createAsync",
         "description": "Returns an IActivateAudioInterfaceAsyncOperation interface that represents the asynchronous operation of activating the requested WASAPI interface."
       }
     ],

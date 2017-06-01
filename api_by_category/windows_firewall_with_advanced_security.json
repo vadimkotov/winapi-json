@@ -21,8 +21,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "NETISO_ERROR_TYPE",
-        "name": "*netIsoError",
+        "type": "NETISO_ERROR_TYPE*",
+        "name": "netIsoError",
         "description": "Type: NETISO_ERROR_TYPE* The error that has occurred, indicating which network capability was missing and thus caused the failure."
       }
     ],
@@ -50,14 +50,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwNumPublicAppCs",
+        "type": "DWORD*",
+        "name": "pdwNumPublicAppCs",
         "description": "Type: DWORD* The number of app containers in the ppPublicAppCs member."
       },
       {
         "in_out": "_Out_",
-        "type": "PINET_FIREWALL_APP_CONTAINER",
-        "name": "*ppPublicAppCs",
+        "type": "PINET_FIREWALL_APP_CONTAINER*",
+        "name": "ppPublicAppCs",
         "description": "Type: PINET_FIREWALL_APP_CONTAINER* The list of app container structure elements."
       }
     ],
@@ -79,8 +79,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IEnumVARIANT",
-        "name": "**newEnum",
+        "type": "IEnumVARIANT**",
+        "name": "newEnum",
         "description": "Type: IEnumVARIANT** Enumerator interface of an INetFwRule3 object that represents the rules enforcing app containers."
       }
     ],
@@ -125,14 +125,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwNumPublicAppCs",
+        "type": "DWORD*",
+        "name": "pdwNumPublicAppCs",
         "description": "Type: DWORD* The number of app containers in the appContainerSids member."
       },
       {
         "in_out": "_Out_",
-        "type": "PSID_AND_ATTRIBUTES",
-        "name": "*appContainerSids",
+        "type": "PSID_AND_ATTRIBUTES*",
+        "name": "appContainerSids",
         "description": "Type: PSID_AND_ATTRIBUTES* The security identifiers (SIDs) of app containers that are allowed to send loopback traffic. Used for debugging purposes."
       }
     ],
@@ -172,8 +172,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HANDLE",
-        "name": "*registrationObject",
+        "type": "HANDLE*",
+        "name": "registrationObject",
         "description": "Type: HANDLE* Handle to the newly created registration."
       }
     ],
@@ -254,8 +254,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "LPCWSTR",
-        "name": "*binaries",
+        "type": "LPCWSTR*",
+        "name": "binaries",
         "description": "Type: LPCWSTR* An array of paths to the applications running in the app container."
       },
       {
@@ -306,14 +306,14 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "void",
-        "name": "*context",
+        "type": "void*",
+        "name": "context",
         "description": "Type: void* Optional context pointer. It contains the value of the context parameter of the NetworkIsolationRegisterForAppContainerChanges function."
       },
       {
         "in_out": "_In_",
-        "type": "const INET_FIREWALL_AC_CHANGE",
-        "name": "*pChange",
+        "type": "const INET_FIREWALL_AC_CHANGE*",
+        "name": "pChange",
         "description": "Type: const INET_FIREWALL_AC_CHANGE* The app container change information."
       }
     ],

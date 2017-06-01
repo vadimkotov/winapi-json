@@ -67,14 +67,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "APPLICATION_RECOVERY_CALLBACK",
-        "name": "*pRecoveryCallback",
+        "type": "APPLICATION_RECOVERY_CALLBACK*",
+        "name": "pRecoveryCallback",
         "description": "A pointer to the recovery callback function. For more information, see ApplicationRecoveryCallback."
       },
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*ppvParameter",
+        "type": "PVOID*",
+        "name": "ppvParameter",
         "description": "A pointer to the callback parameter."
       },
       {

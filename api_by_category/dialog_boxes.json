@@ -558,8 +558,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "BOOL",
-        "name": "*lpTranslated",
+        "type": "BOOL*",
+        "name": "lpTranslated",
         "description": "Type: BOOL* Indicates success or failure (TRUE indicates success, FALSE indicates failure).  If this parameter is NULL, the function returns no information about success or failure."
       },
       {
@@ -844,7 +844,7 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "LPMSGBOXPARAMS",
+        "type": "const LPMSGBOXPARAMS",
         "name": "lpMsgBoxParams",
         "description": "Type: const LPMSGBOXPARAMS A pointer to a MSGBOXPARAMS structure that contains information used to display the message box."
       }

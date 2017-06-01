@@ -21,8 +21,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PTBS_HCONTEXT",
-        "name": "*phContext",
+        "type": "PTBS_HCONTEXT*",
+        "name": "phContext",
         "description": "A pointer to a location to store the new context handle."
       }
     ],
@@ -191,14 +191,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*pabOutput",
+        "type": "PBYTE*",
+        "name": "pabOutput",
         "description": "A pointer to a buffer to receive  and store the WBCL. This parameter may be NULL to estimate the required buffer when the location pointed to by pcbOutput is also 0 on input."
       },
       {
         "in_out": "_Inout_",
-        "type": "PUNIT32",
-        "name": "*pcbOutput",
+        "type": "PUNIT32*",
+        "name": "pcbOutput",
         "description": "A pointer to an unsigned long integer that, on input, specifies the size, in bytes, of the output buffer.  If the function succeeds, this parameter, on output, receives the size, in bytes, of the data pointed to by pOutputBuf. If the function fails, this parameter does not receive a value. Calling the Tbsi_Get_TCG_Log function with a zero length buffer will return the size of the buffer required. Windows Vista with SP1 and Windows Server 2008:  This functionality is not available."
       }
     ],
@@ -226,8 +226,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "UINT32",
-        "name": "*pNextLog",
+        "type": "UINT32*",
+        "name": "pNextLog",
         "description": "A pointer to a UINT32 variable to receive the number of the next hibernation log to retrieve."
       },
       {
@@ -279,8 +279,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const PCBYTE",
-        "name": "*pabInput",
+        "type": "const PCBYTE*",
+        "name": "pabInput",
         "description": "A pointer to a buffer that contains the input to the ACPI command.  The input to the ACPI command is defined in the TCG Physical Presence Interface Specification at https://www.trustedcomputinggroup.org/specs/PCClient. The buffer should contain Arg2 and Arg3 values as defined in this document. The values for Arg0 and Arg1 are static and automatically added. For example, if this method is used for Get Physical Presence Interface Version, then Arg2 is the integer value 1 and Arg3 is empty, so the buffer should just contain an integer value of 1. If this method is used for \"Submit TPM Operation Request to Pre-OS Environment\", then Arg2 is the integer value 2 and Arg3 will be the integer for the specified operation, such as 1 for enable or 2 for disable."
       },
       {
@@ -297,8 +297,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "PUNIT32",
-        "name": "*pcbOutput",
+        "type": "PUNIT32*",
+        "name": "pcbOutput",
         "description": "A pointer to an unsigned long integer that, on input, specifies the size, in bytes, of the output buffer. If the function succeeds, this parameter, on output, receives the size, in bytes, of the data pointed to by pabOutput. If the function fails, this parameter does not receive a value."
       }
     ],
@@ -400,8 +400,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const PCBYTE",
-        "name": "*pabCommand",
+        "type": "const PCBYTE*",
+        "name": "pabCommand",
         "description": "A pointer to a buffer that contains the TPM command to process."
       },
       {
@@ -412,14 +412,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*pabResult",
+        "type": "PBYTE*",
+        "name": "pabResult",
         "description": "A pointer to a buffer to receive the result of the TPM command.  This buffer can be the same as pabCommand."
       },
       {
         "in_out": "_Inout_",
-        "type": "UINT32",
-        "name": "*pcbOutput",
+        "type": "UINT32*",
+        "name": "pcbOutput",
         "description": "An integer that, on input, specifies the size, in bytes, of the result buffer.  This value is set when the submit command returns.  If the supplied buffer is too small, this parameter, on output, is set to the required size, in bytes, for the result."
       }
     ],

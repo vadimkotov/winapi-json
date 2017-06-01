@@ -61,14 +61,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pCallback",
+        "type": "IUnknown*",
+        "name": "pCallback",
         "description": "Pointer to an IWMStatusCallback interface containing the OnStatus callback method to be used by the new backup restorer object."
       },
       {
         "in_out": "_Out_",
-        "type": "IWMLicenseBackup",
-        "name": "**ppBackup",
+        "type": "IWMLicenseBackup**",
+        "name": "ppBackup",
         "description": "Pointer to a pointer to the IWMLicenseBackup interface of the newly created backup restorer object."
       }
     ],
@@ -90,8 +90,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IUnknown",
-        "name": "**pUnkCert",
+        "type": "IUnknown**",
+        "name": "pUnkCert",
         "description": "Pointer to a pointer to the IUnknown interface of the newly created certificate object."
       }
     ],
@@ -113,8 +113,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IWMDeviceRegistration",
-        "name": "**ppDevReg",
+        "type": "IWMDeviceRegistration**",
+        "name": "ppDevReg",
         "description": "Address of a pointer to the IWMDeviceRegistration interface of the newly created device registration object."
       }
     ],
@@ -136,8 +136,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IWMDRMTranscryptor",
-        "name": "**ppTranscryptor",
+        "type": "IWMDRMTranscryptor**",
+        "name": "ppTranscryptor",
         "description": "Address of a pointer to the IWMDRMTranscryptor interface of the newly created DRM transcryptor object."
       }
     ],
@@ -159,8 +159,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IWMMetadataEditor",
-        "name": "**ppEditor",
+        "type": "IWMMetadataEditor**",
+        "name": "ppEditor",
         "description": "Pointer to a pointer to the IWMMetadataEditor interface of the newly created metadata editor object."
       }
     ],
@@ -182,8 +182,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IWMIndexer",
-        "name": "**ppIndexer",
+        "type": "IWMIndexer**",
+        "name": "ppIndexer",
         "description": "Pointer to a pointer to the IWMIndexer interface of the newly created indexer object."
       }
     ],
@@ -205,14 +205,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pCallback",
+        "type": "IUnknown*",
+        "name": "pCallback",
         "description": "Address of the IUnknown interface of the object that implements the IWMStatusCallback::OnStatus callback method used to communicate license revocation status to the application."
       },
       {
         "in_out": "_Out_",
-        "type": "IWMLicenseRevocationAgent",
-        "name": "**ppLicenseRevocationAgent",
+        "type": "IWMLicenseRevocationAgent**",
+        "name": "ppLicenseRevocationAgent",
         "description": "Address of a variable that receives a pointer to the IWMLicenseRevocationAgent interface of the newly created license revocation agent object."
       }
     ],
@@ -234,8 +234,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IWMProfileManager",
-        "name": "**ppProfileManager",
+        "type": "IWMProfileManager**",
+        "name": "ppProfileManager",
         "description": "Pointer to a pointer to the IWMProfileManager interface of the newly created profile manager object."
       }
     ],
@@ -257,8 +257,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pUnkReserved",
+        "type": "IUnknown*",
+        "name": "pUnkReserved",
         "description": "This value must be set to NULL."
       },
       {
@@ -269,8 +269,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IWMReader",
-        "name": "**ppReader",
+        "type": "IWMReader**",
+        "name": "ppReader",
         "description": "Pointer to a pointer to the IWMReader interface of the newly created reader object."
       }
     ],
@@ -292,8 +292,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IWMSecureChannel",
-        "name": "**ppChannel",
+        "type": "IWMSecureChannel**",
+        "name": "ppChannel",
         "description": "Address of a pointer to the IWMSecureChannel interface of the newly created secure channel object."
       }
     ],
@@ -315,8 +315,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IWMSecureChannel",
-        "name": "**ppChannel",
+        "type": "IWMSecureChannel**",
+        "name": "ppChannel",
         "description": "Address of a pointer to the IWMSecureChannel interface of the newly created secure channel object."
       }
     ],
@@ -338,8 +338,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IWMSecureChannel",
-        "name": "**ppChannel",
+        "type": "IWMSecureChannel**",
+        "name": "ppChannel",
         "description": "Address of a pointer to the IWMSecureChannel interface of the newly created secure channel object."
       }
     ],
@@ -361,8 +361,8 @@
     "arguments": [
       {
         "in_out": "",
-        "type": "IWMSecureChannel",
-        "name": "**ppChannel",
+        "type": "IWMSecureChannel**",
+        "name": "ppChannel",
         "description": "Address of a pointer to the IWMSecureChannel interface of the newly created secure channel object."
       }
     ],
@@ -384,8 +384,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pUnkCert",
+        "type": "IUnknown*",
+        "name": "pUnkCert",
         "description": "Pointer to an IUnknown interface. This value must be set to NULL."
       },
       {
@@ -396,8 +396,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IWMSyncReader",
-        "name": "**ppSyncReader",
+        "type": "IWMSyncReader**",
+        "name": "ppSyncReader",
         "description": "Pointer to a pointer to the IWMSyncReader interface of the newly created synchronous reader object."
       }
     ],
@@ -419,14 +419,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*pUnkReserved",
+        "type": "IUnknown*",
+        "name": "pUnkReserved",
         "description": "Pointer to an IUnknown interface. This value is not used and should be set to NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "IWMWriter",
-        "name": "**ppWriter",
+        "type": "IWMWriter**",
+        "name": "ppWriter",
         "description": "Pointer to a pointer to the IWMWriter interface of the newly created writer object."
       }
     ],
@@ -448,8 +448,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IWMWriterFileSink",
-        "name": "**ppSink",
+        "type": "IWMWriterFileSink**",
+        "name": "ppSink",
         "description": "Pointer to a pointer to the IWMWriterFileSink interface of the newly created writer file sink object."
       }
     ],
@@ -471,8 +471,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IWMWriterNetworkSink",
-        "name": "**ppSink",
+        "type": "IWMWriterNetworkSink**",
+        "name": "ppSink",
         "description": "Pointer to a pointer to the IWMWriterNetworkSink interface of the newly created writer network sink object."
       }
     ],
@@ -494,8 +494,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "IWMWriterPushSink",
-        "name": "**ppSink",
+        "type": "IWMWriterPushSink**",
+        "name": "ppSink",
         "description": "Pointer to a pointer to the IWMWriterPushSink interface of the newly created writer push sink object."
       }
     ],
@@ -529,8 +529,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pfIsAvailableOffline",
+        "type": "BOOL*",
+        "name": "pfIsAvailableOffline",
         "description": "Pointer to a Boolean value that is set to True if the file is available offline."
       }
     ],
@@ -552,14 +552,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "WCHAR",
-        "name": "*pwszFileName",
+        "type": "const WCHAR*",
+        "name": "pwszFileName",
         "description": "Pointer to a wide-character null-terminated string containing the name of the file to check for DRM-protected content."
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pfIsProtected",
+        "type": "BOOL*",
+        "name": "pfIsProtected",
         "description": "Pointer to a Boolean value that is set to True on function return if the file contains DRM-protected content."
       }
     ],
@@ -581,14 +581,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*pbData",
+        "type": "BYTE*",
+        "name": "pbData",
         "description": "Pointer to a BYTE array containing the data buffer to validate. This data should be part of a file, starting at the beginning of the file, and continuing for the number of bytes specified in pdwDataSize. You can set this parameter to NULL to retrieve the minimum number of bytes to pass."
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*pdwDataSize",
+        "type": "DWORD*",
+        "name": "pdwDataSize",
         "description": "Pointer to a DWORD containing the data size. If pbData is set to NULL, this value will be set to the minimum buffer size on return. The minimum buffer size is 512 bytes."
       }
     ],

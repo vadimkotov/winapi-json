@@ -62,14 +62,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IWICBitmapSource",
-        "name": "*pISrc",
+        "type": "IWICBitmapSource*",
+        "name": "pISrc",
         "description": "Type: IWICBitmapSource* The source bitmap."
       },
       {
         "in_out": "_Out_",
-        "type": "IWICBitmapSource",
-        "name": "**ppIDst",
+        "type": "IWICBitmapSource**",
+        "name": "ppIDst",
         "description": "Type: IWICBitmapSource** A pointer to the null-initialized destination bitmap pointer."
       }
     ],
@@ -127,8 +127,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IWICBitmap",
-        "name": "**pIBitmap",
+        "type": "IWICBitmap**",
+        "name": "pIBitmap",
         "description": "Type: IWICBitmap** A pointer that receives the bitmap."
       }
     ],
@@ -192,8 +192,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IWICBitmap",
-        "name": "**pIBitmap",
+        "type": "IWICBitmap**",
+        "name": "pIBitmap",
         "description": "Type: IWICBitmap** A pointer that receives the bitmap."
       }
     ],
@@ -221,14 +221,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "IWICMetadataWriter",
-        "name": "*pIWriter",
+        "type": "IWICMetadataWriter*",
+        "name": "pIWriter",
         "description": "Type: IWICMetadataWriter* The IWICMetadataWriter that contains the content."
       },
       {
         "in_out": "_Out_",
-        "type": "ULARGE_INTEGER",
-        "name": "*pcbSize",
+        "type": "ULARGE_INTEGER*",
+        "name": "pcbSize",
         "description": "Type: ULARGE_INTEGER* A pointer that receives the size of the metadata content."
       }
     ],
@@ -262,14 +262,14 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "WCHAR",
-        "name": "*wzName",
+        "type": "WCHAR*",
+        "name": "wzName",
         "description": "Type: WCHAR* A pointer that receives the short name associated with the GUID."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcchActual",
+        "type": "UINT*",
+        "name": "pcchActual",
         "description": "Type: UINT* The actual size needed to retrieve the entire short name associated with the GUID."
       }
     ],
@@ -309,8 +309,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "WCHAR",
-        "name": "*wzName",
+        "type": "WCHAR*",
+        "name": "wzName",
         "description": "Type: WCHAR* A pointer to a buffer that receives the schema's name. To obtain the required buffer size, call WICMapSchemaToName with cchName set to 0 and wzName set to NULL."
       },
       {
@@ -338,14 +338,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "WCHAR",
-        "name": "*wzName",
+        "type": "const WCHAR*",
+        "name": "wzName",
         "description": "Type: const WCHAR* A pointer to the short name."
       },
       {
         "in_out": "_Out_",
-        "type": "GUID",
-        "name": "*pguid",
+        "type": "GUID*",
+        "name": "pguid",
         "description": "Type: GUID* A pointer that receives the GUID associated with the given short name."
       }
     ],
@@ -373,20 +373,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*pguidVendor",
+        "type": "const GUID*",
+        "name": "pguidVendor",
         "description": "Type: const GUID* The vendor GUID."
       },
       {
         "in_out": "_In_",
-        "type": "IStream",
-        "name": "*pIStream",
+        "type": "IStream*",
+        "name": "pIStream",
         "description": "Type: IStream* The content stream in which to match a metadata format."
       },
       {
         "in_out": "_Out_",
-        "type": "GUID",
-        "name": "*pguidMetadataFormat",
+        "type": "GUID*",
+        "name": "pguidMetadataFormat",
         "description": "Type: GUID* A pointer that receives a metadata format GUID for the given parameters."
       }
     ],
@@ -414,8 +414,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IWICMetadataWriter",
-        "name": "*pIWriter",
+        "type": "IWICMetadataWriter*",
+        "name": "pIWriter",
         "description": "Type: IWICMetadataWriter* The metadata writer to write metadata to the stream."
       },
       {
@@ -426,8 +426,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IStream",
-        "name": "*pIStream",
+        "type": "IStream*",
+        "name": "pIStream",
         "description": "Type: IStream* A pointer to the stream in which to write the metadata."
       }
     ],

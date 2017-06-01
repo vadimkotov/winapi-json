@@ -786,14 +786,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*ObjectTypeGuid",
+        "type": "GUID*",
+        "name": "ObjectTypeGuid",
         "description": "A pointer to a  GUID structure that identifies the type of object, property set, or property protected by the new ACE. If this parameter is NULL, the new ACE protects the object to which the DACL is assigned."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*InheritedObjectTypeGuid",
+        "type": "GUID*",
+        "name": "InheritedObjectTypeGuid",
         "description": "A pointer to a GUID structure that identifies the type of object that can inherit the new ACE. If this parameter is non-NULL, only the specified object type can inherit the ACE. If NULL, any type of child object can inherit the ACE. In either case, inheritance is also controlled by the value of the AceFlags parameter, as well as by any protection against inheritance placed on the child objects."
       },
       {
@@ -933,14 +933,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*ObjectTypeGuid",
+        "type": "GUID*",
+        "name": "ObjectTypeGuid",
         "description": "A pointer to a  GUID structure that identifies the type of object, property set, or property protected by the new ACE. If this parameter is NULL, the new ACE protects the object to which the ACL is assigned."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*InheritedObjectTypeGuid",
+        "type": "GUID*",
+        "name": "InheritedObjectTypeGuid",
         "description": "A pointer to a GUID structure that identifies the type of object that can inherit the new ACE. If this parameter is non-NULL, only the specified object type can inherit the ACE. If NULL, any type of child object can inherit the ACE. In either case, inheritance is also controlled by the value of the AceFlags parameter, as well as by any protection against inheritance placed on the child objects."
       },
       {
@@ -1151,14 +1151,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*ObjectTypeGuid",
+        "type": "GUID*",
+        "name": "ObjectTypeGuid",
         "description": "A pointer to a  GUID structure that identifies the type of object, property set, or property protected by the new ACE. If this parameter is NULL, the new ACE protects the object to which the ACL is assigned."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*InheritedObjectTypeGuid",
+        "type": "GUID*",
+        "name": "InheritedObjectTypeGuid",
         "description": "A pointer to a GUID structure that identifies the type of object that can inherit the new ACE. If this parameter is non-NULL, only the specified object type can inherit the ACE. If NULL, any type of child object can inherit the ACE. In either case, inheritance is also controlled by the value of the AceFlags parameter, as well as by any protection against inheritance placed on the child objects."
       },
       {
@@ -1240,8 +1240,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*ReturnLength",
+        "type": "DWORD*",
+        "name": "ReturnLength",
         "description": "The size, in bytes, of the ACL. If the buffer specified by the pACL parameter is not of sufficient size, the value of this parameter is the required size."
       }
     ],
@@ -1582,8 +1582,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSID",
-        "name": "*pSid",
+        "type": "PSID*",
+        "name": "pSid",
         "description": "A pointer to a variable that receives the pointer to the allocated and initialized  SID structure."
       }
     ],
@@ -1692,8 +1692,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pSubCategoryGuids",
+        "type": "const GUID*",
+        "name": "pSubCategoryGuids",
         "description": "A pointer to an array of GUID values that specify the subcategories for which to compute effective audit policy. For a list of defined subcategories, see Auditing Constants."
       },
       {
@@ -1704,8 +1704,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PAUDIT_POLICY_INFORMATION",
-        "name": "*ppAuditPolicy",
+        "type": "PAUDIT_POLICY_INFORMATION*",
+        "name": "ppAuditPolicy",
         "description": "A pointer to a single buffer that contains both an array of pointers to AUDIT_POLICY_INFORMATION structures and the structures themselves. The AUDIT_POLICY_INFORMATION structures specify the effective audit policy for the subcategories specified by the pSubCategoryGuids array.  When you have finished using this buffer, free it by calling the AuditFree function."
       }
     ],
@@ -1733,8 +1733,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pSubCategoryGuids",
+        "type": "const GUID*",
+        "name": "pSubCategoryGuids",
         "description": "A pointer to an array of GUID values that specify the subcategories for which to compute effective audit policy. For a list of defined subcategories, see Auditing Constants."
       },
       {
@@ -1745,8 +1745,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PAUDIT_POLICY_INFORMATION",
-        "name": "*ppAuditPolicy",
+        "type": "PAUDIT_POLICY_INFORMATION*",
+        "name": "ppAuditPolicy",
         "description": "A pointer to a single buffer that contains both an array of pointers to AUDIT_POLICY_INFORMATION structures and the structures themselves. The AUDIT_POLICY_INFORMATION structures specify the effective audit policy for the subcategories specified by the pSubCategoryGuids array.  When you have finished using this buffer, free it by calling the AuditFree function."
       }
     ],
@@ -1768,8 +1768,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "GUID",
-        "name": "**ppAuditCategoriesArray",
+        "type": "GUID**",
+        "name": "ppAuditCategoriesArray",
         "description": "A pointer to a single buffer that contains both an array of pointers to GUID structures and the structures themselves. The GUID structures specify the audit-policy categories available on the computer.  When you have finished using this buffer, free it by calling the AuditFree function."
       },
       {
@@ -1797,8 +1797,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PPOLICY_AUDIT_SID_ARRAY",
-        "name": "*ppAuditSidArray",
+        "type": "PPOLICY_AUDIT_SID_ARRAY*",
+        "name": "ppAuditSidArray",
         "description": "A pointer to a single buffer that contains both an array of pointers to POLICY_AUDIT_SID_ARRAY structures and the structures themselves. The POLICY_AUDIT_SID_ARRAY structures specify the users for whom per-user audit policy is specified.  When you have finished using this buffer, free it by calling the AuditFree function."
       }
     ],
@@ -1820,8 +1820,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pAuditCategoryGuid",
+        "type": "const GUID*",
+        "name": "pAuditCategoryGuid",
         "description": "The GUID of an audit-policy category for which subcategories are enumerated. If the value of the bRetrieveAllSubCategories parameter is TRUE, this parameter is ignored."
       },
       {
@@ -1832,8 +1832,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "GUID",
-        "name": "**ppAuditSubCategoriesArray",
+        "type": "GUID**",
+        "name": "ppAuditSubCategoriesArray",
         "description": "A pointer to a single buffer that contains both an array of pointers to GUID structures and the structures themselves. The GUID structures specify the audit-policy subcategories available on the computer.  When you have finished using this buffer, free it by calling the AuditFree function."
       },
       {
@@ -1890,8 +1890,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "GUID",
-        "name": "*pAuditCategoryGuid",
+        "type": "GUID*",
+        "name": "pAuditCategoryGuid",
         "description": "A pointer to a GUID structure that represents the audit-policy category specified by the  AuditCategoryId"
       }
     ],
@@ -1913,8 +1913,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pAuditCategoryGuid",
+        "type": "const GUID*",
+        "name": "pAuditCategoryGuid",
         "description": "A pointer to a GUID structure that specifies an audit-policy category."
       },
       {
@@ -1942,14 +1942,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pAuditCategoryGuid",
+        "type": "const GUID*",
+        "name": "pAuditCategoryGuid",
         "description": "A pointer to a GUID structure that specifies an audit-policy category."
       },
       {
         "in_out": "_Out_",
-        "type": "PTSTR",
-        "name": "*ppszCategoryName",
+        "type": "PTSTR*",
+        "name": "ppszCategoryName",
         "description": "The address of a pointer to a null-terminated string that contains the display name of the audit-policy category specified by the pAuditCategoryGuid function. When you have finished using this string, free it by calling the AuditFree function."
       }
     ],
@@ -1971,14 +1971,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pAuditSubCategoryGuid",
+        "type": "const GUID*",
+        "name": "pAuditSubCategoryGuid",
         "description": "A pointer to a GUID structure that specifies an audit-policy subcategory."
       },
       {
         "in_out": "_Out_",
-        "type": "PTSTR",
-        "name": "*ppszSubCategoryName",
+        "type": "PTSTR*",
+        "name": "ppszSubCategoryName",
         "description": "The address of a pointer to a null-terminated string that contains the display name of the audit-policy subcategory specified by the pAuditSubCategoryGuid parameter. When you have finished using this string, free it by calling the AuditFree function."
       }
     ],
@@ -2006,8 +2006,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PACL",
-        "name": "*Acl",
+        "type": "PACL*",
+        "name": "Acl",
         "description": "A pointer to an ACL structure that contains the SACL information.  This should be freed later by calling the LocalFree function."
       }
     ],
@@ -2035,8 +2035,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pSubCategoryGuids",
+        "type": "const GUID*",
+        "name": "pSubCategoryGuids",
         "description": "A pointer to an array of GUID values that specify the subcategories for which to query audit policy. For a list of defined audit-policy subcategories, see Auditing Constants."
       },
       {
@@ -2047,8 +2047,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PAUDIT_POLICY_INFORMATION",
-        "name": "*ppAuditPolicy",
+        "type": "PAUDIT_POLICY_INFORMATION*",
+        "name": "ppAuditPolicy",
         "description": "A pointer to a single buffer that contains both an array of pointers to AUDIT_POLICY_INFORMATION structures and the structures themselves. The AUDIT_POLICY_INFORMATION structures specify the per-user audit policy for the subcategories specified by the pSubCategoryGuids array.  When you have finished using this buffer, free it by calling the AuditFree function."
       }
     ],
@@ -2076,8 +2076,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*ppSecurityDescriptor",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "ppSecurityDescriptor",
         "description": "The address of a pointer to a well-formed SECURITY_DESCRIPTOR structure that controls access to the Audit security object."
       }
     ],
@@ -2099,8 +2099,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const GUID",
-        "name": "*pSubCategoryGuids",
+        "type": "const GUID*",
+        "name": "pSubCategoryGuids",
         "description": "A pointer to an array of GUID values that specify the subcategories for which to query audit policy. For a list of defined audit-policy subcategories, see Auditing Constants."
       },
       {
@@ -2111,8 +2111,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PAUDIT_POLICY_INFORMATION",
-        "name": "*ppAuditPolicy",
+        "type": "PAUDIT_POLICY_INFORMATION*",
+        "name": "ppAuditPolicy",
         "description": "A pointer to a single buffer that contains both an array of pointers to AUDIT_POLICY_INFORMATION structures and the structures themselves. The AUDIT_POLICY_INFORMATION structures specify the system audit policy for the subcategories specified by the pSubCategoryGuids array.  When you have finished using this buffer, free it by calling the AuditFree function."
       }
     ],
@@ -2286,8 +2286,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*OptionalSecurityDescriptorArray",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "OptionalSecurityDescriptorArray",
         "description": "An array of SECURITY_DESCRIPTOR structures. NULL access control lists (ACLs) in these security descriptors are treated as empty ACLs. The ACL for the entire object is the logical concatenation of all of the ACLs."
       },
       {
@@ -2533,8 +2533,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSID_AND_ATTRIBUTES",
-        "name": "*pSidAttrArray",
+        "type": "PSID_AND_ATTRIBUTES*",
+        "name": "pSidAttrArray",
         "description": "A pointer to a pointer variable that receives the address of an array of SID_AND_ATTRIBUTES structures. These structures represent the groups to which the client belongs."
       },
       {
@@ -2545,8 +2545,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSID_AND_ATTRIBUTES",
-        "name": "*pRestrictedSidAttrArray",
+        "type": "PSID_AND_ATTRIBUTES*",
+        "name": "pRestrictedSidAttrArray",
         "description": "A pointer to a pointer variable that receives the address of an array of SID_AND_ATTRIBUTES structures. These structures represent the groups from which the client is restricted."
       },
       {
@@ -3445,8 +3445,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*SecurityDescriptorArray",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "SecurityDescriptorArray",
         "description": "A pointer to an array of SECURITY_DESCRIPTOR structures."
       },
       {
@@ -3867,8 +3867,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*pNewSD",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "pNewSD",
         "description": "A pointer to a variable that receives a pointer to the new security descriptor. The function allocates memory for the new security descriptor. You must call the  LocalFree function to free the returned buffer."
       }
     ],
@@ -3984,14 +3984,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*pObjectGuid",
+        "type": "GUID*",
+        "name": "pObjectGuid",
         "description": "A pointer to a GUID structure that describes the ObjectType GUID to be added to the  TRUSTEE structure."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*pInheritedObjectGuid",
+        "type": "GUID*",
+        "name": "pInheritedObjectGuid",
         "description": "A pointer to a GUID structure that describes the InheritedObjectType GUID to be added to the TRUSTEE structure."
       },
       {
@@ -4142,8 +4142,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPTSTR",
-        "name": "*StringSecurityDescriptor",
+        "type": "LPTSTR*",
+        "name": "StringSecurityDescriptor",
         "description": "A pointer to a variable that receives a pointer to a null-terminated security descriptor string. For a description of the string format, see  Security Descriptor String Format. To free the returned buffer, call the  LocalFree function."
       },
       {
@@ -4177,8 +4177,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPTSTR",
-        "name": "*StringSid",
+        "type": "LPTSTR*",
+        "name": "StringSid",
         "description": "A pointer to a variable that receives a pointer to a null-terminated SID string. To free the returned buffer, call the  LocalFree function."
       }
     ],
@@ -4212,8 +4212,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*SecurityDescriptor",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "SecurityDescriptor",
         "description": "A pointer to a variable that receives a pointer to the converted security descriptor. The returned security descriptor is self-relative. To free the returned buffer, call the  LocalFree function. To convert the security descriptor to an absolute security descriptor, use the  MakeAbsoluteSD function."
       },
       {
@@ -4247,8 +4247,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSID",
-        "name": "*Sid",
+        "type": "PSID*",
+        "name": "Sid",
         "description": "A pointer to a variable that receives a pointer to the converted SID. To free the returned buffer, call the  LocalFree function."
       }
     ],
@@ -4282,14 +4282,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*NewSecurityDescriptor",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "NewSecurityDescriptor",
         "description": "A pointer to a variable that receives a pointer to the newly allocated self-relative security descriptor. It is the caller's responsibility to call the  DestroyPrivateObjectSecurity function to free this security descriptor."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*ObjectType",
+        "type": "GUID*",
+        "name": "ObjectType",
         "description": "A pointer to a  GUID structure that identifies the type of object associated with the CurrentSecurityDescriptor parameter. If the object does not have a GUID, this parameter must be NULL."
       },
       {
@@ -4370,8 +4370,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*NewDescriptor",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "NewDescriptor",
         "description": "A pointer to a variable that receives a pointer to the newly allocated self-relative security descriptor. The caller must call the  DestroyPrivateObjectSecurity function to free this security descriptor."
       },
       {
@@ -4423,14 +4423,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*NewDescriptor",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "NewDescriptor",
         "description": "A pointer to a variable that receives a pointer to the newly allocated self-relative security descriptor. When you have finished using the security descriptor, free it by calling the   DestroyPrivateObjectSecurity function."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "*ObjectType",
+        "type": "GUID*",
+        "name": "ObjectType",
         "description": "A pointer to a  GUID structure that identifies the type of object associated with NewDescriptor. If the object does not have a GUID, set ObjectType to NULL."
       },
       {
@@ -4488,14 +4488,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*NewDescriptor",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "NewDescriptor",
         "description": "A pointer to a variable to receive a pointer to the newly allocated self-relative security descriptor. When you have finished using the security descriptor, free it by calling the   DestroyPrivateObjectSecurity function."
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "**ObjectTypes",
+        "type": "GUID**",
+        "name": "ObjectTypes",
         "description": "An array of pointers to GUID structures that identify the object types or classes of the object associated with NewDescriptor. For Active Directory objects, this array contains pointers to the class GUIDs of the object's structural class and all attached auxiliary classes. Set ObjectTypes to NULL if the object does not have a GUID."
       },
       {
@@ -4659,8 +4659,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*cbSid",
+        "type": "DWORD*",
+        "name": "cbSid",
         "description": "A pointer to a DWORD that contains the number of bytes available at pSid. The CreateWellKnownSid function stores the number of bytes actually used at this location."
       }
     ],
@@ -4711,8 +4711,8 @@
     "arguments": [
       {
         "in_out": "_Inout_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*ObjectDescriptor",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "ObjectDescriptor",
         "description": "A pointer to a pointer to the  SECURITY_DESCRIPTOR structure to be deleted. This security descriptor must have been created by a call to the  CreatePrivateObjectSecurity function."
       }
     ],
@@ -4752,8 +4752,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HPROPSHEETPAGE",
-        "name": "*phPage",
+        "type": "HPROPSHEETPAGE*",
+        "name": "phPage",
         "description": "A pointer to a HPROPSHEETPAGE that returns the created security property page."
       },
       {
@@ -4811,8 +4811,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPSECURITYINFO",
-        "name": "*ppSI",
+        "type": "LPSECURITYINFO*",
+        "name": "ppSI",
         "description": "A pointer to the instance of the ISecurityInformation interface this function creates."
       },
       {
@@ -4888,8 +4888,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPSECURITYINFO",
-        "name": "*ppSI",
+        "type": "LPSECURITYINFO*",
+        "name": "ppSI",
         "description": "A pointer to the instance of the ISecurityInformation interface this function creates."
       },
       {
@@ -4953,8 +4953,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "LPCWSTR",
-        "name": "*pwszCaption",
+        "type": "LPCWSTR*",
+        "name": "pwszCaption",
         "description": "The dialog box caption."
       },
       {
@@ -5158,8 +5158,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*pfEqual",
+        "type": "BOOL*",
+        "name": "pfEqual",
         "description": "A pointer to a BOOL that EqualDomainSid sets to TRUE if the domains of the two SIDs are equal or FALSE if they are not equal. This value cannot be NULL."
       }
     ],
@@ -5245,8 +5245,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*pAce",
+        "type": "LPVOID*",
+        "name": "pAce",
         "description": "The address of a pointer to the first free position in the ACL created when the function returns. If the ACL is not valid, this parameter is NULL. If the ACL is full, this parameter points to the byte immediately following the ACL."
       }
     ],
@@ -5327,8 +5327,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "GUID",
-        "name": "**pObjectClassGuids",
+        "type": "GUID**",
+        "name": "pObjectClassGuids",
         "description": "Optional list of GUIDs that identify the object types or names associated with pObjectName. This may be NULL if the object manager only supports one object class or has no GUID associated with the object class."
       },
       {
@@ -5415,8 +5415,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPVOID",
-        "name": "*pAce",
+        "type": "LPVOID*",
+        "name": "pAce",
         "description": "A pointer to a pointer that the function sets to the address of the ACE."
       }
     ],
@@ -5662,8 +5662,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PEXPLICIT_ACCESS",
-        "name": "*pListOfExplicitEntries",
+        "type": "PEXPLICIT_ACCESS*",
+        "name": "pListOfExplicitEntries",
         "description": "A pointer to a variable that receives a pointer to an array of EXPLICIT_ACCESS structures that describe the ACEs in the ACL. If the function succeeds, you must call the  LocalFree function to free the returned buffer."
       }
     ],
@@ -5820,32 +5820,32 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PSID",
-        "name": "*ppsidOwner",
+        "type": "PSID*",
+        "name": "ppsidOwner",
         "description": "A pointer to a variable that receives a pointer to the owner SID in the security descriptor returned in ppSecurityDescriptor or NULL if the security descriptor has no owner SID. The returned pointer is valid only if you set the OWNER_SECURITY_INFORMATION flag. Also, this parameter can be NULL if you do not need the owner SID."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PSID",
-        "name": "*ppsidGroup",
+        "type": "PSID*",
+        "name": "ppsidGroup",
         "description": "A pointer to a variable that receives a pointer to the primary group SID in the returned security descriptor or NULL if  the security descriptor has no group SID. The returned pointer is valid only if you set the GROUP_SECURITY_INFORMATION flag. Also, this parameter can be NULL if you do not need the group SID."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PACL",
-        "name": "*ppDacl",
+        "type": "PACL*",
+        "name": "ppDacl",
         "description": "A pointer to a variable that receives a pointer to the DACL in the returned security descriptor or NULL if the security descriptor has no DACL. The returned pointer is valid only if you set the DACL_SECURITY_INFORMATION flag. Also, this parameter can be NULL if you do not need the DACL."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PACL",
-        "name": "*ppSacl",
+        "type": "PACL*",
+        "name": "ppSacl",
         "description": "A pointer to a variable that receives a pointer to the SACL in the returned security descriptor  or NULL if the security descriptor has no SACL. The returned pointer is valid only if you set the SACL_SECURITY_INFORMATION flag. Also, this parameter can be NULL if you do not need the SACL."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*ppSecurityDescriptor",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "ppSecurityDescriptor",
         "description": "A pointer to a variable that receives a pointer to the security descriptor of the object. When you have finished using the pointer,  free the returned buffer by calling the  LocalFree function. This parameter is required if any one of the ppsidOwner, ppsidGroup, ppDacl, or ppSacl parameters is not NULL."
       }
     ],
@@ -5961,8 +5961,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PACL",
-        "name": "*pDacl",
+        "type": "PACL*",
+        "name": "pDacl",
         "description": "A pointer to a pointer to an  access control list (ACL). If a DACL exists, the function sets the pointer pointed to by pDacl to the address of the security descriptor's DACL. If a DACL does not exist, no value is stored.     If the function stores a NULL value in the pointer pointed to by pDacl, the security descriptor has a NULL DACL. A NULL DACL implicitly allows all access to an object. If an application expects a non-NULL DACL but encounters a NULL DACL, the application should fail securely and not allow access."
       },
       {
@@ -5996,8 +5996,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSID",
-        "name": "*pGroup",
+        "type": "PSID*",
+        "name": "pGroup",
         "description": "A pointer to a pointer to a  security identifier (SID) that identifies the primary group when the function returns. If the security descriptor does not contain a primary group, the function sets the pointer pointed to by pGroup to NULL and ignores the remaining output parameter, lpbGroupDefaulted. If the security descriptor contains a primary group, the function sets the pointer pointed to by pGroup to the address of the security descriptor's group SID and provides a valid value for the variable pointed to by lpbGroupDefaulted."
       },
       {
@@ -6054,8 +6054,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PSID",
-        "name": "*pOwner",
+        "type": "PSID*",
+        "name": "pOwner",
         "description": "A pointer to a pointer to a  security identifier (SID) that identifies the owner when the function returns. If the security descriptor does not contain an owner, the function sets the pointer pointed to by pOwner to NULL and ignores the remaining output parameter, lpbOwnerDefaulted. If the security descriptor contains an owner, the function sets the pointer pointed to by pOwner to the address of the security descriptor's owner SID and provides a valid value for the variable pointed to by lpbOwnerDefaulted."
       },
       {
@@ -6124,8 +6124,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PACL",
-        "name": "*pSacl",
+        "type": "PACL*",
+        "name": "pSacl",
         "description": "A pointer to a pointer to an  access control list (ACL). If a SACL exists, the function sets the pointer pointed to by pSacl to the address of the security descriptor's SACL. If a SACL does not exist, no value is stored.     If the function stores a NULL value in the pointer pointed to by pSacl, the security descriptor has a NULL SACL."
       },
       {
@@ -6171,32 +6171,32 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PSID",
-        "name": "*ppsidOwner",
+        "type": "PSID*",
+        "name": "ppsidOwner",
         "description": "A pointer to a variable that receives a pointer to the owner SID in the security descriptor returned in ppSecurityDescriptor. The returned pointer is valid only if you set the OWNER_SECURITY_INFORMATION flag. This parameter can be NULL if you do not need the owner SID."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PSID",
-        "name": "*ppsidGroup",
+        "type": "PSID*",
+        "name": "ppsidGroup",
         "description": "A pointer to a variable that receives a pointer to the primary group SID in the returned security descriptor. The returned pointer is valid only if you set the GROUP_SECURITY_INFORMATION flag. This parameter can be NULL if you do not need the group SID."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PACL",
-        "name": "*ppDacl",
+        "type": "PACL*",
+        "name": "ppDacl",
         "description": "A pointer to a variable that receives a pointer to the DACL in the returned security descriptor. The returned pointer is valid only if you set the DACL_SECURITY_INFORMATION flag. This parameter can be NULL if you do not need the DACL."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PACL",
-        "name": "*ppSacl",
+        "type": "PACL*",
+        "name": "ppSacl",
         "description": "A pointer to a variable that receives a pointer to the SACL in the returned security descriptor. The returned pointer is valid only if you set the SACL_SECURITY_INFORMATION flag. This parameter can be NULL if you do not need the SACL."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*ppSecurityDescriptor",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "ppSecurityDescriptor",
         "description": "A pointer to a variable that receives a pointer to the security descriptor of the object. When you have finished using the pointer,  free the returned buffer by calling the  LocalFree function. This parameter is required if any one of the ppsidOwner, ppsidGroup, ppDacl, or ppSacl parameters is not NULL."
       }
     ],
@@ -6491,8 +6491,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "DWORD",
-        "name": "*cbSid",
+        "type": "DWORD*",
+        "name": "cbSid",
         "description": "A pointer to a DWORD that GetWindowsAccountDomainSid fills with the size of the domain SID, in bytes."
       }
     ],
@@ -7097,14 +7097,14 @@
     "arguments": [
       {
         "in_out": "_Out_opt_",
-        "type": "PTRUSTEE",
-        "name": "*pOwner",
+        "type": "PTRUSTEE*",
+        "name": "pOwner",
         "description": "A pointer to a variable that receives a pointer to a  TRUSTEE structure. The function looks up the name associated with the owner  security identifier (SID)  in the pSD security descriptor, and returns a pointer to the name in the ptstrName member of the TRUSTEE structure. The function sets the TrusteeForm member to TRUSTEE_IS_NAME.     This parameter can be NULL if you are not interested in the name of the owner."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PTRUSTEE",
-        "name": "*pGroup",
+        "type": "PTRUSTEE*",
+        "name": "pGroup",
         "description": "A pointer to a variable that receives a pointer to a TRUSTEE structure. The function looks up the name associated with the primary group SID of the security descriptor, and returns a pointer to the name in the ptstrName member of the TRUSTEE structure. The function sets the TrusteeForm member to TRUSTEE_IS_NAME.      This parameter can be NULL if you are not interested in the name of the group."
       },
       {
@@ -7115,8 +7115,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PEXPLICIT_ACCESS",
-        "name": "*pListOfAccessEntries",
+        "type": "PEXPLICIT_ACCESS*",
+        "name": "pListOfAccessEntries",
         "description": "A pointer to a variable that receives a pointer to an array of EXPLICIT_ACCESS structures that describe the access control entries (ACEs) in the discretionary access control list (DACL) of the security descriptor. The  TRUSTEE structure in these EXPLICIT_ACCESS structures use the TRUSTEE_IS_NAME form. For a description of how an array of EXPLICIT_ACCESS structures describes the ACEs in an  access control list (ACL), see the  GetExplicitEntriesFromAcl function. If this parameter is NULL, the cCountOfAccessEntries parameter must also be NULL."
       },
       {
@@ -7127,8 +7127,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "PEXPLICIT_ACCESS",
-        "name": "*pListOfAuditEntries",
+        "type": "PEXPLICIT_ACCESS*",
+        "name": "pListOfAuditEntries",
         "description": "A pointer to a variable that receives a pointer to an array of EXPLICIT_ACCESS structures that describe the ACEs in the system access control list (SACL) of the security descriptor. The TRUSTEE structure in these EXPLICIT_ACCESS structures uses the TRUSTEE_IS_NAME form. If this parameter is NULL, the cCountOfAuditEntries parameter must also be NULL."
       },
       {
@@ -7847,8 +7847,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PACL",
-        "name": "*NewAcl",
+        "type": "PACL*",
+        "name": "NewAcl",
         "description": "A pointer to a variable that receives a pointer to the new ACL. If the function succeeds, you must call the  LocalFree function to free the returned buffer."
       }
     ],
@@ -8011,8 +8011,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*ObjectsSecurityDescriptor",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "ObjectsSecurityDescriptor",
         "description": "A pointer to a pointer to a SECURITY_DESCRIPTOR structure. This security descriptor must be in self-relative form.     On input, this is the current security descriptor of the private object. The function modifies it to produce the new security descriptor. If necessary, the SetPrivateObjectSecurity function allocates additional memory to produce a larger security descriptor."
       },
       {
@@ -8058,8 +8058,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "PSECURITY_DESCRIPTOR",
-        "name": "*ObjectsSecurityDescriptor",
+        "type": "PSECURITY_DESCRIPTOR*",
+        "name": "ObjectsSecurityDescriptor",
         "description": "A pointer to a pointer to a SECURITY_DESCRIPTOR structure. This security descriptor must be in self-relative form.     On input, this is the current security descriptor of the private object. The function modifies it to produce the new security descriptor. If necessary, the SetPrivateObjectSecurityEx function allocates additional memory to produce a larger security descriptor."
       },
       {
@@ -8692,8 +8692,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPBYTE",
-        "name": "*bufptr",
+        "type": "LPBYTE*",
+        "name": "bufptr",
         "description": "Pointer to the buffer that receives the data. The format of this data depends on the value of the level parameter. For more information, see  Network Management Function Buffers.     This buffer is allocated by the system and must be freed using the  NetApiBufferFree function."
       }
     ],

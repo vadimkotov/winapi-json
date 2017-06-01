@@ -21,8 +21,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID*  A pointer to the product ID."
       },
       {
@@ -39,8 +39,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SL_ACTIVATION_INFO_HEADER",
-        "name": "*pActivationInfo",
+        "type": "const SL_ACTIVATION_INFO_HEADER*",
+        "name": "pActivationInfo",
         "description": "Type: const SL_ACTIVATION_INFO_HEADER* A pointer to additional product activation information."
       },
       {
@@ -74,14 +74,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "VOID",
-        "name": "**ppTicketBlob",
+        "type": "VOID**",
+        "name": "ppTicketBlob",
         "description": "The address of a pointer to a buffer that receives the ticket BLOB. When you have finished using this buffer, free it by calling the LocalFree function."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbTicketBlob",
+        "type": "UINT*",
+        "name": "pcbTicketBlob",
         "description": "A pointer to the size, in bytes, of the ppTicketBlob buffer."
       },
       {
@@ -150,14 +150,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pAppId",
+        "type": "const SLID*",
+        "name": "pAppId",
         "description": "Type: const SLID* A pointer to the identifier of the application who's right is going to be           \t\tconsumed."
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to the identifier of product SKU. If set to NULL, all of the  product  SKU's           \t\tlicenses will be consumed."
       },
       {
@@ -255,8 +255,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to the product ID."
       },
       {
@@ -296,14 +296,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to the product ID."
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SL_ACTIVATION_INFO_HEADER",
-        "name": "*pActivationInfo",
+        "type": "const SL_ACTIVATION_INFO_HEADER*",
+        "name": "pActivationInfo",
         "description": "Type: const SL_ACTIVATION_INFO_HEADER* A pointer to additional information."
       },
       {
@@ -349,8 +349,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pApplicationId",
+        "type": "const SLID*",
+        "name": "pApplicationId",
         "description": "Type: const SLID* A pointer to the application ID."
       }
     ],
@@ -378,14 +378,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to the product ID."
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppwszInstallationId",
+        "type": "PWSTR*",
+        "name": "ppwszInstallationId",
         "description": "Type: PWSTR* The Installation ID string. Once you are finished, call the LocalFree function to       \t\tfree the memory."
       }
     ],
@@ -413,20 +413,20 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer the product ID."
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SL_ACTIVATION_INFO_HEADER",
-        "name": "*pActivationInfo",
+        "type": "const SL_ACTIVATION_INFO_HEADER*",
+        "name": "pActivationInfo",
         "description": "Type: const SL_ACTIVATION_INFO_HEADER* A pointer to additional information."
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppwszInstallationId",
+        "type": "PWSTR*",
+        "name": "ppwszInstallationId",
         "description": "Type: PWSTR* The Installation ID string. Once you are finished, call the LocalFree function to       \t\tfree the memory."
       }
     ],
@@ -454,8 +454,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pApplicationId",
+        "type": "const SLID*",
+        "name": "pApplicationId",
         "description": "Type: const SLID* A pointer to the application ID."
       },
       {
@@ -466,20 +466,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "SLDATATYPE",
-        "name": "*peDataType",
+        "type": "SLDATATYPE*",
+        "name": "peDataType",
         "description": "Type: SLDATATYPE* A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer.  The following values are valid.  ValueMeaning  SL_DATA_SZ    UNICODE string   SL_DATA_DWORD    DWORD   SL_DATA_BINARY    Binary blob"
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbValue",
+        "type": "UINT*",
+        "name": "pcbValue",
         "description": "Type: UINT* A pointer to the size, in bytes, of the ppbValue buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppbValue",
+        "type": "PBYTE*",
+        "name": "ppbValue",
         "description": "Type: PBYTE* If successful, the data is returned in the buffer allocated by the SLC.        \t\tWhen finished using the memory, free it by calling the LocalFree function."
       }
     ],
@@ -513,20 +513,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "SLDATATYPE",
-        "name": "*peDataType",
+        "type": "SLDATATYPE*",
+        "name": "peDataType",
         "description": "Type: SLDATATYPE* A pointer to the type of the data, if available."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbValue",
+        "type": "UINT*",
+        "name": "pcbValue",
         "description": "Type: UINT* A pointer to  the size, in bytes, of the data, if  available."
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppbValue",
+        "type": "PBYTE*",
+        "name": "ppbValue",
         "description": "Type: PBYTE*  The data, if available."
       }
     ],
@@ -548,14 +548,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pApplicationId",
+        "type": "const SLID*",
+        "name": "pApplicationId",
         "description": "Type: const SLID* A pointer to the identifier of the application ID to be used for the fast policy queries."
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to the identifier of the ACID to be used for the fast policy queries."
       },
       {
@@ -583,14 +583,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pApplicationId",
+        "type": "const SLID*",
+        "name": "pApplicationId",
         "description": "Type: const SLID* A pointer to the identifier of the application ID to be used for the fast policy queries."
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to the identifier of the ACID to be used for the fast policy queries."
       },
       {
@@ -601,8 +601,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HSLP",
-        "name": "*phPolicyContext",
+        "type": "HSLP*",
+        "name": "phPolicyContext",
         "description": "Type: HSLP* A pointer to a policy context for use in the SLGetApplicationPolicy function and     \t\tthe SLUnloadApplicationPolicies function."
       }
     ],
@@ -630,14 +630,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbValue",
+        "type": "UINT*",
+        "name": "pcbValue",
         "description": "Type: UINT* A pointer to the size, in bytes, of the authentication result."
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppbValue",
+        "type": "PBYTE*",
+        "name": "ppbValue",
         "description": "Type: PBYTE* A pointer to the authentication result. When finished using the memory, free it by calling the LocalFree function."
       }
     ],
@@ -659,8 +659,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pAppId",
+        "type": "const SLID*",
+        "name": "pAppId",
         "description": "A pointer to an SLID structure that specifies the application to check."
       },
       {
@@ -671,20 +671,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "SLDATATYPE",
-        "name": "*peDataType",
+        "type": "SLDATATYPE*",
+        "name": "peDataType",
         "description": "A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbValue",
+        "type": "UINT*",
+        "name": "pcbValue",
         "description": "A pointer to the size, in bytes, of the ppbValue buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "BYTE",
-        "name": "**ppbValue",
+        "type": "BYTE**",
+        "name": "ppbValue",
         "description": "The address of a pointer to an array of BYTE pointers that specifies the value associated with the name specified by the pwszValueName parameter. When you have finished using this array, free it by calling the LocalFree function."
       }
     ],
@@ -706,8 +706,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pAppId",
+        "type": "const SLID*",
+        "name": "pAppId",
         "description": "A pointer to an SLID structure that specifies the application for which to set information."
       },
       {
@@ -730,8 +730,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const BYTE",
-        "name": "*pbValue",
+        "type": "const BYTE*",
+        "name": "pbValue",
         "description": "A pointer to an array of BYTE values that specify the value associated with the name specified by the pwszValueName parameter. Some name-value pairs allow this parameter to be NULL. In this case, the existing value of the name-value pair is deleted. When you have finished using this array, free it by calling the LocalFree function."
       }
     ],
@@ -753,8 +753,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pAppId",
+        "type": "const SLID*",
+        "name": "pAppId",
         "description": "Type: const SLID* A pointer to the application ID."
       },
       {
@@ -765,20 +765,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "SLDATATYPE",
-        "name": "*peDataType",
+        "type": "SLDATATYPE*",
+        "name": "peDataType",
         "description": "Type: SLDATATYPE* A pointer to a value of the SLDATATYPE enumeration that specifies the data type in the ppbValue buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbValue",
+        "type": "UINT*",
+        "name": "pcbValue",
         "description": "Type: UINT* A pointer to the size, in bytes, of the ppbValue buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "BYTE",
-        "name": "**ppbValue",
+        "type": "BYTE**",
+        "name": "ppbValue",
         "description": "Type: BYTE** A pointer to the genuine status retrieved.  When finished using the memory, free it by calling the LocalFree function."
       }
     ],
@@ -806,20 +806,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to the product SKU ID."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pnProductKeyIds",
+        "type": "UINT*",
+        "name": "pnProductKeyIds",
         "description": "Type: UINT* A pointer to the number of product Key IDs returned."
       },
       {
         "in_out": "_Out_",
-        "type": "SLID",
-        "name": "**ppProductKeyIds",
+        "type": "SLID**",
+        "name": "ppProductKeyIds",
         "description": "Type: SLID** A pointer to an array of the product Key IDs."
       }
     ],
@@ -841,14 +841,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pnReturnedAppIds",
+        "type": "UINT*",
+        "name": "pnReturnedAppIds",
         "description": "A pointer to the number of elements in the ppReturnedAppIds array."
       },
       {
         "in_out": "_Out_",
-        "type": "SLID",
-        "name": "**ppReturnedAppIds",
+        "type": "SLID**",
+        "name": "ppReturnedAppIds",
         "description": "The address of a pointer to an array of pointers to SLID structures that identify applications."
       }
     ],
@@ -870,8 +870,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pApplicationId",
+        "type": "const SLID*",
+        "name": "pApplicationId",
         "description": "A pointer to an SLID structure that specifies the application for which to install a SAM license."
       },
       {
@@ -882,8 +882,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const BYTE",
-        "name": "*pbXmlLicenseData",
+        "type": "const BYTE*",
+        "name": "pbXmlLicenseData",
         "description": "A pointer to an array of BYTE pointers that specifies data for the SAM license."
       }
     ],
@@ -911,20 +911,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pLicenseFileId",
+        "type": "const SLID*",
+        "name": "pLicenseFileId",
         "description": "Type: const SLID* A pointer to the license file ID."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbLicenseFile",
+        "type": "UINT*",
+        "name": "pcbLicenseFile",
         "description": "Type: UINT* A pointer to the size, in bytes, of the license file BLOB."
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppbLicenseFile",
+        "type": "PBYTE*",
+        "name": "ppbLicenseFile",
         "description": "Type: PBYTE* The license file BLOB."
       }
     ],
@@ -958,14 +958,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const BYTE",
-        "name": "*pbLicenseBlob",
+        "type": "const BYTE*",
+        "name": "pbLicenseBlob",
         "description": "A pointer to the number of licenses in the BLOB."
       },
       {
         "in_out": "_Out_",
-        "type": "SLID",
-        "name": "*pLicenseFileId",
+        "type": "SLID*",
+        "name": "pLicenseFileId",
         "description": "A pointer to the license file ID."
       }
     ],
@@ -993,8 +993,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pSLLicenseId",
+        "type": "const SLID*",
+        "name": "pSLLicenseId",
         "description": "Type: const SLID* A pointer to the license ID."
       },
       {
@@ -1005,20 +1005,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "SLDATATYPE",
-        "name": "*peDataType",
+        "type": "SLDATATYPE*",
+        "name": "peDataType",
         "description": "Type: SLDATATYPE* A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer. Acceptable values are:  ValueMeaning  SL_DATA_SZ    UNICODE string   SL_DATA_DWORD    DWORD   SL_DATA_BINARY    Binary BLOB"
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbValue",
+        "type": "UINT*",
+        "name": "pcbValue",
         "description": "Type: UINT* A pointer to the size, in bytes, of the ppbValue buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppbValue",
+        "type": "PBYTE*",
+        "name": "ppbValue",
         "description": "Type: PBYTE* If successful, the data is returned in the buffer allocated by SLC.      \t\tWhen finished using the memory, free it by calling the LocalFree function."
       }
     ],
@@ -1046,14 +1046,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SLID",
-        "name": "*pAppID",
+        "type": "const SLID*",
+        "name": "pAppID",
         "description": "Type: const SLID* A pointer to a SLID that represents the application ID. \t\t  pAppIDpProductSkuIdResults  NULL  NULL  Get previous right consumption result.   NULL  Not NULL  Get licensing status of this SKU.   Not NULL  NULL  Get licensing status of this application.   Not NULL  Not NULL  Get licensing status of this application/SKU."
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to a SLID that represents the product ID. \t\t  pAppIDpProductSkuIdResults  NULL  NULL  Get previous right consumption result.   NULL  Not NULL  Get licensing status of this SKU.   Not NULL  NULL  Get licensing status of this application.   Not NULL  Not NULL  Get licensing status of this application/SKU."
       },
       {
@@ -1064,14 +1064,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pnStatusCount",
+        "type": "UINT*",
+        "name": "pnStatusCount",
         "description": "Type: UINT* A pointer to the number of the SKU's status."
       },
       {
         "in_out": "_Out_",
-        "type": "SL_LICENSING_STATUS",
-        "name": "**ppLicensingStatus",
+        "type": "SL_LICENSING_STATUS**",
+        "name": "ppLicensingStatus",
         "description": "Type: SL_LICENSING_STATUS** A pointer to the licensing status of the SKU."
       }
     ],
@@ -1117,14 +1117,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const BYTE",
-        "name": "*pbPKeySpecificData",
+        "type": "const BYTE*",
+        "name": "pbPKeySpecificData",
         "description": "A pointer to the product key specific data. If there is no PKey specific data, set pbPKeySpecificData to NULL."
       },
       {
         "in_out": "_Out_",
-        "type": "SLID",
-        "name": "*pPKeyId",
+        "type": "SLID*",
+        "name": "pPKeyId",
         "description": "A pointer to the product key ID."
       }
     ],
@@ -1152,8 +1152,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pPKeyId",
+        "type": "const SLID*",
+        "name": "pPKeyId",
         "description": "Type: const SLID* A pointer to the PKey ID."
       },
       {
@@ -1164,20 +1164,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "SLDATATYPE",
-        "name": "*peDataType",
+        "type": "SLDATATYPE*",
+        "name": "peDataType",
         "description": "Type: SLDATATYPE* The data type.  ValueMeaning  SL_DATA_SZ    UNICODE string   SL_DATA_DWORD    DWORD   SL_DATA_BINARY    Binary BLOB"
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbValue",
+        "type": "UINT*",
+        "name": "pcbValue",
         "description": "Type: UINT* A pointer to the size, in bytes, of the ppbValue buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppbValue",
+        "type": "PBYTE*",
+        "name": "ppbValue",
         "description": "Type: PBYTE* A pointer to the data returned by SLC.           \t\tWhen finished using the memory, free it by calling the LocalFree function."
       }
     ],
@@ -1211,20 +1211,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "SLDATATYPE",
-        "name": "*peDataType",
+        "type": "SLDATATYPE*",
+        "name": "peDataType",
         "description": "Type: SLDATATYPE* A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer.  ValueMeaning  SL_DATA_SZ    UNICODE string   SL_DATA_DWORD    DWORD   SL_DATA_BINARY    Binary BLOB"
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbValue",
+        "type": "UINT*",
+        "name": "pcbValue",
         "description": "Type: UINT* A pointer to the size, in bytes, of the ppbValue buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppbValue",
+        "type": "PBYTE*",
+        "name": "ppbValue",
         "description": "Type: PBYTE* If successful, the data is returned in the buffer allocated by SLC.  \t\tWhen finished using the memory, free it by calling the LocalFree function."
       }
     ],
@@ -1258,8 +1258,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwValue",
+        "type": "DWORD*",
+        "name": "pdwValue",
         "description": "Type: DWORD* A pointer to the return value."
       }
     ],
@@ -1287,8 +1287,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to the SKU ID."
       },
       {
@@ -1299,20 +1299,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "SLDATATYPE",
-        "name": "*peDataType",
+        "type": "SLDATATYPE*",
+        "name": "peDataType",
         "description": "Type: SLDATATYPE* A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer.  ValueMeaning  SL_DATA_SZ    UNICODE string   SL_DATA_DWORD    DWORD   SL_DATA_BINARY    Binary BLOB"
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbValue",
+        "type": "UINT*",
+        "name": "pcbValue",
         "description": "Type: UINT* A pointer to the size, in bytes,  of the ppbValue buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppbValue",
+        "type": "PBYTE*",
+        "name": "ppbValue",
         "description": "Type: PBYTE* If successful, the data is returned in the buffer allocated by SLC.          \t\tWhen finished using the memory, free it by calling the LocalFree function."
       }
     ],
@@ -1346,8 +1346,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pSkuOrAppId",
+        "type": "const SLID*",
+        "name": "pSkuOrAppId",
         "description": "Type: const SLID* A pointer to the SLID of the application or SKU from which to obtain information."
       },
       {
@@ -1358,8 +1358,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppwszValue",
+        "type": "PWSTR*",
+        "name": "ppwszValue",
         "description": "Type: PWSTR* The value to store. When finished using the memory, free it by calling the LocalFree function."
       }
     ],
@@ -1381,20 +1381,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pApplicationId",
+        "type": "const SLID*",
+        "name": "pApplicationId",
         "description": "A pointer to an SLID structure that specifies an application."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbXmlLicenseData",
+        "type": "UINT*",
+        "name": "pcbXmlLicenseData",
         "description": "A pointer to the size, in bytes, of the ppbXmlLicenseData array."
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppbXmlLicenseData",
+        "type": "PBYTE*",
+        "name": "ppbXmlLicenseData",
         "description": "A pointer to an array of BYTE pointers that specifies license file information about the application identified by the pApplicationId parameter. When you have finished using this array, free it by calling the LocalFree function."
       }
     ],
@@ -1440,8 +1440,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "HRESULT",
-        "name": "*phrStatus",
+        "type": "HRESULT*",
+        "name": "phrStatus",
         "description": "Type: HRESULT* A pointer to the server status."
       }
     ],
@@ -1475,20 +1475,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "SLDATATYPE",
-        "name": "*peDataType",
+        "type": "SLDATATYPE*",
+        "name": "peDataType",
         "description": "Type: SLDATATYPE* A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer.  ValueMeaning  SL_DATA_SZ    UNICODE string   SL_DATA_DWORD    DWORD   SL_DATA_BINARY    Binary blob   SL_DATA_MULTI_SZ    Double null-terminated UNICODE string array"
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbValue",
+        "type": "UINT*",
+        "name": "pcbValue",
         "description": "Type: UINT* A pointer to the size, in bytes, of the ppbValue buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppbValue",
+        "type": "PBYTE*",
+        "name": "ppbValue",
         "description": "Type: PBYTE* If successful, the data is returned in the buffer allocated by SLC.     \t\tWhen finished using the memory, free it by calling the LocalFree function."
       }
     ],
@@ -1522,8 +1522,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SLID",
-        "name": "*pQueryId",
+        "type": "const SLID*",
+        "name": "pQueryId",
         "description": "Type: const SLID* A pointer to the input ID."
       },
       {
@@ -1534,14 +1534,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pnReturnIds",
+        "type": "UINT*",
+        "name": "pnReturnIds",
         "description": "Type: UINT* A pointer to the number of returned IDs."
       },
       {
         "in_out": "_Out_",
-        "type": "SLID",
-        "name": "**ppReturnIds",
+        "type": "SLID**",
+        "name": "ppReturnIds",
         "description": "Type: SLID** An array of returned IDs."
       }
     ],
@@ -1569,20 +1569,20 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "SLDATATYPE",
-        "name": "*peDataType",
+        "type": "SLDATATYPE*",
+        "name": "peDataType",
         "description": "A pointer to a value of the SLDATATYPE enumeration that specifies the type of data in the ppbValue buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "UINT",
-        "name": "*pcbValue",
+        "type": "UINT*",
+        "name": "pcbValue",
         "description": "A pointer to the size, in bytes, of the ppbValue buffer."
       },
       {
         "in_out": "_Out_",
-        "type": "PBYTE",
-        "name": "*ppbValue",
+        "type": "PBYTE*",
+        "name": "ppbValue",
         "description": "A pointer to an array of BYTE pointers that specifies the value associated with the name specified by the pwszValueName parameter. When you have finished using this array, free it by calling the LocalFree function."
       }
     ],
@@ -1610,8 +1610,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pdwValue",
+        "type": "DWORD*",
+        "name": "pdwValue",
         "description": "A pointer to the value associated with the name specified by the pwszValueName parameter."
       }
     ],
@@ -1645,14 +1645,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const BYTE",
-        "name": "*pbLicenseBlob",
+        "type": "const BYTE*",
+        "name": "pbLicenseBlob",
         "description": "Type: const BYTE* A pointer to the licenses in the BLOB."
       },
       {
         "in_out": "_Out_",
-        "type": "SLID",
-        "name": "*pLicenseFileId",
+        "type": "SLID*",
+        "name": "pLicenseFileId",
         "description": "Type: SLID* A pointer to the license file ID."
       }
     ],
@@ -1704,8 +1704,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "SLID",
-        "name": "*pPKeyId",
+        "type": "SLID*",
+        "name": "pPKeyId",
         "description": "Type: SLID* A pointer to an identifier of the registered product key. This SLID can be used to reference PKey information later."
       }
     ],
@@ -1733,14 +1733,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pApplicationId",
+        "type": "const SLID*",
+        "name": "pApplicationId",
         "description": "Type: const SLID* A pointer to the application ID."
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to the product SKU ID."
       },
       {
@@ -1769,8 +1769,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "SLID",
-        "name": "*pPKeyId",
+        "type": "SLID*",
+        "name": "pPKeyId",
         "description": "Type: SLID* A pointer to the  identifier of the registered product key. Used to reference PKey information."
       }
     ],
@@ -1792,20 +1792,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pAppId",
+        "type": "const SLID*",
+        "name": "pAppId",
         "description": "A pointer to an SLID structure that specifies the application to check."
       },
       {
         "in_out": "_Out_",
-        "type": "SL_GENUINE_STATE",
-        "name": "*pGenuineState",
+        "type": "SL_GENUINE_STATE*",
+        "name": "pGenuineState",
         "description": "A pointer to a value of the SL_GENUINE_STATE enumeration that specifies the state of the installation."
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "SL_NONGENUINE_UI_OPTIONS",
-        "name": "*pUIOptions",
+        "type": "SL_NONGENUINE_UI_OPTIONS*",
+        "name": "pUIOptions",
         "description": "A pointer to an SL_NONGENUINE_UI_OPTIONS structure that specifies a dialog box to display if the installation is not genuine. If the value of this parameter is NULL, no dialog box is displayed."
       }
     ],
@@ -1827,8 +1827,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pAppId",
+        "type": "const SLID*",
+        "name": "pAppId",
         "description": "A pointer to an SLID structure that specifies the application to check."
       },
       {
@@ -1839,8 +1839,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "SL_GENUINE_STATE",
-        "name": "*pGenuineState",
+        "type": "SL_GENUINE_STATE*",
+        "name": "pGenuineState",
         "description": "A pointer to a value of the SL_GENUINE_STATE enumeration that specifies the state of the installation.  This function does not change the value of this parameter if the return value is any value other than S_OK. If this parameter is NULL, the function fails with a return value of E_INVALIDARG."
       }
     ],
@@ -1862,8 +1862,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "HSLC",
-        "name": "*phSLC",
+        "type": "HSLC*",
+        "name": "phSLC",
         "description": "Type: HSLC* A pointer to a context handle returned from the Software Licensing Service."
       }
     ],
@@ -1891,20 +1891,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pApplicationId",
+        "type": "const SLID*",
+        "name": "pApplicationId",
         "description": "Type: const SLID* A pointer to the identifier of the application ID to be used for the fast policy queries."
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to the identifier of the ACID to be used for the fast policy queries."
       },
       {
         "in_out": "_In_",
-        "type": "BYTE",
-        "name": "*pbData",
+        "type": "BYTE*",
+        "name": "pbData",
         "description": "Type: BYTE* A pointer to the byte data that will be sent during activation. This function assumes the data is composed of a 20-bit value stored in the first three bytes:       \t\tByte[0] is the LSB of the HIWORD, Byte[1] is the HSB of the LOWORD, and Byte[2] is the LSB of the LOWORD.    \t\tAny value composed of these three bytes that exceeds 20 bits will be rejected with E_INVALIDARG."
       },
       {
@@ -1938,8 +1938,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "ULONG",
-        "name": "*valueType",
+        "type": "ULONG*",
+        "name": "valueType",
         "description": "The data type of the policy value. The following table describes the values that this parameter can         receive.  ValueDescription REG_DWORDA 32-bit integer.  For this type, the size of the buffer that the dataBuffer           parameter specifies should be at least 4 bytes. REG_BINARYA binary value. REG_SZA wide-character, null-terminated string, including the last null character."
       },
       {
@@ -1956,8 +1956,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*resultDataSize",
+        "type": "ULONG*",
+        "name": "resultDataSize",
         "description": "The actual size of the data received for the policy value, in bytes."
       }
     ],
@@ -1985,14 +1985,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pApplicationId",
+        "type": "const SLID*",
+        "name": "pApplicationId",
         "description": "Type: const SLID* A pointer to the application ID."
       },
       {
         "in_out": "_In_opt_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to the product SKU ID."
       },
       {
@@ -2032,8 +2032,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pApplicationId",
+        "type": "const SLID*",
+        "name": "pApplicationId",
         "description": "Type: const SLID* A pointer to the  application ID to which the event will be registered."
       },
       {
@@ -2102,14 +2102,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pProductSkuId",
+        "type": "const SLID*",
+        "name": "pProductSkuId",
         "description": "Type: const SLID* A pointer to the product SKU ID."
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pProductKeyId",
+        "type": "const SLID*",
+        "name": "pProductKeyId",
         "description": "Type: const SLID* A pointer to the product key ID."
       }
     ],
@@ -2137,8 +2137,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pLicenseFileId",
+        "type": "const SLID*",
+        "name": "pLicenseFileId",
         "description": "Type: const SLID* A pointer to the license file ID."
       }
     ],
@@ -2166,8 +2166,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pPKeyId",
+        "type": "const SLID*",
+        "name": "pPKeyId",
         "description": "Type: const SLID* A pointer to the identifier of the registered product key."
       }
     ],
@@ -2189,8 +2189,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pApplicationId",
+        "type": "const SLID*",
+        "name": "pApplicationId",
         "description": "A pointer to an SLID that specifies the application for which to uninstall a SAM license."
       }
     ],
@@ -2253,8 +2253,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "const SLID",
-        "name": "*pApplicationId",
+        "type": "const SLID*",
+        "name": "pApplicationId",
         "description": "Type: const SLID* A pointer to the application ID that the event will be unregistered from."
       },
       {

@@ -97,8 +97,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "void",
-        "name": "*lpProps",
+        "type": "void*",
+        "name": "lpProps",
         "description": "Type: void* When this function returns, contains a pointer to a PROPPRG structure."
       },
       {
@@ -144,8 +144,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*lpProps",
+        "type": "const void*",
+        "name": "lpProps",
         "description": "Type: const void* A property group record buffer that holds the data."
       },
       {
@@ -185,8 +185,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "PROPVARIANT",
-        "name": "*ppropvar",
+        "type": "PROPVARIANT*",
+        "name": "ppropvar",
         "description": "Type: PROPVARIANT* On entry, contains a pointer to a PROPVARIANT structure that contains the original value. When this function returns successfully, contains the canonical value."
       }
     ],
@@ -208,8 +208,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyStore",
-        "name": "*pps",
+        "type": "IPropertyStore*",
+        "name": "pps",
         "description": "Type: IPropertyStore* Pointer to an IPropertyStore object that represents the property store."
       },
       {
@@ -220,8 +220,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid."
       }
     ],
@@ -249,14 +249,14 @@
       },
       {
         "in_out": "",
-        "type": "IDelayedPropertyStoreFactory",
-        "name": "*pdpsf",
+        "type": "IDelayedPropertyStoreFactory*",
+        "name": "pdpsf",
         "description": "Type: IDelayedPropertyStoreFactory* Interface pointer to an instance of IDelayedPropertyStoreFactory."
       },
       {
         "in_out": "_In_",
-        "type": "DWORD",
-        "name": "*rgStoreIds",
+        "type": "const DWORD*",
+        "name": "rgStoreIds",
         "description": "Type: const DWORD* Pointer to an array of property store IDs. This array does not need to be initialized."
       },
       {
@@ -273,8 +273,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyStore."
       }
     ],
@@ -302,8 +302,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains a pointer to the desired interface, typically IPropertyStore or IPersistSerializedPropStorage."
       }
     ],
@@ -325,8 +325,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "**prgpunkStores",
+        "type": "IUnknown**",
+        "name": "prgpunkStores",
         "description": "Type: IUnknown** Address of a pointer to an array of property stores that implement either IPropertyStore or IPropertySetStorage."
       },
       {
@@ -343,8 +343,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyStore."
       }
     ],
@@ -366,20 +366,20 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "PROPERTYKEY",
-        "name": "*rgpropkey",
+        "type": "const PROPERTYKEY*",
+        "name": "rgpropkey",
         "description": "Type: const PROPERTYKEY* Pointer to an array of PROPERTYKEY structures that name the specific properties whose changes are being stored. If this value is NULL, cChanges must be 0."
       },
       {
         "in_out": "_In_opt_",
-        "type": "PKA_FLAGS",
-        "name": "*rgflags",
+        "type": "const PKA_FLAGS*",
+        "name": "rgflags",
         "description": "Type: const PKA_FLAGS* Pointer to an array of PKA_FLAGS values. If this value is NULL, cChanges must be 0."
       },
       {
         "in_out": "_In_opt_",
-        "type": "PROPVARIANT",
-        "name": "*rgpropvar",
+        "type": "const PROPVARIANT*",
+        "name": "rgpropvar",
         "description": "Type: const PROPVARIANT* Pointer to an array of PROPVARIANT structures. If this value is NULL, cChanges must be 0."
       },
       {
@@ -396,8 +396,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyChangeArray."
       }
     ],
@@ -419,8 +419,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punk",
+        "type": "IUnknown*",
+        "name": "punk",
         "description": "Type: IUnknown* A pointer to an interface that supports either IPropertyStore or IPropertySetStorage."
       },
       {
@@ -437,8 +437,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns successfully, contains the address of a pointer to an interface guaranteed to support IPropertyStore."
       }
     ],
@@ -460,8 +460,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertySetStorage",
-        "name": "*ppss",
+        "type": "IPropertySetStorage*",
+        "name": "ppss",
         "description": "Type: IPropertySetStorage* A pointer to an IPropertySetStorage interface."
       },
       {
@@ -478,8 +478,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer specified in riid."
       }
     ],
@@ -525,8 +525,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** The address of an IPropertyChange interface pointer."
       }
     ],
@@ -560,8 +560,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** The address of an IPropertyDescriptionList interface pointer."
       }
     ],
@@ -648,8 +648,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppszDisplay",
+        "type": "PWSTR*",
+        "name": "ppszDisplay",
         "description": "Type: PWSTR* When the function returns, contains a pointer to a null-terminated, Unicode string representation of the requested property value."
       }
     ],
@@ -671,14 +671,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyStore",
-        "name": "*pps",
+        "type": "IPropertyStore*",
+        "name": "pps",
         "description": "Type: IPropertyStore* Pointer to an IPropertyStore, which represents the property store from which the property value is taken."
       },
       {
         "in_out": "_In_",
-        "type": "IPropertyDescription",
-        "name": "*ppd",
+        "type": "IPropertyDescription*",
+        "name": "ppd",
         "description": "Type: IPropertyDescription* Pointer to an IPropertyDescription, which represents the property whose value is being retrieved."
       },
       {
@@ -689,8 +689,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*ppszDisplay",
+        "type": "LPWSTR*",
+        "name": "ppszDisplay",
         "description": "Type: LPWSTR* When the function returns, contains a pointer to the formatted value as a null-terminated, Unicode string."
       }
     ],
@@ -724,8 +724,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns successfully, contains the interface pointer requested in riid."
       }
     ],
@@ -747,8 +747,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punkItem",
+        "type": "IUnknown*",
+        "name": "punkItem",
         "description": "Type: IUnknown* A pointer to the IUnknown interface of a Shell item that supports IShellItem.                       Windows XP: Use SHCreateShellItem to create the Shell item. Windows Vista: Use SHCreateItemFromIDList, SHCreateItemFromParsingName, SHCreateItemFromRelativeName, SHCreateItemInKnownFolder, or SHCreateItemWithParent to create the Shell item."
       },
       {
@@ -765,8 +765,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid."
       }
     ],
@@ -788,8 +788,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punkItem",
+        "type": "IUnknown*",
+        "name": "punkItem",
         "description": "Type: IUnknown* A pointer to the IUnknown interface of a Shell item that supports IShellItem.                       Windows XP: Use SHCreateShellItem to create the Shell item. Windows Vista: Use SHCreateItemFromIDList, SHCreateItemFromParsingName, SHCreateItemFromRelativeName, SHCreateItemInKnownFolder, or SHCreateItemWithParent to create the Shell item."
       },
       {
@@ -800,8 +800,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punkCreateObject",
+        "type": "IUnknown*",
+        "name": "punkCreateObject",
         "description": "Type: IUnknown* Pointer to the IUnknown interface of a class factory object that supports ICreateObject."
       },
       {
@@ -812,8 +812,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns successfully, contains the interface pointer requested in riid. This is typically IPropertyStore or IPropertyStoreCapabilities."
       }
     ],
@@ -853,8 +853,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PROPVARIANT",
-        "name": "*ppropvar",
+        "type": "PROPVARIANT*",
+        "name": "ppropvar",
         "description": "Type: PROPVARIANT* When this function returns, contains the requested value."
       }
     ],
@@ -882,8 +882,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*ppszCanonicalName",
+        "type": "PWSTR*",
+        "name": "ppszCanonicalName",
         "description": "Type: PWSTR* When this function returns, contains a pointer to the property name as a null-terminated Unicode string."
       }
     ],
@@ -917,8 +917,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyDescription, IPropertyDescriptionAliasInfo, or IPropertyDescriptionSearchInfo."
       }
     ],
@@ -952,8 +952,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyDescription, IPropertyDescriptionAliasInfo, or  IPropertyDescriptionSearchInfo."
       }
     ],
@@ -987,8 +987,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyDescriptionList."
       }
     ],
@@ -1028,8 +1028,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PROPVARIANT",
-        "name": "**ppropvar",
+        "type": "PROPVARIANT**",
+        "name": "ppropvar",
         "description": "Type: PROPVARIANT** When this function returns, contains the requested value."
       }
     ],
@@ -1057,8 +1057,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PROPERTYKEY",
-        "name": "*ppropkey",
+        "type": "PROPERTYKEY*",
+        "name": "ppropkey",
         "description": "Type: PROPERTYKEY* When this function returns, contains the requested property key."
       }
     ],
@@ -1086,8 +1086,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertySystem."
       }
     ],
@@ -1109,20 +1109,20 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyStore",
-        "name": "*pps",
+        "type": "IPropertyStore*",
+        "name": "pps",
         "description": "Type: IPropertyStore* Pointer to an instance of the IPropertyStore interface, which represents the property store from which to get the value."
       },
       {
         "in_out": "_In_",
-        "type": "IPropertyDescription",
-        "name": "*ppd",
+        "type": "IPropertyDescription*",
+        "name": "ppd",
         "description": "Type: IPropertyDescription* Pointer to an instance of the IPropertyDescription interface, which represents the property in the property store."
       },
       {
         "in_out": "_Out_",
-        "type": "PROPVARIANT",
-        "name": "*ppropvar",
+        "type": "PROPVARIANT*",
+        "name": "ppropvar",
         "description": "Type: PROPVARIANT* Pointer to an uninitialized PROPVARIANT structure. When this function returns, points to the requested property value."
       }
     ],
@@ -1150,8 +1150,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "CLSID",
-        "name": "*pclsid",
+        "type": "CLSID*",
+        "name": "pclsid",
         "description": "Type: CLSID* When this function returns, contains the requested property handler CLSID."
       }
     ],
@@ -1173,8 +1173,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1202,8 +1202,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1214,8 +1214,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL",
-        "name": "*value",
+        "type": "BOOL*",
+        "name": "value",
         "description": "Type: BOOL* When this function returns successfully, contains a pointer to the value read from the property."
       }
     ],
@@ -1237,8 +1237,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1249,8 +1249,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BSTR",
-        "name": "*value",
+        "type": "BSTR*",
+        "name": "value",
         "description": "Type: BSTR* When this function returns, contains a pointer to a BSTR property value."
       }
     ],
@@ -1272,8 +1272,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1284,8 +1284,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*value",
+        "type": "DWORD*",
+        "name": "value",
         "description": "Type: DWORD* When this function returns, contains a pointer to a DWORD property value."
       }
     ],
@@ -1307,8 +1307,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1319,8 +1319,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "GUID",
-        "name": "*value",
+        "type": "GUID*",
+        "name": "value",
         "description": "Type: GUID* When this function returns, contains a pointer to a GUID property value."
       }
     ],
@@ -1342,8 +1342,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1354,8 +1354,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "int",
-        "name": "*value",
+        "type": "int*",
+        "name": "value",
         "description": "Type: int* When this function returns, contains a pointer to an int property value."
       }
     ],
@@ -1377,8 +1377,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1389,8 +1389,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LONG",
-        "name": "*value",
+        "type": "LONG*",
+        "name": "value",
         "description": "Type: LONG* When this function returns, contains a pointer to a LONG property value."
       }
     ],
@@ -1412,8 +1412,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1424,8 +1424,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "POINTL",
-        "name": "*value",
+        "type": "POINTL*",
+        "name": "value",
         "description": "Type: POINTL* When this function returns, contains a pointer to a POINTL structure that contains the property coordinates."
       }
     ],
@@ -1447,8 +1447,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1459,8 +1459,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "POINTS",
-        "name": "*value",
+        "type": "POINTS*",
+        "name": "value",
         "description": "Type: POINTS* When this function returns successfully, contains a pointer to a POINTS structure that contains the property coordinates."
       }
     ],
@@ -1482,8 +1482,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1494,8 +1494,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PROPERTYKEY",
-        "name": "*value",
+        "type": "PROPERTYKEY*",
+        "name": "value",
         "description": "Type: PROPERTYKEY* When this function returns, contains a pointer to a property key value."
       }
     ],
@@ -1517,8 +1517,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1529,8 +1529,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "RECTL",
-        "name": "*value",
+        "type": "RECTL*",
+        "name": "value",
         "description": "Type: RECTL* When this function returns, contains a pointer to a RECTL structure that contains the property coordinates."
       }
     ],
@@ -1552,8 +1552,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1564,8 +1564,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "SHORT",
-        "name": "*value",
+        "type": "SHORT*",
+        "name": "value",
         "description": "Type: SHORT* When this function returns, contains a pointer to a SHORT property value."
       }
     ],
@@ -1587,8 +1587,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1628,8 +1628,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1640,8 +1640,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*value",
+        "type": "PWSTR*",
+        "name": "value",
         "description": "Type: PWSTR* When this function returns, contains a pointer to a string data value from a property in a property bag and allocates memory for the string that is read. The caller of the PSPropertyBag_ReadStrAlloc function needs to call a CoTaskMemFree function on this parameter."
       }
     ],
@@ -1663,8 +1663,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object, that represents the property bag in which the property is stored."
       },
       {
@@ -1675,8 +1675,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IStream",
-        "name": "**value",
+        "type": "IStream**",
+        "name": "value",
         "description": "Type: IStream** The address of a pointer that, when this function returns successfully, receives the IStream object."
       }
     ],
@@ -1698,8 +1698,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object, that represents the property bag in which the property is stored."
       },
       {
@@ -1710,14 +1710,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "VARIANT",
-        "name": "*var",
+        "type": "VARIANT*",
+        "name": "var",
         "description": "Type: VARIANT* Returns on successful function completion a pointer to a VARIANT data type that contains the property value."
       },
       {
         "in_out": "_Out_",
-        "type": "VARTYPE",
-        "name": "*type",
+        "type": "VARTYPE*",
+        "name": "type",
         "description": "Type: VARTYPE* If type is VT_EMPTY, this function reads the VARIANT of the property in the IPropertyBag   propBag parameter. If type is not VT_EMPTY and not the same as the VARIANT read, then this function attempts to convert the VARIANT read to the VARTYPE defined by type parameter before returning."
       }
     ],
@@ -1739,8 +1739,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1774,8 +1774,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object, that represents the property bag in which the property is stored."
       },
       {
@@ -1792,8 +1792,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this method returns successfully, contains the interface pointer requested in riid. This is typically riid."
       }
     ],
@@ -1815,8 +1815,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1850,8 +1850,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1885,8 +1885,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1920,8 +1920,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1932,8 +1932,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*value",
+        "type": "const GUID*",
+        "name": "value",
         "description": "Type: const GUID* A pointer to a GUID value to which the named property should be set."
       }
     ],
@@ -1955,8 +1955,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -1990,8 +1990,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -2025,8 +2025,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -2037,8 +2037,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "POINTL",
-        "name": "*value",
+        "type": "const POINTL*",
+        "name": "value",
         "description": "Type: const POINTL* A pointer to a POINTL structure that specifies the coordinates to store in the  property."
       }
     ],
@@ -2060,8 +2060,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -2072,8 +2072,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "POINTS",
-        "name": "*value",
+        "type": "const POINTS*",
+        "name": "value",
         "description": "Type: const POINTS* Pointer to a POINTS structure that specifies the coordinates to store in the property."
       }
     ],
@@ -2095,8 +2095,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -2130,8 +2130,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -2142,8 +2142,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "RECTL",
-        "name": "*value",
+        "type": "const RECTL*",
+        "name": "value",
         "description": "Type: const RECTL* A pointer to a RECTL structure that specifies the coordinates to store in the property."
       }
     ],
@@ -2165,8 +2165,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -2200,8 +2200,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -2235,8 +2235,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -2247,8 +2247,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IStream",
-        "name": "*value",
+        "type": "IStream*",
+        "name": "value",
         "description": "Type: IStream* A pointer to the IStream object to write to the property."
       }
     ],
@@ -2270,8 +2270,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -2305,8 +2305,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyBag",
-        "name": "*propBag",
+        "type": "IPropertyBag*",
+        "name": "propBag",
         "description": "Type: IPropertyBag* A pointer to an IPropertyBag object that represents the property bag in which the property is stored."
       },
       {
@@ -2317,8 +2317,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IUnknown",
-        "name": "*punk",
+        "type": "IUnknown*",
+        "name": "punk",
         "description": "Type: IUnknown* A pointer to an IUnknown derived interface that copies the specified property of an unknown data value in a property bag."
       }
     ],
@@ -2346,8 +2346,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PROPERTYKEY",
-        "name": "*pkey",
+        "type": "PROPERTYKEY*",
+        "name": "pkey",
         "description": "Type: PROPERTYKEY* When this function returns, contains a pointer to a PROPERTYKEY structure."
       }
     ],
@@ -2392,14 +2392,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyStore",
-        "name": "*pps",
+        "type": "IPropertyStore*",
+        "name": "pps",
         "description": "Type: IPropertyStore* Pointer to an instance of the IPropertyStore interface, which represents the property store that contains the property."
       },
       {
         "in_out": "_In_",
-        "type": "IPropertyDescription",
-        "name": "*ppd",
+        "type": "IPropertyDescription*",
+        "name": "ppd",
         "description": "Type: IPropertyDescription* Pointer to an instance of the IPropertyDescription interface, which identifies the individual property."
       },
       {
@@ -2491,8 +2491,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "IPropertyStore",
-        "name": "*pPropStore",
+        "type": "IPropertyStore*",
+        "name": "pPropStore",
         "description": "Type: IPropertyStore* A pointer to the IPropertyStore interface that defines the default properties to add."
       }
     ],
@@ -2526,8 +2526,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyStore."
       }
     ],
@@ -2567,8 +2567,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyStore or a related interface."
       }
     ],
@@ -2596,8 +2596,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "IBindCtx",
-        "name": "*pbc",
+        "type": "IBindCtx*",
+        "name": "pbc",
         "description": "Type: IBindCtx* A pointer to a IBindCtx object, which provides access to a bind context. This value can be NULL."
       },
       {
@@ -2614,8 +2614,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "void",
-        "name": "**ppv",
+        "type": "void**",
+        "name": "ppv",
         "description": "Type: void** When this function returns, contains the interface pointer requested in riid. This is typically IPropertyStore or a related interface."
       }
     ],
@@ -2637,8 +2637,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertySetStorage",
-        "name": "*psstg",
+        "type": "IPropertySetStorage*",
+        "name": "psstg",
         "description": "Type: IPropertySetStorage* A pointer to an IPropertySetStorage interface."
       },
       {
@@ -2649,8 +2649,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "CLSID",
-        "name": "*pclsid",
+        "type": "const CLSID*",
+        "name": "pclsid",
         "description": "Type: const CLSID* A pointer to the CLSID associated with the set. This parameter can be NULL."
       },
       {
@@ -2673,14 +2673,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "IPropertyStorage",
-        "name": "**ppstg",
+        "type": "IPropertyStorage**",
+        "name": "ppstg",
         "description": "Type: IPropertyStorage** When this method returns, contains an IPropertyStorage interface pointer."
       },
       {
         "in_out": "_Out_opt_",
-        "type": "UINT",
-        "name": "*puCodePage",
+        "type": "UINT*",
+        "name": "puCodePage",
         "description": "Type: UINT* When this method returns, contains the address of the code page ID for the set."
       }
     ],
@@ -2702,8 +2702,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyStorage",
-        "name": "*pps",
+        "type": "IPropertyStorage*",
+        "name": "pps",
         "description": "Type: IPropertyStorage* An IPropertyStorage interface pointer that identifies the property store."
       },
       {
@@ -2720,7 +2720,7 @@
       },
       {
         "in_out": "_In_",
-        "type": "PROPSPEC",
+        "type": "PROPSPEC const",
         "name": "rgpspec[]",
         "description": "Type: PROPSPEC const[] An array of properties to be read."
       },
@@ -2749,14 +2749,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "IPropertyStorage",
-        "name": "*pps",
+        "type": "IPropertyStorage*",
+        "name": "pps",
         "description": "Type: IPropertyStorage* An IPropertyStorage interface pointer that identifies the property store."
       },
       {
         "in_out": "_Inout_opt_",
-        "type": "UINT",
-        "name": "*uCodePage",
+        "type": "UINT*",
+        "name": "uCodePage",
         "description": "Type: UINT* A pointer to the code page value for ANSI string properties."
       },
       {
@@ -2767,7 +2767,7 @@
       },
       {
         "in_out": "_In_",
-        "type": "PROPSPEC",
+        "type": "PROPSPEC const",
         "name": "rgpspec[]",
         "description": "Type: PROPSPEC const[] An array of PROPSPEC structures that contain the property information to be set."
       },

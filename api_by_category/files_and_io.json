@@ -229,8 +229,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "COPYFILE2_EXTENDED_PARAMETERS",
-        "name": "*pExtendedParameters",
+        "type": "COPYFILE2_EXTENDED_PARAMETERS*",
+        "name": "pExtendedParameters",
         "description": "Optional address of a        COPYFILE2_EXTENDED_PARAMETERS        structure."
       }
     ],
@@ -252,8 +252,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "COPYFILE2_MESSAGE",
-        "name": "*pMessage",
+        "type": "const COPYFILE2_MESSAGE*",
+        "name": "pMessage",
         "description": "Pointer to a COPYFILE2_MESSAGE structure."
       },
       {
@@ -963,7 +963,7 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "LPSECURITY_ATTRIBUTES",
+        "type": "const LPSECURITY_ATTRIBUTES",
         "name": "lpSecurityAttributes",
         "description": "A pointer to a  SECURITY_ATTRIBUTES structure that specifies the security attributes of the destination file or directory, if it does not already exist. If you specify NULL, the file or directory gets a default security descriptor. The ACLs in the default security descriptor for a file or directory are inherited from its parent directory."
       }
@@ -2194,8 +2194,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPTSTR",
-        "name": "*lpFilePart",
+        "type": "LPTSTR*",
+        "name": "lpFilePart",
         "description": "A pointer to a buffer that receives the address (within lpBuffer) of the final        file name component in the path.  This parameter can be  NULL. If lpBuffer        refers to a directory and not a file, lpFilePart receives zero."
       }
     ],
@@ -2235,8 +2235,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPTSTR",
-        "name": "*lpFilePart",
+        "type": "LPTSTR*",
+        "name": "lpFilePart",
         "description": "A pointer to a buffer that receives the address (in lpBuffer) of the final file         name component in the path. Specify NULL if you do not need to receive this         information. If lpBuffer points to a directory and not a file,         lpFilePart receives 0 (zero)."
       },
       {
@@ -2358,8 +2358,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPOVERLAPPED",
-        "name": "*lpOverlapped",
+        "type": "LPOVERLAPPED*",
+        "name": "lpOverlapped",
         "description": "A pointer to a variable that receives the address of the  OVERLAPPED structure that was specified when the completed I/O operation was started.     \t\t\t\t\t\t Even if you have passed the function a file handle associated with a completion port and a valid  OVERLAPPED structure, an application can prevent completion port notification. This is done by specifying a valid event handle for the hEvent member of the OVERLAPPED structure, and setting its low-order bit. A valid event handle whose low-order bit is set keeps I/O completion from being queued to the completion port."
       },
       {
@@ -3059,8 +3059,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PENCRYPTION_CERTIFICATE_HASH_LIST",
-        "name": "*pRecoveryAgents",
+        "type": "PENCRYPTION_CERTIFICATE_HASH_LIST*",
+        "name": "pRecoveryAgents",
         "description": "A pointer to a  ENCRYPTION_CERTIFICATE_HASH_LIST structure that receives a list of recovery agents."
       }
     ],
@@ -3088,8 +3088,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PENCRYPTION_CERTIFICATE_HASH_LIST",
-        "name": "*pUsers",
+        "type": "PENCRYPTION_CERTIFICATE_HASH_LIST*",
+        "name": "pUsers",
         "description": "A pointer to a  ENCRYPTION_CERTIFICATE_HASH_LIST structure that receives the list of users."
       }
     ],
@@ -3358,8 +3358,8 @@
       },
       {
         "in_out": "_Out_opt_",
-        "type": "LPTSTR",
-        "name": "*lpFilePart",
+        "type": "LPTSTR*",
+        "name": "lpFilePart",
         "description": "A pointer to the variable to receive the address (within lpBuffer) of the last        component of the valid path and file name, which is the address of the character immediately following the final        backslash (\\) in the path."
       }
     ],
@@ -3979,7 +3979,7 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "PVOID",
+        "type": "const PVOID",
         "name": "EntryInfo",
         "description": "The structure that contains specific provider info. The Type of EntryInfo is provider-specific.  For WOF_PROVIDER_WIM, it will be PWIM_ENTRY_INFO."
       },
@@ -4417,8 +4417,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PVOID",
-        "name": "*OldValue",
+        "type": "PVOID*",
+        "name": "OldValue",
         "description": "The WOW64 file system redirection value. The system uses this parameter to store information necessary to         revert (re-enable) file system redirection. Note  This value is for system use only. To avoid unpredictable behavior, do not modify this value in any         way."
       }
     ],

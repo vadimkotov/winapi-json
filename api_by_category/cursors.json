@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_In_opt_",
-        "type": "RECT",
-        "name": "*lpRect",
+        "type": "const RECT*",
+        "name": "lpRect",
         "description": "Type: const RECT* A pointer to the structure that contains the screen coordinates of the upper-left and lower-right corners of the confining rectangle. If this parameter is NULL, the cursor is free to move anywhere on the screen."
       }
     ],
@@ -91,14 +91,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "VOID",
-        "name": "*pvANDPlane",
+        "type": "const VOID*",
+        "name": "pvANDPlane",
         "description": "Type: const VOID* An array of bytes that contains the bit values for the  \t\t\t\t\tAND mask of the cursor, as in a device-dependent monochrome bitmap."
       },
       {
         "in_out": "_In_",
-        "type": "VOID",
-        "name": "*pvXORPlane",
+        "type": "const VOID*",
+        "name": "pvXORPlane",
         "description": "Type: const VOID* An array of bytes that contains the bit values for the  \t\t\t\t\tXOR mask of the cursor, as in a device-dependent monochrome bitmap."
       }
     ],

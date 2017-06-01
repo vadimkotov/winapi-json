@@ -15,8 +15,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "OPERATION_START_PARAMETERS",
-        "name": "*OperationParams",
+        "type": "OPERATION_START_PARAMETERS*",
+        "name": "OperationParams",
         "description": "An _OPERATION_START_PARAMETERS structure that specifies VERSION, OPERATION_ID and FLAGS."
       }
     ],
@@ -38,8 +38,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "OPERATION_END_PARAMETERS",
-        "name": "*OperationParams",
+        "type": "OPERATION_END_PARAMETERS*",
+        "name": "OperationParams",
         "description": "An _OPERATION_END_PARAMETERS structure that specifies VERSION, OPERATION_ID and FLAGS."
       }
     ],

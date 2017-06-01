@@ -15,14 +15,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "HELPER_ATTRIBUTE",
-        "name": "*Dest",
+        "type": "HELPER_ATTRIBUTE*",
+        "name": "Dest",
         "description": "Type: HELPER_ATTRIBUTE* The structure to be updated."
       },
       {
         "in_out": "_In_",
-        "type": "HELPER_ATTRIBUTE",
-        "name": "*Source",
+        "type": "const HELPER_ATTRIBUTE*",
+        "name": "Source",
         "description": "Type: const HELPER_ATTRIBUTE* The existing structure to be copied."
       }
     ],
@@ -44,14 +44,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "RepairInfo",
-        "name": "*Dest",
+        "type": "RepairInfo*",
+        "name": "Dest",
         "description": "Type: RepairInfo* The structure to be updated."
       },
       {
         "in_out": "_In_",
-        "type": "RepairInfo",
-        "name": "*Source",
+        "type": "const RepairInfo*",
+        "name": "Source",
         "description": "Type: const RepairInfo* The existing structure to be copied."
       }
     ],
@@ -73,14 +73,14 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "RootCauseInfo",
-        "name": "*Dest",
+        "type": "RootCauseInfo*",
+        "name": "Dest",
         "description": "Type: RootCauseInfo* The structure to be updated."
       },
       {
         "in_out": "_In_",
-        "type": "RootCauseInfo",
-        "name": "*Source",
+        "type": "const RootCauseInfo*",
+        "name": "Source",
         "description": "Type: const RootCauseInfo* The existing structure to be copied."
       }
     ],
@@ -102,8 +102,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "RepairInfoEx",
-        "name": "*pInfo",
+        "type": "RepairInfoEx*",
+        "name": "pInfo",
         "description": "Type: RepairInfoEx* The array of structures. The allocated memory pointed to by these structures will be freed."
       },
       {
@@ -137,8 +137,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "RepairInfo",
-        "name": "*pInfo",
+        "type": "RepairInfo*",
+        "name": "pInfo",
         "description": "Type: RepairInfo* The array of structures. The allocated memory pointed to by these structures will be freed."
       },
       {
@@ -172,8 +172,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "RootCauseInfo",
-        "name": "*pInfo",
+        "type": "RootCauseInfo*",
+        "name": "pInfo",
         "description": "Type: RootCauseInfo* The array of structures. The allocated memory pointed to by these structures will be freed."
       },
       {
@@ -207,8 +207,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "HELPER_ATTRIBUTE",
-        "name": "*pInfo",
+        "type": "HELPER_ATTRIBUTE*",
+        "name": "pInfo",
         "description": "Type: HELPER_ATTRIBUTE* The array of structures. The allocated memory pointed to by these structures will be freed."
       },
       {
@@ -242,8 +242,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "UiInfo",
-        "name": "*pInfo",
+        "type": "UiInfo*",
+        "name": "pInfo",
         "description": "Type: UiInfo* The structure. The allocated memory pointed to by this structure will be freed."
       }
     ],
@@ -311,8 +311,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "NDFHANDLE",
-        "name": "*handle",
+        "type": "NDFHANDLE*",
+        "name": "handle",
         "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
       }
     ],
@@ -346,8 +346,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "NDFHANDLE",
-        "name": "*handle",
+        "type": "NDFHANDLE*",
+        "name": "handle",
         "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
       }
     ],
@@ -393,8 +393,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SOCKET_ADDRESS_LIST",
-        "name": "*Addresses",
+        "type": "SOCKET_ADDRESS_LIST*",
+        "name": "Addresses",
         "description": "Type: SOCKET_ADDRESS_LIST* Optional list of addresses of the peers to which the application is trying to connect. If this parameter is used, the helper class will diagnose connectivity to these addresses."
       },
       {
@@ -405,8 +405,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "NDFHANDLE",
-        "name": "*handle",
+        "type": "NDFHANDLE*",
+        "name": "handle",
         "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
       }
     ],
@@ -440,13 +440,13 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SID",
-        "name": "*userID",
+        "type": "SID*",
+        "name": "userID",
         "description": "Type: SID* The SID for the application receiving the traffic. If NULL, the caller's SID is automatically used."
       },
       {
         "in_out": "_In_opt_",
-        "type": "SOCKADDR_STORAGE",
+        "type": "const SOCKADDR_STORAGE",
         "name": "localTarget",
         "description": "Type: const SOCKADDR_STORAGE A SOCKADDR_STORAGE structure which limits the diagnosis to traffic to a specific IP address. If NULL, all traffic will be included in the diagnosis."
       },
@@ -464,8 +464,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "NDFHANDLE",
-        "name": "*handle",
+        "type": "NDFHANDLE*",
+        "name": "handle",
         "description": "Type: NDFHANDLE* Pointer to a handle to the Network Diagnostics Framework incident."
       }
     ],
@@ -499,14 +499,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "HELPER_ATTRIBUTE",
-        "name": "*attributes",
+        "type": "HELPER_ATTRIBUTE*",
+        "name": "attributes",
         "description": "Type: HELPER_ATTRIBUTE* The applicable HELPER_ATTRIBUTE structure."
       },
       {
         "in_out": "_Out_",
-        "type": "NDFHANDLE",
-        "name": "*handle",
+        "type": "NDFHANDLE*",
+        "name": "handle",
         "description": "Type: NDFHANDLE* A handle to the Network Diagnostics Framework incident."
       }
     ],
@@ -528,8 +528,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "NDFHANDLE",
-        "name": "*handle",
+        "type": "NDFHANDLE*",
+        "name": "handle",
         "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
       },
       {
@@ -581,8 +581,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "NDFHANDLE",
-        "name": "*handle",
+        "type": "NDFHANDLE*",
+        "name": "handle",
         "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
       }
     ],
@@ -610,8 +610,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "NDFHANDLE",
-        "name": "*handle",
+        "type": "NDFHANDLE*",
+        "name": "handle",
         "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
       }
     ],
@@ -639,8 +639,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "NDFHANDLE",
-        "name": "*handle",
+        "type": "NDFHANDLE*",
+        "name": "handle",
         "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
       }
     ],
@@ -680,8 +680,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "NDFHANDLE",
-        "name": "*handle",
+        "type": "NDFHANDLE*",
+        "name": "handle",
         "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
       }
     ],
@@ -727,14 +727,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "SID",
-        "name": "*userId",
+        "type": "SID*",
+        "name": "userId",
         "description": "Type: SID* Unique identifier associated with the user."
       },
       {
         "in_out": "_Out_",
-        "type": "NDFHANDLE",
-        "name": "*handle",
+        "type": "NDFHANDLE*",
+        "name": "handle",
         "description": "Type: NDFHANDLE* Handle to the Network Diagnostics Framework incident."
       }
     ],
@@ -762,14 +762,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "*RootCauseCount",
+        "type": "ULONG*",
+        "name": "RootCauseCount",
         "description": "Type: ULONG* The number of root causes that could potentially have caused this incident. If diagnosis does not succeed, the contents of this parameter should be ignored."
       },
       {
         "in_out": "_Out_",
-        "type": "RootCauseInfo",
-        "name": "**RootCauses",
+        "type": "RootCauseInfo**",
+        "name": "RootCauses",
         "description": "Type: RootCauseInfo** A collection of RootCauseInfo structures that contain a detailed description of the root cause. If diagnosis succeeds, this parameter contains both the leaf root causes identified in the diagnosis session and any non-leaf root causes that have an available repair. If diagnosis does not succeed, the contents of this parameter should be ignored. Memory allocated to these structures should later be freed.  For an example of how to do this, see the Microsoft Windows Network Diagnostics Samples."
       },
       {
@@ -838,8 +838,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPCWSTR",
-        "name": "*TraceFileLocation",
+        "type": "LPCWSTR*",
+        "name": "TraceFileLocation",
         "description": "Type: LPCWSTR* The location of the trace file."
       }
     ],
@@ -867,8 +867,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "RepairInfoEx",
-        "name": "*RepairEx",
+        "type": "RepairInfoEx*",
+        "name": "RepairEx",
         "description": "Type: RepairInfoEx* A structure (obtained from NdfDiagnoseIncident) which indicates the particular repair to be performed. Memory allocated to these structures should later be freed.  For an example of how to do this, see the Microsoft Windows Network Diagnostics Samples."
       },
       {
@@ -896,8 +896,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*Buffer",
+        "type": "LPWSTR*",
+        "name": "Buffer",
         "description": "Type: LPWSTR* The location where the newly allocated string will be placed.  When the string is no longer needed, it must be released with CoTaskMemFree."
       },
       {
@@ -955,8 +955,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*ppwzBuffer",
+        "type": "LPWSTR*",
+        "name": "ppwzBuffer",
         "description": "Type: LPWSTR* The location where the newly allocated string will be placed.   The string must be freed using CoTaskMemFree when it is no longer needed."
       },
       {
@@ -984,8 +984,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "LPWSTR",
-        "name": "*Buffer",
+        "type": "LPWSTR*",
+        "name": "Buffer",
         "description": "Type: LPWSTR* The location where the pointer to the allocated memory is stored.  When no longer needed, it must be released with CoTaskMemFree.  This buffer is always null-terminated."
       },
       {

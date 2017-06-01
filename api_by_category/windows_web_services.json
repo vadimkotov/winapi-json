@@ -161,8 +161,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*callbackState",
+        "type": "void*",
+        "name": "callbackState",
         "description": "A void pointer that corresponds to the value of the callbackState field of                      the WS_ASYNC_CONTEXT structure. This parameter is used to pass user-defined data to the callback function if the operation completes asynchronously."
       }
     ],
@@ -272,14 +272,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "CERT_CONTEXT",
-        "name": "*certContext",
+        "type": "CERT_CONTEXT*",
+        "name": "certContext",
         "description": "A pointer to a CERT_CONTEXT structure that is associated with the connection. Applications must free this structure using CertFreeCertificateContext."
       },
       {
         "in_out": "_In_opt_",
-        "type": "void",
-        "name": "*state",
+        "type": "void*",
+        "name": "state",
         "description": "A pointer to application specific state information. This parameter corresponds to the state member of the WS_CERTIFICATE_VALIDATION_CALLBACK_CONTEXT structure."
       }
     ],
@@ -624,8 +624,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG*",
-        "name": "*length",
+        "type": "ULONG**",
+        "name": "length",
         "description": "The number of bytes read should be returned here.                                  The number of bytes should be set to 0 when there are no more bytes left.  This indicates                  the end of the decoded message data, and will cause WS_DECODER_END_CALLBACK to                  be invoked."
       },
       {
@@ -712,8 +712,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "WS_STRING*",
-        "name": "*newContentType",
+        "type": "WS_STRING**",
+        "name": "newContentType",
         "description": "The callback should return the content type for the newly decoded message here."
       },
       {
@@ -776,26 +776,26 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "const WS_DURATION",
-        "name": "*duration1",
+        "type": "const WS_DURATION*",
+        "name": "duration1",
         "description": "A pointer to a WS_DURATION structure representing the first duration to compare."
       },
       {
         "in_out": "_In_",
-        "type": "const WS_DURATION",
-        "name": "*duration2",
+        "type": "const WS_DURATION*",
+        "name": "duration2",
         "description": "A  pointer to a WS_DURATION structure representing the second duration."
       },
       {
         "in_out": "_Out_",
-        "type": "int",
-        "name": "*result",
+        "type": "int*",
+        "name": "result",
         "description": "The relationship between the durations as one of the following values:                      -1 if duration1 is less than duration2  0 if duration1 is equal to duration2  1 if duration1 is greater than duration2"
       },
       {
         "in_out": "_In_opt_",
-        "type": "WS_ERROR",
-        "name": "*error",
+        "type": "WS_ERROR*",
+        "name": "error",
         "description": "A pointer to  a WS_ERROR handle where additional error information should be stored if the function fails."
       }
     ],
@@ -829,14 +829,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL*",
-        "name": "*found",
+        "type": "BOOL**",
+        "name": "found",
         "description": "Whether or not the string was found in the dynamic dictionary is returned here."
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG*",
-        "name": "*id",
+        "type": "ULONG**",
+        "name": "id",
         "description": "The id of the string is returned here."
       },
       {
@@ -958,14 +958,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "WS_STRING*",
-        "name": "*newContentType",
+        "type": "WS_STRING**",
+        "name": "newContentType",
         "description": "The callback should return the content type for the newly encoded message here."
       },
       {
         "in_out": "_Out_",
-        "type": "WS_STRING*",
-        "name": "*contentEncoding",
+        "type": "WS_STRING**",
+        "name": "contentEncoding",
         "description": "The callback should return the content encoding for the encoded message here."
       },
       {
@@ -1320,8 +1320,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL*",
-        "name": "*isDefault",
+        "type": "BOOL**",
+        "name": "isDefault",
         "description": "Whether or not the value is the default value."
       },
       {
@@ -1349,8 +1349,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*doneCallbackState",
+        "type": "void*",
+        "name": "doneCallbackState",
         "description": "A pointer to state information passed to the  WsReadEnvelopeStart or WsWriteEnvelopeStart function.                                       This parameter can be used to specify a pointer to user-defined                     data required by the callback."
       }
     ],
@@ -1565,8 +1565,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG*",
-        "name": "*actualSize",
+        "type": "ULONG**",
+        "name": "actualSize",
         "description": "The actual number of bytes that were read.  This may be less than maxSize.  Returning 0           indicates that there is no more data."
       },
       {
@@ -1600,8 +1600,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*callbackState",
+        "type": "void*",
+        "name": "callbackState",
         "description": "A             void pointer to the user-defined state that was passed to WsPushBytes."
       },
       {
@@ -1612,20 +1612,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*writeCallbackState",
+        "type": "void*",
+        "name": "writeCallbackState",
         "description": "A  void  pointer to the caller-defined state that should be passed when invoking the WS_WRITE_CALLBACK function."
       },
       {
         "in_out": "_In_opt_",
-        "type": "const WS_ASYNC_CONTEXT",
-        "name": "*asyncContext",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
         "description": "A pointer to a WS_ASYNC_CONTEXT structure containing information on how to invoke the function asynchronously.  Assign  NULL if invoking synchronously."
       },
       {
         "in_out": "_In_opt_",
-        "type": "WS_ERROR",
-        "name": "*error",
+        "type": "WS_ERROR*",
+        "name": "error",
         "description": "A  pointer to a WS_ERROR data structure where additional error information should be stored if the function fails."
       }
     ],
@@ -1647,14 +1647,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "**callbackState",
+        "type": "void**",
+        "name": "callbackState",
         "description": "A   void pointer to the user-defined state value that was passed to the function that accepted this callback."
       },
       {
         "in_out": "",
-        "type": "void",
-        "name": "**bytes",
+        "type": "void**",
+        "name": "bytes",
         "description": "A void pointer to the location where the data should be placed."
       },
       {
@@ -1665,20 +1665,20 @@
       },
       {
         "in_out": "_Out_",
-        "type": "ULONG",
-        "name": "**actualSize",
+        "type": "ULONG**",
+        "name": "actualSize",
         "description": "A pointer to a ULONG  value that indicates the number of bytes actually read.  This may be less than maxSize.  Returning 0           indicates that there is no more data."
       },
       {
         "in_out": "_In_opt_",
-        "type": "const WS_ASYNC_CONTEXT",
-        "name": "*asyncContext",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
         "description": "A pointer to a WS_ASYNC_CONTEXT structure containing information on how to invoke the function asynchronously.  Assigned NULL if invoking synchronously."
       },
       {
         "in_out": "_In_opt_",
-        "type": "WS_ERROR",
-        "name": "*error",
+        "type": "WS_ERROR*",
+        "name": "error",
         "description": "A pointer to WS_ERROR data structure where additional error information should be stored if the function fails."
       }
     ],
@@ -1782,8 +1782,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "WS_XML_READER",
-        "name": "*reader",
+        "type": "WS_XML_READER*",
+        "name": "reader",
         "description": "A pointer to a WS_XML_READER handle that contains the type value."
       },
       {
@@ -1794,20 +1794,20 @@
       },
       {
         "in_out": "_In_",
-        "type": "const void",
-        "name": "*descriptionData",
+        "type": "const void*",
+        "name": "descriptionData",
         "description": "A pointer to the value of the descriptionData field of a  WS_CUSTOM_TYPE_DESCRIPTION structure.                     The callback can use this to gain access to any additional information about the type."
       },
       {
         "in_out": "_In_opt_",
-        "type": "WS_HEAP",
-        "name": "*heap",
+        "type": "WS_HEAP*",
+        "name": "heap",
         "description": "A pointer to the heap for use in allocating any additional data associated with this type such as its nested fields.                                         Note that this parameter may be NULL,                     if the caller did not specify a WS_HEAP object when deserializing                     the type."
       },
       {
         "in_out": "",
-        "type": "void",
-        "name": "*value",
+        "type": "void*",
+        "name": "value",
         "description": "A pointer to a buffer that holds the value that is being deserialized.                     The callback is responsible for filling in the value based on the current                      contents of the reader and the typeMapping.                     The callback can use the supplied heap if necessary to allocate                     values associated with the value."
       },
       {
@@ -1818,8 +1818,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "WS_ERROR",
-        "name": "*error",
+        "type": "WS_ERROR*",
+        "name": "error",
         "description": "A pointer to WS_ERROR data structure where additional error information should be stored if the function fails."
       }
     ],
@@ -2010,8 +2010,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "BOOL*",
-        "name": "*authorized",
+        "type": "BOOL**",
+        "name": "authorized",
         "description": "Set to TRUE, if authorization succeeded, FALSE if authorization failed."
       },
       {
@@ -2297,14 +2297,14 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "void",
-        "name": "*callbackState",
+        "type": "void*",
+        "name": "callbackState",
         "description": "A   void pointer to the user-defined state value that was passed to the function that accepted this callback."
       },
       {
         "in_out": "const",
-        "type": "WS_BYTES",
-        "name": "*buffers",
+        "type": "WS_BYTES*",
+        "name": "buffers",
         "description": "A  pointer to the buffers containing the data to be written."
       },
       {
@@ -2315,14 +2315,14 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "const WS_ASYNC_CONTEXT",
-        "name": "*asyncContext",
+        "type": "const WS_ASYNC_CONTEXT*",
+        "name": "asyncContext",
         "description": "A pointer to a WS_ASYNC_CONTEXT structure containing information on how to invoke the function asynchronously.  Assigned NULL if invoking synchronously."
       },
       {
         "in_out": "_In_opt_",
-        "type": "WS_ERROR",
-        "name": "*error",
+        "type": "WS_ERROR*",
+        "name": "error",
         "description": "A pointer to a WS_ERROR data structure where additional error information should be stored if the function fails."
       }
     ],
@@ -2426,8 +2426,8 @@
     "arguments": [
       {
         "in_out": "_In_",
-        "type": "WS_XML_WRITER",
-        "name": "*writer",
+        "type": "WS_XML_WRITER*",
+        "name": "writer",
         "description": "A  WS_XML_WRITER pointer to the writer that the value should be written to."
       },
       {
@@ -2438,14 +2438,14 @@
       },
       {
         "in_out": "_In_",
-        "type": "const void",
-        "name": "*descriptionData",
+        "type": "const void*",
+        "name": "descriptionData",
         "description": "This is the value of the descriptionData field of the WS_CUSTOM_TYPE_DESCRIPTION structure.                     The callback uses this field to access any additional information about the type."
       },
       {
         "in_out": "const",
-        "type": "void",
-        "name": "*value",
+        "type": "void*",
+        "name": "value",
         "description": "A  void pointer to a value to serialize."
       },
       {
@@ -2456,8 +2456,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "WS_ERROR",
-        "name": "*error",
+        "type": "WS_ERROR*",
+        "name": "error",
         "description": "A pointer to a WS_ERROR data structure where additional error information should be stored if the function fails."
       }
     ],

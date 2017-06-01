@@ -21,8 +21,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "SECURITY_QUALITY_OF_SERVICE",
-        "name": "*pqosNew",
+        "type": "const SECURITY_QUALITY_OF_SERVICE*",
+        "name": "pqosNew",
         "description": "Type: const SECURITY_QUALITY_OF_SERVICE* A pointer to a SECURITY_QUALITY_OF_SERVICE structure for the desired quality of service values."
       },
       {

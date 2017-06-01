@@ -1567,14 +1567,14 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWTS_PROCESS_INFO",
-        "name": "*ppProcessInfo",
+        "type": "PWTS_PROCESS_INFO*",
+        "name": "ppProcessInfo",
         "description": "Pointer to a variable that receives a pointer to an array of        WTS_PROCESS_INFO structures. Each structure        in the array contains information about an active process on the specified RD Session Host server. To free the returned        buffer, call the WTSFreeMemory function."
       },
       {
         "in_out": "_Out_",
-        "type": "DWORD",
-        "name": "*pCount",
+        "type": "DWORD*",
+        "name": "pCount",
         "description": "Pointer to a variable that receives the number of WTS_PROCESS_INFO        structures returned in the ppProcessInfo buffer."
       }
     ],
@@ -1939,8 +1939,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PWSTR",
-        "name": "*threadDescription",
+        "type": "PWSTR*",
+        "name": "threadDescription",
         "description": "A Unicode string that contains the description of the thread."
       }
     ],
@@ -2392,8 +2392,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "GROUP_AFFINITY",
-        "name": "*GroupAffinity",
+        "type": "const GROUP_AFFINITY*",
+        "name": "GroupAffinity",
         "description": "A GROUP_AFFINITY structure that specifies the processor group affinity to be used for the specified thread."
       },
       {
@@ -4528,8 +4528,8 @@
       },
       {
         "in_out": "_In_opt_",
-        "type": "struct _ACTIVATION_CONTEXT",
-        "name": "*ActivationContext",
+        "type": "struct _ACTIVATION_CONTEXT*",
+        "name": "ActivationContext",
         "description": "Pointer to an _ACTIVATION_CONTEXT structure."
       }
     ],
@@ -5115,8 +5115,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "GUID",
-        "name": "*ThreadOrderingGuid",
+        "type": "GUID*",
+        "name": "ThreadOrderingGuid",
         "description": "A pointer to the unique identifier for the thread ordering group to be created. If this value is not unique to the thread ordering service, the function fails. If the identifier is GUID_NULL on input, the thread ordering service generates and returns a unique identifier."
       },
       {
@@ -5156,8 +5156,8 @@
       },
       {
         "in_out": "_Inout_",
-        "type": "GUID",
-        "name": "*ThreadOrderingGuid",
+        "type": "GUID*",
+        "name": "ThreadOrderingGuid",
         "description": "A pointer to the unique identifier for the thread ordering group to be created. If this value is not unique to the thread ordering service, the function fails. If the identifier is GUID_NULL on input, the thread ordering service generates and returns a unique identifier."
       },
       {
@@ -5220,8 +5220,8 @@
       },
       {
         "in_out": "_In_",
-        "type": "GUID",
-        "name": "*ThreadOrderingGuid",
+        "type": "GUID*",
+        "name": "ThreadOrderingGuid",
         "description": "A pointer to the unique identifier for the thread ordering group."
       },
       {
@@ -6293,8 +6293,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PUMS_COMPLETION_LIST",
-        "name": "*UmsCompletionList",
+        "type": "PUMS_COMPLETION_LIST*",
+        "name": "UmsCompletionList",
         "description": "A PUMS_COMPLETION_LIST variable. On output, this parameter receives a pointer        to an empty UMS completion list."
       }
     ],
@@ -6316,8 +6316,8 @@
     "arguments": [
       {
         "in_out": "_Out_",
-        "type": "PUMS_CONTEXT",
-        "name": "*lpUmsThread",
+        "type": "PUMS_CONTEXT*",
+        "name": "lpUmsThread",
         "description": "A PUMS_CONTEXT variable. On output, this parameter receives a pointer to a UMS thread context."
       }
     ],
@@ -6397,8 +6397,8 @@
       },
       {
         "in_out": "_Out_",
-        "type": "PUMS_CONTEXT",
-        "name": "*UmsThreadList",
+        "type": "PUMS_CONTEXT*",
+        "name": "UmsThreadList",
         "description": "A pointer to a UMS_CONTEXT variable. On output, this parameter receives a pointer to the first UMS thread context in a list of UMS thread contexts.  If no worker threads are available before the time-out specified by the WaitTimeOut parameter, this parameter is set to NULL."
       }
     ],
