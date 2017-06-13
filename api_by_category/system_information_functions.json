@@ -1,0 +1,1133 @@
+[
+  {
+    "n_arguments": 0,
+    "description": "Checks whether the user has opted in for SQM data collection as part of the Customer Experience Improvement Program (CEIP).",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2012 R2 [desktop apps | Windows Store apps]",
+    "header": "Windowsceip.h",
+    "return_value": "True if SQM data collection is opted in and the machine can send data. Otherwise, false. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "CeipIsOptedIn",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows 8.1 [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Converts a DNS-style host name to a NetBIOS-style computer name.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. To get extended error information, call  GetLastError. Possible values include the following.  ",
+    "remarks": "This function performs a textual mapping of the name. This convention limits the names of computers to be the common subset of the names. (Specifically, the leftmost label of the DNS name is truncated to 15-bytes of OEM characters.) Therefore, do not use this function to convert a DNS domain name to a NetBIOS domain name. There is no textual mapping for domain names. To compile an application that uses this function, define _WIN32_WINNT as 0x0500 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "DnsHostnameToComputerName",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "Hostname",
+        "description": "The DNS name. If the DNS name is not a valid, translatable name, the function fails. For more information, see Computer Names."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "ComputerName",
+        "description": "A pointer to a buffer that receives the computer name. The buffer size should be large enough to contain MAX_COMPUTERNAME_LENGTH + 1 characters."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "nSize",
+        "description": "On input, specifies the size of the buffer, in TCHARs. On output, receives the number of TCHARs copied to the destination buffer, not including the terminating null character.     If the buffer is too small, the function fails, GetLastError returns ERROR_MORE_DATA, and nSize receives the required buffer size, not including the terminating null character."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Enumerates all system firmware tables of the specified type.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008, Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the number of bytes written to the buffer. This value will always be less than or equal to BufferSize. If the function fails because the buffer is not large enough, the return value is the required buffer size, in bytes. This value is always greater than BufferSize. If the function fails for any other reason, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "As of Windows Server 2003 with Service Pack 1 (SP1), applications cannot access the \\Device\\PhysicalMemory object. Access to this object is limited to kernel-mode drivers. This change affects applications read System Management BIOS (SMBIOS) or other BIOS data stored in the lowest 1MB of physical memory. Applications have the following alternatives to read data from low physical memory: There is no way for applications to write to low physical memory. The raw SMBIOS table provider ('RSMB') currently returns a single table identifier, 0x0000. This corresponds to the raw SMBIOS firmware table. The raw firmware table provider ('FIRM') returns a list of DWORD table identifiers. Each identifier corresponds to the beginning of a physical address range. Currently, this provider returns 'C0000' and 'E0000'. These values correspond to physical memory from 0xC0000 to 0xDFFFF and 0xE0000 to 0xFFFFF, respectively. The ACPI table provider ('ACPI') returns a list of DWORD table identifiers. Each identifier returned corresponds to Signature field of the DESCRIPTION_HEADER structure for an ACPI table currently in the ACPI namespace of the system. For ACPI, if the system contains multiple tables with the same name, they are all enumerated with EnumSystemFirmwareTables. However, GetSystemFirmwareTable retrieves only the first table in the list with this name. ",
+    "return_type": "UINT WINAPI",
+    "category": "System Information Functions",
+    "name": "EnumSystemFirmwareTables",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "FirmwareTableProviderSignature",
+        "description": "The identifier of the firmware table provider to which the query is to be directed. This parameter can be one of the following values.  ValueMeaning 'ACPI'The ACPI firmware table provider. 'FIRM'The raw firmware table provider. Not supported for UEFI systems; use 'RSMB' instead. 'RSMB'The raw SMBIOS firmware table provider."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "pFirmwareTableBuffer",
+        "description": "A pointer to a buffer that receives the list of  firmware tables. If this parameter is NULL, the return value is the required buffer size. For more information on the contents of this buffer, see the Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "BufferSize",
+        "description": "The size of the pFirmwareTableBuffer buffer, in bytes."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP Professional x64 Edition [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Expands environment-variable strings and replaces them with the values defined for the current user.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the number of TCHARs stored in the destination buffer, including the terminating null character. If the destination buffer is too small to hold the expanded string, the return value is the required buffer size, in characters. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The size of the lpSrc and lpDst buffers is limited to 32K. To replace folder names in a fully qualified path with their associated environment-variable strings, use the PathUnExpandEnvStrings function. To retrieve the list of environment variables for a process, use the GetEnvironmentStrings function. For an example, see  Getting System Information. ",
+    "return_type": "DWORD WINAPI",
+    "category": "System Information Functions",
+    "name": "ExpandEnvironmentStrings",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpSrc",
+        "description": "A buffer that contains one or more environment-variable strings in the form: %variableName%. For each such reference, the %variableName% portion is replaced with the current value of that environment variable.     Case is ignored when looking up the environment-variable name. If the name is not found, the %variableName% portion is left unexpanded. Note that this function does not support all the features that Cmd.exe supports. For example, it does not support %variableName:str1=str2% or %variableName:~offset,length%."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPTSTR",
+        "name": "lpDst",
+        "description": "A pointer to a buffer that receives the result of expanding the environment variable strings in the lpSrc buffer. Note that this buffer cannot be the same as the lpSrc buffer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nSize",
+        "description": "The maximum number of characters that can be stored in the buffer pointed to by the lpDst parameter. When using ANSI strings, the buffer size should be the string length, plus terminating null character, plus one. When using Unicode strings, the buffer size should be the string length plus the terminating null character."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the NetBIOS name of the local computer. This name is established at system startup, when the system reads it from the registry.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  GetComputerName function retrieves the NetBIOS name established at system startup. Name changes made by the  SetComputerName or  SetComputerNameEx functions do not take effect until the user restarts the computer. If the caller is running under a client session, this function returns the server name. To retrieve the client name, use the WTSQuerySessionInformation function. For an example, see  Getting System Information. ",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "GetComputerName",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpBuffer",
+        "description": "A pointer to a buffer that receives the computer name or the cluster virtual server name. The buffer size should be large enough to contain MAX_COMPUTERNAME_LENGTH + 1 characters."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpnSize",
+        "description": "On input, specifies the size of the buffer, in TCHARs. On output, the number of TCHARs copied to the destination buffer, not including the terminating null character.     If the buffer is too small, the function fails and GetLastError returns ERROR_BUFFER_OVERFLOW. The lpnSize parameter specifies the size of the buffer required, including the terminating null character."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves a NetBIOS or DNS name associated with the local computer. The names are established at system startup, when the system reads them from the registry.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. To get extended error information, call  GetLastError. Possible values include the following.  ",
+    "remarks": "If group policy is not set for the local machine, the  GetComputerNameEx function retrieves the NetBIOS or DNS names established at system startup. If  group policy is set, the function returns the primary domain name set by group policy. Name changes made by the  SetComputerName or  SetComputerNameEx functions do not take effect until the user restarts the computer. If the local computer is not configured to use DNS names, GetComputerNameEx will not return DNS information. To configure the computer to do this, follow the steps outlined in the operating system help and change the primary DNS suffix of the computer, then restart the computer. The behavior of this function can be affected if the local computer is a node in a cluster. For more information, see ResUtilGetEnvironmentWithNetName and UseNetworkName. If you are working with environments that use different DNS layouts, where the computer's FQDN does not match the FQDN of its domain, use LsaQueryInformationPolicy instead. To compile an application that uses this function, define the _WIN32_WINNT macro as 0x0500 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "GetComputerNameEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "COMPUTER_NAME_FORMAT",
+        "name": "NameType",
+        "description": "The type of name to be retrieved. This parameter is a value from the  COMPUTER_NAME_FORMAT enumeration type. The following table provides additional information.     ValueMeaning  ComputerNameDnsDomain   The name of the DNS domain assigned to the local computer. If the local computer is a node in a cluster, lpBuffer receives the DNS domain name of the cluster virtual server.   ComputerNameDnsFullyQualified   The fully qualified DNS name that uniquely identifies the local computer. This name is a combination of the DNS host name and the DNS domain name, using the form HostName.DomainName. If the local computer is a node in a cluster, lpBuffer receives the fully qualified DNS name of the cluster virtual server.   ComputerNameDnsHostname   The DNS host name of the local computer. If the local computer is a node in a cluster, lpBuffer receives the DNS host name of the cluster virtual server.   ComputerNameNetBIOS   The NetBIOS name of the local computer. If the local computer is a node in a cluster, lpBuffer receives the NetBIOS name of the cluster virtual server.   ComputerNamePhysicalDnsDomain   The name of the DNS domain assigned to the local computer. If the local computer is a node in a cluster, lpBuffer receives the DNS domain name of the local computer, not the name of the cluster virtual server.   ComputerNamePhysicalDnsFullyQualified   The fully qualified DNS name that uniquely identifies the computer. If the local computer is a node in a cluster, lpBuffer receives the fully qualified DNS name of the local computer, not the name of the cluster virtual server.     The fully qualified DNS name is a combination of the DNS host name and the DNS domain name, using the form HostName.DomainName.   ComputerNamePhysicalDnsHostname   The DNS host name of the local computer. If the local computer is a node in a cluster, lpBuffer receives the DNS host name of the local computer, not the name of the cluster virtual server.   ComputerNamePhysicalNetBIOS   The NetBIOS name of the local computer. If the local computer is a node in a cluster, lpBuffer receives the NetBIOS name of the local computer, not the name of the cluster virtual server."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpBuffer",
+        "description": "A pointer to a buffer that receives the computer name or the cluster virtual server name.     The length of the name may be greater than MAX_COMPUTERNAME_LENGTH characters because DNS allows longer names. To ensure that this buffer is large enough, set this parameter to NULL and use the required buffer size returned in the lpnSize parameter."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpnSize",
+        "description": "On input, specifies the size of the buffer, in TCHARs. On output, receives the number of TCHARs copied to the destination buffer, not including the terminating null character.     If the buffer is too small, the function fails and GetLastError returns ERROR_MORE_DATA. This parameter receives the size of the buffer required,  including the terminating null character. If lpBuffer is NULL, this parameter must be zero."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the local computer's name in a specified format.",
+    "library": "Secur32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Secext.h (include Security.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOLEAN WINAPI",
+    "category": "System Information Functions",
+    "name": "GetComputerObjectName",
+    "is_callback": 0,
+    "dll": "Secur32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "EXTENDED_NAME_FORMAT",
+        "name": "NameFormat",
+        "description": "The format for the name. This parameter is a value from the  EXTENDED_NAME_FORMAT enumeration type. It cannot be NameUnknown."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpNameBuffer",
+        "description": "A pointer to a buffer that receives the name in the specified format.     If this parameter is NULL, either the function succeeds and the lpnSize parameter receives the required size, or the function fails with ERROR_INSUFFICIENT_BUFFER and lpnSize receives the required size. The behavior depends on the value of NameFormat and the version of the operating system."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "lpnSize",
+        "description": "On input, specifies the size of the lpNameBuffer buffer, in TCHARs. On success, receives the size of the name copied to the buffer. If the lpNameBuffer buffer is too small to hold the name, the function fails and lpnSize receives the required buffer size."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves information about the current hardware profile for the local computer.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  GetCurrentHwProfile function retrieves the display name and globally unique identifier (GUID) string for the hardware profile. The function also retrieves the reported docking state for portable computers with docking stations. The system generates a GUID for each hardware profile and stores it as a string in the registry. You can use  GetCurrentHwProfile to retrieve the GUID string to use as a registry subkey under your application's configuration settings key in HKEY_CURRENT_USER. This enables you to store each user's settings for each hardware profile. For example, the Colors control panel application could use the subkey to store each user's color preferences for different hardware profiles, such as profiles for the docked and undocked states. Applications that use this functionality can check the current hardware profile when they start up, and update their settings accordingly. Applications can also update their settings when a system device message, such as  DBT_CONFIGCHANGED, indicates that the hardware profile has changed. To compile an application that uses this function, define the _WIN32_WINNT macro as 0x0400 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "GetCurrentHwProfile",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPHW_PROFILE_INFO",
+        "name": "lpHwProfileInfo",
+        "description": "A pointer to an  HW_PROFILE_INFO structure that receives information about the current hardware profile."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the value of the specified firmware environment variable.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the number of bytes stored in the pBuffer buffer. If the function fails, the return value is zero. To get extended error information, call  GetLastError. Possible error codes include ERROR_INVALID_FUNCTION. ",
+    "remarks": "The exact set of firmware environment variables is determined by the boot firmware. The location of these environment variables is also specified by the firmware.  For example, on a UEFI-based system, NVRAM contains firmware environment variables that specify system boot settings. For information about specific variables used, see the UEFI specification. For more information about UEFI and Windows, see UEFI and Windows. Firmware variables are not supported on a legacy BIOS-based system. The GetFirmwareEnvironmentVariable function will always fail on a legacy BIOS-based system, or if Windows was installed using legacy BIOS on a system that supports both legacy BIOS and UEFI. To identify these conditions, call the function with a dummy firmware environment name such as an empty string (\"\") for the lpName parameter and a dummy GUID such as \"{00000000-0000-0000-0000-000000000000}\" for the lpGuid parameter. On a legacy BIOS-based system, or on a system that supports both legacy BIOS and UEFI where Windows was installed using legacy BIOS, the function will fail with  ERROR_INVALID_FUNCTION. On a UEFI-based system, the function will  fail with an error specific to the firmware, such as ERROR_NOACCESS, to indicate that the dummy GUID namespace does not exist. If you are creating a backup application, you can use this function to save all the boot settings for the system so they can be restored using the SetFirmwareEnvironmentVariable  \t function if needed. GetFirmwareEnvironmentVariable is the user-mode equivalent of the ExGetFirmwareEnvironmentVariable kernel-mode routine. ",
+    "return_type": "DWORD WINAPI",
+    "category": "System Information Functions",
+    "name": "GetFirmwareEnvironmentVariable",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpName",
+        "description": "The name of the firmware environment variable. The pointer must not be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpGuid",
+        "description": "The GUID that represents the namespace of the firmware environment variable. The GUID must be  a string in the format  \"{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\" where 'x' represents a hexadecimal value."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "pBuffer",
+        "description": "A pointer to a buffer that receives the value of the specified firmware environment variable."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nSize",
+        "description": "The size of the pBuffer buffer, in bytes."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the value of the specified firmware environment variable and its attributes.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the number of bytes stored in the pValue buffer. If the function fails, the return value is zero. To get extended error information, call  GetLastError. Possible error codes include ERROR_INVALID_FUNCTION. ",
+    "remarks": "The exact set of firmware environment variables is determined by the boot firmware. The location of these environment variables is also specified by the firmware.  For example, on a UEFI-based system, NVRAM contains firmware environment variables that specify system boot settings. For information about specific variables used, see the UEFI specification. For more information about UEFI and Windows, see UEFI and Windows. Firmware variables are not supported on a legacy BIOS-based system. The GetFirmwareEnvironmentVariableEx function will always fail on a legacy BIOS-based system, or if Windows was installed using legacy BIOS on a system that supports both legacy BIOS and UEFI. To identify these conditions, call the function with a dummy firmware environment name such as an empty string (\"\") for the lpName parameter and a dummy GUID such as \"{00000000-0000-0000-0000-000000000000}\" for the lpGuid parameter. On a legacy BIOS-based system, or on a system that supports both legacy BIOS and UEFI where Windows was installed using legacy BIOS, the function will fail with  ERROR_INVALID_FUNCTION. On a UEFI-based system, the function will  fail with an error specific to the firmware, such as ERROR_NOACCESS, to indicate that the dummy GUID namespace does not exist. If you are creating a backup application, you can use this function to save all the boot settings for the system so they can be restored using the SetFirmwareEnvironmentVariable  \t function if needed. ",
+    "return_type": "BOOL WINBASEAPI",
+    "category": "System Information Functions",
+    "name": "GetFirmwareEnvironmentVariableEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "LPCSTR",
+        "name": "lpName",
+        "description": "The name of the firmware environment variable. The pointer must not be NULL."
+      },
+      {
+        "in_out": "",
+        "type": "LPCSTR",
+        "name": "lpGuid",
+        "description": "The GUID that represents the namespace of the firmware environment variable. The GUID must be  a string in the format  \"{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\" where 'x' represents a hexadecimal value. The pointer must not be NULL."
+      },
+      {
+        "in_out": "",
+        "type": "PVOID",
+        "name": "pValue",
+        "description": "A pointer to a buffer that receives the value of the specified firmware environment variable."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "nSize",
+        "description": "The size of the pValue buffer, in bytes."
+      },
+      {
+        "in_out": "",
+        "type": "PDWORD",
+        "name": "pdwAttributes",
+        "description": "Bitmask identifying UEFI variable attributes associated with the variable. See SetFirmwareEnvironmentVariableEx for the bitmask definition."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the firmware type of the local computer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call the GetLastError function. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "GetFirmwareType",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "PFIRMWARE_TYPE",
+        "name": "FirmwareType",
+        "description": "A pointer to a FIRMWARE_TYPE enumeration."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[Some information relates to pre-released product which may be substantially modified before it's commercially released. Microsoft makes no warranties, express or implied, with respect to the information provided here.]",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2016 [desktop apps | Windows Store apps]",
+    "header": "Winbase.h",
+    "return_value": "The result code indicating if the function succeeded or failed. ",
+    "remarks": "Uses the display driver as the source for display size information. Registry overrides to screen size will not be used. Uses the display adapter connection type to determine which display, if any, is integral to the system.  If no internal display detected, an error will be returned.   This requires the display to be active to be detected. For example, the lid cannot be closed when the function is called. To compile an application that uses this function, define _WIN32_WINNT as 0x0501 or later. For more information, see  Using the Windows Headers. The following function displays the best estimate of the diagonal size of the built-in screen, in inches. ",
+    "return_type": " WINAPI",
+    "category": "System Information Functions",
+    "name": "GetIntegratedDisplaySize",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "double*",
+        "name": "sizeInInches",
+        "description": "The best estimate of the diagonal size of the built-in screen, in inches."
+      }
+    ],
+    "min_client": "Windows 10 [desktop apps | UWP apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves information about the current system to an application running under  WOW64. If the function is called from a 64-bit application, it is equivalent to the  GetSystemInfo function.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "To determine whether a Win32-based application is running under WOW64, call the  IsWow64Process function. To compile an application that uses this function, define _WIN32_WINNT as 0x0501 or later. For more information, see  Using the Windows Headers. For an example, see Getting the System Version. ",
+    "return_type": "void WINAPI",
+    "category": "System Information Functions",
+    "name": "GetNativeSystemInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPSYSTEM_INFO",
+        "name": "lpSystemInfo",
+        "description": "A pointer to a  SYSTEM_INFO structure that receives the information."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the product type for the operating system on the local computer, and maps the type to the product types supported by the specified operating system.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. This function fails if one of the input parameters is invalid. ",
+    "remarks": "To detect whether a server role or feature is installed, use the  Server Feature WMI provider. Subsequent releases of Windows will map the product types it supports to the set of product types supported by each supported previous release of Windows, back to version 6.0.0.0. Therefore, an application that does an equality test for any of these values will continue to work on future releases, even when new product types are added. PRODUCT_*_SERVER_CORE values are not returned in Windows Server 2012. For  example, the base server edition, Server Datacenter, is used to build the two different installation options: \"full server\" and \"core server\". With Windows Server 2012,  GetProductInfo will return PRODUCT_DATACENTER regardless of the option used during product installation. The following table indicates the product types that were introduced in 6.1.0.0, and what they will map to if GetProductInfo is called with version 6.0.0.0 on a 6.1.0.0 system.  To compile an application that uses this function, define _WIN32_WINNT as 0x0600 or later. For more information, see  Using the Windows Headers. For an example, see Getting the System Version. ",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "GetProductInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwOSMajorVersion",
+        "description": "The major version number of the operating system. The minimum value is 6. The combination of the dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion, and dwSpMinorVersion parameters describes the maximum target operating system version for the application. For example, Windows Vista and Windows Server 2008 are version 6.0.0.0 and Windows 7 and Windows Server 2008 R2 are version 6.1.0.0."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwOSMinorVersion",
+        "description": "The minor version number of the operating system. The minimum value is 0."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwSpMajorVersion",
+        "description": "The major version number of the operating system service pack. The minimum value is 0."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwSpMinorVersion",
+        "description": "The minor version number of the operating system service pack. The minimum value is 0."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDWORD",
+        "name": "pdwReturnedProductType",
+        "description": "The product type. This parameter cannot be NULL. If the specified operating system  is less than the current operating system, this information is mapped to the types supported by the specified operating system. If the specified operating system is greater than the highest supported operating system, this information is mapped to the types supported by the current operating system.   This parameter can be one of the following values.  ValueMeaning  PRODUCT_BUSINESS 0x00000006   Business   PRODUCT_BUSINESS_N 0x00000010   Business N   PRODUCT_CLUSTER_SERVER 0x00000012   HPC Edition   PRODUCT_CLUSTER_SERVER_V 0x00000040   Server Hyper Core V   PRODUCT_CORE 0x00000065   Windows 10 Home   PRODUCT_CORE_COUNTRYSPECIFIC 0x00000063   Windows 10 Home China   PRODUCT_CORE_N 0x00000062   Windows 10 Home N   PRODUCT_CORE_SINGLELANGUAGE 0x00000064   Windows 10 Home Single Language   PRODUCT_DATACENTER_EVALUATION_SERVER 0x00000050   Server Datacenter (evaluation installation)   PRODUCT_DATACENTER_SERVER 0x00000008   Server Datacenter (full installation)   PRODUCT_DATACENTER_SERVER_CORE 0x0000000C   Server Datacenter (core installation)   PRODUCT_DATACENTER_SERVER_CORE_V 0x00000027   Server Datacenter without Hyper-V (core installation)   PRODUCT_DATACENTER_SERVER_V 0x00000025   Server Datacenter without Hyper-V (full installation)   PRODUCT_EDUCATION 0x00000079   Windows 10 Education   PRODUCT_EDUCATION_N 0x0000007A   Windows 10 Education N   PRODUCT_ENTERPRISE 0x00000004   Windows 10 Enterprise   PRODUCT_ENTERPRISE_E 0x00000046   Windows 10 Enterprise E   PRODUCT_ENTERPRISE_EVALUATION 0x00000048   Windows 10 Enterprise Evaluation   PRODUCT_ENTERPRISE_N 0x0000001B   Windows 10 Enterprise N   PRODUCT_ENTERPRISE_N_EVALUATION 0x00000054   Windows 10 Enterprise N Evaluation   PRODUCT_ENTERPRISE_S 0x0000007D   Windows 10 Enterprise 2015 LTSB   PRODUCT_ENTERPRISE_S_EVALUATION 0x00000081   Windows 10 Enterprise 2015 LTSB Evaluation   PRODUCT_ENTERPRISE_S_N 0x0000007E   Windows 10 Enterprise 2015 LTSB N   PRODUCT_ENTERPRISE_S_N_EVALUATION 0x00000082   Windows 10 Enterprise 2015 LTSB N Evaluation   PRODUCT_ENTERPRISE_SERVER 0x0000000A   Server Enterprise (full installation)   PRODUCT_ENTERPRISE_SERVER_CORE 0x0000000E   Server Enterprise (core installation)   PRODUCT_ENTERPRISE_SERVER_CORE_V 0x00000029   Server Enterprise without Hyper-V (core installation)    PRODUCT_ENTERPRISE_SERVER_IA64 0x0000000F   Server Enterprise for Itanium-based Systems   PRODUCT_ENTERPRISE_SERVER_V 0x00000026   Server Enterprise without Hyper-V (full installation)   PRODUCT_ESSENTIALBUSINESS_SERVER_ADDL 0x0000003C   Windows Essential Server Solution Additional   PRODUCT_ESSENTIALBUSINESS_SERVER_ADDLSVC 0x0000003E   Windows Essential Server Solution Additional SVC   PRODUCT_ESSENTIALBUSINESS_SERVER_MGMT 0x0000003B   Windows Essential Server Solution Management   PRODUCT_ESSENTIALBUSINESS_SERVER_MGMTSVC 0x0000003D   Windows Essential Server Solution Management SVC   PRODUCT_HOME_BASIC 0x00000002   Home Basic    PRODUCT_HOME_BASIC_E 0x00000043   Not supported   PRODUCT_HOME_BASIC_N 0x00000005   Home Basic N   PRODUCT_HOME_PREMIUM 0x00000003   Home Premium   PRODUCT_HOME_PREMIUM_E 0x00000044   Not supported   PRODUCT_HOME_PREMIUM_N 0x0000001A   Home Premium N   PRODUCT_HOME_PREMIUM_SERVER 0x00000022   Windows Home Server 2011   PRODUCT_HOME_SERVER 0x00000013   Windows Storage Server 2008 R2 Essentials   PRODUCT_HYPERV 0x0000002A   Microsoft Hyper-V Server   PRODUCT_IOTUAP 0x0000007B   Windows 10 IoT Core   PRODUCT_IOTUAPCOMMERCIAL 0x00000083   Windows 10 IoT Core Commercial   PRODUCT_MEDIUMBUSINESS_SERVER_MANAGEMENT 0x0000001E   Windows Essential Business Server Management Server   PRODUCT_MEDIUMBUSINESS_SERVER_MESSAGING 0x00000020   Windows Essential Business Server Messaging Server   PRODUCT_MEDIUMBUSINESS_SERVER_SECURITY 0x0000001F    Windows Essential Business Server Security Server   PRODUCT_MOBILE_CORE 0x00000068   Windows 10 Mobile   PRODUCT_MOBILE_ENTERPRISE 0x00000085   Windows 10 Mobile Enterprise   PRODUCT_MULTIPOINT_PREMIUM_SERVER 0x0000004D   Windows MultiPoint Server Premium (full installation)   PRODUCT_MULTIPOINT_STANDARD_SERVER 0x0000004C   Windows MultiPoint Server Standard (full installation)   PRODUCT_PROFESSIONAL 0x00000030   Windows 10  Pro   PRODUCT_PROFESSIONAL_E 0x00000045    Not supported   PRODUCT_PROFESSIONAL_N 0x00000031    Windows 10 Pro N   PRODUCT_PROFESSIONAL_WMC 0x00000067   Professional with Media Center   PRODUCT_SB_SOLUTION_SERVER 0x00000032   Windows Small Business Server 2011 Essentials   PRODUCT_SB_SOLUTION_SERVER_EM 0x00000036   Server For SB Solutions EM   PRODUCT_SERVER_FOR_SB_SOLUTIONS 0x00000033   Server For SB Solutions   PRODUCT_SERVER_FOR_SB_SOLUTIONS_EM 0x00000037   Server For SB Solutions EM   PRODUCT_SERVER_FOR_SMALLBUSINESS 0x00000018   Windows Server 2008 for Windows Essential Server Solutions   PRODUCT_SERVER_FOR_SMALLBUSINESS_V 0x00000023   Windows Server 2008 without Hyper-V for Windows Essential Server Solutions   PRODUCT_SERVER_FOUNDATION 0x00000021   Server Foundation   PRODUCT_SMALLBUSINESS_SERVER 0x00000009   Windows Small Business Server   PRODUCT_SMALLBUSINESS_SERVER_PREMIUM 0x00000019   Small Business Server Premium   PRODUCT_SMALLBUSINESS_SERVER_PREMIUM_CORE 0x0000003F   Small Business Server Premium (core installation)   PRODUCT_SOLUTION_EMBEDDEDSERVER 0x00000038   Windows MultiPoint Server   PRODUCT_STANDARD_EVALUATION_SERVER 0x0000004F   Server Standard (evaluation installation)   PRODUCT_STANDARD_SERVER 0x00000007   Server Standard   PRODUCT_STANDARD_SERVER_CORE  0x0000000D   Server Standard (core installation)   PRODUCT_STANDARD_SERVER_CORE_V 0x00000028   Server Standard without Hyper-V (core installation)   PRODUCT_STANDARD_SERVER_V 0x00000024   Server Standard without Hyper-V   PRODUCT_STANDARD_SERVER_SOLUTIONS 0x00000034   Server Solutions Premium    PRODUCT_STANDARD_SERVER_SOLUTIONS_CORE 0x00000035   Server Solutions Premium (core installation)   PRODUCT_STARTER 0x0000000B   Starter   PRODUCT_STARTER_E 0x00000042   Not supported   PRODUCT_STARTER_N 0x0000002F   Starter N   PRODUCT_STORAGE_ENTERPRISE_SERVER 0x00000017   Storage Server Enterprise   PRODUCT_STORAGE_ENTERPRISE_SERVER_CORE 0x0000002E   Storage Server Enterprise (core installation)   PRODUCT_STORAGE_EXPRESS_SERVER 0x00000014   Storage Server Express   PRODUCT_STORAGE_EXPRESS_SERVER_CORE 0x0000002B   Storage Server Express (core installation)   PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER 0x00000060   Storage Server Standard (evaluation installation)   PRODUCT_STORAGE_STANDARD_SERVER 0x00000015   Storage Server Standard   PRODUCT_STORAGE_STANDARD_SERVER_CORE 0x0000002C   Storage Server Standard (core installation)   PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER 0x0000005F   Storage Server Workgroup (evaluation installation)   PRODUCT_STORAGE_WORKGROUP_SERVER 0x00000016   Storage Server Workgroup   PRODUCT_STORAGE_WORKGROUP_SERVER_CORE 0x0000002D   Storage Server Workgroup (core installation)   PRODUCT_ULTIMATE 0x00000001   Ultimate   PRODUCT_ULTIMATE_E 0x00000047   Not supported   PRODUCT_ULTIMATE_N 0x0000001C   Ultimate N   PRODUCT_UNDEFINED 0x00000000   An unknown product   PRODUCT_WEB_SERVER 0x00000011   Web Server (full installation)   PRODUCT_WEB_SERVER_CORE 0x0000001D   Web Server (core installation)"
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the path of the system directory. The system directory contains system files such as dynamic-link libraries and drivers.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the length, in TCHARs, of the string copied to the buffer, not including the terminating null character. If the length is greater than the size of the buffer, the return value is the size of the buffer required to hold the path, including the terminating null character. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "Applications should not create files in the system directory. If the user is running a shared version of the operating system, the application does not have write access to the system directory. For an example, see  Getting System Information. ",
+    "return_type": "UINT WINAPI",
+    "category": "System Information Functions",
+    "name": "GetSystemDirectory",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpBuffer",
+        "description": "A pointer to the buffer to receive the path. This path does not end with a backslash unless the system directory is the root directory. For example, if the system directory is named Windows\\System32 on drive C, the path of the system directory retrieved by this function is C:\\Windows\\System32."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uSize",
+        "description": "The maximum size of the buffer, in TCHARs."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the specified firmware table from the firmware table provider.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008, Windows Server 2003 with SP1 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the number of bytes written to the buffer. This value will always be less than or equal to BufferSize. If the function fails because the buffer is not large enough, the return value is the required buffer size, in bytes. This value is always greater than BufferSize. If the function fails for any other reason, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "As of Windows Server 2003 with Service Pack 1 (SP1), applications cannot access the \\Device\\PhysicalMemory object. Access to this object is limited to kernel-mode drivers. This change affects applications read System Management BIOS (SMBIOS) or other BIOS data stored in the lowest 1MB of physical memory. Applications have the following alternatives to read data from low physical memory: There is no way for applications to write to low physical memory. The raw SMBIOS table provider ('RSMB') retrieves the contents of the raw SMBIOS firmware table. The pFirmwareTableBuffer buffer receives the following data: The raw firmware table provider ('FIRM') retrieves the contents of the specified physical address range. The function returns the size of the address range. The ACPI table provider ('ACPI') retrieves the contents of the specified ACPI table. Because OEMs can include ACPI firmware tables that are not listed in the ACPI specification, you should first call EnumSystemFirmwareTables to enumerate all ACPI tables that are currently on the system. For ACPI, if the system contains multiple tables with the same name, they are all enumerated with EnumSystemFirmwareTables. However, GetSystemFirmwareTable retrieves only the first table in the list with this name. ",
+    "return_type": "UINT WINAPI",
+    "category": "System Information Functions",
+    "name": "GetSystemFirmwareTable",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "FirmwareTableProviderSignature",
+        "description": "The identifier of the firmware table provider to which the query is to be directed. This parameter can be one of the following values.  ValueMeaning 'ACPI'The ACPI firmware table provider. 'FIRM'The raw firmware table provider. 'RSMB'The raw SMBIOS firmware table provider."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "FirmwareTableID",
+        "description": "The identifier of the firmware table. This identifier is little endian, you must reverse the characters in the string.  For example, FACP is an ACPI provider, as described in the Signature field of the DESCRIPTION_HEADER structure in the ACPI specification (see http://www.acpi.info). Therefore, use 'PCAF' to specify the FACP table, as shown in the following example: retVal = GetSystemFirmwareTable('ACPI', 'PCAF', pBuffer, BUFSIZE); For more information, see the Remarks section of the EnumSystemFirmwareTables function."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PVOID",
+        "name": "pFirmwareTableBuffer",
+        "description": "A pointer to a buffer that receives the requested firmware table. If this parameter is NULL, the return value is the required buffer size.  For more information on the contents of this buffer, see the Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "BufferSize",
+        "description": "The size of the pFirmwareTableBuffer buffer, in bytes."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP Professional x64 Edition [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves information about the current system.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "This function does not return a value. For an example, see  Getting Hardware Information. ",
+    "remarks": "",
+    "return_type": "void WINAPI",
+    "category": "System Information Functions",
+    "name": "GetSystemInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPSYSTEM_INFO",
+        "name": "lpSystemInfo",
+        "description": "A pointer to a  SYSTEM_INFO structure that receives the information."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the path of the shared Windows directory on a multi-user system.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the length of the string copied to the buffer, in TCHARs, not including the terminating null character. If the length is greater than the size of the buffer, the return value is the size of the buffer required to hold the path. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "On a system that is running Terminal Services, each user has a unique Windows directory. The system Windows directory is shared by all users, so it is the directory where an application should store initialization and help files that apply to all users. With Terminal Services, the  GetSystemWindowsDirectory function retrieves the path of the system Windows directory, while the  GetWindowsDirectory function retrieves the path of a Windows directory that is private for each user. On a single-user system,  GetSystemWindowsDirectory is the same as  GetWindowsDirectory. ",
+    "return_type": "UINT WINAPI",
+    "category": "System Information Functions",
+    "name": "GetSystemWindowsDirectory",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpBuffer",
+        "description": "A pointer to the buffer to receive the path. This path does not end with a backslash unless the Windows directory is the root directory. For example, if the Windows directory is named Windows on drive C, the path of the Windows directory retrieved by this function is C:\\Windows. If the system was installed in the root directory of drive C, the path retrieved is C:\\."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uSize",
+        "description": "The maximum size of the buffer specified by the lpBuffer parameter, in TCHARs."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the path of the system directory used by WOW64. This directory is not present on 32-bit Windows.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the length, in TCHARs, of the string copied to the buffer, not including the terminating null character. If the length is greater than the size of the buffer, the return value is the size of the buffer required to hold the path. If the function fails, the return value is zero. To get extended error information, call  GetLastError. On 32-bit Windows, the function always fails, and the extended error is set to ERROR_CALL_NOT_IMPLEMENTED. ",
+    "remarks": "WOW64 uses the system directory to store shared 32-bit code on 64-bit Windows. Most applications have no need to access this directory explicitly. For more information on WOW64, see  Running 32-bit Applications. To compile an application that uses this function, define _WIN32_WINNT as 0x0501 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "UINT WINAPI",
+    "category": "System Information Functions",
+    "name": "GetSystemWow64Directory",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpBuffer",
+        "description": "A pointer to the buffer to receive the path. This path does not end with a backslash."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uSize",
+        "description": "The maximum size of the buffer, in TCHARs."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the name of the user associated with the current thread.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value, and the variable pointed to by lpnSize contains the number of TCHARs copied to the buffer specified by lpBuffer, including the terminating null character. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "If the current thread is impersonating another client, the  GetUserName function returns the user name of the client that the thread is impersonating. If GetUserName is called from a process that is running under the  \"NETWORK SERVICE\" account, the string returned in lpBuffer may be different depending on the version of Windows.  On Windows XP, the \"NETWORK SERVICE\" string is returned. On Windows Vista, the \u00e2\u0080\u009c<HOSTNAME>$\u00e2\u0080\u009d string is returned. For an example, see  Getting System Information. ",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "GetUserName",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpBuffer",
+        "description": "A pointer to the buffer to receive the user's logon name. If this buffer is not large enough to contain the entire user name, the function fails. A buffer size of (UNLEN + 1) characters will hold the maximum length user name including the terminating null character. UNLEN is defined in Lmcons.h."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPDWORD",
+        "name": "lpnSize",
+        "description": "On input, this variable specifies the size of the lpBuffer buffer, in TCHARs. On output, the variable receives the number of TCHARs copied to the buffer, including the terminating null character.     If lpBuffer is too small, the function fails and GetLastError returns ERROR_INSUFFICIENT_BUFFER. This parameter receives the required buffer size, including the terminating null character."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the name of the user or other security principal associated with the calling thread. You can specify the format of the returned name.",
+    "library": "Secur32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Secext.h (include Security.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. To get extended error information, call  GetLastError. Possible values include the following.  ",
+    "remarks": "",
+    "return_type": "BOOLEAN WINAPI",
+    "category": "System Information Functions",
+    "name": "GetUserNameEx",
+    "is_callback": 0,
+    "dll": "Secur32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "EXTENDED_NAME_FORMAT",
+        "name": "NameFormat",
+        "description": "The format of the name. This parameter is a value from the  EXTENDED_NAME_FORMAT enumeration type. It cannot be NameUnknown. If the user account is not in a domain, only NameSamCompatible is supported."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpNameBuffer",
+        "description": "A pointer to a buffer that receives the name in the specified format. The buffer must include space for the terminating null character."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "lpnSize",
+        "description": "On input, this variable specifies the size of the lpNameBuffer buffer, in TCHARs. If the function is successful, the variable receives the number of TCHARs copied to the buffer, not including the terminating null character.     If lpNameBuffer is too small, the function fails and GetLastError returns ERROR_MORE_DATA. This parameter receives the required buffer size, in Unicode characters (whether or not Unicode is being used), including the terminating null character."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "[GetVersion may be altered or unavailable for releases after Windows 8.1. Instead, use the Version Helper functions]",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value includes the major and minor version numbers of the operating system in the low-order word, and information about the operating system platform in the high-order word. For all platforms, the low-order word contains the version number of the operating system. The low-order byte of this word specifies the major version number, in hexadecimal notation. The high-order byte specifies the minor version (revision) number, in hexadecimal notation. The  high-order bit is zero, the next 7 bits represent the build number, and the low-order byte is 5. ",
+    "remarks": "The  GetVersionEx function was developed because many existing applications err when examining the packed DWORD value returned by  GetVersion, transposing the major and minor version numbers.  GetVersionEx forces applications to explicitly examine each element of version information.  VerifyVersionInfo eliminates further potential for error by comparing the required system version with the current system version for you. The following code fragment illustrates how to extract information from the  GetVersion return value: OSVERSIONINFOEX ",
+    "return_type": "DWORD WINAPI",
+    "category": "System Information Functions",
+    "name": "GetVersion",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[GetVersionEx may be altered or unavailable for releases after Windows 8.1. Instead, use the Version Helper functions]",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. To get extended error information, call  GetLastError. The function fails if you specify an invalid value for the dwOSVersionInfoSize member of the  OSVERSIONINFO or  OSVERSIONINFOEX structure. ",
+    "remarks": "Identifying the current operating system is usually not the best way to determine whether a particular operating system feature is present. This is because the operating system may have had new features added in a redistributable DLL. Rather than using  GetVersionEx to determine the operating system platform or version number, test for the presence of the feature itself. For more information, see  Operating System Version. The GetSystemMetrics function provides additional information about the current operating system.  To check for specific operating systems or operating system features, use the IsOS function. The GetProductInfo function retrieves the product type. To retrieve information for the operating system on a remote computer, use the NetWkstaGetInfo function, the Win32_OperatingSystem WMI class, or the OperatingSystem property of the IADsComputer interface. To compare the current system version to a required version, use the  VerifyVersionInfo function instead of using  GetVersionEx to perform the comparison yourself. If compatibility mode is in effect, the GetVersionEx function reports the operating system as it identifies itself, which may not be the operating system that is installed. For example, if compatibility mode is in effect, GetVersionEx reports the operating system that is selected for application compatibility. When using the  GetVersionEx function to determine whether your application is running on a particular version of the operating system, check for version numbers that are greater than or equal to the desired version numbers. This ensures that the test succeeds for later versions of the operating system. For example, if your application requires Windows XP or later, use the following test. For an example that identifies the current operating system, see  Getting the System Version. ",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "GetVersionEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "LPOSVERSIONINFO",
+        "name": "lpVersionInfo",
+        "description": "An  OSVERSIONINFO or OSVERSIONINFOEX structure that receives the operating system information.     Before calling the  GetVersionEx function, set the dwOSVersionInfoSize member of the structure as appropriate to indicate which data structure is being passed to this function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the      path of the Windows directory.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the length of the string copied to the buffer, in         TCHARs, not including the terminating null character. If the length is greater than the size of the buffer, the return value is the size of the buffer required to         hold the path. If the function fails, the return value is zero. To get extended error information, call         GetLastError. ",
+    "remarks": "The Windows directory is the directory where some legacy applications  store initialization and help files. New applications should not store files in the Windows directory; instead, they should store system-wide data in the application's installation directory, and user-specific data in the user's profile. If the      user is running a shared version of the system, the Windows directory is guaranteed to be private for each user. If an application creates other files that it wants to store on a per-user basis, it should place them in the      directory specified by the HOMEPATH environment variable. This directory will be different for each user, if so      specified by an administrator, through the User Manager administrative tool. HOMEPATH always specifies either the      user's home directory, which is guaranteed to be private for each user, or a default directory (for example,      C:\\USERS\\DEFAULT) where the user will have all access. Terminal Services:        If the application is running in a Terminal Services environment, each user has a private Windows directory.       There is also a shared Windows directory for the system. If the application is Terminal-Services-aware (has the       IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE flag set in the image header), this       function returns the path of the system Windows directory, just as the       GetSystemWindowsDirectory function does.       Otherwise, it retrieves the path of the private Windows directory for the user. For an example, see Getting System Information. ",
+    "return_type": "UINT WINAPI",
+    "category": "System Information Functions",
+    "name": "GetWindowsDirectory",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpBuffer",
+        "description": "A pointer to a buffer that receives the path. This path does not end with a        backslash unless the Windows directory is the root directory. For example, if the Windows directory is named        Windows on drive C, the path of the Windows directory retrieved by this function is C:\\Windows. If the system        was installed in the root directory of drive C, the path retrieved is C:\\."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uSize",
+        "description": "The maximum size of the buffer specified by the lpBuffer parameter, in        TCHARs. This value should be set to MAX_PATH."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Indicates if the OS was booted from a VHD container.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "TRUE if the OS was a native VHD boot; otherwise, FALSE. Call GetLastError to get extended error information. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI IsNativeVhdBoot",
+    "category": "System Information Functions",
+    "name": "IsNativeVhdBoot",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PBOOL*",
+        "name": "NativeVhdBoot",
+        "description": "Pointer to a variable that receives a boolean         indicating if the OS was booted from a VHD."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines whether the specified processor feature is supported by the current computer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the feature is supported, the return value is a nonzero value. If the feature is not supported, the return value is zero. If the HAL does not support detection of the feature, whether or not the hardware supports the feature, the return value is also zero. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "IsProcessorFeaturePresent",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "ProcessorFeature",
+        "description": "The processor feature to be tested. This parameter can be one of the following values.     ValueMeaning  PF_ARM_64BIT_LOADSTORE_ATOMIC 25   The 64-bit load/store atomic instructions are available.   PF_ARM_DIVIDE_INSTRUCTION_AVAILABLE 24   The divide instructions are available.   PF_ARM_EXTERNAL_CACHE_AVAILABLE 26   The external cache is available.   PF_ARM_FMAC_INSTRUCTIONS_AVAILABLE 27   The floating-point multiply-accumulate instruction is available.   PF_ARM_VFP_32_REGISTERS_AVAILABLE 18   The VFP/Neon: 32 x 64bit register bank is present. This flag has the same meaning as PF_ARM_VFP_EXTENDED_REGISTERS.   PF_3DNOW_INSTRUCTIONS_AVAILABLE 7   The 3D-Now instruction set is available.   PF_CHANNELS_ENABLED 16   The processor channels are enabled.   PF_COMPARE_EXCHANGE_DOUBLE 2   The atomic compare and exchange operation (cmpxchg) is available.   PF_COMPARE_EXCHANGE128 14   The  atomic compare and exchange 128-bit operation (cmpxchg16b) is available. Windows Server 2003 and Windows XP/2000:  This feature is not supported.   PF_COMPARE64_EXCHANGE128 15   The atomic compare 64 and exchange 128-bit operation (cmp8xchg16) is available. Windows Server 2003 and Windows XP/2000:  This feature is not supported.   PF_FASTFAIL_AVAILABLE 23      _fastfail() is available.     PF_FLOATING_POINT_EMULATED 1   Floating-point operations are emulated using a software emulator. This function returns a nonzero value if floating-point operations are emulated; otherwise, it returns zero.   PF_FLOATING_POINT_PRECISION_ERRATA 0   On a Pentium, a floating-point precision error can occur in rare circumstances.   PF_MMX_INSTRUCTIONS_AVAILABLE 3   The MMX instruction set is available.   PF_NX_ENABLED 12    Data execution prevention is enabled. Windows XP/2000:  This feature is not supported until Windows XP with SP2 and Windows Server 2003 with SP1.   PF_PAE_ENABLED 9   The processor is PAE-enabled. For more information, see  Physical Address Extension. All x64 processors always return a nonzero value for this feature.   PF_RDTSC_INSTRUCTION_AVAILABLE 8   The RDTSC instruction is available.   PF_RDWRFSGSBASE_AVAILABLE 22   RDFSBASE, RDGSBASE, WRFSBASE, and WRGSBASE instructions are available.   PF_SECOND_LEVEL_ADDRESS_TRANSLATION 20   Second Level Address Translation is supported by the hardware.   PF_SSE3_INSTRUCTIONS_AVAILABLE 13   The SSE3 instruction set is available. Windows Server 2003 and Windows XP/2000:  This feature is not supported.   PF_VIRT_FIRMWARE_ENABLED 21   Virtualization is enabled in the firmware.    PF_XMMI_INSTRUCTIONS_AVAILABLE 6   The SSE instruction set is available.   PF_XMMI64_INSTRUCTIONS_AVAILABLE 10   The SSE2 instruction set is available. Windows 2000:  This feature is not supported.   PF_XSAVE_ENABLED 17   The processor implements the XSAVE and XRSTOR instructions. Windows Server 2008, Windows Vista, Windows Server 2003 and Windows XP/2000:  This feature is not supported until Windows 7 and Windows Server 2008 R2."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "[Some information relates to pre-released product which may be substantially modified before it's commercially released. Microsoft makes no warranties, express or implied, with respect to the information provided here.]",
+    "library": "Ntdll.lib",
+    "min_server": "Windows Server 2016 [desktop apps only]",
+    "header": "Ntddk.h",
+    "return_value": "A bit mask that identifies the product suites available on the system. The bit mask can include the following values.  ",
+    "remarks": "You should not  rely upon only the 0x00000001 flag to determine      whether Small Business Server has been installed on the system, as both this flag and the      0x00000020 flag are set when this product suite is installed. If      you upgrade this installation to Windows Server, Standard Edition, the      0x00000020 flag will be cleared\u00e2\u0080\u0094however, the 0x00000001 flag will remain set. In this case, this indicates that Small      Business Server was once installed on this system. If this installation is further upgraded to Windows Server,      Enterprise Edition, the 0x00000001 flag will remain set. ",
+    "return_type": "ULONG NTAPI",
+    "category": "System Information Functions",
+    "name": "RtlGetSuiteMask",
+    "is_callback": 0,
+    "dll": "Ntdll.dll",
+    "arguments": [],
+    "min_client": "Windows 10 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets a new NetBIOS name for the local computer. The name is stored in the registry and the name change takes effect the next time the user restarts the computer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "Applications using this function must have administrator rights. ",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "SetComputerName",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpComputerName",
+        "description": "The computer name that will take effect the next time the computer is started. The name must not be longer than MAX_COMPUTERNAME_LENGTH characters.     The standard character set includes letters, numbers, and the following symbols: ! @ # $ % ^ & ' ) ( . - _ { } ~ . If this parameter contains one or more characters that are outside the standard character set,  SetComputerName returns ERROR_INVALID_PARAMETER."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Sets a new NetBIOS or DNS name for the local computer. Name changes made by  SetComputerNameEx do not take effect until the user restarts the computer.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "SetComputerNameEx can set the Computer Name (the first label of the full DNS name) or the primary DNS suffix of the local computer. It cannot set a fully qualified DNS name in one call. If the local computer is a node in a cluster,  SetComputerNameEx sets NetBIOS or DNS name of the local computer, not that of the cluster virtual server. The process that calls the  SetComputerNameEx function must have administrator privileges on the local computer. To compile an application that uses this function, define _WIN32_WINNT as 0x0500 or later. For more information, see  Using the Windows Headers. ",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "SetComputerNameEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "COMPUTER_NAME_FORMAT",
+        "name": "NameType",
+        "description": "The type of name to be set. This parameter can be one of the following values from the  COMPUTER_NAME_FORMAT enumeration type.     ValueMeaning  ComputerNamePhysicalDnsDomain   Sets the primary DNS suffix of the computer.   ComputerNamePhysicalDnsHostname   Sets the NetBIOS and the Computer Name (the first label of the full DNS name) to the name specified in lpBuffer. If the name exceeds MAX_COMPUTERNAME_LENGTH characters, the NetBIOS name is truncated to MAX_COMPUTERNAME_LENGTH characters, not including the terminating null character.   ComputerNamePhysicalNetBIOS   Sets the NetBIOS name to the name specified in lpBuffer. The name cannot exceed MAX_COMPUTERNAME_LENGTH characters, not including the terminating null character.     Warning: Using this option to set the NetBIOS name breaks the convention of interdependent NetBIOS and DNS names. Applications that use the  DnsHostnameToComputerName function to derive the NetBIOS name from the first label of the DNS name will fail if this convention is broken."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpBuffer",
+        "description": "The new name. The name cannot include control characters, leading or trailing spaces, or any of the following characters: \" / \\ [ ] : | < > + = ; , ?"
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Sets the value of the specified firmware environment variable.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. To get extended error information, call  GetLastError. Possible error codes include ERROR_INVALID_FUNCTION. ",
+    "remarks": "The exact set of firmware environment variables is determined by the boot firmware. The location of these environment variables is also specified by the firmware.  For example, on a UEFI-based system, NVRAM contains firmware environment variables that specify system boot settings. For information about specific variables used, see the UEFI specification. For more information about UEFI and Windows, see UEFI and Windows. Firmware variables are not supported on a legacy BIOS-based system. The SetFirmwareEnvironmentVariable function will always fail on a legacy BIOS-based system, or if Windows was installed using legacy BIOS on a system that supports both legacy BIOS and UEFI.  To identify these conditions, call the function with a dummy firmware environment name such as an empty string (\"\") for the lpName parameter and a dummy GUID such as \"{00000000-0000-0000-0000-000000000000}\" for the lpGuid parameter. On a legacy BIOS-based system, or on a system that supports both legacy BIOS and UEFI where Windows was installed using legacy BIOS, the function will fail with  ERROR_INVALID_FUNCTION. On a UEFI-based system, the function will  fail with an error specific to the firmware, such as ERROR_NOACCESS, to indicate that the dummy GUID namespace does not exist. SetFirmwareEnvironmentVariable is the user-mode equivalent of the ExSetFirmwareEnvironmentVariable kernel-mode routine. ",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "SetFirmwareEnvironmentVariable",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpName",
+        "description": "The name of the firmware environment variable. The pointer must not be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpGuid",
+        "description": "The GUID that represents the namespace of the firmware environment variable. The GUID must be a string in the format  \"{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\". If the system does not support GUID-based namespaces, this parameter is ignored."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pBuffer",
+        "description": "A pointer to the new value for the  firmware environment variable."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nSize",
+        "description": "The size of the pBuffer buffer, in bytes. If this parameter is zero, the firmware environment variable is deleted."
+      }
+    ],
+    "min_client": "Windows Vista, Windows XP with SP1 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Sets the value of the specified firmware environment variable as the attributes that indicate how this variable is stored and maintained.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. To get extended error information, call  GetLastError. Possible error codes include ERROR_INVALID_FUNCTION. ",
+    "remarks": "The correct method of changing the attributes of a variable is to delete the variable and recreate it with different attributes. The exact set of firmware environment variables is determined by the boot firmware. The location of these environment variables is also specified by the firmware.  For example, on a UEFI-based system, NVRAM contains firmware environment variables that specify system boot settings. For information about specific variables used, see the UEFI specification. For more information about UEFI and Windows, see UEFI and Windows. Firmware variables are not supported on a legacy BIOS-based system. The SetFirmwareEnvironmentVariableEx function will always fail on a legacy BIOS-based system, or if Windows was installed using legacy BIOS on a system that supports both legacy BIOS and UEFI.  To identify these conditions, call the function with a dummy firmware environment name such as an empty string (\"\") for the lpName parameter and a dummy GUID such as \"{00000000-0000-0000-0000-000000000000}\" for the lpGuid parameter. On a legacy BIOS-based system, or on a system that supports both legacy BIOS and UEFI where Windows was installed using legacy BIOS, the function will fail with  ERROR_INVALID_FUNCTION. On a UEFI-based system, the function will  fail with an error specific to the firmware, such as ERROR_NOACCESS, to indicate that the dummy GUID namespace does not exist. ",
+    "return_type": "BOOL WINBASEAPI",
+    "category": "System Information Functions",
+    "name": "SetFirmwareEnvironmentVariableEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpName",
+        "description": "The name of the firmware environment variable. The pointer must not be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpGuid",
+        "description": "The GUID that represents the namespace of the firmware environment variable. The GUID must be a string in the format  \"{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\". If the system does not support GUID-based namespaces, this parameter is ignored. The pointer must not be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pValue",
+        "description": "A pointer to the new value for the  firmware environment variable."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nSize",
+        "description": "The size of the pValue buffer, in bytes. Unless the VARIABLE_ATTRIBUTE_APPEND_WRITE, VARIABLE_ATTRIBUTE_AUTHENTICATED_WRITE_ACCESS, or VARIABLE_ATTRIBUTE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS variable attribute is set via dwAttributes, setting this value to zero will result in the deletion of this variable."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwAttributes",
+        "description": "Bitmask to set UEFI variable attributes associated with the variable. See also UEFI Spec 2.3.1, Section 7.2.  ValueMeaning  VARIABLE_ATTRIBUTE_NON_VOLATILE 0x00000001   The firmware environment variable is stored in non-volatile memory (e.g. NVRAM).   VARIABLE_ATTRIBUTE_BOOTSERVICE_ACCESS 0x00000002   The firmware environment variable can be accessed during boot service.   VARIABLE_ATTRIBUTE_RUNTIME_ACCESS 0x00000004   The firmware environment variable can be accessed at runtime. Note  Variables with this attribute set, must also have VARIABLE_ATTRIBUTE_BOOTSERVICE_ACCESS set.     VARIABLE_ATTRIBUTE_HARDWARE_ERROR_RECORD 0x00000008   Indicates hardware related errors encountered at runtime.   VARIABLE_ATTRIBUTE_AUTHENTICATED_WRITE_ACCESS 0x00000010   Indicates an authentication requirement that must be met before writing to this firmware environment variable. For more information see, UEFI spec 2.3.1.   VARIABLE_ATTRIBUTE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS 0x00000020   Indicates authentication and time stamp requirements that must be met before writing to this firmware environment variable. When this attribute is set, the buffer, represented by pValue, will begin with an instance of a complete (and serialized) EFI_VARIABLE_AUTHENTICATION_2 descriptor.  For more information see, UEFI spec 2.3.1.   VARIABLE_ATTRIBUTE_APPEND_WRITE 0x00000040    Append an existing environment variable with the value of pValue. If the firmware does not support the operation, then SetFirmwareEnvironmentVariableEx will return ERROR_INVALID_FUNCTION."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Converts a directory service object name from one format to another.",
+    "library": "Secur32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Secext.h (include Security.h)",
+    "return_value": "If the function succeeds, the return value is a nonzero value. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "TranslateName fails if it cannot bind to Active Directory on a domain controller. ",
+    "return_type": "BOOLEAN WINAPI",
+    "category": "System Information Functions",
+    "name": "TranslateName",
+    "is_callback": 0,
+    "dll": "Secur32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpAccountName",
+        "description": "The name to be translated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "EXTENDED_NAME_FORMAT",
+        "name": "AccountNameFormat",
+        "description": "The format of the name to be translated. This parameter is a value from the  EXTENDED_NAME_FORMAT enumeration type."
+      },
+      {
+        "in_out": "_In_",
+        "type": "EXTENDED_NAME_FORMAT",
+        "name": "DesiredNameFormat",
+        "description": "The format of the converted name. This parameter is a value from the  EXTENDED_NAME_FORMAT enumeration type. It cannot be NameUnknown."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpTranslatedName",
+        "description": "A pointer to a buffer that receives the converted name."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PULONG",
+        "name": "nSize",
+        "description": "On input, the variable indicates the size of the lpTranslatedName buffer, in TCHARs. On output, the variable returns the size of the returned string, in TCHARs, including the terminating null character.     If lpTranslated is NULL and nSize is 0, the function succeeds and nSize receives the required buffer size. If the lpTranslatedName buffer is too small to hold the converted name, the function fails and nSize receives the required buffer size."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Compares a set of operating system version requirements to the corresponding values for the currently running version of the system.    This function is subject to manifest-based behavior.  For more information, see the Remarks section.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "If the currently running operating system satisfies the specified requirements, the return value is a nonzero value. If the current system does not satisfy the requirements, the return value is zero and  GetLastError returns ERROR_OLD_WIN_VERSION. If the function fails, the return value is zero and GetLastError returns an error code other than ERROR_OLD_WIN_VERSION. ",
+    "remarks": "The  VerifyVersionInfo function retrieves version information about the currently running operating system and compares it to the valid members of the lpVersionInfo structure. This enables you to easily determine the presence of a required set of operating system version conditions. It is preferable to use  VerifyVersionInfo rather than calling the  GetVersionEx function to perform your own comparisons. Typically,  VerifyVersionInfo returns a nonzero value only if all specified tests succeed. However, major, minor, and service pack versions are tested in a hierarchical manner because the operating system version is a combination of these values. If a condition exists for the major version, it supersedes the conditions specified for minor version and service pack version. (You cannot test for major version greater than 5 and minor version less than or equal to 1. If you specify such a test, the function will change the request to test for a minor version greater than 1 because it is performing a greater than operation on the major version.) The function tests these values in this order: major version, minor version, and service pack version. The function continues testing values while they are equal, and stops when one of the values does not meet the specified condition. For example, if you test for a system greater than or equal to version 5.1 service pack 1, the test succeeds if the current version is 6.0. (The major version is greater than the specified version, so the testing stops.) In the same way, if you test for a system greater than or equal to version 5.1 service pack 1, the test succeeds if the current version is 5.2. (The minor version is greater than the specified versions, so the testing stops.) However, if you test for a system greater than or equal to version 5.1 service pack 1, the test fails if the current version is 5.0 service pack 2. (The minor version is not greater than the specified version, so the testing stops.) To verify a range of system versions, you must call  VerifyVersionInfo twice. For example, to verify that the system version is greater than 5.0 but less than or equal to 5.1, first call  VerifyVersionInfo to test that the major version is 5 and the minor version is greater than 0, then call  VerifyVersionInfo again to test that the major version is 5 and the minor version is less than or equal to 1. Identifying the current operating system is usually not the best way to determine whether a particular operating system feature is present. This is because the operating system may have had new features added in a redistributable DLL. Rather than using  GetVersionEx to determine the operating system platform or version number, test for the presence of the feature itself. For more information, see  Operating System Version. To verify whether the current operating system is either the Media Center or Tablet PC version of Windows, call GetSystemMetrics. Windows 10:  VerifyVersionInfo returns false when called by applications that do not have a compatibility manifest for Windows 8.1 or Windows 10 if the lpVersionInfo parameter is set so that it specifies Windows 8.1 or Windows 10, even when the current operating system version is Windows 8.1 or Windows 10. Specifically, VerifyVersionInfo has the following behavior: The Version Helper functions use the VerifyVersionInfo function, so the behavior IsWindows8Point1OrGreater and IsWindows10OrGreater are similarly affected by the presence and content of the manifest. To manifest your applications for Windows 8.1 or Windows 10, see Targeting your application for Windows. For an example, see  Verifying the System Version. ",
+    "return_type": "BOOL WINAPI",
+    "category": "System Information Functions",
+    "name": "VerifyVersionInfo",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOSVERSIONINFOEX",
+        "name": "lpVersionInfo",
+        "description": "A pointer to an  OSVERSIONINFOEX structure containing the operating system version requirements to compare. The dwTypeMask parameter indicates the members of this structure that contain information to compare.     You must set the dwOSVersionInfoSize member of this structure to sizeof(OSVERSIONINFOEX). You must also specify valid data for the members indicated by dwTypeMask. The function ignores structure members for which the corresponding dwTypeMask bit is not set."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwTypeMask",
+        "description": "A mask that indicates the members of the  OSVERSIONINFOEX structure to be tested. This parameter can be one or more of the following values.  ValueMeaning  VER_BUILDNUMBER 0x0000004   dwBuildNumber   VER_MAJORVERSION 0x0000002   dwMajorVersion If you are testing the major version, you must also test the minor version and the service pack major and minor versions.   VER_MINORVERSION 0x0000001   dwMinorVersion   VER_PLATFORMID 0x0000008   dwPlatformId   VER_SERVICEPACKMAJOR 0x0000020   wServicePackMajor   VER_SERVICEPACKMINOR 0x0000010   wServicePackMinor   VER_SUITENAME 0x0000040   wSuiteMask   VER_PRODUCT_TYPE 0x0000080   wProductType"
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORDLONG",
+        "name": "dwlConditionMask",
+        "description": "The type of comparison to be used for each lpVersionInfo member being compared. To build this value, call the  VerSetConditionMask function or the  VER_SET_CONDITION macro once for each  OSVERSIONINFOEX member being compared."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the bits of a 64-bit value to indicate the comparison operator to use for a specified operating system version attribute. This function is used to build the dwlConditionMask parameter of the  VerifyVersionInfo function.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnt.h (include Windows.h)",
+    "return_value": "The function returns the condition mask value. ",
+    "remarks": "Call this function once for each bit set in the dwTypeMask parameter of the  VerifyVersionInfo function. For an example, see  Verifying the System Version. ",
+    "return_type": "ULONGLONG WINAPI",
+    "category": "System Information Functions",
+    "name": "VerSetConditionMask",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ULONGLONG",
+        "name": "dwlConditionMask",
+        "description": "A value to be passed as the dwlConditionMask parameter of the  VerifyVersionInfo function. The function stores the comparison information in the bits of this variable.     Before the first call to VerSetCondition, initialize this variable to zero. For subsequent calls, pass in the variable used in the previous call."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwTypeBitMask",
+        "description": "A mask that indicates the member of the  OSVERSIONINFOEX structure whose comparison operator is being set. This value corresponds to one of the bits specified in the dwTypeMask parameter for the  VerifyVersionInfo function. This parameter can be one of the following values.  ValueMeaning  VER_BUILDNUMBER 0x0000004   dwBuildNumber   VER_MAJORVERSION 0x0000002   dwMajorVersion   VER_MINORVERSION 0x0000001   dwMinorVersion   VER_PLATFORMID 0x0000008   dwPlatformId   VER_PRODUCT_TYPE 0x0000080   wProductType   VER_SERVICEPACKMAJOR 0x0000020   wServicePackMajor   VER_SERVICEPACKMINOR 0x0000010   wServicePackMinor   VER_SUITENAME 0x0000040   wSuiteMask"
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "dwConditionMask",
+        "description": "The operator to be used for the comparison. The  VerifyVersionInfo function uses this operator to compare a specified attribute value to the corresponding value for the currently running system.     For all values of dwTypeBitMask other than VER_SUITENAME, this parameter can be one of the following values.  ValueMeaning  VER_EQUAL 1   The current value must be equal to the specified value.   VER_GREATER 2   The current value must be greater than the specified value.   VER_GREATER_EQUAL 3   The current value must be greater than or equal to the specified value.   VER_LESS 4   The current value must be less than the specified value.   VER_LESS_EQUAL 5   The current value must be less than or equal to the specified value.     If dwTypeBitMask is VER_SUITENAME, this parameter can be one of the following values.  ValueMeaning  VER_AND 6   All product suites specified in the wSuiteMask member must be present in the current system.   VER_OR 7   At least one of the specified product suites must be present in the current system."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "[NtQuerySystemInformation may be altered or unavailable in future versions of Windows. Applications should use the alternate functions listed in this topic.]",
+    "library": "",
+    "min_server": "",
+    "header": "Winternl.h",
+    "return_value": "Returns an  NTSTATUS success or error code. The forms and significance of NTSTATUS error codes are listed in the Ntstatus.h header file available in the DDK, and are described in the DDK documentation. ",
+    "remarks": "The NtQuerySystemInformation function and the structures that it returns are internal to the operating system and  subject to change from one  release of Windows to another.  To maintain the    compatibility of your application, it is better to use the alternate functions previously mentioned instead. If you do use NtQuerySystemInformation, access the function through run-time dynamic linking.  This gives  your code an opportunity to respond gracefully if the function has been   changed or removed from the operating system. Signature changes, however, may not be detectable. This function has no associated import library. You must use the LoadLibrary and GetProcAddress functions to dynamically link to Ntdll.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "System Information Functions",
+    "name": "NtQuerySystemInformation",
+    "is_callback": 0,
+    "dll": "Ntdll.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SYSTEM_INFORMATION_CLASS",
+        "name": "SystemInformationClass",
+        "description": "One of the values enumerated in SYSTEM_INFORMATION_CLASS, which indicate the kind of system information to be retrieved. These include the following values.  SystemBasicInformation   Returns the number of processors in the system in a SYSTEM_BASIC_INFORMATION structure. Use the GetSystemInfo function instead.  SystemCodeIntegrityInformation   Returns a SYSTEM_CODEINTEGRITY_INFORMATION structure that can be used to determine the options being enforced by Code Integrity on the system.  SystemExceptionInformation   Returns an opaque SYSTEM_EXCEPTION_INFORMATION structure that can be used to generate an unpredictable seed for a random number generator. Use the CryptGenRandom function instead.  SystemInterruptInformation   Returns an opaque SYSTEM_INTERRUPT_INFORMATION structure that can be used to generate an unpredictable seed for a random number generator. Use the CryptGenRandom function instead.  SystemLookasideInformation   Returns an opaque SYSTEM_LOOKASIDE_INFORMATION structure that can be used to generate an unpredictable seed for a random number generator. Use the CryptGenRandom function instead.  SystemPerformanceInformation   Returns an opaque SYSTEM_PERFORMANCE_INFORMATION structure that can be used to generate an unpredictable seed for a random number generator. Use the CryptGenRandom function instead.  SystemProcessInformation   Returns an array of SYSTEM_PROCESS_INFORMATION structures, one for each process running in the system.  These structures contain information about the resource usage of each process, including the number of handles used by the process, the peak page-file usage, and the number of memory pages that the process has allocated.  SystemProcessorPerformanceInformation   Returns an array of SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION structures, one for each processor installed in the system.  SystemQueryPerformanceCounterInformation   Returns a SYSTEM_QUERY_PERFORMANCE_COUNTER_INFORMATION structure that can be used to determine whether the system requires a kernel transition to retrieve the high-resolution performance counter information through a QueryPerformanceCounter function call.    SystemRegistryQuotaInformation   Returns a SYSTEM_REGISTRY_QUOTA_INFORMATION structure.  SystemTimeOfDayInformation   Returns an opaque SYSTEM_TIMEOFDAY_INFORMATION structure that can be used to generate an unpredictable seed for a random number generator. Use the CryptGenRandom function instead.  SystemPolicyInformation   Returns policy information in a SYSTEM_POLICY_INFORMATION structure. Use the SLGetWindowsInformation function instead to obtain policy information."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PVOID",
+        "name": "SystemInformation",
+        "description": "A pointer to a buffer that receives the requested information. The size and structure of this information varies depending on the value of the SystemInformationClass parameter:  SYSTEM_BASIC_INFORMATION   When the SystemInformationClass  parameter is SystemBasicInformation,  the buffer pointed to by the SystemInformation parameter should be large enough to hold a single SYSTEM_BASIC_INFORMATION structure having the following layout:        Copy     typedef struct _SYSTEM_BASIC_INFORMATION {     BYTE Reserved1[24];     PVOID Reserved2[4];     CCHAR NumberOfProcessors; } SYSTEM_BASIC_INFORMATION;      The NumberOfProcessors member contains the number of processors present in the system. Use GetSystemInfo instead to retrieve this information. The  other members of the structure are reserved for internal use by the operating system.  SYSTEM_CODEINTEGRITY_INFORMATION   When the SystemInformationClass  parameter is SystemCodeIntegrityInformation,  the buffer pointed to by the SystemInformation parameter should be large enough to hold a single SYSTEM_CODEINTEGRITY_INFORMATION structure having the following layout:        Copy     typedef struct _SYSTEM_CODEINTEGRITY_INFORMATION {     ULONG  Length;     ULONG  CodeIntegrityOptions; } SYSTEM_CODEINTEGRITY_INFORMATION, *PSYSTEM_CODEINTEGRITY_INFORMATION;     The Length member contains the size of the structure in bytes. This must be set by the caller. The CodeIntegrityOptions member contains a bitmask to identify code integrity options.   ValueMeaning 0x01CODEINTEGRITY_OPTION_ENABLEDEnforcement of kernel mode Code Integrity is enabled. 0x02CODEINTEGRITY_OPTION_TESTSIGNTest signed content is allowed by Code Integrity. 0x04CODEINTEGRITY_OPTION_UMCI_ENABLEDEnforcement of user mode Code Integrity is enabled. 0x08CODEINTEGRITY_OPTION_UMCI_AUDITMODE_ENABLEDEnforcement of user mode Code Integrity is enabled in audit mode. Executables will be allowed to run/load; however, audit events will be recorded.  0x10CODEINTEGRITY_OPTION_UMCI_EXCLUSIONPATHS_ENABLED User mode binaries being run from certain paths are allowed to run even if they fail code integrity checks. Exclusion paths are listed in the following registry key in REG_MULTI_SZ format:   Key: HKLM\\SYSTEM\\CurrentControlSet\\Control\\CI\\TRSData Value: TestPath  Paths added to this key should be in one of two formats:  Path (absolute or relative): \\Program Files\\TestAutomationPath Binary (specific): \\Program Files\\TestAutomationPath\\mybinary.exe  The following paths are restricted and cannot be added as an exclusion:  \\ \\Windows \\Windows\\System32 \\Program Files  Built-in Path Exclusions: The following paths are excluded by default. You don't need to specifically add these to path exclusions. This only applies on ARM (Windows Runtime).  \\Program Files\\WTT \\Program Files (x86)\\WTT \\WTT\\JobsWorkingDir  \\Program Files\\Common Files\\Model Design Environment \\TAEF  \\$ASITEMP \\ATDEVXCT1\\WTTInstall \\ATUEXCT1\\WTTInstall \\ATESCCT1\\WTTInstall  \\ATCORECT1\\WTTInstall \\ATStressCT1\\WTTInstall \\ATWSCCT1\\WTTInstall  \\ATFUNCT1\\WTTInstall \\ATIDCCT1\\WTTInstall \\ATDNTCT1\\WTTInstall   0x20CODEINTEGRITY_OPTION_TEST_BUILDThe build of Code Integrity is from a test build. 0x40CODEINTEGRITY_OPTION_PREPRODUCTION_BUILDThe build of Code Integrity is from a pre-production build. 0x80CODEINTEGRITY_OPTION_DEBUGMODE_ENABLEDThe kernel debugger is attached and Code Integrity may allow unsigned code to load. 0x100CODEINTEGRITY_OPTION_FLIGHT_BUILDThe build of Code Integrity is from a flight build. 0x200CODEINTEGRITY_OPTION_FLIGHTING_ENABLEDFlight signed content is allowed by Code Integrity. Flight signed content is content signed by the Microsoft Development Root Certificate Authority 2014.  0x400CODEINTEGRITY_OPTION_HVCI_KMCI_ENABLEDHypervisor enforced Code Integrity is enabled for kernel mode components. 0x800CODEINTEGRITY_OPTION_HVCI_KMCI_AUDITMODE_ENABLEDHypervisor enforced Code Integrity is enabled in audit mode. Audit events will be recorded for kernel mode components that are not compatible with HVCI. This bit can be set whether CODEINTEGRITY_OPTION_HVCI_KMCI_ENABLED is set or not. 0x1000CODEINTEGRITY_OPTION_HVCI_KMCI_STRICTMODE_ENABLEDHypervisor enforced Code Integrity is enabled for kernel mode components, but in strict mode.  0x2000CODEINTEGRITY_OPTION_HVCI_IUM_ENABLEDHypervisor enforced Code Integrity is enabled with enforcement of Isolated User Mode component signing.     SYSTEM_EXCEPTION_INFORMATION   When the SystemInformationClass  parameter is SystemExceptionInformation, the buffer pointed to by the SystemInformation parameter should be large enough to hold an opaque SYSTEM_EXCEPTION_INFORMATION structure for use in generating an unpredictable seed for a random number generator. For this purpose, the structure has the following layout:        Copy     typedef struct _SYSTEM_EXCEPTION_INFORMATION {     BYTE Reserved1[16]; } SYSTEM_EXCEPTION_INFORMATION;     Individual members of the structure are reserved for internal use by the operating system. Use the CryptGenRandom  function instead to generate cryptographically random data.  SYSTEM_INTERRUPT_INFORMATION   When the SystemInformationClass  parameter is SystemInterruptInformation, the buffer pointed to by the SystemInformation parameter should be large enough to hold an array that contains as many opaque  SYSTEM_INTERRUPT_INFORMATION structures as there are  processors (CPUs) installed on the system. Each structure, or the array as a whole, can be used to generate an unpredictable seed for a random number generator. For this purpose, the structure has the following layout:        Copy     typedef struct _SYSTEM_INTERRUPT_INFORMATION {     BYTE Reserved1[24]; } SYSTEM_INTERRUPT_INFORMATION;     Individual members of the structure are reserved for internal use by the operating system. Use the CryptGenRandom  function instead to generate cryptographically random data.  SYSTEM_LOOKASIDE_INFORMATION   When the SystemInformationClass  parameter is SystemLookasideInformation, the buffer pointed to by the SystemInformation parameter should be large enough to hold an opaque SYSTEM_LOOKASIDE_INFORMATION structure for use in generating an unpredictable seed for a random number generator. For this purpose, the structure has the following layout:        Copy     typedef struct _SYSTEM_LOOKASIDE_INFORMATION {     BYTE Reserved1[32]; } SYSTEM_LOOKASIDE_INFORMATION;     Individual members of the structure are reserved for internal use by the operating system. Use the CryptGenRandom  function instead to generate cryptographically random data.  SYSTEM_PERFORMANCE_INFORMATION   When the SystemInformationClass  parameter is SystemPerformanceInformation, the buffer pointed to by the SystemInformation parameter should be large enough to hold an opaque SYSTEM_PERFORMANCE_INFORMATION structure for use in generating an unpredictable seed for a random number generator. For this purpose, the structure has the following layout:        Copy     typedef struct _SYSTEM_PERFORMANCE_INFORMATION {     BYTE Reserved1[312]; } SYSTEM_PERFORMANCE_INFORMATION;     Individual members of the structure are reserved for internal use by the operating system. Use the CryptGenRandom  function instead to generate cryptographically random data.  SYSTEM_PROCESS_INFORMATION   When the SystemInformationClass  parameter is SystemProcessInformation,  the buffer pointed to by the SystemInformation parameter should be large enough to hold an array that contains as many SYSTEM_PROCESS_INFORMATION structures as there are processes running in the system. Each structure has the following layout:        Copy     typedef struct _SYSTEM_PROCESS_INFORMATION {     ULONG NextEntryOffset;     BYTE Reserved1[52];     PVOID Reserved2[3];     HANDLE UniqueProcessId;     PVOID Reserved3;     ULONG HandleCount;     BYTE Reserved4[4];     PVOID Reserved5[11];     SIZE_T PeakPagefileUsage;     SIZE_T PrivatePageCount;     LARGE_INTEGER Reserved6[6]; } SYSTEM_PROCESS_INFORMATION;     The start of the next item in the array is the address of the previous item plus the value in the NextEntryOffset member. For the last item in the array, NextEntryOffset is 0. The HandleCount member contains the total number of handles being used by the process in question; use GetProcessHandleCount  to retrieve this information instead. The PeakPagefileUsage member contains the  maximum number of bytes of page-file storage used by the process, and the PrivatePageCount member contains the number of memory pages allocated for the use of this process. You can also retrieve this information using either the GetProcessMemoryInfo function or the Win32_Process class. The  other members of the structure are reserved for internal use by the operating system.  SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION   When the SystemInformationClass  parameter is SystemProcessorPerformanceInformation,  the buffer pointed to by the SystemInformation parameter should be large enough to hold an array that contains as many SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION structures as there are processors (CPUs) installed in the system. Each structure has the following layout:        Copy     typedef struct _SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION {     LARGE_INTEGER IdleTime;     LARGE_INTEGER KernelTime;     LARGE_INTEGER UserTime;     LARGE_INTEGER Reserved1[2];     ULONG Reserved2; } SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION;     The IdleTime member contains the amount of time that the system has been idle, in 100-nanosecond intervals. The KernelTime member contains the amount of time that the system has spent executing in Kernel mode (including all threads in all processes, on all processors), in 100-nanosecond intervals. The UserTime member contains the amount of time that the system has spent executing in User mode (including all threads in all processes, on all processors), in 100-nanosecond intervals. Use GetSystemTimes instead to retrieve this information.  SYSTEM_QUERY_PERFORMANCE_COUNTER_INFORMATION   When the SystemInformationClass parameter is SystemQueryPerformanceCounterInformation, the buffer pointed to by the SystemInformation parameter should be large enough to hold a single SYSTEM_QUERY_PERFORMANCE_COUNTER_INFORMATION structure having the following layout:       Copy     typedef struct _SYSTEM_QUERY_PERFORMANCE_COUNTER_INFORMATION {     ULONG                           Version;     QUERY_PERFORMANCE_COUNTER_FLAGS Flags;     QUERY_PERFORMANCE_COUNTER_FLAGS ValidFlags; } SYSTEM_QUERY_PERFORMANCE_COUNTER_INFORMATION;      The Flags and ValidFlags members are QUERY_PERFORMANCE_COUNTER_FLAGS structures having the following layout:       Copy     typedef struct _QUERY_PERFORMANCE_COUNTER_FLAGS {     union {         struct {             ULONG KernelTransition:1;             ULONG Reserved:31;         };         ULONG ul;     }; } QUERY_PERFORMANCE_COUNTER_FLAGS;     The ValidFlags member of the SYSTEM_QUERY_PERFORMANCE_COUNTER_INFORMATION structure indicates which bits of the Flags member contain valid information. If a kernel transition is required, the KernelTransition bit is set in both ValidFlags and Flags. If a kernel transition is not required, the KernelTransition bit is set in ValidFlags and clear in Flags.  SYSTEM_REGISTRY_QUOTA_INFORMATION   When the SystemInformationClass  parameter is SystemRegistryQuotaInformation,  the buffer pointed to by the SystemInformation parameter should be large enough to hold a single SYSTEM_REGISTRY_QUOTA_INFORMATION structure having the following layout:        Copy     typedef struct _SYSTEM_REGISTRY_QUOTA_INFORMATION {     ULONG RegistryQuotaAllowed;     ULONG RegistryQuotaUsed;     PVOID Reserved1; } SYSTEM_REGISTRY_QUOTA_INFORMATION;     The RegistryQuotaAllowed member contains the maximum size, in bytes, that the Registry can attain on this system. The RegistryQuotaUsed member contains the current size of the Registry, in bytes. Use GetSystemRegistryQuota instead to retrieve this information. The  other member of the structure is reserved for internal use by the operating system.  SYSTEM_TIMEOFDAY_INFORMATION   When the SystemInformationClass  parameter is SystemTimeOfDayInformation, the buffer pointed to by the SystemInformation parameter should be large enough to hold an opaque SYSTEM_TIMEOFDAY_INFORMATION structure for use in generating an unpredictable seed for a random number generator. For this purpose, the structure has the following layout:        Copy     typedef struct _SYSTEM_TIMEOFDAY_INFORMATION {     BYTE Reserved1[48]; } SYSTEM_TIMEOFDAY_INFORMATION;     Individual members of the structure are reserved for internal use by the operating system. Use the CryptGenRandom  function instead to generate cryptographically random data.  SYSTEM_POLICY_INFORMATION   When the SystemInformationClass  parameter is SystemPolicyInformation, the buffer pointed to by the SystemInformation parameter should be large enough to hold a single SYSTEM_POLICY_INFORMATION structure having the following layout:        Copy     typedef struct _SYSTEM_POLICY_INFORMATION {     PVOID Reserved1[2];     ULONG Reserved2[3]; } SYSTEM_POLICY_INFORMATION;     Individual members of the structure are reserved for internal use by the operating system. Use the SLGetWindowsInformation  function instead to obtain policy information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "SystemInformationLength",
+        "description": "The size of the buffer pointed to by the SystemInformation parameter, in bytes."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PULONG",
+        "name": "ReturnLength",
+        "description": "An optional pointer to a location where the function  writes the actual size of the information requested. If that size is less than or equal to the     SystemInformationLength parameter, the function copies the information into the SystemInformation buffer; otherwise, it returns an NTSTATUS error code and returns in ReturnLength the size of buffer required to receive the requested information."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 4,
+    "description": "[ZwQuerySystemInformation is no longer available for use as of Windows 8. Instead, use the alternate functions listed in this topic.]",
+    "library": "",
+    "min_server": "",
+    "header": "",
+    "return_value": "Returns an  NTSTATUS success or error code. The forms and significance of NTSTATUS error codes are listed in the Ntstatus.h header file available in the DDK, and are described in the DDK documentation. ",
+    "remarks": "The ZwQuerySystemInformation function and the structures that it returns are internal to the operating system and  subject to change from one  release of Windows to another.  To maintain the    compatibility of your application, it is better to use the alternate functions previously mentioned instead. If you do use ZwQuerySystemInformation, access the function through run-time dynamic linking.  This gives  your code an opportunity to respond gracefully if the function has been   changed or removed from the operating system. Signature changes, however, may not be detectable. This function has no associated import library. You must use the LoadLibrary and GetProcAddress functions to dynamically link to Ntdll.dll. ",
+    "return_type": "NTSTATUS WINAPI",
+    "category": "System Information Functions",
+    "name": "ZwQuerySystemInformation",
+    "is_callback": 0,
+    "dll": "Ntdll.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "SYSTEM_INFORMATION_CLASS",
+        "name": "SystemInformationClass",
+        "description": "The type of system information to be retrieved. This parameter can be one of the following values from the SYSTEM_INFORMATION_CLASS enumeration type.  SystemBasicInformation   The number of processors in the system in a SYSTEM_BASIC_INFORMATION structure. Use the GetSystemInfo function instead.  SystemPerformanceInformation   An opaque SYSTEM_PERFORMANCE_INFORMATION structure that can be used to generate an unpredictable seed for a random number generator. Use the CryptGenRandom function instead.  SystemTimeOfDayInformation   An opaque SYSTEM_TIMEOFDAY_INFORMATION structure that can be used to generate an unpredictable seed for a random number generator. Use the CryptGenRandom function instead.  SystemProcessInformation   An array of SYSTEM_PROCESS_INFORMATION structures, one for each process running in the system.  These structures contain information about the resource usage of each process, including the number of handles used by the process, the peak page-file usage, and the number of memory pages that the process has allocated.  SystemProcessorPerformanceInformation   An array of SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION structures, one for each processor installed in the system.  SystemInterruptInformation   An opaque SYSTEM_INTERRUPT_INFORMATION structure that can be used to generate an unpredictable seed for a random number generator. Use the CryptGenRandom function instead.  SystemExceptionInformation   An opaque SYSTEM_EXCEPTION_INFORMATION structure that can be used to generate an unpredictable seed for a random number generator. Use the CryptGenRandom function instead.  SystemRegistryQuotaInformation   A SYSTEM_REGISTRY_QUOTA_INFORMATION structure.  SystemLookasideInformation   An opaque SYSTEM_LOOKASIDE_INFORMATION structure that can be used to generate an unpredictable seed for a random number generator. Use the CryptGenRandom function instead."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PVOID",
+        "name": "SystemInformation",
+        "description": "A pointer to a buffer that receives the requested information. The size and structure of this information varies depending on the value of the SystemInformationClass parameter, as indicated in the following table.  SYSTEM_BASIC_INFORMATION   When the SystemInformationClass  parameter is SystemBasicInformation,  the buffer pointed to by the SystemInformation parameter should be large enough to hold a single SYSTEM_BASIC_INFORMATION structure having the following layout:        Copy     typedef struct _SYSTEM_BASIC_INFORMATION {     BYTE Reserved1[24];     PVOID Reserved2[4];     CCHAR NumberOfProcessors; } SYSTEM_BASIC_INFORMATION;      The NumberOfProcessors member contains the number of processors present in the system. Use GetSystemInfo instead to retrieve this information. The  other members of the structure are reserved for internal use by the operating system.  SYSTEM_PERFORMANCE_INFORMATION   When the SystemInformationClass  parameter is SystemPerformanceInformation, the buffer pointed to by the SystemInformation parameter should be large enough to hold an opaque SYSTEM_PERFORMANCE_INFORMATION structure for use in generating an unpredictable seed for a random number generator. For this purpose, the structure has the following layout:        Copy     typedef struct _SYSTEM_PERFORMANCE_INFORMATION {     BYTE Reserved1[312]; } SYSTEM_PERFORMANCE_INFORMATION;     Individual members of the structure are reserved for internal use by the operating system. Use the CryptGenRandom  function instead to generate cryptographically random data.  SYSTEM_TIMEOFDAY_INFORMATION   When the SystemInformationClass  parameter is SystemTimeOfDayInformation, the buffer pointed to by the SystemInformation parameter should be large enough to hold an opaque SYSTEM_TIMEOFDAY_INFORMATION structure for use in generating an unpredictable seed for a random number generator. For this purpose, the structure has the following layout:        Copy     typedef struct _SYSTEM_TIMEOFDAY_INFORMATION {     BYTE Reserved1[48]; } SYSTEM_TIMEOFDAY_INFORMATION;     Individual members of the structure are reserved for internal use by the operating system. Use the CryptGenRandom  function instead to generate cryptographically random data.  SYSTEM_PROCESS_INFORMATION   When the SystemInformationClass  parameter is SystemProcessInformation,  the buffer pointed to by the SystemInformation parameter should be large enough to hold an array that contains as many SYSTEM_PROCESS_INFORMATION structures as there are processes running in the system. Each structure has the following layout:       Copy     typedef struct _SYSTEM_PROCESS_INFORMATION {     ULONG NextEntryOffset;     ULONG NumberOfThreads;     BYTE Reserved1[48];     PVOID Reserved2[3];     HANDLE UniqueProcessId;     PVOID Reserved3;     ULONG HandleCount;     BYTE Reserved4[4];     PVOID Reserved5[11];     SIZE_T PeakPagefileUsage;     SIZE_T PrivatePageCount;     LARGE_INTEGER Reserved6[6]; } SYSTEM_PROCESS_INFORMATION;     The NumberOfThreads member contains the total number of currently running threads in the process. The HandleCount member contains the total number of handles being used by the process in question; use GetProcessHandleCount  to retrieve this information instead. The PeakPagefileUsage member contains the  maximum number of bytes of page-file storage used by the process, and the PrivatePageCount member contains the number of memory pages allocated for the use of this process. You can also retrieve this information using either the GetProcessMemoryInfo function or the Win32_Process class. The  other members of the structure are reserved for internal use by the operating system.  SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION   When the SystemInformationClass  parameter is SystemProcessorPerformanceInformation,  the buffer pointed to by the SystemInformation parameter should be large enough to hold an array that contains as many SYSTEM_PROCESS_INFORMATION structures as there are processors (CPUs) installed in the system. Each structure has the following layout:       Copy     typedef struct _SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION {     LARGE_INTEGER IdleTime;     LARGE_INTEGER KernelTime;     LARGE_INTEGER UserTime;     LARGE_INTEGER Reserved1[2];     ULONG Reserved2; } SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION;     The IdleTime member contains the amount of time that the system has been idle, in 1/100ths of a nanosecond. The KernelTime member contains the amount of time that the system has spent executing in Kernel mode (including all threads in all processes, on all processors), in 1/100ths of a nanosecond. The UserTime member contains the amount of time that the system has spent executing in User mode (including all threads in all processes, on all processors), in 1/100ths of a nanosecond. Use GetSystemTimes instead to retrieve this information.  SYSTEM_INTERRUPT_INFORMATION   When the SystemInformationClass  parameter is SystemInterruptInformation, the buffer pointed to by the SystemInformation parameter should be large enough to hold an array that contains as many opaque  SYSTEM_INTERRUPT_INFORMATION structures as there are  processors (CPUs) installed on the system. Each structure, or the array as a whole, can be used to generate an unpredictable seed for a random number generator. For this purpose, the structure has the following layout:        Copy     typedef struct _SYSTEM_INTERRUPT_INFORMATION {     BYTE Reserved1[24]; } SYSTEM_INTERRUPT_INFORMATION;     Individual members of the structure are reserved for internal use by the operating system. Use the CryptGenRandom  function instead to generate cryptographically random data.  SYSTEM_EXCEPTION_INFORMATION   When the SystemInformationClass  parameter is SystemExceptionInformation, the buffer pointed to by the SystemInformation parameter should be large enough to hold an opaque SYSTEM_EXCEPTION_INFORMATION structure for use in generating an unpredictable seed for a random number generator. For this purpose, the structure has the following layout:        Copy     typedef struct _SYSTEM_EXCEPTION_INFORMATION {     BYTE Reserved1[16]; } SYSTEM_EXCEPTION_INFORMATION;     Individual members of the structure are reserved for internal use by the operating system. Use the CryptGenRandom  function instead to generate cryptographically random data.  SYSTEM_REGISTRY_QUOTA_INFORMATION   When the SystemInformationClass  parameter is SystemRegistryQuotaInformation,  the buffer pointed to by the SystemInformation parameter should be large enough to hold a single SYSTEM_REGISTRY_QUOTA_INFORMATION structure having the following layout:       Copy     typedef struct _SYSTEM_REGISTRY_QUOTA_INFORMATION {     ULONG RegistryQuotaAllowed;     ULONG RegistryQuotaUsed;     PVOID Reserved1; } SYSTEM_REGISTRY_QUOTA_INFORMATION;     The RegistryQuotaAllowed member contains the maximum size, in bytes, that the Registry can attain on this system. The RegistryQuotaUsed member contains the current size of the Registry, in bytes. Use GetSystemRegistryQuota instead to retrieve this information. The  other member of the structure is reserved for internal use by the operating system.  SYSTEM_LOOKASIDE_INFORMATION   When the SystemInformationClass  parameter is SystemLookasideInformation, the buffer pointed to by the SystemInformation parameter should be large enough to hold an opaque SYSTEM_LOOKASIDE_INFORMATION structure for use in generating an unpredictable seed for a random number generator. For this purpose, the structure has the following layout:        Copy     typedef struct _SYSTEM_LOOKASIDE_INFORMATION {     BYTE Reserved1[32]; } SYSTEM_LOOKASIDE_INFORMATION;     Individual members of the structure are reserved for internal use by the operating system. Use the CryptGenRandom  function instead to generate cryptographically random data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "SystemInformationLength",
+        "description": "The size of the buffer pointed to by the SystemInformation parameter, in bytes."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PULONG",
+        "name": "ReturnLength",
+        "description": "An optional pointer to a location where the function  writes the actual size of the information requested. If that size is less than or equal to the     SystemInformationLength parameter, the function copies the information into the SystemInformation buffer; otherwise, it returns an NTSTATUS error code and returns in ReturnLength the size of buffer required to receive the requested information."
+      }
+    ],
+    "min_client": ""
+  }
+]
