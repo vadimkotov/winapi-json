@@ -1,0 +1,25 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "The ZwAllocateLocallyUniqueId routine allocates a locally unique identifier (LUID).",
+    "library": "NtosKrnl.lib",
+    "min_server": "",
+    "header": "Ntddk.h (include Ntddk.h)",
+    "return_value": "ZwAllocateLocallyUniqueId returns STATUS_SUCCESS if the operation succeeds or the appropriate NTSTATUS value if the operation fails. If the output parameter cannot be written to, the routine returns STATUS_ACCESS_VIOLATION. ",
+    "remarks": "The allocated LUID is unique to the local system only, and uniqueness is guaranteed only until the system is next restarted. For calls from kernel-mode drivers, the NtXxx and ZwXxx versions of a Windows Native System Services routine can behave differently in the way that they handle and interpret input parameters. For more information about the relationship between the NtXxx and ZwXxx versions of a routine, see Using Nt and Zw Versions of the Native System Services Routines. ",
+    "return_type": "NTSTATUS",
+    "category": "Driver Support",
+    "name": "ZwAllocateLocallyUniqueId",
+    "is_callback": 0,
+    "dll": "NtosKrnl.exe",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "PLUID",
+        "name": "LUID",
+        "description": "Pointer to a caller-allocated buffer to receive a copy of the source LUID structure. The buffer must be at least sizeof(LUID)."
+      }
+    ],
+    "min_client": ""
+  }
+]

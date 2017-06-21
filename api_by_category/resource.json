@@ -1,0 +1,763 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "Retrieves a handle that can be used by the UpdateResource function to add, delete, or replace resources in a binary module.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: HANDLE If the function succeeds, the return value is a handle that can be used by the UpdateResource and EndUpdateResource functions. The return value is NULL if the specified file is not a PE, the file does not exist, or the file cannot be opened for writing. To get extended error information, call GetLastError. ",
+    "remarks": "It is recommended that the resource file is not loaded before this function is called. However, if that file is already loaded, it will not cause an error to be returned. There are some restrictions on resource updates in files that contain  Resource Configuration(RC Config) data: LN files and the associated .mui files. Details on which types of resources are allowed to be updated in these files are in the Remarks section for the UpdateResource function. This function can update resources within modules that contain both code and resources. As noted above, there are restrictions on resource updates in LN files and .mui files, both of which contain RC Config data; details of the restrictions are in the reference for the UpdateResource function. For an example see, Updating Resources. ",
+    "return_type": "HANDLE WINAPI",
+    "category": "Resource",
+    "name": "BeginUpdateResource",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pFileName",
+        "description": "Type: LPCTSTR The binary file in which to update resources. An application must be able to obtain write-access to this file; the file referenced by pFileName cannot be currently executing. If pFileName does not specify a full path, the system searches for the file in the current directory."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bDeleteExistingResources",
+        "description": "Type: BOOL Indicates whether to delete the pFileName parameter's existing resources. If this parameter is TRUE, existing resources are deleted and the updated file includes only resources added with the UpdateResource function. If this parameter is FALSE, the updated file includes existing resources unless they are explicitly deleted or replaced by using UpdateResource."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Creates a new image (icon, cursor, or bitmap) and copies the attributes of the specified image to the new one. If necessary, the function stretches the bits to fit the desired size of the new image.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HANDLE If the function succeeds, the return value is the handle to the newly created image. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "When you are finished using the resource, you can release its associated memory by calling one of the functions in the following table.  The system automatically deletes the resource when its process terminates, however, calling the appropriate function saves memory and decreases the size of the process's working set. ",
+    "return_type": "HANDLE WINAPI",
+    "category": "Resource",
+    "name": "CopyImage",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hImage",
+        "description": "Type: HANDLE A handle to the image to be copied."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uType",
+        "description": "Type: UINT The type of image to be copied. This parameter can be one of the following values.   ValueMeaning  IMAGE_BITMAP 0   Copies a bitmap.   IMAGE_CURSOR 2   Copies a cursor.   IMAGE_ICON 1   Copies an icon."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cxDesired",
+        "description": "Type: int The desired width, in pixels, of the image. If this is zero, then the returned image will have the same width as the original hImage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cyDesired",
+        "description": "Type: int The desired height, in pixels, of the image. If this is zero, then the returned image will have the same height as the original hImage."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "fuFlags",
+        "description": "Type: UINT This parameter can be one or more of the following values. ..."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Commits or discards changes made prior to a call to UpdateResource.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: BOOL Returns TRUE if the function succeeds; FALSE otherwise. If the function succeeds and   fDiscard is TRUE, then no resource updates are made to the file; otherwise all   successful resource updates are made to the file. To get extended error information, call GetLastError. ",
+    "remarks": "Before you call this function, make sure all file handles other than the one returned by BeginUpdateResource are closed. This function can update resources within modules that contain both code and resources. There are restrictions on resource updates in LN files and .mui files, both of which contain Resource Configuration data; details of the restrictions are in the reference for the UpdateResource function. For an example, see Updating Resources. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Resource",
+    "name": "EndUpdateResource",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hUpdate",
+        "description": "Type: HANDLE A module handle returned by the BeginUpdateResource function, and used by UpdateResource, referencing the file to be updated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fDiscard",
+        "description": "Type: BOOL Indicates whether to write the resource updates to the file. If this parameter is TRUE, no changes are made. If it is FALSE, the changes are made: the resource updates will take effect."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "An application-defined callback function used with the EnumResourceLanguages and EnumResourceLanguagesEx functions. It receives the type, name, and language of a resource item. The ENUMRESLANGPROC type defines a pointer to this callback function. EnumResLangProc is a placeholder for the application-defined function name.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: BOOL Returns TRUE to continue enumeration or FALSE to stop enumeration. ",
+    "remarks": "If IS_INTRESOURCE(lpszType) is TRUE, then lpszType specifies the integer identifier of the given resource type. Otherwise, it is a pointer to a null-terminated string. If the first character of the string is a pound sign (#), then the remaining characters represent a decimal number that specifies the integer identifier of the resource type. For example, the string \"#258\" represents the identifier 258. Similarly, if IS_INTRESOURCE(lpszName) is TRUE, then lpszName specifies the integer identifier of the given resource. Otherwise, it is a pointer to a null-terminated string. If the first character of the string is a pound sign (#), then the remaining characters represent a decimal number that specifies the integer identifier of the resource. An application must register this function by passing its address to the EnumResourceLanguages or EnumResourceLanguagesEx function. If the callback function returns FALSE, then EnumResourceLanguages or EnumResourceLanguagesEx will stop enumeration and return FALSE. On Windows XP and earlier the value obtained from GetLastError will be ERROR_SUCCESS; starting with Windows Vista, the last error value will be ERROR_RESOURCE_ENUM_USER_STOP. ",
+    "return_type": "BOOL CALLBACK",
+    "category": "Resource",
+    "name": "EnumResLangProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HMODULE",
+        "name": "hModule",
+        "description": "Type: HMODULE A handle to the module whose executable file contains the resources for which the languages are being enumerated. If this parameter is NULL, the function enumerates the resource languages in the module used to create the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszType",
+        "description": "Type: LPCTSTR The type of resource for which the language is being enumerated. Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is an integer value representing a predefined resource type. For standard resource types, see Resource Types. For more information, see the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszName",
+        "description": "Type: LPCTSTR The name of the resource for which the language is being enumerated. Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is the integer identifier of the resource. For more information, see the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "wIDLanguage",
+        "description": "Type: WORD The language identifier for the resource for which the language is being enumerated. The EnumResourceLanguages or EnumResourceLanguagesEx function provides this value. For a list of the primary language identifiers and sublanguage identifiers that constitute a language identifier, see MAKELANGID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lParam",
+        "description": "Type: LONG_PTR The application-defined parameter passed to the EnumResourceLanguages or EnumResourceLanguagesEx function. This parameter can be used in error checking."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "An application-defined callback function used with the EnumResourceNames and EnumResourceNamesEx functions. It receives the type and name of a resource. The ENUMRESNAMEPROC type defines a pointer to this callback function. EnumResNameProc is a placeholder for the application-defined function name.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: BOOL Returns TRUE to continue enumeration or FALSE to stop enumeration. ",
+    "remarks": "If IS_INTRESOURCE(lpszType) is TRUE, then lpszType specifies the integer identifier of the given resource type. Otherwise, it is a pointer to a null-terminated string. If the first character of the string is a pound sign (#), then the remaining characters represent a decimal number that specifies the integer identifier of the resource type. For example, the string \"#258\" represents the identifier 258. Similarly, if IS_INTRESOURCE(lpszName) is TRUE, then lpszName specifies the integer identifier of the given resource. Otherwise, it is a pointer to a null-terminated string. If the first character of the string is a pound sign (#), then the remaining characters represent a decimal number that specifies the integer identifier of the resource. An application must register this function by passing its address to the EnumResourceNames or EnumResourceNamesEx function. If the callback function returns FALSE, then EnumResourceNames or EnumResourceNamesEx will stop enumeration and return FALSE. On Windows XP and earlier the value obtained from GetLastError will be ERROR_SUCCESS; starting with Windows Vista, the last error value will be ERROR_RESOURCE_ENUM_USER_STOP. ",
+    "return_type": "BOOL CALLBACK",
+    "category": "Resource",
+    "name": "EnumResNameProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HMODULE",
+        "name": "hModule",
+        "description": "Type: HMODULE A handle to the module whose executable file contains the resources that are being enumerated. If this parameter is NULL, the function enumerates the resource names in the module used to create the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszType",
+        "description": "Type: LPCTSTR The type of resource for which the name is being enumerated. Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is an integer value representing a predefined resource type. For standard resource types, see Resource Types. For more information, see the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszName",
+        "description": "Type: LPTSTR The name of a resource of the type being enumerated. Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is the integer identifier of the resource. For more information, see the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lParam",
+        "description": "Type: LONG_PTR An application-defined parameter passed to the EnumResourceNames or EnumResourceNamesEx function. This parameter can be used in error checking."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Enumerates language-specific resources, of the specified type and name, associated with a binary module.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: BOOL Returns TRUE if successful or FALSE otherwise. To get extended error information, call GetLastError. ",
+    "remarks": "If IS_INTRESOURCE(lpType) is TRUE, then lpType specifies the integer identifier of the given resource type. Otherwise, it is a pointer to a null-terminated string. If the first character of the string is a pound sign (#), then the remaining characters represent a decimal number that specifies the   integer identifier of the resource type. For example, the string \"#258\" represents the identifier 258. Similarly, if IS_INTRESOURCE(lpName) is TRUE, then lpName specifies the integer identifier of the given resource. Otherwise, it is a pointer to a null-terminated string. If the first character of the string is a pound sign (#), then the remaining characters represent a decimal number that specifies the   integer identifier of the resource. Starting with Windows Vista, the binary module is typically a language-neutral Portable Executable (LN file), and the enumeration will also include resources from the corresponding language-specific resource files (.mui files) that contain localizable language resources. For each resource found, EnumResourceLanguages calls an application-defined callback function lpEnumFunc, passing the language identifier (see Language Identifiers) of the language for which a resource was found, as well as the various other parameters that were passed to EnumResourceLanguages. Alternately, applications can call EnumResourceLanguagesEx, which provides more precise control of what resources are enumerated. The EnumResourceLanguages function continues to enumerate resource languages until the callback function returns FALSE or all resource languages have been enumerated. In Windows Vista and later, if  hModule specifies an LN file, then the resources enumerated can reside either in the LN file or in an .mui file associated with it.  If no .mui files are found, only resources from the LN file are returned.  Unlike EnumResourceNames and EnumResourceTypes, this search will look at multiple .mui files. The enumeration begins with .mui files in the folders associated with EnumUILanguages. These are followed by any other .mui files whose paths conform to the scheme described at MUI Resource Management. Finally, the file designated by hModule is also searched. The enumeration never includes duplicates: if a resource with the same name, type, and language is contained in both the LN file and in an .mui file, the resource will only be enumerated once. For an example, see Creating a Resource List. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Resource",
+    "name": "EnumResourceLanguages",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HMODULE",
+        "name": "hModule",
+        "description": "Type: HMODULE The handle to a module to be searched. Starting with Windows Vista, if this is a language-neutral Portable Executable (LN file), then appropriate .mui files (if any exist) are included in the search. If this is a specific .mui file, only that file is searched for resources. \t\t\t\t                      If this parameter is NULL, that is equivalent to passing in a handle to the module used to create the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpType",
+        "description": "Type: LPCTSTR The type of resource for which the language is being enumerated. Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is an integer value representing a predefined resource type. For a list of predefined resource types, see Resource Types. For more information, see   the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpName",
+        "description": "Type: LPCTSTR The name of the resource for which the language is being enumerated. Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is the integer identifier of the resource. For more information, see the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ENUMRESLANGPROC",
+        "name": "lpEnumFunc",
+        "description": "Type: ENUMRESLANGPROC A pointer to the callback function to be called for each enumerated resource language. For more information, see EnumResLangProc."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lParam",
+        "description": "Type: LONG_PTR An application-defined value passed to the callback function. This parameter can be used in error checking."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Enumerates language-specific resources, of the specified type and name, associated with a specified binary module. Extends EnumResourceLanguages by allowing more control over the enumeration.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: BOOL Returns TRUE if the function succeeds or FALSE if the function does not find a resource of the type specified, or if the function fails for another reason. To get extended error information, call GetLastError. ",
+    "remarks": "If IS_INTRESOURCE(lpType) is TRUE, then lpType specifies the integer identifier of the given resource type. Otherwise, it is a pointer to a null-terminated string. If the first character of the string is a pound sign (#), then the remaining characters represent a decimal number that specifies the   integer identifier of the resource type. For example, the string \"#258\" represents the identifier 258. Similarly, if IS_INTRESOURCE(lpName) is TRUE, then lpName specifies the integer identifier of the given resource. Otherwise, it is a pointer to a null-terminated string. If the first character of the string is a pound sign (#), then the remaining characters represent a decimal number that specifies the   integer identifier of the resource. Starting with Windows Vista, the binary module is typically an LN file, and the enumeration will also include resources from the corresponding language-specific resource files (.mui files) that contain localizable language resources. For each such resource found, EnumResourceLanguagesEx calls an application-defined callback function lpEnumFunc, passing to the callback function the language identifier (see Language Identifiers) of the language for which a resource was found (as well as the various other parameters that were passed to EnumResourceLanguagesEx). The search can include both an LN file and its associated .mui files, or it can be limited either to a single binary module of any type, or to the .mui files associated with a single LN file. Also, by specifying an LN file for the hModule parameter and a nonzero LangId parameter, the search can be limited to the unique .mui file associated with that LN file and language. The EnumResourceLanguagesEx function continues to enumerate resource languages until the callback function returns FALSE or all resource languages have been enumerated. If hModule specifies an LN file, and both flags are selected, the languages enumerated include all languages whose resources reside either in the LN file or in any .mui files associated with it. If no .mui files are found, only languages from the LN file are returned. If dwFlags contains RESOURCE_ENUM_MUI or NULL and LangId is 0, then the enumeration first includes the languages associated with all system-installed .mui files, using languages retrieved from EnumUILanguages.. Finally, if the RESOURCE_ENUM_LN flag is also set, the file designated by hModule is also searched. If the LangId is nonzero, then only the .mui file corresponding to that language identifier will be searched. Language fallbacks will not be used. If an .mui file for that language does not exist, the enumeration will be empty (unless resources for that language exist in the LN file, and the flag is set to search the LN file as well). The enumeration never includes duplicates: if resources for a particular language are contained in both the LN file and in an .mui file, the type will only be enumerated once. For an example, see Creating a Resource List. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Resource",
+    "name": "EnumResourceLanguagesEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HMODULE",
+        "name": "hModule",
+        "description": "Type: HMODULE The handle to a module to search. Typically this is a language-neutral Portable Executable (LN file), and if flag RESOURCE_ENUM_MUI is set, then appropriate .mui files are included in the search. Alternately, this can be a handle to an .mui file or other LN file. If this is a specific .mui file, only that file is searched for resources.                           If this parameter is NULL, it is equivalent to passing in a handle to the module used to create the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpType",
+        "description": "Type: LPCTSTR The type of the resource for which the language is being enumerated. Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is an integer value representing a predefined resource type. For a list of predefined resource types, see Resource Types. For more   information, see the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpName",
+        "description": "Type: LPCTSTR The name of the resource for which the language is being enumerated. Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is the integer identifier of the resource. For more information, see the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ENUMRESLANGPROC",
+        "name": "lpEnumFunc",
+        "description": "Type: ENUMRESLANGPROC A pointer to the callback function to be called for each enumerated resource language. For more information, see EnumResLangProc."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lParam",
+        "description": "Type: LONG_PTR An application-defined value passed to the callback function. This parameter can be used in error checking."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD The type of file to be searched. The following values are supported. Note that if dwFlags is zero, then the RESOURCE_ENUM_LN and RESOURCE_ENUM_MUI flags are assumed to be specified.  ValueMeaning  RESOURCE_ENUM_MUI 0x0002   Search for language-specific resources in .mui files associated with the LN file specified by hModule. Alternately, if LangId is nonzero, the only .mui file searched will be the one matching the specified LangId. Typically this flag should be used only if hModule references an LN file. If hModule references an .mui file, then that file is actually covered by the RESOURCE_LN flag, despite the name of the flag. See the Remarks section below for sequence of search.   RESOURCE_ENUM_LN 0x0001   Searches the file specified by hModule, regardless of whether the file is an LN file, another type of LN file, or an .mui file.   RESOURCE_ENUM_MUI_SYSTEM 0x0004   Restricts the .mui files search to system-installed MUI languages.   RESOURCE_ENUM_VALIDATE 0x0008   Performs extra validation on the resource section and its reference in the PE header while doing the enumeration to ensure that resources are properly formatted."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LANGID",
+        "name": "LangId",
+        "description": "Type: LANGID The localization language used to filter the search in the .mui file. This parameter is used only when the RESOURCE_ENUM_MUI flag is set in dwFlags. If zero is specified, then all .mui files are included in the search. If a nonzero LangId is specified, then the only .mui file searched will be the one matching the specified LangId."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Enumerates resources of a specified type within a binary module. For Windows Vista and later, this is typically a language-neutral Portable Executable (LN file), and the enumeration will also include resources from the corresponding language-specific resource files (.mui files) that contain localizable language resources. It is also possible for hModule to specify an .mui file, in which case only that file is searched for resources.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: BOOL The return value is TRUE if the function succeeds or FALSE if the function does not find a resource of the type specified, or if the function fails for another reason. To get extended error information, call GetLastError. ",
+    "remarks": "If IS_INTRESOURCE(lpszType) is TRUE, then lpszType specifies the integer identifier of the given resource type. Otherwise, it is a pointer to a null-terminated string. If the first character of the string is a pound sign (#), then the remaining characters represent a decimal number that specifies the   integer identifier of the resource type. For example, the string \"#258\" represents the identifier 258. For each resource found, EnumResourceNames calls an application-defined callback function lpEnumFunc, passing the name or the ID of each resource it finds, as well as the various other parameters that were passed to EnumResourceNames. Alternately, applications can call EnumResourceNamesEx, which provides more precise control of what resources are enumerated. If a resource has an ID, the ID is passed to the callback function; otherwise the resource name is passed to the callback function. For more information, see EnumResNameProc. The EnumResourceNames function continues to enumerate resources until the callback function returns FALSE or all resources have been enumerated. Starting with Windows Vista, if hModule specifies an LN file, then the resources enumerated can reside either in the LN file or in a .mui file associated with it. If no .mui files are found, only resources from the LN file are returned. The order in which .mui files are searched is the usual Resource Loader search order; see User Interface Language Management for details. Once one appropriate .mui file is found, the .mui file search stops. Because all .mui files that correspond to a single LN file have the same resource types, only the resources in the found .mui file need to be enumerated. The enumeration never includes duplicates: if resources with the same name are contained in both the LN file and in an .mui file, the resource will only be enumerated once. For an example, see Creating a Resource List. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Resource",
+    "name": "EnumResourceNames",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HMODULE",
+        "name": "hModule",
+        "description": "Type: HMODULE A handle to a module to be searched. Starting with Windows Vista, if this is an LN file, then appropriate .mui files (if any exist) are included in the search. If this parameter is NULL, that is equivalent to passing in a handle to the module used to create the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszType",
+        "description": "Type: LPCTSTR The type of the resource for which the name is being enumerated. Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is an integer value representing a predefined resource type. For a list of predefined resource types, see Resource Types. For more information, see   the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ENUMRESNAMEPROC",
+        "name": "lpEnumFunc",
+        "description": "Type: ENUMRESNAMEPROC A pointer to the callback function to be called for each enumerated resource name or ID. For more information, see EnumResNameProc."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lParam",
+        "description": "Type: LONG_PTR An application-defined value passed to the callback function. This parameter can be used in error checking."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Enumerates resources of a specified type that are associated with a specified binary module. The search can include both an LN file and its associated .mui files, or it can be limited in several ways.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: BOOL The function TRUE if successful, or FALSE if the function does not find a resource of the type specified, or if the function fails for another reason. To get extended error information, call GetLastError. ",
+    "remarks": "If IS_INTRESOURCE(lpszType) is TRUE, then lpszType specifies the integer identifier of the given resource type. Otherwise, it is a pointer to a null-terminated string. If the first character of the string is a pound sign (#), then the remaining characters represent a decimal number that specifies the   integer identifier of the resource type. For example, the string \"#258\" represents the identifier 258. The enumeration search can include both an LN file and its associated .mui files. It can be limited to a single binary module of any type. It can also be limited to the .mui files associated with a single LN file. By specifying an LN file for the hModule parameter and a nonzero LangId parameter, the search can be limited to the unique .mui file associated with that LN file and language. For each resource found, EnumResourceNamesEx calls an application-defined callback function lpEnumFunc, passing the name or the ID of each resource it finds, as well as the various other parameters that were passed to EnumResourceNamesEx. If a resource has an ID, the ID is returned to the callback function; otherwise the resource name is returned to the callback function. For more information, see EnumResNameProc. The EnumResourceNamesEx function continues to enumerate resource names until the callback function returns FALSE or all resource names for this type have been enumerated. If hModule specifies an LN file, and both flags are selected, the names enumerated correspond to resources residing either in that LN file or  the .mui files associated with it. If no .mui files are found, only names from the LN file are returned. After one appropriate .mui file is found the search will not continue further, because all .mui files corresponding to a single LN file have the same resource names. If dwFlags and LangId are both zero, then the function behaves like EnumResourceNames. If LangId is nonzero, then only the .mui file corresponding to that Language identifier will be searched. Language fallbacks will not be used. If an .mui file for that language does not exist, the enumeration will be empty (unless resources for that language exist in the LN file, and the flag is set to search the LN file as well). The enumeration never includes duplicates: if resources for a particular language are contained in both the LN file and in an .mui file, the name will only be enumerated once. For an example, see Creating a Resource List. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Resource",
+    "name": "EnumResourceNamesEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HMODULE",
+        "name": "hModule",
+        "description": "Type: HMODULE The handle to a module to search. Typically this is an LN file, and if flag RESOURCE_ENUM_MUI is set, then appropriate .mui files are included in the search. Alternately, this can be a handle to an .mui file or other LN file. If this parameter is NULL, it is equivalent to passing in a handle to the module used to create the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszType",
+        "description": "Type: LPCTSTR The type of the resource for which the name is being enumerated. Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is an integer value representing a predefined resource type. For a list of predefined resource types, see Resource Types. For more information, see   the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ENUMRESNAMEPROC",
+        "name": "lpEnumFunc",
+        "description": "Type: ENUMRESNAMEPROC A pointer to the callback function to be called for each enumerated resource name. For more information, see EnumResNameProc."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lParam",
+        "description": "Type: LONG_PTR An application-defined value passed to the callback function. This parameter can be used in error checking."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD The type of file to search. The following values are supported. Note that if dwFlags is zero, then the RESOURCE_ENUM_LN and RESOURCE_ENUM_MUI  flags are assumed to be specified.  ValueMeaning  RESOURCE_ENUM_MUI 0x0002   Search for resources in .mui files associated with the LN file specified by hModule and with the current language preferences, following the usual Resource Loader strategy (see User Interface Language Management). Alternately, if LangId is nonzero, then only the specified .mui file will be searched. Typically this flag should be used only if hModule references an LN file. If hModule references an .mui file, then that file is actually covered by the RESOURCE_ENUM_LN flag, despite the name of the flag.   RESOURCE_ENUM_LN 0x0001   Searches the file specified by hModule, regardless of whether the file is an LN file, another type of LN file, or an .mui file.   RESOURCE_ENUM_VALIDATE 0x0008   Performs extra validation on the resource section and its reference in the PE header while doing the enumeration to ensure that resources are properly formatted. The validation sets a maximum limit of 260 characters for each name that is enumerated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LANGID",
+        "name": "LangId",
+        "description": "Type: LANGID The localization language used to filter the search in the MUI module. This parameter is used only when the RESOURCE_ENUM_MUI flag is set in dwFlags. If zero is specified, then all .mui files that match current language preferences are included in the search, following the usual Resource Loader strategy (see User Interface Language Management). If a nonzero LangId is specified, then the only .mui file searched will be the one matching the specified LangId."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Enumerates resource types within a binary module. Starting with Windows Vista, this is typically a language-neutral Portable Executable (LN file), and the enumeration also includes resources from one of the corresponding language-specific resource files (.mui files)\u00e2\u0080\u0094if one exists\u00e2\u0080\u0094that contain localizable language resources. It is also possible to use hModule to specify a .mui file, in which case only that file is searched for resource types.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: BOOL Returns TRUE if successful; otherwise, FALSE. To get extended error information, call GetLastError. ",
+    "remarks": "For each resource type found, EnumResourceTypes calls an application-defined callback function lpEnumFunc, passing each resource type it finds, as well as the various other parameters that were passed to EnumResourceTypes. EnumResourceTypes continues to enumerate resource types until the callback function returns FALSE or all resource types have been enumerated. Starting with Windows Vista, if hModule specifies an LN file, then the types enumerated correspond to resources that reside in the LN file and in the .mui file associated with it. If no .mui files are found, only types from the LN file are returned. The order in which .mui files are searched is the usual Resource Loader search order; see User Interface Language Management for details. After one appropriate .mui file is found, the search does not continue further to other .mui files associated with the LN file, because all .mui files that correspond to a single LN file have the same set of resource types. The enumeration never includes duplicates: if a given resource type is contained in both the LN file and in an .mui file, the type is enumerated only once. For an example, see Creating a Resource List. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Resource",
+    "name": "EnumResourceTypes",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HMODULE",
+        "name": "hModule",
+        "description": "Type: HMODULE A handle to a module to be searched. This handle must be obtained through LoadLibrary or LoadLibraryEx. \t\t\t\t\t                     See Remarks for more information. If this parameter is NULL, that is equivalent to passing in a handle to the module used to create the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ENUMRESTYPEPROC",
+        "name": "lpEnumFunc",
+        "description": "Type: ENUMRESTYPEPROC A pointer to the callback function to be called for each enumerated resource type. For more information, see the EnumResTypeProc function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lParam",
+        "description": "Type: LONG_PTR An application-defined value passed to the callback function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Enumerates resource types associated with a specified binary module. The search can include both a language-neutral Portable Executable file (LN file) and its associated .mui files. Alternately, it can be limited to a single binary module of any type, or to the .mui files associated with a single LN file. The search can also be limited to a single associated .mui file that contains resources for a specific language.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: BOOL Returns TRUE if successful or FALSE if the function does not find a resource of the type specified, or if the function fails for another reason. To get extended error information, call GetLastError. ",
+    "remarks": "The EnumResourceTypesEx function continues to enumerate resource types until the callback function returns FALSE or all resource types have been enumerated. If hModule specifies an LN file, and both flags are selected, the types enumerated correspond to resources residing either in the LN file or in the .mui files associated with it. If no .mui files are found, only types from the LN file are returned. Once one appropriate .mui file is found the search will not continue further, because all .mui files corresponding to a single LN file have the same resource types. If dwFlags and LangId are both zero, then the function behaves like EnumResourceTypes. If LangId is nonzero, then only the .mui file corresponding to that language identifier will be searched. Language fallbacks will not be used. If an .mui file for that language does not exist, the enumeration will be empty (unless resources for that language exist in the LN file, and the flag is set to search the LN file as well). The enumeration never includes duplicates: if resources for a particular language are contained in both the LN file and in an .mui file, the type will only be enumerated once. For an example, see Creating a Resource List. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Resource",
+    "name": "EnumResourceTypesEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HMODULE",
+        "name": "hModule",
+        "description": "Type: HMODULE The handle to a module to be searched. Typically this is an LN file, and if flag RESOURCE_ENUM_MUI is set, then appropriate .mui files can be included in the search. Alternately, this can be a handle to an .mui file or other LN file. If this parameter is NULL, it is equivalent to passing in a handle to the module used to create the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ENUMRESTYPEPROC",
+        "name": "lpEnumFunc",
+        "description": "Type: ENUMRESTYPEPROC A pointer to the callback function to be called for each enumerated resource type. For more information, see EnumResTypeProc."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lParam",
+        "description": "Type: LONG_PTR An application-defined value passed to the callback function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD The type of file to be searched. The following values are supported. Note that if dwFlags is zero, then the RESOURCE_ENUM_LN and RESOURCE_ENUM_MUI  flags are assumed to be specified.  ValueMeaning  RESOURCE_ENUM_MUI 0x0002   Search for resource types in one of the .mui files associated with the file specified by hModule and with the current language preferences, following the usual Resource Loader strategy (see User Interface Language Management). Alternately, if LangId is nonzero, then only the .mui file of the language as specified by LangId will be searched. Typically this flag should be used only if hModule references an LN file. If hModule references an .mui file, then that file is actually covered by the RESOURCE_ENUM_LN flag, despite the name of the flag.   RESOURCE_ENUM_LN 0x0001   Searches only the file specified by hModule, regardless of whether the file is an LN file or an .mui file.   RESOURCE_ENUM_VALIDATE 0x0008   Performs extra validation on the resource section and its reference in the PE header while doing the enumeration to ensure that resources are properly formatted. The validation sets a maximum limit of 260 characters for each type that is enumerated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LANGID",
+        "name": "LangId",
+        "description": "Type: LANGID The language used to filter the search in the MUI module. This parameter is used only when the RESOURCE_ENUM_MUI flag is set in dwFlags. If zero is specified, then all .mui files that match current language preferences are included in the search, following the usual Resource Loader strategy (see User Interface Language Management). If a nonzero LangId is specified, then the only .mui file searched will be the one matching the specified LangId."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "An application-defined callback function used with the EnumResourceTypes and EnumResourceTypesEx functions. It receives resource types. The ENUMRESTYPEPROC type defines a pointer to this callback function. EnumResTypeProc is a placeholder for the application-defined function name.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: BOOL Returns TRUE to continue enumeration or FALSE to stop enumeration. ",
+    "remarks": "If IS_INTRESOURCE(lpszType) is TRUE, then lpszType specifies the integer identifier of the given resource type. Otherwise, it is a pointer to a null-terminated string. If the first character of the string is a pound sign (#), then the remaining characters represent a decimal number that specifies the integer identifier of the resource type. For example, the string \"#258\" represents the identifier 258. An application must register this function by passing its address to the EnumResourceTypes or EnumResourceTypesEx function. If the callback function returns FALSE, then EnumResourceTypes or EnumResourceTypesEx will stop enumeration and return FALSE. On Windows XP and earlier the value obtained from GetLastError will be ERROR_SUCCESS; starting with Windows Vista, the last error value will be ERROR_RESOURCE_ENUM_USER_STOP. ",
+    "return_type": "BOOL CALLBACK",
+    "category": "Resource",
+    "name": "EnumResTypeProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HMODULE",
+        "name": "hModule",
+        "description": "Type: HMODULE A handle to the module whose executable file contains the resources for which the types are to be enumerated. If this parameter is NULL, the function enumerates the resource types in the module used to create the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszType",
+        "description": "Type: LPTSTR The type of resource for which the type is being enumerated.   Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is the integer identifier of the given resource type. For standard resource types, see Resource Types. For more information, see the Remarks section   below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG_PTR",
+        "name": "lParam",
+        "description": "Type: LONG_PTR An application-defined parameter passed to the EnumResourceTypes or EnumResourceTypesEx function. This parameter can be used in error checking."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Determines the location of the resource with the specified type, name, and language in the specified module.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: HRSRC If the function succeeds, the return value is a handle to the specified resource's information block. To obtain a handle to the resource, pass this handle to the LoadResource function. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "If IS_INTRESOURCE is TRUE for x = lpType or lpName, x specifies the integer identifier of the type or name of the given resource. Otherwise, those parameters are long pointers to null-terminated strings. If the first character of the string is a pound sign (#), the remaining characters represent a decimal number that specifies the integer identifier of the resource's name or type. For example, the string \"#258\" represents the integer identifier 258. To reduce the amount of memory required for a resource, an application should refer to it by integer identifier instead of by name. An application can use FindResourceEx to find any type of resource, but this function should be used only if the application must access the binary resource data by making subsequent calls to LoadResource and then to LockResource. To use a resource immediately, an application should use one of the following resource-specific functions to find the resource and convert the data into a more usable form.  For example, an application can use the LoadIcon function to load an icon for display on the screen. However, the application should use FindResourceEx and LoadResource if it is loading the icon to copy its data to another application. String resources are stored in sections of up to 16 strings per section. The strings in each section are stored as a sequence of counted (not necessarily null-terminated) Unicode strings. The LoadString function will extract the string resource from its corresponding section. For an example, see Creating a Resource List. ",
+    "return_type": "HRSRC WINAPI",
+    "category": "Resource",
+    "name": "FindResourceEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HMODULE",
+        "name": "hModule",
+        "description": "Type: HMODULE A handle to the module whose portable executable file or an accompanying MUI file contains the resource. If this parameter is NULL, the function searches the module used to create the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpType",
+        "description": "Type: LPCTSTR The resource type. Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is the integer identifier of the given   resource type. For standard resource types, see Resource Types. For more information, see the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpName",
+        "description": "Type: LPCTSTR The name of the resource. Alternately, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is the integer identifier of the resource. For more information, see the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "wLanguage",
+        "description": "Type: WORD The language of the resource. If this parameter is MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), the current language associated with the calling thread is used.          To specify a language other than the current language, use the MAKELANGID macro to create this parameter. For more information, see MAKELANGID."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "[This  function is obsolete and is only supported for backward compatibility with 16-bit Windows. For 32-bit Windows applications, it is not necessary to free the resources loaded using LoadResource. If used on 32 or 64-bit Windows systems, this function will return FALSE.]",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: BOOL If the function succeeds, the return value is zero. If the function fails, the return value is nonzero, which indicates that the resource has not been freed. ",
+    "remarks": "For resources loaded with other functions, FreeResource has been replaced by the following functions:  The reference count for a resource is incremented (increased by one) each time an application calls the LoadResource function for the resource. The system automatically deletes these resources when the process that created them terminates. However, calling the appropriate function saves memory.  For more information, see LoadResource. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Resource",
+    "name": "FreeResource",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HGLOBAL",
+        "name": "hglbResource",
+        "description": "Type: HGLOBAL A handle of the resource. It is assumed that hglbResource was created by LoadResource."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Loads an icon, cursor, animated cursor, or bitmap.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HANDLE If the function succeeds, the return value is the handle of the newly loaded image. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "If IS_INTRESOURCE(lpszName) is TRUE, then lpszName specifies the integer identifier of the given resource. Otherwise, it is a pointer to a null-  terminated string. If the first character of the string is a pound sign (#), then the remaining characters represent a decimal number that specifies the   integer identifier of the resource. For example, the string \"#258\" represents the identifier 258. When you are finished using a bitmap, cursor, or icon you loaded without specifying the LR_SHARED flag, you can release its associated memory by calling one of the functions in the following table.   The system automatically deletes these resources when the process that created them terminates; however, calling the appropriate function saves memory and decreases the size of the process's working set. For an example, see Using Window Classes. ",
+    "return_type": "HANDLE WINAPI",
+    "category": "Resource",
+    "name": "LoadImage",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HINSTANCE",
+        "name": "hinst",
+        "description": "Type: HINSTANCE A handle to the module of either a DLL or executable (. ..."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszName",
+        "description": "Type: LPCTSTR The image to be loaded. If the hinst parameter is non-NULL and the fuLoad parameter omits LR_LOADFROMFILE, lpszName specifies the image resource in the hinst module. If the image resource is to be loaded by name from the module, the lpszName parameter is a pointer to a null-terminated string that contains the name of the image resource. If the image resource is to be loaded by ordinal from the module, use the MAKEINTRESOURCE macro to convert the image ordinal into a form that can be passed to the LoadImage function.  \t\t\t\t\tFor more information, see the Remarks section below. If the hinst parameter is NULL and the fuLoad parameter omits the LR_LOADFROMFILE value, the lpszName specifies the OEM image to load. The OEM image identifiers are defined in Winuser.h and have the following prefixes.  PrefixMeaning OBM_OEM bitmaps OIC_OEM icons OCR_OEM cursors    To pass these constants to the LoadImage function, use the MAKEINTRESOURCE macro. For example, to load the OCR_NORMAL cursor, pass MAKEINTRESOURCE(OCR_NORMAL) as the lpszName parameter, NULL as the hinst parameter, and LR_SHARED as one of the flags to the fuLoad parameter. If the fuLoad parameter includes the LR_LOADFROMFILE value, lpszName is the name of the file that contains the  stand-alone resource (icon, cursor, or bitmap file). Therefore, set hinst to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uType",
+        "description": "Type: UINT The type of image to be loaded. This parameter can be one of the following values.  ValueMeaning  IMAGE_BITMAP 0   Loads a bitmap.   IMAGE_CURSOR 2   Loads a cursor.   IMAGE_ICON 1   Loads an icon."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cxDesired",
+        "description": "Type: int The width, in pixels, of the icon or cursor. If this parameter is zero and the fuLoad parameter is LR_DEFAULTSIZE, the function uses the SM_CXICON or SM_CXCURSOR system metric value to set the width. If this parameter is zero and LR_DEFAULTSIZE is not used, the function uses the actual resource width."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cyDesired",
+        "description": "Type: int The height, in pixels, of the icon or cursor. If this parameter is zero and the fuLoad parameter is LR_DEFAULTSIZE, the function uses the SM_CYICON or SM_CYCURSOR system metric value to set the height. If this parameter is zero and LR_DEFAULTSIZE is not used, the function uses the actual resource height."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "fuLoad",
+        "description": "Type: UINT This parameter can be one or more of the following values.  ValueMeaning  LR_CREATEDIBSECTION 0x00002000   When the uType parameter specifies IMAGE_BITMAP, causes the function to return a DIB section bitmap rather than a compatible bitmap. This flag is useful for loading a bitmap without mapping it to the colors of the display device.   LR_DEFAULTCOLOR 0x00000000   The default flag; it does nothing. All it means is \"not LR_MONOCHROME\".   LR_DEFAULTSIZE 0x00000040   Uses the width or height specified by the system metric values for cursors or icons, if the cxDesired or cyDesired values are set to zero. If this flag is not specified and cxDesired and cyDesired are set to zero, the function uses the actual resource size. If the resource contains multiple images, the function uses the size of the first image.   LR_LOADFROMFILE 0x00000010   Loads the stand-alone image from the file specified by  lpszName (icon, cursor, or bitmap file).   LR_LOADMAP3DCOLORS 0x00001000   Searches the color table for the image and replaces the following shades of gray with the corresponding 3-D color. \t\t\t\t\t\t                           Dk Gray, RGB(128,128,128) with COLOR_3DSHADOW Gray, RGB(192,192,192) with COLOR_3DFACE Lt Gray, RGB(223,223,223) with COLOR_3DLIGHT  Do not use this option if you are loading a bitmap with a color depth greater than 8bpp.   LR_LOADTRANSPARENT 0x00000020   Retrieves the color value of the first pixel in the image and replaces the corresponding entry in the color table with the default window color (COLOR_WINDOW). All pixels in the image that use that entry become the default window color. This value applies only to images that have corresponding color tables. Do not use this option if you are loading a bitmap with a color depth greater than 8bpp. If fuLoad includes both the LR_LOADTRANSPARENT and LR_LOADMAP3DCOLORS values, LR_LOADTRANSPARENT takes precedence. However, the color table entry is replaced with COLOR_3DFACE rather than COLOR_WINDOW.   LR_MONOCHROME 0x00000001   Loads the image in black and white.   LR_SHARED 0x00008000   Shares the image handle if the image is loaded multiple times. If LR_SHARED is not set, a second call to LoadImage for the same resource will load the image again and return a different handle.  When you use this flag, the system will destroy the resource when it is no longer needed. Do not use LR_SHARED for images that have non-standard sizes, that may change after loading, or that are loaded from a file. When loading a system icon or cursor, you must use LR_SHARED or the function will fail to load the resource. This function finds the first image in the cache with the requested resource name, regardless of the size requested.   LR_VGACOLOR 0x00000080   Uses true VGA colors."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves a handle that can be used to obtain a pointer to the first byte of the specified resource in memory.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: HGLOBAL If the function succeeds, the return value is a handle to the data associated with the resource. If the function fails, the return value is NULL. To get extended error information, call GetLastError. ",
+    "remarks": "The return type of LoadResource is HGLOBAL for backward compatibility, not because the function returns a handle to a global memory block. Do not pass this handle to the GlobalLock or GlobalFree function. To obtain a pointer to the first byte of the resource data, call the LockResource function; to obtain the size of the resource, call SizeofResource. To use a resource immediately, an application should use the following resource-specific functions to find and load the resource in one call.  For example, an application can use the LoadIcon function to load an icon for display on the screen, followed by DestroyIcon when done. For an example see Updating Resources. ",
+    "return_type": "HGLOBAL WINAPI",
+    "category": "Resource",
+    "name": "LoadResource",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HMODULE",
+        "name": "hModule",
+        "description": "Type: HMODULE A handle to the module whose executable file contains the resource. If hModule is NULL, the system loads the resource from the module that was used to create the current process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HRSRC",
+        "name": "hResInfo",
+        "description": "Type: HRSRC A handle to the resource to be loaded. This handle is returned by the FindResource or FindResourceEx function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves a pointer to the specified resource in memory.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: LPVOID If the loaded resource is available, the return value is a pointer to the first byte of the resource; otherwise, it is NULL. ",
+    "remarks": "The pointer returned by LockResource is valid until the module containing the resource is unloaded. It is not necessary to unlock resources because the system automatically deletes them when the process that created them terminates. Do not try to lock a resource by using the handle returned by the FindResource or FindResourceEx function. Such a handle points to random data. For an example, see Updating Resources. ",
+    "return_type": "LPVOID WINAPI",
+    "category": "Resource",
+    "name": "LockResource",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HGLOBAL",
+        "name": "hResData",
+        "description": "Type: HGLOBAL A handle to the resource to be accessed. The LoadResource function returns this handle. Note that this parameter is listed as an HGLOBAL variable only for backward compatibility. Do not pass any value as a parameter other than a successful return value from the LoadResource function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the size, in bytes, of the specified resource.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: DWORD If the function succeeds, the return value is the number of bytes in the resource. If the function fails, the return value is zero. To get extended error information, call GetLastError. For an example, see Updating Resources. ",
+    "remarks": "",
+    "return_type": "DWORD WINAPI",
+    "category": "Resource",
+    "name": "SizeofResource",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HMODULE",
+        "name": "hModule",
+        "description": "Type: HMODULE A handle to the module whose executable file contains the resource."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HRSRC",
+        "name": "hResInfo",
+        "description": "Type: HRSRC A handle to the resource. This handle must be created by using the FindResource or FindResourceEx function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Adds, deletes, or replaces a resource in a portable executable (PE) file. There are some restrictions on resource updates in files that contain Resource Configuration (RC Config) data: language-neutral (LN) files and language-specific resource (.mui) files.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Type: BOOL Returns TRUE if successful or FALSE otherwise. To get extended error information, call GetLastError. ",
+    "remarks": "It is recommended that the resource file is not loaded before this function is called. However, if that file is already loaded, it will not cause an error to be returned. An application can use UpdateResource repeatedly to make changes to the resource data. Each call to UpdateResource contributes to an internal list of additions, deletions, and replacements but does not actually write the data to the file indicated by hUpdate. The application must use the EndUpdateResource function to write the accumulated changes to the file. This function can update resources within modules that contain both code and resources. Prior to Windows 7: If lpData is NULL and cbData is nonzero, the specified resource is NOT deleted and an exception is thrown. Starting with Windows Vista: As noted above, there are restrictions on resource updates in files that contain RC Config data: LN files and .mui files. The restrictions are as follows:  For an example, see Updating Resources. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Resource",
+    "name": "UpdateResource",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hUpdate",
+        "description": "Type: HANDLE A module handle returned by the BeginUpdateResource function, referencing the file to be updated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpType",
+        "description": "Type: LPCTSTR The resource type to be updated. Alternatively, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is an integer value representing a predefined resource type. If the first character of the string is a pound sign (#), then the remaining characters represent a   decimal number that specifies the integer identifier of the resource type. For example, the string \"#258\" represents the identifier 258.  For a list of predefined resource types, see Resource Types."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpName",
+        "description": "Type: LPCTSTR The name of the resource to be updated. Alternatively, rather than a pointer, this parameter can be MAKEINTRESOURCE(ID), where ID is a resource ID. When creating a new resource do not use a string that begins with a '#' character for this parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "wLanguage",
+        "description": "Type: WORD The language identifier of the resource to be updated. For a list of the primary language identifiers and sublanguage identifiers that make up a language identifier, see the MAKELANGID  macro."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPVOID",
+        "name": "lpData",
+        "description": "Type: LPVOID The resource data to be inserted into the file indicated by hUpdate. If the resource is one of the predefined types, the data must be valid and properly aligned. Note that this is the raw binary data to be stored in the file indicated by hUpdate, not the data provided by LoadIcon, LoadString, or other resource-specific load functions. All data containing strings or text must be in Unicode format. lpData must not point to ANSI data.      \t\t\t\t If lpData is NULL and cbData is 0, the specified resource is deleted from the file indicated by hUpdate."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbData",
+        "description": "Type: DWORD The size, in bytes, of the resource data at lpData."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]

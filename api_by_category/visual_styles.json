@@ -1,0 +1,2964 @@
+[
+  {
+    "n_arguments": 8,
+    "description": "Begins a buffered animation operation. The animation consists of a cross-fade between the contents of two buffers over a specified period of time.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HANIMATIONBUFFER A handle to the buffered paint animation. ",
+    "remarks": "BeginBufferedAnimation will take care of drawing the intermediate frames between those two states by generating multiple WM_PAINT messages. BeginBufferedAnimation starts a timer that generates WM_PAINT messages on which BufferedPaintRenderAnimation should be called.  During these messages, BufferedPaintRenderAnimation will return TRUE when it paints an intermediate frame, to signify that the application has no further painting to do. If the animation duration is zero, then only phdcTo is returned and phdcFrom  is set to NULL.  In this case, the application should paint the final state using phdcTo to get the behavior similar to BeginBufferedPaint.  The following code example shows how to use this function. ",
+    "return_type": "HANIMATIONBUFFER",
+    "category": "Visual Styles",
+    "name": "BeginBufferedAnimation",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND A handle to the window in which the animations play."
+      },
+      {
+        "in_out": "",
+        "type": "HDC",
+        "name": "hdcTarget",
+        "description": "Type: HDC A handle of the target DC on which the buffer is animated."
+      },
+      {
+        "in_out": "const",
+        "type": "RECT*",
+        "name": "rcTarget",
+        "description": "Type: const RECT* A pointer to a structure that specifies the area of the target DC in which to draw."
+      },
+      {
+        "in_out": "",
+        "type": "BP_BUFFERFORMAT",
+        "name": "dwFormat",
+        "description": "Type: BP_BUFFERFORMAT The format of the buffer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BP_PAINTPARAMS*",
+        "name": "pPaintParams",
+        "description": "Type: BP_PAINTPARAMS* A pointer to a structure that defines the paint operation parameters. This value can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BP_ANIMATIONPARAMS*",
+        "name": "pAnimationParams",
+        "description": "Type: BP_ANIMATIONPARAMS* A pointer to a structure that defines the animation operation parameters."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HDC*",
+        "name": "phdcFrom",
+        "description": "Type: HDC* When this function returns, this value points to the handle of the DC where the application should paint the initial state of the animation, if not NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HDC*",
+        "name": "phdcTo",
+        "description": "Type: HDC* When this function returns, this value points to the handle of the DC where the application should paint the final state of the animation, if not NULL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Begins a buffered paint operation.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HPAINTBUFFER A handle to the buffered paint context. If this function fails, the return value is NULL, and phdc is NULL. To get extended error information, call GetLastError. The returned handle is freed when EndBufferedPaint is called. An application should call BufferedPaintInit on the calling thread before calling BeginBufferedPaint, and BufferedPaintUnInit before the thread is terminated.  Failure to call BufferedPaintInit may result in degraded performance due to internal data being initialized and destroyed for each buffered paint operation. ",
+    "remarks": "",
+    "return_type": "HPAINTBUFFER",
+    "category": "Visual Styles",
+    "name": "BeginBufferedPaint",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HDC",
+        "name": "hdcTarget",
+        "description": "Type: HDC The handle of the target DC on which the buffer will be painted."
+      },
+      {
+        "in_out": "const",
+        "type": "RECT*",
+        "name": "prcTarget",
+        "description": "Type: const RECT* A pointer to a RECT structure that specifies the area of the target DC in which to paint."
+      },
+      {
+        "in_out": "",
+        "type": "BP_BUFFERFORMAT",
+        "name": "dwFormat",
+        "description": "Type: BP_BUFFERFORMAT A member of the BP_BUFFERFORMAT enumeration that specifies the format of the buffer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BP_PAINTPARAMS*",
+        "name": "pPaintParams",
+        "description": "Type: BP_PAINTPARAMS* A pointer to a BP_PAINTPARAMS structure that defines the paint operation parameters. This value can be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HDC*",
+        "name": "phdc",
+        "description": "Type: HDC* When this function returns, points to the handle of the new device context."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Notifies the system to send feedback about a target window affected by panning gestures.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: BOOL TRUE, if successful. ",
+    "remarks": "This function must be called before either the UpdatePanningFeedback or EndPanningFeedback functions can be called. ",
+    "return_type": "BOOL",
+    "category": "Visual Styles",
+    "name": "BeginPanningFeedback",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND The handle to the target window that will receive feedback."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Clears a specified rectangle in the buffer to ARGB = {0,0,0,0}.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This function accesses the buffer bits directly and is therefore faster than calling a GDI function to erase the buffer. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "BufferedPaintClear",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HPAINTBUFFER",
+        "name": "hBufferedPaint",
+        "description": "Type: HPAINTBUFFER The handle of the buffered paint context, obtained through BeginBufferedPaint."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const RECT*",
+        "name": "prc",
+        "description": "Type: const RECT* A pointer to a RECT structure that specifies the rectangle to clear. Set this parameter to NULL to specify the entire buffer."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Initialize buffered painting for the current thread.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "BufferedPaintInit is called before BeginBufferedPaint or BeginBufferedAnimation for each thread that uses these functions. Each call to BufferedPaintInit should be matched with a call to BufferedPaintUnInit when calls to buffered paint APIs are no longer needed.  \t\t\tAn application may call this API multiple times, as long as each call to BufferedPaintInit is balanced with a call to BufferedPaintUnInit. This function only needs to be called once in the lifetime of a thread. Typically, this function is called before creating the main application window, or during WM_CREATE. Call BufferedPaintUnInit after destroying the window, or during WM_NCDESTROY. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "BufferedPaintInit",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Paints the next frame of a buffered paint animation.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: BOOL Returns TRUE if the frame has been painted, or FALSE otherwise. ",
+    "remarks": "If this function returns TRUE, the application should do no further painting. If this function returns FALSE, the application should paint normally. An application calls this function within its WM_PAINT handler.  After BufferedPaintRenderAnimation paints an animation frame, an application will typically continue without performing its usual painting operations.  If appropriate, an application may choose to render additional user interface (UI) over the top of the animation. The following code example, to be included as part of a larger body of code, shows how to use the animation painting functions. ",
+    "return_type": "BOOL",
+    "category": "Visual Styles",
+    "name": "BufferedPaintRenderAnimation",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Handle to the window in which the animations play."
+      },
+      {
+        "in_out": "",
+        "type": "HDC",
+        "name": "hdcTarget",
+        "description": "Type: HDC Handle of the target DC on which the buffer is animated."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets the alpha to a specified value in a given rectangle. The alpha controls the amount of transparency applied when blending with the buffer onto the destination target device context (DC).",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This function sets the alpha value for each pixel in the target rectangle. Passing an alpha value of 255 makes pixels fully opaque. The BufferedPaintMakeOpaque macro, which is  defined in uxtheme.h, sets alpha values to 255.  It is typically used to call GDI to draw into a memory buffer and then to make it opaque in order to draw it on glass. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "BufferedPaintSetAlpha",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HPAINTBUFFER",
+        "name": "hBufferedPaint",
+        "description": "Type: HPAINTBUFFER The handle of the buffered paint context, obtained through BeginBufferedPaint."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const RECT*",
+        "name": "prc",
+        "description": "Type: const RECT* A pointer to a RECT structure that specifies the rectangle in which to set the alpha. Set this parameter to NULL to specify the entire buffer."
+      },
+      {
+        "in_out": "",
+        "type": "BYTE",
+        "name": "alpha",
+        "description": "Type: BYTE The alpha value to set. The alpha value can range from zero (fully transparent) to 255 (fully opaque)."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Stops all buffered animations for the given window.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "BufferedPaintStopAllAnimations",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND The handle of the window in which to stop all animations."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Closes down buffered painting for the current thread. Called once for each call to BufferedPaintInit after calls to BeginBufferedPaint are no longer needed.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "BufferedPaintUnInit",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes the theme data handle.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The CloseThemeData function should be called when a window that has a visual style applied is destroyed. This function should also be called whenever a window receives a WM_THEMECHANGED message. This call should be followed by an attempt to create a new theme data handle if a call to the IsThemeActive function returns TRUE. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "CloseThemeData",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Draws the border and fill defined by the visual style for the specified control part.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Drawing operations are scaled to fit and not exceed the rectangle specified in pRect. Your application should not draw outside the rectangle specified by pClipRect. Prior to calling DrawThemeBackground to draw the background image for a window, you may call IsThemeBackgroundPartiallyTransparent. This method determines whether DrawThemeParentBackground should be called to draw in backgrounds behind partially-transparent or alpha-blended child controls, and is demonstrated in the following example. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "DrawThemeBackground",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC used for drawing the theme-defined background image."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part to draw. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part to draw. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const RECT*",
+        "name": "pRect",
+        "description": "Type: const RECT* Pointer to a RECT structure that contains the rectangle, in logical coordinates, in which the background image is drawn."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const RECT*",
+        "name": "pClipRect",
+        "description": "Type: const RECT* Pointer to a RECT structure that contains a clipping rectangle. This parameter may be set to NULL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "[DrawThemeBackgroundEx is available for use in the operating   systems specified in the Requirements section. It may be altered or unavailable in   subsequent versions.]",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Drawing operations are scaled to fit and to not exceed the rectangle specified in pRect. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "DrawThemeBackgroundEx",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC used for drawing the theme-defined background image."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part to draw. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part to draw. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const RECT*",
+        "name": "pRect",
+        "description": "Type: const RECT* Pointer to a RECT structure that contains the rectangle, in logical coordinates, in which the background image is drawn."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const DTBGOPTS*",
+        "name": "pOptions",
+        "description": "Type: const DTBGOPTS* Pointer to a DTBGOPTS structure that contains clipping information. This parameter may be set to NULL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "Draws one or more edges defined by the visual style of a rectangle.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "DrawThemeEdge",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the rectangle. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "pDestRect",
+        "description": "Type: LPCRECT Pointer to a RECT structure that contains, in logical coordinates, the rectangle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uEdge",
+        "description": "Type: UINT UINT that specifies the type of inner and outer edges to draw. This parameter must be a combination of one inner-border flag and one outer-border flag, or one of the combination flags. The border flags are:  ValueMeaning   BDR_RAISEDINNER   Raised inner edge    BDR_SUNKENINNER   Sunken inner edge    BDR_RAISEDOUTER   Raised outer edge    BDR_SUNKENOUTER   Sunken outer edge    EDGE_BUMP   Combination of BDR_RAISEDOUTER and BDR_SUNKENINNER    EDGE_ETCHED   Combination of BDR_SUNKENOUTER and BDR_RAISEDINNER    EDGE_RAISED   Combination of BDR_RAISEDOUTER and BDR_RAISEDINNER    EDGE_SUNKEN   Combination of BDR_SUNKENOUTER and BDR_SUNKENINNER"
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uFlags",
+        "description": "Type: UINT UINT that specifies the type of border to draw. This parameter can be a combination of the following values.  ValueMeaning   BF_ADJUST   The rectangle pointed to by the pDestRect parameter is shrunk to exclude the edges that were drawn; otherwise the rectangle does not change.    BF_BOTTOM   Bottom of border rectangle.    BF_BOTTOMLEFT   Bottom and left side of border rectangle.    BF_BOTTOMRIGHT   Bottom and right side of border rectangle.    BF_DIAGONAL   Diagonal border.    BF_DIAGONAL_ENDBOTTOMLEFT   Diagonal border. The end point is the lower-left corner of the rectangle; the origin is the upper-right corner.    BF_DIAGONAL_ENDBOTTOMRIGHT   Diagonal border. The end point is the lower-right corner of the rectangle; the origin is the upper-left corner.    BF_DIAGONAL_ENDTOPLEFT   Diagonal border. The end point is the upper-left corner of the rectangle; the origin is the lower-right corner.    BF_DIAGONAL_ENDTOPRIGHT   Diagonal border. The end point is the upper-right corner of the rectangle; the origin is the lower-left corner.    BF_FLAT   Flat border.    BF_LEFT   Left side of border rectangle.    BF_MIDDLE   Interior of the rectangle is to be filled.    BF_MONO   One-dimensional border.    BF_RECT   Entire border rectangle.    BF_RIGHT   Right side of border rectangle.    BF_SOFT   Soft buttons instead of tiles.    BF_TOP   Top of border rectangle.    BF_TOPLEFT   Top and left side of border rectangle.    BF_TOPRIGHT   Top and right side of border rectangle."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPRECT",
+        "name": "pContentRect",
+        "description": "Type: LPRECT Pointer to a RECT structure that contains, in logical coordinates, the rectangle that receives the interior rectangle, if uFlags is set to BF_ADJUST. This parameter may be set to NULL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Draws an image from an image list with the icon effect defined by the visual style.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "DrawThemeIcon",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part in which the image is drawn. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "pRect",
+        "description": "Type: LPCRECT Pointer to a RECT structure that contains, in logical coordinates, the rectangle in which the image is drawn."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HIMAGELIST",
+        "name": "himl",
+        "description": "Type: HIMAGELIST Handle to an image list that contains the image to draw."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iImageIndex",
+        "description": "Type: int Value of type int that specifies the index of the image to draw."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Draws the part of a parent control that is covered by a partially-transparent or alpha-blended child control.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. Prior to calling DrawThemeBackground to draw the background image for a window, you may call IsThemeBackgroundPartiallyTransparent. This method determines whether DrawThemeParentBackground should be called to draw in backgrounds behind partially-transparent or alpha-blended child controls, and is demonstrated in the following example. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "DrawThemeParentBackground",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND The child control."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC The child control's DC."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const RECT*",
+        "name": "prc",
+        "description": "Type: const RECT* The area to be drawn. The rectangle is in the child window's coordinates. If this parameter is NULL, the area to be drawn includes the entire area occupied by the child control."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Used by partially-transparent or alpha-blended child controls to draw the part of their parent in front of which they appear. Sends a WM_ERASEBKGND message followed by a WM_PRINTCLIENT.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT S_OK if successful; otherwise, S_FALSE. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "DrawThemeParentBackgroundEx",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Handle of the child control."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC of the child control."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD Zero or more of the following values. If this value is zero, this function returns S_OK only if the parent handled WM_PRINTCLIENT.  ValueMeaning  DTPB_WINDOWDC   If set, hdc is assumed to be a window DC, not a client DC.   DTPB_USECTLCOLORSTATIC   If set, this function sends a WM_CTLCOLORSTATIC message to the parent and uses the brush if one is provided. Otherwise, it uses COLOR_BTNFACE.   DTPB_USEERASEBKGND   If set, this function returns S_OK without sending a WM_CTLCOLORSTATIC message if the parent actually painted on WM_ERASEBKGND."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const RECT*",
+        "name": "prc",
+        "description": "Type: const RECT* Optional. The area to be drawn, in child coordinates. If this parameter is NULL, the area to be drawn includes the entire area occupied by the child control."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 9,
+    "description": "Draws text using the color and font defined by the visual style.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The function always uses the themed font for the specified part and state if one is defined. Otherwise it uses the font currently selected into the device context. To find out if a themed font is defined, you can call GetThemeFont or GetThemePropertyOrigin with TMT_FONT as the property identifier. DrawThemeText uses parameters similar to the Win32 DrawText function, but with a few differences. One of the most notable is support for wide-character strings. Therefore, non-wide strings must be converted to wide strings, as in the following example. Security Warning:  Using MultiByteToWideChar incorrectly can compromise the security of your application. Ensure that when creating wide-character buffers they are large enough to accommodate the size of the string in wide characters, not in bytes. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "DrawThemeText",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC to use for drawing."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int The control part that has the desired text appearance. See Parts and States. If this value is 0, the text is drawn in the default font, or a font selected into the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int The control state that has the desired text appearance. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszText",
+        "description": "Type: LPCWSTR Pointer to a string that contains the text to draw."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iCharCount",
+        "description": "Type: int Value of type int that contains the number of characters to draw. If the parameter is set to -1, all the characters in the string are drawn."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwTextFlags",
+        "description": "Type: DWORD DWORD that contains one or more values that specify the string's formatting. See Format Values for possible parameter values.  Note  DrawThemeText does not support DT_CALCRECT.  However, DrawThemeTextEx does support DT_CALCRECT."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwTextFlags2",
+        "description": "Type: DWORD Not used. Set to zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "pRect",
+        "description": "Type: LPCRECT Pointer to a RECT structure that contains the rectangle, in logical coordinates, in which the text is to be drawn.  It is recommended to use pExtentRect from GetThemeTextExtent to retrieve the correct coordinates."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 9,
+    "description": "Draws text using the color and font defined by the visual style. Extends DrawThemeText by allowing additional text format options.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The function always uses the themed font for the specified part and state if one is defined. Otherwise it uses the font currently selected into the device context. To find out if a themed font is defined, you can call GetThemeFont or GetThemePropertyOrigin with TMT_FONT as the property identifier. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "DrawThemeTextEx",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC to use for drawing."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int The control part that has the desired text appearance. See Parts and States. If this value is 0, the text is drawn in the default font, or a font selected into the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int The control state that has the desired text appearance. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszText",
+        "description": "Type: LPCWSTR Pointer to a string that contains the text to draw."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iCharCount",
+        "description": "Type: int Value of type int that contains the number of characters to draw. If the parameter is set to -1, all the characters in the string are drawn."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD DWORD that contains one or more values that specify the string's formatting. See Format Values for possible parameter values."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPRECT",
+        "name": "pRect",
+        "description": "Type: LPRECT Pointer to a RECT structure that contains the rectangle, in logical coordinates, in which the text is to be drawn."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const DTTOPTS*",
+        "name": "pOptions",
+        "description": "Type: const DTTOPTS* A DTTOPTS structure that defines additional formatting options that will be applied to the text being drawn."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Enables or disables the visual style of the background of a dialog window.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "EnableThemeDialogTexture can be used to tailor dialog box compatibility with child windows and controls that may or may not coordinate rendering their client area backgrounds with that of their parent dialog box. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "EnableThemeDialogTexture",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Window handle of the target dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD One of the following option flag values:  ValueMeaning   ETDT_DISABLE   Disables background texturing.    ETDT_ENABLE   Enables dialog window background texturing. The texturing is defined by a visual style.    ETDT_USETABTEXTURE   Uses the Tab control texture for the background texture of a dialog window.    ETDT_USEAEROWIZARDTABTEXTURE   Uses the Aero wizard texture for the background texture of a dialog window.    ETDT_ENABLETAB   Enables dialog window background texturing. The texture is the Tab control texture defined by the visual style. This flag is equivalent to (ETDT_ENABLE | ETDT_USETABTEXTURE).    ETDT_ENABLEAEROWIZARDTAB   ETDT_ENABLE | ETDT_USEAEROWIZARDTABTEXTURE.    ETDT_VALIDBITS   ETDT_DISABLE | ETDT_ENABLE | ETDT_USETABTEXTURE | ETDT_USEAEROWIZARDTABTEXTURE."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Windows Vista through Windows 7: Enables or disables visual styles for the current user in the current and later sessions.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "EnableTheming",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fEnable",
+        "description": "Type: BOOL              Receives one of the following values.  ValueMeaning   TRUE   Enables visual styles. If the user previously had an active visual style, it becomes active again.  Note  Only clients with trusted computing base (TCB) privileges, where the client acts as part of the operating system, can load or change a global theme.      FALSE   Disables visual styles and turns visual styles off."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Renders the first frame of a buffered animation operation and starts the animation timer.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "EndBufferedAnimation",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HANIMATIONBUFFER",
+        "name": "hbpAnimation",
+        "description": "Type: HANIMATIONBUFFER The handle to the buffered animation context that was returned by BeginBufferedAnimation."
+      },
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "fUpdateTarget",
+        "description": "Type: BOOL If TRUE, updates the target DC with the animation.  If FALSE, the animation is not started, the target DC is not updated, and the hbpAnimation parameter is freed."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Completes a buffered paint operation and frees the associated buffered paint handle.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "EndBufferedPaint",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HPAINTBUFFER",
+        "name": "hBufferedPaint",
+        "description": "Type: HPAINTBUFFER The handle of the buffered paint context, obtained through BeginBufferedPaint."
+      },
+      {
+        "in_out": "",
+        "type": "BOOL",
+        "name": "fUpdateTarget",
+        "description": "Type: BOOL TRUE to copy the buffer to the target DC."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Terminates any existing animation that was in process or set up by BeginPanningFeedback and UpdatePanningFeedback.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: BOOL TRUE if successful. ",
+    "remarks": "This function can only be called after a BeginPanningFeedback call. ",
+    "return_type": "BOOL",
+    "category": "Visual Styles",
+    "name": "EndPanningFeedback",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND The handle to the target window that will receive feedback."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fAnimateBack",
+        "description": "Type: BOOL Flag that indicates whether the displaced window should return to the original position using animation. If FALSE, the method restore the moved window using a direct jump."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Updates clients about state of a window resulting from a panning gesture. This function can only be called after a BeginPanningFeedback call.",
+    "library": "",
+    "min_server": "Windows Server 2008 R2 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: BOOL TRUE if successful. ",
+    "remarks": "Incremental calls to this function should always pass the sum of the increments and not just the latest increment itself. ",
+    "return_type": "BOOL",
+    "category": "Visual Styles",
+    "name": "UpdatePanningFeedback",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND The handle to the target window that will receive feedback. For the method to succeed, this must be the same HWND as provided in BeginPanningFeedback."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "lTotalOverpanOffsetX",
+        "description": "Type: LONG The total displacement that the window has moved in the horizontal direction since the end of scrollable region was reached. A maximum displacement of 30 pixels is allowed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "lTotalOverpanOffsetY",
+        "description": "Type: LONG The total displacement that the window has moved in the vertical direction since the end of scrollable region was reached. A maximum displacement of 30 pixels is allowed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fInInertia",
+        "description": "Type: BOOL Flag indicating whether the application is handling a WM_GESTURE message with the GF_INERTIA FLAG set."
+      }
+    ],
+    "min_client": "Windows 7 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves a pointer to the buffer bitmap if the buffer is a device-independent bitmap (DIB).",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT Returns S_OK if successful, or an error value otherwise. If an error occurs, ppbBuffer  is set to NULL and pcxRow is set to zero. ",
+    "remarks": "The number of bits per pixel depends on the pixel format passed to BeginBufferedPaint. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetBufferedPaintBits",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HPAINTBUFFER",
+        "name": "hBufferedPaint",
+        "description": "Type: HPAINTBUFFER The handle of the buffered paint context, obtained through BeginBufferedPaint."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "RGBQUAD**",
+        "name": "ppbBuffer",
+        "description": "Type: RGBQUAD** When this function returns, contains a pointer to the address of the buffer bitmap pixels."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "int*",
+        "name": "pcxRow",
+        "description": "Type: int* When this function returns, contains a pointer to the width, in pixels, of the buffer bitmap. This value is not necessarily equal to the buffer width. It may be larger."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Gets the paint device context (DC). This is the same value retrieved by BeginBufferedPaint.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HDC Handle of the requested DC. This is the same DC that is returned by BeginBufferedPaint. Returns NULL upon failure. ",
+    "remarks": "",
+    "return_type": "HDC",
+    "category": "Visual Styles",
+    "name": "GetBufferedPaintDC",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HPAINTBUFFER",
+        "name": "hBufferedPaint",
+        "description": "Type: HPAINTBUFFER Handle of the buffered paint context, obtained through BeginBufferedPaint."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves the target device context (DC).",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HDC A handle to the requested DC, or NULL otherwise. ",
+    "remarks": "If successful, this function returns the target DC that was passed by the application to BeginBufferedPaint. ",
+    "return_type": "HDC",
+    "category": "Visual Styles",
+    "name": "GetBufferedPaintTargetDC",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HPAINTBUFFER",
+        "name": "hBufferedPaint",
+        "description": "Type: HPAINTBUFFER A handle to the buffered paint context obtained through BeginBufferedPaint."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the target rectangle specified by BeginBufferedPaint.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "If this function fails, the RECT structure at prc is set to empty. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetBufferedPaintTargetRect",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HPAINTBUFFER",
+        "name": "hBufferedPaint",
+        "description": "Type: HPAINTBUFFER Handle to the buffered paint context obtained through BeginBufferedPaint."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "RECT*",
+        "name": "prc",
+        "description": "Type: RECT* When this function returns, contains the requested rectangle."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Retrieves the name of the current visual style, and optionally retrieves the color scheme name and size name.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT Returns S_OK if successful, otherwise an error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetCurrentThemeName",
+    "is_callback": 0,
+    "dll": "UxTheme.dll (version 1.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "pszThemeFileName",
+        "description": "Type: LPWSTR Pointer to a string that receives the theme path and file name."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "dwMaxNameChars",
+        "description": "Type: int Value of type int that contains the maximum number of characters allowed in the theme file name."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "pszColorBuff",
+        "description": "Type: LPWSTR Pointer to a string that receives the color scheme name. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchMaxColorChars",
+        "description": "Type: int Value of type int that contains the maximum number of characters allowed in the color scheme name."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "pszSizeBuff",
+        "description": "Type: LPWSTR Pointer to a string that receives the size name. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchMaxSizeChars",
+        "description": "Type: int Value of type int that contains the maximum number of characters allowed in the size name."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves the property flags that control how visual styles are applied in the current application.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: DWORD The following return values are bit flags combined with a logical OR operator.  ",
+    "remarks": "Individual flags can be extracted from the result by combining the result with the logical AND of the desired flag. Do not call this function during DllMain or global objects constructors. This may cause invalid return values. The example extracts a single flag's state from the function result. ",
+    "return_type": "DWORD",
+    "category": "Visual Styles",
+    "name": "GetThemeAppProperties",
+    "is_callback": 0,
+    "dll": "UxTheme.dll (version 1.0 or later)",
+    "arguments": [],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Retrieves the size of the content area for the background defined by the visual style.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "A visual style can define a content area within each background image. This is the area where content such as text and icons can be placed without overwriting background borders. When applying a theme to an entire client area of a window, you can call GetClientRect to retrieve this area in a RECT, which can be passed via pointer as the pContentRect parameter to GetThemeBackgroundContentRect as in the following example. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeBackgroundContentRect",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC to use when drawing. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the content area. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part that contains the content area. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "pBoundingRect",
+        "description": "Type: LPCRECT Pointer to a RECT structure that contains the total background rectangle, in logical coordinates. This is the area inside the borders or margins."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPRECT",
+        "name": "pContentRect",
+        "description": "Type: LPRECT Pointer to a RECT structure that receives the content area background rectangle, in logical coordinates.  This rectangle is calculated to fit the content area."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Calculates the size and location of the background, defined by the visual style, given the content area.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "A theme can define a content area within each background image. This is the area where content such as text and icons can be placed without overwriting background borders. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeBackgroundExtent",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC to use when drawing. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the content. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part that contains the content. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "pContentRect",
+        "description": "Type: LPCRECT Pointer to a RECT structure that contains the content background rectangle, in logical coordinates. This rectangle is returned from GetThemeBackgroundContentRect."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPRECT",
+        "name": "pExtentRect",
+        "description": "Type: LPRECT Pointer to a RECT structure that receives the background rectangle, in logical coordinates. This rectangle is based on the pContentRect."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Computes the region for a regular or partially transparent background that is bounded by a specified rectangle.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The region handle that is returned by this function should be released when it is no longer needed, using DeleteObject. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeBackgroundRegion",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC to draw into. The DC uses dots per inch (DPI) scaling. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the region. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "pRect",
+        "description": "Type: LPCRECT Pointer to a RECT structure that contains, in logical coordinates, the specified rectangle used to compute the region."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HRGN*",
+        "name": "pRegion",
+        "description": "Type: HRGN* Pointer to the handle to the computed region."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Retrieves the bitmap associated with a particular theme, part, state, and property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "If dwFlags is set to GBF_COPY, release the bitmap stored in phBitmap when no longer needed by calling DeleteObject. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeBitmap",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME A handle to theme data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int The part that contains the bitmap. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int The state of the part."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int The property to retrieve. Pass zero to automatically select the first available bitmap for this part and state,                  or use one of the following values.  ValueMeaning  TMT_DIBDATA   The background image.   TMT_GLYPHDIBDATA   The glyph image drawn on top of the background, if present.    TMT_HBITMAP   Not currently supported."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "dwFlags",
+        "description": "Type: ULONG The flags that specify how the bitmap is to be retrieved. Can be one of the following values.  ValueMeaning  GBF_DIRECT   Retrieves a handle to the existing bitmap.   GBF_COPY   Retrieves a copy of the bitmap.   GBF_VALIDBITS   GBF_DIRECT | GBF_COPY"
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HBITMAP*",
+        "name": "phBitmap",
+        "description": "Type: HBITMAP* A pointer that receives a handle to the requested bitmap."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the value of a BOOL property from the SysMetrics section of theme data.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeBool",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part containing the BOOL property. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. May be one of the following values.  ValueMeaning  TMT_TRANSPARENT   TRUE if the image associated with the part and state have transparent areas. See GetThemeColor for the definition of the TMT_TRANSPARENTCOLOR value that defines the transparent color.   TMT_AUTOSIZE   TRUE if the nonclient caption area associated with the part and state vary with text width.   TMT_BORDERONLY   TRUE if the image associated with the part and state should only have its border drawn.   TMT_COMPOSITED   TRUE if the control associated with the part and state will handle its own compositing of images.   TMT_BGFILL   TRUE if true-sized images associated with this part and state are to be drawn on the background fill.   TMT_GLYPHTRANSPARENT   TRUE if the glyph associated with this part and state have transparent areas. See GetThemeColor for the definition of the TMT_GLYPHCOLOR value that defines the transparent color.   TMT_GLYPHONLY   TRUE if the glyph associated with this part and state should be drawn without a background.   TMT_ALWAYSSHOWSIZINGBAR   TRUE if the sizing bar associated with this part and state should always be shown.   TMT_MIRRORIMAGE   TRUE if the image associated with this part and state should be flipped if the window is being viewed in right-to-left reading mode.   TMT_UNIFORMSIZING   TRUE if the image associated with this part and state must have equal height and width.   TMT_INTEGRALSIZING   TRUE if the truesize image or border associated with this part and state must be sized to a factor of 2.   TMT_SOURCEGROW   TRUE if the image associated with this part and state will scale larger in size if necessary.   TMT_SOURCESHRINK   TRUE if the image associated with this part and state will scale smaller in size if necessary.   TMT_USERPICTURE   TRUE if the image associated with this part and state is based on the current user."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "BOOL*",
+        "name": "pfVal",
+        "description": "Type: BOOL* Pointer to a BOOL that receives the retrieved property value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the value of a color property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeColor",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the color property. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. For a list of possible values, see Property Identifiers."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "COLORREF*",
+        "name": "pColor",
+        "description": "Type: COLORREF* Pointer to a COLORREF structure that receives the color value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the value for a theme property from the documentation section of the specified theme file.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "If the theme property has been localized in the theme files string table, this function returns the localized version. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeDocumentationProperty",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszThemeName",
+        "description": "Type: LPCWSTR Pointer to a string that contains the name of the theme file that will be opened to query for the property."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszPropertyName",
+        "description": "Type: LPCWSTR Pointer to a string that contains the name of the theme property to query. Can be one of the following values.  ValueMeaning  SZ_THDOCPROP_DISPLAYNAME   Retrieves the display name of the theme.    SZ_THDOCPROP_TOOLTIP   Retrieves the tooltip associated with this theme.   SZ_THDOCPROP_AUTHOR   Retrieves the name of the author of the theme.   SZ_THDOCPROP_CANONICALNAME   Retrieves the name of the theme."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "pszValueBuff",
+        "description": "Type: LPWSTR Pointer to a string buffer that receives the property string value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchMaxValChars",
+        "description": "Type: int Value of type int that specifies the maximum number of characters that pszValueBuff can contain."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the value of an enumerated type property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeEnumValue",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the enumerated type property. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. For a list of possible values, see Property Identifiers."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "int*",
+        "name": "piVal",
+        "description": "Type: int* Pointer to an int that receives the enumerated type value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Retrieves the value of a filename property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeFilename",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the filename property. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. For a list of possible values, see Property Identifiers."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "pszThemeFilename",
+        "description": "Type: LPWSTR Pointer to a buffer that receives the retrieved file name."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchMaxBuffChars",
+        "description": "Type: int Value of type int that receives the maximum number of characters in the file name"
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Retrieves the value of a font property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The font is scaled in dots per inch (DPI)  for the current logical screen. If the property is not supported for the specified part and state, E_PROP_ID_UNSUPPORTED may be returned. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeFont",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the font property. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. For a list of possible values, see Property Identifiers."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LOGFONTW*",
+        "name": "pFont",
+        "description": "Type: LOGFONTW* Pointer to a LOGFONT structure that receives the font property value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the value of an int property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeInt",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the int property. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. For a list of possible values, see Property Identifiers."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "int*",
+        "name": "piVal",
+        "description": "Type: int* Pointer to an int that receives the retrieved value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves a list of int data from a visual style.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "UxTheme.h",
+    "return_value": "Type: HRESULT Returns S_OK if successful, otherwise an error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeIntList",
+    "is_callback": 0,
+    "dll": "UxTheme.dll (version 1.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the list of data to return. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. See Property Identifiers."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "INTLIST*",
+        "name": "pIntList",
+        "description": "Type: INTLIST* Pointer to an INTLIST structure that receives the int data."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Retrieves the value of a MARGINS property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeMargins",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC to select fonts into. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the MARGINS property. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. For a list of possible values, see Property Identifiers."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPRECT",
+        "name": "prc",
+        "description": "Type: LPRECT Pointer to a RECT structure that contains the rectangle that specifies the area to be drawn into. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "MARGINS*",
+        "name": "pMargins",
+        "description": "Type: MARGINS* Pointer to a MARGINS structure that receives the retrieved value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Retrieves the value of a metric property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeMetric",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the metric property. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. Can be one of the following values.  ValueMeaning  TMT_ALPHALEVEL   The alpha value (0-255) used for DrawThemeIcon.   TMT_ALPHATHRESHOLD   The minimum alpha value (0-255) that a pixel must be to be considered opaque.   TMT_BORDERSIZE   The thickness of the border drawn if this part uses a border fill.   TMT_GLYPHINDEX   The character index into the selected font that will be used for the glyph, if the part uses a font-based glyph.   TMT_GRADIENTRATIO1   The amount of the first gradient color to use in drawing the part. This value can be from 0 to 255, but this value plus the values of each of the GRADIENTRATIO values must add up to 255. See the TMT_GRADIENTCOLOR1 value of GetThemeColor.   TMT_GRADIENTRATIO2   The amount of the second gradient color to use in drawing the part.   TMT_GRADIENTRATIO3   The amount of the third gradient color to use in drawing the part.   TMT_GRADIENTRATIO4   The amount of the fourth gradient color to use in drawing the part.   TMT_GRADIENTRATIO5   The amount of the fifth gradient color to use in drawing the part.   TMT_HEIGHT   The height of the part.   TMT_IMAGECOUNT   The number of state images present in an image file.   TMT_MINDPI1   The minimum dpi that the first image file was designed for. See GetThemeFilename.   TMT_MINDPI2   The minimum dpi that the second image file was designed for.   TMT_MINDPI3   The minimum dpi that the third image file was designed for.   TMT_MINDPI4   The minimum dpi that the fourth image file was designed for.   TMT_MINDPI5   The minimum dpi that the fifth image file was designed for.   TMT_PROGRESSCHUNKSIZE   The size of the progress control \"chunk\" shapes that define how far an operation has progressed.   TMT_PROGRESSSPACESIZE   The total size of all of the progress control \"chunks\".   TMT_ROUNDCORNERWIDTH   The roundness (0-100%) of the part's corners.   TMT_ROUNDCORNERHEIGHT   The roundness (0-100%) of the part's corners.   TMT_SATURATION   The amount of saturation (0-255) to apply to an icon drawn using DrawThemeIcon.   TMT_TEXTBORDERSIZE   The thickness of the border drawn around text characters.   TMT_TRUESIZESTRETCHMARK   The percentage of a true-size image's original size at which the image will be stretched.   TMT_WIDTH   The width of the part."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "int*",
+        "name": "piVal",
+        "description": "Type: int* Pointer to an int that receives the metric property value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Calculates the original size of the part defined by a visual style.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemePartSize",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC to select fonts into."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part to calculate the size of. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "prc",
+        "description": "Type: LPCRECT Pointer to a RECT structure that contains the rectangle used for the part drawing destination. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "THEMESIZE",
+        "name": "eSize",
+        "description": "Type: THEMESIZE Enumerated type that specifies the type of size to retrieve. See THEMESIZE for a list of type values."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "SIZE*",
+        "name": "psz",
+        "description": "Type: SIZE* Pointer to a SIZE structure that receives the dimensions of the specified part."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the value of a position property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The part in which the position is located determines the possible state values. For example, if the position is in a check box, the state could be checked or unchecked, but in a caption the possible states are active, inactive, or disabled. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemePosition",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the position property. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. For a list of possible values, see Property Identifiers."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "POINT*",
+        "name": "pPoint",
+        "description": "Type: POINT* Pointer to a POINT structure that receives the position value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the location of the theme property definition for a property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemePropertyOrigin",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part that contains the theme. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. You may use any of the property values from Vssym32.h. These values are described in the reference pages for the functions that use them. For instance, the GetThemeInt function uses the TMT_BORDERSIZE value. See the Visual Styles Reference for a list of functions."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PROPERTYORIGIN*",
+        "name": "pOrigin",
+        "description": "Type: PROPERTYORIGIN* Pointer to a PROPERTYORIGIN enumerated type that indicates where the property was or was not found."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the value of a RECT property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeRect",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part containing the RECT property. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. For a list of possible values, see Property Identifiers."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPRECT",
+        "name": "pRect",
+        "description": "Type: LPRECT Pointer to a RECT structure that receives a  rectangle."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Retrieves a data stream corresponding to a specified theme, starting from a specified part, state, and property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "Windows 8: In high contrast mode, the data stream retrieved by this function is not valid after the hTheme theme handle is closed. The data stream retrieved by this function is not a copy; do not delete or close the data stream after using it. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeStream",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to the theme from which the stream will be retrieved."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Specifies the part to retrieve a stream from. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Specifies the state of the part."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Specifies the property to retrieve."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "VOID**",
+        "name": "ppvStream",
+        "description": "Type: VOID** Address of a pointer that receives the stream."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD*",
+        "name": "pcbStream",
+        "description": "Type: DWORD* Pointer that receives the length, in bytes, of the stream received by ppvStream."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HINSTANCE",
+        "name": "hInst",
+        "description": "Type: HINSTANCE If iPropId is TMT_STREAM, this value is NULL. If iPropId is TMT_DISKSTREAM, this value is the HINSTANCE of a loaded styles file."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Retrieves the value of a string property.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeString",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part containing the string property. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Value of type int that specifies the property to retrieve. For a list of possible values, see Property Identifiers."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "pszBuff",
+        "description": "Type: LPWSTR Pointer to a buffer that receives the string value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchMaxBuffChars",
+        "description": "Type: int Value of type int that specifies the maximum number of characters pszBuff can contain."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the Boolean value of a system metric.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: BOOL Value of desired system metric. ",
+    "remarks": "If the theme data handle is not a NULL handle, this function returns the desired BOOL from the SysMetrics section of the visual style. If the theme data handle is NULL, this function returns the value of the specified system Boolean. ",
+    "return_type": "BOOL",
+    "category": "Visual Styles",
+    "name": "GetThemeSysBool",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to theme data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iBoolID",
+        "description": "Type: int Value of type int that specifies the system Boolean metric desired. May be the following value.  ValueMeaning  TMT_FLATMENUS   Describes how menus are drawn. If TRUE, menus are drawn without shadows. If FALSE, menus have shadows underneath them."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the value of a system color.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: COLORREF The value of the specified system color. ",
+    "remarks": "If the theme data handle is not a NULL handle, this function returns the color from the SysMetrics section of the current visual style. If the theme data handle is NULL, this function returns the color matching the global system color. ",
+    "return_type": "COLORREF",
+    "category": "Visual Styles",
+    "name": "GetThemeSysColor",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to theme data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iColorID",
+        "description": "Type: int Value of type int that specifies the color number. May be one of the values listed in GetSysColor for the nIndex parameter."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves a system color brush.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HBRUSH Handle to brush data. ",
+    "remarks": "If the theme data handle is not a NULL handle, GetThemeSysColorBrush returns the brush that matches the specified color from the SysMetrics section of the visual style. If the theme data handle is NULL, the function returns the brush matching the global system color. The brush handle that is returned by this function should be released when it is no longer needed using DeleteObject. ",
+    "return_type": "HBRUSH",
+    "category": "Visual Styles",
+    "name": "GetThemeSysColorBrush",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to theme data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iColorID",
+        "description": "Type: int Value of type int that specifies the number of the desired system color.  May be one of the following values.  ValueMeaning  TMT_SCROLLBAR   The color of scroll bars.   TMT_BACKGROUND   The color of the background.   TMT_ACTIVECAPTION   The color of the caption area on an active window.   TMT_INACTIVECAPTION   The color of the caption area on an inactive window.   TMT_WINDOW   The color of a window.   TMT_WINDOWFRAME   The color of the frame around a window.   TMT_MENUTEXT   The color of text drawn on a menu.   TMT_WINDOWTEXT   The color of text drawn in a window.   TMT_CAPTIONTEXT   The color of text drawn in the caption area of an active window.   TMT_ACTIVEBORDER   The color of the border around an active window.   TMT_INACTIVEBORDER   The color of the border around an inactive window.   TMT_APPWORKSPACE   The color of the application workspace.   TMT_HIGHLIGHT   The color of a highlight.   TMT_HIGHLIGHTTEXT   The color of highlighted text.   TMT_BTNFACE   The color of a button face.   TMT_BTNSHADOW   The color of the shadow underneath a button.   TMT_GRAYTEXT   The color of dimmed text.   TMT_BTNTEXT   The color of text contained within a button.   TMT_INACTIVECAPTIONTEXT   The color of the text in the caption area of an inactive window.   TMT_BTNHIGHLIGHT   The color of the highlight around a button.   TMT_DKSHADOW3D   The color of three-dimensional dark shadows.   TMT_LIGHT3D   The color of three-dimensional light areas.   TMT_INFOTEXT   The color of informational text.   TMT_INFOBK   The color of the background behind informational text.   TMT_BUTTONALTERNATEFACE   The color of the alternate face of a button.   TMT_HOTTRACKING   The color of highlight applied when a user moves the mouse over a control.   TMT_GRADIENTACTIVECAPTION   The gradient color applied to the caption area of an active window.   TMT_GRADIENTINACTIVECAPTION   The gradient color applied to the caption area of an inactive window.   TMT_MENUHILIGHT   The color of highlight drawn on a menu item when the user moves the mouse over it.   TMT_MENUBAR   The color of the menu bar."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the LOGFONT of a system font.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "This function requires vssym32.h and uxtheme.h. If the theme data handle is not a NULL handle, this function returns the desired LOGFONT from the SysMetrics section of the visual style. If the theme data handle is NULL, the function returns the value of the global system metric of the same type. The font is scaled in dots per inch for the current logical screen. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeSysFont",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to theme data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iFontID",
+        "description": "Type: int Value of type int that specifies a system font. May be one of the following values.  ValueMeaning  TMT_CAPTIONFONT   The font used by window captions.   TMT_SMALLCAPTIONFONT   The font used by window small captions.   TMT_MENUFONT   The font used by menus.   TMT_STATUSFONT   The font used in status messages.   TMT_MSGBOXFONT   The font used to display messages in a message box.   TMT_ICONTITLEFONT   The font used for icons."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LOGFONTW*",
+        "name": "plf",
+        "description": "Type: LOGFONTW* Pointer to a LOGFONT structure that receives the font information from this function."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the value of a system int.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeSysInt",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to theme data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iIntID",
+        "description": "Type: int Value of type int that specifies the desired system int. May be the following value.  ValueMeaning  TMT_MINCOLORDEPTH   The minimum color depth, in bits, required to properly view this style."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int*",
+        "name": "piValue",
+        "description": "Type: int* Pointer to an int that receives the system integer value."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the value of a system size metric from theme data.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: int Returns the size in pixels. ",
+    "remarks": "If hTheme is  not   NULL, this function returns the size stored in the current visual style (SysMetrics section of the visual style) scaled to the current screen dpi.  If hTheme is NULL, this function returns the global system metric in pixels that is scaled to the current dpi only if the application is marked as dpi-aware; otherwise, the pixels returned are unscaled. ",
+    "return_type": "int",
+    "category": "Visual Styles",
+    "name": "GetThemeSysSize",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to theme data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iSizeID",
+        "description": "Type: int Value of type int that specifies the system size metric desired. The following values are valid:  ValueMeaning  SM_CXBORDER   Specifies the width of a border.   SM_CXVSCROLL   Specifies the width of a scroll bar.   SM_CXHSCROLL   Specifies the height of a scroll bar.   SM_CXSIZE   Specifies the width of a caption.   SM_CYSIZE   Specifies the height of a caption.   SM_CXSMSIZE   Specifies the width of a small caption.   SM_CYSMSIZE   Specifies the height of a small caption.   SM_CXMENUSIZE   Specifies the width of a menu bar.   SM_CYMENUSIZE   Specifies the height of a menu bar.   SM_CXPADDEDBORDER   Specifies the amount of border padding for captioned windows."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the value of a system string.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "If the theme data handle is not a NULL handle, this function returns the desired string from the SysMetrics section of the visual style. If the theme data handle is NULL, this function returns the value of the global system metric of the same type. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeSysString",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to theme data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStringID",
+        "description": "Type: int Value of type int that specifies a system string. May be one of the following values.  ValueMeaning  TMT_CSSNAME   The name of the CSS file associated with the theme specified by hTheme.   TMT_XMLNAME   The name of the XML file associated with the theme specified by hTheme."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPWSTR",
+        "name": "pszStringBuff",
+        "description": "Type: LPWSTR Pointer to the buffer that receives the string value from this function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchMaxStringChars",
+        "description": "Type: int Value of type int that specifies the maximum number of characters the string buffer can hold."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 9,
+    "description": "Calculates the size and location of the specified text when rendered in the visual style font.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeTextExtent",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC to select the font into."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part in which the text will be drawn. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszText",
+        "description": "Type: LPCWSTR Pointer to a string that contains the text to draw."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iCharCount",
+        "description": "Type: int Value of typeint that contains the number of characters to draw. If the parameter is set to -1, all the characters in the string are drawn."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwTextFlags",
+        "description": "Type: DWORD DWORD that contains one or more values that specify the string's formatting. See Format Values for possible parameter values."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "pBoundingRect",
+        "description": "Type: LPCRECT Pointer to a RECT structure that contains the rectangle used to control layout of the text. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPRECT",
+        "name": "pExtentRect",
+        "description": "Type: LPRECT Pointer to a RECT structure that contains, in logical coordinates, the rectangle required to fit the rendered text."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves information about the font specified by a visual style for a particular part.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeTextMetrics",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC to use for screen context. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part to retrieve font information about. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "TEXTMETRIC*",
+        "name": "ptm",
+        "description": "Type: TEXTMETRIC* Receives the font information."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Gets the duration for the specified transition.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. The following example code retrieves the length of time it takes for a button to transition from the hot to the normal state (for example, when the user has moved the cursor away from the button). ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "GetThemeTransitionDuration",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle of the theme data."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int ID of the part."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "iStateIdFrom",
+        "description": "Type: int State ID of the part before the transition."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "iStateIdTo",
+        "description": "Type: int State ID of the part after the transition."
+      },
+      {
+        "in_out": "",
+        "type": "int",
+        "name": "iPropId",
+        "description": "Type: int Property ID."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD*",
+        "name": "pdwDuration",
+        "description": "Type: DWORD* Address of a variable that receives the transition duration, in milliseconds."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves a theme handle to a window that has visual styles applied.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HTHEME The most recent theme handle from OpenThemeData. ",
+    "remarks": "If a window has a visual style applied, the GetWindowTheme function returns the most recent theme handle from OpenThemeData. If no visual style is applied, GetWindowTheme returns NULL. ",
+    "return_type": "HTHEME",
+    "category": "Visual Styles",
+    "name": "GetWindowTheme",
+    "is_callback": 0,
+    "dll": "UxTheme.dll (version 1.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND Handle of the window."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 9,
+    "description": "Retrieves a hit test code for a point in the background specified by a visual style.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The values in ptTest and pRect should be in the same coordinate system, such as client or screen. If the hrgn parameter is used, it must be specified in the same coordinates as pRect and ptTest. ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "HitTestThemeBackground",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Type: HDC HDC to use when drawing. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwOptions",
+        "description": "Type: DWORD DWORD that specifies the hit test options. See Hit Test Options for a list of options."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "pRect",
+        "description": "Type: LPCRECT Pointer to a RECT structure that contains, in logical coordinates, the rectangle that bounds the background."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HRGN",
+        "name": "hrgn",
+        "description": "Type: HRGN Handle to a region that can be used to specify the bounds of a hit test area. This parameter may be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "POINT",
+        "name": "ptTest",
+        "description": "Type: POINT  POINT structure that contains the coordinates of the point."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "WORD*",
+        "name": "pwHitTestCode",
+        "description": "Type: WORD* WORD that receives the hit test code that indicates whether the point in ptTest is in the background area bounded by pRect or hrgn. See Hit Test Return Values for a list of values returned."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Reports whether the current application's user interface displays using visual styles.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: BOOL Returns one of the following values.  ",
+    "remarks": "Prior to Windows 8, a visual style can be turned off in Control Panel, so that an application can support visual styles but not have a visual style applied at a given time. In Windows 8, it is not possible to turn off visual styles. Do not call this function during DllMain or global objects contructors. This may cause invalid return values. ",
+    "return_type": "BOOL",
+    "category": "Visual Styles",
+    "name": "IsAppThemed",
+    "is_callback": 0,
+    "dll": "UxTheme.dll (version 1.0 or later)",
+    "arguments": [],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Determines whether Desktop Window Manager (DWM) composition effects are available to the theme.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: BOOL TRUE if composition effects are available; otherwise, FALSE. ",
+    "remarks": "Composition effects are provided through the DWM. This function first determines whether DWM is active, then checks whether it has composition effects enabled. ",
+    "return_type": "BOOL",
+    "category": "Visual Styles",
+    "name": "IsCompositionActive",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Tests if a visual style for the current application is active.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: BOOL Returns one of the following values.  ",
+    "remarks": "Do not call this function during DllMain or global objects contructors. This may cause invalid return values. ",
+    "return_type": "BOOL",
+    "category": "Visual Styles",
+    "name": "IsThemeActive",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves whether the background specified by the visual style has transparent pieces or alpha-blended pieces.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: BOOL Returns one of the following values.  Prior to calling DrawThemeBackground to draw the background image for a window, you may call IsThemeBackgroundPartiallyTransparent. This method determines whether DrawThemeParentBackground should be called to draw in backgrounds behind partially-transparent or alpha-blended child controls, and is demonstrated in the following example. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Visual Styles",
+    "name": "IsThemeBackgroundPartiallyTransparent",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Value of type int that specifies the state of the part. See Parts and States."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Reports whether a specified dialog window supports background texturing.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: BOOL Returns one of the following values.  ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Visual Styles",
+    "name": "IsThemeDialogTextureEnabled",
+    "is_callback": 0,
+    "dll": "UxTheme.dll (version 1.0 or later)",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND HWND value that specifies a dialog window."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves whether a visual style has defined parameters for the specified part and state.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: BOOL Returns one of the following values.  ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Visual Styles",
+    "name": "IsThemePartDefined",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HTHEME",
+        "name": "hTheme",
+        "description": "Type: HTHEME Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iPartId",
+        "description": "Type: int Value of type int that specifies the part. See Parts and States."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iStateId",
+        "description": "Type: int Currently unused. The value should be 0."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Opens the theme data for a window and its associated class.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HTHEME OpenThemeData tries to match each class, one at a time, to a class data section in the active theme. If a match is found, an associated HTHEME handle is returned. If no match is found NULL is returned. ",
+    "remarks": "The pszClassList parameter contains a list, not just a single name, to provide the class an opportunity to get the best match between the class and the current visual style. For example, a button might pass L\"OkButton;Button\"  if its ID is ID_OK. If the current visual style has an entry for OkButton, that is used; otherwise no visual style is applied. Class names for the Aero theme are defined in AeroStyle.xml. ",
+    "return_type": "HTHEME",
+    "category": "Visual Styles",
+    "name": "OpenThemeData",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Handle of the window for which theme data is required."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszClassList",
+        "description": "Type: LPCWSTR Pointer to a string that contains a semicolon-separated list of classes."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Opens the theme data associated with a window for specified theme classes.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HTHEME If a match is found, a valid handle to a theme is returned. Otherwise, a NULL value will be returned. ",
+    "remarks": "The string specified by pszClassIdList will be tokenized using semicolons as a delimiter. The names are matched against class names one token at a time. If no match is found for a particular token, the next token will be matched. If a match is found, the return value of the function will be the theme handle associated with the matched class. Class names for the Aero theme are defined in AeroStyle.xml. ",
+    "return_type": "HTHEME",
+    "category": "Visual Styles",
+    "name": "OpenThemeDataEx",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND A handle to a window or control that the theme is to be retrieved from."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszClassIdList",
+        "description": "Type: LPCWSTR A semicolon-separated list of class names to match."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD Optional flags that control how to return the theme data. May be set to a combination of the following values.  ValueMeaning  OTD_FORCE_RECT_SIZING   Forces drawn images from this theme to stretch to fit the rectangles specified by drawing functions.   OTD_NONCLIENT   Allows theme elements to be drawn in the non-client area of the window."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the flags that determine how visual styles are implemented in the calling application.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "After you set the flags, send a WM_THEMECHANGED message to your application's main window for the changes to take effect. This example combines flags and calls this function as shown. ",
+    "return_type": "void",
+    "category": "Visual Styles",
+    "name": "SetThemeAppProperties",
+    "is_callback": 0,
+    "dll": "UxTheme.dll (version 1.0 or later)",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Type: DWORD DWORD that specifies one or more of the following bit flags, which can be combined with a logical OR.  ValueMeaning   STAP_ALLOW_NONCLIENT   Specifies that the nonclient areas of application windows will have visual styles applied.    STAP_ALLOW_CONTROLS   Specifies that the common controls used in an application will have visual styles applied.    STAP_ALLOW_WEBCONTENT   Specifies that web content displayed in an application will have visual styles applied."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Causes a window to use a different set of visual style information than its class normally uses.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "The theme manager retains the pszSubAppName and the pszSubIdList associations through the lifetime of the window, even if visual styles subsequently change. The window is sent a WM_THEMECHANGED message at the end of a SetWindowTheme call, so that the new visual style can be found and applied. When pszSubAppName and pszSubIdList are NULL, the theme manager removes the previously applied associations. You can prevent visual styles from being applied to a specified window by specifying an empty string, (L\" \"), which does not match any section entries. The following example code gives a list-view control the appearance of a Windows Explorer list: ",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "SetWindowTheme",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Handle to the window whose visual style information is to be changed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszSubAppName",
+        "description": "Type: LPCWSTR Pointer to a string that contains the application name to use in place of the calling application's name. If this parameter is NULL, the calling application's name is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "pszSubIdList",
+        "description": "Type: LPCWSTR Pointer to a string that contains a semicolon-separated list of CLSID names to use in place of the actual list passed by the window's class. If this parameter is NULL, the ID list from the calling class is used."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Sets attributes to control how visual styles are applied to a specified window.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "SetWindowThemeAttribute",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Handle to a window to apply changes to."
+      },
+      {
+        "in_out": "_In_",
+        "type": "enum WINDOWTHEMEATTRIBUTETYPE",
+        "name": "eAttribute",
+        "description": "Type: enum WINDOWTHEMEATTRIBUTETYPE Value of type WINDOWTHEMEATTRIBUTETYPE that specifies the type of attribute to set. The value of this parameter determines the type of data that should be passed in the pvAttribute parameter. Can be the following value.  ValueMeaning  WTA_NONCLIENT   Specifies non-client related attributes. pvAttribute must be a pointer of type WTA_OPTIONS."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pvAttribute",
+        "description": "Type: PVOID A pointer that specifies attributes to set. Type is determined by the value of the eAttribute value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "cbAttribute",
+        "description": "Type: DWORD Specifies the size, in bytes, of the data pointed to by pvAttribute."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets non-client attributes to control how visual styles are applied to a specified window.",
+    "library": "UxTheme.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Uxtheme.h",
+    "return_value": "Type: HRESULT If this function succeeds, it returns S_OK. Otherwise, it returns an HRESULT error code. ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "Visual Styles",
+    "name": "SetWindowThemeNonClientAttributes",
+    "is_callback": 0,
+    "dll": "UxTheme.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND A handle to the window in which to apply changes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwMask",
+        "description": "Type: DWORD A bitmask that describes which values are to be modified. Can be a combination of the WTNCA constants."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwAttributes",
+        "description": "Type: DWORD A combination of flags that modify window visual style attributes based on dwMask. Can be a combination of the WTNCA constants."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  }
+]

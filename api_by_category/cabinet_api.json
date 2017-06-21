@@ -1,0 +1,552 @@
+[
+  {
+    "n_arguments": 8,
+    "description": "The FCIAddFile adds a file to the cabinet under construction.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Fci.h",
+    "return_value": "If the function succeeds, it returns TRUE; otherwise, FALSE. Extended error information is provided in the ERF structure used to create the FCI context. For an example, see Creating a Cabinet. ",
+    "remarks": "When set, the _A_EXEC attribute is added to the file entry in the CAB. This mechanism is used in some Microsoft self-extracting executables, and could be used for this purpose in any custom extraction application. ",
+    "return_type": "BOOL",
+    "category": "Cabinet API",
+    "name": "FCIAddFile",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HFCI",
+        "name": "hfci",
+        "description": "A valid FCI context handle returned by the FCICreate function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTR",
+        "name": "pszSourceFile",
+        "description": "The name of the file to add; this value should include path information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTR",
+        "name": "pszFileName",
+        "description": "The name under which to store the file in the cabinet."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fExecute",
+        "description": "If set TRUE, the file will be executed when extracted."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCIGETNEXTCABINET",
+        "name": "GetNextCab",
+        "description": "Pointer to an application-defined callback function to obtain specifications on the next cabinet to create. The function should be declared using the FNFCIGETNEXTCABINET macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCISTATUS",
+        "name": "pfnProgress",
+        "description": "Pointer to an application-defined callback function to update the progress information available to the user. The function should be declared using the FNFCISTATUS macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCIGETOPENINFO",
+        "name": "pfnOpenInfo",
+        "description": "Pointer to an application-defined callback function to open a file and retrieve the file date, time, and attributes. The function should be declared using the FNFCIGETOPENINFO macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "TCOMP",
+        "name": "typeCompress",
+        "description": "The compression type to use. Note  To indicate LZX compression, use the TCOMPfromLZXWindow macro.    ValueMeaning  tcompTYPE_NONE 0x0000   No compression.   tcompTYPE_MSZIP 0x0001   Microsoft ZIP compression."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 13,
+    "description": "The FCICreate function creates an FCI context.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Fci.h",
+    "return_value": "If the function succeeds, it returns a non-NULL HFCI context pointer; otherwise, NULL. Extended error information is provided in the ERF structure. For an example, see Creating a Cabinet. ",
+    "remarks": "FCI supports multiple simultaneous contexts. As a result it is possible to create or extract multiple cabinets at the same time within the same application. If the application is multithreaded, it is also possible to run a different context in each thread; however, an application cannot use the same context simultaneously in multiple threads. For example, FCIAddFile cannot be called from two different threads, using the same FCI context. ",
+    "return_type": "HFCI",
+    "category": "Cabinet API",
+    "name": "FCICreate",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "PERF",
+        "name": "perf",
+        "description": "Pointer to an ERF structure that receives the error information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCIFILEPLACED",
+        "name": "pfnfiledest",
+        "description": "Pointer to an application-defined callback function to notify when a file is placed in the cabinet. The function should be declared using the FNFCIFILEPLACED macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCIALLOC",
+        "name": "pfnalloc",
+        "description": "Pointer to an application-defined callback function to allocate memory. The function should be declared using the FNFCIALLOC macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCIFREE",
+        "name": "pfnfree",
+        "description": "Pointer to an application-defined callback function to free previously allocated memory. The function should be delcared using the FNFCIFREE macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCIOPEN",
+        "name": "pfnopen",
+        "description": "Pointer to an application-defined callback function to open a file. The function should be declared using the FNFCIOPEN macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCIREAD",
+        "name": "pfnread",
+        "description": "Pointer to an application-defined callback function to read data from a file. The function should be declared using the FNFCIREAD macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCIWRITE",
+        "name": "pfnwrite",
+        "description": "Pointer to an application-defined callback function to write data to a file. The function should be declared using the FNFCIWRITE macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCICLOSE",
+        "name": "pfnclose",
+        "description": "Pointer to an application-defined callback function to close a file. The function should be declared using the FNFCICLOSE macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCISEEK",
+        "name": "pfnseek",
+        "description": "Pointer to an application-defined callback function to move a file pointer to the specific location. The function should be declared using the FNFCISEEK macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCIDELETE",
+        "name": "pfndelete",
+        "description": "Pointer to an application-defined callback function to delete a file. The function should be declared using the FNFCIDELETE macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCIGETTEMPFILE",
+        "name": "pfnfcigtf",
+        "description": "Pointer to an application-defined callback function to retrieve a temporary file name. The function should be declared using the FNFCIGETTEMPFILE macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PCCAB",
+        "name": "pccab",
+        "description": "Pointer to a CCAB structure that contains the parameters for creating a cabinet."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "void FAR*",
+        "name": "pv",
+        "description": "Pointer to an application-defined value that is passed to callback functions."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FCIDestroy function deletes an open  FCI context, freeing any memory and temporary files associated with the context.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Fci.h",
+    "return_value": "If the function succeeds, it returns TRUE; otherwise, FALSE. Extended error information is provided in the ERF structure used to create the FCI context. For an example, see Creating a Cabinet. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Cabinet API",
+    "name": "FCIDestroy",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HFCI",
+        "name": "hfci",
+        "description": "A valid FCI context handle returned by the FCICreate function."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 4,
+    "description": "The FCIFlushCabinet function completes the current cabinet.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Fci.h",
+    "return_value": "If the function succeeds, it returns TRUE; otherwise, FALSE. Extended error information is provided in the ERF structure used to create the FCI context. For an example, see Creating a Cabinet. ",
+    "remarks": "The FCIFlushCabinet API forces the current cabinet under construction to be completed immediately and then written to disk. Further calls to FCIAddFile will result in files being added to another cabinet. In the event the current cabinet has reached the application-specified media size limit, the pending data within an FCI's internal buffers will be placed into another cabinet. The fGetNextCab flag determines whether the function pointed to by the GetNextCab parameter will be called. If fGetNextCab is set TRUE, GetNextCab is called to obtain continuation information. If FALSE, then GetNextCab is called only in the event the cabinet overflows. ",
+    "return_type": "BOOL",
+    "category": "Cabinet API",
+    "name": "FCIFlushCabinet",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HFCI",
+        "name": "hfci",
+        "description": "A valid FCI context handle returned by theFCICreate function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fGetNextCab",
+        "description": "Specifies whether the function pointed to by the supplied GetNextCab parameter will be called."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCIGETNEXTCABINET",
+        "name": "GetNextCab",
+        "description": "Pointer to an application-defined callback function to obtain specifications on the next cabinet to create. The function should be declared using the FNFCIGETNEXTCABINET macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCISTATUS",
+        "name": "pfnProgress",
+        "description": "Pointer to an application-defined callback function to update the user. The function should be declared using the FNFCISTATUS macro."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 3,
+    "description": "The FCIFlushFolder function forces the current folder under construction to be completed immediately.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Fci.h",
+    "return_value": "If the function succeeds, it returns TRUE; otherwise, FASLE. Extended error information is provided in the ERF structure used to create the FCI context. For an example, see Creating a Cabinet. ",
+    "remarks": "The FCIFlushFolder API forces the folder currently under construction to be completed immediately; effectively resetting the compression history if a compression method is in use. The callback function indicated by GetNextCab will be called if the cabinet overflows, which occurs if the pending data buffered inside an FCI causes the application-specified cabinet media size to be exceeded. ",
+    "return_type": "BOOL",
+    "category": "Cabinet API",
+    "name": "FCIFlushFolder",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HFCI",
+        "name": "hfci",
+        "description": "A valid FCI context handle returned by the FCICreate function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCIGETNEXTCABINET",
+        "name": "GetNextCab",
+        "description": "Pointer to an application-defined callback function to obtain specifications on the next cabinet to create. The function should be declared using the FNFCIGETNEXTCABINET macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFCISTATUS",
+        "name": "pfnProgress",
+        "description": "Pointer to an application-defined callback function to update the user. The function should be declared using the FNFCISTATUS macro."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 7,
+    "description": "The FDICopy function extracts files from cabinets.",
+    "library": "Cabinet.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Fdi.h",
+    "return_value": "If the function succeeds, it returns TRUE; otherwise, FALSE. Extended error information is provided in the ERF structure used to create the FDI context. For an example, see Extracting Files from a Cabinet. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Cabinet API",
+    "name": "FDICopy",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HFDI",
+        "name": "hfdi",
+        "description": "A valid FDI context handle returned by the FDICreate function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTR",
+        "name": "pszCabinet",
+        "description": "The name of the cabinet file, excluding any path information, from which to extract files. If a file is split over multiple cabinets, FDICopy  allows for subsequent cabinets to be opened."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTR",
+        "name": "pszCabPath",
+        "description": "The pathname of the cabinet file, but not including the name of the file itself. For example, \"C:\\MyCabs\\\".  The contents of pszCabinet are appended to pszCabPath to create the full pathname of the cabinet."
+      },
+      {
+        "in_out": "_In_",
+        "type": "INT",
+        "name": "flags",
+        "description": "No flags are currently defined and this parameter should be set to zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFDINOTIFY",
+        "name": "pfnfdin",
+        "description": "Pointer to an application-defined callback notification function to update the application on the status of the decoder. The function should be declared using the FNFDINOTIFY macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFDIDECRYPT",
+        "name": "pfnfdid",
+        "description": "Not currently used by FDI. This parameter should be set to NULL."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "void FAR*",
+        "name": "pvUser",
+        "description": "Pointer to an application-specified value to pass to the notification function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 9,
+    "description": "The FDICreate function creates an FDI context.",
+    "library": "Cabinet.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Fdi.h",
+    "return_value": "If the function succeeds, it returns a non-NULL HFDI context pointer; otherwise, it returns NULL. Extended error information is provided in the ERF structure. For an example, see Extracting Files from a Cabinet. ",
+    "remarks": "",
+    "return_type": "HFDI",
+    "category": "Cabinet API",
+    "name": "FDICreate",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "PFNALLOC",
+        "name": "pfnalloc",
+        "description": "Pointer to an application-defined callback function to allocate memory. The function should be declared using the FNALLOC macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNFREE",
+        "name": "pfnfree",
+        "description": "Pointer to an application-defined callback function to free previously allocated memory. The function should be declared using the FNFREE macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNOPEN",
+        "name": "pfnopen",
+        "description": "Pointer to an application-defined callback function to open a file. The function should be declared using the FNOPEN macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNREAD",
+        "name": "pfnread",
+        "description": "Pointer to an application-defined callback function to read data from a file. The function should be declared using the FNREAD macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNWRITE",
+        "name": "pfnwrite",
+        "description": "Pointer to an application-defined callback function to write data to a file. The function should be declared using the FNWRITE macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNCLOSE",
+        "name": "pfnclose",
+        "description": "Pointer to an application-defined callback function to close a file. The function should be declared using the FNCLOSE macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PFNSEEK",
+        "name": "pfnseek",
+        "description": "Pointer to an application-defined callback function to move a file pointer to the specified location. The function should be declared using the FNSEEK macro."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cpuType",
+        "description": "In the 16-bit version of FDI, specifies the CPU type and can be any of the following values. Note  Expressing the cpuUNKNOWN value is recommended.    ValueMeaning  cpuUNKNOWN -1   FDI should determine the CPU type.   cpu80286 0   Only 80286 instructions can be used.   cpu80386 1   80386 instructions can be used."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PERF",
+        "name": "perf",
+        "description": "Pointer to an ERF structure that receives the error information."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The FDIDestroy function deletes an open FDI context.",
+    "library": "Cabinet.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Fdi.h",
+    "return_value": "If the function succeeds, it returns TRUE; otherwise, FALSE. Extended error information is provided in the ERF structure used to create the FDI context. For an example, see Extracting Files from a Cabinet. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Cabinet API",
+    "name": "FDIDestroy",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "hfdi",
+        "description": "A valid FDI context handle returned by  the FDICreate function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The FDIIsCabinet function determines whether a file is a cabinet and, if it is, returns information about it.",
+    "library": "Cabinet.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Fdi.h",
+    "return_value": "If the file is a cabinet, the function returns TRUE ; otherwise, FALSE. Extended error information is provided in the ERF structure used to create the FDI context. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Cabinet API",
+    "name": "FDIIsCabinet",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HFDI",
+        "name": "hfdi",
+        "description": "A valid FDI context handle returned  by FDICreate."
+      },
+      {
+        "in_out": "_In_",
+        "type": "INT_PTR",
+        "name": "hf",
+        "description": "An application-defined value to keep track of the opened file. This value must be of the same type as values used by the File I/O functions passed to FDICreate."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "PFDICABINETINFO",
+        "name": "pfdici",
+        "description": "Pointer to an FDICABINETINFO structure that receives the cabinet details, in the event the file is actually a cabinet."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The FDITruncateCabinet function truncates a cabinet file starting at the specified folder number.",
+    "library": "Cabinet.lib",
+    "min_server": "",
+    "header": "Fdi.h",
+    "return_value": "If the function succeeds, it returns TRUE; otherwise, FALSE. Extended error information is provided in the ERF structure used to create the FDI context. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Cabinet API",
+    "name": "FDITruncateCabinet",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HFDI",
+        "name": "hfdi",
+        "description": "A valid FDI context handle returned by the FDICreate function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTR*",
+        "name": "pszCabinetName",
+        "description": "The full cabinet filename."
+      },
+      {
+        "in_out": "_In_",
+        "type": "USHORT",
+        "name": "iFolderToDelete",
+        "description": "The index of the first folder to delete."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 1,
+    "description": "[This function is no longer supported, so its behavior cannot be guaranteed.]",
+    "library": "",
+    "min_server": "",
+    "header": "",
+    "return_value": "This function does not return a value. ",
+    "remarks": "This function has no associated import library or header file; you must call it using the LoadLibrary and GetProcAddress functions. ",
+    "return_type": "VOID WINAPI",
+    "category": "Cabinet API",
+    "name": "DeleteExtractedFiles",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "PSESSION",
+        "name": "ps",
+        "description": "A pointer to a SESSION structure that contains information about the current session. This function frees the memory in the pFileList member of this structure and sets  pFileList to NULL."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 2,
+    "description": "[This function is no longer supported, so its behavior cannot be guaranteed.]",
+    "library": "",
+    "min_server": "",
+    "header": "",
+    "return_value": "If the function succeeds, it returns S_OK; otherwise, it returns an error code. ",
+    "remarks": "This function has no associated import library or header file; you must call it using the LoadLibrary and GetProcAddress functions. ",
+    "return_type": "HRESULT",
+    "category": "Cabinet API",
+    "name": "Extract",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "PSESSION",
+        "name": "ps",
+        "description": "Pointer to a SESSION structure that contains information about the current session."
+      },
+      {
+        "in_out": "",
+        "type": "LPCSTR",
+        "name": "lpCabName",
+        "description": "Pointer to the name of the cabinet from which files are to be extracted."
+      }
+    ],
+    "min_client": ""
+  },
+  {
+    "n_arguments": 0,
+    "description": "[This function is no longer supported, so its behavior cannot be guaranteed. ]",
+    "library": "",
+    "min_server": "",
+    "header": "",
+    "return_value": "The version number of the file (see VERSIONINFO Resource). ",
+    "remarks": "This function has no associated import library or header file; you must call it using the LoadLibrary and GetProcAddress functions. ",
+    "return_type": "LPCSTR WINAPI",
+    "category": "Cabinet API",
+    "name": "GetDllVersion",
+    "is_callback": 0,
+    "dll": "Cabinet.dll",
+    "arguments": [],
+    "min_client": ""
+  }
+]

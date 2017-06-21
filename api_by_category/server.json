@@ -1,0 +1,300 @@
+[
+  {
+    "n_arguments": 3,
+    "description": "Allows an assistive technology (AT) application to notify the system that it is interacting with UI through a Windows Automation API (such as Microsoft UI Automation) as a result of a touch gesture from the user. This allows the assistive technology to notify the target application and the system that the user is interacting with touch.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "If successful, returns S_OK. If not successful, returns a standard COM error code. ",
+    "remarks": "This function requires the calling process to have UIAccess or higher privileges.  If the caller does not have the required privileges, the call to AccNotifyTouchInteraction fails and returns E_ACCESSDENIED. For more information, see Security Considerations for Assistive Technologies and /MANIFESTUAC (Embeds UAC information in manifest). When an AT is consuming touch data (such as when using the RegisterPointerInputTarget function), the shell and applications that the AT interacts with through the Windows Automation API are not aware that the user is interacting through touch. For the system to expose touch-related functionality to the user, the AT must use AccNotifyTouchInteraction to notify the system that it is performing the interaction in response to user touch input. This code example shows how to call the AccNotifyTouchInteraction function. ",
+    "return_type": "STDAPI",
+    "category": "Server",
+    "name": "AccNotifyTouchInteraction",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndApp",
+        "description": "A window that belongs to the AT process that is calling AccNotifyTouchInteraction."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndTarget",
+        "description": "The nearest window of the automation element that the AT is targeting."
+      },
+      {
+        "in_out": "_In_",
+        "type": "POINT",
+        "name": "ptTarget",
+        "description": "The center point of the automation element (or a point in the bounding rectangle of the element)."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Sets system values that indicate whether an assistive technology (AT) application's current state  affects  functionality that is typically provided by the system.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "Type: STDAPI If successful, returns S_OK. If not successful, returns a standard COM error code. ",
+    "remarks": "Before it exits, an AT application should reset any system values that it previously set. This function requires the calling process to have UIAccess or higher privileges.  If the caller does not have the required privileges, the call to AccSetRunningUtilityState fails and returns E_ACCESSDENIED. For more information, see Security Considerations for Assistive Technologies and /MANIFESTUAC (Embeds UAC information in manifest). This code example shows how to call the AccSetRunningUtilityState function. ",
+    "return_type": "STDAPI",
+    "category": "Server",
+    "name": "AccSetRunningUtilityState",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndApp",
+        "description": "Type: HWND The handle of the AT application window. This parameter must not be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwUtilityStateMask",
+        "description": "Type: DWORD  A   mask that indicates the system values being set. It can be a combination of the following values: ANRUS_ON_SCREEN_KEYBOARD_ACTIVEANRUS_TOUCH_MODIFICATION_ACTIVEANRUS_PRIORITY_AUDIO_ACTIVEANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK"
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwUtilityState",
+        "description": "Type: DWORD  The new settings for the system values indicated by dwUtilityStateMask. This parameter can be zero to reset the system values, or a combination of the following values.  ValueMeaning  ANRUS_ON_SCREEN_KEYBOARD_ACTIVE 0x0000001   The AT application is providing an on-screen keyboard.   ANRUS_TOUCH_MODIFICATION_ACTIVE 0x0000002   The AT application is consuming redirected touch input.    ANRUS_PRIORITY_AUDIO_ACTIVE 0x0000004   The AT application is relying on audio (such as text-to-speech) to convey essential information to the user and should remain audible over other system sounds.   ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK 0x0000008   The AT application is relying on audio (such as text-to-speech) to convey essential information to the user but should not change relative to other system sounds."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates an accessible object with the methods and properties of the specified type of system-provided user interface element.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "Type: STDAPI If successful, returns S_OK. If not successful, returns a standard COM error code. ",
+    "remarks": "Server applications call this function when they contain a custom UI object that is similar to a system-provided object. Server developers can call CreateStdAccessibleObject to override the IAccessible methods and properties as required to match their custom objects. Alternatively, server developers can use Dynamic Annotation to override specific properties without having to use difficult subclassing techniques that CreateStdAccessibleObject requires. Server developers should still use CreateStdAccessibleObject for structural changes, such as hiding a child element or creating a placeholder child element. This approach saves server developers the work of fully implementing all of the IAccessible properties and methods. This function is similar to CreateStdAccessibleProxy, except that CreateStdAccessibleProxy allows you to specify the class name as a parameter whereas CreateStdAccessibleObject uses the class name associated with the hwnd parameter. ",
+    "return_type": "STDAPI",
+    "category": "Server",
+    "name": "CreateStdAccessibleObject",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Window handle of the system-provided user interface element (a control) for which an accessible object is created."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "idObject",
+        "description": "Type: LONG Object ID. This value is usually OBJID_CLIENT, but it may be another object identifier."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riidInterface",
+        "description": "Type: REFIID Reference identifier of the requested interface. This value is one of the following: IID_IAccessible, IID_IDispatch, IID_IEnumVARIANT, or IID_IUnknown."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void**",
+        "name": "ppvObject",
+        "description": "Type: void** Address of a pointer variable that receives the address of the specified interface."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Creates an accessible object that has the properties and methods of the specified class of system-provided user interface element.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "Type: STDAPI If successful, returns S_OK. If not successful, returns a standard COM error code. ",
+    "remarks": "Server applications call this function when they contain a custom control that is similar to a system-provided control. Server applications can call CreateStdAccessibleProxy to override the IAccessible methods and properties as required to match their custom controls. Alternatively, server developers can use Dynamic Annotation to override specific properties without having to use difficult subclassing techniques that were required with CreateStdAccessibleProxy. Server developers should still use CreateStdAccessibleProxy for structural changes, such as hiding a child element or creating a placeholder child element. This approach saves server developers the work of fully implementing all of the IAccessible properties and methods. This function is similar to CreateStdAccessibleObject, except that CreateStdAccessibleObject always uses the class name associated with the hwnd whereas CreateStdAccessibleProxy allows you to specify the class name as a parameter. Use CreateStdAccessibleProxy to create an accessible object for a user interface element that is superclassed. When a user interface element is superclassed, an application creates a custom control with a window class name different from the predefined control on which it is based. Because the class name associated with the hwnd parameter is the superclass window class name, specify the base class name (the system class name on which the superclassed control is based) in pszClassName. ",
+    "return_type": "STDAPI",
+    "category": "Server",
+    "name": "CreateStdAccessibleProxy",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Window handle of the system-provided user interface element (a control) for which an accessible object is created."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pszClassName",
+        "description": "Type: LPCTSTR Pointer to a null-terminated string of the class name of a system-provided user interface element for which an accessible object is created. The window class name is one of the common controls (defined in Comctl32.dll), predefined controls (defined in User32.dll), or window elements."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "idObject",
+        "description": "Type: LONG Object ID. This value is usually OBJID_CLIENT, which is one of the object identifier constants, but it may be another object identifier."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riidInterface",
+        "description": "Type: REFIID Reference identifier of the interface requested. This value is one of the following: IID_IAccessible, IID_IDispatch, IID_IEnumVARIANT, or IID_IUnknown."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void**",
+        "name": "ppvObject",
+        "description": "Type: void** Address of a pointer variable that receives the address of the specified interface."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Returns a reference, similar to a handle, to the specified object. Servers return this reference when handling WM_GETOBJECT.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "Type: LRESULT If successful, returns a positive value that is a reference to the object. If not successful, returns one of the values in the table that follows, or another standard COM error code.  ",
+    "remarks": "Servers call this function only when handling the WM_GETOBJECT message. For an overview of how LresultFromObject is related to WM_GETOBJECT, see How WM_GETOBJECT Works. LresultFromObject increments the object's reference count. If you are not storing the interface pointer passed to the function (that is, you create a new interface pointer for the object each time WM_GETOBJECT is received), call the object's Release method to decrement the reference count back to one. Then the client calls Release and the object is destroyed. For more information, see How to Handle WM_GETOBJECT. Each time a server processes WM_GETOBJECT for a specific object, it calls LresultFromObject to obtain a new reference to the object. Servers do not save the reference returned from LresultFromObject from one instance of processing WM_GETOBJECT to use as the message's return value when processing subsequent WM_GETOBJECT messages for the same object. This causes the client to receive an error. ",
+    "return_type": "LRESULT",
+    "category": "Server",
+    "name": "LresultFromObject",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference identifier of the interface provided to the client. This parameter is IID_IAccessible."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM Value sent by the associated WM_GETOBJECT message in its wParam parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPUNKNOWN",
+        "name": "pAcc",
+        "description": "Type: LPUNKNOWN Address of the IAccessible interface to the object that corresponds to the WM_GETOBJECT message."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves a requested interface pointer for an accessible object based on a previously generated object reference.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "Type: STDAPI If successful, returns S_OK. If not successful, returns one of the following standard COM error codes.  ",
+    "remarks": "",
+    "return_type": "STDAPI",
+    "category": "Server",
+    "name": "ObjectFromLresult",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LRESULT",
+        "name": "lResult",
+        "description": "Type: LRESULT A 32-bit value returned by a previous successful call to the LresultFromObject function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Reference identifier of the interface to be retrieved. This is IID_IAccessible."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wParam",
+        "description": "Type: WPARAM Value sent by the associated WM_GETOBJECT message in its wParam parameter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void**",
+        "name": "ppvObject",
+        "description": "Type: void** Receives the address of the IAccessible interface on the object that corresponds to the WM_GETOBJECT message."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines whether there is an installed WinEvent hook that might be notified of a specified event.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h",
+    "return_value": "Type: BOOL If there is a hook to be notified of the specified event, the return value is TRUE. If there are no hooks to be notified of the specified event, the return value is FALSE. ",
+    "remarks": "This method is guaranteed to never return a false negative. If this method returns FALSE, it means that no hooks in the system would be notified of the event. However, this method may return a false positive. In other words, it may return TRUE even though there are no hooks that would be notified. Thus, it is safe for components to circumvent some work if this method returns FALSE. Event hooks can be installed at any time, so server developers should not cache the return value for long periods of time. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Server",
+    "name": "IsWinEventHookInstalled",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "event",
+        "description": "Type: DWORD The event constant that hooks might be notified of. The function checks whether there is an installed hook for this event constant."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Signals the system that a predefined event occurred. If any client applications have registered a hook function for the event, the system calls the client's hook function.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "Servers call this function to notify the system that an event has occurred. Microsoft Active Accessibility checks to see if any client applications have set hook procedures for the event and, if so, calls the appropriate hook procedures. If no hook procedures are registered for the event, the performance penalty for calling this function is minor. Servers call NotifyWinEvent to announce the event to the system after the event has occurred; they must never notify the system of an event before the event has occurred. When the client's hook procedure is called, it receives a number of parameters that describe the event and the object that generated the event. The hook procedure uses the AccessibleObjectFromEvent function to retrieve a pointer to the IAccessible interface of the object that generated the event. Servers may receive a WM_GETOBJECT message immediately after calling this function. This can happen if there are any in-context clients that call AccessibleObjectFromEvent in the event callback. When servers call this function, they must be ready to handle WM_GETOBJECT, return an IAccessible interface pointer, and handle any of the IAccessible methods. Note to Server Developers:  When you call NotifyWinEvent, if any clients are listening for that event in-context, their event handlers, which typically send WM_GETOBJECT and call IAccessible methods, will execute before NotifyWinEvent returns. When you call NotifyWinEvent, you should be prepared to handle these calls, if they occur. If you need to do extra setup to allow for this, you should do so before you call NotifyWinEvent, not after. ",
+    "return_type": "void WINAPI",
+    "category": "Server",
+    "name": "NotifyWinEvent",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "event",
+        "description": "Type: DWORD Specifies the event that occurred. This value must be one of the event constants."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Handle to the window that contains the object that generated the event."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "idObject",
+        "description": "Type: LONG Identifies the object that generated the event. This value is either one of the predefined object identifiers or a custom object ID value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "idChild",
+        "description": "Type: LONG Identifies whether the event was generated by an object or by a child element of the object. If this value is CHILDID_SELF, the event was generated by the object itself. If not CHILDID_SELF, this value is the child ID of the element that generated the event."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]

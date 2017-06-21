@@ -3978,6 +3978,37 @@
       }
     ],
     "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Instructs an in-process server to remove only those entries created through DllRegisterServer.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Olectl.h",
+    "return_value": "This function can return the standard return values E_OUTOFMEMORY and E_UNEXPECTED, as well as the following values.  ",
+    "remarks": "The server must not disturb any entries that it did not create which currently exist for its object classes. For example, between registration and unregistration, the user may have specified a Treat As relationship between this class and another. In that case, unregistration can remove all entries except the TreatAs key and any others that were not explicitly created in DllRegisterServer. The registry functions specifically disallow the deletion of an entire populated tree in the registry. The server can attempt, as the last step, to remove the CLSID key, but if other entries still exist, the key will remain. ",
+    "return_type": "HRESULT __stdcall",
+    "category": "COM",
+    "name": "DllUnregisterServer",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Instructs an in-process server to create its registry entries for all classes supported in this server module.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Olectl.h",
+    "return_value": "This function can return the standard return values E_OUTOFMEMORY and E_UNEXPECTED, as well as the following values.  ",
+    "remarks": "E_NOTIMPL is not a valid return code. If this function fails, the state of the registry for all its classes is undefined. ",
+    "return_type": "HRESULT __stdcall",
+    "category": "COM",
+    "name": "DllRegisterServer",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
   }
 ]
-

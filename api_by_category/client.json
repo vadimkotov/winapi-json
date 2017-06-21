@@ -1,0 +1,523 @@
+[
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the child ID or IDispatch of each child within an accessible container object.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "Type: STDAPI If successful, returns S_OK. If not successful, returns one of the following or another standard COM error code.  ",
+    "remarks": "To retrieve information about all of the children in a container, the iChildStart parameter  must be zero (0), and cChildren must be the value returned by IAccessible::get_accChildCount. When calling this function to obtain information about the children of a user interface element, it is recommended that clients obtain information about all of the children. For example, iChildStart must be zero (0), and cChildren must be the value returned by IAccessible::get_accChildCount. If a child ID is returned for an element, then the container must provide information about the child element. To obtain information about the element, clients use the container's  IAccessible interface pointer and specify the obtained child ID in calls to the IAccessible properties. Clients must call the IUnknown::Release method for any IDispatch interfaces retrieved by this function, and free the array when it is no longer required. The following example function displays a view of the element tree below the element that is passed in. The name and role of each element are printed by user-defined functions that are not shown here. ",
+    "return_type": "STDAPI",
+    "category": "Client",
+    "name": "AccessibleChildren",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IAccessible*",
+        "name": "paccContainer",
+        "description": "Type: IAccessible* Pointer to the container object's IAccessible interface."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "iChildStart",
+        "description": "Type: LONG Specifies the zero-based index of the first child that is retrieved. This parameter is an index, not a child ID, and it is usually is set to zero (0)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "cChildren",
+        "description": "Type: LONG Specifies the number of children to retrieve. To retrieve the current number of children, an application calls IAccessible::get_accChildCount."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "VARIANT*",
+        "name": "rgvarChildren",
+        "description": "Type: VARIANT* Pointer to an array of VARIANT structures that receives information about the container's children. If the vt member of an array element is VT_I4, then the lVal member for that element is the child ID. If the vt member of an array element is VT_DISPATCH, then the pdispVal member for that element is the address of the child object's IDispatch interface."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LONG*",
+        "name": "pcObtained",
+        "description": "Type: LONG* Address of a variable that receives the number of elements in the rgvarChildren array that is populated by the AccessibleChildren function. This value is the same as that of the cChildren parameter; however, if you request more children than exist, this value will be less than that of cChildren."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves the address of the IAccessible interface for the object that generated the event that is currently being processed by the client's event hook function.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "Type: STDAPI If successful, returns S_OK. If not successful, returns one of the following or another standard COM error code.  ",
+    "remarks": "Clients call this function within an event hook function to obtain an IAccessible interface pointer to either the object that generated the event or to the parent of the element that generated the event. The parameters sent to the WinEventProc callback function must be used for this function's hwnd, dwObjectID, and dwChildID parameters. This function retrieves the lowest-level accessible object in the object hierarchy that is associated with an event. If the element that generated the event is not an accessible object (that is, does not support IAccessible), then the function retrieves the IAccessible interface of the parent object. The parent object must provide information about the child element through the IAccessible interface. As with other IAccessible methods and functions, clients might receive errors for IAccessible interface pointers because of a user action. For more information, see Receiving Errors for IAccessible Interface Pointers. This function fails if called in response to EVENT_OBJECT_CREATE because the object is not fully initialized. Similarly, clients should not call this in response to EVENT_OBJECT_DESTROY because the object is no longer available and cannot respond. Clients watch for EVENT_OBJECT_SHOW and EVENT_OBJECT_HIDE events rather than for EVENT_OBJECT_CREATE and EVENT_OBJECT_DESTROY. The following example code shows this method being called in a WinEventProc event handler. ",
+    "return_type": "STDAPI",
+    "category": "Client",
+    "name": "AccessibleObjectFromEvent",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Specifies the window handle of the window that generated the event. This value must be the window handle that is sent to the event hook function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwObjectID",
+        "description": "Type: DWORD Specifies the object ID of the object that generated the event. This value must be the object ID that is sent to the event hook function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwChildID",
+        "description": "Type: DWORD Specifies whether the event was triggered by an object or one of its child elements. If the object triggered the event, dwChildID is CHILDID_SELF. If a child element triggered the event, dwChildID is the element's child ID. This value must be the child ID that is sent to the event hook function."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "IAccessible**",
+        "name": "ppacc",
+        "description": "Type: IAccessible** Address of a pointer variable that receives the address of an IAccessible interface. The interface is either for the object that generated the event, or for the parent of the element that generated the event."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "VARIANT*",
+        "name": "pvarChild",
+        "description": "Type: VARIANT* Address of a VARIANT structure that specifies the child ID that can be used to access information about the UI element."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the address of the IAccessible interface pointer for the object displayed at a specified point on the screen.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "If successful, returns S_OK. If not successful, returns one of the following or another standard COM error code.  ",
+    "remarks": "This function retrieves the lowest-level accessible object in the object hierarchy at a given point. If the element at the point is not an accessible object (that is, does not support IAccessible), then the function retrieves the IAccessible interface of the parent object. The parent object must provide information about the child element through the IAccessible interface. Call IAccessible::accHitTest to identify the child element at the specified screen coordinates. As with other IAccessible methods and functions, clients might receive errors for IAccessible interface pointers because of a user action. For more information, see Receiving Errors for IAccessible Interface Pointers. The following example function selects the item at a specified point on the screen. It is assumed that a single selection is wanted. ",
+    "return_type": "STDAPI",
+    "category": "Client",
+    "name": "AccessibleObjectFromPoint",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "POINT",
+        "name": "ptScreen",
+        "description": "Specifies, in physical screen coordinates, the point that is examined."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "IAccessible**",
+        "name": "ppacc",
+        "description": "Address of a pointer variable that receives the address of the object's IAccessible interface."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "VARIANT*",
+        "name": "pvarChild",
+        "description": "Address of a VARIANT structure that specifies whether the IAccessible interface pointer that is returned in ppacc belongs to the object displayed at the specified point, or to the parent of the element at the specified point. The vt member of the VARIANT is always VT_I4. If the lVal member is CHILDID_SELF, then the IAccessible interface pointer at ppacc belongs to the object at the point. If the lVal member is not CHILDID_SELF, ppacc is the address of the IAccessible interface of the child element's parent object. Clients must call VariantClear on the retrieved VARIANT parameter when finished using it."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves the address of the specified interface for the object associated with the specified window.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "Type: STDAPI If successful, returns S_OK. If not successful, returns one of the following or another standard COM error code.  ",
+    "remarks": "Clients call this function to retrieve the address of an object's IAccessible, IDispatch, IEnumVARIANT, IUnknown, or other supported interface pointer. As with other IAccessible methods and functions, clients might receive errors for IAccessible interface pointers because of a user action. For more information, see Receiving Errors for IAccessible Interface Pointers. Clients use this function to obtain access to the Microsoft Office 2000 native object model. The native object model provides clients with accessibility information about an Office application's document or client area that is not exposed by Microsoft Active Accessibility. To obtain an IDispatch interface pointer to a class supported by the native object model, specify OBJID_NATIVEOM in dwObjectID. When using this object identifier, the hwnd parameter must match the following window class types.  Note that the above window classes correspond to the innermost document window or pane window. For more information about the Office object model, see the Microsoft Office 2000/Visual Basic Programmer's Guide. ",
+    "return_type": "STDAPI",
+    "category": "Client",
+    "name": "AccessibleObjectFromWindow",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Specifies the handle of a window for which an object is to be retrieved. To retrieve an interface pointer to the cursor or caret object, specify NULL and use the appropriate object ID in dwObjectID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwObjectID",
+        "description": "Type: DWORD Specifies the object ID. This value is one of the standard object identifier constants or a custom object ID such as OBJID_NATIVEOM, which is the object ID for the Office native object model. For more information about OBJID_NATIVEOM, see the Remarks section in this topic."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Type: REFIID Specifies the reference identifier of the requested interface. This value is either IID_IAccessible or IID_IDispatch, but it can also be IID_IUnknown, or the IID of any interface that the object is expected to support."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "void**",
+        "name": "ppvObject",
+        "description": "Type: void** Address of a pointer variable that receives the address of the specified interface."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the version number and build number of the Microsoft Active Accessibility file Oleacc.dll.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "This function provides an easy way to get the version and build numbers for Oleacc.dll. The GetFileVersionInfoSize, GetFileVersionInfo, and VerQueryValue functions can be used to retrieve the same information. ",
+    "return_type": "void STDAPI",
+    "category": "Client",
+    "name": "GetOleaccVersionInfo",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "DWORD*",
+        "name": "pdwVer",
+        "description": "Type: DWORD* Address of a DWORD that receives the version number. The major version number is placed in the high word, and the minor version number is placed in the low word."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD*",
+        "name": "pdwBuild",
+        "description": "Type: DWORD* Address of a DWORD that receives the build number. The major build number is placed in the high word, and the minor build number is placed in the low word."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves a process handle from a window handle.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "",
+    "return_value": "Type: HANDLE If successful, returns the handle of the process that owns the window. If not successful, returns NULL. ",
+    "remarks": "In previous versions of the operating system, a process could open another process (to access its memory, for example) using OpenProcess. This function succeeds if the caller has appropriate privileges; usually the caller and target process must be the same user. On Windows Vista, however, OpenProcess fails in the scenario where the caller has UIAccess, and the target process is elevated. In this case, the owner of the target process is in the Administrators group, but the calling process is running with the restricted token, so does not have membership in this group, and is denied access to the elevated process. If the caller has UIAccess, however, they can use a windows hook to inject code into the target process, and from within the target process, send a handle back to the caller. GetProcessHandleFromHwnd is a convenience function that uses this technique to obtain the handle of the process that owns the specified HWND. Note that it only succeeds in cases where the caller and target process are running as the same user. The returned handle has the following privileges: PROCESS_DUP_HANDLE | PROCESS_VM_OPERATION | PROCESS_VM_READ | PROCESS_VM_WRITE | SYNCHRONIZE. If other privileges are required, it may be necessary to implement the hooking technique explicitly instead of using this function. ",
+    "return_type": "HANDLE WINAPI",
+    "category": "Client",
+    "name": "GetProcessHandleFromHwnd",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND The window handle."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves the localized string that describes the object's role for the specified role value.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "Type: UINT If successful, and if lpszRole is non-NULL, the return value is the number of bytes (ANSI strings) or characters (Unicode strings) copied into the buffer, not including the terminating null character. If lpszRole is NULL, the return value represents the string's length, not including the null character. If the string resource does not exist, or if the lpszRole parameter is not a valid pointer, the return value is zero (0). To get extended error information, call GetLastError. ",
+    "remarks": "",
+    "return_type": "UINT",
+    "category": "Client",
+    "name": "GetRoleText",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwRole",
+        "description": "Type: DWORD One of the object role constants."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszRole",
+        "description": "Type: LPTSTR Address of a buffer that receives the role text string. If this parameter is NULL, the function returns the role string's length, not including the null character."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cchRoleMax",
+        "description": "Type: UINT The size of the buffer that is pointed to by the lpszRole parameter. For ANSI strings, this value is measured in bytes; for Unicode strings, it is measured in characters."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves a localized string that describes an object's state for a single predefined state bit flag. Because state values are a combination of one or more bit flags, clients call this function more than once to retrieve all state strings.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "Type: UINT If successful, and if lpszStateBit is non-NULL, the return value is the number of bytes (ANSI strings) or characters (Unicode strings) that are copied into the buffer, not including the null-terminated character. If lpszStateBit is NULL, the return value represents the string's length, not including the null character. If the string resource does not exist, or if the lpszStateBit parameter is not a valid pointer, the return value is zero (0). To get extended error information, call GetLastError. ",
+    "remarks": "This function accepts only one state bit at a time, not a bitmask. ",
+    "return_type": "UINT",
+    "category": "Client",
+    "name": "GetStateText",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwStateBit",
+        "description": "Type: DWORD One of the object state constants."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "lpszStateBit",
+        "description": "Type: LPTSTR Address of a buffer that receives the state text string. If this parameter is NULL, the function returns the state string's length, not including the null character."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cchStateBitMax",
+        "description": "Type: UINT The size of the buffer that is pointed to by the lpszStateBit parameter. For ANSI strings, this value is measured in bytes; for Unicode strings, it is measured in characters."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Sets an event hook function for a range of events.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: HWINEVENTHOOK If successful, returns an HWINEVENTHOOK value that identifies this event hook instance. Applications save this return value to use it with the UnhookWinEvent function. If unsuccessful, returns zero. ",
+    "remarks": "This function allows clients to specify which processes and threads they are interested in. If the idProcess parameter is nonzero and idThread is zero, the hook function receives the specified events from all threads in that process. If the idProcess parameter is zero and idThread is nonzero, the hook function receives the specified events only from the thread specified by idThread. If both are zero, the hook function receives the specified events from all threads and processes. Clients can call SetWinEventHook multiple times if they want to register additional hook functions or listen for additional events. The client thread that calls SetWinEventHook must have a message loop in order to receive events. When you use SetWinEventHook to set a callback in managed code, you should use the GCHandle structure to avoid exceptions. This tells the garbage collector not to move the callback. For out-of-context events, the event is delivered on the same thread that called SetWinEventHook. In some situations, even if you request WINEVENT_INCONTEXT events, the events will still be delivered out-of-context. These scenarios include events from console windows and events from processes that have a different bit-depth (64 bit versus 32 bits) than the caller. While a hook function processes an event, additional events may be triggered, which may cause the hook function to reenter before the processing for the original event is finished. The problem with reentrancy in hook functions is that events are completed out of sequence unless the hook function handles this situation. For more information, see Guarding Against Reentrancy. Windows Store app development If dwFlags is WINEVENT_INCONTEXT AND (idProcess = 0 | idThread = 0), then window hook DLLs are not loaded in-process for the Windows Store app processes and the Windows Runtime broker process unless they are installed by UIAccess processes (accessibility tools). The notification is delivered on the installer's thread. This behavior is similar to what happens when there is an architecture mismatch between the hook DLL and the target application process, for example, when the hook DLL is 32-bit and the application process 64-bit. The following example code shows how a client application might listen for menu-start and menu-end events. For simplicity, the event handler just sends some information to the standard output. ",
+    "return_type": "HWINEVENTHOOK WINAPI",
+    "category": "Client",
+    "name": "SetWinEventHook",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "eventMin",
+        "description": "Type: UINT Specifies the event constant for the lowest event value in the range of events that are handled by the hook function. This parameter can be set to EVENT_MIN to indicate the lowest possible event value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "eventMax",
+        "description": "Type: UINT Specifies the event constant for the highest event value in the range of events that are handled by the hook function. This parameter can be  set to EVENT_MAX to indicate the highest possible event value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HMODULE",
+        "name": "hmodWinEventProc",
+        "description": "Type: HMODULE Handle to the DLL that contains the hook function at lpfnWinEventProc, if the WINEVENT_INCONTEXT flag is specified in the dwFlags parameter. If the hook function is not located in a DLL, or if the WINEVENT_OUTOFCONTEXT flag is specified, this parameter is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WINEVENTPROC",
+        "name": "lpfnWinEventProc",
+        "description": "Type: WINEVENTPROC Pointer to the event hook function. For more information about this function, see WinEventProc."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "idProcess",
+        "description": "Type: DWORD Specifies the ID of the process from which the hook function receives events. Specify zero (0) to receive events from all processes on the current desktop."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "idThread",
+        "description": "Type: DWORD Specifies the ID of the thread from which the hook function receives events. If this parameter is zero, the hook function is associated with all existing threads on the current desktop."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "dwflags",
+        "description": "Type: UINT  Flag values that specify the location of the hook function and of the events to be skipped. The following flags are valid: \t\t\t   ValueMeaning  WINEVENT_INCONTEXT   The DLL that contains the callback function is mapped into the address space of the process that generates the event. With this flag, the system sends event notifications to the callback function as they occur. The hook function must be in a DLL when this flag is specified. This flag has no effect when both the calling process and the generating process are not 32-bit or 64-bit processes, or when the generating process is a console application. For more information, see In-Context Hook Functions.   WINEVENT_OUTOFCONTEXT   The callback function is not mapped into the address space of the process that generates the event. Because the hook function is called across process boundaries, the system must queue events. Although this method is asynchronous, events are guaranteed to be in sequential order. For more information, see Out-of-Context Hook Functions.   WINEVENT_SKIPOWNPROCESS   Prevents this instance of the hook from receiving the events that are generated by threads in this process. This flag does not prevent threads from generating events.   WINEVENT_SKIPOWNTHREAD   Prevents this instance of the hook from receiving the events that are generated by the thread that is registering this hook.     The following flag combinations are valid:  WINEVENT_INCONTEXT | WINEVENT_SKIPOWNPROCESS WINEVENT_INCONTEXT | WINEVENT_SKIPOWNTHREAD WINEVENT_OUTOFCONTEXT | WINEVENT_SKIPOWNPROCESS WINEVENT_OUTOFCONTEXT | WINEVENT_SKIPOWNTHREAD  Additionally, client applications can specify WINEVENT_INCONTEXT, or WINEVENT_OUTOFCONTEXT alone. See Remarks section for information on Windows Store app development."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Removes an event hook function created by a previous call to SetWinEventHook.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If successful, returns TRUE; otherwise, returns FALSE. Three common errors cause this function to fail: ",
+    "remarks": "This function removes the event hook specified by hWinEventHook that prevents the corresponding callback function from receiving further event notifications. If the client's thread ends, the system automatically calls this function. Call this function from the same thread that installed the event hook. UnhookWinEvent fails if called from a thread different from the call that corresponds to SetWinEventHook. If WINEVENT_INCONTEXT was specified when this event hook was installed, the system attempts to unload the corresponding DLL from all processes that loaded it. Although unloading does not occur immediately, the hook function is not called after UnhookWinEvent returns. For more information on WINEVENT_INCONTEXT, see In-Context Hook Functions. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Client",
+    "name": "UnhookWinEvent",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWINEVENTHOOK",
+        "name": "hWinEventHook",
+        "description": "Type: HWINEVENTHOOK Handle to the event hook returned in the previous call to SetWinEventHook."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Retrieves the window handle that corresponds to a particular instance of an IAccessible interface.",
+    "library": "Oleacc.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Oleacc.h",
+    "return_value": "Type: STDAPI If successful, returns S_OK. If not successful, returns the following or another standard COM error code.  ",
+    "remarks": "",
+    "return_type": "STDAPI",
+    "category": "Client",
+    "name": "WindowFromAccessibleObject",
+    "is_callback": 0,
+    "dll": "Oleacc.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "IAccessible*",
+        "name": "pacc",
+        "description": "Type: IAccessible* Pointer to the IAccessible interface whose corresponding window handle will be retrieved. This parameter must not be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HWND*",
+        "name": "phwnd",
+        "description": "Type: HWND* Address of a variable that receives a handle to the window containing the object specified in pacc. If this value is NULL after the call, the object is not contained within a window; for example, the mouse pointer is not contained within a window."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "An application-defined callback (or hook) function that the system calls in response to events generated by an accessible object. The hook function processes the event notifications as required. Clients install the hook function and request specific types of event notifications by calling SetWinEventHook.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "This callback function does not return a value. ",
+    "remarks": "Within the hook function, the parameters hwnd, idObject, and idChild are used when calling AccessibleObjectFromEvent. Servers generate events by calling NotifyWinEvent. Create multiple callback functions to handle different events. For more information, see Registering a Hook Function. ",
+    "return_type": "void CALLBACK",
+    "category": "Client",
+    "name": "WinEventProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWINEVENTHOOK",
+        "name": "hWinEventHook",
+        "description": "Type: HWINEVENTHOOK Handle to an event hook function. This value is returned by SetWinEventHook when the hook function is installed and is specific to each instance of the hook function."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "event",
+        "description": "Type: DWORD Specifies the event that occurred. This value is one of the event constants."
+      },
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND Handle to the window that generates the event, or NULL if no window is associated with the event. For example, the mouse pointer is not associated with a window."
+      },
+      {
+        "in_out": "",
+        "type": "LONG",
+        "name": "idObject",
+        "description": "Type: LONG Identifies the object associated with the event. This is one of the object identifiers or a custom object ID."
+      },
+      {
+        "in_out": "",
+        "type": "LONG",
+        "name": "idChild",
+        "description": "Type: LONG Identifies whether the event was triggered by an object or a child element of the object. If this value is CHILDID_SELF, the event was triggered by the object; otherwise, this value is the child ID of the element that triggered the event."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwEventThread",
+        "description": "Type: DWORD Identifies the thread that generated the event, or the thread that owns the current window."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwmsEventTime",
+        "description": "Type: DWORD Specifies the time, in milliseconds, that the event was generated."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Used to declare a pointer to an application-defined callback function that the system calls in response to events that are generated by an accessible object.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (WINVER >= 0x0500) (include Windows.h)",
+    "return_value": "This function pointer does not return a value. ",
+    "remarks": "For more information, see WinEventProc. ",
+    "return_type": "typedef void ( CALLBACK",
+    "category": "Client",
+    "name": "WINEVENTPROC pointer",
+    "is_callback": 0,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWINEVENTHOOK",
+        "name": "hWinEventHook",
+        "description": "Handle to an event hook instance. This value is returned by SetWinEventHook when the hook function is installed, and it is specific to each instance of the hook function."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "event",
+        "description": "Specifies the event that occurred. This value is one of the event constants."
+      },
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Handle to the window that generates the event, or NULL if no window is associated with the event; for example, the mouse pointer is not associated with a window."
+      },
+      {
+        "in_out": "",
+        "type": "LONG",
+        "name": "idObject",
+        "description": "Identifies the object that is associated with the event. This is either one of the object identifiers or a custom object ID."
+      },
+      {
+        "in_out": "",
+        "type": "LONG",
+        "name": "idChild",
+        "description": "Identifies whether the event was triggered by an object or a child element of the object. If this value is CHILDID_SELF, the event was triggered by the object; if this value is a child ID, the event was triggered by a child element."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwEventThread",
+        "description": "Identifies the thread that generated the event, or the thread that owns the current window."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwmsEventTime",
+        "description": "Specifies the time, in milliseconds, that the event was generated."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]

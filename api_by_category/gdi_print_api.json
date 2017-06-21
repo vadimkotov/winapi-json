@@ -1,0 +1,339 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "The AbortDoc function stops the current print job and erases everything drawn since the last call to the StartDoc function.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is greater than zero. If the function fails, the return value is SP_ERROR. ",
+    "remarks": "Applications should call the AbortDoc function to stop a print job if an error occurs, or to stop a print job after the user cancels that job. To end a successful print job, an application should call the EndDoc function. If Print Manager was used to start the print job, calling AbortDoc erases the entire spool job, so that the printer receives nothing. If Print Manager was not used to start the print job, the data may already have been sent to the printer. In this case, the printer driver resets the printer (when possible) and ends the print job. ",
+    "return_type": "int",
+    "category": "GDI Print API",
+    "name": "AbortDoc",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Handle to the device context for the print job."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The StartDoc function starts a print job.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is greater than zero. This value is the print job identifier for the document. If the function fails, the return value is less than or equal to zero. ",
+    "remarks": "Applications should call the StartDoc function immediately before beginning a print job. Using this function ensures that multipage documents are not interspersed with other print jobs. Applications can use the value returned by StartDoc to retrieve or set the priority of a print job. Call the GetJob or SetJob function and supply this value as one of the required arguments. For a sample program that uses this function, see How To: Print Using the GDI Print API. ",
+    "return_type": "int",
+    "category": "GDI Print API",
+    "name": "StartDoc",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context for the print job."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const DOCINFO*",
+        "name": "lpdi",
+        "description": "A pointer to a DOCINFO structure containing the name of the document file and the name of the output file."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The AbortProc function is an application-defined callback function used with the SetAbortProc function. It is called when a print job is to be canceled during spooling. The ABORTPROC type defines a pointer to this callback function. AbortProc is a placeholder for the application-defined function name.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "The callback function should return TRUE to continue the print job or FALSE to cancel the print job. ",
+    "remarks": "If the iError parameter is SP_OUTOFDISK, the application need not cancel the print job. If it does not cancel the job, it must yield to Print Manager by calling the PeekMessage or GetMessage function. ",
+    "return_type": "BOOL CALLBACK",
+    "category": "GDI Print API",
+    "name": "AbortProc",
+    "is_callback": 0,
+    "dll": "Gutils.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context for the print job."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iError",
+        "description": "Specifies whether an error has occurred. This parameter is zero if no error has occurred; it is SP_OUTOFDISK if Print Manager is currently out of disk space and more disk space will become available if the application waits."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The SetAbortProc function sets the application-defined abort function that allows a print job to be canceled during spooling.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is greater than zero. If the function fails, the return value is SP_ERROR. ",
+    "remarks": "For an example, see How to Collect Print Job  Information from the User. ",
+    "return_type": "int",
+    "category": "GDI Print API",
+    "name": "SetAbortProc",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Handle to the device context for the print job."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ABORTPROC",
+        "name": "lpAbortProc",
+        "description": "Pointer to the application-defined abort function. For more information about the callback function, see the AbortProc callback function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The EndDoc function ends a print job.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is greater than zero. If the function fails, the return value is less than or equal to zero. ",
+    "remarks": "Applications should call EndDoc immediately after finishing a print job. For a sample program that uses this function, see How To: Print Using the GDI Print API. ",
+    "return_type": "int",
+    "category": "GDI Print API",
+    "name": "EndDoc",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Handle to the device context for the print job."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The EndPage function notifies the device that the application has finished writing to a page. This function is typically used to direct the device driver to advance to a new page.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is greater than zero. If the function fails, the return value is less than or equal to zero. ",
+    "remarks": "Use the ResetDC function to change the device mode, if necessary, after calling the EndPage function. Note that a call to ResetDC resets all device context attributes back to default values. Neither EndPage nor StartPage resets the device context attributes. Device context attributes remain constant across subsequent pages. You do not need to re-select objects and set up the mapping mode again before printing the next page; however, doing so will produce the same results and reduce code differences between versions of Windows. When a page in a spooled file exceeds approximately 350 MB, it may fail to print and not send an error message. For example, this can occur when printing large EMF files. The page size limit depends on many factors including the amount of virtual memory available, the amount of memory allocated by calling processes, and the amount of fragmentation in the process heap. For a sample program that uses this function, see How To: Print Using the GDI Print API. ",
+    "return_type": "int",
+    "category": "GDI Print API",
+    "name": "EndPage",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context for the print job."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The Escape function enables an application to access the system-defined device capabilities that are not available through GDI. Escape calls made by an application are translated and sent to the driver.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is greater than zero, except with the QUERYESCSUPPORT printer escape, which checks for implementation only. If the escape is not implemented, the return value is zero. If the function fails, the return value is a system error code. If the function fails, the return value is one of the following values.  ",
+    "remarks": "The effect of passing 0 for cbInput will depend on the value of nEscape and on the driver that is handling the escape. Of the original printer escapes, only the following can be used.  Use the StartPage function to prepare the printer driver to receive data. ",
+    "return_type": "int",
+    "category": "GDI Print API",
+    "name": "Escape",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nEscape",
+        "description": "The escape function to be performed. This parameter must be one of the predefined escape values listed in Remarks. Use the ExtEscape function if your application defines a private escape value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cbInput",
+        "description": "The number of bytes of data pointed to by the lpvInData parameter. This can be 0."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCSTR",
+        "name": "lpvInData",
+        "description": "A pointer to the input structure required for the specified escape."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID",
+        "name": "lpvOutData",
+        "description": "A pointer to the structure that receives output from this escape. This parameter should be NULL if no data is returned."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The ExtEscape function enables an application to access device capabilities that are not available through GDI.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "The return value specifies the outcome of the function. It is greater than zero if the function is successful, except for the QUERYESCSUPPORT printer escape, which checks for implementation only. The return value is zero if the escape is not implemented. A return value less than zero indicates an error. ",
+    "remarks": "Use this function to pass a driver-defined escape value to a device. Use the Escape function to pass one of the system-defined escape values to a device, unless the escape is one of the defined escapes in nEscape. ExtEscape might not work properly with the system-defined escapes. In particular, escapes in which lpszInData is a pointer to a structure that contains a member that is a pointer will fail. Note, that the behavior described in this article is the expected behavior, but it is up to the driver to comply with this model. The variables referenced by lpszInData and lpszOutData should not be the same or overlap. If the input and the output buffer size variables overlap, they may not contain the correct values after the call returns. For the best results, lpszInData and lpszOutData should refer to different variables. For an example, see Sizing a JPEG or PNG Image. ",
+    "return_type": "int",
+    "category": "GDI Print API",
+    "name": "ExtEscape",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nEscape",
+        "description": "The escape function to be performed. It can be one of the following or it can be an application-defined escape function.  ValueMeaning  CHECKJPEGFORMAT   Checks whether the printer supports a JPEG image.   CHECKPNGFORMAT   Checks whether the printer supports a PNG image.   DRAWPATTERNRECT   Draws a white, gray-scale, or black rectangle.   GET_PS_FEATURESETTING   Gets information on a specified feature setting for a PostScript driver.   GETTECHNOLOGY   Reports on whether or not the driver is a Postscript driver.   PASSTHROUGH   Allows the application to send data directly to a printer. Supported in compatibility mode and GDI-centric mode.   POSTSCRIPT_DATA   Allows the application to send data directly to a printer. Supported only in compatibility mode.   POSTSCRIPT_IDENTIFY   Sets a PostScript driver to GDI-centric or PostScript-centric mode.   POSTSCRIPT_INJECTION   Inserts a block of raw data in a PostScript job stream.   POSTSCRIPT_PASSTHROUGH   Sends data directly to a PostScript printer driver. Supported in compatibility mode and PostScript-centric mode.   QUERYESCSUPPORT   Determines whether a particular escape is implemented by the device driver.   SPCLPASSTHROUGH2   Enables applications to include private procedures and other resources at the document level-save context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cbInput",
+        "description": "The number of bytes of data pointed to by the lpszInData parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCSTR",
+        "name": "lpszInData",
+        "description": "A pointer to the input structure required for the specified escape. See also Remarks."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cbOutput",
+        "description": "The number of bytes of data pointed to by the lpszOutData parameter."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSTR",
+        "name": "lpszOutData",
+        "description": "A pointer to the structure that receives output from this escape. This parameter must not be NULL if ExtEscape is called as a query function. If no data is to be returned in this structure, set cbOutput to 0. See also Remarks."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The IsWindowRedirectedForPrint function determines whether the specified window is currently redirected for printing.",
+    "library": "",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "",
+    "return_value": "If the window is currently redirected for printing, the function returns a nonzero value; otherwise, it returns zero. ",
+    "remarks": "A window is redirected for printing when it processes a  call to PrintWindow. In a call to PrintWindow, a window renders its content to an off-screen device context. This function has no associated import library or header file; you must call it by using the LoadLibrary and GetProcAddress functions. ",
+    "return_type": "BOOL WINAPI",
+    "category": "GDI Print API",
+    "name": "IsWindowRedirectedForPrint",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "The handle of the window."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The PrintWindow function copies a visual window into the specified device context (DC), typically a printer DC.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, it returns a nonzero value. If the function fails, it returns zero. ",
+    "remarks": "The application that owns the window referenced by hWnd processes the PrintWindow call and renders the image in the device context that is referenced by hdcBlt. The application  receives a WM_PRINT message or, if the PW_PRINTCLIENT flag is specified, a WM_PRINTCLIENT message. For more information, see WM_PRINT and WM_PRINTCLIENT. ",
+    "return_type": "BOOL",
+    "category": "GDI Print API",
+    "name": "PrintWindow",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "A handle to the window that will be copied."
+      },
+      {
+        "in_out": "",
+        "type": "HDC",
+        "name": "hdcBlt",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "",
+        "type": "UINT",
+        "name": "nFlags",
+        "description": "The drawing options. It can be one of the following values.  ValueMeaning  PW_CLIENTONLY   Only the client area of the window is copied to hdcBlt. By default, the entire window is copied."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The StartPage function prepares the printer driver to accept data.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is greater than zero. If the function fails, the return value is less than or equal to zero. ",
+    "remarks": "The system disables the ResetDC function between calls to the StartPage and EndPage functions. This means that you cannot change the device mode except at page boundaries. After calling EndPage, you can call ResetDC to change the device mode, if necessary. Note that a call to ResetDC resets all device context attributes back to default values. Neither EndPage nor StartPage resets the device context attributes. Device context attributes remain constant across subsequent pages. You do not need to re-select objects and set up the mapping mode again before printing the next page; however, doing so will produce the same results and reduce code differences between versions of Windows. For a sample program that uses this function, see How To: Print Using the GDI Print API. ",
+    "return_type": "int",
+    "category": "GDI Print API",
+    "name": "StartPage",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hDC",
+        "description": "A handle to the device context for the print job."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]

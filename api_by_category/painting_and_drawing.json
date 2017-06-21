@@ -1,0 +1,1217 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "The BeginPaint function prepares the specified window for painting and fills a PAINTSTRUCT structure with information about the painting.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the handle to a display device context for the specified window. If the function fails, the return value is NULL, indicating that no display device context is available. ",
+    "remarks": "The BeginPaint function automatically sets the clipping region of the device context to exclude any area outside the update region. The update region is set by the InvalidateRect or InvalidateRgn function and by the system after sizing, moving, creating, scrolling, or any other operation that affects the client area. If the update region is marked for erasing, BeginPaint sends a WM_ERASEBKGND message to the window. An application should not call BeginPaint except in response to a WM_PAINT message. Each call to BeginPaint must have a corresponding call to the EndPaint function. If the caret is in the area to be painted, BeginPaint automatically hides the caret to prevent it from being erased. If the window's class has a background brush, BeginPaint uses that brush to erase the background of the update region before returning. For an example, see Drawing in the Client Area. ",
+    "return_type": "HDC",
+    "category": "Painting and Drawing",
+    "name": "BeginPaint",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Handle to the window to be repainted."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPPAINTSTRUCT",
+        "name": "lpPaint",
+        "description": "Pointer to the PAINTSTRUCT structure that will receive painting information."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Animates the caption of a window to indicate the opening of an icon or the minimizing or maximizing of a window.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "DrawAnimatedRects",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "A handle to the window whose caption should be animated on the screen. The animation will be clipped to the parent of this window."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "idAni",
+        "description": "The type of animation. This must be IDANI_CAPTION. With the IDANI_CAPTION animation type, the window caption will animate from the position specified by lprcFrom to the position specified by lprcTo. The effect is similar to minimizing or maximizing a window."
+      },
+      {
+        "in_out": "const",
+        "type": "RECT*",
+        "name": "lprcFrom",
+        "description": "A pointer to a RECT structure specifying the location and size of the icon or minimized window. Coordinates are relative to the clipping window hwnd."
+      },
+      {
+        "in_out": "const",
+        "type": "RECT*",
+        "name": "lprcTo",
+        "description": "A pointer to a RECT structure specifying the location and size of the restored window. Coordinates are relative to the clipping window hwnd."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The DrawCaption function draws a window caption.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "DrawCaption",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "A handle to a window that supplies text and an icon for the window caption."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to a device context. The function draws the window caption into this device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "lprc",
+        "description": "A pointer to a RECT structure that specifies the bounding rectangle for the window caption in logical coordinates."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uFlags",
+        "description": "The drawing options. This parameter can be zero or more of the following values.  ValueMeaning  DC_ACTIVE   The function uses the colors that denote an active caption.   DC_BUTTONS                     If set, the function draws the buttons in the caption bar (to minimize, restore, or close an application).   DC_GRADIENT                     When this flag is set, the function uses COLOR_GRADIENTACTIVECAPTION (if the DC_ACTIVE flag was set) or COLOR_GRADIENTINACTIVECAPTION for the title-bar color. If this flag is not set, the function uses COLOR_ACTIVECAPTION or COLOR_INACTIVECAPTION for both colors.   DC_ICON   The function draws the icon when drawing the caption text.   DC_INBUTTON   The function draws the caption as a button.   DC_SMALLCAP   The function draws a small caption, using the current small caption font.   DC_TEXT   The function draws the caption text when drawing the caption.     If DC_SMALLCAP is specified, the function draws a normal window caption."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The DrawEdge function draws one or more edges of rectangle.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "DrawEdge",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPRECT",
+        "name": "qrc",
+        "description": "A pointer to a RECT structure that contains the logical coordinates of the rectangle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "edge",
+        "description": "The type of inner and outer edges to draw. This parameter must be a combination of one inner-border flag and one outer-border flag. The inner-border flags are as follows.  ValueMeaning  BDR_RAISEDINNER   Raised inner edge.   BDR_SUNKENINNER   Sunken inner edge.     The outer-border flags are as follows.  ValueMeaning  BDR_RAISEDOUTER   Raised outer edge.   BDR_SUNKENOUTER   Sunken outer edge.     Alternatively, the edge parameter can specify one of the following flags.  ValueMeaning  EDGE_BUMP   Combination of BDR_RAISEDOUTER and BDR_SUNKENINNER.   EDGE_ETCHED   Combination of BDR_SUNKENOUTER and BDR_RAISEDINNER.   EDGE_RAISED   Combination of BDR_RAISEDOUTER and BDR_RAISEDINNER.   EDGE_SUNKEN   Combination of BDR_SUNKENOUTER and BDR_SUNKENINNER."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "grfFlags",
+        "description": "The type of border. This parameter can be a combination of the following values.  ValueMeaning  BF_ADJUST   If this flag is passed, shrink the rectangle pointed to by the qrc parameter to exclude the edges that were drawn. If this flag is not passed, then do not change the rectangle pointed to by the qrc parameter.   BF_BOTTOM   Bottom of border rectangle.   BF_BOTTOMLEFT   Bottom and left side of border rectangle.   BF_BOTTOMRIGHT   Bottom and right side of border rectangle.   BF_DIAGONAL   Diagonal border.   BF_DIAGONAL_ENDBOTTOMLEFT   Diagonal border. The end point is the lower-left corner of the rectangle; the origin is top-right corner.   BF_DIAGONAL_ENDBOTTOMRIGHT   Diagonal border. The end point is the lower-right corner of the rectangle; the origin is top-left corner.   BF_DIAGONAL_ENDTOPLEFT   Diagonal border. The end point is the top-left corner of the rectangle; the origin is lower-right corner.   BF_DIAGONAL_ENDTOPRIGHT   Diagonal border. The end point is the top-right corner of the rectangle; the origin is lower-left corner.   BF_FLAT   Flat border.   BF_LEFT   Left side of border rectangle.   BF_MIDDLE   Interior of rectangle to be filled.   BF_MONO   One-dimensional border.   BF_RECT   Entire border rectangle.   BF_RIGHT   Right side of border rectangle.   BF_SOFT   Soft buttons instead of tiles.   BF_TOP   Top of border rectangle.   BF_TOPLEFT   Top and left side of border rectangle.   BF_TOPRIGHT   Top and right side of border rectangle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The DrawFocusRect function draws a rectangle in the style used to indicate that the rectangle has the focus.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "DrawFocusRect works only in MM_TEXT mode. Because DrawFocusRect is an XOR function, calling it a second time with the same rectangle removes the rectangle from the screen. This function draws a rectangle that cannot be scrolled. To scroll an area containing a rectangle drawn by this function, call DrawFocusRect to remove the rectangle from the screen, scroll the area, and then call DrawFocusRect again to draw the rectangle in the new position. Windows XP: The focus rectangle can now be thicker than 1 pixel, so it is more visible for high-resolution, high-density displays and accessibility needs. This is handled by the SPI_SETFOCUSBORDERWIDTH and SPI_SETFOCUSBORDERHEIGHT in SystemParametersInfo. For an example, see \"Creating an Owner-Drawn List Box\" in Using List Boxes. ",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "DrawFocusRect",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hDC",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const RECT*",
+        "name": "lprc",
+        "description": "A pointer to a RECT structure that specifies the logical coordinates of the rectangle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The DrawFrameControl function draws a frame control of the specified type and style.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "If uType is either DFC_MENU or DFC_BUTTON and uState is not DFCS_BUTTONPUSH, the frame control is a black-on-white mask (that is, a black frame control on a white background). In such cases, the application must pass a handle to a bitmap memory device control. The application can then use the associated bitmap as the hbmMask parameter to the MaskBlt function, or it can use the device context as a parameter to the BitBlt function using ROPs such as SRCAND and SRCINVERT. ",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "DrawFrameControl",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context of the window in which to draw the control."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPRECT",
+        "name": "lprc",
+        "description": "A pointer to a RECT structure that contains the logical coordinates of the bounding rectangle for frame control."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uType",
+        "description": "The type of frame control to draw. This parameter can be one of the following values.  ValueMeaning  DFC_BUTTON   Standard button   DFC_CAPTION   Title bar   DFC_MENU   Menu bar   DFC_POPUPMENU                     Popup menu item.   DFC_SCROLL   Scroll bar"
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uState",
+        "description": "The initial state of the frame control. If uType is DFC_BUTTON, uState can be one of the following values.  ValueMeaning  DFCS_BUTTON3STATE   Three-state button   DFCS_BUTTONCHECK   Check box   DFCS_BUTTONPUSH   Push button   DFCS_BUTTONRADIO   Radio button   DFCS_BUTTONRADIOIMAGE   Image for radio button (nonsquare needs image)   DFCS_BUTTONRADIOMASK   Mask for radio button (nonsquare needs mask)     If uType is DFC_CAPTION, uState can be one of the following values.  ValueMeaning  DFCS_CAPTIONCLOSE   Close button   DFCS_CAPTIONHELP   Help button   DFCS_CAPTIONMAX   Maximize button   DFCS_CAPTIONMIN   Minimize button   DFCS_CAPTIONRESTORE   Restore button     If uType is DFC_MENU, uState can be one of the following values.  ValueMeaning  DFCS_MENUARROW   Submenu arrow   DFCS_MENUARROWRIGHT   Submenu arrow pointing left. This is used for the right-to-left cascading menus used with right-to-left languages such as Arabic or Hebrew.   DFCS_MENUBULLET   Bullet   DFCS_MENUCHECK   Check mark     If uType is DFC_SCROLL, uState can be one of the following values.  ValueMeaning  DFCS_SCROLLCOMBOBOX   Combo box scroll bar   DFCS_SCROLLDOWN   Down arrow of scroll bar   DFCS_SCROLLLEFT   Left arrow of scroll bar   DFCS_SCROLLRIGHT   Right arrow of scroll bar   DFCS_SCROLLSIZEGRIP   Size grip in lower-right corner of window   DFCS_SCROLLSIZEGRIPRIGHT   Size grip in lower-left corner of window. This is used with right-to-left languages such as Arabic or Hebrew.   DFCS_SCROLLUP   Up arrow of scroll bar     The following style can be used to adjust the bounding rectangle of the push button.  ValueMeaning  DFCS_ADJUSTRECT   Bounding rectangle is adjusted to exclude the surrounding edge of the push button.     One or more of the following values can be used to set the state of the control to be drawn.  ValueMeaning  DFCS_CHECKED   Button is checked.   DFCS_FLAT   Button has a flat border.   DFCS_HOT                     Button is hot-tracked.   DFCS_INACTIVE   Button is inactive (grayed).   DFCS_MONO   Button has a monochrome border.   DFCS_PUSHED   Button is pushed.   DFCS_TRANSPARENT                     The background remains untouched. This flag can only be combined with DFCS_MENUARROWUP or DFCS_MENUARROWDOWN."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 10,
+    "description": "The DrawState function displays an image and applies a visual effect to indicate a state, such as a disabled or default state.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "DrawState",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context to draw in."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HBRUSH",
+        "name": "hbr",
+        "description": "A handle to the brush used to draw the image, if the state specified by the fuFlags parameter is DSS_MONO. This parameter is ignored for other states."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DRAWSTATEPROC",
+        "name": "lpOutputFunc",
+        "description": "A pointer to an application-defined callback function used to render the image. This parameter is required if the image type in fuFlags is DST_COMPLEX. It is optional and can be NULL if the image type is DST_TEXT. For all other image types, this parameter is ignored. For more information about the callback function, see the DrawStateProc function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lData",
+        "description": "Information about the image. The meaning of this parameter depends on the image type."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wData",
+        "description": "Information about the image. The meaning of this parameter depends on the image type. It is, however, zero extended for use with the DrawStateProc function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "x",
+        "description": "The horizontal location, in device units, at which to draw the image."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "y",
+        "description": "The vertical location, in device units, at which to draw the image."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cx",
+        "description": "The width of the image, in device units. This parameter is required if the image type is DST_COMPLEX. Otherwise, it can be zero to calculate the width of the image."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cy",
+        "description": "The height of the image, in device units. This parameter is required if the image type is DST_COMPLEX. Otherwise, it can be zero to calculate the height of the image."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "fuFlags",
+        "description": "The image type and state. This parameter can be one of the following type values.  Value (type)Meaning  DST_BITMAP   The image is a bitmap. The lData parameter is the bitmap handle. Note that the bitmap cannot already be selected into an existing device context.   DST_COMPLEX   The image is application defined. To render the image, DrawState calls the callback function specified by the lpOutputFunc parameter.   DST_ICON   The image is an icon. The lData parameter is the icon handle.   DST_PREFIXTEXT   The image is text that may contain an accelerator mnemonic. DrawState interprets the ampersand (&) prefix character as a directive to underscore the character that follows. The lData parameter is a pointer to the string, and the wData parameter specifies the length. If wData is zero, the string must be null-terminated.   DST_TEXT   The image is text. The lData parameter is a pointer to the string, and the wData parameter specifies the length. If wData is zero, the string must be null-terminated.     This parameter can also be one of the following state values.  Value (state)Meaning  DSS_DISABLED   Embosses the image.   DSS_HIDEPREFIX                     Ignores the ampersand (&) prefix character in the text, thus the letter that follows will not be underlined. This must be used with DST_PREFIXTEXT.   DSS_MONO   Draws the image using the brush specified by the hbr parameter.   DSS_NORMAL   Draws the image without any modification.   DSS_PREFIXONLY                     Draws only the underline at the position of the letter after the ampersand (&) prefix character. No text in the string is drawn. This must be used with DST_PREFIXTEXT.   DSS_RIGHT   Aligns the text to the right.   DSS_UNION   Dithers the image.     For all states except DSS_NORMAL, the image is converted to monochrome before the visual effect is applied."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The DrawStateProc function is an application-defined callback function that renders a complex image for the DrawState function. The DRAWSTATEPROC type defines a pointer to this callback function. DrawStateProc is a placeholder for the application-defined function name.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. ",
+    "remarks": "",
+    "return_type": "BOOL CALLBACK",
+    "category": "Painting and Drawing",
+    "name": "DrawStateProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context to draw in. The device context is a memory device context with a bitmap selected, the dimensions of which are at least as great as those specified by the cx and cy parameters."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lData",
+        "description": "Specifies information about the image, which the application passed to DrawState."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WPARAM",
+        "name": "wData",
+        "description": "Specifies information about the image, which the application passed to DrawState."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cx",
+        "description": "The image width, in device units, as specified by the call to DrawState."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cy",
+        "description": "The image height, in device units, as specified by the call to DrawState."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The EndPaint function marks the end of painting in the specified window. This function is required for each call to the BeginPaint function, but only after painting is complete.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "The return value is always nonzero. ",
+    "remarks": "If the caret was hidden by BeginPaint, EndPaint restores the caret to the screen. EndPaint releases the display device context that BeginPaint retrieved. For an example, see Drawing in the Client Area. ",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "EndPaint",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Handle to the window that has been repainted."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const PAINTSTRUCT*",
+        "name": "lpPaint",
+        "description": "Pointer to a PAINTSTRUCT structure that contains the painting information retrieved by BeginPaint."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The ExcludeUpdateRgn function prevents drawing within invalid areas of a window by excluding an updated region in the window from a clipping region.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "The return value specifies the complexity of the excluded region; it can be any one of the following values.  ",
+    "remarks": "",
+    "return_type": "int",
+    "category": "Painting and Drawing",
+    "name": "ExcludeUpdateRgn",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hDC",
+        "description": "Handle to the device context associated with the clipping region."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Handle to the window to update."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "The GdiFlush function flushes the calling thread's current batch.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If all functions in the current batch succeed, the return value is nonzero. If not all functions in the current batch succeed, the return value is zero, indicating that at least one function returned an error. ",
+    "remarks": "Batching enhances drawing performance by minimizing the amount of time needed to call GDI drawing functions that return Boolean values. The system accumulates the parameters for calls to these functions in the current batch and then calls the functions when the batch is flushed by any of the following means: The return value for GdiFlush applies only to the functions in the batch at the time GdiFlush is called. Errors that occur when the batch is flushed by any other means are never reported. The GdiGetBatchLimit function returns the batch limit. An application should call GdiFlush before a thread goes away if there is a possibility that there are pending function calls in the graphics batch queue. The system does not execute such batched functions when a thread goes away. A multithreaded application that serializes access to GDI objects with a mutex must ensure flushing the GDI batch queue by calling GdiFlush as each thread releases ownership of the GDI object. This prevents collisions of the GDI objects (device contexts, metafiles, and so on). ",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "GdiFlush",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "The GdiGetBatchLimit function returns the maximum number of function calls that can be accumulated in the calling thread's current batch. The system flushes the current batch whenever this limit is exceeded.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the batch limit. If the function fails, the return value is zero. ",
+    "remarks": "The batch limit is set by using the GdiSetBatchLimit function. Setting the limit to 1 effectively disables batching. Only GDI drawing functions that return Boolean values can be batched; calls to any other GDI functions immediately flush the current batch. Exceeding the batch limit or calling the GdiFlush function also flushes the current batch. When the system batches a function call, the function returns TRUE. The actual return value for the function is reported only if GdiFlush is used to flush the batch. ",
+    "return_type": "DWORD",
+    "category": "Painting and Drawing",
+    "name": "GdiGetBatchLimit",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GdiSetBatchLimit function sets the maximum number of function calls that can be accumulated in the calling thread's current batch. The system flushes the current batch whenever this limit is exceeded.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the previous batch limit. If the function fails, the return value is zero. ",
+    "remarks": "Only GDI drawing functions that return Boolean values can be accumulated in the current batch; calls to any other GDI functions immediately flush the current batch. Exceeding the batch limit or calling the GdiFlush function also flushes the current batch. When the system accumulates a function call, the function returns TRUE to indicate it is in the batch. When the system flushes the current batch and executes the function for the second time, the return value is either TRUE or FALSE, depending on whether the function succeeds. This second return value is reported only if GdiFlush is used to flush the batch. ",
+    "return_type": "DWORD",
+    "category": "Painting and Drawing",
+    "name": "GdiSetBatchLimit",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwLimit",
+        "description": "Specifies the batch limit to be set. A value of 0 sets the default limit. A value of 1 disables batching."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetBkColor function returns the current background color for the specified device context.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a COLORREF value for the current background color. If the function fails, the return value is CLR_INVALID. For an example, see Using Rectangles. ",
+    "remarks": "",
+    "return_type": "COLORREF",
+    "category": "Painting and Drawing",
+    "name": "GetBkColor",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Handle to the device context whose background color is to be returned."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetBkMode function returns the current background mix mode for a specified device context. The background mix mode of a device context affects text, hatched brushes, and pen styles that are not solid lines.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value specifies the current background mix mode, either OPAQUE or TRANSPARENT. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "int",
+    "category": "Painting and Drawing",
+    "name": "GetBkMode",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Handle to the device context whose background mode is to be returned."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The GetBoundsRect function obtains the current accumulated bounding rectangle for a specified device context.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "The return value specifies the state of the accumulated bounding rectangle; it can be one of the following values.  ",
+    "remarks": "The DCB_SET value is a combination of the bit values DCB_ACCUMULATE and DCB_RESET. Applications that check the DCB_RESET bit to determine whether the bounding rectangle is empty must also check the DCB_ACCUMULATE bit. The bounding rectangle is empty only if the DCB_RESET bit is 1 and the DCB_ACCUMULATE bit is 0. ",
+    "return_type": "UINT",
+    "category": "Painting and Drawing",
+    "name": "GetBoundsRect",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context whose bounding rectangle the function will return."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPRECT",
+        "name": "lprcBounds",
+        "description": "A pointer to the RECT structure that will receive the current bounding rectangle. The application's rectangle is returned in logical coordinates, and the bounding rectangle is returned in screen coordinates."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "flags",
+        "description": "Specifies how the GetBoundsRect function will behave. This parameter can be the following value.  ValueMeaning  DCB_RESET   Clears the bounding rectangle after returning it. If this flag is not set, the bounding rectangle will not be cleared."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetROP2 function retrieves the foreground mix mode of the specified device context. The mix mode specifies how the pen or interior color and the color already on the screen are combined to yield a new color.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value specifies the foreground mix mode. If the function fails, the return value is zero. ",
+    "remarks": "Following are the foreground mix modes.  ",
+    "return_type": "int",
+    "category": "Painting and Drawing",
+    "name": "GetROP2",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Handle to the device context."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The GetUpdateRect function retrieves the coordinates of the smallest rectangle that completely encloses the update region of the specified window. GetUpdateRect retrieves the rectangle in logical coordinates. If there is no update region, GetUpdateRect retrieves an empty rectangle (sets all coordinates to zero).",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the update region is not empty, the return value is nonzero. If there is no update region, the return value is zero. ",
+    "remarks": "The update rectangle retrieved by the BeginPaint function is identical to that retrieved by GetUpdateRect. BeginPaint automatically validates the update region, so any call to GetUpdateRect made immediately after the call to BeginPaint retrieves an empty update region. ",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "GetUpdateRect",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Handle to the window whose update region is to be retrieved."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPRECT",
+        "name": "lpRect",
+        "description": "Pointer to the RECT structure that receives the coordinates, in device units, of the enclosing rectangle. An application can set this parameter to NULL to determine whether an update region exists for the window. If this parameter is NULL, GetUpdateRect returns nonzero if an update region exists, and zero if one does not. This provides a simple and efficient means of determining whether a WM_PAINT message resulted from an invalid area."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bErase",
+        "description": "Specifies whether the background in the update region is to be erased. If this parameter is TRUE and the update region is not empty, GetUpdateRect sends a WM_ERASEBKGND message to the specified window to erase the background."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The GetUpdateRgn function retrieves the update region of a window by copying it into the specified region. The coordinates of the update region are relative to the upper-left corner of the window (that is, they are client coordinates).",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "The return value indicates the complexity of the resulting region; it can be one of the following values.  ",
+    "remarks": "The BeginPaint function automatically validates the update region, so any call to GetUpdateRgn made immediately after the call to BeginPaint retrieves an empty update region. ",
+    "return_type": "int",
+    "category": "Painting and Drawing",
+    "name": "GetUpdateRgn",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Handle to the window with an update region that is to be retrieved."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HRGN",
+        "name": "hRgn",
+        "description": "Handle to the region to receive the update region."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bErase",
+        "description": "Specifies whether the window background should be erased and whether nonclient areas of child windows should be drawn. If this parameter is FALSE, no drawing is done."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetWindowDC function retrieves the device context (DC) for the entire window, including title bar, menus, and scroll bars. A window device context permits painting anywhere in a window, because the origin of the device context is the upper-left corner of the window instead of the client area.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to a device context for the specified window. If the function fails, the return value is NULL, indicating an error or an invalid hWnd parameter. ",
+    "remarks": "GetWindowDC is intended for special painting effects within a window's nonclient area. Painting in nonclient areas of any window is not recommended. The GetSystemMetrics function can be used to retrieve the dimensions of various parts of the nonclient area, such as the title bar, menu, and scroll bars. The GetDC function can be used to retrieve a device context for the entire screen. After painting is complete, the ReleaseDC function must be called to release the device context. Not releasing the window device context has serious effects on painting requested by applications. ",
+    "return_type": "HDC",
+    "category": "Painting and Drawing",
+    "name": "GetWindowDC",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the window with a device context that is to be retrieved. If this value is NULL, GetWindowDC retrieves the device context for the entire screen.               If this parameter is NULL, GetWindowDC retrieves the device context for the primary display monitor. To get the device context for other display monitors, use the EnumDisplayMonitors and CreateDC functions."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The GetWindowRgn function obtains a copy of the window region of a window. The window region of a window is set by calling the SetWindowRgn function. The window region determines the area within the window where the system permits drawing. The system does not display any portion of a window that lies outside of the window region",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "The return value specifies the type of the region that the function obtains. It can be one of the following values.  ",
+    "remarks": "The coordinates of a window's window region are relative to the upper-left corner of the window, not the client area of the window. To set the window region of a window, call the SetWindowRgn function. The following code shows how you pass in the handle of an existing region. ",
+    "return_type": "int",
+    "category": "Painting and Drawing",
+    "name": "GetWindowRgn",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Handle to the window whose window region is to be obtained."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HRGN",
+        "name": "hRgn",
+        "description": "Handle to the region which will be modified to represent the window region."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The GetWindowRgnBox function retrieves the dimensions of the tightest bounding rectangle for the window region of a window.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "The return value specifies the type of the region that the function obtains. It can be one of the following values.  ",
+    "remarks": "The window region determines the area within the window where the system permits drawing. The system does not display any portion of a window that lies outside of the window region. The coordinates of a window's window region are relative to the upper-left corner of the window, not the client area of the window. To set the window region of a window, call the SetWindowRgn function. ",
+    "return_type": "int",
+    "category": "Painting and Drawing",
+    "name": "GetWindowRgnBox",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Handle to the window."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPRECT",
+        "name": "lprc",
+        "description": "Pointer to a RECT structure that receives the rectangle dimensions, in device units relative to the upper-left corner of the window."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 9,
+    "description": "The GrayString function draws gray text at the specified location. The function draws the text by copying it into a memory bitmap, graying the bitmap, and then copying the bitmap to the screen. The function grays the text regardless of the selected brush and background. GrayString uses the font currently selected for the specified device context.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the string is drawn, the return value is nonzero. If either the TextOut function or the application-defined output function returned zero, or there was insufficient memory to create a memory bitmap for graying, the return value is zero. ",
+    "remarks": "Without calling GrayString, an application can draw grayed strings on devices that support a solid gray color. The system color COLOR_GRAYTEXT is the solid-gray system color used to draw disabled text. The application can call the GetSysColor function to retrieve the color value of COLOR_GRAYTEXT. If the color is other than zero (black), the application can call the SetTextColor function to set the text color to the color value and then draw the string directly. If the retrieved color is black, the application must call GrayString to gray the text. ",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "GrayString",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hDC",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HBRUSH",
+        "name": "hBrush",
+        "description": "A handle to the brush to be used for graying. If this parameter is NULL, the text is grayed with the same brush that was used to draw window text."
+      },
+      {
+        "in_out": "_In_",
+        "type": "GRAYSTRINGPROC",
+        "name": "lpOutputFunc",
+        "description": "A pointer to the application-defined function that will draw the string, or, if TextOut is to be used to draw the string, it is a NULL pointer. For details, see the OutputProc callback function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lpData",
+        "description": "A pointer to data to be passed to the output function. If the lpOutputFunc parameter is NULL, lpData must be a pointer to the string to be output."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCount",
+        "description": "The number of characters to be output. If the nCount parameter is zero, GrayString calculates the length of the string (assuming lpData is a pointer to the string). If nCount is 1 and the function pointed to by lpOutputFunc returns FALSE, the image is shown but not grayed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "X",
+        "description": "The device x-coordinate of the starting position of the rectangle that encloses the string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Y",
+        "description": "The device y-coordinate of the starting position of the rectangle that encloses the string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nWidth",
+        "description": "The width, in device units, of the rectangle that encloses the string. If this parameter is zero, GrayString calculates the width of the area, assuming lpData is a pointer to the string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nHeight",
+        "description": "The height, in device units, of the rectangle that encloses the string. If this parameter is zero, GrayString calculates the height of the area, assuming lpData is a pointer to the string."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The InvalidateRect function adds a rectangle to the specified window's update region. The update region represents the portion of the window's client area that must be redrawn.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The invalidated areas accumulate in the update region until the region is processed when the next WM_PAINT message occurs or until the region is validated by using the ValidateRect or ValidateRgn function. The system sends a WM_PAINT message to a window whenever its update region is not empty and there are no other messages in the application queue for that window. If the bErase parameter is TRUE for any part of the update region, the background is erased in the entire region, not just in the specified part. For an example, see Invalidating the Client Area. ",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "InvalidateRect",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the window whose update region has changed. If this parameter is NULL, the system invalidates and redraws all windows, not just the windows for this application, and sends the WM_ERASEBKGND and WM_NCPAINT messages before the function returns. Setting this parameter to NULL is not recommended."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const RECT*",
+        "name": "lpRect",
+        "description": "A pointer to a RECT structure that contains the client coordinates of the rectangle to be added to the update region. If this parameter is NULL, the entire client area is added to the update region."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bErase",
+        "description": "Specifies whether the background within the update region is to be erased when the update region is processed. If this parameter is TRUE, the background is erased when the BeginPaint function is called. If this parameter is FALSE, the background remains unchanged."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The InvalidateRgn function invalidates the client area within the specified region by adding it to the current update region of a window. The invalidated region, along with all other areas in the update region, is marked for painting when the next WM_PAINT message occurs.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "The return value is always nonzero. ",
+    "remarks": "Invalidated areas accumulate in the update region until the next WM_PAINT message is processed or until the region is validated by using the ValidateRect or ValidateRgn function. The system sends a WM_PAINT message to a window whenever its update region is not empty and there are no other messages in the application queue for that window. The specified region must have been created by using one of the region functions. If the bErase parameter is TRUE for any part of the update region, the background in the entire region is erased, not just in the specified part. ",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "InvalidateRgn",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the window with an update region that is to be modified."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HRGN",
+        "name": "hRgn",
+        "description": "A handle to the region to be added to the update region. The region is assumed to have client coordinates. If this parameter is NULL, the entire client area is added to the update region."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bErase",
+        "description": "Specifies whether the background within the update region should be erased when the update region is processed. If this parameter is TRUE, the background is erased when the BeginPaint function is called. If the parameter is FALSE, the background remains unchanged."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The LockWindowUpdate function disables or enables drawing in the specified window. Only one window can be locked at a time.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero, indicating that an error occurred or another window was already locked. ",
+    "remarks": "The purpose of the LockWindowUpdate function is to permit drag/drop feedback to be drawn over a window without interference from the window itself. The intent is that the window is locked when feedback is drawn and unlocked when feedback is complete. LockWindowUpdate is not intended for general-purpose suppression of window redraw. Use the WM_SETREDRAW message to disable redrawing of a particular window. If an application with a locked window (or any locked child windows) calls the GetDC, GetDCEx, or BeginPaint function, the called function returns a device context with a visible region that is empty. This will occur until the application unlocks the window by calling LockWindowUpdate, specifying a value of NULL for hWndLock. If an application attempts to draw within a locked window, the system records the extent of the attempted operation in a bounding rectangle. When the window is unlocked, the system invalidates the area within this bounding rectangle, forcing an eventual WM_PAINT message to be sent to the previously locked window and its child windows. If no drawing has occurred while the window updates were locked, no area is invalidated. LockWindowUpdate does not make the specified window invisible and does not clear the WS_VISIBLE style bit. A locked window cannot be moved. ",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "LockWindowUpdate",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWndLock",
+        "description": "The window in which drawing will be disabled. If this parameter is NULL, drawing in the locked window is enabled."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The OutputProc function is an application-defined callback function used with the GrayString function. It is used to draw a string. The GRAYSTRINGPROC type defines a pointer to this callback function. OutputProc is a placeholder for the application-defined or library-defined function name.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If it succeeds, the callback function should return TRUE. If the function fails, the return value is FALSE. ",
+    "remarks": "The callback function must draw an image relative to the coordinates (0,0). ",
+    "return_type": "BOOL CALLBACK",
+    "category": "Painting and Drawing",
+    "name": "OutputProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to a device context with a bitmap of at least the width and height specified by the nWidth and nHeight parameters passed to GrayString."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lpData",
+        "description": "A pointer to the string to be drawn."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchData",
+        "description": "The length, in characters, of the string."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The PaintDesktop function fills the clipping region in the specified device context with the desktop pattern or wallpaper. The function is provided primarily for shell desktops.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "PaintDesktop",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Handle to the device context."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The RedrawWindow function updates the specified rectangle or region in a window's client area.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "When RedrawWindow is used to invalidate part of the desktop window, the desktop window does not receive a WM_PAINT message. To repaint the desktop, an application uses the RDW_ERASE flag to generate a WM_ERASEBKGND message. ",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "RedrawWindow",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the window to be redrawn. If this parameter is NULL, the desktop window is updated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const RECT*",
+        "name": "lprcUpdate",
+        "description": "A pointer to a RECT structure containing the coordinates, in device units, of the update rectangle. This parameter is ignored if the hrgnUpdate parameter identifies a region."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HRGN",
+        "name": "hrgnUpdate",
+        "description": "A handle to the update region. If both the hrgnUpdate and lprcUpdate parameters are NULL, the entire client area is added to the update region."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "flags",
+        "description": "One or more redraw flags. This parameter can be used to invalidate or validate a window, control repainting, and control which windows are affected by RedrawWindow. The following flags are used to invalidate the window.  Flag (invalidation)Description  RDW_ERASE   Causes the window to receive a WM_ERASEBKGND message when the window is repainted. The RDW_INVALIDATE flag must also be specified; otherwise, RDW_ERASE has no effect.   RDW_FRAME   Causes any part of the nonclient area of the window that intersects the update region to receive a WM_NCPAINT message. The RDW_INVALIDATE flag must also be specified; otherwise, RDW_FRAME has no effect. The WM_NCPAINT message is typically not sent during the execution of RedrawWindow unless either RDW_UPDATENOW or RDW_ERASENOW is specified.   RDW_INTERNALPAINT   Causes a WM_PAINT message to be posted to the window regardless of whether any portion of the window is invalid.   RDW_INVALIDATE   Invalidates lprcUpdate or hrgnUpdate (only one may be non-NULL). If both are NULL, the entire window is invalidated.     The following flags are used to validate the window.  Flag (validation)Description  RDW_NOERASE   Suppresses any pending WM_ERASEBKGND messages.   RDW_NOFRAME   Suppresses any pending WM_NCPAINT messages. This flag must be used with RDW_VALIDATE and is typically used with RDW_NOCHILDREN. RDW_NOFRAME should be used with care, as it could cause parts of a window to be painted improperly.   RDW_NOINTERNALPAINT   Suppresses any pending internal WM_PAINT messages. This flag does not affect WM_PAINT messages resulting from a non-NULL update area.   RDW_VALIDATE   Validates lprcUpdate or hrgnUpdate (only one may be non-NULL). If both are NULL, the entire window is validated. This flag does not affect internal WM_PAINT messages.     The following flags control when repainting occurs. RedrawWindow will not repaint unless one of these flags is specified.  FlagDescription  RDW_ERASENOW   Causes the affected windows (as specified by the RDW_ALLCHILDREN and RDW_NOCHILDREN flags) to receive WM_NCPAINT and WM_ERASEBKGND messages, if necessary, before the function returns. WM_PAINT messages are received at the ordinary time.   RDW_UPDATENOW   Causes the affected windows (as specified by the RDW_ALLCHILDREN and RDW_NOCHILDREN flags) to receive WM_NCPAINT, WM_ERASEBKGND, and WM_PAINT messages, if necessary, before the function returns.     By default, the windows affected by RedrawWindow depend on whether the specified window has the WS_CLIPCHILDREN style. Child windows that are not the WS_CLIPCHILDREN style are unaffected; non-WS_CLIPCHILDREN windows are recursively validated or invalidated until a WS_CLIPCHILDREN window is encountered. The following flags control which windows are affected by the RedrawWindow function.  FlagDescription  RDW_ALLCHILDREN   Includes child windows, if any, in the repainting operation.   RDW_NOCHILDREN   Excludes child windows, if any, from the repainting operation."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The SetBkColor function sets the current background color to the specified color value, or to the nearest physical color if the device cannot represent the specified color value.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value specifies the previous background color as a COLORREF value. If the function fails, the return value is CLR_INVALID. ",
+    "remarks": "This function fills the gaps between styled lines drawn using a pen created by the CreatePen function; it does not fill the gaps between styled lines drawn using a pen created by the ExtCreatePen function. The SetBkColor function also sets the background colors for TextOut and ExtTextOut. If the background mode is OPAQUE, the background color is used to fill gaps between styled lines, gaps between hatched lines in brushes, and character cells. The background color is also used when converting bitmaps from color to monochrome and vice versa. For an example, see \"Example of Owner-Drawn Menu Items\" in Using Menus. ",
+    "return_type": "COLORREF",
+    "category": "Painting and Drawing",
+    "name": "SetBkColor",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COLORREF",
+        "name": "crColor",
+        "description": "The new background color. To make a COLORREF value, use the RGB macro."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The SetBkMode function sets the background mix mode of the specified device context. The background mix mode is used with text, hatched brushes, and pen styles that are not solid lines.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value specifies the previous background mode. If the function fails, the return value is zero. ",
+    "remarks": "The SetBkMode function affects the line styles for lines drawn using a pen created by the CreatePen function. SetBkMode does not affect lines drawn using a pen created by the ExtCreatePen function. To see how to make the background of a  hatch brush transparent or opaque, refer to the example shown in the CreateHatchBrush   topic. The next example draws a string 36 times, rotating it 10 degrees  counterclockwise each time. It also sets the background mode to transparent to make the text visible. ",
+    "return_type": "int",
+    "category": "Painting and Drawing",
+    "name": "SetBkMode",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iBkMode",
+        "description": "The background mode. This parameter can be one of the following values.  ValueMeaning  OPAQUE   Background is filled with the current background color before the text, hatched brush, or pen is drawn.   TRANSPARENT   Background remains untouched."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The SetBoundsRect function controls the accumulation of bounding rectangle information for the specified device context. The system can maintain a bounding rectangle for all drawing operations. An application can examine and set this rectangle. The drawing boundaries are useful for invalidating bitmap caches.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value specifies the previous state of the bounding rectangle. This state can be a combination of the following values.  If the function fails, the return value is zero. ",
+    "remarks": "The DCB_SET value is a combination of the bit values DCB_ACCUMULATE and DCB_RESET. Applications that check the DCB_RESET bit to determine whether the bounding rectangle is empty must also check the DCB_ACCUMULATE bit. The bounding rectangle is empty only if the DCB_RESET bit is 1 and the DCB_ACCUMULATE bit is 0. ",
+    "return_type": "UINT",
+    "category": "Painting and Drawing",
+    "name": "SetBoundsRect",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context for which to accumulate bounding rectangles."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const RECT*",
+        "name": "lprcBounds",
+        "description": "A pointer to a RECT structure used to set the bounding rectangle. Rectangle dimensions are in logical coordinates. This parameter can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "flags",
+        "description": "Specifies how the new rectangle will be combined with the accumulated rectangle. This parameter can be one of more of the following values.  ValueMeaning  DCB_ACCUMULATE   Adds the rectangle specified by the lprcBounds parameter to the bounding rectangle (using a rectangle union operation). Using both DCB_RESET and DCB_ACCUMULATE sets the bounding rectangle to the rectangle specified by the lprcBounds parameter.   DCB_DISABLE   Turns off boundary accumulation.   DCB_ENABLE   Turns on boundary accumulation, which is disabled by default.   DCB_RESET   Clears the bounding rectangle."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The SetROP2 function sets the current foreground mix mode. GDI uses the foreground mix mode to combine pens and interiors of filled objects with the colors already on the screen. The foreground mix mode defines how colors from the brush or pen and the colors in the existing image are to be combined.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value specifies the previous mix mode. If the function fails, the return value is zero. ",
+    "remarks": "Mix modes define how GDI combines source and destination colors when drawing with the current pen. The mix modes are binary raster operation codes, representing all possible Boolean functions of two variables, using the binary operations AND, OR, and XOR (exclusive OR), and the unary operation NOT. The mix mode is for raster devices only; it is not available for vector devices. For an example, see Using Rectangles. ",
+    "return_type": "int",
+    "category": "Painting and Drawing",
+    "name": "SetROP2",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "fnDrawMode",
+        "description": "The mix mode. This parameter can be one of the following values.  Mix modeMeaning  R2_BLACK   Pixel is always 0.   R2_COPYPEN   Pixel is the pen color.   R2_MASKNOTPEN   Pixel is a combination of the colors common to both the screen and the inverse of the pen.   R2_MASKPEN   Pixel is a combination of the colors common to both the pen and the screen.   R2_MASKPENNOT   Pixel is a combination of the colors common to both the pen and the inverse of the screen.   R2_MERGENOTPEN   Pixel is a combination of the screen color and the inverse of the pen color.   R2_MERGEPEN   Pixel is a combination of the pen color and the screen color.   R2_MERGEPENNOT   Pixel is a combination of the pen color and the inverse of the screen color.   R2_NOP   Pixel remains unchanged.   R2_NOT   Pixel is the inverse of the screen color.   R2_NOTCOPYPEN   Pixel is the inverse of the pen color.   R2_NOTMASKPEN   Pixel is the inverse of the R2_MASKPEN color.   R2_NOTMERGEPEN   Pixel is the inverse of the R2_MERGEPEN color.   R2_NOTXORPEN   Pixel is the inverse of the R2_XORPEN color.   R2_WHITE   Pixel is always 1.   R2_XORPEN   Pixel is a combination of the colors in the pen and in the screen, but not in both."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The SetWindowRgn function sets the window region of a window. The window region determines the area within the window where the system permits drawing. The system does not display any portion of a window that lies outside of the window region",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "When this function is called, the system sends the WM_WINDOWPOSCHANGING and WM_WINDOWPOSCHANGING messages to the window. The coordinates of a window's window region are relative to the upper-left corner of the window, not the client area of the window. After a successful call to SetWindowRgn, the system owns the region specified by the region handle hRgn. The system does not make a copy of the region. Thus, you should not make any further function calls with this region handle. In particular, do not delete this region handle. The system deletes the region handle when it no longer needed. To obtain the window region of a window, call the GetWindowRgn function. ",
+    "return_type": "int",
+    "category": "Painting and Drawing",
+    "name": "SetWindowRgn",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the window whose window region is to be set."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HRGN",
+        "name": "hRgn",
+        "description": "A handle to a region. The function sets the window region of the window to this region. If hRgn is NULL, the function sets the window region to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bRedraw",
+        "description": "Specifies whether the system redraws the window after setting the window region. If bRedraw is TRUE, the system does so; otherwise, it does not. Typically, you set bRedraw to TRUE if the window is visible."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The UpdateWindow function updates the client area of the specified window by sending a WM_PAINT message to the window if the window's update region is not empty. The function sends a WM_PAINT message directly to the window procedure of the specified window, bypassing the application queue. If the update region is empty, no message is sent.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. For an example, see Drawing in the Client Area. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "UpdateWindow",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Handle to the window to be updated."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The ValidateRect function validates the client area within a rectangle by removing the rectangle from the update region of the specified window.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The BeginPaint function automatically validates the entire client area. Neither the ValidateRect nor ValidateRgn function should be called if a portion of the update region must be validated before the next WM_PAINT message is generated. The system continues to generate WM_PAINT messages until the current update region is validated. ",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "ValidateRect",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Handle to the window whose update region is to be modified. If this parameter is NULL, the system invalidates and redraws all windows and sends the WM_ERASEBKGND and WM_NCPAINT messages to the window procedure before the function returns."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const RECT*",
+        "name": "lpRect",
+        "description": "Pointer to a RECT structure that contains the client coordinates of the rectangle to be removed from the update region. If this parameter is NULL, the entire client area is removed."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The ValidateRgn function validates the client area within a region by removing the region from the current update region of the specified window.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The specified region must have been created by a region function. The region coordinates are assumed to be client coordinates. The BeginPaint function automatically validates the entire client area. Neither the ValidateRect nor ValidateRgn function should be called if a portion of the update region must be validated before the next WM_PAINT message is generated. ",
+    "return_type": "BOOL",
+    "category": "Painting and Drawing",
+    "name": "ValidateRgn",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Handle to the window whose update region is to be modified."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HRGN",
+        "name": "hRgn",
+        "description": "Handle to a region that defines the area to be removed from the update region. If this parameter is NULL, the entire client area is removed."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]

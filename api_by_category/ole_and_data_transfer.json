@@ -1,0 +1,2608 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Retrieves a pointer to the OLE implementation of IDataAdviseHolder on the data advise holder object.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "ObjBase.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "Call CreateDataAdviseHolder in your implementation of IDataObject::DAdvise to get a pointer to the OLE implementation of IDataAdviseHolder interface. With this pointer, you can then complete the implementation of IDataObject::DAdvise by calling the IDataAdviseHolder::Advise method, which creates an advisory connection between the calling object and the data object. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "CreateDataAdviseHolder",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPDATAADVISEHOLDER*",
+        "name": "ppDAHolder",
+        "description": "Address of an IDataAdviseHolder pointer variable that receives the interface pointer to the new advise holder object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Retrieves a pointer to a new instance of an OLE-provided implementation of a data cache.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "ObjBase.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The cache object created by CreateDataCache supports the IOleCache, IOleCache2, and IOleCacheControl interfaces for controlling the cache. It also supports the IPersistStorage, IDataObject (without advise sinks), IViewObject, and IViewObject2 interfaces. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "CreateDataCache",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPUNKNOWN",
+        "name": "pUnkOuter",
+        "description": "If the cache is to be created as part of an aggregate, pointer to the controlling IUnknown of the aggregate. If not, the parameter should be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFCLSID",
+        "name": "rclsid",
+        "description": "CLSID used to generate icon labels. This value is typically CLSID_NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "iid",
+        "description": "Reference to the identifier of the interface the caller wants to use to communicate with the cache. This value is typically IID_IOleCache (defined in the OLE headers to equal the interface identifier for IOleCache)."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppv",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer to the supplied cache object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Creates an object that implements IEnumFORMATETC over a static array of FORMATETC structures.",
+    "library": "Urlmon.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Urlmon.h",
+    "return_value": "This function returns S_OK on success. Other possible return values include the following.  ",
+    "remarks": "The CreateFormatEnumerator function creates an enumerator object that implements IEnumFORMATETC over a static array of FORMATETC structures. The cfmtetc parameter specifies the number of these structures. With the pointer, you can call the standard enumeration methods to enumerate the structures. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "CreateFormatEnumerator",
+    "is_callback": 0,
+    "dll": "Urlmon.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cfmtetc",
+        "description": "Number of FORMATETC structures in the static array specified by the rgfmtetc parameter. The cfmtetc parameter cannot be zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "FORMATETC*",
+        "name": "rgfmtetc",
+        "description": "Pointer to a static array of FORMATETC structures."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "IEnumFORMATETC**",
+        "name": "ppenumfmtetc",
+        "description": "Address of IEnumFORMATETC pointer variable that receives the interface pointer to the enumerator object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Creates an advise holder object for managing compound document notifications. It returns a pointer to the object's OLE implementation of the IOleAdviseHolder interface.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success and supports the standard return value E_OUTOFMEMORY. ",
+    "remarks": "The function CreateOleAdviseHolder creates an instance of an advise holder, which supports the OLE implementation of the IOleAdviseHolder interface. The methods of this interface are intended to be used to implement the advisory methods of IOleObject, and, when advisory connections have been set up with objects supporting an advisory sink, to send notifications of changes in the object to the advisory sink. The advise holder returned by CreateOleAdviseHolder will suffice for the great majority of applications. The OLE-provided implementation does not, however, support IOleAdviseHolder::EnumAdvise, so if you need to use this method, you will need to implement your own advise holder. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "CreateOleAdviseHolder",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPOLEADVISEHOLDER*",
+        "name": "ppOAHolder",
+        "description": "Address of IOleAdviseHolder pointer variable that receives the interface pointer to the new advise holder object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Carries out an OLE drag and drop operation.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "If you are developing an application that can act as a data source for an OLE drag-and-drop operation, you must call DoDragDrop when you detect that the user has started an OLE drag-and-drop operation. The DoDragDrop function enters a loop in which it calls various methods in the IDropSource and IDropTarget interfaces. (For a successful drag-and-drop operation, the application acting as the data source must also implement IDropSource, while the target application must implement IDropTarget.) DoDragDrop does not support invoking drag and drop support when you handle touch or pen input. To support touch or pen input, do not call DoDragDrop from your touch handler. Instead, call DoDragDrop from your handler for those mouse messages that the system synthesizes upon touch input. The application can identify synthesized messages by calling the GetMessageExtraInfo function. For more information about using GetMessageExtraInfo to distinguish between mouse input and Windows Touch input,  see Troubleshooting Applications. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "DoDragDrop",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPDATAOBJECT",
+        "name": "pDataObj",
+        "description": "Pointer to the IDataObject interface on a data object that contains the data being dragged."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPDROPSOURCE",
+        "name": "pDropSource",
+        "description": "Pointer to an implementation of the IDropSource interface, which is used to communicate with the source during the drag operation."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwOKEffects",
+        "description": "Effects the source allows in the OLE drag-and-drop operation. Most significant is whether it permits a move. The dwOKEffect and pdwEffect parameters obtain values from the DROPEFFECT enumeration. For a list of values, see DROPEFFECT."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPDWORD",
+        "name": "pdwEffect",
+        "description": "Pointer to a value that indicates how the OLE drag-and-drop operation affected the source data. The pdwEffect parameter is set only if the operation is not canceled."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 11,
+    "description": "Invokes a new property frame, that is, a property sheet dialog box, whose parent is hwndOwner, where the dialog is positioned at the point (x,y) in the parent window and has the caption lpszCaption.",
+    "library": "OleAut32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleCtl.h",
+    "return_value": "This function supports the standard return values E_INVALIDARG, E_OUTOFMEMORY, and E_UNEXPECTED, as well as the following:  ",
+    "remarks": "The property pages to be displayed are identified with pPageClsID, which is an array of cPages CLSID values. The objects that are affected by this property sheet are identified in ppUnk, an array of size cObjects containing IUnknown pointers. This function always creates a modal dialog box and does not return until the dialog box is closed. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreatePropertyFrame",
+    "is_callback": 0,
+    "dll": "OleAut32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndOwner",
+        "description": "Handle to the parent window of the resulting property sheet dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "x",
+        "description": "Reserved. Horizontal position for the dialog box relative to hwndOwner."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "y",
+        "description": "Reserved. Vertical position for the dialog box relative to hwndOwner."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCOLESTR",
+        "name": "lpszCaption",
+        "description": "Pointer to the string used for the caption of the dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cObjects",
+        "description": "Number of object pointers passed in ppUnk."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPUNKNOWN*",
+        "name": "ppUnk",
+        "description": "An array of IUnknown pointers on the objects for which this property sheet is being invoked. The number of elements in the array is specified by cObjects. These pointers are passed to each property page through IPropertyPage::SetObjects."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cPages",
+        "description": "Number of property pages specified in pPageCIsID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCLSID",
+        "name": "pPageClsID",
+        "description": "Array of size cPages containing the CLSIDs of each property page to display in the property sheet."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LCID",
+        "name": "lcid",
+        "description": "Locale identifier to use for the property sheet. Property pages can retrieve this identifier through IPropertyPageSite::GetLocaleID."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwReserved",
+        "description": "Reserved for future use; must be zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "pvReserved",
+        "description": "Reserved for future use; must be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates a new instance of the default embedding handler. This instance is initialized so it creates a local server when the embedded object enters the running state.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns NOERROR on success and supports the standard return value E_OUTOFMEMORY. ",
+    "remarks": "OleCreateDefaultHandler creates a new instance of the default embedding handler, initialized so it creates a local server identified by the clsid parameter when the embedded object enters the running state. If you are writing a handler and want to use the services of the default handler, call OleCreateDefaultHandler. OLE also calls it internally when the CLSID specified in an object creation call is not registered. If the given class does not have a special handler, a call to OleCreateDefaultHandler produces the same results as a call to the CoCreateInstance function with the class context parameter assigned the value CLSCTX_INPROC_HANDLER. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateDefaultHandler",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFCLSID",
+        "name": "clsid",
+        "description": "CLSID identifying the OLE server to be loaded when the embedded object enters the running state."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPUNKNOWN",
+        "name": "pUnkOuter",
+        "description": "Pointer to the controlling IUnknown interface if the handler is to be aggregated; NULL if it is not to be aggregated."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface, usually IID_IOleObject, through which the caller will communicate with the handler."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "lplpObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created handler."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Creates an OLE embedding helper object using application-supplied code aggregated with pieces of the OLE default object handler. This helper object can be created and used in a specific context and role, as determined by the caller.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The OleCreateEmbeddingHelper function creates an object that supports the same interface implementations found in the default handler, but which has additional hooks that allow it to be used more generally than just as a handler object. The following two calls produce the same result: The embedding helper is aggregatable; pUnkOuter is the controlling IUnknown of the aggregate of which the embedding helper is to be a part. It is used to create a new instance of the OLE default handler, which can be used to support objects in various roles. The caller passes a pointer to its IClassFactory implementation to OleCreateEmbeddingHelper. This object and the default handler are then aggregated to create the new embedding helper object. The OleCreateEmbeddingHelper function is usually used to support one of the following implementations: The flags parameter indicates how the embedding helper is to be used and how and when the embedding helper is initialized. The values for flags are obtained by OR-ing together values from the following table.  ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateEmbeddingHelper",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFCLSID",
+        "name": "clsid",
+        "description": "CLSID of the class to be helped."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPUNKNOWN",
+        "name": "pUnkOuter",
+        "description": "If the embedding helper is to be aggregated, pointer to the outer object's controlling IUnknown interface. If it is not to be aggregated, although this is rare, the value should be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "flags",
+        "description": "DWORD containing flags that specify the role and creation context for the embedding helper. For legal values, see the following Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCLASSFACTORY",
+        "name": "pCF",
+        "description": "Pointer to the IClassFactory interface on the class object the function uses to create the secondary object. In some situations, this value may be NULL. For more information, see the following Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface desired by the caller."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "lplpObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created embedding helper."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 12,
+    "description": "Extends OleCreate functionality by supporting more efficient instantiation of objects in containers requiring caching of multiple presentation formats or data, instead of the single format supported by OleCreate.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The following call to OleCreate: is equivalent to the following call to OleCreateEx: Existing instantiation functions, (OleCreate, OleCreateFromFile, OleCreateFromData, OleCreateLink, OleCreateLinkToFile, and OleCreateLinkFromData) create only a single presentation or data format cache in the default cache location (within the '\\001OlePresXXX' streams of the passed-in IStorage), during instantiation. Plus, these caches must be created when the object next enters the running state. Since most applications require caching at least two presentations (screen and printer) and may require caching data in a different format or location from the handler, applications must typically launch and shut down the object server multiple times in order to prime their data caches during object creation, i.e., Insert Object, Insert Object from File, and Paste Object. Extended versions of these creation functions solve this problem. OleCreateEx, OleCreateFromFileEx, OleCreateFromDataEx, OleCreateLinkEx, OleCreateLinkToFileEx, and OleCreateLinkFromDataEx contain the following new parameters: dwFlags to indicate additional options, cFormats to indicate how many formats to cache, rgAdvf, from the ADVF enumeration, to specify the advise flags for each format to be cached, pAdviseSink to indicate whether presentation (default-handler) or data (non-default-handler) caching is required, rgdwConnection to return IDataObject::DAdvise cookies, and pFormatEtc, an array of formats rather than a single format. Containers requiring that multiple presentations be cached on their behalf by the object's handler can simply call these functions and specify the number of formats in cFormats, the ADVF flags for each format in rgAdvf, and the set of formats in pFormatEtc. These containers pass NULL for pAdviseSink. Containers performing all their own data- or presentation-caching perform these same steps, but pass a non-NULLpAdviseSink. They perform their own caching or manipulation of the object or data during IAdviseSink::OnDataChange. Typically such containers never establish the advisory connections with ADVF_NODATA, although they are not prevented from doing so. These new functions are for OLE Compound Documents. Using these functions, applications can avoid the repeated launching and initialization steps required by the current functions. They are targeted at OLE Compound Document container applications that use default data- and presentation-caching, and also at applications that provide their own caching and data transfer from the underlying IDataObject::DAdvise support. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateEx",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFCLSID",
+        "name": "rclsid",
+        "description": "Identifies the class of the object to create."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface of the object to return."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This value can be 0 or OLECREATE_LEAVERUNNING    (0x00000001)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "renderopt",
+        "description": "Value taken from the OLERENDER enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cFormats",
+        "description": "When renderopt is OLERENDER_FORMAT, indicates the number of FORMATETC structures in the rgFormatEtc array, which must be at least one. In all other cases, this parameter must be zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD*",
+        "name": "rgAdvf",
+        "description": "When renderopt is OLERENDER_FORMAT, points to an array of cFormats DWORD elements, each of which is a combination of values from the ADVF enumeration. Each element of this array is passed in as the advf parameter to a call to either IOleCache::Cache or IDataObject::DAdvise, depending on whether pAdviseSink is NULL or non-NULL (see below). In all other cases, this parameter must be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPFORMATETC",
+        "name": "rgFormatEtc",
+        "description": "When renderopt is OLERENDER_FORMAT, points to an array of cFormats FORMATETC structures. When pAdviseSink is NULL, each element of this array is passed as the pFormatEtc parameter to a call to the object's IOleCache::Cache. This populates the data and presentation cache managed by the objects in-process handler (typically the default handler) with presentation or other cacheable data. When pAdviseSink is non-NULL, each element of this array is passed as the pFormatEtc parameter to a call to IDataObject::DAdvise. This allows the caller (typically an OLE Container) to do its own caching or processing of data received from the object. In all other cases, this parameter must be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IAdviseSink*",
+        "name": "lpAdviseSink",
+        "description": "When renderopt is OLERENDER_FORMAT, may be either a valid IAdviseSink pointer, indicating custom caching or processing of data advises, or NULL, indicating default caching of data formats. In all other cases, this parameter must be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD*",
+        "name": "rgdwConnection",
+        "description": "Location to return the array of dwConnection values returned when the pAdviseSink interface is registered for each advisory connection using IDataObject::DAdvise, or NULL if the returned advisory connections are not needed. Must be NULL, if pAdviseSink is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLECLIENTSITE",
+        "name": "pClientSite",
+        "description": "Pointer to the primary interface through which the object will request services from its container. This parameter may be NULL, in which case it is the caller's responsibility to establish the client site as soon as possible using IOleObject::SetClientSite."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the storage to use for the object and any default data or presentation caching established for it. This parameter may not be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of output pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Creates and initializes a standard font object using an initial description of the font's properties in a FONTDESC structure. The function returns an interface pointer to the new font object specified by caller in the riid parameter. A QueryInterface call is part of this call. The caller is responsible for calling Release through the interface pointer returned.",
+    "library": "OleAut32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleCtl.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateFontIndirect",
+    "is_callback": 0,
+    "dll": "OleAut32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPFONTDESC",
+        "name": "lpFontDesc",
+        "description": "Address of a caller-allocated, FONTDESC structure containing the initial state of the font. This value must not be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface describing the type of interface pointer to return in lplpvObj."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "lplpvObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, this parameter contains the requested interface pointer on the newly created font object. If successful, the caller is responsible to call Release through this interface pointer when the new object is no longer needed. If unsuccessful, the value of is set to NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Creates an embedded object from a data transfer object retrieved either from the clipboard or as part of an OLE drag-and-drop operation. It is intended to be used to implement a paste from an OLE drag-and-drop operation.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The OleCreateFromData function creates an embedded object from a data transfer object supporting the IDataObject interface. The data object in this case is either the type retrieved from the clipboard with a call to the OleGetClipboard function or is part of an OLE drag-and-drop operation (the data object is passed to a call to IDropTarget::Drop). If either the FileName or FileNameW clipboard format (CF_FILENAME) is present in the data transfer object, and CF_EMBEDDEDOBJECT or CF_EMBEDSOURCE do not exist, OleCreateFromData first attempts to create a package containing the indicated file. Generally, it takes the first available format. If OleCreateFromData cannot create a package, it tries to create an object using the CF_EMBEDDEDOBJECT format. If that format is not available, OleCreateFromData tries to create it with the CF_EMBEDSOURCE format. If neither of these formats is available and the data transfer object supports the IPersistStorage interface, OleCreateFromData calls the object's IPersistStorage::Save to have the object save itself. If an existing linked object is selected, then copied, it appears on the clipboard as just another embeddable object. Consequently, a paste operation that invokes OleCreateFromData may create a linked object. After the paste operation, the container should call the QueryInterface function, requesting IID_IOleLink (defined in the OLE headers as the interface identifier for IOleLink), to determine if a linked object was created. Use the renderopt and pFormatetc parameters to control the caching capability of the newly created object. For general information about using the interaction of these parameters to determine what is to be cached, refer to the OLERENDER enumeration. There are, however, some additional specific effects of these parameters on the way OleCreateFromData initializes the cache. When OleCreateFromData uses either the CF_EMBEDDEDOBJECT or the CF_EMBEDSOURCE clipboard format to create the embedded object, the main difference between the two is where the cache-initialization data is stored: The renderopt values affect cache initialization as follows.  ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateFromData",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPDATAOBJECT",
+        "name": "pSrcDataObj",
+        "description": "Pointer to the IDataObject interface on the data transfer object that holds the data from which the object is created."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface the caller later uses to communicate with the new object (usually IID_IOleObject, defined in the OLE headers as the interface identifier for IOleObject)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "renderopt",
+        "description": "Value from the enumeration OLERENDER that indicates the locally cached drawing or data-retrieval capabilities the newly created object is to have. Additional considerations are described in the following Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPFORMATETC",
+        "name": "pFormatEtc",
+        "description": "Pointer to a value from the enumeration OLERENDER that indicates the locally cached drawing or data-retrieval capabilities the newly created object is to have. The OLERENDER value chosen affects the possible values for the pFormatEtc parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLECLIENTSITE",
+        "name": "pClientSite",
+        "description": "Pointer to an instance of IOleClientSite, the primary interface through which the object will request services from its container. This parameter can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the IStorage interface on the storage object. This parameter may not be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 12,
+    "description": "Extends OleCreateFromData functionality by supporting more efficient instantiation of objects in containers requiring caching of multiple formats of presentation or data, instead of the single format supported by OleCreateFromData.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The following call to OleCreateFromData: is equivalent to the following call to OleCreateFromDataEx: Existing instantiation functions (OleCreate, OleCreateFromFile, OleCreateFromData, OleCreateLink, OleCreateLinkToFile, and OleCreateLinkFromData) create only a single presentation or data format cache in the default cache location (within the '\\001OlePresXXX' streams of the passed-in IStorage) during instantiation. Plus, these caches must be created when the object next enters the running state. Because most applications require caching at least two presentations (screen and printer) and may require caching data in a different format or location from the handler, applications must typically launch and shut down the object server multiple times in order to prime their data caches during object creation, i.e., Insert Object, Insert Object from File, and Paste Object. Extended versions of these creation functions solve this problem. OleCreateEx, OleCreateFromFileEx, OleCreateFromDataEx, OleCreateLinkEx, OleCreateLinkToFileEx, and OleCreateLinkFromDataEx, contain the following new parameters: dwFlags to indicate additional options, cFormats to indicate how many formats to cache, rgAdvf, from the ADVF enumeration, to specify the advise flags for each format to be cached, pAdviseSink to indicate whether presentation (default-handler) or data (non-default-handler) caching is required, rgdwConnection to return IDataObject::DAdvise cookies, and rgFormatEtc, an array of formats rather than a single format. Containers requiring that multiple presentations be cached on their behalf by the object's handler can simply call these functions and specify the number of formats in cFormats, the ADVF flags for each format in rgAdvf, and the set of formats in rgFormatEtc. These containers pass NULL for pAdviseSink. Containers performing all their own data- or presentation-caching perform these same steps, but pass a non-NULLpAdviseSink. They perform their own caching or manipulation of the object or data during IAdviseSink::OnDataChange. Typically, such containers never establish the advisory connections with ADVF_NODATA, although they are not prevented from doing so. These new functions are for OLE Compound Documents. Using these functions, applications can avoid the repeated launching and initialization steps required by the current functions. They are targeted at OLE Compound Document container applications that use default data- and presentation-caching, and also at applications that provide their own caching and data transfer from the underlying IDataObject::DAdvise support. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateFromDataEx",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPDATAOBJECT",
+        "name": "pSrcDataObj",
+        "description": "Pointer to the data transfer object holding the new data used to create the new object. (see OleCreateFromData)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface of the object to return."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be 0 or OLECREATE_LEAVERUNNING (0x00000001)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "renderopt",
+        "description": "Value taken from the OLERENDER enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cFormats",
+        "description": "When renderopt is OLERENDER_FORMAT, indicates the number of FORMATETC structures in the rgFormatEtc array, which must be at least one. In all other cases, this parameter must be zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD*",
+        "name": "rgAdvf",
+        "description": "When renderopt is OLERENDER_FORMAT, points to an array of DWORD elements, each of which is a combination of values from the ADVF enumeration. Each element of this array is passed in as the advf parameter to a call to either IOleCache::Cache or IDataObject::DAdvise, depending on whether pAdviseSink is NULL or non-NULL (see below). In all other cases, this parameter must be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPFORMATETC",
+        "name": "rgFormatEtc",
+        "description": "When renderopt is OLERENDER_FORMAT, points to an array of FORMATETC structures. When pAdviseSink is NULL, each element of this array is passed as the pFormatEtc parameter to a call to the object's IOleCache::Cache. This populates the data and presentation cache managed by the object's in-process handler (typically the default handler) with presentation or other cacheable data. When pAdviseSink is non-NULL, each element of this array is passed as the pFormatEtc parameter to a call to IDataObject::DAdvise. This allows the caller (typically an OLE Container) to do its own caching or processing of data received from the object."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IAdviseSink*",
+        "name": "lpAdviseSink",
+        "description": "When renderopt is OLERENDER_FORMAT, may be either a valid IAdviseSink pointer, indicating custom caching or processing of data advises, or NULL, indicating default caching of data formats."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD*",
+        "name": "rgdwConnection",
+        "description": "Location to return the array of dwConnection values returned when the IAdviseSink interface is registered for each advisory connection using IDataObject::DAdvise, or NULL if the returned advisory connections are not needed. This parameter must be NULL if pAdviseSink is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLECLIENTSITE",
+        "name": "pClientSite",
+        "description": "Pointer to the primary interface through which the object will request services from its container. This parameter may be NULL, in which case it is the caller's responsibility to establish the client site as soon as possible using IOleObject::SetClientSite."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the storage to use for the object and any default data or presentation caching established for it."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of output pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "Creates an embedded object from the contents of a named file.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The OleCreateFromFile function creates a new embedded object from the contents of a named file. If the ProgID in the registration database contains the PackageOnFileDrop key, it creates a package. If not, the function calls the GetClassFile function to get the CLSID associated with the lpszFileName parameter, and then creates an OLE 2-embedded object associated with that CLSID. The rclsid parameter of OleCreateFromFile will always be ignored, and should be set to CLSID_NULL. As for other OleCreateXxx functions, the newly created object is not shown to the user for editing, which requires a DoVerb operation. It is used to implement insert file operations. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateFromFile",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFCLSID",
+        "name": "rclsid",
+        "description": "This parameter is reserved and must be CLSID_NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCOLESTR",
+        "name": "lpszFileName",
+        "description": "Pointer to a string specifying the full path of the file from which the object should be initialized."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface the caller later uses to communicate with the new object (usually IID_IOleObject, defined in the OLE headers as the interface ID of IOleObject)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "renderopt",
+        "description": "Value from the enumeration OLERENDER that indicates the locally cached drawing or data-retrieval capabilities the newly created object is to have. The OLERENDER value chosen affects the possible values for the lpFormatEtc parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPFORMATETC",
+        "name": "lpFormatEtc",
+        "description": "Depending on which of the OLERENDER flags is used as the value of renderopt, pointer to one of the FORMATETC enumeration values. Refer also to the OLERENDER enumeration for restrictions."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLECLIENTSITE",
+        "name": "pClientSite",
+        "description": "Pointer to an instance of IOleClientSite, the primary interface through which the object will request services from its container. This parameter can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the IStorage interface on the storage object. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 13,
+    "description": "Extends OleCreateFromFile functionality by supporting more efficient instantiation of objects in containers requiring caching of multiple presentation formats or data, instead of the single format supported by OleCreateFromFile.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The following call to OleCreateFromFile: is equivalent to the following call to OleCreateFromFileEx: Existing instantiation functions (OleCreate, OleCreateFromFile, OleCreateFromData, OleCreateLink, OleCreateLinkToFile, and OleCreateLinkFromData) create only a single presentation or data format cache in the default cache location (within the '\\001OlePresXXX' streams of the passed-in IStorage), during instantiation. Plus, these caches must be created when the object next enters the running state. Because most applications require caching at least two presentations (screen and printer) and may require caching data in a different format or location from the handler, applications must typically launch and shut down the object server multiple times in order to prime their data caches during object creation, i.e., Insert Object, Insert Object from File, and Paste Object. Extended versions of these creation functions solve this problem. OleCreateEx, OleCreateFromFileEx, OleCreateFromDataEx, OleCreateLinkEx, OleCreateLinkToFileEx, and OleCreateLinkFromDataEx, contain the following new parameters: dwFlags to indicate additional options, cFormats to indicate how many formats to cache, rgAdvf, from the ADVF enumeration, to specify the advise flags for each format to be cached, pAdviseSink to indicate whether presentation (default-handler) or data (non-default-handler) caching is required, rgdwConnection to return IDataObject::DAdvise cookies, and rgFormatEtc, an array of formats rather than a single format. Containers requiring that multiple presentations be cached on their behalf by the object's handler can simply call these functions and specify the number of formats in cFormats, the ADVF flags for each format in rgAdvf, and the set of formats in rgFormatEtc. These containers pass NULL for pAdviseSink. Containers performing all their own data- or presentation-caching perform these same steps, but pass a non-NULLpAdviseSink. They perform their own caching or manipulation of the object or data during IAdviseSink::OnDataChange. Typically, such containers never establish the advisory connections with ADVF_NODATA, although they are not prevented from doing so. These new functions are for OLE Compound Documents. Using these functions, applications can avoid the repeated launching and initialization steps required by the current functions. They are targeted at OLE Compound Document container applications that use default data- and presentation-caching, and also at applications that provide their own caching and data transfer from the underlying IDataObject::DAdvise support. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateFromFileEx",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFCLSID",
+        "name": "rclsid",
+        "description": "This parameter is reserved and must be CLSID_NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCOLESTR",
+        "name": "lpszFileName",
+        "description": "Pointer to the name of the file from which the new object should be initialized."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface of the object to return."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be 0 or OLECREATE_LEAVERUNNING (0x00000001)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "renderopt",
+        "description": "Value taken from the OLERENDER enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cFormats",
+        "description": "When renderopt is OLERENDER_FORMAT, indicates the number of FORMATETC structures in the rgFormatEtc array, which must be at least one. In all other cases, this parameter must be zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD*",
+        "name": "rgAdvf",
+        "description": "When renderopt is OLERENDER_FORMAT, points to an array of DWORD elements, each of which is a combination of values from the ADVF enumeration. Each element of this array is passed in as the advf parameter to a call to either IOleCache::Cache or IDataObject::DAdvise, depending on whether pAdviseSink is NULL or non-NULL (see below). In all other cases, this parameter must be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPFORMATETC",
+        "name": "rgFormatEtc",
+        "description": "When renderopt is OLERENDER_FORMAT, points to an array of FORMATETC structures. When pAdviseSink is NULL, each element of this array is passed as the pFormatEtc parameter to a call to the object's IOleCache::Cache. This populates the data and presentation cache managed by the objects in-process handler (typically the default handler) with presentation or other cacheable data. When pAdviseSink is non-NULL, each element of this array is passed as the pFormatEtc parameter to a call to IDataObject::DAdvise. This allows the caller (typically an OLE Container) to do its own caching or processing of data received from the object."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IAdviseSink*",
+        "name": "lpAdviseSink",
+        "description": "When renderopt is OLERENDER_FORMAT, may be either a valid IAdviseSink pointer, indicating custom caching or processing of data advises, or NULL, indicating default caching of data formats."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD*",
+        "name": "rgdwConnection",
+        "description": "Location to return the array of dwConnection values returned when the pAdviseSink interface is registered for each advisory connection using IDataObject::DAdvise, or NULL if the returned advisory connections are not needed. This parameter must be NULL if pAdviseSink is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLECLIENTSITE",
+        "name": "pClientSite",
+        "description": "Pointer to the primary interface through which the object will request services from its container. This parameter may be NULL, in which case it is the caller's responsibility to establish the client site as soon as possible using IOleObject::SetClientSite."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the storage to use for the object and any default data or presentation caching established for it."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of output pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Creates an OLE compound-document linked object.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "Call OleCreateLink to allow a container to create a link to an object. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateLink",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPMONIKER",
+        "name": "pmkLinkSrc",
+        "description": "Pointer to the IMoniker interface on the moniker that can be used to locate the source of the linked object."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface the caller later uses to communicate with the new object (usually IID_IOleObject, defined in the OLE headers as the interface identifier for IOleObject)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "renderopt",
+        "description": "Specifies a value from the enumeration OLERENDER that indicates the locally cached drawing or data-retrieval capabilities the newly created object is to have. Additional considerations are described in the Remarks section below."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPFORMATETC",
+        "name": "lpFormatEtc",
+        "description": "Pointer to a value from the enumeration OLERENDER that indicates the locally cached drawing or data-retrieval capabilities the newly created object is to have. The OLERENDER value chosen affects the possible values for the lpFormatEtc parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLECLIENTSITE",
+        "name": "pClientSite",
+        "description": "Pointer to an instance of IOleClientSite, the primary interface through which the object will request services from its container. This parameter can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the IStorage interface on the storage object. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 12,
+    "description": "Extends OleCreateLink functionality by supporting more efficient instantiation of objects in containers requiring caching of multiple formats of presentations or data, instead of the single format supported by OleCreateLink.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The following call to OleCreateLink: is equivalent to the following call to OleCreateLinkEx: Existing instantiation functions (OleCreate, OleCreateFromFile, OleCreateFromData, OleCreateLink, OleCreateLinkToFile, and OleCreateLinkFromData) create only a single presentation or data format cache in the default cache location (within the '\\001OlePresXXX' streams of the passed-in IStorage) during instantiation. Plus, these caches must be created when the object next enters the running state. Because most applications require caching in at least two presentations (screen and printer) and may require caching data in a different format or location from the handler, applications must typically launch and shut down the object server multiple times in order to prime their data caches during object creation, i.e., Insert Object, Insert Object from File, and Paste Object. Extended versions of these creation functions solve this problem. OleCreateEx, OleCreateFromFileEx, OleCreateFromDataEx, OleCreateLinkEx, OleCreateLinkToFileEx, and OleCreateLinkFromDataEx, contain the following new parameters: dwFlags to indicate additional options, cFormats to indicate how many formats to cache, rgAdvf, from the ADVF enumeration, to specify the advise flags for each format to be cached, pAdviseSink to indicate whether presentation (default-handler) or data (non-default-handler) caching is required, rgdwConnection to return IDataObject::DAdvise cookies, and rgFormatEtc, an array of formats rather than a single format. Containers requiring that multiple presentations be cached on their behalf by the object's handler can simply call these functions and specify the number of formats in cFormats, the ADVF flags for each format in rgAdvf, and the set of formats in rgFormatEtc. These containers pass NULL for pAdviseSink. Containers performing all their own data- or presentation-caching perform these same steps, but pass a non-NULLpAdviseSink. They perform their own caching or manipulation of the object or data during IAdviseSink::OnDataChange. Typically, such containers never establish the advisory connections with ADVF_NODATA, although they are not prevented from doing so. These new functions are for OLE Compound Documents. Using these functions, applications can avoid the repeated launching and initialization steps required by the current functions. They are targeted at OLE Compound Document container applications that use default data- and presentation-caching, and also at applications that provide their own caching and data transfer from the underlying IDataObject::DAdvise support. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateLinkEx",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPMONIKER",
+        "name": "pmkLinkSrc",
+        "description": "Pointer to a moniker to the object to create a link to."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface of the object to return."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be 0 or OLECREATE_LEAVERUNNING (0x00000001)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "renderopt",
+        "description": "Value taken from the OLERENDER enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cFormats",
+        "description": "When renderopt is OLERENDER_FORMAT, indicates the number of FORMATETC structures in the rgFormatEtc array, which must be at least one. In all other cases, this parameter must be zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD*",
+        "name": "rgAdvf",
+        "description": "When renderopt is OLERENDER_FORMAT, points to an array of DWORD elements, each of which is a combination of values from the ADVF enumeration. Each element of this array is passed in as the advf parameter to a call to either IOleCache::Cache or IDataObject::DAdvise, depending on whether pAdviseSink is NULL or non-NULL (see below). In all other cases, this parameter must be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPFORMATETC",
+        "name": "rgFormatEtc",
+        "description": "When renderopt is OLERENDER_FORMAT, points to an array of FORMATETC structures. When pAdviseSink is NULL, each element of this array is passed as the pFormatEtc parameter to a call to the object's IOleCache::Cache. This populates the data and presentation cache managed by the objects in-process handler (typically the default handler) with presentation or other cacheable data. When pAdviseSink is non-NULL, each element of this array is passed as the pFormatEtc parameter to a call to IDataObject::DAdvise. This allows the caller (typically an OLE Container) to do its own caching or processing of data received from the object."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IAdviseSink*",
+        "name": "lpAdviseSink",
+        "description": "When renderopt is OLERENDER_FORMAT, may be either a valid IAdviseSink pointer, indicating custom caching or processing of data advises, or NULL, indicating default caching of data formats."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD*",
+        "name": "rgdwConnection",
+        "description": "Location to return the array of dwConnection values returned when the IAdviseSink interface is registered for each advisory connection using IDataObject::DAdvise, or NULL if the returned advisory connections are not needed. This parameter must be NULL if pAdviseSink is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLECLIENTSITE",
+        "name": "pClientSite",
+        "description": "Pointer to the primary interface through which the object will request services from its container. This parameter can be NULL, in which case it is the caller's responsibility to establish the client site as soon as possible using IOleObject::SetClientSite."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the storage to use for the object and any default data or presentation caching established for it."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of output pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Creates a linked object from a data transfer object retrieved either from the clipboard or as part of an OLE drag-and-drop operation.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The OleCreateLinkFromData function is used to implement either a paste-link or a drag-link operation. Its operation is similar to that of the OleCreateFromData function, except that it creates a link, and looks for different data formats. If the CF_LINKSOURCE format is not present, and either the FileName or FileNameW clipboard format is present in the data transfer object, OleCreateLinkFromData creates a package containing the link to the indicated file. You use the renderopt and pFormatetc parameters to control the caching capability of the newly created object. For general information on how to determine what is to be cached, refer to the OLERENDER enumeration for a description of the interaction between renderopt and pFormatetc. There are, however, some additional specific effects of these parameters on the way OleCreateLinkFromData initializes the cache, as follows.  ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateLinkFromData",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPDATAOBJECT",
+        "name": "pSrcDataObj",
+        "description": "Pointer to the IDataObject interface on the data transfer object from which the linked object is to be created."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of interface the caller later uses to communicate with the new object (usually IID_IOleObject, defined in the OLE headers as the interface identifier for IOleObject)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "renderopt",
+        "description": "Value from the enumeration OLERENDER that indicates the locally cached drawing or data-retrieval capabilities the newly created object is to have. Additional considerations are described in the following Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPFORMATETC",
+        "name": "pFormatEtc",
+        "description": "Pointer to a value from the enumeration OLERENDER that indicates the locally cached drawing or data-retrieval capabilities the newly created object is to have. The OLERENDER value chosen affects the possible values for the pFormatEtc parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLECLIENTSITE",
+        "name": "pClientSite",
+        "description": "Pointer to an instance of IOleClientSite, the primary interface through which the object will request services from its container. This parameter can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the IStorage interface on the storage object. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return,   ppvObj contains the requested interface pointer on the newly created object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 12,
+    "description": "Extends OleCreateLinkFromData functionality by supporting more efficient instantiation of objects in containers requiring caching of multiple formats of presentations or data, instead of the single format supported by OleCreateLinkFromData.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The following call to OleCreateLinkFromData: is equivalent to the following call to OleCreateLinkFromDataEx: Existing instantiation functions (OleCreate, OleCreateFromFile, OleCreateFromData, OleCreateLink, OleCreateLinkToFile, and OleCreateLinkFromData), create only a single presentation or data format cache in the default cache location (within the '\\001OlePresXXX' streams of the passed-in IStorage) during instantiation. Plus, these caches must be created when the object next enters the running state. Because most applications require caching at least two presentations (screen and printer) and may require caching data in a different format or location from the handler, applications must typically launch and shut down the object server multiple times in order to prime their data caches during object creation, i.e., Insert Object, Insert Object from File, and Paste Object. Extended versions of these creation functions solve this problem. OleCreateEx, OleCreateFromFileEx, OleCreateFromDataEx, OleCreateLinkEx, OleCreateLinkToFileEx, and OleCreateLinkFromDataEx, contain the following new parameters: dwFlags to indicate additional options, cFormats to indicate how many formats to cache, rgAdvf, from the ADVF enumeration, to specify the advise flags for each format to be cached, pAdviseSink to indicate whether presentation (default-handler) or data (non-default-handler) caching is required, rgdwConnection to return IDataObject::DAdvise cookies, and rgFormatEtc, an array of formats rather than a single format. Containers requiring that multiple presentations be cached on their behalf by the object's handler can simply call these functions and specify the number of formats in cFormats, the ADVF flags for each format in rgAdvf, and the set of formats in rgFormatEtc. These containers pass NULL for pAdviseSink. Containers performing all their own data- or presentation-caching perform these same steps, but pass a non-NULLpAdviseSink. They perform their own caching or manipulation of the object or data during IAdviseSink::OnDataChange. Typically such containers never establish the advisory connections with ADVF_NODATA, although they are not prevented from doing so. These new functions are for OLE Compound Documents. Using these functions, applications can avoid the repeated launching and initialization steps required by the current functions. They are targeted at OLE Compound Document container applications that use default data- and presentation-caching, and also at applications that provide their own caching and data transfer from the underlying IDataObject::DAdvise support. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateLinkFromDataEx",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPDATAOBJECT",
+        "name": "pSrcDataObj",
+        "description": "Pointer to the data object to create a link object from."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface of the object to return."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be 0 or OLECREATE_LEAVERUNNING (0x00000001)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "renderopt",
+        "description": "Value taken from the OLERENDER enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cFormats",
+        "description": "When renderopt is OLERENDER_FORMAT, indicates the number of FORMATETC structures in the rgFormatEtc array, which must be at least one. In all other cases, this parameter must be zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD*",
+        "name": "rgAdvf",
+        "description": "When renderopt is OLERENDER_FORMAT, points to an array of DWORD elements, each of which is a combination of values from the ADVF enumeration. Each element of this array is passed in as the advf parameter to a call to either IOleCache::Cache or IDataObject::DAdvise, depending on whether pAdviseSink is NULL or non-NULL (see below). In all other cases, this parameter must be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPFORMATETC",
+        "name": "rgFormatEtc",
+        "description": "When renderopt is OLERENDER_FORMAT, points to an array of FORMATETC structures. When pAdviseSink is NULL, each element of this array is passed as the pFormatEtc parameter to a call to the object's IOleCache::Cache. This populates the data and presentation cache managed by the objects in-process handler (typically the default handler) with presentation or other cacheable data. When pAdviseSink is non-NULL, each element of this array is passed as the pFormatEtc parameter to a call to IDataObject::DAdvise. This allows the caller (typically an OLE Container) to do its own caching or processing of data received from the object."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IAdviseSink*",
+        "name": "lpAdviseSink",
+        "description": "When renderopt is OLERENDER_FORMAT, may be either a valid IAdviseSink pointer, indicating custom caching or processing of data advises, or NULL, indicating default caching of data formats."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "DWORD*",
+        "name": "rgdwConnection",
+        "description": "Location to return the array of dwConnection values returned when the pAdviseSink interface is registered for each advisory connection using IDataObject::DAdvise, or NULL if the returned advisory connections are not needed. This parameter must be NULL if pAdviseSink is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLECLIENTSITE",
+        "name": "pClientSite",
+        "description": "Pointer to the primary interface through which the object will request services from its container. This parameter can be NULL, in which case it is the caller's responsibility to establish the client site as soon as possible using IOleObject::SetClientSite."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the storage to use for the object and any default data or presentation caching established for it."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of output pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Creates an object that is linked to a file.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The OleCreateLinkToFile function differs from the OleCreateLink function because it can create links both to files that are not aware of OLE, as well as to those that are using the Windows Packager. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateLinkToFile",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCOLESTR",
+        "name": "lpszFileName",
+        "description": "Pointer to a string naming the source file to be linked to."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface the caller later uses to communicate with the new object (usually IID_IOleObject, defined in the OLE headers as the interface identifier for IOleObject)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "renderopt",
+        "description": "Value from the enumeration OLERENDER that indicates the locally cached drawing or data-retrieval capabilities the newly created object is to have. Additional considerations are described in the following Remarks section."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPFORMATETC",
+        "name": "lpFormatEtc",
+        "description": "Pointer to a value from the enumeration OLERENDER that indicates the locally cached drawing or data-retrieval capabilities the newly created object is to have. The OLERENDER value chosen affects the possible values for the pFormatEtc parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLECLIENTSITE",
+        "name": "pClientSite",
+        "description": "Pointer to an instance of IOleClientSite, the primary interface through which the object will request services from its container. This parameter can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the IStorage interface on the storage object. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 12,
+    "description": "Extends OleCreateLinkToFile functionality by supporting more efficient instantiation of objects in containers requiring caching of multiple formats of presentations or data, instead of the single format supported by OleCreateLinkToFile.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The following call to OleCreateLinkToFile: is equivalent to the following call to OleCreateLinkToFileEx: Existing instantiation functions (OleCreate, OleCreateFromFile, OleCreateFromData, OleCreateLink, OleCreateLinkToFile, and OleCreateLinkFromData) create only a single presentation or data format cache in the default cache location (within the '\\001OlePresXXX' streams of the passed-in IStorage) during instantiation. Plus, these caches must be created when the object next enters the running state. Because most applications require caching at least two presentations (screen and printer) and may require caching data in a different format or location from the handler, applications must typically launch and shut down the object server multiple times in order to prime their data caches during object creation, i.e., Insert Object, Insert Object from File, and Paste Object. Extended versions of these creation functions solve this problem. OleCreateEx, OleCreateFromFileEx, OleCreateFromDataEx, OleCreateLinkEx, OleCreateLinkToFileEx, and OleCreateLinkFromDataEx, contain the following new parameters: dwFlags to indicate additional options, cFormats to indicate how many formats to cache, rgAdvf, from the ADVF enumeration, to specify the advise flags for each format to be cached, pAdviseSink to indicate whether presentation (default-handler) or data (non-default-handler) caching is required, rgdwConnection to return IDataObject::DAdvise cookies, and rgFormatEtc, an array of formats rather than a single format. Containers requiring that multiple presentations be cached on their behalf by the object's handler can simply call these functions and specify the number of formats in cFormats, the ADVF flags for each format in rgAdvf, and the set of formats in rgFormatEtc. These containers pass NULL for pAdviseSink. Containers performing all their own data- or presentation-caching perform these same steps, but pass a non-NULLpAdviseSink. They perform their own caching or manipulation of the object or data during IAdviseSink::OnDataChange. Typically, such containers never establish the advisory connections with ADVF_NODATA, although they are not prevented from doing so. These new functions are for OLE Compound Documents. Using these functions, applications can avoid the repeated launching and initialization steps required by the current functions. They are targeted at OLE Compound Document container applications that use default data- and presentation-caching, and also at applications that provide their own caching and data transfer from the underlying IDataObject::DAdvise support. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateLinkToFileEx",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCOLESTR",
+        "name": "lpszFileName",
+        "description": "Pointer to the name of the file to create a link to."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface of the object to return."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be 0 or OLECREATE_LEAVERUNNING (0x00000001)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "renderopt",
+        "description": "Value taken from the OLERENDER enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "cFormats",
+        "description": "When renderopt is OLERENDER_FORMAT, indicates the number of FORMATETC structures in the rgFormatEtc array, which must be at least one. In all other cases, this parameter must be zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD*",
+        "name": "rgAdvf",
+        "description": "When renderopt is OLERENDER_FORMAT, points to an array of DWORD elements, each of which is a combination of values from the ADVF enumeration. Each element of this array is passed in as the advf parameter to a call to either IOleCache::Cache or IDataObject::DAdvise, depending on whether pAdviseSink is NULL or non-NULL (see below). In all other cases, this parameter must be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPFORMATETC",
+        "name": "rgFormatEtc",
+        "description": "When renderopt is OLERENDER_FORMAT, points to an array of FORMATETC structures. When pAdviseSink is NULL, each element of this array is passed as the pFormatEtc parameter to a call to the object's IOleCache::Cache. This populates the data and presentation cache managed by the objects in-process handler (typically the default handler) with presentation or other cacheable data. When pAdviseSink is non-NULL, each element of this array is passed as the pFormatEtc parameter to a call to IDataObject::DAdvise. This allows the caller (typically an OLE Container) to do its own caching or processing of data received from the object."
+      },
+      {
+        "in_out": "_In_",
+        "type": "IAdviseSink*",
+        "name": "lpAdviseSink",
+        "description": "When renderopt is OLERENDER_FORMAT, may be either a valid IAdviseSink pointer, indicating custom caching or processing of data advises, or NULL, indicating default caching of data formats."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DWORD*",
+        "name": "rgdwConnection",
+        "description": "Location to return the array of dwConnection values returned when the IAdviseSink interface is registered for each advisory connection using IDataObject::DAdvise, or NULL if the returned advisory connections are not needed. This parameter must be NULL if pAdviseSink is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLECLIENTSITE",
+        "name": "pClientSite",
+        "description": "Pointer to the primary interface through which the object will request services from its container. This parameter may be NULL, in which case it is the caller's responsibility to establish the client site as soon as possible using IOleObject::SetClientSite."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the storage to use for the object and any default data or presentation caching established for it."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of output pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Creates and returns an OLE menu descriptor (that is, an OLE-provided data structure that describes the menus) for OLE to use when dispatching menu messages and commands.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "Returns the handle to the descriptor, or NULL if insufficient memory is available. ",
+    "remarks": "The OleCreateMenuDescriptor function can be called by the object to create a descriptor for the composite menu. OLE then uses this descriptor to dispatch menu messages and commands. To free the shared menu descriptor when it is no longer needed, the container should call the companion helper function, OleDestroyMenuDescriptor. ",
+    "return_type": "HOLEMENU",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateMenuDescriptor",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HMENU",
+        "name": "hmenuCombined",
+        "description": "Handle to the combined menu created by the object."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLEMENUGROUPWIDTHS",
+        "name": "lpMenuWidths",
+        "description": "Pointer to an array of six LONG values giving the number of menus in each group."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates a new picture object initialized according to a PICTDESC structure.",
+    "library": "OleAut32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleCtl.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The fOwn parameter indicates whether the picture is to own the GDI picture handle for the picture it contains, so that the picture object will destroy its picture when the object itself is destroyed. The function returns an interface pointer to the new picture object specified by the caller in the riid parameter. A QueryInterface is built into this call. The caller is responsible for calling Release through the interface pointer returned. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreatePictureIndirect",
+    "is_callback": 0,
+    "dll": "OleAut32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPPICTDESC",
+        "name": "lpPictDesc",
+        "description": "Pointer to a caller-allocated structure containing the initial state of the picture. The specified structure can be NULL to create an uninitialized object, in the event the picture needs to initialize via IPersistStream::Load."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface describing the type of interface pointer to return in lplpvObj."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fOwn",
+        "description": "If TRUE, the picture object is to destroy its picture when the object is destroyed. If FALSE, the caller is responsible for destroying the picture."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "lplpvObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, this parameter contains the requested interface pointer on the newly created object. If the call is successful, the caller is responsible for calling Release through this interface pointer when the new object is no longer needed. If the call fails, the value is set to NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Creates a static object, that contains only a representation, with no native data, from a data transfer object.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. ",
+    "remarks": "The OleCreateStaticFromData function can convert any object, as long as it provides an IDataObject interface, to a static object. It is useful in implementing the Convert To Picture option for OLE linking or embedding. Static objects can be created only if the source supports one of the OLE-rendered clipboard formats: CF_METAFILEPICT, CF_DIB, or CF_ BITMAP, and CF_ENHMF. You can also call OleCreateStaticFromData to paste a static object from the clipboard. To determine whether an object is static, call the OleQueryCreateFromData function, which returns OLE_S_STATIC if one of CF_METAFILEPICT, CF_DIB, or CF_BITMAP is present and an OLE format is not present. This indicates that you should call OleCreateStaticFromData rather than the OleCreateFromData function to create the object. The new static object is of class CLSID_StaticMetafile (in the case of CF_METAFILEPICT) and CLSID_StaticDib (in the case of CF_DIB or CF_BITMAP). The static object sets the OLEMISC_STATIC and OLE_CANTLINKINSIDE bits returned from IOleObject::GetMiscStatus. The static object will have the aspect DVASPECT_CONTENT and a LINDEX of -1. The pSrcDataObject is still valid after OleCreateStaticFromData returns. It is the caller's responsibility to free pSrcDataObject \u00c3\u00a2\u00e2\u0082\u00ac\u00e2\u0080\u009d OLE does not release it. There cannot be more than one presentation stream in a static object. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleCreateStaticFromData",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPDATAOBJECT",
+        "name": "pSrcDataObj",
+        "description": "Pointer to the IDataObject interface on the data transfer object that holds the data from which the object will be created."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "iid",
+        "description": "Reference to the identifier of the interface with which the caller is to communicate with the new object (usually IID_IOleObject, defined in the OLE headers as the interface identifier for IOleObject)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "renderopt",
+        "description": "Value from the enumeration OLERENDER indicating the locally cached drawing or data-retrieval capabilities that the container wants in the newly created component. It is an error to pass the render options OLERENDER_NONE or OLERENDER_ASIS to this function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPFORMATETC",
+        "name": "pFormatEtc",
+        "description": "Depending on which of the OLERENDER flags is used as the value of renderopt, may be a pointer to one of the FORMATETC enumeration values. Refer to the OLERENDER enumeration for restrictions."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLECLIENTSITE",
+        "name": "pClientSite",
+        "description": "Pointer to an instance of IOleClientSite, the primary interface through which the object will request services from its container. This parameter can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the IStorage interface for storage for the object. This parameter cannot be NULL."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly created object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Called by the container to free the shared menu descriptor allocated by the OleCreateMenuDescriptor function.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID",
+    "category": "OLE and Data Transfer",
+    "name": "OleDestroyMenuDescriptor",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HOLEMENU",
+        "name": "holemenu",
+        "description": "Handle to the shared menu descriptor that was returned by the OleCreateMenuDescriptor function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Enables drawing objects more easily. You can use it instead of calling IViewObject::Draw directly.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The OleDraw helper function calls the QueryInterface method for the object specified (pUnk), asking for an IViewObject interface on that object. Then, OleDraw converts the RECT structure to a RECTL structure, and calls IViewObject::Draw as follows: Do not use this function to draw into a metafile because it does not specify the parameter required for drawing into metafiles. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleDraw",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPUNKNOWN",
+        "name": "pUnknown",
+        "description": "Pointer to the IUnknown interface on the view object that is to be drawn."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwAspect",
+        "description": "How the object is to be represented. Representations include content, an icon, a thumbnail, or a printed document. Possible values are taken from the DVASPECT enumeration."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdcDraw",
+        "description": "Device context on which to draw. Cannot be a metafile device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCRECT",
+        "name": "lprcBounds",
+        "description": "Pointer to a RECT structure specifying the rectangle in which the object should be drawn. This parameter is converted to a RECTL structure and passed to IViewObject::Draw."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Duplicates the data found in the specified handle and returns a handle to the duplicated data. The source data is in a clipboard format. Use this function to help implement some of the data transfer interfaces such as IDataObject.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "On success the HANDLE to the source data is returned; on failure a  NULL value is returned. ",
+    "remarks": "The CF_METAFILEPICT, CF_PALETTE, or CF_BITMAP formats receive special handling. They are GDI handles and a new GDI object must be created instead of just copying the bytes. All other formats are duplicated byte-wise. ",
+    "return_type": "HANDLE",
+    "category": "OLE and Data Transfer",
+    "name": "OleDuplicateData",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hSrc",
+        "description": "Handle of the source data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "CLIPFORMAT",
+        "name": "cfFormat",
+        "description": "Clipboard format of the source data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uiFlags",
+        "description": "Flags to be used to allocate global memory for the copied data. These flags are passed to GlobalAlloc. If the value of uiFlags is NULL, GMEM_MOVEABLE is used as a default flag."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves a data object that you can use to access the contents of the clipboard.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "If you are writing an application that can accept data from the clipboard, call the OleGetClipboard function to get a pointer to the IDataObject interface that you can use to retrieve the contents of the clipboard. OleGetClipboard handles three cases: In the first case, the clipboard data object returned by OleGetClipboard may forward calls as necessary to the original data object placed on the clipboard and, thus, can potentially make RPC calls. In the second case, OLE creates a default data object and returns it to the user. Because the data on the clipboard originated from an OleSetClipboard call, the OLE-provided data object contains more accurate information about the type of data on the clipboard. In particular, the original medium (TYMED) on which the data was offered is known. Thus, if a data-source application offers a particular clipboard format, for example cfFOO, on a storage object and calls the OleFlushClipboard function, the storage object is copied into memory and the hglobal memory handle is put on the clipboard. Then, when the OleGetClipboard function creates its default data object, the hglobal from the clipboard again becomes an IStorage object. Furthermore, the FORMATETC enumerator and the IDataObject::QueryGetData method would all correctly indicate that the original clipboard format (cfFOO) is again available on a TYMED_ISTORAGE. In the third case, OLE still creates a default data object, but there is no special information about the data in the clipboard formats (particularly for application-defined Clipboard formats). Thus, if an hGlobal-based storage medium were put on the clipboard directly by a call to the SetClipboardData function, the FORMATETC enumerator and the IDataObject::QueryGetData method would not indicate that the data was available on a storage medium. A call to the IDataObject::GetData method for TYMED_ISTORAGE would succeed, however. Because of these limitations, it is strongly recommended that OLE-aware applications interact with the clipboard using the OLE clipboard functions. The clipboard data object created by the OleGetClipboard function has a fairly extensive IDataObject implementation. The OLE-provided data object can convert OLE 1 clipboard format data into the representation expected by an OLE 2 caller. Also, any structured data is available on any structured or flat medium, and any flat data is available on any flat medium. However, GDI objects (such as metafiles and bitmaps) are only available on their respective mediums. Note that the tymed member of the FORMATETC structure used in the FORMATETC enumerator contains the union of supported mediums. Applications looking for specific information (such as whether CF_TEXT is available on TYMED_HGLOBAL) should do the appropriate bitmasking when checking this value. If you call the OleGetClipboard function, you should only hold on to the returned IDataObject for a very short time. It consumes resources in the application that offered it. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleGetClipboard",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPDATAOBJECT*",
+        "name": "ppDataObj",
+        "description": "Address of IDataObject pointer variable that receives the interface pointer to the clipboard data object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Initializes the COM library on the current apartment, identifies the concurrency model as single-thread apartment (STA), and enables additional functionality described in the Remarks section below. Applications must initialize the COM library before they can call COM library functions other than CoGetMalloc and memory allocation functions.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "Applications that use the following functionality must call OleInitialize before calling any other function in the COM library: OleInitialize calls CoInitializeEx internally to initialize the COM library on the current apartment. Because OLE operations are not thread-safe, OleInitialize specifies the concurrency model as single-thread apartment. Once the concurrency model for an apartment is set, it cannot be changed. A call to OleInitialize on an apartment that was previously initialized as multithreaded will fail and return RPC_E_CHANGED_MODE. You need to initialize the COM library on an apartment before you call any of the library functions except CoGetMalloc, to get a pointer to the standard allocator, and the memory allocation functions. Typically, the COM library is initialized on an apartment only once. Subsequent calls will succeed, as long as they do not attempt to change the concurrency model of the apartment, but will return S_FALSE. To close the COM library gracefully, each successful call to OleInitialize, including those that return S_FALSE, must be balanced by a corresponding call to OleUninitialize. Because there is no way to control the order in which in-process servers are loaded or unloaded, do not call OleInitialize or OleUninitialize from the DllMain function. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleInitialize",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "pvReserved",
+        "description": "This parameter is reserved and must be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines whether the data object pointer previously placed on the clipboard by the OleSetClipboard function is still on the clipboard.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "OleIsCurrentClipboard only works for the data object used in the OleSetClipboard function. It cannot be called by the consumer of the data object to determine if the object that was on the clipboard at the previous OleGetClipboard call is still on the clipboard. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleIsCurrentClipboard",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPDATAOBJECT",
+        "name": "pDataObj",
+        "description": "Pointer to the IDataObject interface on the data object containing clipboard data of interest, which the caller previously placed on the clipboard."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines whether a compound document object is currently in the running state.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "The return value is TRUE if the object is running; otherwise, it is FALSE. ",
+    "remarks": "You can use OleIsRunning and IRunnableObject::IsRunning interchangeably. OleIsRunning queries the object for a pointer to the IRunnableObject interface and calls its IRunnableObject::IsRunning method. If successful, the function returns the results of the call to IRunnableObject::IsRunning. ",
+    "return_type": "BOOL",
+    "category": "OLE and Data Transfer",
+    "name": "OleIsRunning",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOLEOBJECT",
+        "name": "pObject",
+        "description": "Pointer to the IOleObject interface on the object of interest."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Creates a new picture object and initializes it from the contents of a stream. This is equivalent to calling OleCreatePictureIndirect(NULL, ...) followed by IPersistStream::Load.",
+    "library": "OleAut32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleCtl.h",
+    "return_value": "This function supports the standard return values E_OUTOFMEMORY and E_UNEXPECTED, as well as the following:  ",
+    "remarks": "The stream must be in BMP (bitmap), JPEG, WMF (metafile), ICO (icon), or GIF format. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleLoadPicturePath",
+    "is_callback": 0,
+    "dll": "OleAut32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOLESTR",
+        "name": "szURLorPath",
+        "description": "The path or URL to the file you want to open."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPUNKNOWN",
+        "name": "punkCaller",
+        "description": "Points to IUnknown for COM aggregation."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwReserved",
+        "description": "Reserved."
+      },
+      {
+        "in_out": "_In_",
+        "type": "OLE_COLOR",
+        "name": "clrReserved",
+        "description": "The color you want to reserve to be transparent."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface describing the type of interface pointer to return in ppvRet."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvRet",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvRet contains the requested interface pointer on the storage of the object identified by the moniker. If *ppvRet is non-NULL, this function calls IUnknown::AddRef on the interface; it is the caller's responsibility to call IUnknown::Release. If an error occurs, *ppvRet is set to NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Loads an object from the stream.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  This function can also return any of the error values returned by the ReadClassStm and CoCreateInstance functions, and the IPersistStream::Load method. ",
+    "remarks": "This function can be used to load an object that supports the IPersistStream interface. The CLSID of the object must immediately precede the object's data in the stream, which is accomplished by the companion function OleSaveToStream (or the operations it wraps, which are described under that topic). If the CLSID for the stream is CLSID_NULL, the ppvObj parameter is set to NULL. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleLoadFromStream",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPSTREAM",
+        "name": "pStm",
+        "description": "Pointer to the IStream interface on the stream from which the object is to be loaded."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "iidInterface",
+        "description": "Interface identifier (IID) the caller wants to use to communicate with the object after it is loaded."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "ppvObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the newly loaded object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Creates a new picture object and initializes it from the contents of a stream. This is equivalent to calling OleCreatePictureIndirect with NULL as the first parameter, followed by a call to IPersistStream::Load.",
+    "library": "OleAut32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleCtl.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The stream must be in BMP (bitmap), WMF (metafile), or ICO (icon) format. A picture object created using OleLoadPicture always has ownership of its internal resources (fOwn==TRUE is implied). ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleLoadPicture",
+    "is_callback": 0,
+    "dll": "OleAut32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPSTREAM",
+        "name": "lpstream",
+        "description": "Pointer to the stream that contains the picture's data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "lSize",
+        "description": "The number of bytes that should be read from the stream, or zero if the entire stream should be read."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fRunmode",
+        "description": "The opposite of the initial value of the KeepOriginalFormat property. If TRUE, KeepOriginalFormat is set to FALSE and vice-versa."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface describing the type of interface pointer to return in ppvObj."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "lplpvObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the storage of the object identified by the moniker. If *ppvObj is non-NULL, this function calls IUnknown::AddRef on the interface; it is the caller's responsibility to call IUnknown::Release. If an error occurs, *ppvObj is set to NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "Creates a new picture object and initializes it from the contents of a stream. This is equivalent to calling OleCreatePictureIndirect with NULL as the first parameter, followed by a call to IPersistStream::Load.",
+    "library": "OleAut32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleCtl.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The stream must be in BMP (bitmap), WMF (metafile), or ICO (icon) format. A picture object created using OleLoadPictureEx always has ownership of its internal resources (fOwn==TRUE is implied). In addition to allowing specification of icon or cursor size, OleLoadPictureEx supports loading of color cursors. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleLoadPictureEx",
+    "is_callback": 0,
+    "dll": "OleAut32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPSTREAM",
+        "name": "lpstream",
+        "description": "Pointer to the stream that contains the picture's data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LONG",
+        "name": "lSize",
+        "description": "The number of bytes that should be read from the stream, or zero if the entire stream should be read."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fRunmode",
+        "description": "The opposite of the initial value of the KeepOriginalFormat property. If TRUE, KeepOriginalFormat is set to FALSE and vice versa."
+      },
+      {
+        "in_out": "_In_",
+        "type": "REFIID",
+        "name": "riid",
+        "description": "Reference to the identifier of the interface describing the type of interface pointer to return in ppvObj."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "xSizeDesired",
+        "description": "Desired width of icon or cursor. Valid values are 16, 32, and 48. Pass LP_DEFAULT to both size parameters to use system default size."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "ySizeDesired",
+        "description": "Desired height of icon or cursor. Valid values are 16, 32, and 48. Pass LP_DEFAULT to both size parameters to use system default size."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Desired color depth for icon or cursor. Values are LP_MONOCHROME (monochrome), LP_VGACOLOR (16 colors), LP_COLOR (256 colors), or LP_DEFAULT (selects best depth for current display)."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID*",
+        "name": "lplpvObj",
+        "description": "Address of pointer variable that receives the interface pointer requested in riid. Upon successful return, *ppvObj contains the requested interface pointer on the storage of the object identified by the moniker. If *ppvObj is non-NULL, this function calls IUnknown::AddRef on the interface; it is the caller's responsibility to call IUnknown::Release. If an error occurs, *ppvObj is set to NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Locks an already running object into its running state or unlocks it from its running state.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The OleLockRunning function saves you the trouble of calling the IRunnableObject::LockRunning method. You can use OleLockRunning and IRunnableObject::LockRunning interchangeably. With the IUnknown pointer passed in with the pUnknown parameter, OleLockRunning queries for an IRunnableObject pointer. If successful, it calls IRunnableObject::LockRunning and returns the results of the call. For more information on using this function, see IRunnableObject::LockRunning. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleLockRunning",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPUNKNOWN",
+        "name": "pUnknown",
+        "description": "Pointer to the IUnknown interface on the object, which the function uses to query for a pointer to IRunnableObject."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fLock",
+        "description": "TRUE locks the object into its running state. FALSE unlocks the object from its running state."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fLastUnlockCloses",
+        "description": "TRUE specifies that if the connection being released is the last external lock on the object, the object should close. FALSE specifies that the object should remain open until closed by the user or another process."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates a metafile in which the specified icon and label are drawn.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "A global handle to a METAFILEPICT structure containing the icon and label. The metafile uses the MM_ANISOTROPIC mapping mode. If an error occurs, the returned handle is NULL. In this case, the caller can call GetLastError to obtain further information. ",
+    "remarks": "This function is called by OleGetIconOfFile and OleGetIconOfClass. If lpszSourceFile is not NULL and iIconIndex is not 0, the name of the source file passed in lpszSourceFile and the index passed by iIconIndex are added to the created metafile as a comment record. ",
+    "return_type": "HGLOBAL",
+    "category": "OLE and Data Transfer",
+    "name": "OleMetafilePictFromIconAndLabel",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HICON",
+        "name": "hIcon",
+        "description": "Handle to the icon that is to be drawn into the metafile. This parameter can be NULL. If hIcon is NULL, this function returns NULL without creating a metafile."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLESTR",
+        "name": "lpszLabel",
+        "description": "The icon label. This parameter can be NULL. If lpszLabel is NULL, the resulting metafile will not include a label."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLESTR",
+        "name": "lpszSourceFile",
+        "description": "The path and file name of the icon file. This string can be obtained through the user interface or from the registration database. This parameter can be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "iIconIndex",
+        "description": "The location of the icon within the file named by lpszSourceFile, expressed as an offset in bytes from the beginning of file."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Increments or decrements an external reference that keeps an object in the running state.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The OleNoteObjectVisible function calls the CoLockObjectExternal function. It is provided as a separate function to reinforce the need to lock an object when it becomes visible to the user and to release the object when it becomes invisible. This creates a strong lock on behalf of the user to ensure that the object cannot be closed by its container while it is visible. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleNoteObjectVisible",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPUNKNOWN",
+        "name": "pUnknown",
+        "description": "Pointer to the IUnknown interface on the object that is to be locked or unlocked."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fVisible",
+        "description": "Whether the object is visible. If TRUE, OLE increments the reference count to hold the object visible and alive regardless of external or internal IUnknown::AddRef and IUnknown::Release operations, registrations, or revocation. If FALSE, OLE releases its hold (decrements the reference count) and the object can be closed."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Checks whether a data object has one of the formats that would allow it to become an embedded object through a call to either the OleCreateFromData or OleCreateStaticFromData function.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "When an application retrieves a data transfer object through a call to the OleGetClipboard function, the application should call OleQueryCreateFromData as part of the process of deciding to enable or disable the Edit/Paste or Edit/Paste Special... commands. It tests for the presence of the following formats in the data object: Determining that the data object has one of these formats does not absolutely guarantee that the object creation will succeed, but is intended to help the process. If OleQueryCreateFromData finds one of the CF_METAFILEPICT, CF_BITMAP, or CF_DIB formats and none of the other formats, it returns OLE_S_STATIC, indicating that you should call the OleCreateStaticFromData function to create the embedded object. If OleQueryCreateFromData finds one of the other formats (CF_EMBEDDEDOBJECT, CF_EMBEDSOURCE, or cfFileName), even in combination with the static formats, it returns S_OK, indicating that you should call the OleCreateFromData function to create the embedded object. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleQueryCreateFromData",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPDATAOBJECT",
+        "name": "pSrcDataObject",
+        "description": "Pointer to the IDataObject interface on the data transfer object to be queried."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines whether an OLE linked object (rather than an OLE embedded object) can be created from a clipboard data object.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "Returns S_OK if the OleCreateLinkFromData function can be used to create the linked object; otherwise S_FALSE. ",
+    "remarks": "The OleQueryLinkFromData function is similar to the OleQueryCreateFromData function, but determines whether an OLE linked object (rather than an OLE embedded object) can be created from the clipboard data object. If the return value is S_OK, the application can then attempt to create the object with a call to OleCreateLinkFromData. A successful return from OleQueryLinkFromData does not, however, guarantee the successful creation of a link. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleQueryLinkFromData",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPDATAOBJECT",
+        "name": "pSrcDataObject",
+        "description": "Pointer to the IDataObject interface on the clipboard data object from which the object is to be created."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Creates an enumeration object that can be used to enumerate data formats that an OLE object server has registered in the system registry. An object application or object handler calls this function when it must enumerate those formats. Developers of custom DLL object applications use this function to emulate the behavior of the default object handler.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "Object applications can ask OLE to create an enumeration object for FORMATETC structures to enumerate supported data formats in one of two ways. One way is to call OleRegEnumFormatEtc. The other is to return OLE_S_USEREG in response to calls by the default object handler to IDataObject::EnumFormatEtc. OLE_S_USEREG instructs the default handler to call OleRegEnumFormatEtc. Because DLL object applications cannot return OLE_S_USEREG, they must call OleRegEnumFormatEtc rather than delegating the job to the object handler. With the supplied IEnumFORMATETC pointer to the object, you can call the standard enumeration object methods to do the enumeration. The OleRegEnumFormatEtc function and its sibling functions, OleRegGetUserType, OleRegGetMiscStatus, and OleRegEnumVerbs, provide a way for developers of custom DLL object applications to emulate the behavior of OLE's default object handler in getting information about objects from the registry. By using these functions, you avoid the considerable work of writing your own, and the pitfalls inherent in working directly in the registry. In addition, you get future enhancements and optimizations of these functions without having to code them yourself. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleRegEnumFormatEtc",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFCLSID",
+        "name": "clsid",
+        "description": "CLSID of the class whose formats are being requested."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwDirection",
+        "description": "Indicates whether to enumerate formats that can be passed to IDataObject::GetData or formats that can be passed to IDataObject::SetData. Possible values are taken from the enumeration DATADIR."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPENUMFORMATETC*",
+        "name": "ppenum",
+        "description": "Address of IEnumFORMATETC pointer variable that receives the interface pointer to the enumeration object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Supplies an enumeration of the registered verbs for the specified class. Developers of custom DLL object applications use this function to emulate the behavior of the default object handler.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "Object applications can ask OLE to create an enumeration object for OLEVERB structures to enumerate supported verbs in one of two ways. One way is to call OleRegEnumVerbs. The other way is to return OLE_S_USEREG in response to calls by the default object handler to IOleObject::EnumVerbs. OLE_S_USEREG instructs the default handler to call OleRegEnumVerbs. Because DLL object applications cannot return OLE_S_USEREG, they must call OleRegEnumVerbs rather than delegating the job to the object handler. With the supplied IEnumOLEVERB pointer to the object, you can call the standard enumeration object methods to do the enumeration. The OleRegEnumVerbs function and its sibling functions, OleRegGetUserType, OleRegGetMiscStatus, and OleRegEnumFormatEtc, provide a way for developers of custom DLL object applications to emulate the behavior of OLE's default object handler in getting information about objects from the registry. By using these functions, you avoid the considerable work of writing your own, and the pitfalls inherent in working directly in the registry. In addition, you get future enhancements and optimizations of these functions without having to code them yourself. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleRegEnumVerbs",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFCLSID",
+        "name": "clsid",
+        "description": "Class identifier whose verbs are being requested."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPENUMOLEVERB*",
+        "name": "ppenum",
+        "description": "Address of IEnumOLEVERB* pointer variable that receives the interface pointer to the new enumeration object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Puts an OLE compound document object into the running state.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The OleRun function puts an object in the running state. The implementation of OleRun was changed in OLE 2.01 to coincide with the publication of the IRunnableObject interface. You can use OleRun and IRunnableObject::Run interchangeably. OleRun queries the object for a pointer to IRunnableObject. If successful, the function returns the results of calling the IRunnableObject::Run method. For more information on using this function, see IRunnableObject::Run. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleRun",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPUNKNOWN",
+        "name": "pUnknown",
+        "description": "Pointer to the IUnknown interface on the object, with which it will query for a pointer to the IRunnableObject interface, and then call its Run method."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Saves an object opened in transacted mode into the specified storage object.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The OleSave helper function handles the common situation in which an object is open in transacted mode and is then to be saved into the specified storage object which uses the OLE-provided compound file implementation. Transacted mode means that changes to the object are buffered until either of the IStorage::Commit or IStorage::Revert is called. Callers can handle other situations by calling the IPersistStorage and IStorage interfaces directly. OleSave does the following: ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleSave",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPPERSISTSTORAGE",
+        "name": "pPS",
+        "description": "Pointer to the IPersistStorage interface on the object to be saved."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTORAGE",
+        "name": "pStg",
+        "description": "Pointer to the IStorage interface on the destination storage object to which the object indicated in pPS is to be saved."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fSameAsLoad",
+        "description": "TRUE indicates that pStg is the same storage object from which the object was loaded or created; FALSE indicates that pStg was loaded or created from a different storage object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Saves an object with the IPersistStream interface on it to the specified stream.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  This function can also return any of the error values returned by the WriteClassStm function or the IPersistStream::Save method. ",
+    "remarks": "This function simplifies saving an object that implements the IPersistStream interface to a stream. In this stream, the object's CLSID precedes its data. When the stream is retrieved, the CLSID permits the proper code to be associated with the data. The OleSaveToStream function does the following: The companion helper, OleLoadFromStream, loads objects saved in this way. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleSaveToStream",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPPERSISTSTREAM",
+        "name": "pPStm",
+        "description": "Pointer to the IPersistStream interface on the object to be saved to the stream. The pPStm parameter cannot be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTREAM",
+        "name": "pStm",
+        "description": "Pointer to the IStream interface on the stream in which the object is to be saved."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Notifies an object that it is embedded in an OLE container, which ensures that reference counting is done correctly for containers that support links to embedded objects.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "The OleSetContainedObject function notifies an object that it is embedded in an OLE container. The implementation of OleSetContainedObject was changed in OLE 2.01 to coincide with the publication of the IRunnableObject interface. You can use OleSetContainedObject and the IRunnableObject::SetContainedObject method interchangeably. The OleSetContainedObject function queries the object for a pointer to the IRunnableObject interface. If successful, the function returns the results of calling IRunnableObject::SetContainedObject. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleSetContainedObject",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPUNKNOWN",
+        "name": "pUnknown",
+        "description": "Pointer to the IUnknown interface of the object."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fContained",
+        "description": "TRUE if the object is an embedded object; FALSE otherwise."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Installs or removes OLE dispatching code from the container's frame window.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. ",
+    "remarks": "The container should call OleSetMenuDescriptor to install the dispatching code on hwndFrame when the object calls the IOleInPlaceFrame::SetMenu method, or to remove the dispatching code by passing NULL as the value for holemenu to OleSetMenuDescriptor. If both the lpFrame and lpActiveObj parameters are non-NULL, OLE installs the context-sensitive help F1 message filter for the application. Otherwise, the application must supply its own message filter. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleSetMenuDescriptor",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HOLEMENU",
+        "name": "holemenu",
+        "description": "Handle to the composite menu descriptor returned by the OleCreateMenuDescriptor function. If NULL, the dispatching code is unhooked."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndFrame",
+        "description": "Handle to the container's frame window where the in-place composite menu is to be installed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndActiveObject",
+        "description": "Handle to the object's in-place activation window. OLE dispatches menu messages and commands to this window."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLEINPLACEFRAME",
+        "name": "lpFrame",
+        "description": "Pointer to the IOleInPlaceFrame interface on the container's frame window."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLEINPLACEACTIVEOBJECT",
+        "name": "lpActiveObj",
+        "description": "Pointer to the IOleInPlaceActiveObject interface on the active in-place object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Called by the object application, allows an object's container to translate accelerators according to the container's accelerator table.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "Object servers call OleTranslateAccelerator to allow the object's container to translate accelerator keystrokes according to the container's accelerator table, pointed to by lpFrameInfo. While a contained object is the active object, the object's server always has first chance at translating any messages received. If this is not desired, the server calls OleTranslateAccelerator to give the object's container a chance. If the keyboard input matches an accelerator found in the container-provided accelerator table, OleTranslateAccelerator passes the message and its command identifier on to the container through the IOleInPlaceFrame::TranslateAccelerator method. This method returns S_OK if the keystroke is consumed; otherwise it returns S_FALSE. Accelerator tables for containers should be defined so they will work properly with object applications that do their own accelerator keystroke translations. These tables should take the form: This is the most common way to describe keyboard accelerators. Failure to do so can result in keystrokes being lost or sent to the wrong object during an in-place session. Objects can call the IsAccelerator function to see whether the accelerator keystroke belongs to the object or the container. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "OleTranslateAccelerator",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOLEINPLACEFRAME",
+        "name": "lpFrame",
+        "description": "Pointer to the IOleInPlaceFrame interface to which the keystroke might be sent."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPOLEINPLACEFRAMEINFO",
+        "name": "lpFrameInfo",
+        "description": "Pointer to an OLEINPLACEFRAMEINFO structure containing the accelerator table obtained from the container."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPMSG",
+        "name": "lpmsg",
+        "description": "Pointer to an MSG structure containing the keystroke."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 9,
+    "description": "Adds the Verb menu for the specified object to the specified menu.",
+    "library": "OleDlg.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleDlg.h",
+    "return_value": "This function returns TRUE if lpOleObj was valid and at least one verb was added to the menu. A FALSE return indicates that lpOleObj was NULL and a disabled default menu item was created. ",
+    "remarks": "If the object has one verb, the verb is added directly to the given menu. ",
+    "return_type": "BOOL",
+    "category": "OLE and Data Transfer",
+    "name": "OleUIAddVerbMenu",
+    "is_callback": 0,
+    "dll": "OleDlg.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "LPOLEOBJECT",
+        "name": "lpOleObj",
+        "description": "Pointer to the IOleObject interface on the selected object. If this is NULL, then a default disabled menu item is created."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpszShortType",
+        "description": "Pointer to the short name defined in the registry (AuxName==2) for the object identified with lpOleObj. If the string is not known, then NULL may be passed. If NULL is passed, IOleObject::GetUserType is called to retrieve it. If the caller has easy access to the string, it is faster to pass it in."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HMENU",
+        "name": "hMenu",
+        "description": "Handle to the menu in which to make modifications."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uPos",
+        "description": "Position of the menu item."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uIDVerbMin",
+        "description": "The identifier value at which to start the verbs."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uIDVerbMax",
+        "description": "The maximum identifier value to be used for object verbs. If uIDVerbMax is 0, then no maximum identifier value is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "bAddConvert",
+        "description": "Indicates whether to add a Convert item to the bottom of the menu (preceded by a separator)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "idConvert",
+        "description": "The identifier value to use for the Convert menu item, if bAddConvert is TRUE."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "HMENU*",
+        "name": "lphMenu",
+        "description": "An HMENU pointer to the cascading verb menu if it's created. If there is only one verb, this will be filled with NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Invokes the standard Busy dialog box, allowing the user to manage concurrency.",
+    "library": "OleDlg.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleDlg.h",
+    "return_value": "This function returns the following values:  Standard Success/Error Definitions   Standard Field Validation Errors   Initialization Errors   Function Specific Errors  ",
+    "remarks": "The standard OLE Server Busy dialog box notifies the user that the server application is not receiving messages. The dialog box then asks the user to cancel the operation, switch to the task that is blocked, or continue waiting. ",
+    "return_type": "UINT",
+    "category": "OLE and Data Transfer",
+    "name": "OleUIBusy",
+    "is_callback": 0,
+    "dll": "OleDlg.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOLEUIBUSY",
+        "name": "lpBZ",
+        "description": "Pointer to an OLEUIBUSY structure that contains information used to initialize the dialog box."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Determines if there are any OLE object classes in the registry that can be used to convert or activate the specified CLSID from.",
+    "library": "OleDlg.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleDlg.h",
+    "return_value": "This function returns TRUE if the specified class can be converted to another class; FALSE otherwise. ",
+    "remarks": "OleUICanConvertOrActivateAs searches the registry for classes that include wFormat in their \\Conversion\\Readable\\Main, \\Conversion\\ReadWriteable\\Main, and \\DataFormats\\DefaultFile entries. This function is useful for determining if a Convert... menu item should be disabled. If the CF_DISABLEDISPLAYASICON flag is specified in the call to OleUIConvert, then the Convert... menu item should be enabled only if OleUICanConvertOrActivateAs returns TRUE. ",
+    "return_type": "BOOL",
+    "category": "OLE and Data Transfer",
+    "name": "OleUICanConvertOrActivateAs",
+    "is_callback": 0,
+    "dll": "OleDlg.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "REFCLSID",
+        "name": "rClsid",
+        "description": "The CLSID of the class for which the information is required."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fIsLinkedObject",
+        "description": "TRUE if the original object is a linked object; FALSE otherwise."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "wFormat",
+        "description": "Format of the original class."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Invokes the standard Change Icon dialog box, which allows the user to select an icon from an icon file, executable, or DLL.",
+    "library": "OleDlg.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleDlg.h",
+    "return_value": " Standard Success/Error Definitions   Standard Field Validation Errors   Initialization Errors   Function Specific Errors  ",
+    "remarks": "OleUIChangeIcon uses information contained in the OLEUICHANGEICON structure. ",
+    "return_type": "UINT",
+    "category": "OLE and Data Transfer",
+    "name": "OleUIChangeIcon",
+    "is_callback": 0,
+    "dll": "OleDlg.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOLEUICHANGEICON",
+        "name": "lpCI",
+        "description": "Pointer to the In/Out OLEUICHANGEICON structure for this dialog box."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Invokes the Change Source dialog box, allowing the user to change the source of a link.",
+    "library": "OleDlg.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleDlg.h",
+    "return_value": " Standard Success/Error Definitions   Standard Field Validation Errors   Initialization Errors   Function Specific Errors  ",
+    "remarks": "The link source is not changed by the Change Source dialog box itself. Instead, it is up to the caller to change the link source using the returned file and item strings. The Edit Links dialog box typically does this for the caller. ",
+    "return_type": "UINT",
+    "category": "OLE and Data Transfer",
+    "name": "OleUIChangeSource",
+    "is_callback": 0,
+    "dll": "OleDlg.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOLEUICHANGESOURCE",
+        "name": "lpCS",
+        "description": "Pointer to the in-out OLEUICHANGESOURCE structure for this dialog box."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Invokes the standard Convert dialog box, allowing the user to change the type of a single specified object, or the type of all OLE objects of the specified object's class.",
+    "library": "OleDlg.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleDlg.h",
+    "return_value": " Standard Success/Error Definitions   Standard Field Validation Errors   Initialization Errors   Function Specific Errors  ",
+    "remarks": "OleUIConvert populates the Convert dialog box's list box with object classes by traversing the registry and looking for entries in the Readable and ReadWritable keys. Every class that includes the original class' default file format in its Readable key is added to the Convert list, and every class that includes the original class' default file format in its ReadWritable key is added to the Activate As list. The Convert list is shown in the dialog box's list box when the Convert radio button is selected (the default selection), and the Activate As list is shown when Activate As is selected. Note that you can change the type of all objects of a given class only when CF_CONVERTONLY is not specified. The convert command, which invokes this function, should only be made available to the user if OleUICanConvertOrActivateAs returns S_OK. ",
+    "return_type": "UINT",
+    "category": "OLE and Data Transfer",
+    "name": "OleUIConvert",
+    "is_callback": 0,
+    "dll": "OleDlg.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOLEUICONVERT",
+        "name": "lpCV",
+        "description": "Pointer to an OLEUICONVERT structure that contains information used to initialize the dialog box."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Invokes the standard Links dialog box, allowing the user to make modifications to a container's linked objects.",
+    "library": "OleDlg.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleDlg.h",
+    "return_value": " Standard Success/Error Definitions   Standard Field Validation Errors   Initialization Errors   Function Specific Errors  ",
+    "remarks": "",
+    "return_type": "UINT",
+    "category": "OLE and Data Transfer",
+    "name": "OleUIEditLinks",
+    "is_callback": 0,
+    "dll": "OleDlg.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOLEUIEDITLINKS",
+        "name": "lpEL",
+        "description": "Pointer to an OLEUIEDITLINKS structure that contains information used to initialize the dialog box."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Invokes the standard Insert Object dialog box, which allows the user to select an object source and class name, as well as the option of displaying the object as itself or as an icon.",
+    "library": "OleDlg.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleDlg.h",
+    "return_value": " Standard Success/Error Definitions   Standard Field Validation Errors   Initialization Errors   Function Specific Errors  ",
+    "remarks": "OleUIInsertObject allows the user to select the type of object to be inserted from a list box containing the object applications registered on the user's system. To populate that list box, OleUIInsertObject traverses the registry, adding every object server it finds that meets the following criteria: By default, OleUIInsertObject does not validate object servers, however, if the IOF_VERIFYSERVEREXIST flag is included in the dwFlags member of the OLEUIINSERTOBJECT structure, OleUIInsertObject verifies that the server exists. If it does not exist, then the server's object is not added to the list of available objects. Server validation is a time-extensive operation and is a significant performance factor. To free an HMETAFILEPICT returned from the Insert Object or Paste Special dialog box, delete the attached metafile on the handle, as follows: ",
+    "return_type": "UINT",
+    "category": "OLE and Data Transfer",
+    "name": "OleUIInsertObject",
+    "is_callback": 0,
+    "dll": "OleDlg.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOLEUIINSERTOBJECT",
+        "name": "lpIO",
+        "description": "Pointer to the in-out OLEUIINSERTOBJECT structure for this dialog box."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Invokes the Object Properties dialog box, which displays General, View, and Link information about an object.",
+    "library": "OleDlg.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleDlg.h",
+    "return_value": " Standard Success/Error Definitions   Standard Field Validation Errors  Initialization Errors  Initialization Errors   Function Specific Errors  ",
+    "remarks": "OleUIObjectProperties is passed an OLEUIOBJECTPROPS structure, which supplies the information needed to fill in the General, View, and Link tabs of the Object Properties dialog box. ",
+    "return_type": "UINT",
+    "category": "OLE and Data Transfer",
+    "name": "OleUIObjectProperties",
+    "is_callback": 0,
+    "dll": "OleDlg.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOLEUIOBJECTPROPS",
+        "name": "lpOF",
+        "description": "Pointer to the OLEUIOBJECTPROPS structure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Invokes the standard Paste Special dialog box, allowing the user to select the format of the clipboard object to be pasted or paste-linked.",
+    "library": "OleDlg.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleDlg.h",
+    "return_value": " Standard Success/Error Definitions   Standard Field Validation Errors   Initialization Errors   Function Specific Errors  ",
+    "remarks": "The design of the Paste Special dialog box assumes that if you are willing to permit a user to link to an object, you are also willing to permit the user to embed that object. For this reason, if any of the OLEUIPASTE_LINKTYPE flags associated with the OLEUIPASTEFLAG enumeration are set, then the OLEUIPASTE_PASTE flag must also be set in order for the data formats to appear in the Paste Special dialog box. The text displayed in the Source field of the standard Paste Special dialog box, which is implemented in Oledlg32.dll, is the null-terminated string whose offset in bytes is specified in the dwSrcofCopy member of the OBJECTDESCRIPTOR structure for the object to be pasted. If an OBJECTDESCRIPTOR structure is not available for this object, the dialog box displays whatever text may be associated with CF_LINKSOURCEDESCRIPTOR. If neither structure is available, the dialog box looks for CF_FILENAME. If CF_FILENAME is not found, the dialog box displays the string \"Unknown Source\". To free an HMETAFILEPICT returned from the Insert Object or Paste Special dialog box, delete the attached metafile on the handle, as follows. ",
+    "return_type": "UINT",
+    "category": "OLE and Data Transfer",
+    "name": "OleUIPasteSpecial",
+    "is_callback": 0,
+    "dll": "OleDlg.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOLEUIPASTESPECIAL",
+        "name": "lpPS",
+        "description": "A pointer to an OLEUIPASTESPECIAL structure."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Displays a dialog box with the specified template and returns the response (button identifier) from the user. This function is used to display OLE warning messages, for example, Class Not Registered.",
+    "library": "OleDlg.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleDlg.h",
+    "return_value": " Standard Success/Error Definitions   Standard Field Validation Errors   Initialization Errors   Function Specific Errors  ",
+    "remarks": "The following dialog box templates are defined in Windows Interface Guidelines--A Guide for Designing Software. The nTemplate parameter must be a currently defined resource, however, additional templates can be added to prompt.dlg. ",
+    "return_type": "int __cdecl",
+    "category": "OLE and Data Transfer",
+    "name": "OleUIPromptUser",
+    "is_callback": 0,
+    "dll": "OleDlg.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nTemplate",
+        "description": "The resource number of the dialog box to be displayed. See Remarks."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndParent",
+        "description": "The handle to the parent window of the dialog box."
+      },
+      {
+        "in_out": "",
+        "type": "_In_",
+        "name": "...",
+        "description": "Optional. The title of the dialog box followed by a list of arguments for the format string in the static control (IDC_PU_TEXT) of the dialog box. The caller must be sure to pass the correct number and types of arguments."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Updates all links in the link container and displays a dialog box that shows the progress of the updating process. The process is stopped if the user presses the Stop button or when all links are processed.",
+    "library": "OleDlg.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "OleDlg.h",
+    "return_value": "Returns TRUE if the links were successfully updated; otherwise, FALSE. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "OLE and Data Transfer",
+    "name": "OleUIUpdateLinks",
+    "is_callback": 0,
+    "dll": "OleDlg.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPOLEUILINKCONTAINERW",
+        "name": "lpOleUILinkCntr",
+        "description": "Pointer to the IOleUILinkContainer interface on the link container."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwndParent",
+        "description": "Parent window of the dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszTitle",
+        "description": "Pointer to the title of the dialog box."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cLinks",
+        "description": "Total number of links."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Closes the COM library on the apartment, releases any class factories, other COM objects, or servers held by the apartment, disables RPC on the apartment, and frees any resources the apartment maintains.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "Call OleUninitialize on application shutdown, as the last COM library call, if the apartment was initialized with a call to OleInitialize. OleUninitialize calls the CoUninitialize function internally to shut down the OLE Component Object(COM) Library. If the COM library was initialized on the apartment with a call to CoInitialize or CoInitializeEx, it must be closed with a call to CoUninitialize. The OleInitialize and OleUninitialize calls must be balanced \u00c3\u00a2\u00e2\u0082\u00ac\u00e2\u0080\u009d if there are multiple calls to the OleInitialize function, there must be the same number of calls to OleUninitialize; only the OleUninitialize call corresponding to the OleInitialize call that actually initialized the library can close it. Because there is no way to control the order in which in-process servers are loaded or unloaded, do not call OleInitialize or OleUninitialize from the DllMain function. ",
+    "return_type": "void",
+    "category": "OLE and Data Transfer",
+    "name": "OleUninitialize",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Registers the specified window as one that can be the target of an OLE drag-and-drop operation and specifies the IDropTarget instance to use for drop operations.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "If your application can accept dropped objects during OLE drag-and-drop operations, you must call the RegisterDragDrop function. Do this whenever one of your application windows is available as a potential drop target, i.e., when the window appears unobscured on the screen. The application thread that calls the RegisterDragDrop function must be pumping messages, presumably by calling the GetMessage function with a NULLhWnd parameter, because OLE creates windows on the thread that need messages processed. If this requirement is not met, any application that drags an object over the window that is registered as a drop target will hang until the target application closes. The RegisterDragDrop function only registers one window at a time, so you must call it for each application window capable of accepting dropped objects. As the mouse passes over unobscured portions of the target window during an OLE drag-and-drop operation, the DoDragDrop function calls the specified IDropTarget::DragOver method for the current window. When a drop operation actually occurs in a given window, the DoDragDrop function calls IDropTarget::Drop. The RegisterDragDrop function also calls the IUnknown::AddRef method on the IDropTarget pointer. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "RegisterDragDrop",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Handle to a window that can be a target for an OLE drag-and-drop operation."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPDROPTARGET",
+        "name": "pDropTarget",
+        "description": "Pointer to the IDropTarget interface on the object that is to be the target of a drag-and-drop operation in a specified window. This interface is used to communicate OLE drag-and-drop information for that window."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Frees the specified storage medium.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function does not return a value. ",
+    "remarks": "The ReleaseStgMedium function calls the appropriate method or function to release the specified storage medium. Use this function during data transfer operations where storage medium structures are parameters, such as IDataObject::GetData or IDataObject::SetData. In addition to identifying the type of the storage medium, this structure specifies the appropriate Release method for releasing the storage medium when it is no longer needed. It is common to pass a STGMEDIUM from one body of code to another, such as in IDataObject::GetData, in which the one called can allocate a medium and return it to the caller. ReleaseStgMedium permits flexibility in whether the receiving body of code owns the medium, or whether the original provider of the medium still owns it, in which case the receiving code needs to inform the provider that it can free the medium. When the original provider of the medium is responsible for freeing the medium, the provider calls ReleaseStgMedium, specifying the medium and the appropriate IUnknown pointer as the punkForRelease structure member. Depending on the type of storage medium being freed, one of the following actions is taken, followed by a call to the IUnknown::Release method on the specified IUnknown pointer.  The provider indicates that the receiver of the medium is responsible for freeing the medium by specifying NULL for the punkForRelease structure member. Then the receiver calls ReleaseStgMedium, which makes a call as described in the following table depending on the type of storage medium being freed.  In either case, after the call to ReleaseStgMedium, the specified storage medium is invalid and can no longer be used. ",
+    "return_type": "void",
+    "category": "OLE and Data Transfer",
+    "name": "ReleaseStgMedium",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPSTGMEDIUM",
+        "name": "pMedium",
+        "description": "Pointer to the storage medium that is to be freed."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Revokes the registration of the specified application window as a potential target for OLE drag-and-drop operations.",
+    "library": "Ole32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Ole2.h",
+    "return_value": "This function returns S_OK on success. Other possible values include the following.  ",
+    "remarks": "When your application window is no longer available as a potential target for an OLE drag-and-drop operation, you must call RevokeDragDrop. This function calls the IUnknown::Release method for your drop target interface. ",
+    "return_type": "HRESULT",
+    "category": "OLE and Data Transfer",
+    "name": "RevokeDragDrop",
+    "is_callback": 0,
+    "dll": "Ole32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Handle to a window previously registered as a target for an OLE drag-and-drop operation."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]

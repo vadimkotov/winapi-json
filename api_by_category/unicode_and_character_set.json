@@ -1,0 +1,447 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Retrieves a character set identifier for the font that is currently selected into a specified device context.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If successful, returns a value identifying the character set of the font that is currently selected into the specified device context. The following character set identifiers are defined: If the function fails, it returns DEFAULT_CHARSET. ",
+    "remarks": "",
+    "return_type": "int",
+    "category": "Unicode and Character Set",
+    "name": "GetTextCharset",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Handle to a device context. The function obtains a character set identifier for the font that is selected into this device context."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Retrieves information about the character set of the font that is currently selected into a specified device context.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If successful, returns a value identifying the character set of the font currently selected into the specified device context. The following character set identifiers are defined: If the function fails, the return value is DEFAULT_CHARSET. ",
+    "remarks": "",
+    "return_type": "int",
+    "category": "Unicode and Character Set",
+    "name": "GetTextCharsetInfo",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "Handle to a device context. The function obtains information about the font that is selected into this device context."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPFONTSIGNATURE",
+        "name": "lpSig",
+        "description": "Pointer to a FONTSIGNATURE data structure that receives font-signature information. If a TrueType font is currently selected into the device context, the FONTSIGNATURE structure receives information that identifies the code page and Unicode subranges for which the font provides glyphs. If a font other than TrueType is currently selected into the device context, the FONTSIGNATURE structure receives zeros. In this case, the application should use the TranslateCharsetInfo function to obtain generic font-signature information for the character set. The lpSig parameter specifies NULL if the application does not require the FONTSIGNATURE information. In this case, the application can also call the       GetTextCharset function, which is equivalent to calling       GetTextCharsetInfo with lpSig set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Reserved; must be set to 0."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Determines if a specified character is a lead byte for the system default Windows ANSI code page      (CP_ACP). A lead byte is the first byte of a two-byte character in a      double-byte character set (DBCS) for the code      page.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns a nonzero value if the test character is potentially a lead byte. The function returns 0 if the test         character is not a lead byte or if it is a single-byte character. To get extended error information, the         application can call GetLastError. ",
+    "remarks": "In general, instead of attempting low-level manipulation of code page data, applications should use      MultiByteToWideChar to convert the      data to UTF-16 and work with it in that encoding. Lead byte values are specific to each distinct DBCS. Some byte values can appear in a single code page as both      the lead and trail byte of a DBCS character. To make sense of a DBCS string, an application normally starts at the beginning of a string and scans forward,      keeping track when it encounters a lead byte, and treating the next byte as the trailing part of the same      character. If the application must back up, it should use      CharPrev instead of attempting to develop its own      algorithm. ",
+    "return_type": "BOOL",
+    "category": "Unicode and Character Set",
+    "name": "IsDBCSLeadByte",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "TestChar",
+        "description": "The character to test."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Determines if a specified character is potentially a lead byte. A lead byte is the first byte of a two-byte character in a double-byte character set (DBCS) for the code page.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winnls.h (include Windows.h)",
+    "return_value": "Returns a nonzero value if the byte is a lead byte. The function returns 0 if the byte is not a lead byte or if the character is a single-byte character. To get extended error information, the application can call GetLastError. ",
+    "remarks": "In general, instead of attempting low-level manipulation of code page data, applications should use MultiByteToWideChar to convert the data to UTF-16 and work with it in that encoding. Lead byte values are specific to each distinct DBCS. Some byte values can appear in a single code page as both the lead and trail byte of a DBCS character. Thus, IsDBCSLeadByteEx can only indicate a potential lead byte value. To make sense of a DBCS string, an application normally starts at the beginning of the string and scans forward, keeping track when it encounters a lead byte, and treating the next byte as the trailing part of the same character. To back up, the application should use CharPrevExA instead of attempting to develop its own algorithm. ",
+    "return_type": "BOOL",
+    "category": "Unicode and Character Set",
+    "name": "IsDBCSLeadByteEx",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "CodePage",
+        "description": "Identifier of the code page used to check lead byte ranges. This parameter can be one of the code page identifiers defined in Unicode and Character Set Constants or one of the following predefined values. This function validates lead byte values only in code pages 932, 936, 949, 950, and 1361.  ValueMeaning  CP_ACP   Use system default Windows ANSI code page.   CP_MACCP                    Use the system default Macintosh code page.   CP_OEMCP   Use system default OEM code page.   CP_THREAD_ACP                    Use the Windows ANSI code page for the current thread."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BYTE",
+        "name": "TestChar",
+        "description": "The character to test."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Determines if a buffer is likely to contain a form of Unicode text.",
+    "library": "Advapi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winbase.h (include Windows.h)",
+    "return_value": "Returns a nonzero value if the data in the buffer passes the specified tests. The function returns 0 if the data in the buffer does not pass the specified tests. ",
+    "remarks": "This function uses various statistical and deterministic methods to make its determination, under the control of flags passed in the lpiResult parameter. When the function returns, the results of such tests are reported using the same parameter. The IS_TEXT_UNICODE_STATISTICS and IS_TEXT_UNICODE_REVERSE_STATISTICS tests use statistical analysis. These tests are not foolproof. The statistical tests assume certain amounts of variation between low and high bytes in a string, and some ASCII strings can slip through. For example, if lpv indicates the ASCII string 0x41, 0x0A, 0x0D, 0x1D (A\\n\\r^Z), the string passes the IS_TEXT_UNICODE_STATISTICS test, although failure would be preferable. ",
+    "return_type": "BOOL",
+    "category": "Unicode and Character Set",
+    "name": "IsTextUnicode",
+    "is_callback": 0,
+    "dll": "Advapi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "const VOID*",
+        "name": "lpv",
+        "description": "Pointer to the input buffer to examine."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iSize",
+        "description": "Size, in bytes, of the input buffer indicated by lpv."
+      },
+      {
+        "in_out": "_Inout_opt_",
+        "type": "LPINT",
+        "name": "lpiResult",
+        "description": "On input, pointer to the tests to apply to the input buffer text. On output, this parameter receives the results of the specified tests: 1 if the contents of the buffer pass a test, 0 for failure. Only flags that are set upon input to the function are significant upon output. If lpiResult is NULL, the function uses all available tests to determine if the data in the buffer is likely to be Unicode text. This parameter can be one or more of the following values. Values can be combined with binary \"OR\".  ValueMeaning  IS_TEXT_UNICODE_ASCII16   The text is Unicode, and contains only zero-extended ASCII values/characters.   IS_TEXT_UNICODE_REVERSE_ASCII16   Same as the preceding, except that the Unicode text is byte-reversed.   IS_TEXT_UNICODE_STATISTICS   The text is probably Unicode, with the determination made by applying statistical analysis. Absolute certainty is not guaranteed. See the Remarks section.   IS_TEXT_UNICODE_REVERSE_STATISTICS   Same as the preceding, except that the text that is probably Unicode is byte-reversed.   IS_TEXT_UNICODE_CONTROLS   The text contains Unicode representations of one or more of these nonprinting characters: RETURN, LINEFEED, SPACE, CJK_SPACE, TAB.   IS_TEXT_UNICODE_REVERSE_CONTROLS   Same as the preceding, except that the Unicode characters are byte-reversed.   IS_TEXT_UNICODE_BUFFER_TOO_SMALL   There are too few characters in the buffer for meaningful analysis (fewer than two bytes).   IS_TEXT_UNICODE_SIGNATURE   The text contains the Unicode byte-order mark (BOM) 0xFEFF as its first character.   IS_TEXT_UNICODE_REVERSE_SIGNATURE   The text contains the Unicode byte-reversed byte-order mark (Reverse BOM) 0xFFFE as its first character.   IS_TEXT_UNICODE_ILLEGAL_CHARS   The text contains one of these Unicode-illegal characters: embedded Reverse BOM, UNICODE_NUL, CRLF (packed into one word), or 0xFFFF.   IS_TEXT_UNICODE_ODD_LENGTH   The number of characters in the string is odd. A string of odd length cannot (by definition) be Unicode text.   IS_TEXT_UNICODE_NULL_BYTES   The text contains null bytes, which indicate non-ASCII text.   IS_TEXT_UNICODE_UNICODE_MASK   The value is a combination of IS_TEXT_UNICODE_ASCII16, IS_TEXT_UNICODE_STATISTICS, IS_TEXT_UNICODE_CONTROLS, IS_TEXT_UNICODE_SIGNATURE.   IS_TEXT_UNICODE_REVERSE_MASK   The value is a combination of IS_TEXT_UNICODE_REVERSE_ASCII16, IS_TEXT_UNICODE_REVERSE_STATISTICS, IS_TEXT_UNICODE_REVERSE_CONTROLS, IS_TEXT_UNICODE_REVERSE_SIGNATURE.   IS_TEXT_UNICODE_NOT_UNICODE_MASK   The value is a combination of IS_TEXT_UNICODE_ILLEGAL_CHARS, IS_TEXT_UNICODE_ODD_LENGTH, and two currently unused bit flags.   IS_TEXT_UNICODE_NOT_ASCII_MASK   The value is a combination of IS_TEXT_UNICODE_NULL_BYTES and three currently unused bit flags."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Maps a character string to a UTF-16 (wide character) string. The character string is not necessarily from a multibyte character set.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Stringapiset.h (include Windows.h)",
+    "return_value": "Returns the number of characters written to the buffer indicated by lpWideCharStr if successful. If the function succeeds and cchWideChar is 0, the return value is the required size, in characters, for the buffer indicated by lpWideCharStr. If the input byte/char sequences are invalid, returns U+FFFD for UTF encodings. The function returns 0 if it does not succeed. To get extended error information, the application can call GetLastError, which can return one of the following error codes: ",
+    "remarks": "The default behavior of this function is to translate to a precomposed form of the input character string. If a precomposed form does not exist, the function attempts to translate to a composite form. The use of the MB_PRECOMPOSED flag has very little effect on most code pages because most input data is composed already. Consider calling NormalizeString after converting with MultiByteToWideChar. NormalizeString provides more accurate, standard, and consistent data, and can also be faster. Note that for the NORM_FORM enumeration being passed to NormalizeString, NormalizationC corresponds to MB_PRECOMPOSED and NormalizationD corresponds to MB_COMPOSITE. As mentioned in the caution above, the output buffer can easily be overrun if this function is not first called with cchWideChar set to 0 in order to obtain the required size. If the MB_COMPOSITE flag is used, the output can be three or more characters long for each input character. The lpMultiByteStr and lpWideCharStr pointers must not be the same. If they are the same, the function fails, and GetLastError returns the value ERROR_INVALID_PARAMETER. MultiByteToWideChar does not null-terminate an output string if the input string length is explicitly specified without a terminating null character. To null-terminate an output string for this function, the application should pass in -1 or explicitly count the terminating null character for the input string. The function fails if MB_ERR_INVALID_CHARS is set and an invalid character is encountered in the source string. An invalid character is one of the following: Starting with Windows Vista, this function fully conforms with the Unicode 4.1 specification for UTF-8 and UTF-16. The function used on earlier operating systems encodes or decodes lone surrogate halves or mismatched surrogate pairs. Code written in earlier versions of Windows that rely on this behavior to encode random non-text binary data might run into problems. However, code that uses this function on valid UTF-8 strings will behave the same way as on earlier Windows operating systems. Windows XP: To prevent the security problem of the non-shortest-form versions of UTF-8 characters, MultiByteToWideChar deletes these characters. Starting with Windows 8: MultiByteToWideChar  is declared in Stringapiset.h. Before Windows 8, it was declared in Winnls.h. ",
+    "return_type": "int",
+    "category": "Unicode and Character Set",
+    "name": "MultiByteToWideChar",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "CodePage",
+        "description": "Code page to use in performing the conversion. This parameter can be set to the value of any code page that is installed or available in the operating system. For a list of code pages, see Code Page Identifiers. Your application can also specify one of the values shown in the following table.  ValueMeaning  CP_ACP   The system default Windows ANSI code page.  Note  This value can be different on different computers, even on the same network. It can be changed on the same computer, leading to stored data becoming irrecoverably corrupted. This value is only intended for temporary use and permanent storage should use UTF-16 or UTF-8 if possible.     CP_MACCP   The current system Macintosh code page.  Note  This value can be different on different computers, even on the same network. It can be changed on the same computer, leading to stored data becoming irrecoverably corrupted. This value is only intended for temporary use and permanent storage should use UTF-16 or UTF-8 if possible.   Note   This value is used primarily in legacy code and should not generally be needed since modern Macintosh computers use Unicode for encoding.     CP_OEMCP   The current system OEM code page.  Note  This value can be different on different computers, even on the same network. It can be changed on the same computer, leading to stored data becoming irrecoverably corrupted. This value is only intended for temporary use and permanent storage should use UTF-16 or UTF-8 if possible.     CP_SYMBOL                    Symbol code page (42).   CP_THREAD_ACP                    The Windows ANSI code page for the current thread.  Note  This value can be different on different computers, even on the same network. It can be changed on the same computer, leading to stored data becoming irrecoverably corrupted. This value is only intended for temporary use and permanent storage should use UTF-16 or UTF-8 if possible.     CP_UTF7   UTF-7. Use this value only when forced by a 7-bit transport mechanism. Use of UTF-8 is preferred.   CP_UTF8                    UTF-8."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags indicating the conversion type. ..."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCSTR",
+        "name": "lpMultiByteStr",
+        "description": "Pointer to the character string to convert."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cbMultiByte",
+        "description": "Size, in bytes, of the string indicated by the lpMultiByteStr parameter. Alternatively, this parameter can be set to -1 if the string is null-terminated. Note that, if cbMultiByte is 0, the function fails. If this parameter is -1, the function processes the entire input string, including the terminating null character. Therefore, the resulting Unicode string has a terminating null character, and the length returned by the function includes this character. If this parameter is set to a positive integer, the function processes exactly the specified number of bytes. If the provided size does not include a terminating null character, the resulting Unicode string is not null-terminated, and the returned length does not include this character."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPWSTR",
+        "name": "lpWideCharStr",
+        "description": "Pointer to a buffer that receives the converted string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchWideChar",
+        "description": "Size, in characters, of the buffer indicated by lpWideCharStr. If this value is 0, the function returns the required buffer size, in characters, including any terminating null character, and makes no use of the lpWideCharStr buffer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Translates character set information and sets all members of a destination structure to appropriate values.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "Returns a nonzero value if successful, or 0 otherwise. To get extended error information, the application can call GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Unicode and Character Set",
+    "name": "TranslateCharsetInfo",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_Inout_",
+        "type": "DWORD FAR*",
+        "name": "lpSrc",
+        "description": "Pointer to the fsCsb member of a FONTSIGNATURE structure if dwFlags is set to TCI_SRCFONTSIG. Otherwise, this parameter is set to a DWORD value indicating the source."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPCHARSETINFO",
+        "name": "lpCs",
+        "description": "Pointer to a CHARSETINFO structure that receives the translated character set information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags specifying how to perform the translation. This parameter can be one of the following values.  ValueMeaning  TCI_SRCCHARSET   Source contains the character set value in the low word, and 0 in the high word.   TCI_SRCCODEPAGE   Source is a code page identifier in the low word and 0 in the high word.   TCI_SRCFONTSIG   Source is the code page bitfield portion of a FONTSIGNATURE structure. On input this should have only one Windows code-page bit set, either for an ANSI code page value or for a common ANSI and OEM value (for OEM values, bits 32-63 must be clear). On output, this has only one bit set. If the TCI_SRCFONTSIG value is given, the lpSrc parameter must be the address of the code-page bitfield. If any other TCI_ value is given, the lpSrc parameter must be a value not an address.   TCI_SRCLOCALE   Windows 2000: Source is the locale identifier (LCID) or language identifier of the keyboard layout. If it is a language identifier, the value is in the low word."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "Maps a UTF-16 (wide character) string to a new character string. The new character string is not necessarily from a multibyte character set.",
+    "library": "Kernel32.lib",
+    "min_server": "Windows 2000 Server [desktop apps | Windows Store apps]",
+    "header": "Stringapiset.h (include Windows.h)",
+    "return_value": "Returns the number of bytes written to the buffer pointed to by lpMultiByteStr if successful. If the function succeeds and cbMultiByte is 0, the return value is the required size, in bytes, for the buffer indicated by lpMultiByteStr. If the input byte/char sequences are invalid, returns U+FFFD for UTF encodings. The function returns 0 if it does not succeed. To get extended error information, the application can call GetLastError, which can return one of the following error codes: ",
+    "remarks": "The lpMultiByteStr and lpWideCharStr pointers must not be the same. If they are the same, the function fails, and GetLastError returns ERROR_INVALID_PARAMETER. WideCharToMultiByte does not null-terminate an output string if the input string length is explicitly specified without a terminating null character. To null-terminate an output string for this function, the application should pass in -1 or explicitly count the terminating null character for the input string. If cbMultiByte is less than cchWideChar, this function writes the number of characters specified by cbMultiByte to the buffer indicated by lpMultiByteStr. However, if CodePage is set to CP_SYMBOL and cbMultiByte is less than cchWideChar, the function writes no characters to lpMultiByteStr. The WideCharToMultiByte function operates most efficiently when both lpDefaultChar and lpUsedDefaultChar are set to NULL. The following table shows the behavior of the function for the four possible combinations of these parameters.  Starting with Windows Vista, this function fully conforms with the Unicode 4.1 specification for UTF-8 and UTF-16. The function used on earlier operating systems encodes or decodes lone surrogate halves or mismatched surrogate pairs. Code written in earlier versions of Windows that rely on this behavior to encode random non-text binary data might run into problems. However, code that uses this function to produce valid UTF-8 strings will behave the same way as on earlier Windows operating systems. Starting with Windows 8: WideCharToMultiByte  is declared in Stringapiset.h. Before Windows 8, it was declared in Winnls.h. As discussed in Using Unicode Normalization to Represent Strings, Unicode allows multiple representations of the same string (interpreted linguistically). For example, Capital A with dieresis (umlaut) can be represented either precomposed as a single Unicode code point \"\u00c3\u0084\" (U+00C4) or decomposed as the combination of Capital A and the combining dieresis character (\"A\" + \"\u00a8\", that is U+0041 U+0308). However, most code pages provide only composed characters. The WC_COMPOSITECHECK flag causes the WideCharToMultiByte function to test for decomposed Unicode characters and attempts to compose them before converting them to the requested code page. This flag is only available for conversion to single byte (SBCS) or double byte (DBCS) code pages (code pages < 50000, excluding code page 42). If your application needs to convert decomposed Unicode data to single byte or double byte code pages, this flag might be useful. However, not all characters can be converted this way and it is more reliable to save and store such data as Unicode. When an application is using WC_COMPOSITECHECK, some character combinations might remain incomplete or might have additional nonspacing characters left over. For example, A + \u00a8 + \u00a8 combines to \u00c3\u0084 + \u00a8. Using the WC_DISCARDNS flag causes the function to discard additional nonspacing characters. Using the WC_DEFAULTCHAR flag causes the function to use the default replacement character (typically \"?\") instead. Using the WC_SEPCHARS flag causes the function to attempt to convert each additional nonspacing character to the target code page. Usually this flag also causes the use of the replacement character (\"?\"). However, for code page 1258 (Vietnamese) and 20269, nonspacing characters exist and can be used. The conversions for these code pages are not perfect. Some combinations do not convert correctly to code page 1258, and WC_COMPOSITECHECK corrupts data in code page 20269. As mentioned earlier, it is more reliable to design your application to save and store such data as Unicode. ",
+    "return_type": "int",
+    "category": "Unicode and Character Set",
+    "name": "WideCharToMultiByte",
+    "is_callback": 0,
+    "dll": "Kernel32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "CodePage",
+        "description": "Code page to use in performing the conversion. This parameter can be set to the value of any code page that is installed or available in the operating system. For a list of code pages, see Code Page Identifiers. Your application can also specify one of the values shown in the following table.  ValueMeaning  CP_ACP   The system default Windows ANSI code page.  Note  This value can be different on different computers, even on the same network. It can be changed on the same computer, leading to stored data becoming irrecoverably corrupted. This value is only intended for temporary use and permanent storage should use UTF-16 or UTF-8 if possible.     CP_MACCP   The current system Macintosh code page.  Note  This value can be different on different computers, even on the same network. It can be changed on the same computer, leading to stored data becoming irrecoverably corrupted. This value is only intended for temporary use and permanent storage should use UTF-16 or UTF-8 if possible.   Note   This value is used primarily in legacy code and should not generally be needed since modern Macintosh computers use Unicode for encoding.     CP_OEMCP   The current system OEM code page.  Note  This value can be different on different computers, even on the same network. It can be changed on the same computer, leading to stored data becoming irrecoverably corrupted. This value is only intended for temporary use and permanent storage should use UTF-16 or UTF-8 if possible.     CP_SYMBOL   Windows 2000: Symbol code page (42).   CP_THREAD_ACP   Windows 2000: The Windows ANSI code page for the current thread.  Note  This value can be different on different computers, even on the same network. It can be changed on the same computer, leading to stored data becoming irrecoverably corrupted. This value is only intended for temporary use and permanent storage should use UTF-16 or UTF-8 if possible.     CP_UTF7                    UTF-7. Use this value only when forced by a 7-bit transport mechanism. Use of UTF-8 is preferred. With this value set, lpDefaultChar and lpUsedDefaultChar must be set to NULL.   CP_UTF8   UTF-8. With this value set, lpDefaultChar and lpUsedDefaultChar must be set to NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags indicating the conversion type. ..."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCWSTR",
+        "name": "lpWideCharStr",
+        "description": "Pointer to the Unicode string to convert."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchWideChar",
+        "description": "Size, in characters, of the string indicated by lpWideCharStr. Alternatively, this parameter can be set to -1 if the string is null-terminated. If cchWideChar is set to 0, the function fails. If this parameter is -1, the function processes the entire input string, including the terminating null   character. Therefore, the resulting character string has a terminating null character, and the length   returned by the function includes this character. If this parameter is set to a positive integer, the function processes exactly the specified number of   characters. If the provided size does not include a terminating null character, the resulting character   string is not null-terminated, and the returned length does not include this character."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPSTR",
+        "name": "lpMultiByteStr",
+        "description": "Pointer to a buffer that receives the converted string."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cbMultiByte",
+        "description": "Size, in bytes, of the buffer indicated by lpMultiByteStr. If this parameter is set to 0, the function returns the required buffer size for lpMultiByteStr and makes no use of the output parameter itself."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCSTR",
+        "name": "lpDefaultChar",
+        "description": "Pointer to the character to use if a character cannot be represented in the specified code page. The application sets this parameter to NULL if the function is to use a system default value. To obtain the system default character, the application can call the GetCPInfo or GetCPInfoEx function. For the CP_UTF7 and CP_UTF8 settings for CodePage, this parameter must be set to NULL. Otherwise, the function fails with ERROR_INVALID_PARAMETER."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPBOOL",
+        "name": "lpUsedDefaultChar",
+        "description": "Pointer to a flag that indicates if the function has used a default character in the conversion. The flag is set to TRUE if one or more characters in the source string cannot be represented in the specified code page. Otherwise, the flag is set to FALSE. This parameter can be set to NULL. For the CP_UTF7 and CP_UTF8 settings for CodePage, this parameter must be set to NULL. Otherwise, the function fails with ERROR_INVALID_PARAMETER."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps | Windows Store apps]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Deprecated. Converts GB18030 bytes to Unicode characters.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Gb18030.h",
+    "return_value": "Returns the character count of the Unicode characters that are converted. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Unicode and Character Set",
+    "name": "BytesToUnicode",
+    "is_callback": 0,
+    "dll": "C_g18030.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "BYTE*",
+        "name": "lpMultiByteStr",
+        "description": "Pointer to the multibyte string to convert."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cchMultiByte",
+        "description": "Byte count of the multibyte string to convert."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "UINT*",
+        "name": "pcchLeftOverBytes",
+        "description": "Pointer to a UINT that contains GB18030 bytes at the end of the buffer that cannot be converted. These bytes could be the leading bytes of valid GB18030 bytes in the next incoming GB18030 bytes."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "lpWideCharStr",
+        "description": "Pointer to the target Unicode buffer. The application can set this parameter to 0 to return the required size of the GB18030 result without doing any conversion."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cchWideChar",
+        "description": "Size of the target Unicode buffer. The application can set this parameter to 0 to return the required size of the GB18030 result without doing any conversion."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 7,
+    "description": "Used to get code page information or do conversion, depending on flag settings.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Gb18030.h",
+    "return_value": "Returns 1 if successful. If the function does not succeed, it returns 0. To get extended error information, the application can call GetLastError, which can return one of the following error codes: ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Unicode and Character Set",
+    "name": "NlsDllCodePageTranslation",
+    "is_callback": 0,
+    "dll": "C_g18030.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "CodePage",
+        "description": "The value of the code page. The code page value should be 54936. Otherwise, the function returns an error code."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Flags specifying the translation. Possible values are defined in the following table.  ValueMeaning  NLS_CP_CPINFO   Retrieve code page information in the buffer pointed to by lpCPInfo. The lpMultiByteStr, cchMultiByte, lpWideCharStr, and cchWideChar parameters are not used.   NLS_CP_MBTOWC   Convert GB18030 bytes to Unicode characters. The source GB18030 characters should be pointed to by lpMultiByteStr, and cchMultiByte should contain the byte count of the buffer. The Unicode result is stored in the buffer pointed to by lpWideCharStr, and cchWideChar should contain the character count of the Unicode buffer. If lpWideCharStr or cchWideChar is 0, the expected character count of the Unicode result is returned, and no conversion is done. The lpCPInfo parameter is not used in this case.   NLS_CP_WCTOMB   Convert Unicode characters to GB18030 bytes. The source Unicode string should be pointed to by lpWideCharStr, and cchWideChar should contain the character count of the buffer. The GB18030 result is stored in the buffer pointed to by lpMultiByteStr, and cchMultiByte should contain the byte count of the GB18030 buffer. If lpMultiByteStr or cchMultiByte is 0, the byte count of the GB18030 result is returned, and no conversion is done. The lpCPInfo parameter is not used in this case."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPSTR",
+        "name": "lpMultiByteStr",
+        "description": "Pointer to a buffer that contains multibyte GB18030 characters. This can be a source buffer or target buffer, depending on the value of dwFlags."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchMultiByte",
+        "description": "Byte count of the multibyte buffer."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPWSTR",
+        "name": "lpWideCharStr",
+        "description": "Pointer to a buffer that contains Unicode characters. This can be a source buffer or target buffer, depending on the value of dwFlags."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cchWideChar",
+        "description": "Character count of the Unicode buffer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCPINFO",
+        "name": "lpCPInfo",
+        "description": "Pointer to a CPINFO structure."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Deprecated. Converts Unicode characters to GB18030 bytes.",
+    "library": "",
+    "min_server": "Windows Server 2003 [desktop apps only]",
+    "header": "Gb18030.h",
+    "return_value": "Returns the byte count of the multibyte characters that are generated, if successful. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Unicode and Character Set",
+    "name": "UnicodeToBytes",
+    "is_callback": 0,
+    "dll": "C_g18030.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPWSTR",
+        "name": "lpWideCharStr",
+        "description": "Pointer to the Unicode string to convert."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cchWideChar",
+        "description": "Character count of the Unicode string to convert."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPSTR",
+        "name": "lpMultiByteStr",
+        "description": "Pointer to the target multibyte buffer. If lpMultiByteStr is 0, the byte count of the GB18030 result is returned, and no conversion is done."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cchMultiByte",
+        "description": "Byte count of the target multibyte buffer. If cchMultiByte is 0, the byte count of the GB18030 result is returned, and no conversion is done."
+      }
+    ],
+    "min_client": "Windows XP [desktop apps only]"
+  }
+]

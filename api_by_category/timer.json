@@ -1,0 +1,160 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "Destroys the specified timer.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: BOOL If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "The KillTimer function does not remove WM_TIMER messages already posted to the message queue. For an example, see Destroying a Timer. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Timer",
+    "name": "KillTimer",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window associated with the specified timer. This value must be the same as the  \t\t\t\t\thWnd value passed to the SetTimer function that created the timer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT_PTR",
+        "name": "uIDEvent",
+        "description": "Type: UINT_PTR The timer to be destroyed. If the window handle passed to SetTimer is valid, this parameter must be the same as the \t\t\t\t\tnIDEvent   value passed to SetTimer. If the application calls SetTimer with  \t\t\t\t\thWnd set to NULL, this parameter must be the timer identifier returned by SetTimer."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Creates a timer with the specified time-out value and coalescing tolerance delay.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: UINT_PTR If the function succeeds and the hWnd parameter is NULL, the return value is an integer identifying the new timer. An application can pass this value to the KillTimer function to destroy the timer. If the function succeeds and the hWnd parameter is not NULL, then the return value is a nonzero integer. An application can pass the value of the nIDEvent parameter to the KillTimer function to destroy the timer. If the function fails to create a timer, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "An application can process WM_TIMER messages by including a WM_TIMER case statement in the window procedure or by specifying a TimerProc callback function when creating the timer. When you specify a TimerProc callback function, the default window procedure calls the callback function when it processes WM_TIMER. Therefore, you need to dispatch messages in the calling thread, even when you use TimerProc instead of processing WM_TIMER. The wParam parameter of the WM_TIMER message contains the value of the nIDEvent parameter. The timer identifier, nIDEvent, is specific to the associated window. Another window can have its own timer which has the same identifier as a timer owned by another window. The timers are distinct. SetTimer can reuse timer IDs in the case where hWnd is NULL. When uToleranceDelay is set to 0, the system default timer coalescing is used and   SetCoalescableTimer  behaves the same as SetTimer. ",
+    "return_type": "UINT_PTR WINAPI",
+    "category": "Timer",
+    "name": "SetCoalescableTimer",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND A handle to the window to be associated with the timer. This window must be owned by the calling thread. If a NULL value for hWnd is passed in along with an nIDEvent of an existing timer, that timer will be replaced in the same way that an existing non-NULL hWnd timer will be."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT_PTR",
+        "name": "nIDEvent",
+        "description": "Type: UINT_PTR A timer identifier. If the hWnd parameter is NULL, and the nIDEvent does not match an existing timer, then the nIDEvent is ignored and a new timer ID is generated. If the hWnd parameter is not NULL and the window specified by hWnd already has a timer with the value nIDEvent, then the existing timer is replaced by the new timer. When SetCoalescableTimer replaces a timer, the timer is reset. Therefore, a message will be sent after the current time-out value elapses, but the previously set time-out value is ignored. If the call is not intended to replace an existing timer, nIDEvent should be 0 if the hWnd is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uElapse",
+        "description": "Type: UINT The time-out value, in milliseconds.  If uElapse is less than USER_TIMER_MINIMUM (0x0000000A), the timeout is set to USER_TIMER_MINIMUM. If uElapse is greater than USER_TIMER_MAXIMUM (0x7FFFFFFF), the timeout is set to USER_TIMER_MAXIMUM. If the sum of uElapse and uToleranceDelay exceeds USER_TIMER_MAXIMUM, an ERROR_INVALID_PARAMETER exception occurs."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "TIMERPROC",
+        "name": "lpTimerFunc",
+        "description": "Type: TIMERPROC A pointer to the function to be notified when the time-out value elapses. For more information about the function, see TimerProc. If lpTimerFunc is NULL, the system posts a WM_TIMER message to the application queue. The hwnd member of the message's MSG structure contains the value of the hWnd parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "uToleranceDelay",
+        "description": "Type: ULONG It can be one of the following values:  ValueMeaning  TIMERV_DEFAULT_COALESCING 0x00000000   Uses the system default timer coalescing.    TIMERV_NO_COALESCING 0xFFFFFFFF   Uses no timer coalescing.  When this value is used, the created timer is not coalesced, no matter what  the system default timer coalescing is or the application compatiblity flags are.  Note  Do not use this value unless you are certain that the  timer requires no coalescing.       0x1 - 0x7FFFFFF5   Specifies the coalescing tolerance delay, in milliseconds.  Applications should set this value to the system default (TIMERV_DEFAULT_COALESCING) or the largest value possible.  If the sum of uElapse and uToleranceDelay exceeds USER_TIMER_MAXIMUM (0x7FFFFFFF), an ERROR_INVALID_PARAMETER exception occurs. See Windows Timer Coalescing for more details and best practices.   Any other value   An invalid value. If uToleranceDelay is set to an invalid value, the function fails and returns zero."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates a timer with the specified time-out value.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: Type: UINT_PTR If the function succeeds and the hWnd parameter is NULL, the return value is an integer identifying the new timer. An application can pass this value to the KillTimer function to destroy the timer. If the function succeeds and the hWnd parameter is not NULL, then the return value is a nonzero integer. An application can pass the value of the nIDEvent parameter to the KillTimer function to destroy the timer. If the function fails to create a timer, the return value is zero. To get extended error information, call GetLastError. ",
+    "remarks": "An application can process WM_TIMER messages by including a WM_TIMER case statement in the window procedure or by specifying a TimerProc callback function when creating the timer. When you specify a TimerProc callback function, the default window procedure calls the callback function when it processes WM_TIMER. Therefore, you need to dispatch messages in the calling thread, even when you use TimerProc instead of processing WM_TIMER. The wParam parameter of the WM_TIMER message contains the value of the nIDEvent parameter. The timer identifier, nIDEvent, is specific to the associated window. Another window can have its own timer which has the same identifier as a timer owned by another window. The timers are distinct. SetTimer can reuse timer IDs in the case where hWnd is NULL. For an example, see Creating a Timer. ",
+    "return_type": "UINT_PTR WINAPI",
+    "category": "Timer",
+    "name": "SetTimer",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "Type: HWND A handle to the window to be associated with the timer. This window must be owned by the calling thread. If a NULL value for hWnd is passed in along with an nIDEvent of an existing timer, that timer will be replaced in the same way that an existing non-NULL hWnd timer will be."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT_PTR",
+        "name": "nIDEvent",
+        "description": "Type: UINT_PTR A nonzero timer identifier. If the hWnd parameter is NULL, and the nIDEvent does not match an existing timer then it is ignored and a new timer ID is generated. If the hWnd parameter is not NULL and the window specified by hWnd already has a timer with the value nIDEvent, then the existing timer is replaced by the new timer. When SetTimer replaces a timer, the timer is reset. Therefore, a message will be sent after the current time-out value elapses, but the previously set time-out value is ignored. If the call is not intended to replace an existing timer, nIDEvent should be 0 if the hWnd is NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uElapse",
+        "description": "Type: UINT The time-out value, in milliseconds.  If uElapse is less than USER_TIMER_MINIMUM (0x0000000A), the timeout is set to USER_TIMER_MINIMUM. If uElapse is greater than USER_TIMER_MAXIMUM (0x7FFFFFFF), the timeout is set to USER_TIMER_MAXIMUM."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "TIMERPROC",
+        "name": "lpTimerFunc",
+        "description": "Type: TIMERPROC A pointer to the function to be notified when the time-out value elapses. For more information about the function, see TimerProc. If lpTimerFunc is NULL, the system posts a WM_TIMER message to the application queue. The hwnd member of the message's MSG structure contains the value of the hWnd parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "An application-defined callback function that processes WM_TIMER messages. The  \t\t\tTIMERPROC type defines a pointer to this callback function. TimerProc is a placeholder for the application-defined function name.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "This function does not return a value. ",
+    "remarks": "",
+    "return_type": "VOID CALLBACK",
+    "category": "Timer",
+    "name": "TimerProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Type: HWND A handle to the window associated with the timer."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uMsg",
+        "description": "Type: UINT The WM_TIMER message."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT_PTR",
+        "name": "idEvent",
+        "description": "Type: UINT_PTR The timer's identifier."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwTime",
+        "description": "Type: DWORD The number of milliseconds that have elapsed since the system was started. This is the value returned by the GetTickCount function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]

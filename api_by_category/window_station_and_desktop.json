@@ -1,0 +1,613 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "Closes an open window station handle.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. Windows Server 2003 and Windows XP/2000:  This function does not set the last error code on failure. ",
+    "remarks": "The  CloseWindowStation function will fail if the handle being closed is for the window station assigned to the calling process. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "CloseWindowStation",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWINSTA",
+        "name": "hWinSta",
+        "description": "A handle to the window station to be closed. This handle is returned by the  CreateWindowStation or  OpenWindowStation function. Do not specify the handle returned by the GetProcessWindowStation function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Creates a window station object, associates it with the calling process, and assigns it to the current session.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the newly created window station. If the specified window station already exists, the function succeeds and returns a handle to the existing window station. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. ",
+    "remarks": "After you are done with the handle, you must call  CloseWindowStation to free the handle. ",
+    "return_type": "HWINSTA WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "CreateWindowStation",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "LPCTSTR",
+        "name": "lpwinsta",
+        "description": "The name of the window station to be created. Window station names are case-insensitive and cannot contain backslash characters (\\). Only members of the Administrators group are allowed to specify a name. If lpwinsta is NULL or an empty string, the system forms a window station name using the logon session identifier for the calling process. To get this name, call the  GetUserObjectInformation function."
+      },
+      {
+        "in_out": "",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "If this parameter is CWF_CREATE_ONLY and the window station already exists, the call fails. If this flag is not specified and the window station already exists, the function succeeds and returns a new handle to the existing window station. Windows XP/2000:  This parameter is reserved and must be zero."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ACCESS_MASK",
+        "name": "dwDesiredAccess",
+        "description": "The type of access the returned handle has to the window station. In addition, you can specify any of the standard access rights, such as READ_CONTROL or WRITE_DAC, and a combination of the window station-specific access rights. For more information, see Window Station Security and Access Rights."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPSECURITY_ATTRIBUTES",
+        "name": "lpsa",
+        "description": "A pointer to a  SECURITY_ATTRIBUTES structure that determines whether the returned handle can be inherited by child processes. If lpsa is NULL, the handle cannot be inherited. The lpSecurityDescriptor member of the structure specifies a security descriptor for the new window station. If lpsa is NULL, the window station (and any desktops created within the window) gets a security descriptor that grants GENERIC_ALL access to all users."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "Enumerates all window stations in the current session. The function passes the name of each window station, in turn, to an application-defined callback function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, it returns the  nonzero value returned by the callback function that was pointed to by lpEnumFunc. If the function is unable to perform the enumeration, the return value is zero. Call  GetLastError to get extended error information. If the callback function fails, the return value is zero. The callback function can  call SetLastError to set an error code for the caller to retrieve by calling GetLastError. ",
+    "remarks": "The  EnumWindowStations function enumerates only those window stations for which the calling process has the WINSTA_ENUMERATE access right. For more information, see  Window Station Security and Access Rights. EnumWindowStations repeatedly invokes the lpEnumFunc callback function until the last window station is enumerated or the callback function returns FALSE. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "EnumWindowStations",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "WINSTAENUMPROC",
+        "name": "lpEnumFunc",
+        "description": "A pointer to an application-defined  EnumWindowStationProc callback function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "An application-defined value to be passed to the callback function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 0,
+    "description": "Retrieves a handle to the current window station for the calling process.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the window station. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. ",
+    "remarks": "The system associates a window station with a process when the process is created. A process can use the  SetProcessWindowStation function to change its window station. The calling process can use the returned handle in calls to the  GetUserObjectInformation, GetUserObjectSecurity,  SetUserObjectInformation, and SetUserObjectSecurity functions. Do not close the handle returned by this function. A service application is created with an associated window station and desktop, so there is no need to call a USER or GDI function to connect the service to a window station and desktop. ",
+    "return_type": "HWINSTA WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "GetProcessWindowStation",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "Retrieves information about the specified window station or desktop object.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "GetUserObjectInformation",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hObj",
+        "description": "A handle to the window station or desktop object. This handle is returned by the  CreateWindowStation,  OpenWindowStation,  CreateDesktop, or  OpenDesktop function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "The information to be retrieved. The parameter can be one of the following values.  ValueMeaning  UOI_FLAGS 1   The handle flags. The pvInfo parameter must point to a  USEROBJECTFLAGS structure.   UOI_HEAPSIZE 5   The size of the desktop heap, in KB, as a ULONG value. The hObj parameter must be  a handle to a desktop object, otherwise, the function fails. Windows Server 2003 and Windows XP/2000:  This value is not supported.   UOI_IO 6   TRUE if  the hObj parameter is  a handle to the desktop object that is receiving input from the user. FALSE otherwise. Windows Server 2003 and Windows XP/2000:  This value is not supported.   UOI_NAME 2   The name of the object, as a string.   UOI_TYPE 3   The type name of the object, as a string.   UOI_USER_SID 4   The  SID structure that identifies the user that is currently associated with the specified object. If no user is associated with the object, the value returned in the buffer pointed to by lpnLengthNeeded is zero. Note that SID is a variable length structure. You will usually make a call to  GetUserObjectInformation to determine the length of the SID before retrieving its value."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "PVOID",
+        "name": "pvInfo",
+        "description": "A pointer to a buffer to receive the object information."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nLength",
+        "description": "The size of the buffer pointed to by the pvInfo parameter, in bytes."
+      },
+      {
+        "in_out": "_Out_opt_",
+        "type": "LPDWORD",
+        "name": "lpnLengthNeeded",
+        "description": "A pointer to a variable receiving the number of bytes required to store the requested information. If this variable's value is greater than the value of the nLength parameter when the function returns, the function returns FALSE, and none of the information is copied to the pvInfo buffer. If the value of the variable pointed to by lpnLengthNeeded is less than or equal to the value of nLength, the entire information block is copied."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Opens the specified window station.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the handle to the specified window station. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. ",
+    "remarks": "After you are done with the handle, you must call  CloseWindowStation to free the handle. ",
+    "return_type": "HWINSTA WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "OpenWindowStation",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszWinSta",
+        "description": "The name of the window station to be opened. Window station names are case-insensitive. This window station must belong to the current session."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fInherit",
+        "description": "If this value is TRUE, processes created by this process will inherit the handle. Otherwise, the processes do not inherit this handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ACCESS_MASK",
+        "name": "dwDesiredAccess",
+        "description": "The access to the window station. For a list of access rights, see  Window Station Security and Access Rights."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Assigns the specified window station to the calling process. This enables the process to access objects in the window station such as desktops, the clipboard, and global atoms. All subsequent operations on the window station use the access rights granted to hWinSta.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "SetProcessWindowStation",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWINSTA",
+        "name": "hWinSta",
+        "description": "A handle to the window station. This can be a handle returned by the  CreateWindowStation,  OpenWindowStation, or  GetProcessWindowStation function. This window station must be associated with the current session."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Sets information about the specified window station or desktop object.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "SetUserObjectInformation",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HANDLE",
+        "name": "hObj",
+        "description": "A handle to the window station, desktop object or a current process pseudo handle. This handle can be returned by the  CreateWindowStation,  OpenWindowStation,  CreateDesktop, OpenDesktop or  GetCurrentProcess function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "The object information to be set. This parameter can be the following value.  ValueMeaning  UOI_FLAGS 1   Sets the object's handle flags. The pvInfo parameter must point to a  USEROBJECTFLAGS structure.   UOI_TIMERPROC_EXCEPTION_SUPPRESSION 7   Sets the exception handling behavior when calling TimerProc.  hObj must be the process handle returned by the GetCurrentProcess function.   The pvInfo parameter must point to a BOOL.  If TRUE, Windows will enclose its calls to TimerProc with an exception handler that consumes and discards all exceptions. This has been the default behavior since Windows 2000, although that may change in future versions of Windows.   If pvInfo  points to FALSE, Windows will not enclose its calls to TimerProc with an exception handler. A setting of FALSE is recommended.  Otherwise, the application could behave unpredictably, and could be more vulnerable to security exploits."
+      },
+      {
+        "in_out": "_In_",
+        "type": "PVOID",
+        "name": "pvInfo",
+        "description": "A pointer to a buffer containing the object information, or a BOOL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "nLength",
+        "description": "The size of the information contained in the buffer pointed to by pvInfo, in bytes."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Closes an open handle to a desktop object.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  CloseDesktop function will fail if any thread in the calling process is using the specified desktop handle or if the handle refers to the initial desktop of the calling process. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "CloseDesktop",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDESK",
+        "name": "hDesktop",
+        "description": "A handle to the desktop to be closed. This can be a handle returned by the  CreateDesktop,  OpenDesktop, or  OpenInputDesktop functions. Do not specify the handle returned by the GetThreadDesktop function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "Creates a new desktop, associates it with the current window station of the calling process, and assigns it to the calling thread. The calling process must have an associated window station, either assigned by the system at process creation time or set by  the SetProcessWindowStation function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the newly created desktop. If the specified desktop already exists, the function succeeds and returns a handle to the existing desktop. When you are finished using the handle, call the  CloseDesktop function to close it. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. ",
+    "remarks": "If the dwDesiredAccess parameter specifies the READ_CONTROL, WRITE_DAC, or WRITE_OWNER standard access rights, you must also request the DESKTOP_READOBJECTS and DESKTOP_WRITEOBJECTS access rights. The number of desktops that can be created is limited by the size of the system desktop heap, which is 48 MB. Desktop objects use the heap to store resources. You can increase the number of desktops that can be created by reducing the default heap reserved for each desktop in the interactive window station. This value is specified in the \"SharedSection\" substring of the following registry value: HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\SubSystems\\Windows. The default data for this registry value is as follows: \"%SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,3072,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ProfileControl=Off MaxRequestThreads=16\"  The values for the \"SharedSection\" substring are described as follows: ",
+    "return_type": "HDESK WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "CreateDesktop",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszDesktop",
+        "description": "The name of the desktop to be created. Desktop names are case-insensitive and may not contain backslash characters (\\)."
+      },
+      {
+        "in_out": "_Reserved_",
+        "type": "LPCTSTR",
+        "name": "lpszDevice",
+        "description": "Reserved; must be NULL."
+      },
+      {
+        "in_out": "_Reserved_",
+        "type": "DEVMODE*",
+        "name": "pDevmode",
+        "description": "Reserved; must be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be zero or the following value.  ValueMeaning  DF_ALLOWOTHERACCOUNTHOOK 0x0001   Enables processes running in other accounts on the desktop to set hooks in this process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ACCESS_MASK",
+        "name": "dwDesiredAccess",
+        "description": "The access to the desktop. For a list of values, see  Desktop Security and Access Rights. This parameter must include the DESKTOP_CREATEWINDOW access right, because internally  CreateDesktop uses the handle to create a window."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPSECURITY_ATTRIBUTES",
+        "name": "lpsa",
+        "description": "A pointer to a  SECURITY_ATTRIBUTES structure that determines whether the returned handle can be inherited by child processes. If lpsa is NULL, the handle cannot be inherited. The lpSecurityDescriptor member of the structure specifies a security descriptor for the new desktop. If this parameter is NULL, the desktop inherits its security descriptor from the parent window station."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 8,
+    "description": "Creates a new desktop with the specified heap, associates it with the current window station of the calling process, and assigns it to the calling thread. The calling process must have an associated window station, either assigned by the system at process creation time or set by  the SetProcessWindowStation function.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2008 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the newly created desktop. If the specified desktop already exists, the function succeeds and returns a handle to the existing desktop. When you are finished using the handle, call the  CloseDesktop function to close it. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. ",
+    "remarks": "If the dwDesiredAccess parameter specifies the READ_CONTROL, WRITE_DAC, or WRITE_OWNER standard access rights, you must also request the DESKTOP_READOBJECTS and DESKTOP_WRITEOBJECTS access rights. The number of desktops that can be created is limited by the size of the system desktop heap. Desktop objects use the heap to store resources. You can increase the number of desktops that can be created by increasing the size of the desktop heap or by reducing the default heap reserved for each desktop in the interactive window station. This value is specified in the SharedSection substring of the following registry value: HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\SubSystems\\Windows. The default data for this registry value is as follows: %SystemRoot%\\system32\\csrss.exe ObjectDirectory=\\Windows SharedSection=1024,3072,512 Windows=On SubSystemType=Windows ServerDll=basesrv,1 ServerDll=winsrv:UserServerDllInitialization,3 ServerDll=winsrv:ConServerDllInitialization,2 ProfileControl=Off MaxRequestThreads=16  The values for the SharedSection substring are described as follows: The default size of the desktop heap depends on factors such as hardware architecture. To retrieve the size of the desktop heap, call the GetUserObjectInformation function with UOI_HEAPSIZE. ",
+    "return_type": "HDESK WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "CreateDesktopEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszDesktop",
+        "description": "The name of the desktop to be created. Desktop names are case-insensitive and may not contain backslash characters (\\)."
+      },
+      {
+        "in_out": "_Reserved_",
+        "type": "LPCTSTR",
+        "name": "lpszDevice",
+        "description": "This parameter is reserved and must be NULL."
+      },
+      {
+        "in_out": "_Reserved_",
+        "type": "DEVMODE*",
+        "name": "pDevmode",
+        "description": "This parameter is reserved and must be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be zero or the following value.  ValueMeaning  DF_ALLOWOTHERACCOUNTHOOK 0x0001   Enables processes running in other accounts on the desktop to set hooks in this process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ACCESS_MASK",
+        "name": "dwDesiredAccess",
+        "description": "The requested access to the desktop. For a list of values, see  Desktop Security and Access Rights.     This parameter must include the DESKTOP_CREATEWINDOW access right, because internally  CreateDesktop uses the handle to create a window."
+      },
+      {
+        "in_out": "_In_opt_",
+        "type": "LPSECURITY_ATTRIBUTES",
+        "name": "lpsa",
+        "description": "A pointer to a  SECURITY_ATTRIBUTES structure that determines whether the returned handle can be inherited by child processes. If lpsa is NULL, the handle cannot be inherited.     The lpSecurityDescriptor member of the structure specifies a security descriptor for the new desktop. If this parameter is NULL, the desktop inherits its security descriptor from the parent window station."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ULONG",
+        "name": "ulHeapSize",
+        "description": "The size of the desktop heap, in kilobytes."
+      },
+      {
+        "in_out": "_Reserved_",
+        "type": "PVOID",
+        "name": "pvoid",
+        "description": "This parameter is reserved and must be NULL."
+      }
+    ],
+    "min_client": "Windows Vista [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Enumerates all desktops associated with the specified window station of the calling process. The function passes the name of each desktop, in turn, to an application-defined callback function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, it returns the  nonzero value returned by the callback function that was pointed to by lpEnumFunc. If the function is unable to perform the enumeration, the return value is zero. Call  GetLastError to get extended error information. If the callback function fails, the return value is zero. The callback function can  call SetLastError to set an error code for the caller to retrieve by calling GetLastError. ",
+    "remarks": "The  EnumDesktops function enumerates only those desktops for which the calling process has the DESKTOP_ENUMERATE access right. For more information, see  Desktop Security and Access Rights. The  EnumDesktops function repeatedly invokes the lpEnumFunc callback function until the last desktop is enumerated or the callback function returns FALSE. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "EnumDesktops",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HWINSTA",
+        "name": "hwinsta",
+        "description": "A handle to the window station whose desktops are to be enumerated. This handle is returned by the  CreateWindowStation,  GetProcessWindowStation, or  OpenWindowStation function, and must have the WINSTA_ENUMDESKTOPS access right. For more information, see  Window Station Security and Access Rights. If this parameter is NULL, the current window station is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DESKTOPENUMPROC",
+        "name": "lpEnumFunc",
+        "description": "A pointer to an application-defined  EnumDesktopProc callback function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "An application-defined value to be passed to the callback function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Enumerates all top-level windows associated with the specified desktop. It passes the handle to each window, in turn, to an application-defined callback function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function fails or is unable to perform the enumeration, the return value is zero. To get extended error information, call  GetLastError. You must ensure that the callback function sets SetLastError if it fails. Windows Server 2003 and Windows XP/2000:  If there are no windows on the desktop, GetLastError returns ERROR_INVALID_HANDLE. ",
+    "remarks": "The  EnumDesktopWindows function repeatedly invokes the lpfn callback function until the last top-level window is enumerated or the callback function returns FALSE. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "EnumDesktopWindows",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_opt_",
+        "type": "HDESK",
+        "name": "hDesktop",
+        "description": "A handle to the desktop whose top-level windows are to be enumerated. This handle is returned by the  CreateDesktop,  GetThreadDesktop, OpenDesktop, or  OpenInputDesktop function, and must have the DESKTOP_READOBJECTS access right. For more information, see  Desktop Security and Access Rights. If this parameter is NULL, the current desktop is used."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WNDENUMPROC",
+        "name": "lpfn",
+        "description": "A pointer to an application-defined  EnumWindowsProc callback function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "An application-defined value to be passed to the callback function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Retrieves a handle to the desktop assigned to the specified thread.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the desktop associated with the specified thread. You do not need to call the  CloseDesktop function to close the returned handle. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. ",
+    "remarks": "The system associates a desktop with a thread when that thread is created. A thread can use the  SetThreadDesktop function to change its desktop. The desktop associated with a thread must be on the window station associated with the thread's process. The calling process can use the returned handle in calls to the  GetUserObjectInformation, GetUserObjectSecurity,  SetUserObjectInformation, and SetUserObjectSecurity functions. A service application is created with an associated window station and desktop, so there is no need to call a USER or GDI function to connect the service to a window station and desktop. ",
+    "return_type": "HDESK WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "GetThreadDesktop",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwThreadId",
+        "description": "The thread identifier. The  GetCurrentThreadId and  CreateProcess functions return thread identifiers."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "Opens the specified desktop object.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the opened desktop. When you are finished using the handle, call the  CloseDesktop function to close it. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. ",
+    "remarks": "The calling process must have an associated window station, either assigned by the system at process creation time or set by the  SetProcessWindowStation function. If the dwDesiredAccess parameter specifies the READ_CONTROL, WRITE_DAC, or WRITE_OWNER standard access rights, you must also request the DESKTOP_READOBJECTS and DESKTOP_WRITEOBJECTS access rights. ",
+    "return_type": "HDESK WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "OpenDesktop",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPTSTR",
+        "name": "lpszDesktop",
+        "description": "The name of the desktop to be opened. Desktop names are case-insensitive. This desktop must belong to the current window station."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be zero or the following value.  ValueMeaning  DF_ALLOWOTHERACCOUNTHOOK 0x0001   Allows processes running in other accounts on the desktop to set hooks in this process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fInherit",
+        "description": "If this value is TRUE, processes created by this process will inherit the handle. Otherwise, the processes do not inherit this handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ACCESS_MASK",
+        "name": "dwDesiredAccess",
+        "description": "The access to the desktop. For a list of access rights, see  Desktop Security and Access Rights."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "Opens the desktop that receives user input.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the desktop that receives user input. When you are finished using the handle, call the  CloseDesktop function to close it. If the function fails, the return value is NULL. To get extended error information, call  GetLastError. ",
+    "remarks": "The calling process must have an associated window station, either assigned by the system when the process is created, or set by  the SetProcessWindowStation function. The window station associated with the calling process must be capable of receiving input. If the calling process is running in a disconnected session, the function returns a handle to the desktop that  becomes active when the user restores the connection. An application can use the  SwitchDesktop function to change the input desktop. If the dwDesiredAccess parameter specifies the READ_CONTROL, WRITE_DAC, or WRITE_OWNER standard access rights, you must also request the DESKTOP_READOBJECTS and DESKTOP_WRITEOBJECTS access rights. ",
+    "return_type": "HDESK WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "OpenInputDesktop",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be zero or the following value.  ValueMeaning  DF_ALLOWOTHERACCOUNTHOOK 0x0001   Allows processes running in other accounts on the desktop to set hooks in this process."
+      },
+      {
+        "in_out": "_In_",
+        "type": "BOOL",
+        "name": "fInherit",
+        "description": "If this value is TRUE, processes created by this process will inherit the handle. Otherwise, the processes do not inherit this handle."
+      },
+      {
+        "in_out": "_In_",
+        "type": "ACCESS_MASK",
+        "name": "dwDesiredAccess",
+        "description": "The access to the desktop. For a list of access rights, see  Desktop Security and Access Rights."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Assigns the specified desktop to the calling thread. All subsequent operations on the desktop use the access rights granted to the desktop.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. ",
+    "remarks": "The  SetThreadDesktop function will fail if the calling thread has any windows or hooks on its current desktop (unless the hDesktop parameter is a handle to the current desktop). ",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "SetThreadDesktop",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDESK",
+        "name": "hDesktop",
+        "description": "A handle to the desktop to be assigned to the calling thread. This handle is returned by the  CreateDesktop,  GetThreadDesktop, OpenDesktop, or  OpenInputDesktop function. This desktop must be associated with the current window station for the process."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Makes the specified desktop visible and activates it. This enables the desktop to receive input from the user. The calling process must have DESKTOP_SWITCHDESKTOP access to the desktop for the  SwitchDesktop function to succeed.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call  GetLastError. However,  SwitchDesktop only sets the last error for the following cases: ",
+    "remarks": "The  SwitchDesktop function fails if the desktop belongs to an invisible window station.  SwitchDesktop also fails when called from a process that is associated with a secured desktop such as the WinLogon and ScreenSaver desktops. Processes that are associated with a secured desktop include custom UserInit processes. Such calls typically fail with an \"access denied\" error. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Window Station and Desktop",
+    "name": "SwitchDesktop",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDESK",
+        "name": "hDesktop",
+        "description": "A handle to the desktop. This handle is returned by the  CreateDesktop and  OpenDesktop functions. This desktop must be associated with the current window station for the process."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]

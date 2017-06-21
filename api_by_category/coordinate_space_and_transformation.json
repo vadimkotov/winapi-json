@@ -1,0 +1,946 @@
+[
+  {
+    "n_arguments": 2,
+    "description": "The ClientToScreen function converts the client-area coordinates of a specified point to screen coordinates.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The ClientToScreen function replaces the client-area coordinates in the POINT structure with the screen coordinates. The screen coordinates are relative to the upper-left corner of the screen. Note, a screen-coordinate point that is above the window's client area has a negative y-coordinate. Similarly, a screen coordinate to the left of a client area has a negative x-coordinate. All coordinates are device coordinates. For an example, see \"Drawing Lines with the Mouse\" in Using Mouse Input. ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "ClientToScreen",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the window whose client area is used for the conversion."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPPOINT",
+        "name": "lpPoint",
+        "description": "A pointer to a POINT structure that contains the client coordinates to be converted. The new screen coordinates are copied into this structure if the function succeeds."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The CombineTransform function concatenates two world-space to page-space transformations.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "Applying the combined transformation has the same effect as applying the first transformation and then applying the second transformation. The three transformations need not be distinct. For example, lpxform1 can point to the same XFORM structure as lpxformResult. ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "CombineTransform",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "LPXFORM",
+        "name": "lpxformResult",
+        "description": "A pointer to an XFORM structure that receives the combined transformation."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const XFORM*",
+        "name": "lpxform1",
+        "description": "A pointer to an XFORM structure that specifies the first transformation."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const XFORM*",
+        "name": "lpxform2",
+        "description": "A pointer to an XFORM structure that specifies the second transformation."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The DPtoLP function converts device coordinates into logical coordinates. The conversion depends on the mapping mode of the device context, the settings of the origins and extents for the window and viewport, and the world transformation.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The DPtoLP function fails if the device coordinates exceed 27 bits, or if the converted logical coordinates exceed 32 bits. In the case of such an overflow, the results for all the points are undefined. For an example, see Using Coordinate Spaces and Transformations. ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "DPtoLP",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPPOINT",
+        "name": "lpPoints",
+        "description": "A pointer to an array of POINT structures. The x- and y-coordinates contained in each POINT structure will be transformed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCount",
+        "description": "The number of points in the array."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The GetCurrentPositionEx function retrieves the current position in logical coordinates.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "GetCurrentPositionEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPPOINT",
+        "name": "lpPoint",
+        "description": "A pointer to a POINT structure that receives the logical coordinates of the current position."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Gets the orientation preferences of the display.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If this function successfully retrieved the orientation preferences, the return value is nonzero. If the orientation preferences couldn't be retrieved, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL WINAPI",
+    "category": "Coordinate Space and Transformation",
+    "name": "GetDisplayAutoRotationPreferences",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_Out_",
+        "type": "ORIENTATION_PREFERENCE*",
+        "name": "pOrientation",
+        "description": "Type: ORIENTATION_PREFERENCE* A pointer to a variable that receives a combination of ORIENTATION_PREFERENCE-typed values that are combined by using a bitwise OR operation. The resulting value specifies the orientation preferences of the display. Here are possible values:  ValueMeaning  ORIENTATION_PREFERENCE_NONE 0x0   No display orientation is specified.    ORIENTATION_PREFERENCE_LANDSCAPE 0x1   Specifies that the display can be oriented in landscape mode where the width of the display viewing area is greater than the height.    ORIENTATION_PREFERENCE_PORTRAIT 0x2   Specifies that the display can be oriented in portrait mode where the height of the display viewing area is greater than the width.    ORIENTATION_PREFERENCE_LANDSCAPE_FLIPPED 0x4   Specifies that the display can be oriented in flipped landscape mode where the width of the display viewing area is greater than the height. This landscape mode is flipped 180 degrees from ORIENTATION_PREFERENCE_LANDSCAPE mode.    ORIENTATION_PREFERENCE_PORTRAIT_FLIPPED 0x8   Specifies that the display can be oriented in flipped portrait mode where the height of the display viewing area is greater than the width. This portrait mode is flipped 180 degrees from the ORIENTATION_PREFERENCE_PORTRAIT mode."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetGraphicsMode function retrieves the current graphics mode for the specified device context.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the current graphics mode. It can be one of the following values.  Otherwise, the return value is zero. ",
+    "remarks": "An application can set the graphics mode for a device context by calling the SetGraphicsMode function. ",
+    "return_type": "int",
+    "category": "Coordinate Space and Transformation",
+    "name": "GetGraphicsMode",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetMapMode function retrieves the current mapping mode.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value specifies the mapping mode. If the function fails, the return value is zero. ",
+    "remarks": "The following are the various mapping modes.  ",
+    "return_type": "int",
+    "category": "Coordinate Space and Transformation",
+    "name": "GetMapMode",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The GetViewportExtEx function retrieves the x-extent and y-extent of the current viewport for the specified device context.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "GetViewportExtEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSIZE",
+        "name": "lpSize",
+        "description": "A pointer to a SIZE structure that receives the x- and y-extents, in device units."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The GetViewportOrgEx function retrieves the x-coordinates and y-coordinates of the viewport origin for the specified device context.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "GetViewportOrgEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPPOINT",
+        "name": "lpPoint",
+        "description": "A pointer to a POINT structure that receives the coordinates of the origin, in device units."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "This function retrieves the x-extent and y-extent of the window for the specified device context.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "GetWindowExtEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSIZE",
+        "name": "lpSize",
+        "description": "A pointer to a SIZE structure that receives the x- and y-extents in page-space units, that is, logical units."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The GetWindowOrgEx function retrieves the x-coordinates and y-coordinates of the window origin for the specified device context.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "GetWindowOrgEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPPOINT",
+        "name": "lpPoint",
+        "description": "A pointer to a POINT structure that receives the coordinates, in logical units, of the window origin."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The GetWorldTransform function retrieves the current world-space to page-space transformation.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The precision of the transformation may be altered if an application calls the ModifyWorldTransform function prior to calling GetWorldTransform. (This is because the internal format for storing transformation values uses a higher precision than a FLOAT value.) ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "GetWorldTransform",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPXFORM",
+        "name": "lpXform",
+        "description": "A pointer to an XFORM structure that receives the current world-space to page-space transformation."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The LPtoDP function converts logical coordinates into device coordinates. The conversion depends on the mapping mode of the device context, the settings of the origins and extents for the window and viewport, and the world transformation.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The LPtoDP function fails if the logical coordinates exceed 32 bits, or if the converted device coordinates exceed 27 bits. In the case of such an overflow, the results for all the points are undefined. LPtoDP calculates complex floating-point arithmetic, and it has a caching system for efficiency. Therefore, the conversion result of an initial call to LPtoDP might not exactly match the conversion result of a later call to LPtoDP. We recommend not to write code that relies on the exact match of the conversion results from multiple calls to LPtoDP even if the parameters that are passed to each call are identical. ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "LPtoDP",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPPOINT",
+        "name": "lpPoints",
+        "description": "A pointer to an array of POINT structures. The x-coordinates and y-coordinates contained in each of the POINT structures will be transformed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nCount",
+        "description": "The number of points in the array."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The MapWindowPoints function converts (maps) a set of points from a coordinate space relative to one window to a coordinate space relative to another window.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the low-order word of the return value is the number of pixels added to the horizontal coordinate of each source point in order to compute the horizontal coordinate of each destination point. (In addition to that, if precisely one of hWndFrom and hWndTo is mirrored, then each resulting horizontal coordinate is multiplied by -1.) The high-order word is the number of pixels added to the vertical coordinate of each source point in order to compute the vertical coordinate of each destination point. If the function fails, the return value is zero. Call SetLastError prior to calling this method to differentiate an error return value from a legitimate \"0\" return value. ",
+    "remarks": "If hWndFrom or hWndTo (or both) are mirrored windows (that is, have WS_EX_LAYOUTRTL extended style) and precisely two points are passed in lpPoints, MapWindowPoints will interpret those two points as a RECT and possibly automatically swap the left and right fields of that rectangle to ensure that left is not greater than right. If any number of points other than 2 is passed in lpPoints, then MapWindowPoints will correctly map the coordinates of each of those points separately, so if you pass in a pointer to an array of more than one rectangle in lpPoints, the new rectangles may get their left field greater than right. Thus, to guarantee the correct transformation of rectangle coordinates, you must call MapWindowPoints with one RECT pointer at a time, as shown in the following example: Also, if you need to map precisely two independent points and don't want the RECT logic applied to them by MapWindowPoints, to guarantee the correct result you must call MapWindowPoints with one POINT pointer at a time, as shown in the following example: ",
+    "return_type": "int",
+    "category": "Coordinate Space and Transformation",
+    "name": "MapWindowPoints",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWndFrom",
+        "description": "A handle to the window from which points are converted. If this parameter is NULL or HWND_DESKTOP, the points are presumed to be in screen coordinates."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWndTo",
+        "description": "A handle to the window to which points are converted. If this parameter is NULL or HWND_DESKTOP, the points are converted to screen coordinates."
+      },
+      {
+        "in_out": "_Inout_",
+        "type": "LPPOINT",
+        "name": "lpPoints",
+        "description": "A pointer to an array of POINT structures that contain the set of points to be converted. The points are in device units. This parameter can also point to a RECT structure, in which case the cPoints parameter should be set to 2."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "cPoints",
+        "description": "The number of POINT structures in the array pointed to by the lpPoints parameter."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The ModifyWorldTransform function changes the world transformation for a device context using the specified mode.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The ModifyWorldTransform function will fail unless graphics mode for the specified device context has been set to GM_ADVANCED by previously calling the SetGraphicsMode function. Likewise, it will not be possible to reset the graphics mode for the device context to the default GM_COMPATIBLE mode, unless world transform has first been reset to the default identity transform by calling SetWorldTransform or ModifyWorldTransform. ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "ModifyWorldTransform",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const XFORM*",
+        "name": "lpXform",
+        "description": "A pointer to an XFORM structure used to modify the world transformation for the given device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "iMode",
+        "description": "Specifies how the transformation data modifies the current world transformation. This parameter must be one of the following values.  ValueMeaning  MWT_IDENTITY   Resets the current world transformation by using the identity matrix. If this mode is specified, the XFORM structure pointed to by lpXform is ignored.   MWT_LEFTMULTIPLY   Multiplies the current transformation by the data in the XFORM structure. (The data in the XFORM structure becomes the left multiplicand, and the data for the current transformation becomes the right multiplicand.)   MWT_RIGHTMULTIPLY   Multiplies the current transformation by the data in the XFORM structure. (The data in the XFORM structure becomes the right multiplicand, and the data for the current transformation becomes the left multiplicand.)"
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The OffsetViewportOrgEx function modifies the viewport origin for a device context using the specified horizontal and vertical offsets.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The new origin is the sum of the current origin and the horizontal and vertical offsets. ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "OffsetViewportOrgEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nXOffset",
+        "description": "The horizontal offset, in device units."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nYOffset",
+        "description": "The vertical offset, in device units."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPPOINT",
+        "name": "lpPoint",
+        "description": "A pointer to a POINT structure. The previous viewport origin, in device units, is placed in this structure. If lpPoint is NULL, the previous viewport origin is not returned."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The OffsetWindowOrgEx function modifies the window origin for a device context using the specified horizontal and vertical offsets.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "OffsetWindowOrgEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nXOffset",
+        "description": "The horizontal offset, in logical units."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nYOffset",
+        "description": "The vertical offset, in logical units."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPPOINT",
+        "name": "lpPoint",
+        "description": "A pointer to a POINT structure. The logical coordinates of the previous window origin are placed in this structure. If lpPoint is NULL, the previous origin is not returned."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The ScaleViewportExtEx function modifies the viewport for a device context using the ratios formed by the specified multiplicands and divisors.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The viewport extents are modified as follows: ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "ScaleViewportExtEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Xnum",
+        "description": "The amount by which to multiply the current horizontal extent."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Xdenom",
+        "description": "The amount by which to divide the current horizontal extent."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Ynum",
+        "description": "The amount by which to multiply the current vertical extent."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Ydenom",
+        "description": "The amount by which to divide the current vertical extent."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSIZE",
+        "name": "lpSize",
+        "description": "A pointer to a SIZE structure that receives the previous viewport extents, in device units. If lpSize is NULL, this parameter is not used."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 6,
+    "description": "The ScaleWindowExtEx function modifies the window for a device context using the ratios formed by the specified multiplicands and divisors.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The window extents are modified as follows: ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "ScaleWindowExtEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Xnum",
+        "description": "The amount by which to multiply the current horizontal extent."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Xdenom",
+        "description": "The amount by which to divide the current horizontal extent."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Ynum",
+        "description": "The amount by which to multiply the current vertical extent."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Ydenom",
+        "description": "The amount by which to divide the current vertical extent."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSIZE",
+        "name": "lpSize",
+        "description": "A pointer to a SIZE structure that receives the previous window extents, in logical units. If lpSize is NULL, this parameter is not used."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The ScreenToClient function converts the screen coordinates of a specified point on the screen to client-area coordinates.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The function uses the window identified by the hWnd parameter and the screen coordinates given in the POINT structure to compute client coordinates. It then replaces the screen coordinates with the client coordinates. The new coordinates are relative to the upper-left corner of the specified window's client area. The ScreenToClient function assumes the specified point is in screen coordinates. All coordinates are in device units. Do not use ScreenToClient when in a mirroring situation, that is, when changing from left-to-right layout to right-to-left layout. Instead, use MapWindowPoints. For more information, see \"Window Layout and Mirroring\" in Window Features. ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "ScreenToClient",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the window whose client area will be used for the conversion."
+      },
+      {
+        "in_out": "",
+        "type": "LPPOINT",
+        "name": "lpPoint",
+        "description": "A pointer to a POINT structure that specifies the screen coordinates to be converted."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "Sets the orientation preferences of the display.",
+    "library": "User32.lib",
+    "min_server": "Windows Server 2012 [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "Type: BOOL If this function set the orientation preferences, the return value is nonzero. If the orientation preferences weren't set, the return value is zero. ",
+    "remarks": "An app can remove  the orientation preferences of the display after it sets them by passing  ORIENTATION_PREFERENCE_NONE to SetDisplayAutoRotationPreferences. An app can change the orientation preferences of the display by passing  a different combination of ORIENTATION_PREFERENCE-typed values to SetDisplayAutoRotationPreferences. ",
+    "return_type": "BOOL WINAPI",
+    "category": "Coordinate Space and Transformation",
+    "name": "SetDisplayAutoRotationPreferences",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "ORIENTATION_PREFERENCE",
+        "name": "orientation",
+        "description": "Type: ORIENTATION_PREFERENCE A combination of ORIENTATION_PREFERENCE-typed values that are combined by using a bitwise OR operation. The resulting value specifies the orientation preferences of the display. Here are possible values:  ValueMeaning  ORIENTATION_PREFERENCE_NONE 0x0   No display orientation is specified.    ORIENTATION_PREFERENCE_LANDSCAPE 0x1   Specifies that the display can be oriented in landscape mode where the width of the display viewing area is greater than the height.    ORIENTATION_PREFERENCE_PORTRAIT 0x2   Specifies that the display can be oriented in portrait mode where the height of the display viewing area is greater than the width.    ORIENTATION_PREFERENCE_LANDSCAPE_FLIPPED 0x4   Specifies that the display can be oriented in flipped landscape mode where the width of the display viewing area is greater than the height. This landscape mode is flipped 180 degrees from ORIENTATION_PREFERENCE_LANDSCAPE mode.    ORIENTATION_PREFERENCE_PORTRAIT_FLIPPED 0x8   Specifies that the display can be oriented in flipped portrait mode where the height of the display viewing area is greater than the width. This portrait mode is flipped 180 degrees from the ORIENTATION_PREFERENCE_PORTRAIT mode."
+      }
+    ],
+    "min_client": "Windows 8 [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The SetGraphicsMode function sets the graphics mode for the specified device context.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the old graphics mode. If the function fails, the return value is zero. ",
+    "remarks": "There are three areas in which graphics output differs according to the graphics mode: For an example, see Using Coordinate Spaces and Transformations. ",
+    "return_type": "int",
+    "category": "Coordinate Space and Transformation",
+    "name": "SetGraphicsMode",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "iMode",
+        "description": "The graphics mode. This parameter can be one of the following values.  ValueMeaning  GM_COMPATIBLE   Sets the graphics mode that is compatible with 16-bit Windows. This is the default mode. If this value is specified, the application can only modify the world-to-device transform by calling functions that set window and viewport extents and origins, but not by using SetWorldTransform or ModifyWorldTransform; calls to those functions will fail. Examples of functions that set window and viewport extents and origins are SetViewportExtEx and SetWindowExtEx.   GM_ADVANCED   Sets the advanced graphics mode that allows world transformations. This value must be specified if the application will set or modify the world transformation for the specified device context. In this mode all graphics, including text output, fully conform to the world-to-device transformation specified in the device context."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The SetMapMode function sets the mapping mode of the specified device context. The mapping mode defines the unit of measure used to transform page-space units into device-space units, and also defines the orientation of the device's x and y axes.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value identifies the previous mapping mode. If the function fails, the return value is zero. ",
+    "remarks": "The MM_TEXT mode allows applications to work in device pixels, whose size varies from device to device. The MM_HIENGLISH, MM_HIMETRIC, MM_LOENGLISH, MM_LOMETRIC, and MM_TWIPS modes are useful for applications drawing in physically meaningful units (such as inches or millimeters). The MM_ISOTROPIC mode ensures a 1:1 aspect ratio. The MM_ANISOTROPIC mode allows the x-coordinates and y-coordinates to be adjusted independently. For an example, see Using Coordinate Spaces and Transformations. ",
+    "return_type": "int",
+    "category": "Coordinate Space and Transformation",
+    "name": "SetMapMode",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "fnMapMode",
+        "description": "The new mapping mode. This parameter can be one of the following values.  ValueMeaning  MM_ANISOTROPIC   Logical units are mapped to arbitrary units with arbitrarily scaled axes. Use the SetWindowExtEx and SetViewportExtEx functions to specify the units, orientation, and scaling.   MM_HIENGLISH   Each logical unit is mapped to 0.001 inch. Positive x is to the right; positive y is up.   MM_HIMETRIC   Each logical unit is mapped to 0.01 millimeter. Positive x is to the right; positive y is up.   MM_ISOTROPIC   Logical units are mapped to arbitrary units with equally scaled axes; that is, one unit along the x-axis is equal to one unit along the y-axis. Use the SetWindowExtEx and SetViewportExtEx functions to specify the units and the orientation of the axes. Graphics device interface (GDI) makes adjustments as necessary to ensure the x and y units remain the same size (When the window extent is set, the viewport will be adjusted to keep the units isotropic).   MM_LOENGLISH   Each logical unit is mapped to 0.01 inch. Positive x is to the right; positive y is up.   MM_LOMETRIC   Each logical unit is mapped to 0.1 millimeter. Positive x is to the right; positive y is up.   MM_TEXT   Each logical unit is mapped to one device pixel. Positive x is to the right; positive y is down.   MM_TWIPS   Each logical unit is mapped to one twentieth of a printer's point (1/1440 inch, also called a twip). Positive x is to the right; positive y is up."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The SetViewportExtEx function sets the horizontal and vertical extents of the viewport for a device context by using the specified values.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The viewport refers to the device coordinate system of the device space. The extent is the maximum value of an axis. This function sets the maximum values for the horizontal and vertical axes of the viewport in device coordinates (or pixels). When mapping between page space and device space, SetWindowExtEx and SetViewportExtEx determine the scaling factor between the window and the viewport. For more information, see Transformation of Coordinate Spaces. When the following mapping modes are set, calls to the SetWindowExtEx and SetViewportExtEx functions are ignored. When MM_ISOTROPIC mode is set, an application must call the SetWindowExtEx function before it calls SetViewportExtEx. Note that for the MM_ISOTROPIC mode certain portions of a nonsquare screen may not be available for display because the logical units on both axes represent equal physical distances. For an example, see Invalidating the Client Area. ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "SetViewportExtEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nXExtent",
+        "description": "The horizontal extent, in device units, of the viewport."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nYExtent",
+        "description": "The vertical extent, in device units, of the viewport."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSIZE",
+        "name": "lpSize",
+        "description": "A pointer to a SIZE structure that receives the previous viewport extents, in device units. If lpSize is NULL, this parameter is not used."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The SetViewportOrgEx function specifies which device point maps to the window origin (0,0).",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "This function (along with SetViewportExtEx and SetWindowExtEx) helps define the mapping from the logical coordinate space (also known as a window) to the device coordinate space (the viewport). SetViewportOrgEx specifies which device point maps to the logical point (0,0). It has the effect of shifting the axes so that the logical point (0,0) no longer refers to the upper-left corner. This is related to the SetWindowOrgEx function. Generally, you will use one function or the other, but not both. Regardless of your use of SetWindowOrgEx and SetViewportOrgEx, the device point (0,0) is always the upper-left corner. For an example, see Redrawing in the Update Region. ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "SetViewportOrgEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "X",
+        "description": "The x-coordinate, in device units, of the new viewport origin."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Y",
+        "description": "The y-coordinate, in device units, of the new viewport origin."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPPOINT",
+        "name": "lpPoint",
+        "description": "A pointer to a POINT structure that receives the previous viewport origin, in device coordinates. If lpPoint is NULL, this parameter is not used."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The SetWindowExtEx function sets the horizontal and vertical extents of the window for a device context by using the specified values.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The window refers to the logical coordinate system of the page space. The extent is the maximum value of an axis. This function sets the maximum values for the horizontal and vertical axes of the window (in logical coordinates). When mapping between page space and device space, SetViewportExtEx and SetWindowExtEx determine the scaling factor between the window and the viewport. For more information, see Transformation of Coordinate Spaces. When the following mapping modes are set, calls to the SetWindowExtEx and SetViewportExtEx functions are ignored: When MM_ISOTROPIC mode is set, an application must call the SetWindowExtEx function before calling SetViewportExtEx. Note that for the MM_ISOTROPIC mode, certain portions of a nonsquare screen may not be available for display because the logical units on both axes represent equal physical distances. For an example, see Invalidating the Client Area. ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "SetWindowExtEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nXExtent",
+        "description": "The window's horizontal extent in logical units."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nYExtent",
+        "description": "The window's vertical extent in logical units."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPSIZE",
+        "name": "lpSize",
+        "description": "A pointer to a SIZE structure that receives the previous window extents, in logical units. If lpSize is NULL, this parameter is not used."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The SetWindowOrgEx function specifies which window point maps to the viewport origin (0,0).",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "This helps define the mapping from the logical coordinate space (also known as a window) to the device coordinate space (the viewport). SetWindowOrgEx specifies which logical point maps to the device point (0,0). It has the effect of shifting the axes so that the logical point (0,0) no longer refers to the upper-left corner. This is related to the SetViewportOrgEx function. Generally, you will use one function or the other, but not both. Regardless of your use of SetWindowOrgEx and SetViewportOrgEx, the device point (0,0) is always the upper-left corner. ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "SetWindowOrgEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "X",
+        "description": "The x-coordinate, in logical units, of the new window origin."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "Y",
+        "description": "The y-coordinate, in logical units, of the new window origin."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPPOINT",
+        "name": "lpPoint",
+        "description": "A pointer to a POINT structure that receives the previous origin of the window, in logical units. If lpPoint is NULL, this parameter is not used."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The SetWorldTransform function sets a two-dimensional linear transformation between world space and page space for the specified device context. This transformation can be used to scale, rotate, shear, or translate graphics output.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "For any coordinates (x, y) in world space, the transformed coordinates in page space (x', y') can be determined by the following algorithm: where the transformation matrix is represented by the following: This function uses logical units. The world transformation is usually used to scale or rotate logical images in a device-independent way. The default world transformation is the identity matrix with zero offset. The SetWorldTransform function will fail unless the graphics mode for the given device context has been set to GM_ADVANCED by previously calling the SetGraphicsMode function. Likewise, it will not be possible to reset the graphics mode for the device context to the default GM_COMPATIBLE mode, unless the world transformation has first been reset to the default identity transformation by calling SetWorldTransform or ModifyWorldTransform. For an example, see Using Coordinate Spaces and Transformations. ",
+    "return_type": "BOOL",
+    "category": "Coordinate Space and Transformation",
+    "name": "SetWorldTransform",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const XFORM*",
+        "name": "lpXform",
+        "description": "A pointer to an XFORM structure that contains the transformation data."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]

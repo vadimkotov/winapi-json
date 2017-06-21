@@ -1,0 +1,1071 @@
+[
+  {
+    "n_arguments": 1,
+    "description": "The CancelDC function cancels any pending operation on the specified device context (DC).",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The CancelDC function is used by multithreaded applications to cancel lengthy drawing operations. If thread A initiates a lengthy drawing operation, thread B may cancel that operation by calling this function. If an operation is canceled, the affected thread returns an error and the result of its drawing operation is undefined. The results are also undefined if no drawing operation was in progress when the function was called. ",
+    "return_type": "BOOL",
+    "category": "Device Context",
+    "name": "CancelDC",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The ChangeDisplaySettings function changes the settings of the default display device to the specified graphics mode.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "The ChangeDisplaySettings function returns one of the following values.  ",
+    "remarks": "To ensure that the DEVMODE structure passed to ChangeDisplaySettings is valid and contains only values supported by the display driver, use the DEVMODE returned by the EnumDisplaySettings function. When the display mode is changed dynamically, the WM_DISPLAYCHANGE message is sent to all running applications with the following message parameters.  ",
+    "return_type": "LONG",
+    "category": "Device Context",
+    "name": "ChangeDisplaySettings",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "DEVMODE*",
+        "name": "lpDevMode",
+        "description": "A pointer to a DEVMODE structure that describes the new graphics mode. If lpDevMode is NULL, all the values currently in the registry will be used for the display setting. Passing NULL for the lpDevMode parameter and 0 for the dwFlags parameter is the easiest way to return to the default mode after a dynamic mode change. The dmSize member of DEVMODE must be initialized to the size, in bytes, of the DEVMODE structure. The dmDriverExtra member of DEVMODE must be initialized to indicate the number of bytes of private driver data following the DEVMODE structure. In addition, you can use any or all of the following members of the DEVMODE structure.  MemberMeaning dmBitsPerPelBits per pixel dmPelsWidthPixel width dmPelsHeightPixel height                  dmDisplayFlagsMode flags                  dmDisplayFrequencyMode frequency                  dmPositionPosition of the device in a multi-monitor configuration.                 In addition to using one or more of the preceding DEVMODE members, you must also set one or more of the following values in the dmFields member to change the display setting.                         ValueMeaning DM_BITSPERPELUse the dmBitsPerPel value. DM_PELSWIDTHUse the dmPelsWidth value. DM_PELSHEIGHTUse the dmPelsHeight value. DM_DISPLAYFLAGSUse the dmDisplayFlags value. DM_DISPLAYFREQUENCYUse the dmDisplayFrequency value. DM_POSITIONUse the dmPosition value."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwflags",
+        "description": "Indicates how the graphics mode should be changed. This parameter can be one of the following values.  ValueMeaning  0   The graphics mode for the current screen will be changed dynamically.   CDS_FULLSCREEN   The mode is temporary in nature.  If you change to and from another desktop, this mode will not be reset.   CDS_GLOBAL   The settings will be saved in the global settings area so that they will affect all users on the machine. Otherwise, only the settings for the user are modified. This flag is only valid when specified with the CDS_UPDATEREGISTRY flag.   CDS_NORESET   The settings will be saved in the registry, but will not take effect. This flag is only valid when specified with the CDS_UPDATEREGISTRY flag.   CDS_RESET   The settings should be changed, even if the requested settings are the same as the current settings.   CDS_SET_PRIMARY   This device will become the primary device.   CDS_TEST   The system tests if the requested graphics mode could be set.   CDS_UPDATEREGISTRY   The graphics mode for the current screen will be changed dynamically and the graphics mode will be updated in the registry. The mode information is stored in the USER profile.     Specifying CDS_TEST allows an application to determine which graphics modes are actually valid, without causing the system to change to that graphics mode. If CDS_UPDATEREGISTRY is specified and it is possible to change the graphics mode dynamically, the information is stored in the registry and DISP_CHANGE_SUCCESSFUL is returned. If it is not possible to change the graphics mode dynamically, the information is stored in the registry and DISP_CHANGE_RESTART is returned.               If CDS_UPDATEREGISTRY is specified and the information could not be stored in the registry, the graphics mode is not changed and DISP_CHANGE_NOTUPDATED is returned."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The ChangeDisplaySettingsEx function changes the settings of the specified display device to the specified graphics mode.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "The ChangeDisplaySettingsEx function returns one of the following values.  ",
+    "remarks": "To ensure that the DEVMODE structure passed to ChangeDisplaySettingsEx is valid and contains only values supported by the display driver, use the DEVMODE returned by the EnumDisplaySettings function. When adding a display monitor to a multiple-monitor system programmatically, set DEVMODE.dmFields to DM_POSITION and specify a position (in DEVMODE.dmPosition) for the monitor you are adding that is adjacent to at least one pixel of the display area of an existing monitor. To detach the monitor, set DEVMODE.dmFields to DM_POSITION but set DEVMODE.dmPelsWidth and DEVMODE.dmPelsHeight to zero. For more information, see Multiple Display Monitors. When the display mode is changed dynamically, the WM_DISPLAYCHANGE message is sent to all running applications with the following message parameters.  To change the settings for more than one display at the same time, first call ChangeDisplaySettingsEx for each device individually to update the registry without applying the changes. Then call ChangeDisplaySettingsEx once more, with a NULL device, to apply the changes. For example, to change the settings for two displays, do the following: ",
+    "return_type": "LONG",
+    "category": "Device Context",
+    "name": "ChangeDisplaySettingsEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszDeviceName",
+        "description": "A pointer to a null-terminated string that specifies the display device whose graphics mode will change. Only display device names as returned by EnumDisplayDevices are valid. See EnumDisplayDevices for further information on the names associated with these display devices. The lpszDeviceName parameter can be NULL. A NULL value specifies the default display device. The default device can be determined by calling EnumDisplayDevices and checking for the DISPLAY_DEVICE_PRIMARY_DEVICE flag."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DEVMODE*",
+        "name": "lpDevMode",
+        "description": "A pointer to a DEVMODE structure that describes the new graphics mode. If lpDevMode is NULL, all the values currently in the registry will be used for the display setting. Passing NULL for the lpDevMode parameter and 0 for the dwFlags parameter is the easiest way to return to the default mode after a dynamic mode change. The dmSize member must be initialized to the size, in bytes, of the DEVMODE structure. The dmDriverExtra member must be initialized to indicate the number of bytes of private driver data following the DEVMODE structure. In addition, you can use any of the following members of the DEVMODE structure.  MemberMeaning dmBitsPerPelBits per pixel dmPelsWidthPixel width dmPelsHeightPixel height                  dmDisplayFlagsMode flags                  dmDisplayFrequencyMode frequency                  dmPositionPosition of the device in a multi-monitor configuration.    In addition to using one or more of the preceding DEVMODE members, you must also set one or more of the following values in the dmFields member to change the display settings.  ValueMeaning DM_BITSPERPELUse the dmBitsPerPel value. DM_PELSWIDTHUse the dmPelsWidth value. DM_PELSHEIGHTUse the dmPelsHeight value. DM_DISPLAYFLAGSUse the dmDisplayFlags value. DM_DISPLAYFREQUENCYUse the dmDisplayFrequency value. DM_POSITIONUse the dmPosition value."
+      },
+      {
+        "in_out": "",
+        "type": "HWND",
+        "name": "hwnd",
+        "description": "Reserved; must be NULL."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwflags",
+        "description": "Indicates how the graphics mode should be changed. This parameter can be one of the following values.  ValueMeaning   0   The graphics mode for the current screen will be changed dynamically.   CDS_FULLSCREEN   The mode is temporary in nature.  If you change to and from another desktop, this mode will not be reset.   CDS_GLOBAL   The settings will be saved in the global settings area so that they will affect all users on the machine. Otherwise, only the settings for the user are modified. This flag is only valid when specified with the CDS_UPDATEREGISTRY flag.   CDS_NORESET   The settings will be saved in the registry, but will not take effect. This flag is only valid when specified with the CDS_UPDATEREGISTRY flag.   CDS_RESET   The settings should be changed, even if the requested settings are the same as the current settings.   CDS_SET_PRIMARY   This device will become the primary device.   CDS_TEST   The system tests if the requested graphics mode could be set.   CDS_UPDATEREGISTRY   The graphics mode for the current screen will be changed dynamically and the graphics mode will be updated in the registry. The mode information is stored in the USER profile.   CDS_VIDEOPARAMETERS   When set, the lParam parameter is a pointer to a VIDEOPARAMETERS structure.   CDS_ENABLE_UNSAFE_MODES   Enables settings changes to unsafe graphics modes.   CDS_DISABLE_UNSAFE_MODES   Disables settings changes to unsafe graphics modes.     Specifying CDS_TEST allows an application to determine which graphics modes are actually valid, without causing the system to change to them. If CDS_UPDATEREGISTRY is specified and it is possible to change the graphics mode dynamically, the information is stored in the registry and DISP_CHANGE_SUCCESSFUL is returned. If it is not possible to change the graphics mode dynamically, the information is stored in the registry and DISP_CHANGE_RESTART is returned.               If CDS_UPDATEREGISTRY is specified and the information could not be stored in the registry, the graphics mode is not changed and DISP_CHANGE_NOTUPDATED is returned."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "lParam",
+        "description": "If dwFlags is CDS_VIDEOPARAMETERS, lParam is a pointer to a VIDEOPARAMETERS structure. Otherwise lParam must be NULL."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The CreateCompatibleDC function creates a memory device context (DC) compatible with the specified device.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the handle to a memory DC. If the function fails, the return value is NULL. ",
+    "remarks": "A memory DC exists only in memory. When the memory DC is created, its display surface is exactly one monochrome pixel wide and one monochrome pixel high. Before an application can use a memory DC for drawing operations, it must select a bitmap of the correct width and height into the DC. To select a bitmap into a DC, use the CreateCompatibleBitmap function, specifying the height, width, and color organization required. When a memory DC is created, all attributes are set to normal default values. The memory DC can be used as a normal DC. You can set the attributes; obtain the current settings of its attributes; and select pens, brushes, and regions. The CreateCompatibleDC function can only be used with devices that support raster operations. An application can determine whether a device supports these operations by calling the GetDeviceCaps function. When you no longer need the memory DC, call the DeleteDC function. We recommend that you call DeleteDC to delete the DC.  However, you can also call                  DeleteObject with the HDC to delete the DC. If hdc is NULL, the thread that calls CreateCompatibleDC owns the HDC that is created. When this thread is destroyed, the HDC is no longer valid. Thus, if you create the HDC and pass it to another thread, then exit the first thread, the second thread will not be able to use the HDC. ICM: If the DC that is passed to this function is enabled for Image Color Management (ICM), the DC created by the function is ICM-enabled. The source and destination color spaces are specified in the DC. For an example, see Capturing an Image. ",
+    "return_type": "HDC",
+    "category": "Device Context",
+    "name": "CreateCompatibleDC",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to an existing DC. If this handle is NULL, the function creates a memory DC compatible with the application's current screen."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The CreateDC function creates a device context (DC) for a device using the specified name.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the handle to a DC for the specified device. If the function fails, the return value is NULL. ",
+    "remarks": "Note that the handle to the DC can only be used by a single thread at any one time. For parameters lpszDriver and lpszDevice, call EnumDisplayDevices to obtain valid names for displays. When you no longer need the DC, call the DeleteDC function. If lpszDriver or lpszDevice is DISPLAY, the thread that calls CreateDC owns the HDC that is created. When this thread is destroyed, the HDC is no longer valid. Thus, if you create the HDC and pass it to another thread, then exit the first thread, the second thread will not be able to use the HDC. When you call CreateDC to create the HDC for a display device, you must pass to lpInitData either NULL or a pointer to DEVMODE that matches the current DEVMODE of the display device that lpszDevice specifies. We recommend to pass NULL and not to try to exactly match the DEVMODE for the current display device. When you call CreateDC to create the HDC for a printer device, the printer driver validates the DEVMODE. If the printer driver determines that the DEVMODE is invalid (that is, printer driver can't convert or consume the DEVMODE), the printer driver provides a default DEVMODE to create the HDC for the printer device. ICM: To enable ICM, set the dmICMMethod member of the DEVMODE structure (pointed to by the pInitData parameter) to the appropriate value. For an example, see Capturing an Image. ",
+    "return_type": "HDC",
+    "category": "Device Context",
+    "name": "CreateDC",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "",
+        "type": "LPCTSTR",
+        "name": "lpszDriver",
+        "description": "A pointer to a null-terminated character string that specifies either DISPLAY or the name of a specific display device. For printing, we recommend that you pass NULL to lpszDriver because GDI ignores lpszDriver for printer devices."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszDevice",
+        "description": "A pointer to a null-terminated character string that specifies the name of the specific output device being used, as shown by the Print Manager (for example, Epson FX-80). It is not the printer model name. The lpszDevice parameter must be used. To obtain valid names for displays, call EnumDisplayDevices. If lpszDriver is DISPLAY or the device name of a specific display device, then lpszDevice must be NULL or that same device name. If lpszDevice is NULL, then a DC is created for the primary display device. If there are multiple monitors on the system, calling CreateDC(TEXT(\"DISPLAY\"),NULL,NULL,NULL) will create a DC covering all the monitors."
+      },
+      {
+        "in_out": "",
+        "type": "LPCTSTR",
+        "name": "lpszOutput",
+        "description": "This parameter is ignored and should be set to NULL. It is provided only for compatibility with 16-bit Windows."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const DEVMODE*",
+        "name": "lpInitData",
+        "description": "A pointer to a DEVMODE structure containing device-specific initialization data for the device driver. The DocumentProperties function retrieves this structure filled in for a specified device. The lpInitData parameter must be NULL if the device driver is to use the default initialization (if any) specified by the user. If lpszDriver is DISPLAY, lpInitData must be NULL; GDI then uses the display device's current DEVMODE."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The CreateIC function creates an information context for the specified device. The information context provides a fast way to get information about the device without creating a device context (DC). However, GDI drawing functions cannot accept a handle to an information context.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the handle to an information context. If the function fails, the return value is NULL. ",
+    "remarks": "When you no longer need the information DC, call the DeleteDC function. ",
+    "return_type": "HDC",
+    "category": "Device Context",
+    "name": "CreateIC",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszDriver",
+        "description": "A pointer to a null-terminated character string that specifies the name of the device driver (for example, Epson)."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszDevice",
+        "description": "A pointer to a null-terminated character string that specifies the name of the specific output device being used, as shown by the Print Manager (for example, Epson FX-80). It is not the printer model name. The lpszDevice parameter must be used."
+      },
+      {
+        "in_out": "",
+        "type": "LPCTSTR",
+        "name": "lpszOutput",
+        "description": "This parameter is ignored and should be set to NULL. It is provided only for compatibility with 16-bit Windows."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const DEVMODE*",
+        "name": "lpdvmInit",
+        "description": "A pointer to a DEVMODE structure containing device-specific initialization data for the device driver. The DocumentProperties function retrieves this structure filled in for a specified device. The lpdvmInit parameter must be NULL if the device driver is to use the default initialization (if any) specified by the user."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The DeleteDC function deletes the specified device context (DC).",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "An application must not delete a DC whose handle was obtained by calling the GetDC function. Instead, it must call the ReleaseDC function to free the DC. For an example, see Retrieving the Capabilities of a Printer. ",
+    "return_type": "BOOL",
+    "category": "Device Context",
+    "name": "DeleteDC",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The DeleteObject function deletes a logical pen, brush, font, bitmap, region, or palette, freeing all system resources associated with the object. After the object is deleted, the specified handle is no longer valid.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the specified handle is not valid or is currently selected into a DC, the return value is zero. ",
+    "remarks": "Do not delete a drawing object (pen or brush) while it is still selected into a DC. When a pattern brush is deleted, the bitmap associated with the brush is not deleted. The bitmap must be deleted independently. For an example, see Creating Colored Pens and Brushes. ",
+    "return_type": "BOOL",
+    "category": "Device Context",
+    "name": "DeleteObject",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HGDIOBJ",
+        "name": "hObject",
+        "description": "A handle to a logical pen, brush, font, bitmap, region, or palette."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 5,
+    "description": "The DeviceCapabilities function retrieves the capabilities of a printer driver.",
+    "library": "WinSpool.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "WinGdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value depends on the setting of the fwCapability parameter. A return value of zero generally indicates that, while the function completed successfully, there was some type of failure, such as a capability that is not supported. For more details, see the descriptions for the fwCapability values. If the function returns -1, this may mean either that the capability is not supported or there was a general function failure. ",
+    "remarks": "The DEVMODE structure pointed to by the pDevMode parameter may be obtained by calling the DocumentProperties function. If a printer driver supports custom device capabilities, the driver must call the SetPrinterData function for each custom capability. The SetPrinterData function adds the appropriate printer data to the print system, which enables 32-bit applications to access the custom capabilities on 64-bit Windows installations. For each custom capability, you must first add printer data that describes the type of the capability. To do this, when you call SetPrinterData, set the pValueName string to CustomDeviceCapabilityType_Xxx, where \"Xxx\" is the hexadecimal representation of the capability. For example, you might have \"CustomDeviceCapabilityType_1234\". The registry data that you set must be of the REG_DWORD type, and you must set its value to one of the following: If the custom capability is an array of items, you must call SetPinterData a second time to provide information about the size of an item in the array. To do this, when you call SetPinterData, the pValueName string that you provide must be \"CustomDeviceCapabilitySize_Xxx\" where Xxx is the hexadecimal representation of the capability. For example, you might have \"CustomDeviceCapabilitySize_1234\". The registry data that you set must be of the REG_DWORD type, and you must set its value to the size in bytes of an item in the array. ",
+    "return_type": "DWORD",
+    "category": "Device Context",
+    "name": "DeviceCapabilities",
+    "is_callback": 0,
+    "dll": "WinSpool.drv",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pDevice",
+        "description": "A pointer to a null-terminated string that contains the name of the printer. Note that this is the name of the printer, not of the printer driver."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "pPort",
+        "description": "A pointer to a null-terminated string that contains the name of the port to which the device is connected, such as LPT1."
+      },
+      {
+        "in_out": "_In_",
+        "type": "WORD",
+        "name": "fwCapability",
+        "description": "The capabilities to be queried. This parameter can be one of the following values.  ValueMeaning  DC_BINNAMES   Retrieves the names of the printer's paper bins. The pOutput buffer receives an array of string buffers. Each string buffer is 24 characters long and contains the name of a paper bin. The return value indicates the number of entries in the array. The name strings are null-terminated unless the name is 24 characters long. If pOutput is NULL, the return value is the number of bin entries required.   DC_BINS   Retrieves a list of available paper bins. The pOutput buffer receives an array of WORD values that indicate the available paper sources for the printer. The return value indicates the number of entries in the array. For a list of the possible array values, see the description of the dmDefaultSource member of the DEVMODE structure. If pOutput is NULL, the return value indicates the required number of entries in the array.   DC_COLLATE   If the printer supports collating, the return value is 1; otherwise, the return value is zero. The pOutput parameter is not used.   DC_COLORDEVICE   If the printer supports color printing, the return value is 1; otherwise, the return value is zero. The pOutput parameter is not used.   DC_COPIES   Returns the number of copies the device can print.   DC_DRIVER   Returns the version number of the printer driver.   DC_DUPLEX   If the printer supports duplex printing, the return value is 1; otherwise, the return value is zero. The pOutput parameter is not used.   DC_ENUMRESOLUTIONS   Retrieves a list of the resolutions supported by the printer. The pOutput buffer receives an array of LONG values. For each supported resolution, the array contains a pair of LONG values that specify the x and y dimensions of the resolution, in dots per inch. The return value indicates the number of supported resolutions. If pOutput is NULL, the return value indicates the number of supported resolutions.   DC_EXTRA   Returns the number of bytes required for the device-specific portion of the DEVMODE structure for the printer driver.   DC_FIELDS   Returns the dmFields member of the printer driver's DEVMODE structure. The dmFields member indicates which members in the device-independent portion of the structure are supported by the printer driver.   DC_FILEDEPENDENCIES   Retrieves the names of any additional files that need to be loaded when a driver is installed. The pOutput buffer receives an array of string buffers. Each string buffer is 64 characters long and contains the name of a file. The return value indicates the number of entries in the array. The name strings are null-terminated unless the name is 64 characters long. If pOutput is NULL, the return value is the number of files.   DC_MAXEXTENT   Returns the maximum paper size that the dmPaperLength and dmPaperWidth members of the printer driver's DEVMODE structure can specify. The LOWORD of the return value contains the maximum dmPaperWidth value, and the HIWORD contains the maximum dmPaperLength value.   DC_MEDIAREADY   Retrieves the names of the paper forms that are currently available for use. The pOutput buffer receives an array of string buffers. Each string buffer is 64 characters long and contains the name of a paper form. The return value indicates the number of entries in the array. The name strings are null-terminated unless the name is 64 characters long. If pOutput is NULL, the return value is the number of paper forms.   DC_MEDIATYPENAMES   Retrieves the names of the supported media types. The pOutput buffer receives an array of string buffers. Each string buffer is 64 characters long and contains the name of a supported media type. The return value indicates the number of entries in the array. The strings are null-terminated unless the name is 64 characters long. If pOutput is NULL, the return value is the number of media type names required.   DC_MEDIATYPES   Retrieves a list of supported media types. The pOutput buffer receives an array of DWORD values that indicate the supported media types. The return value indicates the number of entries in the array. For a list of possible array values, see the description of the dmMediaType member of the DEVMODE structure. If pOutput is NULL, the return value indicates the required number of entries in the array.   DC_MINEXTENT   Returns the minimum paper size that the dmPaperLength and dmPaperWidth members of the printer driver's DEVMODE structure can specify. The LOWORD of the return value contains the minimum dmPaperWidth value, and the HIWORD contains the minimum dmPaperLength value.   DC_ORIENTATION   Returns the relationship between portrait and landscape orientations for a device, in terms of the number of degrees that portrait orientation is rotated counterclockwise to produce landscape orientation. The return value can be one of the following:  0  No landscape orientation.  90  Portrait is rotated 90 degrees to produce landscape.  270  Portrait is rotated 270 degrees to produce landscape.     DC_NUP   Retrieves an array of integers that indicate that printer's ability to print multiple document pages per printed page. The pOutput buffer receives an array of DWORD values. Each value represents a supported number of document pages per printed page. The return value indicates the number of entries in the array. If pOutput is NULL, the return value indicates the required number of entries in the array.   DC_PAPERNAMES   Retrieves a list of supported paper names (for example, Letter or Legal). The pOutput buffer receives an array of string buffers. Each string buffer is 64 characters long and contains the name of a paper form. The return value indicates the number of entries in the array. The name strings are null-terminated unless the name is 64 characters long. If pOutput is NULL, the return value is the number of paper forms.   DC_PAPERS   Retrieves a list of supported paper sizes. The pOutput buffer receives an array of WORD values that indicate the available paper sizes for the printer. The return value indicates the number of entries in the array. For a list of the possible array values, see the description of the dmPaperSize member of the DEVMODE structure. If pOutput is NULL, the return value indicates the required number of entries in the array.   DC_PAPERSIZE   Retrieves the dimensions, in tenths of a millimeter, of each supported paper size. The pOutput buffer receives an array of POINT structures. Each structure contains the width (x-dimension) and length (y-dimension) of a paper size as if the paper were in the DMORIENT_PORTRAIT orientation. The return value indicates the number of entries in the array.   DC_PERSONALITY   Retrieves a list of printer description languages supported by the printer. The pOutput buffer receives an array of string buffers. Each buffer is 32 characters long and contains the name of a printer description language. The return value indicates the number of entries in the array. The name strings are null-terminated unless the name is 32 characters long. If pOutput is NULL, the return value indicates the required number of array entries.   DC_PRINTERMEM   The return value is the amount of available printer memory, in kilobytes. The pOutput parameter is not used.   DC_PRINTRATE   The return value indicates the printer's print rate. The value returned for DC_PRINTRATEUNIT indicates the units of the DC_PRINTRATE value. The pOutput parameter is not used.   DC_PRINTRATEPPM   The return value indicates the printer's print rate, in pages per minute. The pOutput parameter is not used.   DC_PRINTRATEUNIT   The return value is one of the following values that indicate the print rate units for the value returned for the DC_PRINTRATE flag. The pOutput parameter is not used.  PRINTRATEUNIT_CPS  Characters per second.  PRINTRATEUNIT_IPM  Inches per minute.  PRINTRATEUNIT_LPM  Lines per minute.  PRINTRATEUNIT_PPM  Pages per minute.     DC_SIZE   Returns the dmSize member of the printer driver's DEVMODE structure.   DC_STAPLE   If the printer supports stapling, the return value is a nonzero value; otherwise, the return value is zero. The pOutput parameter is not used.   DC_TRUETYPE   Retrieves the abilities of the driver to use TrueType fonts. For DC_TRUETYPE, the pOutput parameter should be NULL. The return value can be one or more of the following:  DCTT_BITMAP  Device can print TrueType fonts as graphics.  DCTT_DOWNLOAD  Device can download TrueType fonts.  DCTT_SUBDEV  Device can substitute device fonts for TrueType fonts.     DC_VERSION   Returns the specification version to which the printer driver conforms."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPTSTR",
+        "name": "pOutput",
+        "description": "A pointer to an array. The format of the array depends on the setting of the fwCapability parameter. If pOutput is NULL, DeviceCapabilities returns the number of bytes required for the output data."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const DEVMODE*",
+        "name": "pDevMode",
+        "description": "A pointer to a DEVMODE structure. If this parameter is NULL, DeviceCapabilities retrieves the current default initialization values for the specified printer driver. Otherwise, the function retrieves the values contained in the structure to which pDevMode points."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The DrawEscape function provides drawing capabilities of the specified video display that are not directly available through the graphics device interface (GDI).",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function is successful, the return value is greater than zero except for the QUERYESCSUPPORT draw escape, which checks for implementation only. If the escape is not implemented, the return value is zero. If an error occurred, the return value is less than zero. ",
+    "remarks": "When an application calls the DrawEscape function, the data identified by cbInput and lpszInData is passed directly to the specified display driver. ",
+    "return_type": "int",
+    "category": "Device Context",
+    "name": "DrawEscape",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC for the specified video display."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nEscape",
+        "description": "The escape function to be performed."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cbInput",
+        "description": "The number of bytes of data pointed to by the lpszInData parameter."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPCSTR",
+        "name": "lpszInData",
+        "description": "A pointer to the input structure required for the specified escape."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The EnumDisplayDevices function lets you obtain information about the display devices in the current session.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. The function fails if iDevNum is greater than the largest device index. ",
+    "remarks": "To query all display devices in the current session, call this function in a loop, starting with iDevNum set to 0, and incrementing iDevNum until the function fails. To select all display devices in the desktop, use only the display devices that have the DISPLAY_DEVICE_ATTACHED_TO_DESKTOP flag in the DISPLAY_DEVICE structure. To get information on the display adapter, call EnumDisplayDevices with lpDevice set to NULL. For example, DISPLAY_DEVICE.DeviceString contains the adapter name. To obtain information on a display monitor, first call EnumDisplayDevices with lpDevice set to NULL. Then call EnumDisplayDevices with lpDevice set to DISPLAY_DEVICE.DeviceName from the first call to EnumDisplayDevices and with iDevNum set to zero. Then DISPLAY_DEVICE.DeviceString is the monitor name. To query all monitor devices associated with an adapter, call EnumDisplayDevices in a loop with lpDevice set to the adapter name, iDevNum set to start at 0, and iDevNum set to increment until the function fails. Note that DISPLAY_DEVICE.DeviceName changes with each call for monitor information, so you must save the adapter name. The function fails when there are no more monitors for the adapter. ",
+    "return_type": "BOOL",
+    "category": "Device Context",
+    "name": "EnumDisplayDevices",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpDevice",
+        "description": "A pointer to the device name. If NULL, function returns information for the display adapter(s) on the machine, based on iDevNum. For more information, see Remarks."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "iDevNum",
+        "description": "An index value that specifies the display device of interest. The operating system identifies each display device in the current session with an index value. The index values are consecutive integers, starting at 0. If the current session has three display devices, for example, they are specified by the index values 0, 1, and 2."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "PDISPLAY_DEVICE",
+        "name": "lpDisplayDevice",
+        "description": "A pointer to a DISPLAY_DEVICE structure that receives information about the display device specified by iDevNum.  Before calling EnumDisplayDevices, you must initialize the cb member of DISPLAY_DEVICE to the size, in bytes, of DISPLAY_DEVICE."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "Set this flag to EDD_GET_DEVICE_INTERFACE_NAME (0x00000001) to retrieve the device interface name for GUID_DEVINTERFACE_MONITOR, which is registered by the operating system on a per monitor basis. The value is placed in the DeviceID member of the DISPLAY_DEVICE structure returned in lpDisplayDevice. The resulting device interface name can be used with SetupAPI functions and serves as a link between GDI monitor devices and SetupAPI monitor devices."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The EnumDisplaySettings function retrieves information about one of the graphics modes for a display device. To retrieve information for all the graphics modes of a display device, make a series of calls to this function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The function fails if iModeNum is greater than the index of the display device's last graphics mode. As noted in the description of the iModeNum parameter, you can use this behavior to enumerate all of a display device's graphics modes. ",
+    "return_type": "BOOL",
+    "category": "Device Context",
+    "name": "EnumDisplaySettings",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszDeviceName",
+        "description": "A pointer to a null-terminated string that specifies the display device about whose graphics mode the function will obtain information. This parameter is either NULL or a DISPLAY_DEVICE.DeviceName returned from EnumDisplayDevices. A NULL value specifies the current display device on the computer on which the calling thread is running."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "iModeNum",
+        "description": "The type of information to be retrieved. This value can be a graphics mode index or one of the following values.  ValueMeaning  ENUM_CURRENT_SETTINGS   Retrieve the current settings for the display device.   ENUM_REGISTRY_SETTINGS   Retrieve the settings for the display device that are currently stored in the registry.     Graphics mode indexes start at zero. To obtain information for all of a display device's graphics modes, make a series of calls to EnumDisplaySettings, as follows: Set iModeNum to zero for the first call, and increment iModeNum by one for each subsequent call. Continue calling the function until the return value is zero. When you call EnumDisplaySettings with iModeNum set to zero, the operating system initializes and caches information about the display device. When you call EnumDisplaySettings with iModeNum set to a nonzero value, the function returns the information that was cached the last time the function was called with iModeNum set to zero."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DEVMODE*",
+        "name": "lpDevMode",
+        "description": "A pointer to a DEVMODE structure into which the function stores information about the specified graphics mode. Before calling EnumDisplaySettings, set the dmSize member to sizeof(DEVMODE), and set the dmDriverExtra member to indicate the size, in bytes, of the additional space available to receive private driver data. The EnumDisplaySettings function sets values for the following five DEVMODE members:  dmBitsPerPel dmPelsWidth dmPelsHeight dmDisplayFlags dmDisplayFrequency"
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The EnumDisplaySettingsEx function retrieves information about one of the graphics modes for a display device. To retrieve information for all the graphics modes for a display device, make a series of calls to this function.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero.  ",
+    "remarks": "The function fails if iModeNum is greater than the index of the display device's last graphics mode. As noted in the description of the iModeNum parameter, you can use this behavior to enumerate all of a display device's graphics modes. ",
+    "return_type": "BOOL",
+    "category": "Device Context",
+    "name": "EnumDisplaySettingsEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPCTSTR",
+        "name": "lpszDeviceName",
+        "description": "A pointer to a null-terminated string that specifies the display device about which graphics mode the function will obtain information. This parameter is either NULL or a DISPLAY_DEVICE.DeviceName returned from EnumDisplayDevices. A NULL value specifies the current display device on the computer that the calling thread is running on."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "iModeNum",
+        "description": "Indicates the type of information to be retrieved. This value can be a graphics mode index or one of the following values.  ValueMeaning  ENUM_CURRENT_SETTINGS   Retrieve the current settings for the display device.   ENUM_REGISTRY_SETTINGS   Retrieve the settings for the display device that are currently stored in the registry.     Graphics mode indexes start at zero. To obtain information for all of a display device's graphics modes, make a series of calls to EnumDisplaySettingsEx, as follows: Set iModeNum to zero for the first call, and increment iModeNum by one for each subsequent call. Continue calling the function until the return value is zero. When you call EnumDisplaySettingsEx with iModeNum set to zero, the operating system initializes and caches information about the display device. When you call EnumDisplaySettingsEx with iModeNum set to a nonzero value, the function returns the information that was cached the last time the function was called with iModeNum set to zero."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "DEVMODE*",
+        "name": "lpDevMode",
+        "description": "A pointer to a DEVMODE structure into which the function stores information about the specified graphics mode. Before calling EnumDisplaySettingsEx, set the dmSize member to sizeof (DEVMODE), and set the dmDriverExtra member to indicate the size, in bytes, of the additional space available to receive private driver data. The EnumDisplaySettingsEx function will populate the dmFields member of the lpDevMode and one or more other members of the DEVMODE structure. To determine which members were set by the call to EnumDisplaySettingsEx, inspect the dmFields bitmask. Some of the fields typically populated by this function include:  dmBitsPerPel dmPelsWidth dmPelsHeight dmDisplayFlags dmDisplayFrequency dmPosition dmDisplayOrientation"
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwFlags",
+        "description": "This parameter can be the following value.  ValueMeaning  EDS_RAWMODE   If set, the function will return all graphics modes reported by the adapter driver, regardless of monitor capabilities. Otherwise, it will only return modes that are compatible with current monitors.   EDS_ROTATEDMODE    If set, the function will return graphics modes in all orientations. Otherwise, it will only return modes that have the same orientation as the one currently set for the requested display."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 4,
+    "description": "The EnumObjects function enumerates the pens or brushes available for the specified device context (DC). This function calls the application-defined callback function once for each available object, supplying data describing that object. EnumObjects continues calling the callback function until the callback function returns zero or until all of the objects have been enumerated.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the last value returned by the callback function. Its meaning is user-defined. If the objects cannot be enumerated (for example, there are too many objects), the function returns zero without calling the callback function. ",
+    "remarks": "",
+    "return_type": "int",
+    "category": "Device Context",
+    "name": "EnumObjects",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nObjectType",
+        "description": "The object type. This parameter can be OBJ_BRUSH or OBJ_PEN."
+      },
+      {
+        "in_out": "_In_",
+        "type": "GOBJENUMPROC",
+        "name": "lpObjectFunc",
+        "description": "A pointer to the application-defined callback function. For more information about the callback function, see the EnumObjectsProc function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lParam",
+        "description": "A pointer to the application-defined data. The data is passed to the callback function along with the object information."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The EnumObjectsProc function is an application-defined callback function used with the EnumObjects function. It is used to process the object data. The GOBJENUMPROC type defines a pointer to this callback function. EnumObjectsProc is a placeholder for the application-defined function name.",
+    "library": "",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "To continue enumeration, the callback function must return a nonzero value. This value is user-defined. To stop enumeration, the callback function must return zero. ",
+    "remarks": "An application must register this function by passing its address to the EnumObjects function. ",
+    "return_type": "int CALLBACK",
+    "category": "Device Context",
+    "name": "EnumObjectsProc",
+    "is_callback": 1,
+    "dll": "",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "LPVOID",
+        "name": "lpLogObject",
+        "description": "A pointer to a LOGPEN or LOGBRUSH structure describing the attributes of the object."
+      },
+      {
+        "in_out": "_In_",
+        "type": "LPARAM",
+        "name": "lpData",
+        "description": "A pointer to the application-defined data passed by the EnumObjects function."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The GetCurrentObject function retrieves a handle to an object of the specified type that has been selected into the specified device context (DC).",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the specified object. If the function fails, the return value is NULL. ",
+    "remarks": "An application can use the GetCurrentObject and GetObject functions to retrieve descriptions of the graphic objects currently selected into the specified DC. For an example, see Retrieving Graphic-Object Attributes and Selecting New Graphic Objects. ",
+    "return_type": "HGDIOBJ",
+    "category": "Device Context",
+    "name": "GetCurrentObject",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC."
+      },
+      {
+        "in_out": "_In_",
+        "type": "UINT",
+        "name": "uObjectType",
+        "description": "The object type to be queried. This parameter can be one of the following values.  ValueMeaning  OBJ_BITMAP   Returns the current selected bitmap.   OBJ_BRUSH   Returns the current selected brush.   OBJ_COLORSPACE   Returns the current color space.   OBJ_FONT   Returns the current selected font.   OBJ_PAL   Returns the current selected palette.   OBJ_PEN   Returns the current selected pen."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetDC function retrieves a handle to a device context (DC) for the client area of a specified window or for the entire screen. You can use the returned handle in subsequent GDI functions to draw in the DC. The device context is an opaque data structure, whose values are used internally by GDI.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the DC for the specified window's client area. If the function fails, the return value is NULL. ",
+    "remarks": "The GetDC function retrieves a common, class, or private DC depending on the class style of the specified window. For class and private DCs, GetDC leaves the previously assigned attributes unchanged. However, for common DCs, GetDC assigns default attributes to the DC each time it is retrieved. For example, the default font is System, which is a bitmap font. Because of this, the handle to a common DC returned by GetDC does not tell you what font, color, or brush was used when the window was drawn. To determine the font, call GetTextFace. Note that the handle to the DC can only be used by a single thread at any one time. After painting with a common DC, the ReleaseDC function must be called to release the DC. Class and private DCs do not have to be released. ReleaseDC must be called from the same thread that called GetDC. The number of DCs is limited only by available memory. For an example, see Drawing with the Mouse. ",
+    "return_type": "HDC",
+    "category": "Device Context",
+    "name": "GetDC",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the window whose DC is to be retrieved. If this value is NULL, GetDC retrieves the DC for the entire screen."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetDCBrushColor function retrieves the current brush color for the specified device context (DC).",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "WinGdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the COLORREF value for the current DC brush color. If the function fails, the return value is CLR_INVALID. ",
+    "remarks": "For information on setting the brush color, see SetDCBrushColor. ICM: Color management is performed if ICM is enabled. ",
+    "return_type": "COLORREF",
+    "category": "Device Context",
+    "name": "GetDCBrushColor",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC whose brush color is to be returned."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The GetDCEx function retrieves a handle to a device context (DC) for the client area of a specified window or for the entire screen. You can use the returned handle in subsequent GDI functions to draw in the DC. The device context is an opaque data structure, whose values are used internally by GDI.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is the handle to the DC for the specified window. If the function fails, the return value is NULL. An invalid value for the hWnd parameter will cause the function to fail. ",
+    "remarks": "Unless the display DC belongs to a window class, the ReleaseDC function must be called to release the DC after painting. Also, ReleaseDC must be called from the same thread that called GetDCEx. The number of DCs is limited only by available memory. The function returns a handle to a DC that belongs to the window's class if CS_CLASSDC, CS_OWNDC or CS_PARENTDC was specified as a style in the WNDCLASS structure when the class was registered. ",
+    "return_type": "HDC",
+    "category": "Device Context",
+    "name": "GetDCEx",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the window whose DC is to be retrieved. If this value is NULL, GetDCEx retrieves the DC for the entire screen."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HRGN",
+        "name": "hrgnClip",
+        "description": "A clipping region that may be combined with the visible region of the DC. If the value of flags is DCX_INTERSECTRGN or DCX_EXCLUDERGN, then the operating system assumes ownership of the region and will automatically delete it when it is no longer needed. In this case, the application should not use or delete the region after a successful call to GetDCEx."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "flags",
+        "description": "Specifies how the DC is created. This parameter can be one or more of the following values.  ValueMeaning  DCX_WINDOW   Returns a DC that corresponds to the window rectangle rather than the client rectangle.   DCX_CACHE   Returns a DC from the cache, rather than the OWNDC or CLASSDC window. Essentially overrides CS_OWNDC and CS_CLASSDC.   DCX_PARENTCLIP   Uses the visible region of the parent window. The parent's WS_CLIPCHILDREN and CS_PARENTDC style bits are ignored. The origin is set to the upper-left corner of the window identified by hWnd.   DCX_CLIPSIBLINGS   Excludes the visible regions of all sibling windows above the window identified by hWnd.   DCX_CLIPCHILDREN   Excludes the visible regions of all child windows below the window identified by hWnd.   DCX_NORESETATTRS   This flag is ignored.   DCX_LOCKWINDOWUPDATE   Allows drawing even if there is a LockWindowUpdate call in effect that would otherwise exclude this window. Used for drawing during tracking.   DCX_EXCLUDERGN   The clipping region identified by hrgnClip is excluded from the visible region of the returned DC.   DCX_INTERSECTRGN   The clipping region identified by hrgnClip is intersected with the visible region of the returned DC.   DCX_INTERSECTUPDATE   Reserved; do not use.   DCX_VALIDATE   Reserved; do not use."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The GetDCOrgEx function retrieves the final translation origin for a specified device context (DC). The final translation origin specifies an offset that the system uses to translate device coordinates into client coordinates (for coordinates in an application's window).",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The final translation origin is relative to the physical origin of the screen. ",
+    "return_type": "BOOL",
+    "category": "Device Context",
+    "name": "GetDCOrgEx",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC whose final translation origin is to be retrieved."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPPOINT",
+        "name": "lpPoint",
+        "description": "A pointer to a POINT structure that receives the final translation origin, in device coordinates."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetDCPenColor function retrieves the current pen color for the specified device context (DC).",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "WinGdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a COLORREF value for the current DC pen color. If the function fails, the return value is CLR_INVALID. ",
+    "remarks": "For information on setting the pen color, see SetDCPenColor. ICM: Color management is performed if ICM is enabled. ",
+    "return_type": "COLORREF",
+    "category": "Device Context",
+    "name": "GetDCPenColor",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC whose brush color is to be returned."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The GetDeviceCaps function retrieves device-specific information for the specified device.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "The return value specifies the value of the desired item. When nIndex is BITSPIXEL and the device has 15bpp or 16bpp, the return value is 16. ",
+    "remarks": "When nIndex is SHADEBLENDCAPS: On a multiple monitor system, if hdc is the desktop, GetDeviceCaps returns the capabilities of the primary monitor. If you want info for other monitors, you must use the multi-monitor APIs or CreateDC to get a HDC for the device context (DC) of a specific monitor. GetDeviceCaps provides the following six indexes in place of printer escapes.  For an example, see Preparing to Print. ",
+    "return_type": "int",
+    "category": "Device Context",
+    "name": "GetDeviceCaps",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nIndex",
+        "description": "The item to be returned. This parameter can be one of the following values.  IndexMeaning  DRIVERVERSION   The device driver version.   TECHNOLOGY   Device technology. It can be any one of the following values. DT_PLOTTERVector plotterDT_RASDISPLAYRaster displayDT_RASPRINTERRaster printerDT_RASCAMERARaster cameraDT_CHARSTREAMCharacter streamDT_METAFILEMetafileDT_DISPFILEDisplay file   If the hdc parameter is a handle to the DC of an enhanced metafile, the device technology is that of the referenced device as specified to the CreateEnhMetaFile function. To determine whether it is an enhanced metafile DC, use the GetObjectType function.   HORZSIZE   Width, in millimeters, of the physical screen.   VERTSIZE   Height, in millimeters, of the physical screen.   HORZRES   Width, in pixels, of the screen; or for printers, the width, in pixels, of the printable area of the page.   VERTRES   Height, in raster lines, of the screen; or for printers, the height, in pixels, of the printable area of the page.   LOGPIXELSX   Number of pixels per logical inch along the screen width. In a system with multiple display monitors, this value is the same for all monitors.   LOGPIXELSY   Number of pixels per logical inch along the screen height. In a system with multiple display monitors, this value is the same for all monitors.   BITSPIXEL   Number of adjacent color bits for each pixel.   PLANES   Number of color planes.   NUMBRUSHES   Number of device-specific brushes.   NUMPENS   Number of device-specific pens.   NUMFONTS   Number of device-specific fonts.   NUMCOLORS   Number of entries in the device's color table, if the device has a color depth of no more than 8 bits per pixel. For devices with greater color depths, 1 is returned.   ASPECTX   Relative width of a device pixel used for line drawing.   ASPECTY   Relative height of a device pixel used for line drawing.   ASPECTXY   Diagonal width of the device pixel used for line drawing.   PDEVICESIZE   Reserved.   CLIPCAPS   Flag that indicates the clipping capabilities of the device. If the device can clip to a rectangle, it is 1. Otherwise, it is 0.   SIZEPALETTE   Number of entries in the system palette. This index is valid only if the device driver sets the RC_PALETTE bit in the RASTERCAPS index and is available only if the driver is compatible with 16-bit Windows.   NUMRESERVED   Number of reserved entries in the system palette. This index is valid only if the device driver sets the RC_PALETTE bit in the RASTERCAPS index and is available only if the driver is compatible with 16-bit Windows.   COLORRES   Actual color resolution of the device, in bits per pixel. This index is valid only if the device driver sets the RC_PALETTE bit in the RASTERCAPS index and is available only if the driver is compatible with 16-bit Windows.   PHYSICALWIDTH   For printing devices: the width of the physical page, in device units. For example, a printer set to print at 600 dpi on 8.5-x11-inch paper has a physical width value of 5100 device units. Note that the physical page is almost always greater than the printable area of the page, and never smaller.   PHYSICALHEIGHT   For printing devices: the height of the physical page, in device units. For example, a printer set to print at 600 dpi on 8.5-by-11-inch paper has a physical height value of 6600 device units. Note that the physical page is almost always greater than the printable area of the page, and never smaller.   PHYSICALOFFSETX   For printing devices: the distance from the left edge of the physical page to the left edge of the printable area, in device units. For example, a printer set to print at 600 dpi on 8.5-by-11-inch paper, that cannot print on the leftmost 0.25-inch of paper, has a horizontal physical offset of 150 device units.   PHYSICALOFFSETY   For printing devices: the distance from the top edge of the physical page to the top edge of the printable area, in device units. For example, a printer set to print at 600 dpi on 8.5-by-11-inch paper, that cannot print on the topmost 0.5-inch of paper, has a vertical physical offset of 300 device units.   VREFRESH   For display devices: the current vertical refresh rate of the device, in cycles per second (Hz). A vertical refresh rate value of 0 or 1 represents the display hardware's default refresh rate. This default rate is typically set by switches on a display card or computer motherboard, or by a configuration program that does not use display functions such as ChangeDisplaySettings.   SCALINGFACTORX   Scaling factor for the x-axis of the printer.   SCALINGFACTORY   Scaling factor for the y-axis of the printer.   BLTALIGNMENT   Preferred horizontal drawing alignment, expressed as a multiple of pixels. For best drawing performance, windows should be horizontally aligned to a multiple of this value. A value of zero indicates that the device is accelerated, and any alignment may be used.   SHADEBLENDCAPS   Value that indicates the shading and blending capabilities of the device. See Remarks for further comments. SB_CONST_ALPHAHandles the SourceConstantAlpha member of the BLENDFUNCTION structure, which is referenced by the blendFunction parameter of the AlphaBlend function.SB_GRAD_RECTCapable of doing GradientFill rectangles.SB_GRAD_TRICapable of doing GradientFill triangles.SB_NONEDevice does not support any of these capabilities.SB_PIXEL_ALPHACapable of handling per-pixel alpha in AlphaBlend.SB_PREMULT_ALPHACapable of handling premultiplied alpha in AlphaBlend.     RASTERCAPS   Value that indicates the raster capabilities of the device, as shown in the following table. RC_BANDINGRequires banding support.RC_BITBLTCapable of transferring bitmaps.RC_BITMAP64Capable of supporting bitmaps larger than 64 KB.RC_DI_BITMAPCapable of supporting the SetDIBits and GetDIBits functions.RC_DIBTODEVCapable of supporting the SetDIBitsToDevice function.RC_FLOODFILLCapable of performing flood fills.RC_PALETTESpecifies a palette-based device.RC_SCALINGCapable of scaling.RC_STRETCHBLTCapable of performing the StretchBlt function.RC_STRETCHDIBCapable of performing the StretchDIBits function.     CURVECAPS   Value that indicates the curve capabilities of the device, as shown in the following table. CC_NONEDevice does not support curves.CC_CHORDDevice can draw chord arcs.CC_CIRCLESDevice can draw circles.CC_ELLIPSESDevice can draw ellipses.CC_INTERIORSDevice can draw interiors.CC_PIEDevice can draw pie wedges.CC_ROUNDRECTDevice can draw rounded rectangles.CC_STYLEDDevice can draw styled borders.CC_WIDEDevice can draw wide borders.CC_WIDESTYLEDDevice can draw borders that are wide and styled.     LINECAPS   Value that indicates the line capabilities of the device, as shown in the following table: LC_NONEDevice does not support lines.LC_INTERIORSDevice can draw interiors.LC_MARKERDevice can draw a marker.LC_POLYLINEDevice can draw a polyline.LC_POLYMARKERDevice can draw multiple markers.LC_STYLEDDevice can draw styled lines.LC_WIDEDevice can draw wide lines.LC_WIDESTYLEDDevice can draw lines that are wide and styled.     POLYGONALCAPS   Value that indicates the polygon capabilities of the device, as shown in the following table. PC_NONEDevice does not support polygons.PC_INTERIORSDevice can draw interiors.PC_POLYGONDevice can draw alternate-fill polygons.PC_RECTANGLEDevice can draw rectangles.PC_SCANLINEDevice can draw a single scanline.PC_STYLEDDevice can draw styled borders.PC_WIDEDevice can draw wide borders.PC_WIDESTYLEDDevice can draw borders that are wide and styled.PC_WINDPOLYGONDevice can draw winding-fill polygons.     TEXTCAPS   Value that indicates the text capabilities of the device, as shown in the following table. TC_OP_CHARACTERDevice is capable of character output precision.TC_OP_STROKEDevice is capable of stroke output precision.TC_CP_STROKEDevice is capable of stroke clip precision.TC_CR_90Device is capable of 90-degree character rotation.TC_CR_ANYDevice is capable of any character rotation.TC_SF_X_YINDEPDevice can scale independently in the x- and y-directions.TC_SA_DOUBLEDevice is capable of doubled character for scaling.TC_SA_INTEGERDevice uses integer multiples only for character scaling.TC_SA_CONTINDevice uses any multiples for exact character scaling.TC_EA_DOUBLEDevice can draw double-weight characters.TC_IA_ABLEDevice can italicize.TC_UA_ABLEDevice can underline.TC_SO_ABLEDevice can draw strikeouts.TC_RA_ABLEDevice can draw raster fonts.TC_VA_ABLEDevice can draw vector fonts.TC_RESERVEDReserved; must be zero.TC_SCROLLBLTDevice cannot scroll using a bit-block transfer. Note that this meaning may be the opposite of what you expect.     COLORMGMTCAPS   Value that indicates the color management capabilities of the device. CM_CMYK_COLORDevice can accept CMYK color space ICC color profile.CM_DEVICE_ICMDevice can perform ICM on either the device driver or the device itself.CM_GAMMA_RAMPDevice supports GetDeviceGammaRamp and SetDeviceGammaRampCM_NONEDevice does not support ICM."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetLayout function returns the layout of a device context (DC).",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, it returns the layout flags for the current device context. If the function fails, it returns GDI_ERROR. For extended error information, call GetLastError. ",
+    "remarks": "The layout specifies the order in which text and graphics are revealed in a window or device context. The default is left to right. The GetLayout function tells you if the default has been changed through a call to SetLayout. For more information, see \"Window Layout and Mirroring\" in Window Features. ",
+    "return_type": "DWORD",
+    "category": "Device Context",
+    "name": "GetLayout",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the device context."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 3,
+    "description": "The GetObject function retrieves information for the specified graphics object.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, and lpvObject is a valid pointer, the return value is the number of bytes stored into the buffer. If the function succeeds, and lpvObject is NULL, the return value is the number of bytes required to hold the information the function would store into the buffer. If the function fails, the return value is zero. ",
+    "remarks": "The buffer pointed to by the lpvObject parameter must be sufficiently large to receive the information about the graphics object. Depending on the graphics object, the function uses a BITMAP, DIBSECTION, EXTLOGPEN, LOGBRUSH, LOGFONT, or LOGPEN structure, or a count of table entries (for a logical palette). If hgdiobj is a handle to a bitmap created by calling CreateDIBSection, and the specified buffer is large enough, the GetObject function returns a DIBSECTION structure. In addition, the bmBits member of the BITMAP structure contained within the DIBSECTION will contain a pointer to the bitmap's bit values. If hgdiobj is a handle to a bitmap created by any other means, GetObject returns only the width, height, and color format information of the bitmap. You can obtain the bitmap's bit values by calling the GetDIBits or GetBitmapBits function. If hgdiobj is a handle to a logical palette, GetObject retrieves a 2-byte integer that specifies the number of entries in the palette. The function does not retrieve the LOGPALETTE structure defining the palette. To retrieve information about palette entries, an application can call the GetPaletteEntries function. If hgdiobj is a handle to a font, the LOGFONT that is returned is the LOGFONT used to create the font. If Windows had to make some interpolation of the font because the precise LOGFONT could not be represented, the interpolation will not be reflected in the LOGFONT. For example, if you ask for a vertical version of a font that doesn't support vertical painting, the LOGFONT indicates the font is vertical, but Windows will paint it horizontally. For an example, see Storing an Image. ",
+    "return_type": "int",
+    "category": "Device Context",
+    "name": "GetObject",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HGDIOBJ",
+        "name": "hgdiobj",
+        "description": "A handle to the graphics object of interest. This can be a handle to one of the following: a logical bitmap, a brush, a font, a palette, a pen, or a device independent bitmap created by calling the CreateDIBSection function."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "cbBuffer",
+        "description": "The number of bytes of information to be written to the buffer."
+      },
+      {
+        "in_out": "_Out_",
+        "type": "LPVOID",
+        "name": "lpvObject",
+        "description": "A pointer to a buffer that receives the information about the specified graphics object. The following table shows the type of information the buffer receives for each type of graphics object you can specify with hgdiobj.  Object typeData written to buffer  HBITMAP    BITMAP    HBITMAP returned from a call to CreateDIBSection    DIBSECTION, if cbBuffer is set to sizeof (DIBSECTION), or BITMAP, if cbBuffer is set to sizeof (BITMAP).   HPALETTE   A WORD count of the number of entries in the logical palette   HPEN returned from a call to ExtCreatePen    EXTLOGPEN    HPEN    LOGPEN    HBRUSH    LOGBRUSH    HFONT    LOGFONT      If the lpvObject parameter is NULL, the function return value is the number of bytes required to store the information it writes to the buffer for the specified graphics object. The address of lpvObject must be on a 4-byte boundary; otherwise, GetObject fails."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetObjectType retrieves the type of the specified object.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value identifies the object. This value can be one of the following.  If the function fails, the return value is zero. ",
+    "remarks": "",
+    "return_type": "DWORD",
+    "category": "Device Context",
+    "name": "GetObjectType",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HGDIOBJ",
+        "name": "h",
+        "description": "A handle to the graphics object."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The GetStockObject function retrieves a handle to one of the stock pens, brushes, fonts, or palettes.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the requested logical object. If the function fails, the return value is NULL. ",
+    "remarks": "It is not recommended that you employ this method to obtain the current font used by dialogs and windows. Instead, use the SystemParametersInfo function with the SPI_GETNONCLIENTMETRICS parameter to retrieve the current font. SystemParametersInfo will take into account the current theme and provides font information for captions, menus, and message dialogs. Use the DKGRAY_BRUSH, GRAY_BRUSH, and LTGRAY_BRUSH stock objects only in windows with the CS_HREDRAW and CS_VREDRAW styles. Using a gray stock brush in any other style of window can lead to misalignment of brush patterns after a window is moved or sized. The origins of stock brushes cannot be adjusted. The HOLLOW_BRUSH and NULL_BRUSH stock objects are equivalent. It is not necessary (but it is not harmful) to delete stock objects by calling DeleteObject. Both DC_BRUSH and DC_PEN can be used interchangeably with other stock objects like BLACK_BRUSH and BLACK_PEN. For information on retrieving the current pen or brush color, see GetDCBrushColor and GetDCPenColor. See Setting the Pen or Brush Color for an example of setting colors. The GetStockObject function with an argument of DC_BRUSH or DC_PEN can be used interchangeably with the SetDCPenColor and SetDCBrushColor functions. For an example, see Setting the Pen or Brush Color. ",
+    "return_type": "HGDIOBJ",
+    "category": "Device Context",
+    "name": "GetStockObject",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "fnObject",
+        "description": "The type of stock object. This parameter can be one of the following values.  ValueMeaning  BLACK_BRUSH   Black brush.   DKGRAY_BRUSH   Dark gray brush.   DC_BRUSH   Solid color brush. The default color is white. The color can be changed by using the SetDCBrushColor function. For more information, see the Remarks section.   GRAY_BRUSH   Gray brush.   HOLLOW_BRUSH   Hollow brush (equivalent to NULL_BRUSH).   LTGRAY_BRUSH   Light gray brush.   NULL_BRUSH   Null brush (equivalent to HOLLOW_BRUSH).   WHITE_BRUSH   White brush.   BLACK_PEN   Black pen.   DC_PEN   Solid pen color. The default color is white. The color can be changed by using the SetDCPenColor function. For more information, see the Remarks section.   NULL_PEN   Null pen. The null pen draws nothing.   WHITE_PEN   White pen.   ANSI_FIXED_FONT   Windows fixed-pitch (monospace) system font.   ANSI_VAR_FONT   Windows variable-pitch (proportional space) system font.   DEVICE_DEFAULT_FONT   Device-dependent font.   DEFAULT_GUI_FONT   Default font for user interface objects such as menus and dialog boxes. It is not recommended that you use DEFAULT_GUI_FONT or SYSTEM_FONT to obtain the font used by dialogs and windows; for more information, see the remarks section. The default font is Tahoma.   OEM_FIXED_FONT   Original equipment manufacturer (OEM) dependent fixed-pitch (monospace) font.   SYSTEM_FONT   System font. By default, the system uses the system font to draw menus, dialog box controls, and text. It is not recommended that you use DEFAULT_GUI_FONT or SYSTEM_FONT to obtain the font used by dialogs and windows; for more information, see the remarks section.  The default system font is Tahoma.   SYSTEM_FIXED_FONT   Fixed-pitch (monospace) system font. This stock object is provided only for compatibility with 16-bit Windows versions earlier than 3.0.   DEFAULT_PALETTE   Default palette. This palette consists of the static colors in the system palette."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The ReleaseDC function releases a device context (DC), freeing it for use by other applications. The effect of the ReleaseDC function depends on the type of DC. It frees only common and window DCs. It has no effect on class or private DCs.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "The return value indicates whether the DC was released. If the DC was released, the return value is 1. If the DC was not released, the return value is zero. ",
+    "remarks": "The application must call the ReleaseDC function for each call to the GetWindowDC function and for each call to the GetDC function that retrieves a common DC. An application cannot use the ReleaseDC function to release a DC that was created by calling the CreateDC function; instead, it must use the DeleteDC function. ReleaseDC must be called from the same thread that called GetDC. For an example, see Scaling an Image. ",
+    "return_type": "int",
+    "category": "Device Context",
+    "name": "ReleaseDC",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HWND",
+        "name": "hWnd",
+        "description": "A handle to the window whose DC is to be released."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hDC",
+        "description": "A handle to the DC to be released."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The ResetDC function updates the specified printer or plotter device context (DC) using the specified information.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is a handle to the original DC. If the function fails, the return value is NULL. ",
+    "remarks": "An application will typically use the ResetDC function when a window receives a WM_DEVMODECHANGE message. ResetDC can also be used to change the paper orientation or paper bins while printing a document. The ResetDC function cannot be used to change the driver name, device name, or the output port. When the user changes the port connection or device name, the application must delete the original DC and create a new DC with the new information. An application can pass an information DC to the ResetDC function. In that situation, ResetDC will always return a printer DC. ICM: The color profile of the DC specified by the hdc parameter will be reset based on the information contained in the lpInitData member of the DEVMODE structure. ",
+    "return_type": "HDC",
+    "category": "Device Context",
+    "name": "ResetDC",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC to update."
+      },
+      {
+        "in_out": "_In_",
+        "type": "const DEVMODE*",
+        "name": "lpInitData",
+        "description": "A pointer to a DEVMODE structure containing information about the new DC."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The RestoreDC function restores a device context (DC) to the specified state. The DC is restored by popping state information off a stack created by earlier calls to the SaveDC function.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. ",
+    "remarks": "The stack can contain the state information for several instances of the DC. If the state specified by the specified parameter is not at the top of the stack, RestoreDC deletes all state information between the top of the stack and the specified instance. ",
+    "return_type": "BOOL",
+    "category": "Device Context",
+    "name": "RestoreDC",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC."
+      },
+      {
+        "in_out": "_In_",
+        "type": "int",
+        "name": "nSavedDC",
+        "description": "The saved state to be restored. If this parameter is positive, nSavedDC represents a specific instance of the state to be restored. If this parameter is negative, nSavedDC represents an instance relative to the current state. For example, -1 restores the most recently saved state."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The SaveDC function saves the current state of the specified device context (DC) by copying data describing selected objects and graphic modes (such as the bitmap, brush, palette, font, pen, region, drawing mode, and mapping mode) to a context stack.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value identifies the saved state. If the function fails, the return value is zero. ",
+    "remarks": "The SaveDC function can be used any number of times to save any number of instances of the DC state. A saved state can be restored by using the RestoreDC function. ",
+    "return_type": "int",
+    "category": "Device Context",
+    "name": "SaveDC",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC whose state is to be saved."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The SelectObject function selects an object into the specified device context (DC). The new object replaces the previous object of the same type.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the selected object is not a region and the function succeeds, the return value is a handle to the object being replaced. If the selected object is a region and the function succeeds, the return value is one of the following values.  If an error occurs and the selected object is not a region, the return value is NULL. Otherwise, it is HGDI_ERROR. ",
+    "remarks": "This function returns the previously selected object of the specified type. An application should always replace a new object with the original, default object after it has finished drawing with the new object. An application cannot select a single bitmap into more than one DC at a time. ICM: If the object being selected is a brush or a pen, color management is performed. For an example, see Setting the Pen or Brush Color. ",
+    "return_type": "HGDIOBJ",
+    "category": "Device Context",
+    "name": "SelectObject",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC."
+      },
+      {
+        "in_out": "_In_",
+        "type": "HGDIOBJ",
+        "name": "hgdiobj",
+        "description": "A handle to the object to be selected. The specified object must have been created by using one of the following functions.  ObjectFunctions  Bitmap    CreateBitmap, CreateBitmapIndirect, CreateCompatibleBitmap, CreateDIBitmap, CreateDIBSection  Bitmaps can only be selected into memory DC's. A single bitmap cannot be selected into more than one DC at the same time.   Brush    CreateBrushIndirect, CreateDIBPatternBrush, CreateDIBPatternBrushPt, CreateHatchBrush, CreatePatternBrush, CreateSolidBrush    Font    CreateFont, CreateFontIndirect    Pen    CreatePen, CreatePenIndirect    Region    CombineRgn, CreateEllipticRgn, CreateEllipticRgnIndirect, CreatePolygonRgn, CreateRectRgn, CreateRectRgnIndirect"
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "SetDCBrushColor function sets the current device context (DC) brush color to the specified color value. If the device cannot represent the specified color value, the color is set to the nearest physical color.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value specifies the previous DC brush color as a COLORREF value. If the function fails, the return value is CLR_INVALID. ",
+    "remarks": "When the stock DC_BRUSH is selected in a DC, all the subsequent drawings will be done using the DC brush color until the stock brush is deselected. The default DC_BRUSH color is WHITE. The function returns the previous DC_BRUSH color, even if the stock brush DC_BRUSH is not selected in the DC: however, this will not be used in drawing operations until the stock DC_BRUSH is selected in the DC. The GetStockObject function with an argument of DC_BRUSH or DC_PEN can be used interchangeably with the SetDCPenColor and SetDCBrushColor functions. ICM: Color management is performed if ICM is enabled. For an example of setting colors, see Setting the Pen or Brush Color. ",
+    "return_type": "COLORREF",
+    "category": "Device Context",
+    "name": "SetDCBrushColor",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COLORREF",
+        "name": "crColor",
+        "description": "The new brush color."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "SetDCPenColor function sets the current device context (DC) pen color to the specified color value. If the device cannot represent the specified color value, the color is set to the nearest physical color.",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, the return value specifies the previous DC pen color as a COLORREF value. If the function fails, the return value is CLR_INVALID. ",
+    "remarks": "The function returns the previous DC_PEN color, even if the stock pen DC_PEN is not selected in the DC; however, this will not be used in drawing operations until the stock DC_PEN is selected in the DC. The GetStockObject function with an argument of DC_BRUSH or DC_PEN can be used interchangeably with the SetDCPenColor and SetDCBrushColor functions. ICM: Color management is performed if ICM is enabled. For an example of setting colors, see Setting the Pen or Brush Color. ",
+    "return_type": "COLORREF",
+    "category": "Device Context",
+    "name": "SetDCPenColor",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC."
+      },
+      {
+        "in_out": "_In_",
+        "type": "COLORREF",
+        "name": "crColor",
+        "description": "The new pen color."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 2,
+    "description": "The SetLayout function changes the layout of a device context (DC).",
+    "library": "Gdi32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Wingdi.h (include Windows.h)",
+    "return_value": "If the function succeeds, it returns the previous layout of the DC. If the function fails, it returns GDI_ERROR. ",
+    "remarks": "The layout specifies the order in which text and graphics are revealed in a window or a device context. The default is left to right. The SetLayout function changes this to be right to left, which is the standard in Arabic and Hebrew cultures. Once the LAYOUT_RTL flag is selected, flags normally specifying right or left are reversed. To avoid confusion, consider defining alternate words for standard flags, such as those in the following table.  SetLayout cannot modify drawing directly into the bits of a DIB. For more information, see \"Window Layout and Mirroring\" in Window Features. ",
+    "return_type": "DWORD",
+    "category": "Device Context",
+    "name": "SetLayout",
+    "is_callback": 0,
+    "dll": "Gdi32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hdc",
+        "description": "A handle to the DC."
+      },
+      {
+        "in_out": "_In_",
+        "type": "DWORD",
+        "name": "dwLayout",
+        "description": "The DC layout. This parameter can be one or more of the following values.  ValueMeaning  LAYOUT_BITMAPORIENTATIONPRESERVED   Disables any reflection during BitBlt and StretchBlt operations.   LAYOUT_RTL   Sets the default horizontal layout to be right to left."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  },
+  {
+    "n_arguments": 1,
+    "description": "The WindowFromDC function returns a handle to the window associated with the specified display device context (DC). Output functions that use the specified device context draw into this window.",
+    "library": "User32.lib",
+    "min_server": "Windows 2000 Server [desktop apps only]",
+    "header": "Winuser.h (include Windows.h)",
+    "return_value": "The return value is a handle to the window associated with the specified DC. If no window is associated with the specified DC, the return value is NULL. ",
+    "remarks": "",
+    "return_type": "HWND",
+    "category": "Device Context",
+    "name": "WindowFromDC",
+    "is_callback": 0,
+    "dll": "User32.dll",
+    "arguments": [
+      {
+        "in_out": "_In_",
+        "type": "HDC",
+        "name": "hDC",
+        "description": "Handle to the device context from which a handle to the associated window is to be retrieved."
+      }
+    ],
+    "min_client": "Windows 2000 Professional [desktop apps only]"
+  }
+]
