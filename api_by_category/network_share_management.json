@@ -336,7 +336,7 @@
     "header": "Lmshare.h (include Lm.h)",
     "return_value": "If the function succeeds, the return value is NERR_Success. If the function fails, the return value can be one of the following error codes.  ",
     "remarks": "If 503 is specified for the level parameter, the buf parameter points to a SHARE_INFO_503 structure, and the shi503_netname and shi503_servername members of that structure are used to look up the shared resource on the server; the other members are ignored. The remote server specified in the shi503_servername member must have been bound to a transport protocol using the NetServerTransportAddEx function. In the call to  NetServerTransportAddEx, either 2 or 3 must have been specified for the level parameter, and the SVTI2_SCOPED_NAME flag must have been specified in the SERVER_TRANSPORT_INFO_2 structure for the transport protocol. If 0, 1, 2, or 502 is specified for the level parameter, the buf parameter points to a SHARE_INFO_0, SHARE_INFO_1, SHARE_INFO_2, or SHARE_INFO_502 structure, and the shi0_netname, shi1_netname, shi2_netname, or shi502_netname member of that structure is used; the other members are ignored. ",
-    "return_type": "NET_API_STATUS WINAPI",
+    "return_type": "NET_API_STATUS",
     "category": "Network Share Management",
     "name": "NetShareDelEx",
     "is_callback": 0,

@@ -2218,7 +2218,7 @@
     "header": "Winspool.h (include Windows.h)",
     "return_value": "Returns TRUE if the function succeeds; otherwise FALSE. If the return value is FALSE, call GetLastError to get the error status. ",
     "remarks": "Printer drivers should call  GetProcAddress on the winspool.drv module to get the address of the GetPrintExecutionData function because GetPrintExecutionData is not supported on Windows Vista or earlier versions of Windows. GetPrintExecutionData only  fails if the value of pData is NULL. The value of the clientAppPID member of PRINT_EXECUTION_DATA is only meaningful if the value of  context is PRINT_EXECUTION_CONTEXT_WOW64. If the value of context is not PRINT_EXECUTION_CONTEXT_WOW64, the value of clientAppPID is 0. ",
-    "return_type": "BOOL WINAPI",
+    "return_type": "BOOL",
     "category": "Print Spooler",
     "name": "GetPrintExecutionData",
     "is_callback": 0,

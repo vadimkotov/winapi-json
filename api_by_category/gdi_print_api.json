@@ -263,7 +263,7 @@
     "header": "",
     "return_value": "If the window is currently redirected for printing, the function returns a nonzero value; otherwise, it returns zero. ",
     "remarks": "A window is redirected for printing when it processes a  call to PrintWindow. In a call to PrintWindow, a window renders its content to an off-screen device context. This function has no associated import library or header file; you must call it by using the LoadLibrary and GetProcAddress functions. ",
-    "return_type": "BOOL WINAPI",
+    "return_type": "BOOL",
     "category": "GDI Print API",
     "name": "IsWindowRedirectedForPrint",
     "is_callback": 0,

@@ -36,7 +36,7 @@
     "header": "Sfc.h",
     "return_value": "If the key is protected, the return value is a nonzero value. If the key is not protected, the return value is zero. ",
     "remarks": "A key is protected by WRP if the path exists and is protected by WRP. The SfcIsKeyProtected function indicates that a subkey is protected by WRP if the subkey has a  parent key that is protected by WRP. For example, if the following registry key exists on the system and is protected by WRP:  The SfcIsKeyProtected function returns a nonzero value for the following subkey. The new subkey does not need to exist for the function to determine that it is WRP-protected.  ",
-    "return_type": "BOOL WINAPI",
+    "return_type": "BOOL",
     "category": "Windows Resource Protection",
     "name": "SfcIsKeyProtected",
     "is_callback": 0,

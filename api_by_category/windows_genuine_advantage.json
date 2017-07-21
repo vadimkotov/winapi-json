@@ -7,7 +7,7 @@
     "header": "",
     "return_value": "If the method succeeds, it returns S_OK. If the method fails, it returns an error code. For a list of common error codes, see       Common HRESULT Values. ",
     "remarks": "The Windows Genuine Advantage (WGA) functions are available only on Windows Vista and      Windows XP installations that have been validated by clicking      Validate Windows on      http://www.microsoft.com/genuine. ",
-    "return_type": "HRESULT WINAPI",
+    "return_type": "HRESULT",
     "category": "Windows Genuine Advantage",
     "name": "GetLastErrors",
     "is_callback": 0,
